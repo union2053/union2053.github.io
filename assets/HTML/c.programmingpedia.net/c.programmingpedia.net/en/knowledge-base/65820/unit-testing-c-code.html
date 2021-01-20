@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/65820/unit-testing-c-code by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Unit Testing C Code | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Unit Testing C Code | C Language Knowledge Base">
+        <title>[SOLVED] Unit Testing C Code | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="unit-testing-c-code">Unit Testing C Code</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/embedded.html">embedded</a></span>
+                        <span class="tag-item"><a href="../tag/testing.html">testing</a></span>
+                        <span class="tag-item"><a href="../tag/unit-testing.html">unit-testing</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I worked on an embedded system this summer written in straight C.  It was an existing project that the company I work for had taken over.  I have become quite accustomed to writing unit tests in Java using JUnit but was at a loss as to the best way to write unit tests for existing code (which needed refactoring) as well as new code added to the system.</p>
+
+<p>Are there any projects out there that make unit testing plain C code as easy as unit testing Java code with JUnit?  Any insight that would apply specifically to embedded development (cross-compiling to arm-linux platform) would be greatly appreciated.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/7049/paul-osborne" target="_blank"><span itemprop="name">Paul Osborne</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">825</div>
+                                    <div itemprop="dateCreated">8/8/2019 3:42:42 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>One unit testing framework in C is <a href="https://libcheck.github.io/check/" rel="noreferrer">Check</a>; a list of unit testing frameworks in C can be found <a href="http://check.sourceforge.net/doc/check_html/check_2.html#SEC3" rel="noreferrer">here</a> and is reproduced below.  Depending on how many standard library functions your runtime has, you may or not be able to use one of those.</p>
+
+<blockquote>
+  <h3 id="aceunit">AceUnit</h3>
+  
+  <p>AceUnit (Advanced C and Embedded Unit) bills itself as a comfortable C code unit test framework. It tries to mimick JUnit 4.x and includes reflection-like capabilities. AceUnit can be used in resource constraint environments, e.g. embedded software development, and importantly it runs fine in environments where you cannot include a single standard header file and cannot invoke a single standard C function from the ANSI / ISO C libraries. It also has a Windows port. It does not use forks to trap signals, although the authors have expressed interest in adding such a feature. See the <a href="http://aceunit.sourceforge.net/" rel="noreferrer">AceUnit homepage</a>.</p>
+  
+  <h3 id="gnu-autounit">GNU Autounit</h3>
+  
+  <p>Much along the same lines as Check, including forking to run unit tests in a separate address space (in fact, the original author of Check borrowed the idea from GNU Autounit). GNU Autounit uses GLib extensively, which means that linking and such need special options, but this may not be a big problem to you, especially if you are already using GTK or GLib. See the <a href="http://autounit.tigris.org/" rel="noreferrer">GNU Autounit homepage</a>.</p>
+  
+  <h3 id="cunit">cUnit</h3>
+  
+  <p>Also uses GLib, but does not fork to protect the address space of unit tests.</p>
+  
+  <h3 id="cunit">CUnit</h3>
+  
+  <p>Standard C, with plans for a Win32 GUI implementation. Does not currently fork or otherwise protect the address space of unit tests. In early development. See the <a href="http://cunit.sourceforge.net/" rel="noreferrer">CUnit homepage</a>.</p>
+  
+  <h3 id="cutest">CuTest</h3>
+  
+  <p>A simple framework with just one .c and one .h file that you drop into your source tree. See the <a href="http://cutest.sourceforge.net/" rel="noreferrer">CuTest homepage</a>.</p>
+  
+  <h3 id="cppunit">CppUnit</h3>
+  
+  <p>The premier unit testing framework for C++; you can also use it to test C code. It is stable, actively developed, and has a GUI interface. The primary reasons not to use CppUnit for C are first that it is quite big, and second you have to write your tests in C++, which means you need a C++ compiler. If these don’t sound like concerns, it is definitely worth considering, along with other C++ unit testing frameworks. See the <a href="http://cppunit.sourceforge.net/doc/cvs/index.html" rel="noreferrer">CppUnit homepage</a>.</p>
+  
+  <h3 id="embunit">embUnit</h3>
+  
+  <p>embUnit (Embedded Unit) is another unit test framework for embedded systems. This one appears to be superseded by AceUnit. <a href="http://sourceforge.net/projects/embunit/" rel="noreferrer">Embedded Unit homepage</a>.</p>
+  
+  <h3 id="minunit">MinUnit</h3>
+  
+  <p>A minimal set of macros and that’s it! The point is to show how easy it is to unit test your code. See the <a href="http://www.jera.com/techinfo/jtns/jtn002.html" rel="noreferrer">MinUnit homepage</a>.</p>
+  
+  <h3 id="cunit-for-mr-ando">CUnit for Mr. Ando</h3>
+  
+  <p>A CUnit implementation that is fairly new, and apparently still in early development. See the <a href="http://park.ruru.ne.jp/ando/work/CUnitForAndo/html/" rel="noreferrer">CUnit for Mr. Ando homepage</a>.</p>
+  
+  <p><em>This list was last updated in March 2008.</em></p>
+</blockquote>
+
+<h2 id="more-frameworks-">More frameworks:</h2>
+
+<h3 id="cmocka">CMocka</h3>
+
+<p>CMocka is a test framework for C with support for mock objects. It's easy to use and setup.</p>
+
+<p>See <a href="https://cmocka.org/" rel="noreferrer">the CMocka homepage</a>.</p>
+
+<h3 id="criterion">Criterion</h3>
+
+<p>Criterion is a cross-platform C unit testing framework supporting automatic test registration, parameterized tests, theories, and that can output to multiple formats, including TAP and JUnit XML. Each test is run in its own process, so signals and crashes can be reported or tested if needed.</p>
+
+<p>See the <a href="https://github.com/Snaipe/Criterion" rel="noreferrer">Criterion homepage</a> for more information.</p>
+
+<h3 id="hwut">HWUT</h3>
+
+<p>HWUT is a general Unit Test tool with great support for C. It can help to create Makefiles, generate massive test cases coded in minimal 'iteration tables', walk along state machines, generate C-stubs and more. The general approach is pretty unique: Verdicts are based on 'good stdout/bad stdout'. The comparison function, though, is flexible. Thus, any type of script may be used for checking. It may be applied to any language that can produce standard output.</p>
+
+<p>See <a href="http://hwut.sourceforge.net/" rel="noreferrer">the HWUT homepage</a>.</p>
+
+<h3 id="cgreen">CGreen</h3>
+
+<p>A modern, portable, cross-language unit testing and mocking framework for C and C++. It offers an optional BDD notation, a mocking library, the ability to run it in a single process (to make debugging easier). A test runner which discover automatically the test functions is available. But you can create your own programmatically.</p>
+
+<p>All those features (and more) are explained in <a href="https://cgreen-devs.github.io/" rel="noreferrer">the CGreen manual</a>.</p>
+
+<p>Wikipedia gives a detailed list of C unit testing frameworks under <a href="https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C" rel="noreferrer">List of unit testing frameworks: C</a></p>
+
+
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/9530/adam-rosenfield" target="_blank"><span itemprop="name">Adam Rosenfield</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/65820/unit-testing-c-code#answer-0</div>
+                                            <div itemprop="upvoteCount">472</div>
+                                            <div itemprop="dateCreated">1/12/2019 3:47:04 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Personally I like the <a href="http://code.google.com/p/googletest/" rel="noreferrer">Google Test framework</a>.  </p>
+
+<p>The real difficulty in testing C code is breaking the dependencies on external modules so you can isolate code in units.  This can be especially problematic when you are trying to get tests around legacy code.  In this case I often find myself using the linker to use stubs functions in tests.</p>
+
+<p>This is what people are referring to when they talk about "<strong>seams</strong>".  In C your only option really is to use the pre-processor or the linker to mock out your dependencies.</p>
+
+<p>A typical test suite in one of my C projects might look like this:</p>
+
+<pre><code>#include "myimplementationfile.c"
+#include &lt;gtest/gtest.h&gt;
+
+// Mock out external dependency on mylogger.o
+void Logger_log(...){}
+
+TEST(FactorialTest, Zero) {
+    EXPECT_EQ(1, Factorial(0));
+}
+</code></pre>
+
+<p><strong>Note that you are actually including the C file and not the header file</strong>.  This gives the advantage of access to all the static data members.  Here I mock out my logger (which might be in logger.o and give an empty implementation.  This means that the test file compiles and links independently from the rest of the code base and executes in isolation.</p>
+
+<p>As for cross-compiling the code, for this to work you need good facilities on the target.  I have done this with googletest cross compiled to Linux on a PowerPC architecture.    This makes sense because there you have a full shell and os to gather your results.  For less rich environments (which I classify as anything without a full OS) you should just build and run on the host.  You should do this anyway so you can run the tests automatically as part of the build.</p>
+
+<p>I find testing C++ code is generally much easier due to the fact that OO code is in general much less coupled than procedural (of course this depends a lot on coding style).  Also in C++ you can use tricks like dependency injection and method overriding to get seams into code that is otherwise encapsulated.</p>
+
+<p>Michael Feathers has an <a href="https://rads.stackoverflow.com/amzn/click/com/0131177052" rel="noreferrer" rel="nofollow noreferrer">excellent book about testing legacy code</a>.  In one chapter he covers techniques for dealing with non-OO code which I highly recommend.</p>
+
+<p><strong>Edit</strong>: I've written a <a href="http://meekrosoft.wordpress.com/2009/11/09/unit-testing-c-code-with-the-googletest-framework/" rel="noreferrer">blog post</a> about unit testing procedural code, with <a href="http://github.com/meekrosoft/helloc" rel="noreferrer">source available on GitHub</a>.</p>
+
+<p><strong>Edit</strong>: There is a <a href="http://pragprog.com/titles/jgade/test-driven-development-for-embedded-c" rel="noreferrer">new book coming out from the Pragmatic Programmers</a> that specifically addresses unit testing C code which <a href="http://meekrosoft.wordpress.com/2011/03/25/book-review-test-driven-development-for-embedded-c-beta/" rel="noreferrer">I highly recommend</a>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5775/mikelong" target="_blank">mikelong</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/65820" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/65820/unit-testing-c-code by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:30 GMT -->
+</html>

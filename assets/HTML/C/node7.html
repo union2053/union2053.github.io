@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node7.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Arrays and Strings</TITLE>
+<META NAME="description" CONTENT="Arrays and Strings">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html908"
+ HREF="node7.html#SECTION00710000000000000000">
+Single and Multi-dimensional Arrays</A>
+<LI><A NAME="tex2html909"
+ HREF="node7.html#SECTION00720000000000000000">
+Strings</A>
+<LI><A NAME="tex2html910"
+ HREF="node7.html#SECTION00730000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00700000000000000000">
+Arrays and Strings</A>
+</H1>
+<A NAME="ch:array">&#160;</A>
+In principle arrays in C are similar to those found in other
+languages. As we shall shortly see arrays are defined slightly differently and
+there are many subtle differences due the close link between array and pointers.
+We will look more closely at the link between pointer and arrays later in
+Chapter&nbsp;<A HREF="node10.html#ch:pointers">9</A>.
+<P><H1><A NAME="SECTION00710000000000000000">
+Single and Multi-dimensional Arrays</A>
+</H1>
+Let us first look at how we define arrays in C:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int listofnumbers[50];
+</TT></PRE>
+</TT>
+<P><B>BEWARE:</B> In C Array subscripts start at <B>0</B> and end one less than the
+array size. For example, in the above case valid subscripts range from 0 to 49.
+This is a <B>BIG</B> difference between C and other languages and does require a
+bit of practice to get in <EM>the right frame of mind</EM>.
+<P>
+Elements can be accessed in the following ways:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;thirdnumber=listofnumbers[2];
+		 listofnumbers[5]=100;
+</PRE>
+</TT>
+<P>
+Multi-dimensional arrays can be defined as follows:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int tableofnumbers[50][50];
+</PRE>
+</TT>
+<P>
+for two dimensions.
+<P>
+For further dimensions simply add more [&nbsp;]:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int bigD[50][50][40][30]......[50];
+</PRE>
+</TT>
+<P>
+Elements can be accessed in the following ways:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;anumber=tableofnumbers[2][3];
+		 tableofnumbers[25][16]=100;
+</PRE>
+</TT>
+<P></TT></TT></TT></TT><H1><A NAME="SECTION00720000000000000000">
+Strings</A>
+</H1>
+<P>
+In C Strings are defined as arrays of characters. For example, the following
+defines a string of 50 characters:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;char name[50];
+</TT></PRE>
+</TT>
+C has no string handling facilities built in and so the following are all
+<U>illegal</U>:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;char firstname[50],lastname[50],fullname[100];
+&nbsp;
+		 firstname=&nbsp;&quot;Arnold&quot;; /* Illegal */
+		 lastname=&nbsp;&quot;Schwarznegger&quot;; /* Illegal */
+		 fullname=&nbsp;&quot;Mr&quot;+firstname
+				 +lastname; /* Illegal */ 
+</PRE>
+</TT>
+<P>
+However, there is a special library of string handling routines which we will
+come across later.
+<P>
+To print a string we use printf with a special <B>%s</B> control character:
+<P>&nbsp;&nbsp;&nbsp;<TT>printf("s",name);
+<P><B>NOTE:</B> We just need to give the name of the string.
+<P>
+In order to allow variable length strings the <IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">0 character is used to
+indicate the end of a string.
+<P>
+So we if we have a string, <TT>char NAME[50];</TT> and we store the ``<TT>DAVE</TT>'' in it
+its contents will look like:
+<P><img src= string.gif>
+<P>
+<P></TT></TT><H1><A NAME="SECTION00730000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12335</B></P>
+<P>
+Write a C program to read through an array of any type. Write
+a C program 	to scan through this array to find a particular value.
+<P></P>
+<P><P>
+<B>Exercise 12336</B></P>
+<P>
+Read ordinary text a character at a time from the program's
+standard input, and print it with each line reversed from left to right. Read
+until you encounter end-of-data (see below).
+<P>
+You may wish to test the program by typing
+<PRE>
+		    prog5rev | prog5rev
+</PRE>
+	to see if an exact copy of the original input is recreated.
+<P>
+To read characters to end of data, use a loop such as either
+<PRE>
+        char ch;
+        while( ch = getchar(), ch &gt;= 0 ) /* ch &lt; 0 indicates end-of-data */
+</PRE>
+	or
+<PRE>
+        char ch;
+        while( scanf( &quot;%c&quot;, &amp;ch ) == 1 ) /* one character read */
+</PRE>
+</P>
+<P><P>
+<B>Exercise 12337</B></P>
+<P>
+Write a program to read English text to end-of-data (type control-D to indicate
+end of data at a terminal, see below for detecting it), and print a count of word
+lengths, i.e. the total number of words of length 1 which occurred, the number
+of length 2, and so on.
+<P>
+Define a word to be a sequence of alphabetic characters.
+	You should allow for word lengths up to 25 letters.
+<P>
+Typical output should be like this:
+<PRE>
+	    	length 1 : 10 occurrences
+  		 	length 2 : 19 occurrences
+   	  length 3 : 127 occurrences
+   		 length 4 : 0 occurrences
+    		length 5 : 18 occurrences
+   			....
+</PRE>
+	To read characters to end of data see above question.
+</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node7.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:48 GMT -->
+</HTML>

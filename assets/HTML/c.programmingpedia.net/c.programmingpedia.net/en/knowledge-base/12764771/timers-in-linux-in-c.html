@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12764771/timers-in-linux-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] timers in linux in c | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] timers in linux in c | C Language Knowledge Base">
+        <title>[SOLVED] timers in linux in c | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="timers-in-linux-in-c">timers in linux in c</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/timer.html">timer</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href="https://stackoverflow.com/questions/5540245/loops-timers-in-c">Loops/timers in C</a>  </p>
+</blockquote>
+
+
+
+<p>I've been reading about timers for the last 3 days and I'm unable to find anything useful, I'm trying to understand it in real example, can somebody help me figure out how to setup an alarm for the below program. </p>
+
+<p>How can I set a a timer so that it will send 2 args, one is the array name, and the second one is the number to be deleted, I know the below is not safe in anyway, I'm just trying to understand how use alarms with args to call a function.</p>
+
+<p>please note that the environment is Linux, and also I appreciate any link with a working C example. </p>
+
+<pre><code>#include&lt;stdio.h&gt;
+int delete_from_array(int arg) ;
+
+
+    int main()
+    {
+
+    int a[10000], i, y ;
+    //how to set timer here for to delete any number in array after half a second
+    for (y=0; y &lt; 100; y++) {
+
+
+        for (i=0; i&lt;sizeof(a) / sizeof(int); i++)
+            a[i] = i;
+    sleep(1);
+    printf("wake\n");
+    }
+
+    }
+
+    int delete_from_array(int arg) 
+    {
+    int i, a[1000], number_to_delete=0;
+
+    //number_to_delete = arg-&gt;number;
+
+    for (i=0; i&lt;sizeof(a); i++)
+        if (a[i] == number_to_delete)
+            a[i] = 0;
+    printf("deleted\n");
+
+    }
+</code></pre>
+
+<p>What I'm trying to do is that I have a hash which has has values to be expired after 1 seconds, so after I insert the value into the hash, I need to create a timer so that it will delete that value after let's say 1 second, and IF I got a response from the server before the that interval (1 second) then I delete the value from the hash and delete the timer, almost like retransmission in tcp </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1232870/bag-dev" target="_blank"><span itemprop="name">Bag Dev</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">7</div>
+                                    <div itemprop="dateCreated">5/23/2017 10:29:37 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Do you want to use signals or threads?</p>
+
+<p>First, set up the signal handler or prepare a suitable thread function; see <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/sigevent.7.html" rel="nofollow noreferrer">man 7 sigevent</a> for details.</p>
+
+<p>Next, create a suitable timer, using <code>timer_create()</code>. See <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/timer_create.2.html" rel="nofollow noreferrer">man 2 timer_create</a> for details.</p>
+
+<p>Depending on what you do when the timer fires, you may wish to set the timer to either one-shot, or to repeat at a short interval afterwards. You use <code>timer_settime()</code> to both arm, and to disarm, the timer; see <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/timer_settime.2.html" rel="nofollow noreferrer">man 2 timer_settime</a> for details.</p>
+
+<p>In practical applications you usually need to multiplex the timer. Even though a process can create multiple timers, they are a limited resource. Especially timeout timers -- which are trivial, either setting a flag and/or sending a signal to a specific thread -- should use a single timer, which fires at the next timeout, sets the related timeout flag, and optionally send a signal (with an empty-body handler) to the desired thread to make sure it is interrupted. (For a single-thread process, the original signal delivery will interrupt blocking I/O calls.) Consider a server, responding to some request: the request itself might have a timeout on the order of a minute or so, while processing the request might need connection timeouts, I/O timeouts, and so on.</p>
+
+<p>Now, the original question is interesting, because timers are powerful when used effectively. However, the example program is basically nonsense. Why don't you create say a program that sets one or more timers, each for example outputting something to standard output? Remember to use <code>write()</code> et al from <code>unistd.h</code> as they are <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/signal.7.html" rel="nofollow noreferrer">async-signal safe</a>, whereas <code>printf()</code> et cetera from <code>stdio.h</code> are not. (If your signal handlers use non-async-signal safe functions, the results are undefined. It usually works, but it's not guaranteed at all; it may just as well crash as work. Testing will not tell, as it is <em>undefined</em>.)</p>
+
+<hr>
+
+<p>Edited to add: Here is a bare-bones example of multiplexed timeouts.</p>
+
+<p>(To the extent possible under law, I dedicate all copyright and related and neighboring rights to the code snippets shown below to the public domain worldwide; see <a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="nofollow noreferrer">CC0 Public Domain Dedication</a>. In other words, feel free to use the code below in any way you wish, just don't blame me for any problems with it.)</p>
+
+<p>I used old-style GCC atomic built-ins, so it should be thread-safe. With a few additions, it should work for multithreaded code too. (You cannot use for example mutexes, because <code>pthread_mutex_lock()</code> is not async-signal safe. Atomically manipulating the timeout states should work, although there might be some races left if you disable a timeout just when it fires.)</p>
+
+<pre><code>#define _POSIX_C_SOURCE 200809L
+#include &lt;unistd.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;time.h&gt;
+#include &lt;errno.h&gt;
+
+#define   TIMEOUTS       16
+#define   TIMEOUT_SIGNAL (SIGRTMIN+0)
+
+#define   TIMEOUT_USED   1
+#define   TIMEOUT_ARMED  2
+#define   TIMEOUT_PASSED 4
+
+static timer_t               timeout_timer;
+static volatile sig_atomic_t timeout_state[TIMEOUTS] = { 0 };
+static struct timespec       timeout_time[TIMEOUTS];
+
+
+/* Return the number of seconds between before and after, (after - before).
+ * This must be async-signal safe, so it cannot use difftime().
+*/
+static inline double timespec_diff(const struct timespec after, const struct timespec before)
+{
+    return (double)(after.tv_sec - before.tv_sec)
+         + (double)(after.tv_nsec - before.tv_nsec) / 1000000000.0;
+}
+
+/* Add positive seconds to a timespec, nothing if seconds is negative.
+ * This must be async-signal safe.
+*/
+static inline void timespec_add(struct timespec *const to, const double seconds)
+{
+    if (to &amp;&amp; seconds &gt; 0.0) {
+        long  s = (long)seconds;
+        long  ns = (long)(0.5 + 1000000000.0 * (seconds - (double)s));
+
+        /* Adjust for rounding errors. */
+        if (ns &lt; 0L)
+            ns = 0L;
+        else
+        if (ns &gt; 999999999L)
+            ns = 999999999L;
+
+        to-&gt;tv_sec += (time_t)s;
+        to-&gt;tv_nsec += ns;
+
+        if (to-&gt;tv_nsec &gt;= 1000000000L) {
+            to-&gt;tv_nsec -= 1000000000L;
+            to-&gt;tv_sec++;
+        }
+    }
+}
+
+/* Set the timespec to the specified number of seconds, or zero if negative seconds.
+*/
+static inline void timespec_set(struct timespec *const to, const double seconds)
+{
+    if (to) {
+        if (seconds &gt; 0.0) {
+            const long  s = (long)seconds;
+            long       ns = (long)(0.5 + 1000000000.0 * (seconds - (double)s));
+
+            if (ns &lt; 0L)
+                ns = 0L;
+            else
+            if (ns &gt; 999999999L)
+                ns = 999999999L;
+
+            to-&gt;tv_sec = (time_t)s;
+            to-&gt;tv_nsec = ns;
+
+        } else {
+            to-&gt;tv_sec = (time_t)0;
+            to-&gt;tv_nsec = 0L;
+        }
+    }
+}
+
+
+/* Return nonzero if the timeout has occurred.
+*/
+static inline int timeout_passed(const int timeout)
+{
+    if (timeout &gt;= 0 &amp;&amp; timeout &lt; TIMEOUTS) {
+        const int  state = __sync_or_and_fetch(&amp;timeout_state[timeout], 0);
+
+        /* Refers to an unused timeout? */
+        if (!(state &amp; TIMEOUT_USED))
+            return -1;
+
+        /* Not armed? */
+        if (!(state &amp; TIMEOUT_ARMED))
+            return -1;
+
+        /* Return 1 if timeout passed, 0 otherwise. */
+        return (state &amp; TIMEOUT_PASSED) ? 1 : 0;
+
+    } else {
+        /* Invalid timeout number. */
+        return -1;
+    }
+}
+
+/* Release the timeout.
+ * Returns 0 if the timeout had not fired yet, 1 if it had.
+*/
+static inline int timeout_unset(const int timeout)
+{
+    if (timeout &gt;= 0 &amp;&amp; timeout &lt; TIMEOUTS) {
+        /* Obtain the current timeout state to 'state',
+         * then clear all but the TIMEOUT_PASSED flag
+         * for the specified timeout.
+         * Thanks to Bylos for catching this bug. */
+        const int  state = __sync_fetch_and_and(&amp;timeout_state[timeout], TIMEOUT_PASSED);
+
+        /* Invalid timeout? */
+        if (!(state &amp; TIMEOUT_USED))
+            return -1;
+
+        /* Not armed? */
+        if (!(state &amp; TIMEOUT_ARMED))
+            return -1;
+
+        /* Return 1 if passed, 0 otherwise. */
+        return (state &amp; TIMEOUT_PASSED) ? 1 : 0;
+
+    } else {
+        /* Invalid timeout number. */
+        return -1;
+    }
+}
+
+
+int timeout_set(const double seconds)
+{
+    struct timespec   now, then;
+    struct itimerspec when;
+    double            next;
+    int               timeout, i;
+
+    /* Timeout must be in the future. */
+    if (seconds &lt;= 0.0)
+        return -1;
+
+    /* Get current time, */
+    if (clock_gettime(CLOCK_REALTIME, &amp;now))
+        return -1;
+
+    /* and calculate when the timeout should fire. */
+    then = now;
+    timespec_add(&amp;then, seconds);
+
+    /* Find an unused timeout. */
+    for (timeout = 0; timeout &lt; TIMEOUTS; timeout++)
+        if (!(__sync_fetch_and_or(&amp;timeout_state[timeout], TIMEOUT_USED) &amp; TIMEOUT_USED))
+            break;
+
+    /* No unused timeouts? */
+    if (timeout &gt;= TIMEOUTS)
+        return -1;
+
+    /* Clear all but TIMEOUT_USED from the state, */
+    __sync_and_and_fetch(&amp;timeout_state[timeout], TIMEOUT_USED);
+
+    /* update the timeout details, */
+    timeout_time[timeout] = then;
+
+    /* and mark the timeout armable. */
+    __sync_or_and_fetch(&amp;timeout_state[timeout], TIMEOUT_ARMED);
+
+    /* How long till the next timeout? */
+    next = seconds;
+    for (i = 0; i &lt; TIMEOUTS; i++)
+        if ((__sync_fetch_and_or(&amp;timeout_state[i], 0) &amp; (TIMEOUT_USED | TIMEOUT_ARMED | TIMEOUT_PASSED)) == (TIMEOUT_USED | TIMEOUT_ARMED)) {
+            const double secs = timespec_diff(timeout_time[i], now);
+            if (secs &gt;= 0.0 &amp;&amp; secs &lt; next)
+                next = secs;
+        }
+
+    /* Calculate duration when to fire the timeout next, */
+    timespec_set(&amp;when.it_value, next);
+    when.it_interval.tv_sec = 0;
+    when.it_interval.tv_nsec = 0L;
+
+    /* and arm the timer. */
+    if (timer_settime(timeout_timer, 0, &amp;when, NULL)) {
+        /* Failed. */
+        __sync_and_and_fetch(&amp;timeout_state[timeout], 0);
+        return -1;
+    }
+
+    /* Return the timeout number. */
+    return timeout;
+}
+
+
+static void timeout_signal_handler(int signum __attribute__((unused)), siginfo_t *info, void *context __attribute__((unused)))
+{
+    struct timespec   now;
+    struct itimerspec when;
+    int               saved_errno, i;
+    double            next;
+
+    /* Not a timer signal? */
+    if (!info || info-&gt;si_code != SI_TIMER)
+        return;
+
+    /* Save errno; some of the functions used may modify errno. */
+    saved_errno = errno;
+
+    if (clock_gettime(CLOCK_REALTIME, &amp;now)) {
+        errno = saved_errno;
+        return;
+    }
+
+    /* Assume no next timeout. */
+    next = -1.0;
+
+    /* Check all timeouts that are used and armed, but not passed yet. */
+    for (i = 0; i &lt; TIMEOUTS; i++)
+        if ((__sync_or_and_fetch(&amp;timeout_state[i], 0) &amp; (TIMEOUT_USED | TIMEOUT_ARMED | TIMEOUT_PASSED)) == (TIMEOUT_USED | TIMEOUT_ARMED)) {
+            const double  seconds = timespec_diff(timeout_time[i], now);
+            if (seconds &lt;= 0.0) {
+                /* timeout [i] fires! */
+                __sync_or_and_fetch(&amp;timeout_state[i], TIMEOUT_PASSED);
+
+            } else
+            if (next &lt;= 0.0 || seconds &lt; next) {
+                /* This is the soonest timeout in the future. */
+                next = seconds;
+            }
+        }
+
+    /* Note: timespec_set() will set the time to zero if next &lt;= 0.0,
+     *       which in turn will disarm the timer.
+     * The timer is one-shot; it_interval == 0.
+    */
+    timespec_set(&amp;when.it_value, next);
+    when.it_interval.tv_sec = 0;
+    when.it_interval.tv_nsec = 0L;
+    timer_settime(timeout_timer, 0, &amp;when, NULL);
+
+    /* Restore errno. */
+    errno = saved_errno;
+}
+
+
+int timeout_init(void)
+{
+    struct sigaction  act;
+    struct sigevent   evt;
+    struct itimerspec arm;
+
+    /* Install timeout_signal_handler. */
+    sigemptyset(&amp;act.sa_mask);
+    act.sa_sigaction = timeout_signal_handler;
+    act.sa_flags = SA_SIGINFO;
+    if (sigaction(TIMEOUT_SIGNAL, &amp;act, NULL))
+        return errno;
+
+    /* Create a timer that will signal to timeout_signal_handler. */
+    evt.sigev_notify = SIGEV_SIGNAL;
+    evt.sigev_signo = TIMEOUT_SIGNAL;
+    evt.sigev_value.sival_ptr = NULL;
+    if (timer_create(CLOCK_REALTIME, &amp;evt, &amp;timeout_timer))
+        return errno;
+
+    /* Disarm the timeout timer (for now). */
+    arm.it_value.tv_sec = 0;
+    arm.it_value.tv_nsec = 0L;
+    arm.it_interval.tv_sec = 0;
+    arm.it_interval.tv_nsec = 0L;
+    if (timer_settime(timeout_timer, 0, &amp;arm, NULL))
+        return errno;
+
+    return 0;
+}
+
+int timeout_done(void)
+{
+    struct sigaction  act;
+    struct itimerspec arm;
+    int               errors = 0;
+
+    /* Ignore the timeout signals. */
+    sigemptyset(&amp;act.sa_mask);
+    act.sa_handler = SIG_IGN;
+    if (sigaction(TIMEOUT_SIGNAL, &amp;act, NULL))
+        if (!errors) errors = errno;
+
+    /* Disarm any current timeouts. */
+    arm.it_value.tv_sec = 0;
+    arm.it_value.tv_nsec = 0L;
+    arm.it_interval.tv_sec = 0;
+    arm.it_interval.tv_nsec = 0;
+    if (timer_settime(timeout_timer, 0, &amp;arm, NULL))
+        if (!errors) errors = errno;
+
+    /* Destroy the timer itself. */
+    if (timer_delete(timeout_timer))
+        if (!errors) errors = errno;
+
+    /* If any errors occurred, set errno. */
+    if (errors)
+        errno = errors;
+
+    /* Return 0 if success, errno otherwise. */
+    return errors;
+}
+</code></pre>
+
+<p>Remember to include the <code>rt</code> library when compiling, i.e. use <code>gcc -W -Wall *source*.c -lrt -o *binary*</code> to compile.</p>
+
+<p>The idea is that the main program first calls <code>timeout_init()</code> to install all the necessary handlers et cetera, and may call <code>timeout_done()</code> to deistall it before exiting (or in a child process after <code>fork()</code>ing).</p>
+
+<p>To set a timeout, you call <code>timeout_set(seconds)</code>. The return value is a timeout descriptor. Currently there is just a flag you can check using <code>timeout_passed()</code>, but the delivery of the timeout signal also interrupts any blocking I/O calls. Thus, you can expect the timeout to interrupt any blocking I/O call.</p>
+
+<p>If you want to do anything more than set a flag at timeout, you cannot do it in the signal handler; remember, in a signal handler, you're limited to async-signal safe functions. The easiest way around that is to use a separate thread with an endless loop over <code>sigwaitinfo()</code>, with the <code>TIMEOUT_SIGNAL</code> signal blocked in all other threads. That way the dedicated thread is guaranteed to catch the signal, but at the same time, is not limited to async-signal safe functions. It can, for example, do much more work, or even send a signal to a specific thread using <code>pthread_kill()</code>. (As long as that signal has a handler, even one with an empty body, its delivery will interrupt any blocking I/O call in that thread.)</p>
+
+<p>Here is a simple example <code>main()</code> for using the timeouts. It is silly, and relies on <code>fgets()</code> not retrying (when interrupted by a signal), but it seems to work.</p>
+
+<pre><code>#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    char    buffer[1024], *line;
+    int t1, t2, warned1;
+
+    if (timeout_init()) {
+        fprintf(stderr, "timeout_init(): %s.\n", strerror(errno));
+        return 1;
+    }
+
+    printf("You have five seconds to type something.\n");
+    t1 = timeout_set(2.5); warned1 = 0;
+    t2 = timeout_set(5.0);
+    line = NULL;
+
+    while (1) {
+
+        if (timeout_passed(t1)) {
+            /* Print only the first time we notice. */
+            if (!warned1++)
+                printf("\nTwo and a half seconds left, buddy.\n");
+        }
+
+        if (timeout_passed(t2)) {
+            printf("\nAw, just forget it, then.\n");
+            break;
+        }
+
+        line = fgets(buffer, sizeof buffer, stdin);
+        if (line) {
+            printf("\nOk, you typed: %s\n", line);
+            break;
+        }
+    }
+
+    /* The two timeouts are no longer needed. */
+    timeout_unset(t1);
+    timeout_unset(t2);
+
+    /* Note: 'line' is non-NULL if the user did type a line. */
+
+    if (timeout_done()) {
+        fprintf(stderr, "timeout_done(): %s.\n", strerror(errno));
+        return 1;
+    }
+
+    return 0;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1475978/nominal-animal" target="_blank"><span itemprop="name">Nominal Animal</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12764771/timers-in-linux-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">21</div>
+                                            <div itemprop="dateCreated">4/8/2018 9:06:27 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>A useful read is the <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/time.7.html" rel="nofollow">time(7)</a> man page. Notice that Linux also provides the <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/timerfd_create.2.html" rel="nofollow">timerfd_create(2)</a> Linux specific <a href="http://en.wikipedia.org/wiki/Syscall" rel="nofollow">syscall</a>, often used with a multiplexing syscall like <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/poll.2.html" rel="nofollow">poll(2)</a> (or <code>ppoll(2)</code> or the older <code>select(2)</code> syscall).</p>
+
+<p>If you want to use signals don't forget to read carefully <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/signal.7.html" rel="nofollow">signal(7)</a> man page (there are restrictions about coding signal handlers; you might want to set a <code>volatile sigatomic_t</code> variable in your signal handlers; you should not do any <code>new</code> or <code>delete</code> -or <code>malloc</code> &amp; <code>free</code>- memory menagenment operations inside a signal handler, where only <em>async-safe</em> function calls are permitted.).</p>
+
+<p>Notice also that event-oriented programming, such as GUI applications, often provide ways (in Gtk, in Qt, with <code>libevent</code>, ....) to manage timers in their event loop.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/841108/basile-starynkevitch" target="_blank">Basile Starynkevitch</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12764771" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12764771/timers-in-linux-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:53 GMT -->
+</html>

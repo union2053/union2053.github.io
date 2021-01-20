@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6618921/calling-a-function-from-another-file-in-the-same-directory-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Calling a function from another file in the same directory in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Calling a function from another file in the same directory in C | C Language Knowledge Base">
+        <title>[SOLVED] Calling a function from another file in the same directory in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="calling-a-function-from-another-file-in-the-same-directory-in-c">Calling a function from another file in the same directory in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/gcc.html">gcc</a></span>
+                        <span class="tag-item"><a href="../tag/header.html">header</a></span>
+                        <span class="tag-item"><a href="../tag/linker.html">linker</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm learning C, but i have a long experience with higher level programming languages like Java.</p>
+
+<p>I was reading about header files so i was playing around with them, however I noticed that I could call a function from another file without #including it (it's in the same directory), how is that possible ?! 
+Is it the make file, linker that is configured that way or what ?</p>
+
+<p>We have two files</p>
+
+<pre><code>main.c
+add.c
+</code></pre>
+
+<p>main.c calls the function <code>add(int x,int y)</code> from add add.c, but I mistakenly compiled before #including add.c and it worked ! What makes it more confusing is that when i #include add.c, it gives a multiple-definition error on function add</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/834565/mohamedezz" target="_blank"><span itemprop="name">MohamedEzz</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">21</div>
+                                    <div itemprop="dateCreated">3/21/2018 9:09:08 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There's a few different things going on here.  First I'll go over how basic compilation of multiple files works.</p>
+
+<p>If you have multiple files, the important thing is the difference between the declaration and definition of a function.  The definition is probably what you are used to when defining functions:  You write up the contents of the function, like</p>
+
+<pre><code>int square(int i) {
+    return i*i;
+}
+</code></pre>
+
+<p>The declaration, on the other hand, lets you declare to the compiler that you know a function exists, but you don't tell the compiler what it is.  For example, you could write</p>
+
+<pre><code>int square(int i);
+</code></pre>
+
+<p>And the compiler would expect that the function "square" is defined elsewhere.</p>
+
+<p>Now, if you have two different files that you want to interoperate (for example, let's say that the function "square" is defined in add.c, and you want to call square(10) in main.c), you need to do <em>both</em> a definition and a declaration.  First, you define square in add.c.  Then, you <em>declare</em> it at the beginning of main.c.  This let's the compiler know when it is compiling main.c that there is a function "square" which is defined elsewhere.  Now, you need to compile both main.c and add.c into object files.  You can do this by calling</p>
+
+<pre><code>gcc -c main.c
+gcc -c add.c
+</code></pre>
+
+<p>This will produce the files main.o and add.o.  They contain the compiled functions, but are not quite executable.  The important thing to understand here is that main.o is "incomplete" in a sense.  When compiling main.o, you told it that the function "square" exists, but the function "square" is not defined inside main.o.  Thus main.o has a sort of "dangling reference" to the function "square".  It won't compile into a full program unless you combine it with another .o (or a .so or .a) file which contains a definition of "square".  If you just try to <em>link</em> main.o into a program, i.e.</p>
+
+<pre><code>gcc -o executable main.o
+</code></pre>
+
+<p>You will get an error, because the compiler will try to <em>resolve</em> the dangling reference to the function "square", but wont find any definition for it.  However, if you include add.o when linking (linking is the process of <em>resolving</em> all these references to undefined functions while converting .o files to executables or .so files), then there won't be any problem. i.e.</p>
+
+<pre><code>gcc -o executable main.o add.o
+</code></pre>
+
+<p>So that's how to <em>functionally</em> use functions across C files, but <em>stylistically</em>, what I just showed you is "not the right way".  The only reason I did is because I think it will better help you understand what's going on, rather than relying on "#include magic".  Now, you might have noticed before that things get a little messy if you have to redeclare every function you want to use at the top of main.c  This is why often C programs use helper files called "headers" which have a .h extension.  The idea of a header is that it contains <em>just</em> the declarations of the functions, <em>without</em> their definitions.  This way, in order to compile a program using functions defined in add.c, you need not manually declare every function you are using, nor need you #include the entire add.c file in your code.  Instead, you can #include add.h, which simply contains the <em>declarations</em> of all the functions of add.c.  </p>
+
+<p>Now, a refresher on #include: #include simply copies the contents of one file directly into another.  So, for example, the code</p>
+
+<pre><code>abc
+#include "wtf.txt"
+def
+</code></pre>
+
+<p>is exactly equivalent to </p>
+
+<pre><code>abc
+hello world
+def
+</code></pre>
+
+<p>assuming that wtf.txt contains the text "hello world".</p>
+
+<p>So, if we put all the declarations of add.c in add.h  (i.e.</p>
+
+<pre><code>int square(int i);
+</code></pre>
+
+<p>and then at the top of main.c, we write</p>
+
+<pre><code>#include "add.h"
+</code></pre>
+
+<p>This is functionally the same as if we had just manually declared the function "square" at the top of main.c.</p>
+
+<p>So the general idea of using headers is that you can have a special file that automatically declares all the functions you need by just #including it.</p>
+
+<p>However, headers also have one more common use.  Let's suppose that main.c uses functions from 50 different files.  The top of main.c would look like:</p>
+
+<pre><code>#include "add.h"
+#include "divide.h"
+#include "multiply.h"
+#include "eat-pie.h"
+...
+</code></pre>
+
+<p>Instead, people often move all those #includes to the main.h header file, and just #include main.h from main.c.  In this case, the header file serves <strong>two</strong> purposes.  It declares the functions in main.c for use when included by other files, <em>and</em> it includes all of the dependencies of main.c when included from main.c.  Using it this way also allows <em>chains</em> of dependencies.  If you #include add.h, not only do you get the functions defined in add.c, but you also implicitly get any functions which add.c uses, and any functions <em>they</em> use, and so on.</p>
+
+<p>Also, more subtly, #including a header file from it's own .c file implicitly checks for errors you make.  If for example, you accidentally defined square as </p>
+
+<pre><code>double square(int i);
+</code></pre>
+
+<p>in add.h, you normally might not realize until you were linking that main.o is looking for <em>one</em> definition of square, and add.o is providing <em>another, incompatible</em> one.  This will cause you to get errors when linking, so you won't realize the mistake until later in the build process.  However, if you #include add.h from add.c, to the compiler, your file looks like</p>
+
+<pre><code>#include "add.h"
+int square(int i) {
+    return i*i;
+}
+</code></pre>
+
+<p>which after processing the #include statement will look like</p>
+
+<pre><code>double square(int i);
+int square(int i) {
+    return i*i;
+}
+</code></pre>
+
+<p>Which the compiler will notice when compiling add.c, and tell you about.  Effectively, including your own header in this way prevents you from falsely advertising to other files the type of the functions you are providing.</p>
+
+<p><strong>Why you can use a function without ever declaring it</strong></p>
+
+<p>As you have noticed, in some cases you can actually use a function without every declaring it or #including any file which declares it.  This is stupid, and everyone agrees that this is stupid.  However, it is a legacy feature of the C programming language (and C compilers) that if you use a function without declaring it first, it just assumes that it is a function returning type "int".  So in effect, using a function is implicitly declaring that function as a function which returns "int" if it is not already declared.  It's very strange behavior if you think about it, and the compiler should warn you if you it doing that behavior.</p>
+
+<p><strong>Header Guards</strong></p>
+
+<p>One other common practice is the use of "Header Guards".  To explain header guards, let's look at a possible problem.  Let's say that we have two files: herp.c, and derp.c, and they <em>both</em> want to use functions contained in each other.  Following the above guidelines, you might have a herp.h with the line</p>
+
+<pre><code>#include "derp.h"
+</code></pre>
+
+<p>and a derp.h with the line</p>
+
+<pre><code>#include "herp.h"
+</code></pre>
+
+<p>Now, if you think about it, #include "derp.h" will be converted to the contents of derp.h, which in turn contains the line #include "herp.h", which will be converted to the contents of herp.h, and <em>that</em> contains... and so on, so the compiler will go on forever just expanding the includes.  Similarly, if main.h #includes both herp.h and derp.h, and both herp.h and derp.h include add.h, we see that in main.h, we end up with <em>two</em> copies of add.h, one as a result of #including herp.h, and one as a result of including derp.h.  So, the solution?  A "Header guard", i.e. a piece of code which prevents any header from being #included twice.  For add.h, for example, the normal way to do this is:</p>
+
+<pre><code>#ifndef ADD_H
+#define ADD_H
+
+int sqrt(int i);
+...
+#endif
+</code></pre>
+
+<p>This piece of code is essentially telling the preprocessor (the part of the compiler which handles all of the "#XXX" statements) to check if "ADD_H" is already defined.  If it isn't (if<strong>n</strong>def)  then it first defines "ADD_H" (in this context, ADD_H doesn't have to be defined <em>as</em> anything, it is just a boolean which is either defined or not), and then defines the rest of the contents of the header.  However, if ADD_H is already defined, then #including this file will do <em>nothing</em>, because there is nothing outside of the #ifndef block.  So the idea is that only the first time it is included in any given file will it actually add any text to that file.  After that, #including it will not add any additional text to your file.  ADD_H is just an arbitrary symbol you choose to keep track of whether add.h has been included yet.  For every header, you use a different symbol to keep track of whether it has been included yet or not.  For example, herp.h would probably use HERP_H instead of ADD_H.  Using a "header guard" will fix any of the problems I listed above, where you have duplicate copies of a file included, or an infinite loop of #includes.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/94102/jeremy-salwen" target="_blank"><span itemprop="name">Jeremy Salwen</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6618921/calling-a-function-from-another-file-in-the-same-directory-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">84</div>
+                                            <div itemprop="dateCreated">10/6/2016 1:59:27 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>The problem is that you shouldn't be <code>#include</code>ing a .c file.</p>
+
+<p>To use a function in another file, you need to declare it. Usually, every .c file (except main.c) has an associated header (.h) file that properly declares all the functions defined in the .c file. You can <em>declare</em> as many times as you want (so long as all the declarations are identical), but there can only be one <em>definition</em>.</p>
+
+<p>What happens when you <code>#include "add.c"</code> is that the text of add.c is included in main.c, giving main.c a <em>definition</em> (and, as a side-effect, a declaration) of <code>add</code>. Then, when you compile add.c on it's own, that creates <em>another</em> definition of <code>add</code>. Thus, there are two definitons of the function, and the compiler freaks out because it doesn't know which one to use.</p>
+
+<p>If you change it to <code>#include "add.h"</code>, where add.h looks something like this:</p>
+
+<pre><code>#ifndef ADD_H
+#define ADD_H
+
+extern int add(int x, int y);
+
+#endif /* ADD_H - Google "include guard" for more info about this trickery */
+</code></pre>
+
+<p>then main.c has a declaration of <code>add</code> and can use the function, but the <em>definition</em> of <code>add</code> is quite firmly only in the add.c file, and so it only exists once, and so it will compile properly.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/60777/chris-lutz" target="_blank">Chris Lutz</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6618921" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6618921/calling-a-function-from-another-file-in-the-same-directory-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:56 GMT -->
+</html>

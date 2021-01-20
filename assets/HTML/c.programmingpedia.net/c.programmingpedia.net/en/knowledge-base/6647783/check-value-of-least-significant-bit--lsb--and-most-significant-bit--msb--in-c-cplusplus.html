@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6647783/check-value-of-least-significant-bit--lsb--and-most-significant-bit--msb--in-c-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:55:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Check value of least significant bit (LSB) and most significant bit (MSB) in C/C++ | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Check value of least significant bit (LSB) and most significant bit (MSB) in C/C++ | C Language Knowledge Base">
+        <title>[SOLVED] Check value of least significant bit (LSB) and most significant bit (MSB) in C/C++ | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="check-value-of-least-significant-bit-lsb-and-most-significant-bit-msb-in-c-cplusplus">Check value of least significant bit (LSB) and most significant bit (MSB) in C/C++</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/bit.html">bit</a></span>
+                        <span class="tag-item"><a href="../tag/bit-manipulation.html">bit-manipulation</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/integer.html">integer</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I need to check the value of the least significant bit (LSB) and most significant bit (MSB)  of an integer in C/C++. How would I do this?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/554785/delaccount992" target="_blank"><span itemprop="name">delaccount992</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">21</div>
+                                    <div itemprop="dateCreated">12/20/2012 6:43:22 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <pre><code>//int value;
+int LSB = value &amp; 1;
+</code></pre>
+
+<p>Alternatively <em>(which is not theoretically portable, but practically it is - see Steve's comment)</em></p>
+
+<pre><code>//int value;
+int LSB = value % 2;
+</code></pre>
+
+<p><strong><em>Details:</em></strong>
+ The second formula is simpler. The % operator is the remainder operator. A number's LSB is 1 iff it is an odd number and 0 otherwise. So we check the remainder of dividing with 2. The logic of the first formula is this: number 1 in binary is this:</p>
+
+<pre><code>0000...0001
+</code></pre>
+
+<p>If you binary-AND this with an arbitrary number, all the bits of the result will be 0 except the last one because 0 AND anything else is 0. The last bit of the result will be 1 iff the  last bit of your number was 1 because <code>1 &amp; 1 == 1</code> and <code>1 &amp; 0 == 0</code></p>
+
+<p><a href="http://www.cprogramming.com/tutorial/bitwise_operators.html" rel="nofollow noreferrer">This</a> is a good tutorial for bitwise operations. </p>
+
+<p>HTH.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/469935/armen-tsirunyan" target="_blank"><span itemprop="name">Armen Tsirunyan</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6647783/check-value-of-least-significant-bit--lsb--and-most-significant-bit--msb--in-c-cplusplus#answer-0</div>
+                                            <div itemprop="upvoteCount">21</div>
+                                            <div itemprop="dateCreated">2/19/2017 1:53:48 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>You can do something like this:</p>
+
+<pre><code>#include &lt;iostream&gt;
+
+int main(int argc, char **argv)
+{
+    int a = 3;
+    std::cout &lt;&lt; (a &amp; 1) &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+
+<p>This way you <code>AND</code> your variable with the LSB, because</p>
+
+<pre><code>3: 011
+1: 001
+</code></pre>
+
+<p>in 3-bit representation. So being <code>AND</code>:</p>
+
+<pre><code>AND
+-----
+0  0  | 0
+0  1  | 0
+1  0  | 0
+1  1  | 1
+</code></pre>
+
+<p>You will be able to know if LSB is 1 or not.</p>
+
+<p><strong>edit:</strong> find MSB.</p>
+
+<p>First of all read <a href="http://en.wikipedia.org/wiki/Endianness">Endianess</a> article to agree on what <code>MSB</code> means. In the following lines we suppose to handle with big-endian notation.</p>
+
+<p>To find the <code>MSB</code>, in the following snippet we will focus applying a right shift until the <code>MSB</code> will be <code>AND</code>ed with <code>1</code>.
+Consider the following code:</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;limits.h&gt;
+
+int main(int argc, char **argv)
+{
+    unsigned int a = 128; // we want to find MSB of this 32-bit unsigned int
+    int MSB = 0;   // this variable will represent the MSB we're looking for
+
+    // sizeof(unsigned int) = 4 (in Bytes)
+    // 1 Byte = 8 bits
+    // So 4 Bytes are 4 * 8 = 32 bits
+    // We have to perform a right shift 32 times to have the
+    // MSB in the LSB position.
+    for (int i = sizeof(unsigned int) * 8; i &gt; 0; i--) {
+
+        MSB = (a &amp; 1); // in the last iteration this contains the MSB value
+
+        a &gt;&gt;= 1; // perform the 1-bit right shift
+    }
+
+    // this prints out '0', because the 32-bit representation of
+    // unsigned int 128 is:
+    // 00000000000000000000000010000000
+    std::cout &lt;&lt; "MSB: " &lt;&lt; MSB &lt;&lt; std::endl; 
+
+    return 0;
+}
+</code></pre>
+
+<p>If you print <code>MSB</code> outside of the cycle you will get <code>0</code>.
+If you change the value of <code>a</code>:</p>
+
+<pre><code>unsigned int a = UINT_MAX; // found in &lt;limits.h&gt;
+</code></pre>
+
+<p><code>MSB</code> will be <code>1</code>, because its 32-bit representation is:</p>
+
+<pre><code>UINT_MAX: 11111111111111111111111111111111
+</code></pre>
+
+<p>However, if you do the same thing with a <strong>signed integer</strong> things will be different.</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;limits.h&gt;
+
+int main(int argc, char **argv)
+{
+    int a = -128; // we want to find MSB of this 32-bit unsigned int
+    int MSB = 0; // this variable will represent the MSB we're looking for
+
+    // sizeof(int) = 4 (in Bytes)
+    // 1 Byte = 8 bits
+    // So 4 Bytes are 4 * 8 = 32 bits
+    // We have to perform a right shift 32 times to have the
+    // MSB in the LSB position.
+    for (int i = sizeof(int) * 8; i &gt; 0; i--) {
+
+        MSB = (a &amp; 1); // in the last iteration this contains the MSB value
+
+        a &gt;&gt;= 1; // perform the 1-bit right shift
+    }
+
+    // this prints out '1', because the 32-bit representation of
+    // int -128 is:
+    // 10000000000000000000000010000000
+    std::cout &lt;&lt; "MSB: " &lt;&lt; MSB &lt;&lt; std::endl; 
+
+    return 0;
+}
+</code></pre>
+
+<p>As I said in the comment below, the <code>MSB</code> of a <strong>positive integer</strong> is always <code>0</code>, while the <code>MSB</code> of a <strong>negative integer</strong> is always <code>1</code>.</p>
+
+<p>You can check INT_MAX 32-bit representation:</p>
+
+<pre><code>INT_MAX: 01111111111111111111111111111111
+</code></pre>
+
+<hr>
+
+<p>Now. Why the cycle uses <code>sizeof()</code>?
+If you simply do the cycle as I wrote in the comment: (sorry for the <code>=</code> missing in comment)</p>
+
+<pre><code>for (; a != 0; a &gt;&gt;= 1)
+    MSB = a &amp; 1;
+</code></pre>
+
+<p>you will get <code>1</code> always, because C++ won't consider the 'zero-pad bits' (because you specified <code>a != 0</code> as exit statement) higher than the highest <code>1</code>. For example for 32-bit integers we have:</p>
+
+<pre><code>int 7 : 00000000000000000000000000000111
+                                     ^ this will be your fake MSB
+                                       without considering the full size 
+                                       of the variable.
+
+int 16: 00000000000000000000000000010000
+                                   ^ fake MSB
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/797121/dave" target="_blank">dave</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6647783" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6647783/check-value-of-least-significant-bit--lsb--and-most-significant-bit--msb--in-c-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:55:55 GMT -->
+</html>

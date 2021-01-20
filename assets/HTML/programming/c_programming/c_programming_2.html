@@ -1,0 +1,609 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:09 GMT -->
+<head>
+	<title>C Programlama Ders: II</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, Programlama, C Programlama, Değişken, Değişkenler, Degisken, Degiskenler, Aritmetik Operatorler, printf, scanf, int, float, stdio.h, byte">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">25 Temmuz 2006</font></div>
+	<h2>C Programlama Dersi - II</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Bloodshed Dev-C++'in kullanımı</p>
+				<p>- Değişkenler ve değişken tanımlamaları</p>
+ 				<p>- Değişken tipleri ve maksimum-minimum alabileceği değerler</p>
+	 			<p>- scanf(&nbsp;&nbsp;) fonksiyonunun kullanımı</p>
+	 			<p>- Aritmetik operatörler</p>		
+	 			<p>- İşlemlerde öncelik sırası</p>		
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+	
+	<br/>
+	<p>Ge&#231;en hafta bilgisayar ve programlamaya dair temel bilgileri ve printf(&nbsp;&nbsp;); fonksiyonunu &#246;&#287;rendik. 
+	Bu hafta, kald&#305;&#287;&#305;m&#305;z yerden devam edece&#287;iz. &#304;lk yaz&#305;yla ilgili herhangi bir sorunuz varsa, bana 
+	<a href="mailto:cagataycebi@gmail.com">cagataycebi@gmail.com</a> adresinden ula&#351;abilirsiniz. Bu ufak 
+	bilgiden sonra, kald&#305;&#287;&#305;m&#305;z yerden devam edelim.</p>
+	
+	<h3>Bloodshed Dev-C++</h3>
+	<p>
+		Okuyucularımızın bir kısmı, <a href="http://www.bloodshed.net/devcpp.html" target="_blank">Bloodshed Dev-C++</a>'in 
+		kullanımıyla ilgili çeşitli 
+		sorunlar yaşamış.	Programı nasıl kullanabileceğinize dair ufak bir 
+		açıklamayla yazımıza başlamak yerinde olacaktır. (&nbsp;Bu bölüm C derleyicisi 
+		olmayanlara yardımcı olmak için yazılmıştır. Eğer hâli hazırda bir derleyiciniz 
+		varsa ve sorunsuz kullanıyorsanız, "<i>Değişken nedir? Tanımı nasıl yapılır?</i>" 
+		bölümünden devam edebilirsiniz.&nbsp;)   
+	</p>
+	<p> 
+		Dev-C++ kullanımı oldukça basit bir program.  
+		<a href="http://www.bloodshed.net/devcpp.html" target="_blank">Bloodshed Dev-C++</a> 
+		web sitesinin Download kısmından Dev-C++'i indirebilirsiniz. Dilerseniz  
+		<a href="http://heanet.dl.sourceforge.net/sourceforge/dev-cpp/devcpp-4.9.9.2_setup.exe" target="_blank">bu bağlantıya</a> 
+		tıklayarak yüklemeniz de mümkün. (&nbsp;Zaman içinde bağlantı adresi çalışmayabilir.&nbsp;)		
+		Programı başarıyla indirip kurarsanız, geriye yapacak fazla bir şey kalmıyor. 		  
+	</p>
+	<p> 
+		Program menülerinden, File -> New-> Source File yaparak yeni bir kaynak dosyası 
+		açın.	(&nbsp;Ctrl + N ile de aynı işlemi yapabilirsiniz.&nbsp;) Aşağıdaki kodu 
+		deneme amacıyla, açtığınız dosyaya yazın:
+	</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+   // Hello World yazar.
+   printf( "Hello World" );
+   // Sizden herhangi bir giriş bekler.
+   // Böylece program çalışıp, kapanmaz.
+   getchar( );
+   return 0;
+}
+</pre>
+<p>
+	File -> Save As sekmesiyle, yazdığınız dosyayı kaydedin. (&nbsp;Ctrl + S ile de  
+	kaydedebilirsiniz.&nbsp;) Dosyanın adını verdikten sonra sonuna <i>.c</i> yazın. 
+	Örneğin <i>deneme.c</i> gibi...
+</p>
+<p>
+	Execute -> Compile sekmesine tıklayın. (&nbsp;Kısayol olarak Ctrl + F9'u  
+	kullanabilirsiniz.&nbsp;) Artık programınız derlendi ve çalışmaya hazır. 
+	Execute -> Run ile programınızı çalıştırın. (&nbsp;Ctrl + F10'u da 
+	deneyebilirsiniz.&nbsp;) 
+	Ekrana "<i>Hello World</i>" yazacaktır. 
+</p>
+<p>
+	Eğer yazdığınız kodu tek seferde derleyip, çalıştırmak isterseniz, 
+	Execute -> Compile&nbsp;&amp;&nbsp;Run yolunu izleyin. (&nbsp;Bu işlemin    
+	kısayol tuşu, F9'dur.&nbsp;) 
+</p>
+<p>
+	Yazdığınız kodu nereye kaydederseniz, orada sonu <i>.exe</i> ile biten
+	çalıştırılabilir program dosyası oluşacaktır. Örneğin C:\Belgelerim klasörüne
+	<i>deneme.c</i> şeklinde bir dosya kaydedip, F9'a bastığınızda, <i>deneme.c</i>'nin 
+	bulunduğu klasörde <i>deneme.exe</i> diye bir dosya oluşur. Oluşan bu dosyayı
+	istediğiniz yere taşıyabilir, dilediğiniz gibi çalıştırabilirsiniz.
+</p>
+	
+	
+	<h4>De&#287;i&#351;ken nedir? Tan&#305;m&#305; nas&#305;l yap&#305;l&#305;r?</h4>
+	<p>De&#287;i&#351;kenler, girdi&#287;imiz de&#287;erleri alan veya program&#305;n &#231;al&#305;&#351;mas&#305;yla baz&#305; de&#287;erlerin atand&#305;&#287;&#305;, veri tutucular&#305;d&#305;r. 
+	De&#287;i&#351;ken tanımlamaysa, gelecek veya girilecek verilerin ne oldu&#287;una ba&#287;l&#305; olarak, de&#287;i&#351;ken tipinin belirlenmesidir. 
+	Yani a isimli bir de&#287;i&#351;keniniz varsa ve buna tamsay&#305; bir de&#287;er atamak istiyorsan&#305;z, a de&#287;i&#351;kenini tamsay&#305; olarak 
+	tan&#305;tman&#305;z gerekir. Keza, a'ya girilecek de&#287;er e&#287;er bir karakter veya virg&#252;ll&#252; say&#305; olsayd&#305;, de&#287;i&#351;ken tipinizin 
+	ona g&#246;re olmas&#305; gerekirdi. San&#305;r&#305;m bir &#246;rnekle a&#231;&#305;klamak daha iyi olacakt&#305;r.</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int a;
+	a = 25;
+	printf("a say&#305;s&#305; %d",a);
+	return 0;
+}
+</pre>
+	<p>&#350;imdi yukar&#305;daki program&#305; anlamaya &#231;al&#305;&#351;al&#305;m. En ba&#351; sat&#305;ra, int a -int, 
+	&#304;ngilizce de integer'&#305;n k&#305;saltmas&#305;d&#305;r- dedik. Bunun anlam&#305;, tamsay&#305; tipinde, a isimli bir de&#287;i&#351;kenim var demektir. 
+	a=25 ise, a de&#287;i&#351;kenine 25 de&#287;erini ata anlam&#305;na geliyor. Yani, a art&#305;k 25 say&#305;s&#305;n&#305; i&#231;inde ta&#351;&#305;maktad&#305;r. 
+	Onu bir yerlerde kulland&#305;&#287;&#305;n&#305;z zaman program, a'n&#305;n de&#287;eri olan 25'i i&#351;leme alacakt&#305;r. printf(); fonksiyonunun 
+	i&#231;ersine yazd&#305;&#287;&#305;m&#305;z %d ise, ekranda tamsay&#305; bir de&#287;i&#351;ken de&#287;eri g&#246;z&#252;kecek anlam&#305;ndad&#305;r. &#199;ift t&#305;rnaktan sonra 
+	koyaca&#287;&#305;m&#305;z a de&#287;eri ise, g&#246;r&#252;nt&#252;lenecek de&#287;i&#351;kenin a oldu&#287;unu belirtir. Yaln&#305;z dikkat etmeniz gereken, &#231;ift 
+	t&#305;rnaktan sonra, virg&#252;l koyup sonra de&#287;i&#351;kenin ad&#305;n&#305; yazd&#305;&#287;&#305;m&#305;zd&#305;r. Daha geli&#351;mi&#351; bir &#246;rnek yaparsak;  </p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int a;
+	int b;
+	int toplam;
+	a = 25;
+	b = 18;
+	toplam = a + b;
+	printf("a say&#305;s&#305; %d ve b say&#305;s&#305; %d, Toplam&#305; %d.\n", a, b, toplam);
+	return 0;
+}
+</pre>
+	<p>Bu program&#305;n ekran &#231;&#305;kt&#305;s&#305; &#351;&#246;yle olur; a say&#305;s&#305; 25 ve b say&#305;s&#305; 18, Toplam&#305; 43. Yazd&#305;&#287;&#305;m&#305;z bu programda, a, 
+	sonra b, &#252;&#231;&#252;nc&#252; olarakta toplam ismiyle 3 adet tamsay&#305; de&#287;i&#351;ken tan&#305;tt&#305;k. Daha sonra a'ya 25, b'ye 18 de&#287;erlerini 
+	atad&#305;k. Sonraki sat&#305;rdaysa, a ile b'nin de&#287;erlerini toplayarak, toplam ismindeki de&#287;i&#351;kenimizin i&#231;ersine atad&#305;k. 
+	Ekrana yazd&#305;rma k&#305;sm&#305; ise &#351;&#246;yle oldu: &#252;&#231; tane %d koyduk ve &#231;ift t&#305;rna&#287;&#305; kapatt&#305;ktan sonra, ekranda g&#246;z&#252;kme s&#305;ras&#305;na 
+	g&#246;re, de&#287;i&#351;kenlerimizin ad&#305;n&#305; yazd&#305;k. printf(); fonksiyonu i&#231;ersinde kullan&#305;lan %d'nin anlam&#305;, bir tamsay&#305; 
+	de&#287;i&#351;kenin ekranda g&#246;r&#252;nt&#252;lenece&#287;idir. De&#287;i&#351;kenlerin yaz&#305;lma s&#305;ras&#305;ndaki olaya gelince, hangisini &#246;nce g&#246;rmek 
+	istiyorsak onu ba&#351;a koyar sonra virg&#252;l koyup, di&#287;er de&#287;i&#351;kenleri yazar&#305;z. Yani &#246;nce a de&#287;erinin g&#246;z&#252;kmesini 
+	istedi&#287;imiz i&#231;in a, sonra b de&#287;erinin g&#246;z&#252;kmesi i&#231;in b, ve en sonda toplam de&#287;erinin g&#246;z&#252;kmesi i&#231;in toplam yazd&#305;k.</p>
+	
+	<p>Bu arada belirtmekte fayda var, elimizdeki 3 tamsay&#305; de&#287;i&#351;keni, her seferinde int yaz&#305;p, 
+	belirtmek zorunda de&#287;iliz. int a,b,toplam; yazarsakta ayn&#305; i&#351;lemi tek sat&#305;rda yapabiliriz.</p>
+	
+	<p>&#350;imdi, elimizdeki program&#305; bir ad&#305;m &#246;teye ta&#351;&#305;yal&#305;m:</p>
+	
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int saat;
+	float ucret, toplam_ucret;
+	char bas_harf;
+	printf("&#199;al&#305;&#351;an&#305;n ba&#351; harfini giriniz> ");
+	scanf("%c",&bas_harf);
+	printf("&#199;al&#305;&#351;ma saatini giriniz> ");
+	scanf("%d",&saat);
+	printf("Saat &#252;cretini giriniz> ");
+	scanf("%f",&ucret);
+	toplam_ucret = saat * ucret;
+	printf("%c ba&#351;harfli &#231;al&#305;&#351;an&#305;n, alaca&#287;&#305; &#252;cret: %f\n",bas_harf,toplam_ucret);
+	return 0;
+}
+</pre>
+	<p>Bu yazd&#305;&#287;&#305;m&#305;z program basit bir &#231;arp&#305;m i&#351;lemini yerine getirerek sonucu ekrana yazd&#305;r&#305;yor. 
+	Yaz&#305;lanlar&#305;n hepsini bir anda anlamaya &#231;al&#305;&#351;may&#305;n, &#231;&#252;nk&#252; ad&#305;m ad&#305;m hepsinin &#252;zerinde duraca&#287;&#305;z. 
+	Program&#305; incelemeye ba&#351;larsak; de&#287;i&#351;ken tan&#305;m&#305;n&#305; program&#305;m&#305;z&#305;n ba&#351;&#305;nda yap&#305;yoruz. 
+	G&#246;rd&#252;&#287;&#252;n&#252;z gibi bu sefer farkl&#305; tiplerde de&#287;i&#351;kenler kulland&#305;k. Biri int, di&#287;er ikisi float ve sonuncusunu da char. 
+	int'&#305;n tamsay&#305; anlam&#305;na geldi&#287;ini az evvel g&#246;rd&#252;k. float ise 2.54667 gibi virg&#252;ll&#252; say&#305;lar i&#231;in kullan&#305;l&#305;r. 
+	char tipindeki de&#287;i&#351;kenler, a,H,q,... &#351;eklinde tek bir karakter saklarlar. Konu biraz karma&#351;&#305;k g&#246;z&#252;kse de, 
+	de&#287;i&#351;ken tan&#305;m&#305;nda b&#252;t&#252;n yapman&#305;z gereken, de&#287;i&#351;keninizin ta&#351;&#305;yaca&#287;&#305; veriye g&#246;re program&#305;n ba&#351;&#305;nda onun tipini 
+	belirtmektir. Bunun i&#231;in de t&#305;pk&#305; yukar&#305;daki programda oldu&#287;u gibi, &#246;nce tipi belirtir, sonra da ad&#305;n&#305; yazars&#305;n&#305;z.</p>
+	<p>Program&#305;m&#305;za d&#246;nersek, &#231;al&#305;&#351;ma saati bir tamsay&#305; olaca&#287;&#305;ndan, onu saat isminde bir int olarak tan&#305;tt&#305;k. &#220;cret 
+	virg&#252;ll&#252; bir say&#305; olabilirdi. O nedenle onu float (yani virg&#252;ll&#252; say&#305;) olarak bildirdik. Ad&#305;n&#305; da saatucret koyduk. 
+	Farketti&#287;iniz gibi, toplamucret isimli de&#287;i&#351;kenimiz de bir float. &#199;&#252;nk&#252; bir tamsay&#305; (int) ile virg&#252;ll&#252; say&#305;n&#305;n 
+	(float) &#231;arp&#305;m&#305; virg&#252;ll&#252; bir say&#305; olmaktad&#305;r. Tabii 3.5x2=7 gibi tam say&#305; oldu&#287;u durumlarda olabilir. Ancak hatadan 
+	sak&#305;nmak i&#231;in toplamucret isimli de&#287;i&#351;kenimizi bir float olarak belirtmek daha do&#287;rudur.</p>
+	<p>&#220;steki program&#305;m&#305;zda olmas&#305;na kar&#351;&#305;n, &#351;uana kadar scanf(); fonksiyonunun kullan&#305;m&#305;na de&#287;inmedik. 
+	scanf(); ge&#231;en haftaki yaz&#305;m&#305;zdan da  &#246;&#287;rendi&#287;imiz gibi bir giri&#351; fonksiyonudur. Peki nas&#305;l kullan&#305;l&#305;r, 
+	tam olarak ne i&#351;e yarar? scanf(); kabaca klavyeden girdi&#287;iniz say&#305;y&#305; veya karakteri almaya yarar. 
+	Kullan&#305;m&#305; ise &#351;&#246;yledir: &#246;nce scanf yazar, sonra parantez ve ard&#305;ndan &#231;ift t&#305;rnak a&#231;ar, daha sonra al&#305;nacak 
+	de&#287;i&#351;kene g&#246;re, %d, %f veya %c yaz&#305;l&#305;r. %d int, %f float, %c char tipindeki de&#287;i&#351;kenler i&#231;in kullan&#305;l&#305;r. 
+	Bundan sonra &#231;ift t&#305;rna&#287;&#305; kapat&#305;p, virg&#252;l koyars&#305;n&#305;z. Hemen ard&#305;ndan &amp; i&#351;areti ve atanacak de&#287;i&#351;ken ad&#305;n&#305; 
+	yazars&#305;n&#305;z. Son olarak, parantezi kapat&#305;p noktal&#305; virg&#252;l koyars&#305;n&#305;z. Hepsi budur.</p>
+	<p>Yukar&#305;daki programda da scanf(); fonksiyonu g&#246;rd&#252;&#287;&#252;n&#252;z gibi bu &#351;ekilde kullan&#305;lm&#305;&#351;t&#305;r. San&#305;r&#305;m gere&#287;inden &#231;ok 
+	laf oldu ve konu basit oldu&#287;u halde zor gibi g&#246;z&#252;kt&#252;. Yukardaki s&#305;k&#305;nt&#305;dan kurtulmak i&#231;in &#231;ok basit bir 
+	program yazal&#305;m. Bu program&#305;n amac&#305;, klavyeden girilen bir say&#305;y&#305;, ekrana aynen bast&#305;rmak olsun.</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi;
+	printf("De&#287;er giriniz> ");
+	scanf("%d",&sayi);
+	printf("Girilen de&#287;er: %d\n",sayi);
+	return 0;
+}
+</pre>	
+	<p>G&#246;rd&#252;&#287;&#252;n&#252;z gibi hi&#231;bir zor taraf&#305; yok. Klavyeden girilecek bir tamsay&#305;n&#305;z varsa, yapman&#305;z gereken &#246;nce 
+	de&#287;i&#351;kenin tipini ve ad&#305;n&#305; belirtmek, sonra scanf(&nbsp;&nbsp;); fonksiyonunu kullanmak. Bu fonksiyonu kullanmaya gelince, 
+	scanf(" yazd&#305;ktan sonra de&#287;i&#351;ken tipine g&#246;re %d, %c, veya %f, yaz&#305;p, ard&#305;ndan &amp; i&#351;aretini kullanarak atanacak 
+	de&#287;i&#351;kenin ad&#305;n&#305; belirtmekten ibaret. Fark etmi&#351;sinizdir, printf(); ve scanf(); fonksiyonlar&#305;n&#305;n her ikisinde 
+	de %d koyduk. &#199;&#252;nk&#252; scanf(&nbsp;&nbsp;); ve printf(&nbsp;&nbsp;); fonksiyonlar&#305;n de&#287;i&#351;ken tipi simgeleri ayn&#305;d&#305;r. A&#351;a&#287;&#305;daki tablodan 
+	hangi de&#287;i&#351;ken tipinin nas&#305;l deklare edilece&#287;ini, ka&#231; byte yer kaplad&#305;&#287;&#305;n&#305;, maksimum/minimum alabilece&#287;i 
+	de&#287;erleri ve giri&#351;/&#231;&#305;k&#305;&#351; fonksiyonlar&#305;yla nas&#305;l kullan&#305;labilece&#287;ini bulabilirsiniz. Tan&#305;mlamalar ve fonksiyon 
+	uygulamalar&#305;, <i>degisken</i> isimli bir de&#287;i&#351;ken i&#231;in yap&#305;lm&#305;&#351;t&#305;r.</p>
+	
+<div align="center">
+<table border="1" cellspacing="1" width="500" align="center" style="font-size:13px">
+  <tr> 
+    <td align="center" style="text-align:">
+		<b>&nbsp;T&#304;P&nbsp;</b>
+	</td>
+    <td align="center" style="text-align:">
+		<b>&nbsp;DEKLARASYON&nbsp;</b>
+    </td>
+    <td align="center" style="text-align:"> 
+		<b>&nbsp;
+		printf(&nbsp;&nbsp;);
+		</b>
+    </td>
+    <td align="center" style="text-align:">
+      <b>&nbsp;
+      scanf(&nbsp;&nbsp;);
+      &nbsp;
+      </b>
+    </td>
+    <td align="center" style="text-align:"> 
+		<b>&nbsp;Minimum&nbsp;
+		</b>
+    </td>
+    <td align="center" style="text-align:"> 
+      <b>&nbsp;Maksimum&nbsp;</b>
+    </td>
+    <td align="center" style="text-align:"> 
+      <b>&nbsp;Byte&nbsp;</b>
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		&nbsp;Karakter&nbsp;
+	</td>
+    <td align="center" style="text-align:"> 
+      char degisken;
+    </td>	
+    <td align="center" style="text-align:"> 
+      &nbsp;printf("%c",degisken);&nbsp;
+    </td>	
+    <td align="center" style="text-align:"> 
+      &nbsp;scanf("%c",&amp;degisken);&nbsp;
+	</td>
+    <td align="center" style="text-align:"> 
+      -128
+    </td>
+    <td align="center" style="text-align:"> 
+		127
+    </td>
+    <td align="center" style="text-align:"> 
+      1
+    </td>
+  </tr>
+
+  <tr> 
+    <td align="center" style="text-align:"> 
+		&nbsp;Kısa Tam Sayı&nbsp;
+	</td>
+    <td align="center" style="text-align:"> 
+      short degisken;
+    </td>	
+    <td align="center" style="text-align:"> 
+      &nbsp;printf("%d",degisken);&nbsp;
+    </td>	
+    <td align="center" style="text-align:"> 
+      &nbsp;scanf("%d",&amp;degisken);&nbsp;
+	</td>
+    <td align="center" style="text-align:"> 
+      -32768
+    </td>
+    <td align="center" style="text-align:"> 
+		32767
+    </td>
+    <td align="center" style="text-align:"> 
+      2
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		&nbsp;Tamsay&#305;&nbsp;
+	</td>
+    <td align="center" style="text-align:"> 
+      int degisken;
+    </td>
+    <td align="center" style="text-align:"> 
+      &nbsp;printf("%d",degisken);&nbsp;
+    </td>
+    <td align="center" style="text-align:"> 
+      &nbsp;scanf("%d",&amp;degisken);&nbsp;
+    </td>
+    <td align="center" style="text-align:"> 
+      -32768
+    </td>
+    <td align="center" style="text-align:"> 
+      32767
+    </td>
+    <td align="center" style="text-align:"> 
+      2
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		Uzun Tamsay&#305;
+	</td>
+    <td align="center" style="text-align:"> 
+      long int degisken;
+    </td>
+    <td align="center" style="text-align:"> 
+      printf("%ld",degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      scanf("%ld",&amp;degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      -2147483648
+    </td>
+    <td align="center" style="text-align:"> 
+      2147483647
+    </td>
+    <td align="center" style="text-align:"> 
+      4
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		&#304;&#351;aretsiz Tamsay&#305;
+	</td>
+    <td align="center" style="text-align:"> 
+      unsigned int degisken;
+    </td>
+    <td align="center" style="text-align:"> 
+      printf("%u",degisken);
+    </td>
+    <td width=144 class="Normal"> 
+      scanf("%u",&amp;degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      0
+    </td>
+    <td align="center" style="text-align:"> 
+      65535
+    </td>
+    <td align="center" style="text-align:"> 
+      2
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		&#304;&#351;aretsiz Uzun Tamsay&#305;
+	</td>
+    <td align="center" style="text-align:"> 
+      long unsigned degisken;
+    </td>
+    <td align="center" style="text-align:"> 
+      printf("%lu",degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      scanf("%lu",&amp;degisken);
+    </td>
+	<td align="center" style="text-align:"> 
+      0
+    </td>
+    <td align="center" style="text-align:"> 
+      4294967295
+    </td>
+    <td align="center" style="text-align:"> 
+      4
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> 
+		Virg&#252;ll&#252; Say&#305;
+	</td>
+    <td align="center" style="text-align:"> 
+      float degisken;
+    </td>
+    <td align="center" style="text-align:"> 
+      printf("%f",degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      scanf("%f",&amp;degisken);
+    </td>
+    <td align="center" style="text-align:"> 
+      1,17549e-38
+    </td>
+    <td align="center" style="text-align:"> 
+      3,40282e+38
+    </td>
+    <td align="center" style="text-align:"> 
+      4
+    </td>
+  </tr>
+  
+  <tr> 
+    <td align="center" style="text-align:"> Uzun Virg&#252;ll&#252; Say&#305;
+	</td>
+    <td align="center" style="text-align:"> double degisken;
+    </td>
+    <td align="center" style="text-align:"> printf("%lf",degisken);
+    </td>
+    <td align="center" style="text-align:"> scanf("%lf",&amp;degisken);
+    </td>
+    <td align="center" style="text-align:"> 2,22504e-308
+    </td>
+    <td align="center" style="text-align:"> 1,79769e+308
+    </td>
+    <td align="center" style="text-align:">8
+    </td>
+  </tr>  
+</table>
+</div>
+<br/>
+<p>
+Verilen bu değerler; işletim sisteminden, işletim sistemine, farklılık gösterebilir. 
+En doğru değerleri almak için sizeof(&nbsp;&nbsp;), fonksiyonunu kullanmak gerekir. 
+Aşağıda yazmış olduğum bir program bulacaksınız. Kendi bilgisayarınızda derleyip, 
+çalıştırırsanız, size değişkenlerin boyutunu ve alabileceği maksimum-minimum değerleri 
+verecektir:
+</p>
+
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;limits.h&gt;
+#include&lt;float.h&gt;
+int main( void )
+{	
+	printf( "\nTIP\t\t  BOYUT\t\t MIN\t \tMAX\n" );
+	printf("==============================================================\n");
+	printf( "char\t\t: %d byte(s)\t%d\t\t%d\n", sizeof(char),CHAR_MIN,CHAR_MAX );
+	printf( "short\t\t: %d byte(s)\t%d\t\t%d\n", sizeof(short), SHRT_MIN, SHRT_MAX );
+	printf( "int\t\t: %d byte(s)\t%d\t%d\n", sizeof(int), INT_MIN, INT_MAX );
+	printf( "unsigned int\t: %d byte(s)\t\t\t%u\n",sizeof(unsigned),UINT_MAX );
+	printf( "long\t\t: %d byte(s)\t%ld\t%ld\n", sizeof(long), LONG_MIN, LONG_MAX );
+	printf( "float\t\t: %d byte(s)\t%e\t%e\n", sizeof(float), FLT_MIN, FLT_MAX );
+	printf( "double\t\t: %d byte(s)\t%e\t%e\n\n", sizeof(double), DBL_MIN, DBL_MAX );
+
+	return 0;
+}
+</pre>
+
+<p>
+Programı inceleyip, detaylara girmeyin. Sadece çalıştırıp, sonuçları görmeniz yeterli.
+Örneğin, Ubuntu yüklü x86 tabanlı bir bilgisayarda, karşınıza şöyle bir ekran gelecektir:
+</p>
+<pre>
+TIP               BOYUT          MIN            MAX
+==============================================================
+char            : 1 byte(s)     -128            127
+short           : 2 byte(s)     -32768          32767
+int             : 4 byte(s)     -2147483648     2147483647
+unsigned int    : 4 byte(s)                     4294967295
+long            : 4 byte(s)     -2147483648     2147483647
+float           : 4 byte(s)     1.175494e-38    3.402823e+38
+double          : 8 byte(s)     2.225074e-308   1.797693e+308
+</pre>
+<p>
+Sanırım hiç istemediğim bir şey yaparak, kafanızı karıştırdım. Dilerseniz, burada keselim 
+ve bunlar ileriye d&#246;n&#252;k olarak bir kenarda dursunlar. Yine de daha fazla bilgi 
+isterseniz, 
+<a href="http://lib.daemon.am/Books/C/apd/apd.htm#Heading7" target="_blank">Teach Yourself C in 
+21 Days</a> yazısına göz atabilirsiniz. Ama dediğim gibi bunların sonraya bırakılması, 
+uygun olacaktır.
+</p>
+
+<p>&#350;u ana kadar &#246;&#287;rendiklerimizle girilen herhangi iki say&#305;s&#305;n&#305;n ortalamas&#305;n&#305; hesaplayan bir program yazal&#305;m. 
+Ba&#351;lamadan &#246;nce, de&#287;i&#351;kenlerimizin ka&#231; tane ve nas&#305;l olaca&#287;&#305;n&#305; d&#252;&#351;&#252;nelim. &#350;uras&#305; kesin ki, alaca&#287;&#305;m&#305;z iki say&#305; 
+i&#231;in 2 farkl&#305; de&#287;i&#351;kenimiz olmal&#305;. Bir de ortalamay&#305; hesaplad&#305;&#287;&#305;m&#305;zda buldu&#287;umuz de&#287;eri ona atayabilece&#287;imiz bir 
+ba&#351;ka de&#287;i&#351;kene ihtiyac&#305;m&#305;z var. Peki de&#287;i&#351;kenlerimizin tipleri ne olacak? Ba&#351;&#305;nda belirtti&#287;imiz gibi yazmam&#305;z 
+gereken program herhangi iki say&#305; i&#231;in kullan&#305;labilmeli. Sadece tamsay&#305; demiyoruz, yani virg&#252;ll&#252; bir say&#305; da 
+girilebilir. O halde, girilecek iki say&#305;n&#305;n de&#287;i&#351;ken tipi float olmal&#305;. Bunu double da yapabilirsiniz, 
+fakat b&#252;y&#252;kl&#252;&#287;&#252; a&#231;&#305;s&#305;ndan gereksiz olacakt&#305;r. Ortalamalar&#305;n atanaca&#287;&#305; &#252;&#231;&#252;nc&#252; de&#287;i&#351;kene gelince, o da bir float 
+olmal&#305;. &#304;ki virg&#252;ll&#252; say&#305;n&#305;n ortalamas&#305;n&#305;n tamsay&#305; &#231;&#305;kmas&#305; d&#252;&#351;&#252;n&#252;lemez. Olu&#351;turdu&#287;umuz bu &#246;nbilgilerle program&#305;m&#305;z&#305; 
+art&#305;k yazabiliriz.</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	float sayi1,sayi2,ortalama;
+	printf("&#304;ki say&#305; giriniz> ");
+	scanf("%f%f",&amp;sayi1,&amp;sayi2);
+	ortalama = ( sayi1 + sayi2 ) / 2;
+	printf("Ortalama sonucu: %f'dir",ortalama);
+	return 0;
+}
+</pre>
+	<p>Yukar&#305;da yaz&#305;l&#305; programda, bilmedi&#287;imiz hi&#231;bir &#351;ey yok. Gayet basit &#351;ekilde izah edersek, 2 say&#305; al&#305;n&#305;p, 
+	bunlar toplan&#305;yor ve ikiye b&#246;l&#252;n&#252;yor. Bulunan de&#287;erde ortalama isminde bir ba&#351;ka de&#287;i&#351;kene atan&#305;yor. Burada 
+	yabanc&#305; oldu&#287;umuz, sadece scanf(); kullan&#305;m&#305;ndaki de&#287;i&#351;iklik. scanf(); fonksiyonuna bak&#305;n. Dikkat edece&#287;iniz 
+	gibi, de&#287;i&#351;kenlerden ikisine de tek sat&#305;rda de&#287;er atad&#305;k. Ayr&#305; ayr&#305; yazmam&#305;z da m&#252;mk&#252;nd&#252;, ancak kullan&#305;m 
+	a&#231;&#305;s&#305;ndan b&#246;yle yazmak a&#231;&#305;k &#351;ekilde daha pratiktir. Bu konuda bir ba&#351;ka &#246;rnek verelim. Diyelim ki, biri int, 
+	di&#287;eri float, sonuncusuysa char tipinde 3 de&#287;i&#351;keni birden tek scanf(); ile almak istiyorum. De&#287;i&#351;kenlerin 
+	isimleri, d1,d2 ve d3 olsun. Nas&#305;l yapar&#305;z?</p>
+<pre>
+scanf("%d%f%c",&amp;d1,&amp;d2,&amp;d3);
+</pre>
+	<p>Peki ald&#305;&#287;&#305;m&#305;z bu de&#287;i&#351;kenleri ekrana tek printf(); ile nas&#305;l yazd&#305;rabiliriz?</p>
+<pre>
+printf("%d %f %c",d1,d2,d3);
+</pre>
+	<p>G&#246;r&#252;ld&#252;&#287;&#252; gibi bu i&#351;in &#246;yle aman aman bir taraf&#305; yok. Fonksiyonlar&#305;n kullan&#305;mlar&#305; zaten birbirine benziyor. 
+	Tek yapman&#305;z gereken biraz pratik ve el al&#305;&#351;kanl&#305;&#287;&#305;.</p>
+<h4>Aritmetik Operat&#246;r ve &#304;fadeleri</h4>
+	<p>&#220;ste yazd&#305;&#287;&#305;m&#305;z programlar&#305;n hemen hemen hepsinde aritmetik bir i&#351;lem kulland&#305;k. 
+	Ama aritmetik i&#351;lemleri tam olarak anlatmad&#305;k. K&#305;saca;</p>
+<pre>
+( + ) : Art&#305;
+
+( - ) : Eksi
+
+( / ) : B&#246;lme
+
+( * ) : &#199;arpma
+
+( % ) : Mod&#252;l 
+</pre>
+
+	<p>Burada bilinmeyen olsa olsa mod&#252;l i&#351;lemidir. Mod&#252;l kalanlar&#305; bulmaya yarar. Yani diyelim ki 15'in 6'ya olan 
+	b&#246;l&#252;m&#252;nden kalan&#305;n&#305; bulmak istiyorsunuz. O halde 15%6 = 3 demektir. Veya, 7'nin 3'e b&#246;l&#252;m&#252;nden kalan&#305; bulacaksan&#305;z, 
+	o zamanda 7%3 = 1 elde edilir. Bu C'de s&#305;k&#231;a kullanaca&#287;&#305;m&#305;z bir aritmetik operat&#246;r olacak.</p>
+	
+	<p>
+	&#304;&#351;lem s&#305;ras&#305;na gelince, o da &#351;&#246;yle olur. En &#246;nce yap&#305;lan i&#351;lem parantez ( ) i&#231;idir. Sonra * / % gelir. 
+	&#199;arpma, b&#246;lme ve mod&#252;l i&#231;in, soldan sa&#287;a hangisi daha &#246;nce geliyorsa o yap&#305;l&#305;r. En son yap&#305;lanlarsa art&#305; ve eksidir. 
+	Keza, bu ikisi aras&#305;nda, &#246;nce olan solda bulunand&#305;r.
+	</p>
+	
+	<p>
+	B&#246;lme i&#351;lemine dair, bir iki ufak olay daha var. 4/5 normalde 0.8 etmektedir. Ancak C i&#231;in 4/5 s&#305;f&#305;r eder. 
+	&#199;&#252;nk&#252; program, iki tamsay&#305;n&#305;n b&#246;l&#252;nmesiyle, sonucu tamsay&#305; elde etmeyi bekler. &#304;leride tipleri birbiri aras&#305;nda 
+	de&#287;i&#351;tirmeye de&#287;inece&#287;iz. Ama &#351;imdilik bu konuda bir-iki &#246;rnek yapal&#305;m:
+	</p>
+<pre>
+*	8/4+2 => 2 + 2 => 4
+*	8-4*2+-12 => 8 - 8 + -12 => -12
+*	15*4/2%4*7 => 60/2%4*7 => 30%4*7 => 2*7 => 14
+*	31+7/2-83%5*2-2 => 31+ 3 - 3 * 2 - 2 => 31 + 3 - 6 - 2 => 26
+*	(31-7) * 2 + 83 / (5%2) => 24 * 2 + 83 / 1 => 48 + 83 => 131 
+</pre>
+
+	<p>Bu aritmetik ifadeleri hen&#252;z bir C program&#305; i&#231;in denemedik. Ancak burada keselim. Bunu yapmay&#305; di&#287;er yaz&#305;m&#305;za 
+	saklayal&#305;m. E&#287;er u&#287;ra&#351;mak isterseniz klavyeden al&#305;nacak 3 say&#305;n&#305;n ortalamas&#305;n&#305; bulan bir program yazabilirsiniz. 
+	Yada girilecek 2 tamsay&#305; aras&#305;nda b&#252;t&#252;n aritmetik i&#351;lemleri -ikisin &#231;arp&#305;m&#305;n&#305;, toplam&#305;n&#305;, birbirine b&#246;l&#252;m&#252;n&#252; ve 
+	fark&#305;n&#305;- bulan ve sonu&#231;lar&#305; ekrana yazd&#305;ran bir program da yazman&#305;z m&#252;mk&#252;n. Herhangi bir yerde tak&#305;l&#305;r ve bana 
+	ula&#351;mak isterseniz mail adresime yazman&#305;z kafi. Haftaya g&#246;r&#252;&#351;&#252;r&#252;z.</p>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_1.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_3.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:09 GMT -->
+</html>

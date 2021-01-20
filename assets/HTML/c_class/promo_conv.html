@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/promo_conv.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Promotion, Conversion and Casts</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Promotion, Conversion and Casts</H1>
+<H2>Promotion</H2>
+<UL>
+<LI><CODE>char</CODE> or <CODE>short</CODE> values (<CODE>signed</CODE> or
+<CODE>unsigned</CODE>) are promoted to <CODE>int</CODE> (or
+<CODE>unsigned</CODE>) before anything else happens
+<UL>
+<LI>this is done because <CODE>int</CODE> is assumed to be the most
+efficient integral datatype, and it is guaranteed that no information
+will be lost by going from a smaller datatype to a larger one
+<LI>examples:
+<UL>
+<LI>even if <CODE>ch</CODE> is a <CODE>char</CODE>, the <CODE>'z'</CODE> value
+in <CODE>ch = 'z'</CODE> is converted to
+datatype <CODE>int</CODE> before being assigned to <CODE>ch</CODE>
+<LI>as a more graphic illustration, <CODE>sizeof('z')</CODE> returns 4
+(on a machine with 8 bit bytes and 32 bit <CODE>int</CODE>s)
+<LI>similarly, if <CODE>stuff</CODE> is a <CODE>short</CODE> and <CODE>a</CODE>
+is a <CODE>char</CODE>,
+<CODE>stuff = a</CODE> causes the value from <CODE>a</CODE> to be promoted to
+<CODE>int</CODE>
+<LI>promotion doesn't change the size of a variable:
+<PRE>
+{
+	char ch;
+	int before, after;
+
+	ch = 'a';
+	before = sizeof(ch);
+	ch = ch + 1;
+	after = sizeof(ch);
+}
+</PRE>
+sets both <CODE>before</CODE> and <CODE>after</CODE> to 1 even though, when
+evaluating <CODE>ch = ch + 1</CODE>, the value of <CODE>ch</CODE> is promoted
+to <CODE>int</CODE> before adding <CODE>1</CODE>
+</UL>
+</UL>
+</UL>
+<H2>Conversion</H2>
+<UL>
+<LI>after integral promotion, the arguments to an operator are checked
+<LI>if both are the same datatype, evaluation proceeds
+<LI>if the arguments are of different datatypes, conversion will occur:
+<UL>
+<LI>otherwise, if either operand is a <CODE>long double</CODE>, the other operand is converted to <CODE>long double</CODE>
+<LI>otherwise, if either operand is a <CODE>double</CODE>, the other operand is converted to <CODE>double</CODE>
+<LI>otherwise, if either operand is a <CODE>float</CODE>, the other operand is converted to <CODE>float</CODE>
+<LI>otherwise, if either operand is an <CODE>unsigned long</CODE>, the other operand is converted to <CODE>unsigned long</CODE>
+<LI>otherwise, if one operand is a <CODE>long</CODE> and the other is
+<CODE>unsigned</CODE>, one of two things can happen:
+<UL>
+<LI>if <CODE>sizeof(long) == sizeof(unsigned)</CODE> (and
+therefore <CODE>long</CODE> has a maximum value less than the maximum value
+of an <CODE>unsigned</CODE>, then both operands are converted to
+<CODE>unsigned long</CODE>
+<LI>if <CODE>sizeof(long) &gt sizeof(unsigned)</CODE>, the
+<CODE>unsigned</CODE> operand is converted to <CODE>long</CODE>
+</UL>
+<LI>otherwise, if either operand is a <CODE>long</CODE>, the other operand is converted to <CODE>long</CODE>
+<LI>otherwise, if either operand is an <CODE>unsigned</CODE>, the other operand is converted to <CODE>unsigned</CODE>
+<LI>otherwise, both operands are evaluated as <CODE>int</CODE>s
+</UL>
+<LI>conversion spreads from left to right to raise an expression to the
+largest datatype:
+<UL>
+<LI>in an entirely <CODE>int</CODE> context, <CODE>40 / 17 * 13 / 3</CODE>
+would evaluate to <CODE>8</CODE> (<CODE>40 / 17</CODE> rounds to <CODE>2</CODE>,
+<CODE>2 * 13 = 26</CODE>, <CODE>26 / 3</CODE> rounds to <CODE>8</CODE>)
+<LI>to evaluate <CODE>40 / 17 * 13 / 3.0</CODE>
+<UL>
+<LI><CODE>40 / 17</CODE> again rounds to <CODE>2</CODE>
+<LI><CODE>2 * 13 = 26</CODE>
+<LI>but the <CODE>3.0</CODE> forces the final division into a
+<CODE>double</CODE> context and thus <CODE>26.0 / 3.0 = 8.666...</CODE>
+</UL>
+<LI>if we move the decimal point to the <CODE>13</CODE>
+(<CODE>40 / 17 * 13.0 / 3</CODE>), the result will still be
+<CODE>8.666...</CODE> because:
+<UL>
+<LI><CODE>40 / 17</CODE> rounds to <CODE>2</CODE>
+<LI>the <CODE>13.0</CODE> forces the multiplication to a <CODE>double</CODE>
+but <CODE>2.0 * 13.0</CODE> still equals <CODE>26.0</CODE>
+<LI>and the <CODE>26.0</CODE> still forces the final division into a
+<CODE>double</CODE> context and <CODE>26.0 / 3.0 = 8.666...</CODE>
+</UL>
+<LI>if we move the decimal point to the <CODE>17</CODE>
+(<CODE>40 / 17.0 * 13 / 3</CODE>), the result now becomes
+<CODE>10.196...</CODE> because:
+<UL>
+<LI>the <CODE>17.0</CODE> forces the initial division into a
+<CODE>double</CODE> context and <CODE>40.0 / 17.0 = 2.352...</CODE>
+<LI><CODE>2.352... * 13.0 = 30.588...</CODE>
+<LI>and <CODE>30.588... / 3.0 = 10.196...</CODE>
+</UL>
+</UL>
+</UL>
+<H2>Casts</H2>
+<UL>
+<LI>the type of an expression can be forced using <EM>casts</EM>.
+<LI>a <EM>cast</EM> is simply any valid datatype enclosed in parentheses and
+placed next to a constant, variable or expression
+<LI>examples:
+<UL>
+<LI><CODE>(float)11 / 3</CODE> forces the entire expression to be evaluated
+in a floating point context, producing a result of <CODE>3.6666...</CODE>
+<LI>to evaluate <CODE>((int)7.5 * 2) / (long double)5</CODE>
+<UL>
+<LI>first, the cast forces <CODE>7.5</CODE> to an <CODE>int 7</CODE>
+<LI>the multiplication is done in an integer context yielding <CODE>14</CODE>
+<LI>the cast forces <CODE>5</CODE> to a <CODE>long double 5.0</CODE>
+<LI>which forces the division to be done in a <CODE>long double</CODE>
+context
+<LI>leading to a final result of <CODE>14.0 / 5.0</CODE> or <CODE>2.8</CODE>
+</UL>
+<LI>note that casts (as in other conversions) only force conversion at their
+level, so <CODE>(float)(40 / 17 * 13 / 3)</CODE> would <STRONG>still</STRONG>
+evaluate to <CODE>8.0</CODE> because the entire expression inside the
+parentheses takes place in an <CODE>int</CODE> context, after which it
+is cast to a <CODE>float</CODE>
+</UL>
+</UL>
+<A HREF="fundamental_types.html">Previous</A>, 
+<A HREF="constants.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/promo_conv.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

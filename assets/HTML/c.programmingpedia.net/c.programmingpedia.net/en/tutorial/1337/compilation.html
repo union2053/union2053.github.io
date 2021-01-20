@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1337/compilation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Compilation | C Language Tutorial">
+        <meta name="description" property="og:description" content="Compilation | C Language Tutorial">
+        <title>Compilation | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="compilation">Compilation</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>The C language is traditionally a compiled language (as opposed to interpreted). The C Standard defines <strong><em>translation phases</em></strong>, and the product of applying them is a program image (or compiled program). In <a href="../../../questions/tagged/c11.html" class="post-tag" title="show questions tagged &#39;c11&#39;" rel="tag">c11</a>, the phases are listed in §5.1.1.2.</p>
+
+
+            </div>
+
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <table><thead><tr><th>Filename extension</th><th>Description</th></tr></thead><tbody><tr><td><code>.c</code></td><td>Source file. Usually contains definitions and code.</td></tr><tr><td><code>.h</code></td><td>Header file. Usually contains declarations.</td></tr><tr><td><code>.o</code></td><td>Object file. Compiled code in machine language.</td></tr><tr><td><code>.obj</code></td><td>Alternative extension for object files.</td></tr><tr><td><code>.a</code></td><td>Library file. Package of object files.</td></tr><tr><td><code>.dll</code></td><td>Dynamic-Link Library on Windows.</td></tr><tr><td><code>.so</code></td><td>Shared object (library) on many Unix-like systems.</td></tr><tr><td><code>.dylib</code></td><td>Dynamic-Link Library on OSX (Unix variant).</td></tr><tr><td><code>.exe</code>, <code>.com</code></td><td>Windows executable file. Formed by linking object files and library files. In Unix-like systems, there is no special file name extension for executable file.</td></tr></tbody></table><table><thead><tr><th>POSIX c99 compiler flags</th><th>Description</th></tr></thead><tbody><tr><td><code>-o filename</code></td><td>Output file name eg. (<code>bin/program.exe</code>, <code>program</code>)</td></tr><tr><td><code>-I directory</code></td><td>search for headers in <code>direrctory</code>.</td></tr><tr><td><code>-D name</code></td><td>define macro <code>name</code></td></tr><tr><td><code>-L directory</code></td><td>search for libraries in <code>directory</code>.</td></tr><tr><td><code>-l name</code></td><td>link library <code>libname</code>.</td></tr></tbody></table>
+<p>Compilers on POSIX platforms (Linux, mainframes, Mac) usually accept these options, even if they are not called <code>c99</code>.</p>
+<ul>
+<li>See also <a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/c99.html" rel="nofollow noreferrer">c99 - compile standard C programs</a></li>
+</ul>
+<table><thead><tr><th>GCC (GNU Compiler Collection) Flags</th><th>Description</th></tr></thead><tbody><tr><td><code>-Wall</code></td><td>Enables all warning messages that are commonly accepted to be useful.</td></tr><tr><td><code>-Wextra</code></td><td>Enables more warning messages, can be too noisy.</td></tr><tr><td><code>-pedantic</code></td><td>Force warnings where code violates the chosen standard.</td></tr><tr><td><code>-Wconversion</code></td><td>Enable warnings on implicit conversion, use with care.</td></tr><tr><td><code>-c</code></td><td>Compiles source files without linking.</td></tr><tr><td><code>-v</code></td><td>Prints compilation info.</td></tr></tbody></table>
+<ul>
+<li><code>gcc</code> accepts the POSIX flags plus a lot of others.</li>
+<li>Many other compilers on POSIX platforms (<code>clang</code>, vendor specific compilers) also use the flags that are listed above.</li>
+<li>See also <a href="https://gcc.gnu.org/onlinedocs/gcc/index.html#toc_Invoking-GCC" rel="nofollow noreferrer">Invoking GCC</a> for many more options.</li>
+</ul>
+<table><thead><tr><th>TCC (Tiny C Compiler) Flags</th><th>Description</th></tr></thead><tbody><tr><td><code>-Wimplicit-function-declaration</code></td><td>Warn about implicit function declaration.</td></tr><tr><td><code>-Wunsupported</code></td><td>Warn about unsupported GCC features that are ignored by TCC.</td></tr><tr><td><code>-Wwrite-strings</code></td><td>Make string constants be of type const char * instead of char *.</td></tr><tr><td><code>-Werror</code></td><td>Abort compilation if warnings are issued.</td></tr><tr><td><code>-Wall</code></td><td>Activate all warnings, except <code>-Werror</code>, <code>-Wunusupported</code> and <code>-Wwrite strings</code>.</td></tr></tbody></table>
+
+            </div>
+
+
+            <h2 id="file-types">File Types</h2>
+            <div>
+                <p>Compiling C programs requires you to work with five kinds of files:</p>
+<ol>
+<li>
+<p><strong>Source files</strong>: These files contain function definitions, and have names which end in <code>.c</code> by convention. Note: <code>.cc</code> and <code>.cpp</code> are C++ files; <em>not</em> C files.<br />
+e.g., <code>foo.c</code></p>
+</li>
+<li>
+<p><strong>Header files</strong>: These files contain function prototypes and various pre-processor statements (see below). They are used to allow source code files to access externally-defined functions. Header files end in <code>.h</code> by convention.<br />
+e.g., <code>foo.h</code></p>
+</li>
+<li>
+<p><strong>Object files</strong>: These files are produced as the output of the compiler. They consist of function definitions in binary form, but they are not executable by themselves. Object files end in <code>.o</code> by convention, although on some operating systems (e.g. Windows, MS-DOS), they often end in <code>.obj</code>.<br />
+e.g., <code>foo.o</code> <code>foo.obj</code></p>
+</li>
+<li>
+<p><strong>Binary executables</strong>: These are produced as the output of a program called a &quot;linker&quot;. The linker links together a number of object files to produce a binary file which can be directly executed. Binary executables have no special suffix on Unix operating systems, although they generally end in <code>.exe</code> on Windows.<br />
+e.g., <code>foo</code> <code>foo.exe</code></p>
+</li>
+<li>
+<p><strong>Libraries</strong>: A library is a compiled binary but is not in itself an an executable (i.e., there is no <code>main()</code> function in a library).  A library contains functions that may be used by more than one program.   A library should ship with header files which contain prototypes for all functions in the library; these header files should be referenced (e.g; <code>#include &lt;library.h&gt;</code>) in any source file that uses the library.  The linker then needs to be referred to the library so the program can successfully compiled.  There are two types of libraries: static and dynamic.</p>
+<ul>
+<li><strong>Static library</strong>: A static library (<code>.a</code> files for POSIX systems and <code>.lib</code> files for Windows — not to be confused with <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682592(v=vs.85).aspx" rel="nofollow noreferrer">DLL import library files</a>, which also use the <code>.lib</code> extension) is statically built into the program .   Static libraries have the advantage that the program knows exactly which version of a library is used. On the other hand, the sizes of executables are bigger as all used library functions are included.<br />
+e.g., <code>libfoo.a</code> <code>foo.lib</code></li>
+<li><strong>Dynamic library</strong>: A dynamic library (<code>.so</code> files for most POSIX systems, <code>.dylib</code> for OSX and <code>.dll</code> files for Windows) is dynamically linked at runtime by the program.  These are also sometimes referred to as shared libraries because one library image can be shared by many programs. Dynamic libraries have the advantage of taking up less disk space if more than one application is using the library. Also, they allow library updates (bug fixes) without having to rebuild executables.<br />
+e.g., <code>foo.so</code> <code>foo.dylib</code> <code>foo.dll</code></li>
+</ul>
+</li>
+</ol>
+
+
+            </div>
+            <h2 id="the-compiler">The Compiler</h2>
+            <div>
+                <p>After the C pre-processor has included all the header files and expanded all macros, the compiler can compile the program. It does this by turning the C source code into an object code file, which is a file ending in <code>.o</code> which contains the binary version of the source code. Object code is not directly executable, though. In order to make an executable, you also have to add code for all of the library functions that were <code>#include</code>d into the file (this is not the same as including the declarations, which is what <code>#include</code> does). This is the job of <a class='doc-link' href="http://www.riptutorial.com/c/example/4360/the-linker">the linker</a>.</p>
+<p>In general, the exact sequence how to invoke a C compiler depends much on the system that you are using. Here we are using the GCC compiler, though it should be noted that many more compilers exist:</p>
+<pre><code>% gcc -Wall -c foo.c
+</code></pre>
+<p><code>%</code> is the OS' command prompt. This tells the compiler to run the pre-processor on the file <code>foo.c</code> and then compile it into the object code file <code>foo.o</code>. The <code>-c</code> option means to compile the source code file into an object file but not to invoke the linker. This option <code>-c</code> is available on POSIX systems, such as Linux or macOS; other systems may use different syntax.</p>
+<p>If your entire program is in one source code file, you can instead do this:</p>
+<pre><code>% gcc -Wall foo.c -o foo
+</code></pre>
+<p>This tells the compiler to run the pre-processor on <code>foo.c</code>, compile it and then link it to create an executable called <code>foo</code>. The <code>-o</code> option states that the next word on the line is the name of the binary executable file (program). If you don't specify the <code>-o</code>, (if you just type <code>gcc foo.c</code>), the executable will be named <code>a.out</code> for historical reasons.</p>
+<p>In general the compiler takes four steps when converting a <code>.c</code> file into an executable:</p>
+<ol>
+<li><strong>pre-processing</strong> - textually expands <code>#include</code> directives and <code>#define</code> macros in your <code>.c</code> file</li>
+<li><strong>compilation</strong> - converts the program into assembly (you can stop the compiler at this step by adding the <code>-S</code> option)</li>
+<li><strong>assembly</strong> - converts the assembly into machine code</li>
+<li><strong>linkage</strong> - links the object code to external libraries to create an executable</li>
+</ol>
+<p>Note also that the name of the compiler we are using is GCC, which stands for both &quot;GNU C compiler&quot; and &quot;GNU compiler collection&quot;, depending on context. Other C compilers exist. For Unix-like operating systems, many of them have the name <code>cc</code>, for &quot;C compiler&quot;, which is often a symbolic link to some other compiler. On Linux systems, <code>cc</code> is often an alias for GCC. On macOS or OS-X, it points to clang.</p>
+<p>The POSIX standards currently mandates <a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/c99.html" rel="nofollow noreferrer"><code>c99</code></a> as the name of a C compiler — it supports the C99 standard by default. Earlier versions of POSIX mandated <a href="http://pubs.opengroup.org/onlinepubs/7990989775/xcu/c89.html" rel="nofollow noreferrer"><code>c89</code></a> as the compiler. POSIX also mandates that this compiler understands the options <code>-c</code> and <code>-o</code> that we used above.</p>
+<hr />
+<p><strong>Note:</strong> The <code>-Wall</code> option present in both <code>gcc</code> examples tells the compiler to print warnings about questionable constructions, which is strongly recommended. It is a also good idea to add other <a href="https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html" rel="nofollow noreferrer">warning options</a>, e.g. <code>-Wextra</code>.</p>
+
+
+            </div>
+            <h2 id="the-linker">The Linker</h2>
+            <div>
+                <p>The job of the linker is to link together a bunch of object files (<code>.o</code> files) into a binary executable. The process of <em>linking</em> mainly involves <em>resolving symbolic addresses to numerical addresses</em>. The result of the link process is normally an executable program.</p>
+<p>During the link process, the linker will pick up all the object modules specified on the command line, add some system-specific <em>startup code</em> in front and try to resolve all <em>external</em> references in the object module with <em>external definitions</em> in other object files (object files can be specified directly on the command line or may implicitly be added through libraries). It will then assign <em>load addresses</em> for the object files, that is, it specifies where the code and data will end up in the address space of the finished program. Once it's got the load addresses, it can replace all the symbolic addresses in the object code with &quot;real&quot;, numerical addresses in the target's address space. The program is ready to be executed now.</p>
+<p>This includes both the object files that the compiler created from your source code files as well as object files that have been pre-compiled for you and collected into library files. These files have names which end in <code>.a</code> or <code>.so</code>, and you normally don't need to know about them, as the linker knows where most of them are located and will link them in automatically as needed.</p>
+<h4 id="implicit-invocation-of-the-linker">Implicit invocation of the linker</h4>
+<p>Like the pre-processor, the linker is a separate program, often called <code>ld</code> (but Linux uses <code>collect2</code>, for example). Also like the pre-processor, the linker is invoked automatically for you when you use the compiler. Thus, the normal way of using the linker is as follows:</p>
+<pre><code>% gcc foo.o bar.o baz.o -o myprog
+</code></pre>
+<p>This line tells the compiler to link together three object files (<code>foo.o</code>, <code>bar.o</code>, and <code>baz.o</code>) into a binary executable file named <code>myprog</code>. Now you have a file called <code>myprog</code> that you can run and which will hopefully do something cool and/or useful.</p>
+<h4 id="explicit-invocation-of-the-linker">Explicit invocation of the linker</h4>
+<p>It is possible to invoke the linker directly, but this is seldom advisable, and is typically very platform-specific.  That is, options that work on Linux won't necessarily work on Solaris, AIX, macOS, Windows, and similarly for any other platform.  If you work with GCC, you can use <code>gcc -v</code> to see what is executed on your behalf.</p>
+<h4 id="options-for-the-linker">Options for the linker</h4>
+<p>The linker also takes some arguments to modify it's behavior. The following command would tell gcc to link <code>foo.o</code> and <code>bar.o</code>, but also include the <code>ncurses</code> library. </p>
+<pre><code>% gcc foo.o bar.o -o foo -lncurses
+</code></pre>
+<p>This is actually (more or less) equivalent to</p>
+<pre><code>% gcc foo.o bar.o /usr/lib/libncurses.so -o foo
+</code></pre>
+<p>(although <code>libncurses.so</code> could be <code>libncurses.a</code>, which is just an archive created with <code>ar</code>).  Note that you should list the libraries (either by pathname or via <code>-lname</code> options) after the object files.  With static libraries, the order that they are specified matters; often, with shared libraries, the order doesn't matter.</p>
+<p>Note that on many systems, if you are using mathematical functions (from <code>&lt;math.h&gt;</code>), you need to specify <code>-lm</code> to load the mathematics library — but Mac OS X and macOS Sierra do not require this.  There are other libraries that are separate libraries on Linux and other Unix systems, but not on macOS — POSIX threads, and POSIX realtime, and networking libraries are examples.  Consequently, the linking process varies between platforms.</p>
+<h4 id="other-compilation-options">Other compilation options</h4>
+<p>This is all you need to know to begin compiling your own C programs. Generally, we also recommend that you use the <code>-Wall</code> command-line option:</p>
+<pre><code>% gcc -Wall -c foo.cc
+</code></pre>
+<p>The <code>-Wall</code> option causes the compiler to warn you about legal but dubious code constructs, and will help you catch a lot of bugs very early.</p>
+<p>If you want the compiler to throw more warnings at you (including variables that are declared but not used, forgetting to return a value etc.), you can use this set of options, as <code>-Wall</code>, despite the name, doesn't turn <em>all of the possible warnings</em> on:</p>
+<pre><code>% gcc -Wall -Wextra -Wfloat-equal -Wundef -Wcast-align -Wwrite-strings -Wlogical-op \
+&gt;     -Wmissing-declarations -Wredundant-decls -Wshadow …
+</code></pre>
+<p>Note that <code>clang</code> has an option <a href="http://clang.llvm.org/docs/UsersManual.html#enabling-all-diagnostics" rel="nofollow noreferrer"><code>-Weverything</code></a> which really does turn on all warnings in <code>clang</code>.</p>
+
+
+            </div>
+            <h2 id="the-preprocessor">The Preprocessor</h2>
+            <div>
+                <p>Before the C compiler starts compiling a source code file, the file is processed in a preprocessing phase. This phase can be done by a separate program or be completely integrated in one executable. In any case, it is invoked automatically by the compiler before compilation proper begins. The preprocessing phase converts your source code into another source code or translation unit by applying textual replacements. You can think of it as a &quot;modified&quot; or &quot;expanded&quot; source code. That expanded source may exist as a real file in the file system, or it may only be stored in memory for a short time before being processed further.</p>
+<p>Preprocessor commands start with the pound sign (&quot;#&quot;). There are several preprocessor commands; two of the most important are:</p>
+<ol>
+<li>
+<p><strong>Defines</strong>:</p>
+<p><code>#define</code> is mainly used to define constants. For instance,</p>
+<pre><code>#define BIGNUM 1000000
+int a = BIGNUM; 
+</code></pre>
+<p>becomes</p>
+<pre><code>int a = 1000000;
+</code></pre>
+<p><code>#define</code> is used in this way so as to avoid having to explicitly write out some constant value in many different places in a source code file. This is important in case you need to change the constant value later on; it's much less bug-prone to change it once, in the <code>#define</code>, than to have to change it in multiple places scattered all over the code.</p>
+<p>Because <code>#define</code> just does advanced search and replace, you can also declare macros. For instance:</p>
+<pre><code>#define ISTRUE(stm) do{stm = stm ? 1 : 0;}while(0)
+// in the function:
+a = x;
+ISTRUE(a);
+</code></pre>
+<p>becomes:</p>
+<pre><code>// in the function:
+a = x;
+do {
+    a = a ? 1 : 0;
+} while(0);
+</code></pre>
+<p>At first approximation, this effect is roughly the same as with inline functions, but the preprocessor doesn't provide type checking for <code>#define</code> macros. This is well known to be error-prone and their use necessitates great caution.</p>
+<p>Also note here, that the preprocessor would also replace comments with a blanks as explained below.</p>
+</li>
+<li>
+<p><strong>Includes</strong>:</p>
+<p><code>#include</code> is used to access function definitions defined outside of a source code file. For instance:</p>
+<pre><code> #include &lt;stdio.h&gt; 
+</code></pre>
+<p>causes the preprocessor to paste the contents of <code>&lt;stdio.h&gt;</code> into the source code file at the location of the <code>#include</code> statement before it gets compiled. <code>#include</code> is almost always used to include header files, which are files which mainly contain function declarations and <code>#define</code> statements. In this case, we use <code>#include</code> in order to be able to use functions such as <code>printf</code> and <code>scanf</code>, whose declarations are located in the file <code>stdio.h</code>. C compilers do not allow you to use a function unless it has previously been declared or defined in that file; <code>#include</code> statements are thus the way to re-use previously-written code in your C programs.</p>
+</li>
+<li>
+<p><strong>Logic operations</strong>:</p>
+<pre><code>#if defined A || defined B
+variable = another_variable + 1;
+#else
+variable = another_variable * 2;
+#endif
+</code></pre>
+<p>will be changed to:</p>
+<pre><code>variable = another_variable + 1;
+</code></pre>
+<p>if A or B were defined somewhere in the project before. If this is not the case, of course the preprocessor will do this:</p>
+<pre><code>variable = another_variable * 2;
+</code></pre>
+<p>This is often used for code, that runs on different systems or compiles on different compilers. Since there are global defines, that are compiler/system specific you can test on those defines and always let the compiler just use the code he will compile for sure.</p>
+</li>
+<li>
+<p><strong>Comments</strong></p>
+<p>The Preprocessor replaces all comments in the source file by single spaces. Comments are indicated by <code>//</code> up to the end of the line, or a combination of opening <code>/*</code> and closing <code>*/</code> comment brackets.</p>
+</li>
+</ol>
+
+
+            </div>
+            <h2 id="the-translation-phases">The Translation Phases</h2>
+            <div>
+                <p>As of the C 2011 Standard, listed in <em>§5.1.1.2 Translation Phases</em>, the translation of source code to program image (e.g., the executable) are listed to occur in 8 ordered steps.</p>
+<ol>
+<li>The source file input is mapped to the source character set (if necessary). Trigraphs are replaced in this step.</li>
+<li>Continuation lines (lines that end with <code>\</code>) are spliced with the next line.</li>
+<li>The source code is parsed into whitespace and preprocessing tokens.</li>
+<li>The preprocessor is applied, which executes directives, expands macros, and applies pragmas. Each source file pulled in by <code>#include</code> undergoes translation phases 1 through 4 (recursively if necessary). All preprocessor related directives are then deleted.</li>
+<li>Source character set values in character constants and string literals are mapped to the execution character set.</li>
+<li>String literals adjacent to each other are concatenated.</li>
+<li>The source code is parsed into tokens, which comprise the translation unit.</li>
+<li>External references are resolved, and the program image is formed.</li>
+</ol>
+<p>An implementation of a C compiler may combine several steps together, but the resulting image must still behave as if the above steps had occurred separately in the order listed above.</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../2006/common-pitfalls.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../4135/compound-literals.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-21</div>
+        <div itemprop="datePublished">2016-07-21</div>
+        <div itemprop="dateModified">2017-05-21</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=1337" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1723716074" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#file-types">
+                    File Types
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-compiler">
+                    The Compiler
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-linker">
+                    The Linker
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-preprocessor">
+                    The Preprocessor
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-translation-phases">
+                    The Translation Phases
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1337/compilation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

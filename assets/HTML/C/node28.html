@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node28.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>IPC:Sockets</TITLE>
+<META NAME="description" CONTENT="IPC:Sockets">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1284"
+ HREF="node28.html#SECTION002810000000000000000">
+Socket Creation and Naming</A>
+<LI><A NAME="tex2html1285"
+ HREF="node28.html#SECTION002820000000000000000">
+Connecting Stream Sockets</A>
+<LI><A NAME="tex2html1286"
+ HREF="node28.html#SECTION002830000000000000000">
+Stream Data Transfer and Closing</A>
+<LI><A NAME="tex2html1287"
+ HREF="node28.html#SECTION002840000000000000000">
+Datagram sockets</A>
+<LI><A NAME="tex2html1288"
+ HREF="node28.html#SECTION002850000000000000000">
+Socket Options</A>
+<LI><A NAME="tex2html1289"
+ HREF="node28.html#SECTION002860000000000000000">
+Example Socket Programs:<TT>socket_server.c,socket_client</TT></A>
+<UL>
+<LI><A NAME="tex2html1290"
+ HREF="node28.html#SECTION002861000000000000000">
+<TT>socket_server.c</TT></A>
+<LI><A NAME="tex2html1291"
+ HREF="node28.html#SECTION002862000000000000000">
+<TT>socket_client.c</TT></A>
+</UL>
+<LI><A NAME="tex2html1292"
+ HREF="node28.html#SECTION002870000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION002800000000000000000">
+IPC:Sockets</A>
+</H1>
+<P>
+Sockets  provide point-to-point, two-way communication
+between two processes. Sockets are very versatile and are a basic component of interprocess
+and intersystem communication. A socket is an endpoint of communication to which a name can
+be bound. It has a type and one or more associated processes.
+<P>
+Sockets
+exist in communication domains. A socket domain is an abstraction that provides an addressing
+structure and a set of protocols. Sockets connect only with sockets in the same domain.
+Twenty three socket domains are identified (see &lt;<TT>sys/socket.h</TT>&gt;), of which only the
+UNIX and Internet domains are normally used Solaris 2.x Sockets can be used to communicate
+between processes on a single system, like other forms of IPC.
+<P>
+The UNIX domain 
+provides a socket address space on a single system. UNIX domain sockets are named with UNIX
+paths. Sockets can also be used to communicate between processes on different systems. The
+socket address space between connected systems is called the Internet domain.
+<P>
+Internet domain communication uses the TCP/IP internet protocol suite.
+<P><EM>Socket
+types</EM> define the communication properties visible to the application. Processes communicate
+only between sockets of the same type. There are five types of socket.
+<P><DL>
+<DT><STRONG>A stream socket</STRONG>
+<DD>--
+provides two-way, sequenced, reliable, and unduplicated flow of data with no record
+boundaries. A stream operates much like a telephone conversation. The socket type is
+<TT>SOCK_STREAM</TT>, which, in the Internet domain, uses Transmission Control Protocol (TCP). 
+<DT><STRONG>A
+datagram socket</STRONG>
+<DD>-- supports a two-way flow of messages. A on a datagram socket may receive
+messages in a different order from the sequence in which the messages were sent. Record
+boundaries in the data are preserved. Datagram sockets operate much like passing letters back
+and forth in the mail. The socket type is <TT>SOCK_DGRAM</TT>, which, in the Internet domain,
+uses User Datagram Protocol (UDP). 
+<DT><STRONG>A sequential packet socket</STRONG>
+<DD>-- provides a two-way, sequenced,
+reliable, connection, for datagrams of a fixed maximum length. The socket type is
+<TT>SOCK_SEQPACKET</TT>. No protocol for this type has been implemented for any protocol
+family. 
+<DT><STRONG>A
+raw socket</STRONG>
+<DD>provides access to the underlying communication protocols. 
+</DL>
+These sockets are
+usually datagram oriented, but their exact characteristics depend on the interface provided
+by the protocol.
+<P><H1><A NAME="SECTION002810000000000000000">
+Socket Creation and Naming</A>
+</H1>
+<P><TT>int socket(int domain, int type, int protocol)</TT> is called to create a socket in the
+specified domain and of the specified type. If a <TT>protocol</TT> is not  specified, the system
+defaults to a protocol that supports the specified socket type. The socket handle (a
+descriptor) is returned. A remote process has no way to identify a socket until an address is
+bound to it. Communicating processes connect through addresses. In the UNIX domain, a
+connection is usually composed of one or two path names. In the Internet domain, a connection
+is composed of local and remote addresses and local and remote ports. In most domains,
+connections must be unique.
+<P><TT>int bind(int s, const struct sockaddr *name, int namelen)</TT> is called to bind a path or
+internet address to a socket. There are three different ways to call <TT>bind()</TT>, depending
+on the domain of the socket.
+<P><UL>
+<LI> For UNIX domain sockets with paths containing 14, or fewer characters, you can:
+<P><PRE>
+#include &lt;sys/socket.h&gt;
+ ... 
+bind (sd, (struct sockaddr *) &amp;addr, length);
+</PRE>
+<LI> If the path of a
+UNIX domain socket requires more characters, use:
+<P><PRE>
+#include &lt;sys/un.h&gt; 
+... 
+bind (sd, (struct sockaddr_un *) &amp;addr, length); 
+</pre>
+<li>
+For Internet domain sockets, use 
+<pre>
+#include &lt;netinet/in.h&gt;
+... 
+bind (sd, (struct sockaddr_in *) &amp;addr, length);
+</PRE>
+</UL>
+<P>
+In the UNIX domain, binding a name
+creates a named socket in the file system. Use <TT>unlink()</TT> or <TT>rm ()</TT> to remove the
+socket.
+<P><H1><A NAME="SECTION002820000000000000000">
+Connecting Stream Sockets</A>
+</H1>
+<P>
+Connecting sockets is usually not symmetric. One process
+usually acts as a server and the other process is the client. The server binds its socket to
+a previously agreed path or address. It then blocks on the socket. For a <TT>SOCK_STREAM</TT>
+socket, the server calls <TT>int listen(int s, int backlog)</TT> , which specifies how many
+connection requests can be queued. A client initiates a connection to the server's socket by
+a call to <TT>int connect(int s, struct sockaddr *name, int namelen)</TT> . A UNIX domain call
+is like this:
+<P><PRE>
+struct sockaddr_un server; 
+... 
+connect (sd, (struct sockaddr_un *)&amp;server, length);
+</PRE>
+<P>
+while an Internet domain call would be:
+<PRE>
+struct sockaddr_in; 
+... 
+connect (sd, (struct sockaddr_in *)&amp;server, length);
+</PRE>
+<P>
+If the client's
+socket is unbound at the time of the connect call, the system automatically selects and binds
+a name to the socket. For a <TT>SOCK_STREAM</TT> socket, the server calls accept(3N) to complete
+the connection.
+<P><TT>int accept(int s, struct sockaddr *addr, int *addrlen)</TT> returns a new socket descriptor
+which is valid only for the particular connection. A server can have multiple <TT>
+SOCK_STREAM</TT> connections active at one time.
+<P><H1><A NAME="SECTION002830000000000000000">
+Stream Data Transfer and Closing</A>
+</H1>
+<P>
+Several functions to send
+and receive data from a <TT>SOCK_STREAM</TT> socket. These are <TT>write(), read(), int
+send(int s, const char *msg, int len, int flags),</TT> and <TT>int recv(int s, char *buf, int
+len, int flags)</TT>. <TT>send()</TT> and <TT>recv()</TT> are very similar to <TT>read()</TT> and <TT>
+write()</TT>, but have some additional operational <TT>flags</TT>.
+<P>
+The flags parameter is formed from the bitwise OR of zero or
+     more of the following:
+<P><DL>
+<DT><STRONG><TT>MSG_OOB</TT></STRONG>
+<DD>-- Send &quot;out-of-band&quot; data on sockets  that
+support this notion. The underlying protocol must  also  support 
+&quot;out-of-band&quot;
+                         data.   Only <TT>SOCK_STREAM</TT> sockets created
+                         in the <TT>AF_INET</TT>  address  family  support
+                         out-of-band data.
+<DT><STRONG><TT>MSG_DONTROUTE</TT></STRONG>
+<DD>--        The <TT>SO_DONTROUTE</TT> option is turned on for
+the  duration  of  the operation.  It is
+                         used only by diagnostic or routing  pro-
+                         grams.
+<DT><STRONG><TT>MSG_PEEK</TT></STRONG>
+<DD>--     &quot;Peek&quot; at the data present on the socket; the data
+is  returned,  but  not consumed, so that a subsequent receive operation will see the same
+data.
+</DL>
+<P>
+A <TT>SOCK_STREAM</TT> socket is discarded by calling
+<TT>close()</TT>.
+<P><H1><A NAME="SECTION002840000000000000000">
+Datagram sockets</A>
+</H1>
+<P>
+A datagram socket does not require that a connection be
+established. Each message carries the destination address. If a particular local address is
+needed, a call to <TT>bind()</TT> must precede any data transfer. Data is sent through calls to
+<TT>sendto()</TT> or <TT>sendmsg()</TT>. The <TT>sendto()</TT> call is like a <TT>send()</TT> call
+with the destination address also specified. To receive datagram socket messages, call
+<TT>recvfrom()</TT> or <TT>recvmsg()</TT>. While <TT>recv()</TT> requires one buffer for
+the arriving data, <TT>recvfrom()</TT> requires two buffers, one for the incoming message and
+another to receive the source address.
+<P>
+Datagram sockets can also use <TT>connect()</TT> to connect
+the socket to a specified destination socket. When this is done, <TT>send()</TT> and <TT>
+recv()</TT> are used to send and receive data.
+<P><TT>accept()</TT> and <TT>listen()</TT> are not used with
+datagram sockets.
+<P><H1><A NAME="SECTION002850000000000000000">
+Socket Options</A>
+</H1>
+ Sockets have a number of options that can be fetched with
+<TT>getsockopt()</TT> and set with <TT>setsockopt()</TT>. These functions can be used at the native
+socket level (<code>level = SOL_SOCKET</code>), in which case the socket option name must be
+specified. To manipulate options at any other level the protocol number of the desired
+protocol controlling the option of interest must be specified (see <TT>getprotoent()</TT> in
+<TT>getprotobyname()</TT>).
+<P><H1><A NAME="SECTION002860000000000000000">
+Example Socket Programs:<TT>socket_server.c,socket_client</TT></A>
+</H1>
+<P>
+These two programs show how you can establish a socket connection using the above functions.
+<P><H2><A NAME="SECTION002861000000000000000">
+<TT>socket_server.c</TT></A>
+</H2>
+<PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/un.h&gt;
+#include &lt;stdio.h&gt;
+
+#define NSTRS       3           /* no. of strings  */
+#define ADDRESS     &quot;mysocket&quot;  /* addr to connect */
+
+/*
+ * Strings we send to the client.
+ */
+char *strs[NSTRS] = {
+    &quot;This is the first string from the server.\n&quot;,
+    &quot;This is the second string from the server.\n&quot;,
+    &quot;This is the third string from the server.\n&quot;
+};
+
+main()
+{
+    char c;
+    FILE *fp;
+    int fromlen;
+    register int i, s, ns, len;
+    struct sockaddr_un saun, fsaun;
+
+    /*
+     * Get a socket to work with.  This socket will
+     * be in the UNIX domain, and will be a
+     * stream socket.
+     */
+    if ((s = socket(AF_UNIX, SOCK_STREAM, 0)) &lt; 0) {
+        perror(&quot;server: socket&quot;);
+        exit(1);
+    }
+
+    /*
+     * Create the address we will be binding to.
+     */
+    saun.sun_family = AF_UNIX;
+    strcpy(saun.sun_path, ADDRESS);
+
+    /*
+     * Try to bind the address to the socket.  We
+     * unlink the name first so that the bind won't
+     * fail.
+     *
+     * The third argument indicates the &quot;length&quot; of
+     * the structure, not just the length of the
+     * socket name.
+     */
+    unlink(ADDRESS);
+    len = sizeof(saun.sun_family) + strlen(saun.sun_path);
+
+    if (bind(s, &amp;saun, len) &lt; 0) {
+        perror(&quot;server: bind&quot;);
+        exit(1);
+    }
+
+    /*
+     * Listen on the socket.
+     */
+    if (listen(s, 5) &lt; 0) {
+        perror(&quot;server: listen&quot;);
+        exit(1);
+    }
+
+    /*
+     * Accept connections.  When we accept one, ns
+     * will be connected to the client.  fsaun will
+     * contain the address of the client.
+     */
+    if ((ns = accept(s, &amp;fsaun, &amp;fromlen)) &lt; 0) {
+        perror(&quot;server: accept&quot;);
+        exit(1);
+    }
+
+    /*
+     * We'll use stdio for reading the socket.
+     */
+    fp = fdopen(ns, &quot;r&quot;);
+
+    /*
+     * First we send some strings to the client.
+     */
+    for (i = 0; i &lt; NSTRS; i++)
+        send(ns, strs[i], strlen(strs[i]), 0);
+
+    /*
+     * Then we read some strings from the client and
+     * print them out.
+     */
+    for (i = 0; i &lt; NSTRS; i++) {
+        while ((c = fgetc(fp)) != EOF) {
+            putchar(c);
+
+            if (c == '\n')
+                break;
+        }
+    }
+
+    /*
+     * We can simply use close() to terminate the
+     * connection, since we're done with both sides.
+     */
+    close(s);
+
+    exit(0);
+}
+</PRE>
+<P><H2><A NAME="SECTION002862000000000000000">
+<TT>socket_client.c</TT></A>
+</H2>
+<P><PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/un.h&gt;
+#include &lt;stdio.h&gt;
+
+#define NSTRS       3           /* no. of strings  */
+#define ADDRESS     &quot;mysocket&quot;  /* addr to connect */
+
+/*
+ * Strings we send to the server.
+ */
+char *strs[NSTRS] = {
+    &quot;This is the first string from the client.\n&quot;,
+    &quot;This is the second string from the client.\n&quot;,
+    &quot;This is the third string from the client.\n&quot;
+};
+
+main()
+{
+    char c;
+    FILE *fp;
+    register int i, s, len;
+    struct sockaddr_un saun;
+
+    /*
+     * Get a socket to work with.  This socket will
+     * be in the UNIX domain, and will be a
+     * stream socket.
+     */
+    if ((s = socket(AF_UNIX, SOCK_STREAM, 0)) &lt; 0) {
+        perror(&quot;client: socket&quot;);
+        exit(1);
+    }
+
+    /*
+     * Create the address we will be connecting to.
+     */
+    saun.sun_family = AF_UNIX;
+    strcpy(saun.sun_path, ADDRESS);
+
+    /*
+     * Try to connect to the address.  For this to
+     * succeed, the server must already have bound
+     * this address, and must have issued a listen()
+     * request.
+     *
+     * The third argument indicates the &quot;length&quot; of
+     * the structure, not just the length of the
+     * socket name.
+     */
+    len = sizeof(saun.sun_family) + strlen(saun.sun_path);
+
+    if (connect(s, &amp;saun, len) &lt; 0) {
+        perror(&quot;client: connect&quot;);
+        exit(1);
+    }
+
+    /*
+     * We'll use stdio for reading
+     * the socket.
+     */
+    fp = fdopen(s, &quot;r&quot;);
+
+    /*
+     * First we read some strings from the server
+     * and print them out.
+     */
+    for (i = 0; i &lt; NSTRS; i++) {
+        while ((c = fgetc(fp)) != EOF) {
+            putchar(c);
+
+            if (c == '\n')
+                break;
+        }
+    }
+
+    /*
+     * Now we send some strings to the server.
+     */
+    for (i = 0; i &lt; NSTRS; i++)
+        send(s, strs[i], strlen(strs[i]), 0);
+
+    /*
+     * We can simply use close() to terminate the
+     * connection, since we're done with both sides.
+     */
+    close(s);
+
+    exit(0);
+}
+</PRE>
+<P><H1><A NAME="SECTION002870000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12776</B></P>
+<P>
+Configure the above <TT>socket_server.c</TT> and <TT>socket_client.c</TT> programs for you system
+and compile and run them. You will need to set up socket <TT>ADDRESS</TT> definition.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node28.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+</HTML>

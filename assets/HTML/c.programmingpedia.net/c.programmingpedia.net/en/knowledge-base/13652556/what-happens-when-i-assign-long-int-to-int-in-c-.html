@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/13652556/what-happens-when-i-assign-long-int-to-int-in-c- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What happens when I assign long int to int in C? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What happens when I assign long int to int in C? | C Language Knowledge Base">
+        <title>[SOLVED] What happens when I assign long int to int in C? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-happens-when-i-assign-long-int-to-int-in-c-">What happens when I assign long int to int in C?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/casting.html">casting</a></span>
+                        <span class="tag-item"><a href="../tag/integer.html">integer</a></span>
+                        <span class="tag-item"><a href="../tag/long-integer.html">long-integer</a></span>
+                        <span class="tag-item"><a href="../tag/variable-assignment.html">variable-assignment</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>In a recent homework assignment I've been told to use <code>long</code> variable to store a result, since it may be a big number.</p>
+
+<p>I decided to check will it really matter for me, on my system (intel core i5/64-bit windows 7/gnu gcc compiler) and found out that the following code:</p>
+
+<pre><code>printf("sizeof(char) =&gt; %d\n", sizeof(char));
+printf("sizeof(short) =&gt; %d\n", sizeof(short));
+printf("sizeof(short int) =&gt; %d\n", sizeof(short int));
+printf("sizeof(int) =&gt; %d\n", sizeof(int));
+printf("sizeof(long) =&gt; %d\n", sizeof(long));
+printf("sizeof(long int) =&gt; %d\n", sizeof(long int));
+printf("sizeof(long long) =&gt; %d\n", sizeof(long long));
+printf("sizeof(long long int) =&gt; %d\n", sizeof(long long int));
+</code></pre>
+
+<p>produces the following output:</p>
+
+<pre><code>sizeof(char) =&gt; 1
+sizeof(short) =&gt; 2
+sizeof(short int) =&gt; 2
+sizeof(int) =&gt; 4
+sizeof(long) =&gt; 4
+sizeof(long int) =&gt; 4
+sizeof(long long) =&gt; 8
+sizeof(long long int) =&gt; 8
+</code></pre>
+
+<p>In other words, on my system, <code>int</code> and <code>long</code> are the same, and whatever will be too big for <code>int</code> to hold, will be too big for <code>long</code> to hold as well.</p>
+
+<p>The homework assignment itself is not the issue here. I wonder how, on a system where <code>int &lt; long</code>, should I assign an <code>int</code> to long?</p>
+
+<p>I'm aware to the fact that <a href="https://stackoverflow.com/questions/12501331/how-does-long-to-int-cast-work-in-java">there</a> <a href="https://stackoverflow.com/questions/1590831/safely-casting-long-to-int-in-java">are</a> <a href="https://stackoverflow.com/questions/1161887/what-happens-if-i-cast-a-double-to-an-int-but-the-value-of-the-double-is-out-of">numerous</a> <a href="https://stackoverflow.com/questions/2711522/what-happens-if-i-assign-a-negative-value-to-an-unsigned-variable">closely</a> <a href="https://stackoverflow.com/questions/7977265/what-happens-at-background-when-convert-int-to-float">related</a> questions on this subject, but I feel that the answers within these do not provide me with the complete understanding of what will or may happen in the process.</p>
+
+<p>Basically I'm trying to figure out the following:</p>
+
+<ol>
+<li>Should I cast <code>long</code> to <code>int</code> before the assignment, or <del>since <code>long</code>
+is not a different data type, but merely a modifier,</del> it will be
+considered unharmful to assign directly?</li>
+<li>What happens on systems where <code>long &gt; int</code>? Will the result be
+undefined (or unpredictable) or it will cause the extra parts of the
+variable to be omitted?</li>
+<li>How does the casting from <code>long</code> to <code>int</code> works in C?</li>
+<li>How does the assignment from <code>long</code> to <code>int</code> works in C when I don't
+use casting?</li>
+</ol>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1115290/khaloymes" target="_blank"><span itemprop="name">Khaloymes</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">54</div>
+                                    <div itemprop="dateCreated">5/23/2017 11:54:43 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The language guarantees that <code>int</code> is at least 16 bits, <code>long</code> is at least 32 bits, and <code>long</code> can represent <em>at least</em> all the values that <code>int</code> can represent.</p>
+
+<p>If you assign a <code>long</code> value to an <code>int</code> object, it will be implicitly converted. There's no need for an explicit cast; it would merely specify the same conversion that's going to happen anyway.</p>
+
+<p>On your system, where <code>int</code> and <code>long</code> happen to have the same size and range, the conversion is trivial; it simply copies the value.</p>
+
+<p>On a system where <code>long</code> is wider than <code>int</code>, if the value won't fit in an <code>int</code>, then the result of the conversion is implementation-defined. (Or, starting in C99, it can raise an implementation-defined signal, but I don't know of any compilers that actually do that.) What <em>typically</em> happens is that the high-order bits are discarded, but you shouldn't depend on that. (The rules are different for unsigned types; the result of converting a signed or unsigned integer to an unsigned type is well defined.)</p>
+
+<p>If you need to <em>safely</em> assign a <code>long</code> value to an <code>int</code> object, you can check that it will fit before doing the assignment:</p>
+
+<pre><code>#include &lt;limits.h&gt; /* for INT_MIN, INT_MAX */
+
+/* ... */
+
+int i;
+long li = /* whatever */
+
+if (li &gt;= INT_MIN &amp;&amp; li &lt;= INT_MAX) {
+    i = li;
+}
+else {
+    /* do something else? */
+}
+</code></pre>
+
+<p>The details of "something else" are going to depend on what you want to do.</p>
+
+<p>One correction: <code>int</code> and <code>long</code> are <em>always</em> distinct types, even if they happen to have the same size and representation. Arithmetic types are freely convertible, so this often doesn't make any difference, but for example <code>int*</code> and <code>long*</code> are distinct and incompatible types; you can't assign a <code>long*</code> to an <code>int*</code>, or vice versa, without an explicit (and potentially dangerous) cast.</p>
+
+<p>And if you find yourself needing to convert a <code>long</code> value to <code>int</code>, the first thing you should do is reconsider your code's design. Sometimes such conversions are necessary, but more often they're a sign that the <code>int</code> to which you're assigning should have been defined as a <code>long</code> in the first place.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/827263/keith-thompson" target="_blank"><span itemprop="name">Keith Thompson</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/13652556/what-happens-when-i-assign-long-int-to-int-in-c-#answer-0</div>
+                                            <div itemprop="upvoteCount">43</div>
+                                            <div itemprop="dateCreated">4/12/2015 6:22:30 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>A <code>long</code> can always represent all values of <code>int</code>.
+If the value at hand can be represented by the type of the variable you assign to, then the value is preserved.</p>
+
+<p>If it can't be represented, then for signed destination type the result is formally unspecified, while for unsigned destination type it is specified as the original value modulo 2<sup><i>n</i></sup>, where <i>n</i> is the number of bits in the value representation (which is not necessarily all the bits in the destination).</p>
+
+<p>In practice, on modern machines you get wrapping also for signed types.</p>
+
+<p>That's because modern machines use <em>two's complement form</em> to represent signed integers, without any bits used to denote "invalid value" or such &ndash; i.e., all bits used for value representation.</p>
+
+<p>With <i>n</i> bits value representation any integer value is <i>x</i> is mapped to <i>x</i>+K*2<sup><i>n</i></sup> with the integer constant K chosen such that the result is in the range where half of the possible values are negative.</p>
+
+<p>Thus, for example, with 32-bit <code>int</code> the value -7 is represented as bitpattern number -7+2<sup>32</sup> = 2<sup>32</sup>-7, so that if you display the number that the bitpattern stands for as unsigned integer, you get a pretty large number.</p>
+
+<p>The reason that this is called <em>two's complement</em> is because it makes sense for the binary numeral system, the base two numeral system. For the binary numeral system there's also a ones' (note the placement of the apostrophe) complement. Similarly, for the decimal numberal system there's ten's complement and niners' complement. With 4 digit ten's complement representation you would represent -7 as 10000-7 = 9993. That's all, really.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/464581/cheers-and-hth----alf" target="_blank">Cheers and hth. - Alf</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/13652556" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/13652556/what-happens-when-i-assign-long-int-to-int-in-c- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:48 GMT -->
+</html>

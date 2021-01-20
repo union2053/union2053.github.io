@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9860667/writing-robust--color-and-size-invariant--circle-detection-with-opencv--based-on-hough-transform-or-other-features- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] writing robust (color and size invariant) circle detection with opencv (based on Hough transform or other features) | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] writing robust (color and size invariant) circle detection with opencv (based on Hough transform or other features) | C Language Knowledge Base">
+        <title>[SOLVED] writing robust (color and size invariant) circle detection with opencv (based on Hough transform or other features) | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="writing-robust-color-and-size-invariant-circle-detection-with-opencv-based-on-hough-transform-or-other-features-">writing robust (color and size invariant) circle detection with opencv (based on Hough transform or other features)</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/computer-vision.html">computer-vision</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                        <span class="tag-item"><a href="../tag/python.html">python</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I wrote the following very simple python code to find circles in an image:</p>
+
+<pre><code>import cv
+import numpy as np
+
+WAITKEY_DELAY_MS = 10
+STOP_KEY = 'q'
+
+cv.NamedWindow("image - press 'q' to quit", cv.CV_WINDOW_AUTOSIZE);
+cv.NamedWindow("post-process", cv.CV_WINDOW_AUTOSIZE);
+
+key_pressed = False
+while key_pressed != STOP_KEY:
+
+    # grab image
+    orig = cv.LoadImage('circles3.jpg')
+
+    # create tmp images
+    grey_scale = cv.CreateImage(cv.GetSize(orig), 8, 1)
+    processed = cv.CreateImage(cv.GetSize(orig), 8, 1)
+
+
+    cv.Smooth(orig, orig, cv.CV_GAUSSIAN, 3, 3)
+
+    cv.CvtColor(orig, grey_scale, cv.CV_RGB2GRAY)
+
+    # do some processing on the grey scale image
+    cv.Erode(grey_scale, processed, None, 10)
+    cv.Dilate(processed, processed, None, 10)
+    cv.Canny(processed, processed, 5, 70, 3)
+    cv.Smooth(processed, processed, cv.CV_GAUSSIAN, 15, 15)
+
+    storage = cv.CreateMat(orig.width, 1, cv.CV_32FC3)
+
+    # these parameters need to be adjusted for every single image
+    HIGH = 50
+    LOW = 140
+
+    try: 
+        # extract circles
+        cv.HoughCircles(processed, storage, cv.CV_HOUGH_GRADIENT, 2, 32.0, HIGH, LOW)
+
+        for i in range(0, len(np.asarray(storage))):
+            print "circle #%d" %i
+            Radius = int(np.asarray(storage)[i][0][2])
+            x = int(np.asarray(storage)[i][0][0])
+            y = int(np.asarray(storage)[i][0][1])
+            center = (x, y)
+
+            # green dot on center and red circle around
+            cv.Circle(orig, center, 1, cv.CV_RGB(0, 255, 0), -1, 8, 0)
+            cv.Circle(orig, center, Radius, cv.CV_RGB(255, 0, 0), 3, 8, 0)
+
+            cv.Circle(processed, center, 1, cv.CV_RGB(0, 255, 0), -1, 8, 0)
+            cv.Circle(processed, center, Radius, cv.CV_RGB(255, 0, 0), 3, 8, 0)
+
+    except:
+        print "nothing found"
+        pass
+
+    # show images
+    cv.ShowImage("image - press 'q' to quit", orig)
+    cv.ShowImage("post-process", processed)
+
+    cv_key = cv.WaitKey(WAITKEY_DELAY_MS)
+    key_pressed = chr(cv_key &amp; 255)
+</code></pre>
+
+<p>As you can see from the following two examples, the 'circle finding quality' varies quite a lot:</p>
+
+<p><strong>CASE1:</strong></p>
+
+<p><img src="https://i.stack.imgur.com/5iiwQ.jpg" alt="input1">
+<img src="https://i.stack.imgur.com/FUprb.png" alt="detection1">
+<img src="https://i.stack.imgur.com/rE2LV.png" alt="post-processed1"></p>
+
+<p><strong>CASE2:</strong></p>
+
+<p><img src="https://i.stack.imgur.com/n9tzQ.jpg" alt="input2">
+<img src="https://i.stack.imgur.com/sQ73w.png" alt="detection2">
+<img src="https://i.stack.imgur.com/uh39C.png" alt="post-processed2"></p>
+
+<p>Case1 and Case2 are basically the same image, but still the algorithm detects different circles. If I present the algorithm an image with differently sized circles, the circle detection might even fail completely. This is mostly due to the <code>HIGH</code> and <code>LOW</code> parameters which need to be adjusted individually for each new picture.</p>
+
+<p><strong>Therefore my question:</strong> what are the various possibilities of making this algorithm more robust? It should be size and color invariant so that different circles with different colors and in different sizes are detected. Maybe using the Hough transform is not the best way of doing things? Are there better approaches?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/561766/memyself" target="_blank"><span itemprop="name">memyself</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">47</div>
+                                    <div itemprop="dateCreated">3/25/2012 5:16:32 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The following is based on my experience as a vision researcher. From your question you seem to be interested in possible algorithms and methods rather only a working piece of code. First I give a quick and dirty Python script for your sample images and some results are shown to prove it could possibly solve your problem. After getting these out of the way, I try to answer your questions regarding robust detection algorithms.</p>
+
+<h1 id="quick-results">Quick Results</h1>
+
+<p>Some sample images (all the images apart from yours are downloaded from flickr.com and are CC licensed) with the detected circles (without changing/tuning any parameters, exactly the following code is used to extract the circles in all the images):
+<img src="https://i.stack.imgur.com/igVAn.jpg" alt="detected blobs in the sample image 1">
+<img src="https://i.stack.imgur.com/mU66E.jpg" alt="detected blobs in the sample image 2">
+<img src="https://i.stack.imgur.com/kJH3s.jpg" alt="lots of circles">
+<img src="https://i.stack.imgur.com/XiDBj.jpg" alt="blobs in the flickr image 1"></p>
+
+<h1 id="code-based-on-the-mser-blob-detector-">Code (based on the MSER Blob Detector)</h1>
+
+<p>And here is the code:</p>
+
+<pre><code>import cv2
+import math
+import numpy as np
+
+d_red = cv2.cv.RGB(150, 55, 65)
+l_red = cv2.cv.RGB(250, 200, 200)
+
+orig = cv2.imread("c.jpg")
+img = orig.copy()
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+detector = cv2.FeatureDetector_create('MSER')
+fs = detector.detect(img2)
+fs.sort(key = lambda x: -x.size)
+
+def supress(x):
+        for f in fs:
+                distx = f.pt[0] - x.pt[0]
+                disty = f.pt[1] - x.pt[1]
+                dist = math.sqrt(distx*distx + disty*disty)
+                if (f.size &gt; x.size) and (dist&lt;f.size/2):
+                        return True
+
+sfs = [x for x in fs if not supress(x)]
+
+for f in sfs:
+        cv2.circle(img, (int(f.pt[0]), int(f.pt[1])), int(f.size/2), d_red, 2, cv2.CV_AA)
+        cv2.circle(img, (int(f.pt[0]), int(f.pt[1])), int(f.size/2), l_red, 1, cv2.CV_AA)
+
+h, w = orig.shape[:2]
+vis = np.zeros((h, w*2+5), np.uint8)
+vis = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)
+vis[:h, :w] = orig
+vis[:h, w+5:w*2+5] = img
+
+cv2.imshow("image", vis)
+cv2.imwrite("c_o.jpg", vis)
+cv2.waitKey()
+cv2.destroyAllWindows()
+</code></pre>
+
+<p>As you can see it's based on the <a href="http://en.wikipedia.org/wiki/Maximally_stable_extremal_regions">MSER</a> blob detector. The code doesn't preprocess the image apart from the simple mapping into grayscale. Thus missing those faint yellow blobs in your images is expected. </p>
+
+<h1 id="theory">Theory</h1>
+
+<p><em>In short: you don't tell us what you know about the problem apart from giving only two sample images with no description of them. Here I explain why I in my humble opinion it is important to have more information about the problem before asking what are efficient methods to attack the problem.</em> </p>
+
+<p>Back to the main question: what is the best method for this problem?
+Let's look at this as a search problem. To simplify the discussion assume we are looking for circles with a given size/radius. Thus, the problem boils down to finding the centers. Every pixel is a candidate center, therefore, the search space contains all the pixels. </p>
+
+<pre><code>P = {p1, ..., pn} 
+P: search space
+p1...pn: pixels
+</code></pre>
+
+<p>To solve this search problem two other functions should be defined:</p>
+
+<pre><code>E(P) : enumerates the search space
+V(p) : checks whether the item/pixel has the desirable properties, the items passing the check are added to the output list
+</code></pre>
+
+<p>Assuming the complexity of the algorithm doesn't matter, the exhaustive or brute-force search can be used in which E takes every pixel and passes to V. In real-time applications it's important to reduce the search space and optimize computational efficiency of V. </p>
+
+<p>We are getting closer to the main question. How we could define V, to be more precise what properties of the candidates should be measures and how should make solve the dichotomy problem of splitting them into desirable and undesirable. The most common approach is to find some properties which can be used to define simple decision rules based on the measurement of the properties. This is what you're doing by trial and error. You're programming a classifier by learning from positive and negative examples. This is because the methods you're using have no idea what you want to do. You have to adjust / tune the parameters of the decision rule and/or preprocess the data such that the variation in the properties (of the desirable candidates) used by the method for the dichotomy problem are reduced. You could use a machine learning algorithm to find the optimal parameter values for a given set of examples. There's a whole host of learning algorithms from decision trees to genetic programming you can use for this problem. You could also use a learning algorithm to find the optimal parameter values for several circle detection algorithms and see which one gives a better accuracy. This takes the main burden on the learning algorithm you just need to collect sample images.</p>
+
+<p>The other approach to improve robustness which is often overlooked is to utilize extra readily available information. If you know the color of the circles with virtually zero extra effort you could improve the accuracy of the detector significantly. If you knew the position of the circles on the plane and you wanted to detect the imaged circles, you should remember the transformation between these two sets of positions is described by a 2D homography. And the homography can be estimated using only four points. Then you could improve the robustness to have a rock solid method. The value of domain-specific knowledge is often underestimated. Look at it this way, in the first approach we try to approximate some decision rules based on a limited number of sample. In the second approach we know the decision rules and only need to find a way to effectively utilize them in an algorithm.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>To summarize, there are two approaches to improve the accuracy / robustness of the solution:</p>
+
+<ol>
+<li><strong>Tool-based</strong>: finding an easier to use algorithm / with fewer number of parameters / tweaking the algorithm / automating this process by using machine learning algorithms</li>
+<li><strong>Information-based</strong>: are you using all the readily available information? In the question you don't mention what you know about the problem.</li>
+</ol>
+
+<p>For these two images you have shared I would use a blob detector not the HT method. For background subtraction I would suggest to try to estimate the color of the background as in the two images it is not varying while the color of the circles vary. And the most of the area is bare.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1334399/fireant" target="_blank"><span itemprop="name">fireant</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/9860667/writing-robust--color-and-size-invariant--circle-detection-with-opencv--based-on-hough-transform-or-other-features-#answer-0</div>
+                                            <div itemprop="upvoteCount">36</div>
+                                            <div itemprop="dateCreated">4/17/2012 6:15:14 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>This is a great modelling problem. I have the following recommendations/ ideas:</p>
+
+<ol>
+<li>Split the image to RGB then process.</li>
+<li>pre-processing.</li>
+<li>Dynamic parameter search. </li>
+<li>Add constraints.</li>
+<li>Be sure about what you are trying to detect.</li>
+</ol>
+
+<p>In more detail:</p>
+
+<p>1: As noted in other answers, converting straight to grayscale discards too much information - any circles with a similar brightness to the background will be lost. Much better to consider the colour channels either in isolation or in a different colour space. There are pretty much two ways to go here: perform <code>HoughCircles</code> on each pre-processed channel in isolation, then combine results, or, process the channels, then combine them, then operate <code>HoughCircles</code>. In my attempt below, I've tried the second method, splitting to RGB channels, processing, then combining. Be wary of over saturating the image when combining, I use <code>cv.And</code> to avoid this issue (at this stage my circles are always black rings/discs on white background).</p>
+
+<p>2: Pre-processing is quite tricky, and something its often best to play around with. I've made use of <code>AdaptiveThreshold</code> which is a really powerful convolution method that can enhance edges in an image by thresholding pixels based on their local average (similar processes also occur in the early pathway of the mammalian visual system). This is also useful as it reduces some noise. I've used <code>dilate/erode</code> with only one pass. And I've kept the other parameters how you had them. It seems using <code>Canny</code> before <code>HoughCircles</code> does help a lot with finding 'filled circles', so probably best to keep it in. This pre-processing is quite heavy and can lead to false positives with somewhat more 'blobby circles', but in our case this is perhaps desirable?</p>
+
+<p>3: As you've noted HoughCircles parameter <code>param2</code> (your parameter <code>LOW</code>) needs to be adjusted for each image in order to get an optimal solution, in fact from the <a href="http://opencv.willowgarage.com/documentation/cpp/imgproc_feature_detection.html#cv-houghcircles" rel="noreferrer">docs</a>:</p>
+
+<blockquote>
+  <p>The smaller it is, the more false circles may be detected.</p>
+</blockquote>
+
+<p>Trouble is the sweet spot is going to be different for every image. I think the best approach here is to make set a condition and do a search through different <code>param2</code> values until this condition is met. Your images show non-overlapping circles, and when <code>param2</code> is too low we typically get loads of overlapping circles. So I suggest searching for the:</p>
+
+<blockquote>
+  <p>maximum number of non-overlapping, and non-contained circles</p>
+</blockquote>
+
+<p>So we keep calling HoughCircles with different values of <code>param2</code> until this is met. I do this in my example below, just by incrementing <code>param2</code> until it reaches the threshold assumption. It would be way faster (and fairly easy to do) if you perform a binary search to find when this is met, but you need to be careful with exception handling as opencv often throws a errors for innocent looking values of <code>param2</code> (at least on my installation). A different condition that would we very useful to match against would be the number of circles.</p>
+
+<p>4: Are there any more constraints we can add to the model? The more stuff we can tell our model the easy a task we can make it to detect circles. For example, do we know:</p>
+
+<ul>
+<li>The number of circles. - even an upper or lower bound is helpful.</li>
+<li>Possible colours of the circles, or of the background, or of 'non-circles'.</li>
+<li>Their sizes.</li>
+<li>Where they can be in an image.</li>
+</ul>
+
+<p>5: Some of the blobs in your images could only loosely be called circles! Consider the two 'non-circular blobs' in your second image, my code can't find them (good!), but... if I 'photoshop' them so they are more circular, my code can find them... Maybe if you want to detect things that are not circles, a different approach such as <code>Tim Lukins</code> may be better.</p>
+
+<p><strong>Problems</strong></p>
+
+<p>By doing heavy pre-processing <code>AdaptiveThresholding</code> and `Canny' there can be a lot of distortion to features in an image, which may lead to false circle detection, or incorrect radius reporting. For example a large solid disc after processing can appear a ring, so HughesCircles may find the inner ring. Furthermore even the docs note that:</p>
+
+<blockquote>
+  <p>...usually the function detects the circles’ centers well, however it may fail to find the correct radii. </p>
+</blockquote>
+
+<p>If you need more accurate radii detection, I suggest the following approach (not implemented):</p>
+
+<ul>
+<li>On the original image, ray-trace from reported centre of circle, in an expanding cross (4 rays: up/down/left/right)</li>
+<li>Do this seperately in each RGB channel</li>
+<li>Combine this info for each channel for each ray in a sensible fashion (ie. flip, offset, scale, etc as necessary)</li>
+<li>take the average for the first few pixels on each ray, use this to detect where a significant deviation on the ray occurs.</li>
+<li>These 4 points are estimates of points on the circumference.</li>
+<li>Use these four estimates to determine a more accurate radius, and centre position(!).</li>
+<li>This could be generalised by using an expanding ring instead of four rays.</li>
+</ul>
+
+<p><strong>Results</strong></p>
+
+<p>The code at end does pretty good quite a lot of the time, these examples were done with code as shown:</p>
+
+<p>Detects all circles in your first image:<img src="https://i.stack.imgur.com/14q3T.jpg" alt="enter image description here"> </p>
+
+<p>How the pre-processed image looks before canny filter is applied (different colour circles are highly visible):<img src="https://i.stack.imgur.com/yttFu.jpg" alt="enter image description here"> </p>
+
+<p>Detects all but two (blobs) in second image:<img src="https://i.stack.imgur.com/NuOQ8.jpg" alt="enter image description here"> </p>
+
+<p>Altered second image (blobs are circle-afied, and large oval made more circular, thus improving detection), all detected: <img src="https://i.stack.imgur.com/74FsN.jpg" alt="enter image description here"> </p>
+
+<p>Does pretty well in detecting centres in this Kandinsky painting (I cannot find concentric rings due to he boundary condition). <img src="https://i.stack.imgur.com/EKbzB.jpg" alt="enter image description here"></p>
+
+<p>Code:</p>
+
+<pre><code>import cv
+import numpy as np
+
+output = cv.LoadImage('case1.jpg')
+orig = cv.LoadImage('case1.jpg')
+
+# create tmp images
+rrr=cv.CreateImage((orig.width,orig.height), cv.IPL_DEPTH_8U, 1)
+ggg=cv.CreateImage((orig.width,orig.height), cv.IPL_DEPTH_8U, 1)
+bbb=cv.CreateImage((orig.width,orig.height), cv.IPL_DEPTH_8U, 1)
+processed = cv.CreateImage((orig.width,orig.height), cv.IPL_DEPTH_8U, 1)
+storage = cv.CreateMat(orig.width, 1, cv.CV_32FC3)
+
+def channel_processing(channel):
+    pass
+    cv.AdaptiveThreshold(channel, channel, 255, adaptive_method=cv.CV_ADAPTIVE_THRESH_MEAN_C, thresholdType=cv.CV_THRESH_BINARY, blockSize=55, param1=7)
+    #mop up the dirt
+    cv.Dilate(channel, channel, None, 1)
+    cv.Erode(channel, channel, None, 1)
+
+def inter_centre_distance(x1,y1,x2,y2):
+    return ((x1-x2)**2 + (y1-y2)**2)**0.5
+
+def colliding_circles(circles):
+    for index1, circle1 in enumerate(circles):
+        for circle2 in circles[index1+1:]:
+            x1, y1, Radius1 = circle1[0]
+            x2, y2, Radius2 = circle2[0]
+            #collision or containment:
+            if inter_centre_distance(x1,y1,x2,y2) &lt; Radius1 + Radius2:
+                return True
+
+def find_circles(processed, storage, LOW):
+    try:
+        cv.HoughCircles(processed, storage, cv.CV_HOUGH_GRADIENT, 2, 32.0, 30, LOW)#, 0, 100) great to add circle constraint sizes.
+    except:
+        LOW += 1
+        print 'try'
+        find_circles(processed, storage, LOW)
+    circles = np.asarray(storage)
+    print 'number of circles:', len(circles)
+    if colliding_circles(circles):
+        LOW += 1
+        storage = find_circles(processed, storage, LOW)
+    print 'c', LOW
+    return storage
+
+def draw_circles(storage, output):
+    circles = np.asarray(storage)
+    print len(circles), 'circles found'
+    for circle in circles:
+        Radius, x, y = int(circle[0][2]), int(circle[0][0]), int(circle[0][1])
+        cv.Circle(output, (x, y), 1, cv.CV_RGB(0, 255, 0), -1, 8, 0)
+        cv.Circle(output, (x, y), Radius, cv.CV_RGB(255, 0, 0), 3, 8, 0)
+
+#split image into RGB components
+cv.Split(orig,rrr,ggg,bbb,None)
+#process each component
+channel_processing(rrr)
+channel_processing(ggg)
+channel_processing(bbb)
+#combine images using logical 'And' to avoid saturation
+cv.And(rrr, ggg, rrr)
+cv.And(rrr, bbb, processed)
+cv.ShowImage('before canny', processed)
+# cv.SaveImage('case3_processed.jpg',processed)
+#use canny, as HoughCircles seems to prefer ring like circles to filled ones.
+cv.Canny(processed, processed, 5, 70, 3)
+#smooth to reduce noise a bit more
+cv.Smooth(processed, processed, cv.CV_GAUSSIAN, 7, 7)
+cv.ShowImage('processed', processed)
+#find circles, with parameter search
+storage = find_circles(processed, storage, 100)
+draw_circles(storage, output)
+# show images
+cv.ShowImage("original with circles", output)
+cv.SaveImage('case1.jpg',output)
+
+cv.WaitKey(0)
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/1175101/fraxel" target="_blank">fraxel</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/9860667" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9860667/writing-robust--color-and-size-invariant--circle-detection-with-opencv--based-on-hough-transform-or-other-features- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:11:59 GMT -->
+</html>

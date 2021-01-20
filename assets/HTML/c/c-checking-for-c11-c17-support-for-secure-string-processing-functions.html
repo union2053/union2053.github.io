@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-checking-for-c11-c17-support-for-secure-string-processing-functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Checking for C11/C17 Support for secure string processing functions</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Checking for C11/C17 Support for secure string processing functions'>C Checking for C11/C17 Support for secure string processing functions</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Checking for C11/C17 Support for secure string processing functions</h1>
+<a class ='btn btn-outline-dark' href=c-character-string-exercise-4.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-finding-the-length-of-a-string-using-strnlen-s-function.html>Next</a><p>The default set of string processing functions that the standard library provides are not secure. 
+
+</p><p>They provide considerable potential for errors in your code. 
+
+</p><p>These problems can occur because there is no verification that arrays are large enough for  
+the operations. 
+
+</p><p>For these reasons, the C17 standard includes optional versions of the string processing functions 
+that are more secure and less prone to errors because the dimensions of arrays are checked. 
+
+</p><p>All the new functions have names that end with <i style='color:blue'>_s</i>. 
+
+</p><h3>C11/C17 Support
+
+</h3><p>We determine whether the standard library that comes with your C compiler supports these  
+optional functions. 
+
+</p><p>Just compile and execute the following code: 
+</p><div class='myCodeDiv'><button id='WQNUE' class='myCopyButton' data-clipboard-target='#RFHHZ'>Copy</button><pre  id='RFHHZ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+        <span class='c'>//this line shouldn't compile in MS Visual Studio, </span>
+        <span class='c'>//comment it if necessary </span>
+        printf(<span class='q'>"__STDC_VERSION__ = %d\n"</span>, __STDC_VERSION__); 
+
+      #<span class='r'>if</span> defined __STDC_LIB_EXT1__ 
+        printf(<span class='q'>"Optional functions are defined.\n"</span>); 
+      #<span class='r'>else</span> 
+        printf(<span class='q'>"Optional functions are not defined.\n"</span>); 
+      #endif 
+        <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WQNUE');clipboard.on('success', function(e) {$('#WQNUE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WQNUE').text('error');});</script></div><p>The <i style='color:blue'>__STDC_VERSION__</i> macro should yield value 201710L or 201112L for C17 and C11 versions,  
+respectively. 
+
+</p><p>A compiler that implements the optional functions according to the C11/C17 standard will define the  
+symbol <i style='color:blue'>__STDC_LIB_EXT1__</i> (C Library Extension 1). 
+
+</p><p>This code uses preprocessor directives to insert one of two <i style='color:blue'>printf</i>() statements, depending on 
+whether the symbol <i style='color:blue'>__STDC_LIB_EXT1__</i> is defined. 
+
+</p><p>If this symbol is defined, the code will output the message 
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAERElEQVR42u2dUXKrMAxFu4jsf5HpAuhHZzKZEMvSlQw2nDP9eYXItpxB5xlwfzYAgJE8f5//P5kTFo3pTI7RVium/4Pvv3n9/uOzzqPloxAyY6Raa6vb+fyQD5iCW/FDCgBgEnExisSiMeXaLIuLMRA7pvOoYBiFMuEc+2h3lIc8aAoQFwCAIeIil7doDZ4n5qCFKE2wPCYky1BmpIXios1CYRoz6cocRVwAAM5ZdPHXoVViatX3zuKSDFhuSIgL4gIAiEuz0H691i8dUy5Cnjs+3Z+hVdNZSqNPuvgzkyzk8lKQPGTEBXEBgCu4y+tpxKgQrBJzkLgM0sdzxSV0WlJfEBfEBQBAKcN2abxAzJuLS7TeCyPKPAI8Qly0jCEuiAsArCQuX89JSsYkMREXv7jIgxpqIYgL4gIAuMuXQrXfgOQyMa8tLv5bJ7XW0tIX4VPlH0FcEBcAuJG4fN2Da+mYI8QluoAxs7iUlGTtKeBQJhEXxAUA7iguRr2XJWPymELJdL5V5FeBaV+HFu7XZIwwKi6tbXAz0om4IC4AsN6iS9Um8avE1Mq53PoxVbNk1z5h6ahEXLRMlkgn4oK4AMCSiy5H1p7TY4aa8B/170k/qGpmFlSiqx3OgNpEV2Vyy/39I8QFcQGAeRddqi7Q08bUdrQL7SbnOfkYcYlu8qtto7fF9xQOzUIok/KQERfEBQAWE5fMCQvFDP3hxv2zNdF1F//JtStAm/ksatJa/PenkmtCzkxWDbl8ChAXAIBzxGUb8Hd/zoqZ2Wi1ag/ZblXOHA31pMRatsY7Pvm1CuGd6mgHRk8B4gIAAACAuAAAAABcQ1wejwezQqqZCwAAQFz6Tb8oDDVtTaJYCnM66Ptw2FzM/IUEACgWl2QZXuhymezq6SOlMk2V2Nmmg68HANxCXN4vdte4fCMugLgAAFxTXPZXug+P+f9nazH80aB1jtGN1jndPkQbkkuCMczWqKOj+Di6jzBDqo1OavlsdWNrrwXm79Z1R+FPgjAXWqoHzQUAwDLiYlwN7ZKs2YCnOaOEhPrgbKvwf7SeLtmd7J4/Q6o9nYx2rzXM1lqgc65DHQiNOtS07RyhVEdHAQBwU3ERCo+/OS1+t8U5xSWZ5xlSPaI0evxJGJqcHDl7ya9iqA/nPggMAIC4ZMXFXrdfVFzk/h+Zai2NdhDnrS6tGx4ncDYxVFy6dycRFwBAXFYVF3/lQ1yqMimn1OlGVc1VrbjInSlccSlZAQIAWFhcNvXWAOKCuCAuiAsAwAni0r1cHvBgrHa3wv7n6eJSkrf5U50XF+EZ5AP64GxinLgUfu0n3ywRACAsLvalLf8qsudxAc8hu7f790K7TwwI1hIahf1ar+f18glTnU+jMFnduSjvw+bbEtf5OnQosXIfDAtEXADgauKirTEAAAAAIC4AAACAuEjWwiIzAAAArCEuAAAAAMfwByUtqY3j4JB7AAAAAElFTkSuQmCC'><p>If the symbol <i style='color:blue'>__STDC_LIB_EXT1__</i> is not defined, you will see the following output: 
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAEIklEQVR42u3dbW6kMAyA4R5i7n/GVfcAbKVKq2pmMI4TPkKfV/3TloBjKH4nJPRjAQAAmIQPKQCATv78/fz6kgeAuADABMoykbj8DJhsgbgAwO/Vl+mshb6AuAAAcZkmSOIC4gIAxOWiEQaRcxcQFwAgLhOIy2JmMYgLABAXwQPEBcCsRfHpeUQwOXRt9uiRbVv7Fdf+eM9rYaztJB9Sp7i8pq520svbDMwMiAsAVNwl/0H/VTUObpsv80EBjkvvW/Vpkq3WGh/0KNhhwecyShREOzAzIC4AUHeXpEC8XflyfNt8R5b1BTvJzeKho9hI8iEle5Q/RL535QT2ZAbEBQBGiktQ3a/QtmlI5m3dzQw+tWpH8kBNtrFrcl77W/anIaIG4gIAIwddmjxj77b50pifbTNWXDLzSGqqMWSiTNM2w5UOxAUARorLWiG/TttOcemp9yeKy1Ka50tcQFwA3F9cltyjhLPa3ltckp5RnuBCXEBcANzHXZ7WhmyW0rPa3lVcWodSOqWEuIC4ALiJuPz8eat8HNA2WcKbFrmcPselNn8l+RaZ4HDEBcQFwJTisrZ+JFPVDm5bE5f8aMeQVUVNwyqZ998UtKDpZTaZaIkLphGXx+PhrEg1bnk95N/Vdp22mfIc/zBevrSfuDStan59sVshUWP7S1xAXFKH/s/AXV3WD4jLjG5RPmub1+Qx18NXaXkbQM8MiZ3axk2Ct7sGW+5Unptef5dcoR0Pk+ST0xktcUGXuHSW4YnKZGeop/eUkdzYDms7vM4l8V1dphaXt5qSLOSbArR0vOE+828BkuLSM1KVXIuU7MiQzOCXisvPG83st07iAuLiEgVwZ3F5vcs8ecz3t2sD0Y8V1rYJwljbZjOG1gOVb8dBN9d63dqLp9++7uEKqQ6CrOVzLYxlfSyw52ldrZutl30hCa3d7Lwe+vMw8HoAgJS4BHeiuCTXbCBzuOD23RRD8lgDP01mQoqD3Nz+CqnOBNka3lo318YCk+c64y75bu59LbWG1BRG7Bw9eRhyPQDAYHEpFJ784Wr73zziNcWlM89XSPUeZSnjT2Md4shzUetF+Qx2/jk0xXDiRGAAxGV6cUmO288lLuX4j0x1LY3xTpKPusphTCEuyW7uKi6bT0iJCwDiMmYYgLjsJy67jnYU8jxqjOf6Iy7lhAwccRkyAgQARXFZqo8GiAtxIS7EhbgAOEFcNm9VB0yMrT2tiL89XVyG5O36qe4Xl8Ic5OExLCMm5w7PQ7Kb+4nLwD+9i7+wEcBk4hLfVvqXImce1Wd+FUf7uiZz82l9wVqaehEv680sL79gqvvTWDhZm+eidvSmK6r1XPTnYcm9Eje5HLrp5JZjCEyUuAAYKS61MQYAAADiAgAAiEvJWgzwAgCAOcQFAADgGP4Bfno1H21OYJMAAAAASUVORK5CYII='><p>To use the optional functions in string.h, you must define the <i style='color:blue'>__STDC_WANT_LIB_EXT1__</i> symbol in  
+your source file to represent the value 1, prior to the  include directive for string.h, like this: 
+</p><div class='myCodeDiv'><button id='IMPDR' class='myCopyButton' data-clipboard-target='#TWLPG'>Copy</button><pre  id='TWLPG' style='font-size:18px;' class='code'><span class='c'>// Make optional versions of functions available </span>
+#define __STDC_WANT_LIB_EXT1__ 1  
+<span class='c'>// Header for string functions </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IMPDR');clipboard.on('success', function(e) {$('#IMPDR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IMPDR').text('error');});</script></div><p>If you don't define this symbol as 1, only the standard set of string processing functions will be  
+available. 
+</p><a class ='btn btn-outline-dark' href=c-character-string-exercise-4.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-finding-the-length-of-a-string-using-strnlen-s-function.html>Next</a><h2>Related</h2><UL><LI><a href='c-character-string-exercise-2.html'>C Character String Exercise 2</a></LI><LI><a href='c-character-string-exercise-3.html'>C Character String Exercise 3</a></LI><LI><a href='c-character-string-exercise-4.html'>C Character String Exercise 4</a></LI><LI><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C Finding the Length of a String using strnlen_s() function</a></LI><LI><a href='c-copying-strings-with-strcpy-s.html'>C Copying Strings with strcpy_s</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-checking-for-c11-c17-support-for-secure-string-processing-functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

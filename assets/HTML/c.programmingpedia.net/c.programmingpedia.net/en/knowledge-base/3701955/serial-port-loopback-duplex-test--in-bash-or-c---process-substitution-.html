@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3701955/serial-port-loopback-duplex-test--in-bash-or-c---process-substitution- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Serial port loopback/duplex test, in Bash or C? (process substitution) | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Serial port loopback/duplex test, in Bash or C? (process substitution) | C Language Knowledge Base">
+        <title>[SOLVED] Serial port loopback/duplex test, in Bash or C? (process substitution) | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="serial-port-loopback-duplex-test-in-bash-or-c-process-substitution-">Serial port loopback/duplex test, in Bash or C? (process substitution)</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/bash.html">bash</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/loopback.html">loopback</a></span>
+                        <span class="tag-item"><a href="../tag/serial-port.html">serial-port</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have a serial device set up as loopback (meaning it will simply echo back any character it receives), and I'd like to measure effective throughput speed. For this, I hoped I could use <code>time</code>, as in</p>
+
+<pre><code>time bash -c '...'
+</code></pre>
+
+<p>where '<code>...</code>' would be some command I could run. </p>
+
+<p>Now, the first problem is that I want to use the device at 2000000 bps, so I cannot use  <a href="http://man.gnusquad.org/ttylog/section-8/en/" rel="noreferrer">ttylog</a> or <a href="http://www.manpagez.com/man/1/screen/" rel="noreferrer">screen</a> (they both seem to go up to 115200 bps only). However, working with <code>/dev/ttyUSB0</code> as a file (using file redirection and <code>cat</code>) seems to work fine:</p>
+
+<pre><code># initialize serial port
+stty 2000000 -ixon icanon &lt;/dev/ttyUSB0
+
+# check settings
+stty -a -F /dev/ttyUSB0
+
+# in one terminal - read from serial port
+while (true) do cat -A /dev/ttyUSB0 ; done
+
+# in other terminal - write to serial port
+echo "1234567890" &gt; /dev/ttyUSB0
+
+# back to first terminal, I now have:
+# $ while (true) do cat -A /dev/ttyUSB0 ; done
+# 1234567890$
+# ...
+</code></pre>
+
+<p>Now, I'd like to do something similar - I'd like to <code>cat</code> a file to a serial port, and have the serial port read back - but from a single terminal command (so I could use it as argument to <code>time</code>). </p>
+
+<p>I thought that I could use a Bash process substitution, to have the "writing" and "reading" part go, sort of, in "parallel" - if I try it with named pipes, it works:</p>
+
+<pre><code># mkfifo my.pipe # same as below:
+$ mknod my.pipe p
+
+$ comm &lt;(echo -e "test\ntest\ntest\n" &gt; my.pipe) &lt;(cat my.pipe)
+    test
+    test
+    test
+comm: file 2 is not in sorted order
+</code></pre>
+
+<p>Up there, I'm not using <code>comm</code> for any other purpose, than to (sort of) merge the two processes into a single command (I guess, I could have just as well used <code>echo</code> instead). </p>
+
+<p>Unfortunately, that trick does not seem to work with a serial port, because when I try it, I sometimes get:</p>
+
+<pre><code>$ comm &lt;(echo "1234567890" &gt; /dev/ttyUSB0) &lt;(while (true) do cat -A /dev/ttyUSB0 ; done)
+cat: /dev/ttyUSB0: Invalid argument
+</code></pre>
+
+<p>..., however, usually I just get no output whatsoever. This tells me that: either there is no control of which process starts first, and so <code>cat</code> may start reading before the port is ready (however, that doesn't seem to be a problem in the first example above); or in Linux/Bash, you cannot both read and write to a serial port at the same time, and so the "<code>Invalid argument</code>" would occur in those moments when both read and write seem to happen at the same time. </p>
+
+<p>So my questions are:</p>
+
+<ul>
+<li>Is there a way to do something like this (<code>cat</code> a file to a serial port configured as loopback; read it back and see how long it takes) only in Bash, without resorting to writing a dedicated C program? </li>
+<li>If I need a dedicated C program, any source examples out there on the net I could use? </li>
+</ul>
+
+<p>Thanks a lot for any responses, </p>
+
+<p>Cheers! </p>
+
+<p>&nbsp;</p>
+
+<p>EDIT: I am aware that the <code>while</code> loop written above does not exit; that command line was for preliminary testing, and I interrupt it using Ctrl-C. ( <em>I could in principle interrupt it with something like <code>timeout -9 0.1 bash -c 'while (true) do echo AA ; done'</code>, but that would defeat the purpose of <code>time</code>, then :)</em> )</p>
+
+<p>The reason that <code>while</code> is there, is that for the time being, reading via <code>cat</code> from the device exits immediately; at times, I <em>have</em> set up the device, so that when <code>cat</code> is issued, it in fact blocks and waits for incoming data; but I cannot as of yet figure what's going on (and partially that is why I'm looking for a way to test from the command line). </p>
+
+<p>In case I didn't use the <code>while</code>, I imagine for timing, I'd use something like:</p>
+
+<p><code>time bash -c 'comm &lt;(echo "1234567890" &gt; /dev/ttyUSB0) &lt;(cat -A /dev/ttyUSB0)'</code></p>
+
+<p>... however for this to be working, sort of, assumes that <code>cat -A /dev/ttyUSB0</code> starts first and blocks; then the <code>echo</code> writes to the serial port (and exits); and then <code>cat -A</code> outputs whatever it read from the serial port - and then exits. (<em>And I'm not really sure neither if a serial port can behave this way at all, nor if <code>cat</code> can be made to block and exit arbitrarily like that</em>). </p>
+
+<p>The exact method really doesn't matter; if at all possible, I'd just like to avoid coding my own C program to do this kind of testing - which is why my primary interest is if it is somehow possible to run such a "full-duplex test" using basic Bash/Linux (i.e. <code>coreutils</code>); (<em>and if not, if there is a ready-made code I can use for something like this</em>). </p>
+
+<p>EDIT2: Also possibly relevant:</p>
+
+<ul>
+<li><a href="http://ubuntuforums.org/showthread.php?t=31339" rel="noreferrer">Parallel processes in Bash - Ubuntu Forums</a></li>
+</ul>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/277826/sdaau" target="_blank"><span itemprop="name">sdaau</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">8</div>
+                                    <div itemprop="dateCreated">2/28/2013 3:30:28 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Well, I managed to put <code>writeread.c</code> in a threaded version using <code>pthread</code> (<em>code is below - I don't think <code>serial.h</code> changed much; it's not used that much in the threaded version anyways</em>). I have also lowered the speed to 115200, and now I can confirm these measurements with the device, in the sample command line session below: </p>
+
+<pre><code>$ ./writeread /dev/ttyUSB0 115200 writeread.c 3&gt;myout.txt
+stdalt opened; Alternative file descriptor: 3
+Opening port /dev/ttyUSB0;
+Got speed 115200 (4098/0x1002);
+Got file/string 'writeread.c'; opened as file (6131).
+write_thread_function spawned
+   write: 6131
+   read: 18
+   read: 64
+   read: 110
+   read: 156
+   read: 202
+...
+   read: 6066
+   read: 6089
+   read: 6123
+   read: 6131
+
++++DONE+++
+Wrote: 6131 bytes; Read: 6131 bytes; Total: 12262 bytes. 
+Start: 1284462824 s 141104 us; End: 1284462824 s 682598 us; Delta: 0 s 541494 us. 
+115200 baud for 8N1 is 11520 Bps (bytes/sec).
+Measured: write 11322.38 Bps (98.28%), read 11322.38 Bps (98.28%), total 22644.76 Bps.
+
+$ diff writeread.c myout.txt 
+$ 
+</code></pre>
+
+<p>Well, measurements now report up to 99% of the expected baud rate, so I guess that means that the profiling aspect of this program should work. Notice:</p>
+
+<ul>
+<li>For this device, the <code>write</code> is executed in a single chunk (<em>as the PC should be able to handle the sequencing to packets, if necessary</em>), </li>
+<li>while the <code>read</code> goes on in smaller chunks (<em>probably indicating that the device doesn't wait for the entire chunk to arrive - instead it starts sending back smaller chunks as soon as it has received enough</em>)</li>
+</ul>
+
+<p>Well, I guess this is what I needed originally; I also guess it is probably not possible to arrange <code>cat</code> and <code>echo</code> via process substitution to execute in this, let's call it "threaded", manner :) (<em>Now, I do have a problem with doing the same at 2000000 baud, but that indicates a problem with the programming of the device</em>).</p>
+
+<p>Cheers!</p>
+
+<p>&nbsp;</p>
+
+<p><strong>writeread.c</strong> - <em>threaded version</em></p>
+
+<pre><code>/*
+    writeread.c - based on writeread.cpp
+    [SOLVED] Serial Programming, Write-Read Issue - http://www.linuxquestions.org/questions/programming-9/serial-programming-write-read-issue-822980/
+
+    build with: gcc -o writeread -lpthread -Wall -g writeread.c
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stddef.h&gt;
+
+#include &lt;stdlib.h&gt;
+#include &lt;sys/time.h&gt;
+
+#include &lt;pthread.h&gt;
+
+#include "serial.h"
+
+
+int serport_fd;
+
+//POSIX Threads Programming - https://computing.llnl.gov/tutorials/pthreads/#PassingArguments
+struct write_thread_data{
+   int  fd;
+   char* comm; //string to send
+   int bytesToSend;
+   int writtenBytes;
+};
+
+void usage(char **argv)
+{
+    fprintf(stdout, "Usage:\n"); 
+    fprintf(stdout, "%s port baudrate file/string\n", argv[0]); 
+    fprintf(stdout, "Examples:\n"); 
+    fprintf(stdout, "%s /dev/ttyUSB0 115200 /path/to/somefile.txt\n", argv[0]); 
+    fprintf(stdout, "%s /dev/ttyUSB0 115200 \"some text test\"\n", argv[0]); 
+}
+
+// POSIX threads explained - http://www.ibm.com/developerworks/library/l-posix1.html
+// instead of writeport
+void *write_thread_function(void *arg) {
+    int lastBytesWritten;
+    struct write_thread_data *my_data;
+    my_data = (struct write_thread_data *) arg;
+
+    fprintf(stdout, "write_thread_function spawned\n");
+
+    my_data-&gt;writtenBytes = 0; 
+    while(my_data-&gt;writtenBytes &lt; my_data-&gt;bytesToSend)
+    {
+        lastBytesWritten = write( my_data-&gt;fd, my_data-&gt;comm + my_data-&gt;writtenBytes, my_data-&gt;bytesToSend - my_data-&gt;writtenBytes );   
+        my_data-&gt;writtenBytes += lastBytesWritten;  
+        if ( lastBytesWritten &lt; 0 ) 
+        {
+            fprintf(stdout, "write failed!\n");
+            return 0;
+        }
+        fprintf(stderr, "   write: %d - %d\n", lastBytesWritten, my_data-&gt;writtenBytes);
+    }
+    return NULL; //pthread_exit(NULL)
+}
+
+int main( int argc, char **argv ) 
+{
+
+    if( argc != 4 ) { 
+        usage(argv);
+        return 1; 
+    }
+
+    char *serport;
+    char *serspeed;
+    speed_t serspeed_t;
+    char *serfstr;
+    int serf_fd; // if &lt; 0, then serfstr is a string
+    int sentBytes; 
+    int readChars;
+    int recdBytes, totlBytes; 
+
+    char* sResp;
+    char* sRespTotal;
+
+    struct timeval timeStart, timeEnd, timeDelta;
+    float deltasec, expectBps, measReadBps, measWriteBps; 
+
+    struct write_thread_data wrdata;
+    pthread_t myWriteThread;
+
+    /* Re: connecting alternative output stream to terminal - 
+    * http://coding.derkeiler.com/Archive/C_CPP/comp.lang.c/2009-01/msg01616.html 
+    * send read output to file descriptor 3 if open, 
+    * else just send to stdout
+    */
+    FILE *stdalt;
+    if(dup2(3, 3) == -1) {
+        fprintf(stdout, "stdalt not opened; ");
+        stdalt = fopen("/dev/tty", "w");
+    } else {
+        fprintf(stdout, "stdalt opened; ");
+        stdalt = fdopen(3, "w");
+    }
+    fprintf(stdout, "Alternative file descriptor: %d\n", fileno(stdalt));
+
+    // Get the PORT name
+    serport = argv[1];
+    fprintf(stdout, "Opening port %s;\n", serport);
+
+    // Get the baudrate
+    serspeed = argv[2];
+    serspeed_t = string_to_baud(serspeed);
+    fprintf(stdout, "Got speed %s (%d/0x%x);\n", serspeed, serspeed_t, serspeed_t);
+
+    //Get file or command;
+    serfstr = argv[3];
+    serf_fd = open( serfstr, O_RDONLY );
+    fprintf(stdout, "Got file/string '%s'; ", serfstr);
+    if (serf_fd &lt; 0) {
+        wrdata.bytesToSend = strlen(serfstr);
+        wrdata.comm = serfstr; //pointer already defined 
+        fprintf(stdout, "interpreting as string (%d).\n", wrdata.bytesToSend);
+    } else {
+        struct stat st;
+        stat(serfstr, &amp;st);
+        wrdata.bytesToSend = st.st_size;
+        wrdata.comm = (char *)calloc(wrdata.bytesToSend, sizeof(char));
+        read(serf_fd, wrdata.comm, wrdata.bytesToSend);
+        fprintf(stdout, "opened as file (%d).\n", wrdata.bytesToSend);
+    }
+
+    sResp = (char *)calloc(wrdata.bytesToSend, sizeof(char));
+    sRespTotal = (char *)calloc(wrdata.bytesToSend, sizeof(char));
+
+    // Open and Initialise port
+    serport_fd = open( serport, O_RDWR | O_NOCTTY | O_NONBLOCK );
+    if ( serport_fd &lt; 0 ) { perror(serport); return 1; }
+    initport( serport_fd, serspeed_t );
+
+    wrdata.fd = serport_fd;
+
+    sentBytes = 0; recdBytes = 0;
+
+    gettimeofday( &amp;timeStart, NULL );
+
+    // start the thread for writing.. 
+    if ( pthread_create( &amp;myWriteThread, NULL, write_thread_function, (void *) &amp;wrdata) ) {
+        printf("error creating thread.");
+        abort();
+    }
+
+    // run read loop 
+    while ( recdBytes &lt; wrdata.bytesToSend )
+    {
+
+        while ( wait_flag == TRUE );
+
+        if ( (readChars = read( serport_fd, sResp, wrdata.bytesToSend)) &gt;= 0 ) 
+        {
+            //~ fprintf(stdout, "InVAL: (%d) %s\n", readChars, sResp);
+            // binary safe - add sResp chunk to sRespTotal
+            memmove(sRespTotal+recdBytes, sResp+0, readChars*sizeof(char));
+            /* // text safe, but not binary:
+            sResp[readChars] = '\0'; 
+            fprintf(stdalt, "%s", sResp);
+            */
+            recdBytes += readChars;
+        } else {
+            if ( errno == EAGAIN ) 
+            {
+                fprintf(stdout, "SERIAL EAGAIN ERROR\n");
+                return 0;
+            } 
+            else 
+            {
+                fprintf(stdout, "SERIAL read error: %d = %s\n", errno , strerror(errno));
+                return 0;
+            }           
+        }
+        fprintf(stderr, "   read: %d\n", recdBytes);        
+
+        wait_flag = TRUE; // was ==
+        //~ usleep(50000);
+    }
+
+    if ( pthread_join ( myWriteThread, NULL ) ) {
+        printf("error joining thread.");
+        abort();
+    }
+
+    gettimeofday( &amp;timeEnd, NULL );
+
+    // binary safe - dump sRespTotal to stdalt
+    fwrite(sRespTotal, sizeof(char), recdBytes, stdalt);
+
+    // Close the open port
+    close( serport_fd );
+    if (!(serf_fd &lt; 0)) { 
+        close( serf_fd );
+        free(wrdata.comm); 
+    } 
+    free(sResp);
+    free(sRespTotal);
+
+    fprintf(stdout, "\n+++DONE+++\n");
+
+    sentBytes = wrdata.writtenBytes; 
+    totlBytes = sentBytes + recdBytes;
+    timeval_subtract(&amp;timeDelta, &amp;timeEnd, &amp;timeStart);
+    deltasec = timeDelta.tv_sec+timeDelta.tv_usec*1e-6;
+    expectBps = atoi(serspeed)/10.0f; 
+    measWriteBps = sentBytes/deltasec;
+    measReadBps = recdBytes/deltasec;
+
+    fprintf(stdout, "Wrote: %d bytes; Read: %d bytes; Total: %d bytes. \n", sentBytes, recdBytes, totlBytes);
+    fprintf(stdout, "Start: %ld s %ld us; End: %ld s %ld us; Delta: %ld s %ld us. \n", timeStart.tv_sec, timeStart.tv_usec, timeEnd.tv_sec, timeEnd.tv_usec, timeDelta.tv_sec, timeDelta.tv_usec);
+    fprintf(stdout, "%s baud for 8N1 is %d Bps (bytes/sec).\n", serspeed, (int)expectBps);
+    fprintf(stdout, "Measured: write %.02f Bps (%.02f%%), read %.02f Bps (%.02f%%), total %.02f Bps.\n", measWriteBps, (measWriteBps/expectBps)*100, measReadBps, (measReadBps/expectBps)*100, totlBytes/deltasec);
+
+    return 0;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/277826/sdaau" target="_blank"><span itemprop="name">sdaau</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/3701955/serial-port-loopback-duplex-test--in-bash-or-c---process-substitution-#answer-0</div>
+                                            <div itemprop="upvoteCount">4</div>
+                                            <div itemprop="dateCreated">9/14/2010 1:02:31 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Well, here is something like a partial answer - although the question about the use of bash is still open. I tried to look a little bit in some C code solutions - and that, it seems, isn't trivial either! :) </p>
+
+<p>First, let's see what possibly <strong>doesn't</strong> work for this case - below is an example from "<a href="http://www.daniweb.com/forums/thread286634.html" rel="noreferrer">between write and read:serial port. - C</a>": </p>
+
+<pre><code>// from: between write and read:serial port. - C - http://www.daniweb.com/forums/thread286634.html
+// gcc -o sertest -Wall -g sertest.c
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;termios.h&gt;
+
+int main(int argc, char *argv[])
+{
+    char line[1024];
+    int chkin;
+    char input[1024];
+    char msg[1024];
+    char serport[24];
+
+    // argv[1] - serial port
+    // argv[2] - file or echo 
+
+    sprintf(serport, "%s", argv[1]);
+
+    int file= open(serport, O_RDWR | O_NOCTTY | O_NDELAY);
+
+    if (file == 0)
+    {
+        sprintf(msg, "open_port: Unable to open %s.\n", serport);
+        perror(msg);
+    }
+    else
+        fcntl(file, F_SETFL, FNDELAY); //fcntl(file, F_SETFL, 0);
+
+    while (1)
+    {
+
+        printf("enter input data:\n");
+        scanf("%s",&amp;input[0]);
+
+        chkin=write(file,input,sizeof input);
+
+        if (chkin&lt;0)
+        {
+            printf("cannot write to port\n");
+        }
+
+        //chkin=read(file,line,sizeof line);
+
+        while ((chkin=read(file,line,sizeof line))&gt;=0)
+        {
+            if (chkin&lt;0)
+            {
+                printf("cannot read from port\n");
+            }
+            else
+            {
+                printf("bytes: %d, line=%s\n",chkin, line);
+            }
+        }
+
+        /*CODE TO EXIT THE LOOP GOES HERE*/
+        if (input[0] == 'q') break;
+    }
+
+    close(file);
+    return 0;
+}
+</code></pre>
+
+<p>The problem with the above code is that it doesn't explicitly initialize the serial port for character ("raw") operation; so depending on how the port was set previously, a session may look like this: </p>
+
+<pre><code>$ ./sertest /dev/ttyUSB0 
+enter input data:
+t1
+enter input data:
+t2
+enter input data:
+t3
+enter input data:
+^C
+</code></pre>
+
+<p>... in other words, there is no echoing of the input data. However, if the serial port is set up properly, we can get a session like: </p>
+
+<pre><code>$ ./sertest /dev/ttyUSB0 
+enter input data:
+t1
+enter input data:
+t2
+bytes: 127, line=t1
+enter input data:
+t3
+bytes: 127, line=t2
+enter input data:
+t4
+bytes: 127, line=t3
+enter input data:
+^C
+</code></pre>
+
+<p>... (<em>but even then, this <code>sertest</code> code fails on input words greater than 3 characters.</em>)</p>
+
+<p>Finally, through some online digging, I managed to find "<a href="http://www.linuxquestions.org/questions/programming-9/serial-programming-write-read-issue-822980/" rel="noreferrer">(SOLVED) Serial Programming, Write-Read Issue</a>", which offers a <code>writeread.cpp</code> example. However, for this byte-by-byte "duplex" case, not even that was enough - namely, "<a href="http://www.faqs.org/docs/Linux-HOWTO/Serial-Programming-HOWTO.html#AEN92" rel="noreferrer">Serial Programming HOWTO</a>" notes: "<em>Canonical Input Processing ... is the normal processing mode for terminals ... which means that a read will only return a full line of input. A line is by default terminated by a NL  (ASCII LF) ...</em>" ; and thus we have to <strong>explicitly</strong> set the serial port to "non-canonical" (or "raw") mode in our code via <code>ICANON</code> (<em>in other words, just setting <code>O_NONBLOCK</code> via <code>open</code> is <strong>not</strong> enough</em>) - an example for that is given at "<a href="http://www.steve.org.uk/Reference/Unix/faq_4.html#SEC49" rel="noreferrer">3.2 How can I read single characters from the terminal? - Unix Programming Frequently Asked Questions - 3. Terminal I/O</a>". Once that is done, calling <code>writeread</code> will "correctly" set the serial port for the <code>serport</code> example (above), as well. </p>
+
+<p>So I changed some of that <code>writeread</code> code back to C, added the needed initialization stuff, as well as time measurement, possibility to send strings or files, and additional output stream (<em>for 'piping' the read serial data to a separate file</em>). The code is below as <code>writeread.c</code> and <code>serial.h</code>, and with it, I can do something like in the following Bash session: </p>
+
+<pre><code>$ ./writeread /dev/ttyUSB0 2000000 writeread.c 3&gt;myout.txt
+stdalt opened; Alternative file descriptor: 3
+Opening port /dev/ttyUSB0;
+Got speed 2000000 (4107/0x100b);
+Got file/string 'writeread.c'; opened as file (4182).
+
++++DONE+++
+Wrote: 4182 bytes; Read: 4182 bytes; Total: 8364 bytes. 
+Start: 1284422340 s 443302 us; End: 1284422347 s 786999 us; Delta: 7 s 343697 us. 
+2000000 baud for 8N1 is 200000 Bps (bytes/sec).
+Measured: write 569.47 Bps, read 569.47 Bps, total 1138.94 Bps.
+
+$ diff writeread.c myout.txt 
+
+$ ./writeread /dev/ttyUSB0 2000000 writeread.c 3&gt;/dev/null 
+stdalt opened; Alternative file descriptor: 3
+Opening port /dev/ttyUSB0;
+Got speed 2000000 (4107/0x100b);
+Got file/string 'writeread.c'; opened as file (4182).
+
++++DONE+++
+Wrote: 4182 bytes; Read: 4182 bytes; Total: 8364 bytes. 
+Start: 1284422380 s -461710 us; End: 1284422388 s 342977 us; Delta: 8 s 804687 us. 
+2000000 baud for 8N1 is 200000 Bps (bytes/sec).
+Measured: write 474.97 Bps, read 474.97 Bps, total 949.95 Bps.
+</code></pre>
+
+<p>Well:</p>
+
+<ul>
+<li>First surprise - it goes faster if I'm writing to a file, than if I'm piping to <code>/dev/null</code>!</li>
+<li>Also, getting around 1000 Bps - whereas the device is apparently set for 200000 BPS!!</li>
+</ul>
+
+<p>At this point, I'm thinking that the slowdown is because after each written byte in <code>writeread.c</code>, we wait for a flag to be cleared by the read interrupt, before we proceed to read the serial buffer. Possibly, if the reading and writing were separate threads, then both reading and writing could try to use bigger blocks of bytes in single <code>read</code> or <code>write</code> calls, and so bandwidth would be used better ?! (<em>Or, maybe the interrupt handler does act, in some sense, like a "thread" running in parallel - so maybe something similar could be achieved by moving all read related functions to the interrupt handler ?!</em>)</p>
+
+<p>Ah well - at this point, I am very open to suggestions / links for existing code like <code>writeread.c</code>, but multithreaded :) And, of course, for any other possible Linux tools, or possibly Bash methods (although it seems Bash will not be able to exert this kind of control...)</p>
+
+<p>Cheers!</p>
+
+<p>&nbsp;</p>
+
+<p><strong>writeread.c</strong>:</p>
+
+<pre><code>/*
+    writeread.c - based on writeread.cpp
+    [SOLVED] Serial Programming, Write-Read Issue - http://www.linuxquestions.org/questions/programming-9/serial-programming-write-read-issue-822980/
+
+    build with: gcc -o writeread -Wall -g writeread.c
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stddef.h&gt;
+
+#include &lt;stdlib.h&gt;
+#include &lt;sys/time.h&gt;
+
+#include "serial.h"
+
+
+int serport_fd;
+
+void usage(char **argv)
+{
+    fprintf(stdout, "Usage:\n"); 
+    fprintf(stdout, "%s port baudrate file/string\n", argv[0]); 
+    fprintf(stdout, "Examples:\n"); 
+    fprintf(stdout, "%s /dev/ttyUSB0 115200 /path/to/somefile.txt\n", argv[0]); 
+    fprintf(stdout, "%s /dev/ttyUSB0 115200 \"some text test\"\n", argv[0]); 
+}
+
+
+int main( int argc, char **argv ) 
+{
+
+    if( argc != 4 ) { 
+        usage(argv);
+        return 1; 
+    }
+
+    char *serport;
+    char *serspeed;
+    speed_t serspeed_t;
+    char *serfstr;
+    int serf_fd; // if &lt; 0, then serfstr is a string
+    int bytesToSend; 
+    int sentBytes; 
+    char byteToSend[2];
+    int readChars;
+    int recdBytes, totlBytes; 
+
+    char sResp[11];
+
+    struct timeval timeStart, timeEnd, timeDelta;
+    float deltasec; 
+
+    /* Re: connecting alternative output stream to terminal - 
+    * http://coding.derkeiler.com/Archive/C_CPP/comp.lang.c/2009-01/msg01616.html 
+    * send read output to file descriptor 3 if open, 
+    * else just send to stdout
+    */
+    FILE *stdalt;
+    if(dup2(3, 3) == -1) {
+        fprintf(stdout, "stdalt not opened; ");
+        stdalt = fopen("/dev/tty", "w");
+    } else {
+        fprintf(stdout, "stdalt opened; ");
+        stdalt = fdopen(3, "w");
+    }
+    fprintf(stdout, "Alternative file descriptor: %d\n", fileno(stdalt));
+
+    // Get the PORT name
+    serport = argv[1];
+    fprintf(stdout, "Opening port %s;\n", serport);
+
+    // Get the baudrate
+    serspeed = argv[2];
+    serspeed_t = string_to_baud(serspeed);
+    fprintf(stdout, "Got speed %s (%d/0x%x);\n", serspeed, serspeed_t, serspeed_t);
+
+    //Get file or command;
+    serfstr = argv[3];
+    serf_fd = open( serfstr, O_RDONLY );
+    fprintf(stdout, "Got file/string '%s'; ", serfstr);
+    if (serf_fd &lt; 0) {
+        bytesToSend = strlen(serfstr);
+        fprintf(stdout, "interpreting as string (%d).\n", bytesToSend);
+    } else {
+        struct stat st;
+        stat(serfstr, &amp;st);
+        bytesToSend = st.st_size;
+        fprintf(stdout, "opened as file (%d).\n", bytesToSend);
+    }
+
+
+    // Open and Initialise port
+    serport_fd = open( serport, O_RDWR | O_NOCTTY | O_NONBLOCK );
+    if ( serport_fd &lt; 0 ) { perror(serport); return 1; }
+    initport( serport_fd, serspeed_t );
+
+    sentBytes = 0; recdBytes = 0;
+    byteToSend[0]='x'; byteToSend[1]='\0';
+    gettimeofday( &amp;timeStart, NULL );
+
+    // write / read loop - interleaved (i.e. will always write 
+    // one byte at a time, before 'emptying' the read buffer ) 
+    while ( sentBytes &lt; bytesToSend )
+    {
+        // read next byte from input...
+        if (serf_fd &lt; 0) { //interpreting as string
+            byteToSend[0] = serfstr[sentBytes];
+        } else { //opened as file 
+            read( serf_fd, &amp;byteToSend[0], 1 );
+        }
+
+        if ( !writeport( serport_fd, byteToSend ) ) { 
+            fprintf(stdout, "write failed\n"); 
+        }
+        //~ fprintf(stdout, "written:%s\n", byteToSend );
+
+        while ( wait_flag == TRUE );
+
+        if ( (readChars = readport( serport_fd, sResp, 10)) &gt;= 0 ) 
+        {
+            //~ fprintf(stdout, "InVAL: (%d) %s\n", readChars, sResp);
+            recdBytes += readChars;
+            fprintf(stdalt, "%s", sResp);
+        }
+
+        wait_flag = TRUE; // was ==
+        //~ usleep(50000);
+        sentBytes++;
+    }
+
+    gettimeofday( &amp;timeEnd, NULL );
+
+    // Close the open port
+    close( serport_fd );
+    if (!(serf_fd &lt; 0)) close( serf_fd );
+
+    fprintf(stdout, "\n+++DONE+++\n");
+
+    totlBytes = sentBytes + recdBytes;
+    timeval_subtract(&amp;timeDelta, &amp;timeEnd, &amp;timeStart);
+    deltasec = timeDelta.tv_sec+timeDelta.tv_usec*1e-6;
+
+    fprintf(stdout, "Wrote: %d bytes; Read: %d bytes; Total: %d bytes. \n", sentBytes, recdBytes, totlBytes);
+    fprintf(stdout, "Start: %ld s %ld us; End: %ld s %ld us; Delta: %ld s %ld us. \n", timeStart.tv_sec, timeStart.tv_usec, timeEnd.tv_sec, timeEnd.tv_usec, timeDelta.tv_sec, timeDelta.tv_usec);
+    fprintf(stdout, "%s baud for 8N1 is %d Bps (bytes/sec).\n", serspeed, atoi(serspeed)/10);
+    fprintf(stdout, "Measured: write %.02f Bps, read %.02f Bps, total %.02f Bps.\n", sentBytes/deltasec, recdBytes/deltasec, totlBytes/deltasec);
+
+    return 0;
+}
+</code></pre>
+
+<p><strong>serial.h</strong>:</p>
+
+<pre><code>/* serial.h
+    (C) 2004-5 Captain http://www.captain.at
+
+    Helper functions for "ser"
+
+    Used for testing the PIC-MMC test-board
+    http://www.captain.at/electronic-index.php
+*/
+
+#include &lt;stdio.h&gt;   /* Standard input/output definitions */
+#include &lt;string.h&gt;  /* String function definitions */
+#include &lt;unistd.h&gt;  /* UNIX standard function definitions */
+#include &lt;fcntl.h&gt;   /* File control definitions */
+#include &lt;errno.h&gt;   /* Error number definitions */
+#include &lt;termios.h&gt; /* POSIX terminal control definitions */
+#include &lt;sys/signal.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/types.h&gt;
+
+#define TRUE    1
+#define FALSE   0
+
+int wait_flag = TRUE;   // TRUE while no signal received
+
+// Definition of Signal Handler
+void DAQ_signal_handler_IO ( int status )
+{
+    //~ fprintf(stdout, "received SIGIO signal %d.\n", status);
+    wait_flag = FALSE;
+}
+
+
+int writeport( int fd, char *comm ) 
+{
+    int len = strlen( comm );
+    int n = write( fd, comm, len );
+
+    if ( n &lt; 0 ) 
+    {
+        fprintf(stdout, "write failed!\n");
+        return 0;
+    }
+
+    return n;
+}
+
+
+int readport( int fd, char *resp, size_t nbyte ) 
+{
+    int iIn = read( fd, resp, nbyte );
+    if ( iIn &lt; 0 ) 
+    {
+        if ( errno == EAGAIN ) 
+        {
+            fprintf(stdout, "SERIAL EAGAIN ERROR\n");
+            return 0;
+        } 
+        else 
+        {
+            fprintf(stdout, "SERIAL read error: %d = %s\n", errno , strerror(errno));
+            return 0;
+        }
+    }
+
+    if ( resp[iIn-1] == '\r' )
+        resp[iIn-1] = '\0';
+    else
+        resp[iIn] = '\0';
+
+    return iIn;
+}
+
+
+int getbaud( int fd ) 
+{
+    struct termios termAttr;
+    int inputSpeed = -1;
+    speed_t baudRate;
+    tcgetattr( fd, &amp;termAttr );
+    // Get the input speed
+    baudRate = cfgetispeed( &amp;termAttr );
+    switch ( baudRate )
+    {
+        case B0:      inputSpeed = 0; break;
+        case B50:     inputSpeed = 50; break;
+        case B110:    inputSpeed = 110; break;
+        case B134:    inputSpeed = 134; break;
+        case B150:    inputSpeed = 150; break;
+        case B200:    inputSpeed = 200; break;
+        case B300:    inputSpeed = 300; break;
+        case B600:    inputSpeed = 600; break;
+        case B1200:   inputSpeed = 1200; break;
+        case B1800:   inputSpeed = 1800; break;
+        case B2400:   inputSpeed = 2400; break;
+        case B4800:   inputSpeed = 4800; break;
+        case B9600:   inputSpeed = 9600; break;
+        case B19200:  inputSpeed = 19200; break;
+        case B38400:  inputSpeed = 38400; break;
+        case B115200: inputSpeed = 115200; break;
+        case B2000000: inputSpeed = 2000000; break; //added
+    }
+    return inputSpeed;
+}
+
+
+/* ser.c
+    (C) 2004-5 Captain http://www.captain.at
+
+    Sends 3 characters (ABC) via the serial port (/dev/ttyS0) and reads
+    them back if they are returned from the PIC.
+
+    Used for testing the PIC-MMC test-board
+    http://www.captain.at/electronic-index.php
+
+*/
+
+
+int initport( int fd, speed_t baudRate ) 
+{
+    struct termios options;
+    struct sigaction saio;  // Definition of Signal action
+
+    // Install the signal handler before making the device asynchronous
+    saio.sa_handler = DAQ_signal_handler_IO;
+    saio.sa_flags = 0;
+    saio.sa_restorer = NULL;
+    sigaction( SIGIO, &amp;saio, NULL );
+
+    // Allow the process to receive SIGIO
+    fcntl( fd, F_SETOWN, getpid() );
+    // Make the file descriptor asynchronous (the manual page says only 
+    // O_APPEND and O_NONBLOCK, will work with F_SETFL...)
+    fcntl( fd, F_SETFL, FASYNC );
+    //~ fcntl( fd, F_SETFL, FNDELAY); //doesn't work; //fcntl(file, F_SETFL, 0);
+
+    // Get the current options for the port...
+    tcgetattr( fd, &amp;options );
+/*       
+    // Set port settings for canonical input processing
+    options.c_cflag = BAUDRATE | CRTSCTS | CLOCAL | CREAD;
+    options.c_iflag = IGNPAR | ICRNL;
+    //options.c_iflag = IGNPAR;
+    options.c_oflag = 0;
+    options.c_lflag = ICANON;
+    //options.c_lflag = 0;
+    options.c_cc[VMIN] = 0;
+    options.c_cc[VTIME] = 0;
+*/   
+    /* ADDED - else 'read' will not return, unless it sees LF '\n' !!!!
+    * From: Unix Programming Frequently Asked Questions - 3. Terminal I/O - 
+    * http://www.steve.org.uk/Reference/Unix/faq_4.html 
+    */
+    /* Disable canonical mode, and set buffer size to 1 byte */
+    options.c_lflag &amp;= (~ICANON);
+    options.c_cc[VTIME] = 0;
+    options.c_cc[VMIN] = 1; 
+
+    // Set the baud rates to...
+    cfsetispeed( &amp;options, baudRate );
+    cfsetospeed( &amp;options, baudRate );
+
+    // Enable the receiver and set local mode...
+    options.c_cflag |= ( CLOCAL | CREAD );
+    options.c_cflag &amp;= ~PARENB;
+    options.c_cflag &amp;= ~CSTOPB;
+    options.c_cflag &amp;= ~CSIZE;
+    options.c_cflag |= CS8;
+
+    // Flush the input &amp; output...
+    tcflush( fd, TCIOFLUSH );
+
+    // Set the new options for the port...
+    tcsetattr( fd, TCSANOW, &amp;options );
+
+    return 1;
+}
+
+
+/* 
+    ripped from 
+    http://git.savannah.gnu.org/cgit/coreutils.git/tree/src/stty.c
+*/
+
+#define STREQ(a, b)     (strcmp((a), (b)) == 0)
+
+struct speed_map
+{
+  const char *string;       /* ASCII representation. */
+  speed_t speed;        /* Internal form. */
+  unsigned long int value;  /* Numeric value. */
+};
+
+static struct speed_map const speeds[] =
+{
+  {"0", B0, 0},
+  {"50", B50, 50},
+  {"75", B75, 75},
+  {"110", B110, 110},
+  {"134", B134, 134},
+  {"134.5", B134, 134},
+  {"150", B150, 150},
+  {"200", B200, 200},
+  {"300", B300, 300},
+  {"600", B600, 600},
+  {"1200", B1200, 1200},
+  {"1800", B1800, 1800},
+  {"2400", B2400, 2400},
+  {"4800", B4800, 4800},
+  {"9600", B9600, 9600},
+  {"19200", B19200, 19200},
+  {"38400", B38400, 38400},
+  {"exta", B19200, 19200},
+  {"extb", B38400, 38400},
+#ifdef B57600
+  {"57600", B57600, 57600},
+#endif
+#ifdef B115200
+  {"115200", B115200, 115200},
+#endif
+#ifdef B230400
+  {"230400", B230400, 230400},
+#endif
+#ifdef B460800
+  {"460800", B460800, 460800},
+#endif
+#ifdef B500000
+  {"500000", B500000, 500000},
+#endif
+#ifdef B576000
+  {"576000", B576000, 576000},
+#endif
+#ifdef B921600
+  {"921600", B921600, 921600},
+#endif
+#ifdef B1000000
+  {"1000000", B1000000, 1000000},
+#endif
+#ifdef B1152000
+  {"1152000", B1152000, 1152000},
+#endif
+#ifdef B1500000
+  {"1500000", B1500000, 1500000},
+#endif
+#ifdef B2000000
+  {"2000000", B2000000, 2000000},
+#endif
+#ifdef B2500000
+  {"2500000", B2500000, 2500000},
+#endif
+#ifdef B3000000
+  {"3000000", B3000000, 3000000},
+#endif
+#ifdef B3500000
+  {"3500000", B3500000, 3500000},
+#endif
+#ifdef B4000000
+  {"4000000", B4000000, 4000000},
+#endif
+  {NULL, 0, 0}
+};
+
+static speed_t
+string_to_baud (const char *arg)
+{
+  int i;
+
+  for (i = 0; speeds[i].string != NULL; ++i)
+    if (STREQ (arg, speeds[i].string))
+      return speeds[i].speed;
+  return (speed_t) -1;
+}
+
+
+
+/* http://www.gnu.org/software/libtool/manual/libc/Elapsed-Time.html
+Subtract the `struct timeval' values X and Y,
+storing the result in RESULT.
+Return 1 if the difference is negative, otherwise 0.  */
+int timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y)
+{
+    /* Perform the carry for the later subtraction by updating y. */
+    if (x-&gt;tv_usec &lt; y-&gt;tv_usec) {
+     int nsec = (y-&gt;tv_usec - x-&gt;tv_usec) / 1000000 + 1;
+     y-&gt;tv_usec -= 1000000 * nsec;
+     y-&gt;tv_sec += nsec;
+    }
+    if (x-&gt;tv_usec - y-&gt;tv_usec &gt; 1000000) {
+     int nsec = (x-&gt;tv_usec - y-&gt;tv_usec) / 1000000;
+     y-&gt;tv_usec += 1000000 * nsec;
+     y-&gt;tv_sec -= nsec;
+    }
+
+    /* Compute the time remaining to wait.
+      tv_usec is certainly positive. */
+    result-&gt;tv_sec = x-&gt;tv_sec - y-&gt;tv_sec;
+    result-&gt;tv_usec = x-&gt;tv_usec - y-&gt;tv_usec;
+
+    /* Return 1 if result is negative. */
+    return x-&gt;tv_sec &lt; y-&gt;tv_sec;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/277826/sdaau" target="_blank">sdaau</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/3701955" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3701955/serial-port-loopback-duplex-test--in-bash-or-c---process-substitution- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:15 GMT -->
+</html>

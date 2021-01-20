@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-arrays-of-character-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Arrays of Character Strings</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Arrays of Character Strings'>C Arrays of Character Strings</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Arrays of Character Strings</h1>
+<a class ='btn btn-outline-dark' href=c-character-string-arrays-and-initialization.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-and-strings.html>Next</a><p>We can have an array of character strings. 
+
+</p><p>Then you can use a subscript to access several different strings. 
+
+The following code shows two approaches: an array of pointers to strings and an array of char arrays.
+
+</p><div class='myCodeDiv'><button id='UPOLX' class='myCopyButton' data-clipboard-target='#OIMEM'>Copy</button><pre  id='OIMEM' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define SLEN 40
+#define LIM 5
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>const</span> <span class='r'>char</span> *my_talents[LIM] = {
+        <span class='q'>"CSS"</span>,
+        <span class='q'>"HTML"</span>, 
+        <span class='q'>"Java"</span>,
+        <span class='q'>"Javascript"</span>,
+        <span class='q'>"C language"</span>
+    };
+    <span class='r'>char</span> your_talents[LIM][SLEN] = {
+        <span class='q'>"SQL"</span>,
+        <span class='q'>"Ruby"</span>, 
+        <span class='q'>"Python"</span>,
+        <span class='q'>"MySQL"</span>, 
+        <span class='q'>"C++"</span>
+    };
+    <span class='r'>int</span> i;
+
+    puts(<span class='q'>"Let's compare."</span>);
+    printf (<span class='q'>"%-36s %-25s\n"</span>, <span class='q'>"My Talents"</span>, <span class='q'>"Your Talents"</span>);
+    <span class='r'>for</span> (i = 0; i &lt; LIM; i++)
+        printf(<span class='q'>"%-36s %-25s\n"</span>, my_talents[i], your_talents[i]);
+    printf(<span class='q'>"\nsizeof my_talents: %zd, sizeof your_talents: %zd\n"</span>,
+            <span class='r'>sizeof</span>(my_talents), <span class='r'>sizeof</span>(your_talents));
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UPOLX');clipboard.on('success', function(e) {$('#UPOLX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UPOLX').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>In some ways, <i style='color:blue'>my_talents</i> and <i style='color:blue'>your_talents</i> are much alike. 
+
+</p><p>Each represents five strings. 
+
+</p><p>When used with one index, as in my_talents[0] and your_talents[0], the result is a single string.
+
+</p><p>And, just as my_talents[1][2] is 'l', the third character of the second string represented by
+my_talents, your_talents[1][2] is 'e', the third character of the second string represented by
+your_talents. Both are initialized in the same fashion.
+
+</p><p>The my_talents array is an array of five pointers, taking up 40 bytes on our system. 
+
+</p><p>But your_talents is an array of five arrays, each of 40 char values, occupying 200 bytes on 
+our system. 
+
+</p><p>So my_talents is a different type from your_talents, even though my_talents[0] and your_talents[0] both are strings. 
+
+</p><p>The pointers in my_talents point to the locations of the string literals used for initialization, which are stored in static memory.
+
+</p><p>The arrays in your_talents contain copies of the string literals, so each string is
+stored twice. 
+
+</p><p>Furthermore, the allocation of memory in the arrays is inefficient, for each element of your_talents has 
+to be the same size, and that size has to be at least large enough to hold the longest string.
+
+</p><p>One way of visualizing this difference is to think of your_talents as a rectangular two-dimensional 
+array, with each row being of the same length, 40 bytes, in this case. 
+
+</p><p>Next, think of my_talents as a ragged array, one in which the row length varies. 
+</p><a class ='btn btn-outline-dark' href=c-character-string-arrays-and-initialization.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-and-strings.html>Next</a><h2>Related</h2><UL><LI><a href='c-char-string-introduction.html'>C Char String Introduction</a></LI><LI><a href='c-character-string-literals.html'>C Character String Literals</a></LI><LI><a href='c-character-string-arrays-and-initialization.html'>C Character String Arrays and Initialization</a></LI><LI><a href='c-pointers-and-strings.html'>C Pointers and Strings</a></LI><LI><a href='c-null-pointer-vs-null-character.html'>C NULL pointer vs Null character</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-arrays-of-character-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

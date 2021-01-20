@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-binary-numbers-bits-and-bytes.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Binary Numbers, Bits, and Bytes</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Binary Numbers, Bits, and Bytes'>C Binary Numbers, Bits, and Bytes</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Binary Numbers, Bits, and Bytes</h1>
+<a class ='btn btn-outline-dark' href=c-enum-usage.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-signed-integers-binary-representation.html>Next</a><p>The usual way to write numbers is based on the number 10. 
+
+</p><p>For example, 2157 has 
+</p><UL style='font-size:19px;'><LI>a 2 in the thousands place, </LI><LI>a 1 in the hundreds place, </LI><LI>a 5 in the tens place, and </LI><LI>a 7 in the ones place.</LI></UL><p>This means you can think of 2157 as being the following:
+</p><div class='myCodeDiv'><button id='DQSMR' class='myCopyButton' data-clipboard-target='#FAICD'>Copy</button><pre  id='FAICD' style='font-size:18px;' class='code'>2 x 1000 + 1 x 100 + 5 x 10 + 7 x 1
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DQSMR');clipboard.on('success', function(e) {$('#DQSMR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DQSMR').text('error');});</script></div><p>However, 1000 is 10 cubed, 100 is 10 squared, 10 is 10 to the first power, and, by convention, 1
+is 10 or any positive number to the zero power. 
+
+</p><p>Therefore, you can also write 2157 as this:
+
+</p><p>2 x 10<sup>3</sup> + 1 x 10<sup>2</sup> + 5 x 10<sup>1</sup> + 7 x 10<sup>0</sup></p>
+
+<p>Because our system of writing numbers is based on powers of 10, we say that 2157 is written in
+base 10.
+
+</p><p>A base 2 system is natural for a computer. It uses powers of two instead of powers of 10. 
+
+</p><p>Numbers expressed in base 2 are termed binary numbers. 
+
+</p><p>The number 2 plays the same role for binary numbers that the number 10 does for base 10 numbers. 
+
+</p><p>For example, a binary number such as 1101 mean this:
+
+</p><p>1 x 2<sup>3</sup> + 1 x 2<sup>2</sup> + 0 x 2<sup>1</sup> + 1 x 2<sup>0</sup></p>
+
+<p>In decimal numbers, it becomes this:
+</p><div class='myCodeDiv'><button id='YHRMZ' class='myCopyButton' data-clipboard-target='#LDLIP'>Copy</button><pre  id='LDLIP' style='font-size:18px;' class='code'>1 x 8 + 1 x 4 + 0 x 2 + 1 x 1 = 13
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YHRMZ');clipboard.on('success', function(e) {$('#YHRMZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YHRMZ').text('error');});</script></div><p>You can use the binary system to express any integer as a combination of 1s and 0s. 
+
+</p><h3>Binary Integers
+</h3><p>Usually, a byte contains 8 bits. 
+
+</p><p>C, remember, uses the term byte to denote the size used to hold a system's character set.
+
+</p><p>The 8-bit byte is the byte used to describe memory chips and the byte used to describe
+data transfer rates. 
+
+</p><p>You can think of these 8 bits as being numbered from 7 to 0, left to right. 
+
+</p><p>Bit 7 is called the high-order bit, and bit 0 is the low order bit in the byte. 
+
+</p><p>Each bit number corresponds to a particular exponent of 2. 
+
+</p><center><img alt='c-binary.png' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfEAAACJCAIAAACzVpYyAAAgHklEQVR42u2dh1dT2brA35/y7nt31rvvkuSk0JEakCYWHGVmAJGq4NAsKCBFQEEQFSzogAJKR1CRIoKA4igyRKRIiQQWvS8gK8lLO8t3EnoVNWXrfL+1152BHDJf9v7O73x7n31y/+MTAAAA8KPwH9AFAAAA4HQAAAAAnA4AAACA0wEAAABwOgAAADgdAAAAAKcDAAAA4HQAAABAJU7H+cP9Y8INXxJNsDsH+ch8li0iBQAA+Ns7XTryNjvK1VKT7pIxhK9/WcK+dZBKNY2oF6n9U0hHGrJiXC10aIcyN4oUAAAAnC73dteNgxh1Y6d/Eg/U3rv7pGNuRaU81T8wpx6pSrqvH6Bj4PTtddbccBerbUiEVFD47NDQHEKjJ+bNzKEy6xPPjfRwhmeRGjAJd3KKL0UvtyUSlJJaODMxyRWj5HR8KMNlU6ev601Orq9XCls9XUpEeggJp0sHco6aGurp71jRDJmny2dRSDEeu+zyce9TiZnPWoZ4aj8fia46Zmqw2Et6e2MbkVk5w6eqz1pr+5cK1B4J/0Ne8EEjbR2MTKHoO4Q/6ROrP4s6HkS6mDEwDRKVwXSLq+hDY9hEY3/lxXjsDiiaQyKcuZasMx5Hwm9l3k0IcA+8+XpKVWbartOl4tn+1qb3PVOrhw/njYzMyGOVjtddsNei219uGp+c5m2Yd6Kp/sFZXPZPdnPbMH/+Iwqm+jk9PT2cwWmiCMG5o709Sz8tZfXoyDRxsJQ33NnSMbKwfi+e6W9lvedMS9Y6fT7SZs7U2kTDecMdrHcfBmZXBSeeGhgighKMtr9jTyvAcpLOG24HTiTeTr+feU/eMpOPWeh55o2p+1qDT7664bGT6ZLSPItIMSxqTnTzCL989fIVoiVdvVM7gErVh4+VBe+kURhqdzo+VZUQklw7KCAydKA65mcdsv7x0lk19015qJPnxbzK+vrK+zGORjQNmv3lZnVbXTr6rrwgLeSgJolx5AECTsdHH/mbGfo9mj/t+U0JdgZu6R9VczneltMdo2+H7DPW16ZRNajmXqksQgr4VMezjChXSz29k5WyvOe3Fsa4MylUU5ez0bE3yjmri3VJ//PkgD0GDKPT9wsiPRwc9hrRaYae2T3EUcKJ1rzjphT6gZtEgY/P9jbc87cgU39O7pDI6rgXaeFudrq6fmllyQFuLg62OzCGXeTzAVb6mcPOTvuZRIq7/NEmWnb6b+dvndlvpKtHpVAwM295pHKEfWUJwaGXUq5f8LbSt/NLJ7yGT70vTgz4xVTLJqo4L9BSS4NkEFj+7UpnP8qqm8RXDm6uu4FnzqiaPcpvvvmbHs00sGQYGW/OVIT53elBb/L+STr4MCwkOfpXutqdjk/Vl9QsVwOzj3w1qS7pg+rsM2lvZuT1liWFz9VFMCk0q1iWGIGBEzcn7sKQcLqo6aIN1fDkU+6iFjqS7enEzyq5HG/H6eQdLtde9nOl0tmWNA9jEmYZ8ZInL7GfnzGk6s47XSavLFcq3enuJsUWvypoB4bZhj7pJQ6X9me60ql7Lr2XZQI+kUP8odzpMqbzj1IXnC7rnHcJdhSK+bHsDtl/UtSSuIeOmXmlvJ2SyirPskBjulVsk3jR6SR91+QXA/JI77gbYhSLc/JI515GORzLH5afG6LGWFsKZh39RiArOXI96WSdPWFPesa6nuYUN00q/qwcyfXSd80aVq/SRW3XiApG3+/hODLr1dK+u4d0NU33OvqcvZLXgNDuKUlvTnBEyWBfmqP6nb52ppXnbeyW1avWy6Cg/S1rZkUW8cv8taimka9QWOoXt1yxQ8LpYtbFXRSqc1r/0lAJKk8ZkPVPlnNRqdNdMxedJO81zDC4RpbroobonbTtOl3UGGNJpfqWzB8saoixwHYEVQnnU9VthdNnC71XOF3ac+tXjOqetVCsCMpP6GF2ie/nqwIp5/YvdM3AcsFSnX74/nKkl/dSyCbBzwX4aJ6njrlr5KWEhESiXfDZhZFou6+0yiYJdRHGVPNw5e3ckV01DA/fG1RvNcqrDjEiY0Z+t/JS4kL8/Y+HXy14N6XekPCpuuSAo057zehkigYJ09oT+oiDQqkn6kw/E/1sApf2o+Z0XndRiG/8y0nE9gDMPDjC0D9WhERYqDgdH8typWtonyhfzh6xrDbFdl9qRsXp7veXlg5Eb84xqZh77gS+idM3mxmudrq4MdYSMzhZ+aVOF9aEmqxwuuzEo/7+mL/kdNeskaVIX0czKXS3nAlBXZgR3T1zYI67DI8vlIUpehlhSrWMeqMsp+Pj+V76h9PVvE4s+vOcBZmktefsg7cfB/s7a2/7WGBUq5NILMNI5zi1f5zYp02mMBxutqu72BO03Dp58aWsDEXJ6fhEU3a0x05N4uKnY3OyiI3QIxj4dOlxkz3xb9GYZqHidMmHZHs6ySi0ZnmkJJ3XD2Bko+DnCDpd0p60j64dWM7fpE53VrLTa89u1+mStuS9VL2AMr6wOkSfanOhcYMyUMlOxycKvPWc7var2Z1zRT6aGnTvgsUb7/h0xUljjLIrsVmMiBmmXkbtxig7z71Wq9S5fyWdSmqYW04thOp0MXektSLZyxwjaR682YXKbj0+K9HZPaUVlYUzZJwuWz0nmUTUrXB61/WDGNksrA5Bp/OrgowMjhbIFfsNay/rnb7/eve26vRtO51fdcZQz4eIVNp/14lGZYY+n16aHwo6clIriLdUrtPxicKjO35L7VN3Ocwt9tEk6Z+uXM4wbqm/vgbVMweZiTw+lu1KY3jmTanxyvdnrFdw4bv29g+y1lYbt59Oc09rbu/omUBmAYb/JtqKhh3KGEThzjI+VRfrG1WFzi0adNZeRjIP0zX0gipXrL2w4u0oVPurbag4/dCdBVFL+vO8zR1vtS4siteHmVI1/csWIp8t9mZQLc694uMz3V3r5vWi15FM6oJ/iZ9enTOj6B2vkP8p/+kJPaquW+ZHoWS25/ltfzs6Zh5Wx124vskeenK7t6BqQcUJfYpV3ELNLe29/Qud6vOQt+R0p/SFolgykHvU0jGlTb7UPlrsa0QiGxyMKnjTPTjQUZt2yu+yvB4T1oUZYcywF0pxOj5Z5K3/2y2O2s+/+Ts2XrnLBhe9PW9NpnnlobM4K3xx1sTgxFP1VXwS9s2DdA0SZV2j2y/WFyh0U02oCc01e0z94ybovB8eUdwn/oQQyNwjJapdKzJRCi+Pk7A2zJRiGFKtigT/3Pe9iNgPw13t9zgfj0i4Ehd23Dc0s0le7krH3pf+EbATo5BNjySVtMiW16VDD/2ZFEzfyj2ulLN6zU860pB+wopKIZt533z+cXrg1e3fLSkkqtmx1D8HiCMFbelHTYlX6QY2PqlvSiNsrA4dj89uGP2/ocaC8AM6GmRj16vlreNTbaVX3YypGpi1X1rtx9nhvwpiHHQwsrFHYknLJC5iF0e47rV3CjiXcPliWIB/SAZrqTDHx2svOppg8rMUM3O/VD0oIZTb/DjJeycRhqlnUuHrPkUXY4TSf9dzuMVGwAdC2c4qk6BnSzfdBcQcBrO/ho6r8JFsN+bxJ+hcY+QlAmL7XmQTrCf+Jk531F4mSAbK4qNyuwQrftHWOa32wUPG6Z+Eb2IsqMyzdYs9JKs+GYjsZVwaM+5I/8DEZ588lHLHBif5XzW2otnhwXGeTDIiofAbskPCHd0kUuEkp62VPcpTjcjwqeJjOw7c6EZCm/hUdbidsc+DhU1B3BdhluYBJWrcMy/seBAffaOsc/75AelYdaR7wIM+hB7qRsPp+Oy7gpSs5z0LF2NB111f71R1L1/jE7XnD7nHZOTl58lbbnZGUtDp1Hb1j56YFW+NMbwKZtSfP9LBYn9zs1NP5+9hSQeyXI1/u9mGxDNHwFdb9NEx/YPXOpHRlHS8PjngSEhS+r0/YnyPni1iq9UMvJfn7RiyOZPz6dj4C+fO36zqR+zLZ5BwOmGGAKYmMaF18I+6eOXatTtP2eq+H8ltSiYmx2tWqGhOd3vVvDd2pquuOMXfFiNhOw5fKqhkDap9d5CAnR/scex8Wm5eaqSvf3zVkKp6CJyuJPgTvT0jXNS+UEw03c/mjPNRCEvKG+N0tndxxrhSyJatJp78qZGhkSmeGLrie6zteKOc3nGeSks7cDoAAMCPAzgdAAAAnA4AAACA0wEAAABwOgAAAABOBwAAAKcDAAAA4HQAAAAAnA4AAACA0wEAAABwOgAAADgdAAAAAKcDAAAA4HQ1wOfz29vakGrvWKySR4+eVjxFJ6Tmd++IkMrLy9EJ6X1zsyyksjJ0Qmp5/54IqexJKTohtba0ECE9efIEnZDaWltlIZWUIHXSlTx+TESFmgqIhuM4OP3LaGlpoWz0f2AGDRo0aGpvRNEJTv9Kp+/dvQeRhpHIqIWkSWegFpK+ji5qIRkbGqEWkgXTHLWQdtnYohYS0eZD2m27C7WQwOlf6XT7vft6OH2ItMzM+0RIdra70AmpsLCICMnSYic6IZWVlRMhmRqboBNSTW0dEdIOPX10QmpsbCJC0mZoohNS+4dOIiQaBUMnJKLNC7Sb3YNOSFryQgqcDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4HwOngdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTfxynd75IPeloZ2H9m9+NynYUnM55X5N/PeqEx36nmFI2Kk5XXC8pzOmKC0lRTme31OVeiz7hdsA5urwTFad31/4R5Gyz09Yh4HplBxpOV1hIinK6AgcOnK52p38oDDDS2hOWWZx73kFb3+te00e1O701L8LT54T/AU1Nn+xuNJyuyF5SkNMVGZKinN6cF+l19KT/fi3tozkdaDi9tfC4CX1vWObDnJhfdHWOZLI4ane6AkNSlNMVOHDgdHU7vSXNhWISLC+Hu2uibf69/0oDB4m1F/bTs2bIOF2hvaQYpys0JIWuvfRUhDB1UHF6W6ozZna6TFZ7suuiLTUOXG5Ut9MVGZJC114UM3DgdDU7vbPktAnFI6Nzfi7/wE/7mzT6ozpdsb2kEKcrNqQf1uldpacNMc/0+Z7pLvhdR/torpqdrtCQwOng9LWtI9tHRzfgQeeCRkONNQ7d7gSnK7WXFOJ0xYb0wzq9M9eHoRdQOJ9FPeXBJmSnVDU7XaEhgdPB6evU8CDAgOGdPa+Grscn9Cke6VCnK7eXFON0hYb04zq9OEB3KYvYDwMNaG4Z6na6IkMCp4PT193v/jNh37/3XnotX4plpThqWIRX9oDTldpLCnG6YkP6YZ3+8U38bg37hAa27Mfmm7+SLM9WqdnpCg0JnA5OX6/OF3F2FJuIZx2cntr4fXRmWAW7D5yu1F5SzD1ShYb0494j7amN3U2zjHza2dddm2BPMQ+r6FGz0xUaEjgdnL7RLL46yVkX0zfUp2seiC3/pt2yinE6u+a8Hel///nPn/7zP3/6r5/+9W+Ls9+wS11R+9MV2EuK2p+uwJAU5PSe6pjd2E8//c8//vHf//jvf/1TwzK0TP370ztrkhz16NpGOzCtgxeetqGwP11xISnI6YocOHA6Gs+Rslvrq180dcJzpKroJUU+R6qgkH7050h7mutralnfOudT6HOkigkJniMFp8N3A8B3A8B3A8B3A4DTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwengdHA6OB2cDk4Hp4PTwemKdDqRe8qIYSmxwengdHA6OB2c/n07feV7zv87OB2cDk4Hp/+tnb5eiyvr361fmnf6ZoetOXj9O6z/w5W/XHPAhn+1/oPMO/2zR372nbcTDzgdnA5OB6f/vZy+oRA3PH4ze279Vxs6nfiXpTp9w2vMdt75s/GA08Hp4HRwOqJrLyvr6DU19dYvEU4n/neHnv76SnxrXW7zl9t3+sr19JVO384S0NfFA04Hp4PTweng9FULHZ8t3r/O6VuvvYDTwengdHA6OF1Zdfp2loA+K9aVP665R7p1SOB0cDo4HZz+Y+572aYx17+0tO9la1NvZz1dIZJV4Ho6OB2cDk4Hp4PTN72hup19L9u5bbvhb5Z+v9nayxa3f786HnA6OB2cDk6H50jhOVJwOjhdCU7X1tSqq3uJSIu/mDCf9OiEdD35+nzSoxNSWuod1ELKzs5BLaRHDx+jFlJlZRVqIRFtPqTnz2tRCwmc/pVOhwYNGjQEGzj9i+nu6tq9yw6pZr3TkkGl6WppoxOSjaUVEZKOphZCIVlZEyFpMzTRCcnW2oYIiZgyoxPSLhtbIiRNGh2dkOxsdxEhEQ2pk24hJNtdqNlAIBCA0wEAAP5GgNMBAADA6QAAAAA4HQAAAACnAwAAAOB0AAAAcDoAAAAATgcAAADA6QAAAAA4HQAAAACnAwAAgNMBAAAAcDoAAAAATgcAAADA6QAAAOD0rcH5w/1jwo1fE02wOwf5yoxSPP3xXee4FIYLAADgG50uHXmbHeVqqUl3yRjCN3hdwk5xoJPNIutFyohPOvxXUaKXBZViElIjhOECAAD49jpd0nXjIEbdxOmfxP1199OedMwt1/RT/QNzuOJiFFaH6IPTAQAAFOR0fCjDZXOnr70AcHJ9vVLYEsXFKPozygxD2OkSyYYfVsKdmuJvsl4kFUxPTAtUuZgkmRvuYrUNrZ9MiXkzcyrtWfHcCIczPCvauM8mN+0zNQ3jZztQJag+YbY7mqpOny3HSI3p8/WZpV6nS8Wz/a1N73um1owizhsZmZEJXzped8Fei25/uWl8cponXnPU7EDnh/Z2onV8HJWtv+Pc4e6OD+0d7GHewtWCP9zy4mlZWVXDx2nJhk4XTA70EHAGp0Wyvx/hyH7qGZgWrQxmuIP17sPArFjpvSca+yvvgrvd8Qezq37N6yiKcDankykaFG3m4YsVvcIVfdBWcD7oTGxK6h9JoZ7OPldrh5Q83jx2eWLgsZMJ9yvfD/HW5js+WR1mqRPwRKCabOO354X+bKyrScU0sB0HIkp7xSv77JwTU4tEopA1LQ7HPe1VoShEY0255z13BRbNfnEHKh3VJ8yXBDdVfdZa279UoPZIeB0PIl3MGJgGicpgusVV9KFxnZEJIsZjd0DRHJpOd4y+HbLPWF+bRtWgmnulsmZx2aB2VGVGulpr6wc9JQaW31oY486kUE1dzkbH3ijnrM4+fK6nLNKORsHsE96MC+cVXn1ur/WZ0n6Z4YVdOX573a5WtXY1PwrfbeZ5b7HWX+l04URbboA5mepwk3gVn+19k+XPpGL21zrmjxX2lSUEh15KuX7B20rfzi+9eRZXVs9JR5vL8u8EH9DRoHkXrpABPlYR4ngkLvdZff2ze1HOhhiFuu/qO+HCOVBxytzmfMPCDWXuy/CdBl75I8qKEZ+sv+5lYeqa0rzxUhg+Vn7akqGhqRqn45NVl85cqx0Q4J8EA1XnD2pSdgSUzi722dnfPONzKuvrK7OiHE0oJMbeK80qOS2lI83l+WmhP2tRqEfXOf1zHagCaao0Yb4wuLGy4J00CkPtTifyONTJ82KeLH3uxzga0TRo9peb1W116ei78oK0kIOaJMaRB2g6nbzD5drLfq5UOtuS5mFMwiwjXvLkrwqqzxiT9eROJw4dzXKl0p3uDmxS0MxUnDShGJ4qXzh7uM/C/NI48mOFNcE76OZRDbKKW8yKs2XYJbaIN1h7wSeyPbB5p8uYzvdiLDp97mWUw7H8YXnGixpjbSmYdfQbpeabuPnSbsoqp0t7M6KutSzl01xd2E4yZhvbJP8owhdhJgyH2z3SxVzMctVknnutnPk8v/mGky5mHlAyvPFYSAeLw0KTYhwx1Tgdn6ovqR1bstHs42NadOf0QVls0r6MczdW9NmLMHMqxTquSayqs0D8/pIdbZ3TP9eBKkClCfOFyhp8GBaSHP0rXe1Ol/ZmRl5fecpFMCk0q1iWGIFeEjcn7sKQdTrVNXN44YwUt1yxwzDD4Br5WIoaYqwo23X6J2FjnDWm4549JK/ynwQHFS6e53MdFfmV3bKKRDT6LMSSrn+mWriR0ydzVzp9tvDIgtPx0TxPHXPXyEsJCYlEu+CzCyPRdl9pVeZUVdxyee9qpwva376bWVFH8UsDNSnmEa/kp6F8jxBmG1k7JTsCn6k8aWp+qnJaGWWXqO3GATqm5/tofON3l3ByQsNLBnvvOKvI6Wsr4HwvE497vfI0EXxoWNNn/jpks3P1KlOXuCVx91qnf64DVbMSq7qE+cLAenOCI0oG+9Ic1e904pRjrUqfMn8tqmnkKxSufHJVout09/ujix0nenOOScXccyfwTZw+X39tnA0fb/3CwH6+0SmRDmUHhT1deR5JJt8/upV0827hvTM2dN1Tz77I6cK6MCO6e+bAHHcZHl8oVe6QrXX6uolJoTdd17doEl8I/mkI0XPa9hHFjfWpfs6+aauyUYHri9VnTEhkE9+U/JTYs/5+J8OvFLKmlrtC1JUeFPNsApf2q8XpPPaDUL+4l1P4Zn12VEvnWPEkrrozb53TP9OBqrv2qShhvqxg6Ew/Ey1PHxScvi59Hhxh6B8rmkRhher7cbqkPWkfXTuwnL9Jne68hdOJCWSBtw5mHf2q7VZg3J9L6YDPvElysfVK7+DL3v/q3i93enWIPtXmQqNYpUO2tdPx6dJA5u6LjSueyBJ8LAqyYVA0SFr2CW+Vtdwveh3JpGow7EMLGz8ODnTWpvow6djOoIVVBEFLyqn4FzI3qNzp+MRf2TFultoaJIqmbVAhW7hRn5UFmO6La+SrchjXOn3rDlRtGaqKhPmigFpunbz4cj590HM6ccodN9kT/5aPRDTfj9P5VUFGBkcL5ldNvmztRb7K8jzYlKa3z8E7uU2y8sNTDYOq5O8iabvyGacfvNa11unS/rtONCoz9Pny1FTQkZNaMYYrc8i2dDqfdcXJ9XbryvTCZ1h3grxPR/hYaWmQ9fafrxlThiXmir3pFNqRwsVKGJ+uCDIi02wT3os/cRuTgq68nU8ytdTpYu5Ia/m1o2ZUCs0hpVOyrs8uu7jeauWr9sxb6/StOlDFjlJJwmwf7l9Jp5IaFtMHOafzWYnO7imtfETCQdzph+4siFrSn+dt7nirdWEkRS/DmGStwIWBnS32ZlAtzr3i4zPdXZtVNSJWgh2FfuhO7/LrRJVtQKbbxbwc589xaq466WEMn4ezPB4f/ySsizDGdpyuWqjp+BWndCkGrhkfhZK5nupUP1stCjOiliu7nhT7GpHIBgejCt50Dw501Kad8rvcMKfcIdvc6fjUi9jfY6pWLceK2m47mxzO4EiJU/XdHR8LjKzver9P8Scp96EPHdMLerZcBnPL/HUpmEde76s4j5AHrPb5TaXtNRcPYHSP1OYPHZwJ1Z6Z/NfRNhSqS/rg6j6rizsWVa3qJez1Tt+8A1U7pVdVwmy7WPgz1iu48F37fP601cbtp9Pc05rbO3omEBA7kT6xvlFV42jsC0La6Z9E7IfhrvZ7nI9HJFyJCzvuG5rZNF8MS8eaS1P9LGkaFKZnUsn7CfyTdOihP5OC6Vu5x5VyNt1OJOXc9fIvWtX3PNbNQ8YUEsNon/eFx83lYTsxuoVLbMX7psfJRy0oJCrT52Zpi3wBX9B+18scI1Fp+nY+fzSUhtlZOZ28mPV2hMj78dqLjiYYiZioUjAz90vVgxJlD9lmThd03g87V9y7uqoT1oUaa7pmL35uYcfNX7SxfStmKwqLixVnQ8M8VwhI1BhjSaV65r694TDfP2va8n5QVSGsPWtId88aW9lnWWcjH/aK1XDmrXX6ph2Yr1KnqyxhtomEffMgXWOD/KHbJ3eoe988ccqFRxT3obDd5Ttw+uKIckf6ByY++9yFlDs2OMn/TOqL+fz1OSCaneYu/BYXcHlbjI5odnhwnCc7ViQUrv5PCSc5ba3sUZ5EJUO2odMlg2UXY3K6lisXyUB7J3EVlM3oGZ55S/cGJR3JP2PMqD8Vf4de2BRnhxmdqeQuJXz1aYP1J558BqaOfS+ywvdJoJHz3cVtekQXlcdF5XWu6LP+tk4V7fDY4B7pNjtQ2WWxyhLm6+rioYxDiKy9SAbK4qNyV51yKkuf79npwPp6+OIuCu1owczKRJ+oiTnsFp2Zl5cvb3nZ6cmngtLaJbKN2Pdc9Q18Hy4+NDJTcYppHlarjAHHJ5+H25p5Fy7sP+XWRew0O14yin9Sl9PxWVbBrXvPexYkKehO8/NZutWAT9RGu3hEZ+QvdlpOetLpU6kfJKoaRqIqp3oVznxxByoZFSbM9+x0In3OH3KPyVhInvzc7IykoNOp7RIEBBFvjTG8VgkCnI4q+Ex3bdEtf2u6Btn4cEJhJWtQvtLEbUr6VZu8Zmaq6XRnYQ1UOlp/w//X304kEcq/HRNwLCK/VWknqHS8PtnfO/hqRubtC797hRd18zc6KVXldOlgUaAFjUw3dgiMjL+afP1uBXsxHi4ryUGPtGY6Tz+U1itVxTB21RWlBFpRKSRDt/iCZ6zBL+pA5XebChPmO3U6tynZQQdbsxxEc7rbK1WzILrqilP8bTEStuPwpYJFQYDTf9Dyfnakh903qZKvGxJN97M543wkbhtJ+FMjQ6NTPPH3NFgodKAqEwb4zgGnAwAAgNMBAAAAcDoAAAAATgcAAADA6QAAAOB0AAAAAJwOAAAAgNMBAAAAcDoAAAAATgcAAACnAwAAAOB0AAAAAJwOAAAAgNMBAAD+rvw/B8/4wj4nRYIAAAAASUVORK5CYII='/></center><br/><p>This image shows bits 6, 3, and 0 set to 1. The value of this byte is 64 + 8 + 1 or 73.
+
+</p><p>Here, 128 is 2 to the 7th power, and so on. 
+
+</p><p>The largest number this byte can hold is 1, with all bits set to 1: 11111111. 
+
+</p><p>The value of this binary number is as follows:
+</p><div class='myCodeDiv'><button id='IIOUQ' class='myCopyButton' data-clipboard-target='#HERDO'>Copy</button><pre  id='HERDO' style='font-size:18px;' class='code'>128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IIOUQ');clipboard.on('success', function(e) {$('#IIOUQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IIOUQ').text('error');});</script></div><p>The smallest binary number would be 00000000, or a simple 0. 
+
+</p><p>A byte can store numbers from 0 to 255, for a total of 256 possible values. 
+
+</p><p>Or, by interpreting the bit pattern differently, a program can use a byte to store numbers from -128 to +127, 
+again a total of 256 values. 
+
+</p><p>For example, unsigned char typically uses a byte to represent the 0-to-255 range, 
+whereas signed char typically uses a byte to represent the -128 to +127 range.
+</p><a class ='btn btn-outline-dark' href=c-enum-usage.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-signed-integers-binary-representation.html>Next</a><h2>Related</h2><UL><LI><a href='c-enumerated-types.html'>C Enumerated Types</a></LI><LI><a href='c-enum-constants.html'>C enum Constants</a></LI><LI><a href='c-enum-usage.html'>C enum Usage</a></LI><LI><a href='c-signed-integers-binary-representation.html'>C Signed Integers binary representation</a></LI><LI><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point in binary form</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-binary-numbers-bits-and-bytes.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

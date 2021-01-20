@@ -1,0 +1,766 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node4.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Basics</TITLE>
+<META NAME="description" CONTENT="C Basics">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html854"
+ HREF="node4.html#SECTION00410000000000000000">
+History of C</A>
+<LI><A NAME="tex2html855"
+ HREF="node4.html#SECTION00420000000000000000">
+Characteristics of C</A>
+<LI><A NAME="tex2html856"
+ HREF="node4.html#SECTION00430000000000000000">
+C Program Structure</A>
+<LI><A NAME="tex2html857"
+ HREF="node4.html#SECTION00440000000000000000">
+Variables</A>
+<UL>
+<LI><A NAME="tex2html858"
+ HREF="node4.html#SECTION00441000000000000000">
+Defining Global Variables</A>
+<LI><A NAME="tex2html859"
+ HREF="node4.html#SECTION00442000000000000000">
+Printing Out and Inputting Variables</A>
+</UL>
+<LI><A NAME="tex2html860"
+ HREF="node4.html#SECTION00450000000000000000">
+Constants</A>
+<LI><A NAME="tex2html861"
+ HREF="node4.html#SECTION00460000000000000000">
+Arithmetic Operations</A>
+<LI><A NAME="tex2html862"
+ HREF="node4.html#SECTION00470000000000000000">
+Comparison Operators</A>
+<LI><A NAME="tex2html863"
+ HREF="node4.html#SECTION00480000000000000000">
+Logical Operators</A>
+<LI><A NAME="tex2html864"
+ HREF="node4.html#SECTION00490000000000000000">
+Order of Precedence</A>
+<LI><A NAME="tex2html865"
+ HREF="node4.html#SECTION004100000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00400000000000000000">
+C Basics</A>
+</H1>
+<A NAME="ch:basic">&#160;</A>
+Before we embark on a brief tour of C's basic syntax and structure we
+offer a brief history of C and consider the characteristics of the C
+language.
+<P>
+In the remainder of the Chapter we will look at the basic aspects of C
+programs such as C program structure, the declaration of variables, data
+types and operators. We will assume knowledge of a high level language,
+such as PASCAL.
+<P>
+It is our intention to provide a quick guide through similar C principles to most
+high level languages. Here the syntax may be slightly different but the
+concepts exactly the same.
+<P>
+C does have a few surprises: 
+<UL>
+<LI> Many High level languages, like PASCAL, are highly disciplined and
+structured.
+<LI> <B>However beware</B> -- C is much more flexible and free-wheeling.
+This freedom gives C much more <B>power</B> that experienced users can
+employ. The above example below (<TT>mystery.c</TT>) illustrates how bad
+things could really get.
+</UL><H1><A NAME="SECTION00410000000000000000">
+History of C</A>
+</H1>
+<P>
+The <EM>milestones</EM> in C's development as a language are listed below:
+<P><UL>
+<LI> UNIX developed c. 1969 -- DEC PDP-7 Assembly Language
+<LI> BCPL -- a user friendly OS providing powerful development tools
+developed from BCPL. Assembler tedious long and error prone.
+<LI> A new language ``B'' a second attempt. c. 1970.
+<LI> A totally new language ``C'' a successor to ``B''. c. 1971
+<LI> By 1973 UNIX OS almost totally written in ``C''.
+</UL><H1><A NAME="SECTION00420000000000000000">
+Characteristics of C</A>
+</H1>
+<P>
+We briefly list some of C's characteristics that define the language and also
+have lead to its popularity as a programming language. Naturally we will be
+studying many of these aspects throughout the course.
+<P><UL>
+<LI> Small size
+<LI> Extensive use of function calls
+<LI> Loose typing -- unlike PASCAL
+<LI> Structured language
+<LI> Low level (BitWise) programming readily available
+<LI> Pointer implementation - extensive use of pointers for memory, array,
+structures and functions.
+</UL>
+<P>
+C has now  become  a  widely  used  professional  language  for  various reasons.
+<UL>
+<LI> It has high-level constructs.
+<LI> It can handle low-level activities.
+<LI> It produces efficient programs.
+<LI> It can be compiled on a variety of computers.
+</UL>
+<P>
+Its main drawback is that it has poor error detection which can make it
+off putting to the beginner. However diligence in this matter can pay off
+handsomely since having learned the rules of C we can break them. Not many
+languages allow this. This if done properly and carefully leads to the power of
+C programming.
+<P>
+As an extreme example the following C code (<TT>mystery.c</TT>) is actually
+<EM>legal</EM> C code.
+<P><PRE>
+#include &lt;stdio.h&gt;
+
+main(t,_,a)
+char *a;
+{return!0&lt;t?t&lt;3?main(-79,-13,a+main(-87,1-_,
+main(-86, 0, a+1 )+a)):1,t&lt;_?main(t+1, _, a ):3,main ( -94, -27+t, a
+)&amp;&amp;t == 2 ?_&lt;13 ?main ( 2, _+1, &quot;%s %d %d\n&quot; ):9:16:t&lt;0?t&lt;-72?main(_,
+t,&quot;@n'+,#'/*{}w+/w#cdnr/+,{}r/*de}+,/*{*+,/w{%+,/w#q#n+,/#{l,+,/n{n+\
+,/+#n+,/#;#q#n+,/+k#;*+,/'r :'d*'3,}{w+K w'K:'+}e#';dq#'l q#'+d'K#!/\
++k#;q#'r}eKK#}w'r}eKK{nl]'/#;#q#n'){)#}w'){){nl]'/+#n';d}rw' i;# ){n\
+l]!/n{n#'; r{#w'r nc{nl]'/#{l,+'K {rw' iK{;[{nl]'/w#q#\
+n'wk nw' iwk{KK{nl]!/w{%'l##w#' i; :{nl]'/*{q#'ld;r'}{nlwb!/*de}'c \
+;;{nl'-{}rw]'/+,}##'*}#nc,',#nw]'/+kd'+e}+;\
+#'rdq#w! nr'/ ') }+}{rl#'{n' ')# }'+}##(!!/&quot;)
+:t&lt;-50?_==*a ?putchar(a[31]):main(-65,_,a+1):main((*a == '/')+t,_,a\
++1 ):0&lt;t?main ( 2, 2 , &quot;%s&quot;):*a=='/'||main(0,main(-61,*a, &quot;!ek;dc \
+i@bK'(q)-[w]*%n+r3#l,{}:\nuwloca-O;m .vpbks,fxntdCeghiry&quot;),a+1);}
+</PRE>
+<P>
+It will compile and run and produce meaningful output. Try this
+program out. Try to compile and run it yourself. 
+<a href =
+"http://www.cs.cf.ac.uk/User/Dave.Marshall/mystery">Alternatively you
+may run it from here and see the output</a>.
+<P>
+Clearly nobody ever writes code like or at least should never. This piece
+of code actually one an international Obfuscated C Code Contest
+ <a href =
+"http://reality.sgi.com/csp/iocc">http://reality.sgi.com/csp/iocc</a>
+The standard for C programs was originally the  features  set  by  Brian
+Kernighan.    In   order  to  make  the  language  more  internationally
+acceptable, an international standard was developed,  ANSI  C  (American
+National Standards Institute).
+<P><H1><A NAME="SECTION00430000000000000000">
+C Program Structure</A>
+</H1>
+<P>
+A C program basically has the following form:
+<UL>
+<LI> Preprocessor Commands
+<LI> Type definitions
+<LI> Function prototypes -- declare function types and variables passed to
+function.
+<LI> Variables
+<LI> Functions
+</UL>
+<P>
+We must have a <TT>main()</TT> function.
+<P>
+<BR>
+<P>
+A function has the form:
+<P><TT>
+<PRE><TT>
+<EM>type</EM> function_name (<EM>parameters</EM>)
+		{
+				 <EM>local variables</EM>
+&nbsp;
+				 <EM>C Statements</EM>
+&nbsp;
+		 }
+</TT></PRE>
+</TT>
+<P>
+If the type definition is omitted C assumes that function returns an <B>
+ integer</B> type. <B>NOTE:</B> This can be a source of problems in a program.
+<P>
+So returning to our first C program:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;/* Sample program */ 
+&nbsp;
+		main()
+				 {
+&nbsp;
+				 printf( "I Like C \n");
+				 exit ( 0 );
+&nbsp;
+				 }
+</PRE>
+</TT>
+<SMALL>
+<B>NOTE</B>:<UL>
+<LI> C requires a semicolon at the end of <B>every</B> statement.
+<LI> <TT>printf</TT> is a <EM>standard</EM> C function -- called from <TT>main</TT>.
+<LI> \n signifies newline. <B>Formatted output</B> -- more later.
+<LI> <TT>exit()</TT> is also a standard function that causes the program to
+terminate. Strictly speaking it is not needed here as it is the last line of
+<TT>main()</TT> and the program will terminate anyway.
+</UL>
+</SMALL>
+<P>
+Let us look at another printing statement:
+<BR>
+  <TT>
+printf(".\n.1\n..2\n...3\n");</TT>
+<BR>
+<P>
+The output of this would be:
+<TT>
+<PRE><TT>
+		.
+		.1
+		..2
+		...3
+</TT></PRE>
+</TT>
+<P></TT></TT><H1><A NAME="SECTION00440000000000000000">
+Variables</A>
+</H1>
+<P>
+C has the following simple data types:
+<BR>
+<P><p>
+<img src = cvar.gif>
+</p>
+<P>
+<BR>
+<P>
+The Pascal Equivalents are:
+<BR>
+<P><p>
+<img src = cpas.gif>
+</p>
+<P>
+<BR>
+<P>
+On UNIX systems all <TT>int</TT>s are <TT>long int</TT>s unless specified as <TT>
+short int</TT> explicitly.
+ <BR>
+<P><B>NOTE:</B> There is <B>NO</B> Boolean type in C -- you should use <TT>char,
+int</TT> or (better) <TT>unsigned char</TT>.
+<BR>
+<P><TT>Unsigned</TT> can be used with all <TT>char</TT> and <TT>int</TT> types.
+<BR>
+<P>
+To declare a variable in C, do:
+<P>&nbsp;&nbsp;&nbsp;<TT>var_type</TT> <EM>list variables</EM>;
+<TT>
+<PRE><TT>
+<EM></EM>e.g. int i,j,k;
+		 float x,y,z;
+		 char ch;
+</TT></PRE>
+</TT>
+<P><H2><A NAME="SECTION00441000000000000000">
+Defining Global Variables</A>
+</H2>
+<P>
+Global variables are defined above <TT>main()</TT> in the following way:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;short number,sum;
+		 int bignumber,bigsum;
+		 char letter;
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P>
+It is also possible to pre-initialise global variables using the <TT>=
+operator for assignment. 
+ <BR>
+<P><B>NOTE:</B> The <TT>=</TT> operator is the same as <TT>:=</TT> is Pascal.
+<BR>
+<P>
+For example:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float sum=0.0;
+		 int bigsum=0;
+		 char letter=`A';
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P>
+This is the same as:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float sum;
+		 int bigsum;
+		 char letter;
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				 sum=0.0;
+				 bigsum=0;
+				 letter=`A';
+&nbsp;
+				 }
+</PRE>
+</TT>
+<P>...but is more efficient.
+ <BR>
+<P>
+C also allows multiple assignment statements using <TT>=, for example:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=b=c=d=3;
+</TT></PRE>
+</TT>
+<P>...which is the same as, but more efficient than:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=3;
+		b=3;
+		c=3;
+		d=3;
+</PRE>
+</TT>
+<P>
+This kind of assignment is only possible if all the variable types in the
+statement are the same.
+<P>
+You can define your own types use <TT>typedef. This will have greater
+relevance later in the course when we learn how to create more complex data
+structures.
+<P>
+As an example of a simple use let us consider how we may 
+define two new types <TT>real</TT> and <TT>letter</TT>. These new types can then be
+used in the same way as the pre-defined C types:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;typedef real float;
+		 typedef letter char;
+&nbsp;
+<EM>Variables declared:</EM>
+		 real sum=0.0;
+		 letter nextletter;
+</TT></PRE>
+</TT>
+<P><H2><A NAME="SECTION00442000000000000000">
+Printing Out and Inputting Variables</A>
+</H2>
+<P>
+C uses formatted output. The <TT>printf</TT> function has a special formatting
+character (%) -- a character following this defines a certain format for a
+variable:
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; %c -- characters
+		 %d -- integers
+		 %f -- floats
+</TT></PRE>
+<P>&nbsp;&nbsp;&nbsp;<EM>e.g.</EM> <TT>printf("%c %d %f",ch,i,x);</TT>
+<BR>
+<P><B>NOTE:</B> Format statement enclosed in ``...'', variables follow after.
+Make sure order of format and variable data types match up.
+ <BR>
+<P><TT>scanf()</TT> is the function for inputting values to a data structure: Its
+format is similar to <TT>printf</TT>:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<EM>i.e.</EM> <TT>scanf("%c %d %f",&amp;ch,&amp;i,&amp;x);</TT>
+<BR>
+<P><B>NOTE:</B> <U>&amp;</U> before variables. Please accept this for now and
+<B>remember</B> to include it. It is to do with pointers which we will meet later
+(Section&nbsp;<A HREF="node18.html#sec:printf">17.4.1</A>).
+<P><H1><A NAME="SECTION00450000000000000000">
+Constants</A>
+</H1>
+<P>
+ANSI C allows you to declare <EM>constants</EM>. When you declare a constant
+it is a bit like a variable declaration except the value cannot be
+changed.
+<P>
+The <TT>const</TT> keyword is to declare a constant, as shown below:
+<P><PRE>
+int const a = 1;
+const int a =2;
+</PRE>
+<P>
+Note: 
+<UL>
+<LI> You can declare the <TT>const</TT> before or after the type. Choose
+one an stick to it.
+<LI> It is usual to initialise  a <TT>const</TT> with a value as it cannot
+get a value <EM>any other way</EM>.
+</UL>
+<P>
+The preprocessor <TT>#define</TT> is another more flexible (see
+Preprocessor Chapters) method to define <EM>constants</EM> in a program.
+<P>
+You frequently see const declaration in function parameters. This says
+simply that the function is <B>not</B> going to change the value of the
+parameter.
+<P>
+The following function definition used concepts we have not met (see
+chapters on functions, strings, pointers, and standard libraries) but for
+completenes of this section it is is included here:
+<P><PRE>
+void strcpy(char *buffer, char const *string)
+</PRE>
+<P>
+The second argiment <TT>string</TT> is a C string that will not be altered
+by the string copying standard library function.
+<P><H1><A NAME="SECTION00460000000000000000">
+Arithmetic Operations</A>
+</H1>
+<P>
+As well as the standard arithmetic operators (<TT>+&nbsp;-&nbsp;*&nbsp;/</TT>) found in most
+languages, C provides some more operators. There are some notable 
+differences with other languages, such as Pascal.
+<P>
+Assignment is = <EM>i.e.</EM> <I>i</I> = 4;&nbsp;<TT>ch</TT> = `y';
+<P>
+Increment ++, Decrement -- which are more
+efficient than their long hand equivalents, for example:-- <TT>x++</TT> is faster
+than <TT>x=x+1</TT>.
+<P>
+The <TT>++</TT> and <TT>--</TT> operators can be either in post-fixed or pre-fixed.
+With pre-fixed the value is computed before the expression is evaluated whereas
+with post-fixed the value is computed after the expression is evaluated.
+<P>
+In the example below, <TT>++z</TT> is pre-fixed and the <TT>w--</TT> is post-fixed:
+<SMALL>
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int x,y,w;
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				 x=((++z)-(w--)) % 100;
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P>
+This would be equivalent to:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int x,y,w;
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				z++;
+				x=(z-w) % 100;
+				w--;
+&nbsp;
+				 }
+</PRE>
+</TT>
+</SMALL>
+<P>
+The <TT>% (modulus) operator only works with integers.
+<BR>
+<P>
+Division / is for both integer and float division. So be careful.
+<BR>
+<P>
+The answer to: <I>x</I> = 3 / 2 is 1 even if <I>x</I> is declared a float!!
+<BR>
+<P><B>RULE:</B> If both arguments of / are integer then do integer division.
+<BR>
+<P>
+So make sure you do this. The correct (for division) answer to the above is <I>x</I>
+= 3.0 / 2 or <I>x</I>= 3 / 2.0 or (better) <I>x</I> = 3.0 / 2.0.
+<BR>
+<P>
+There is also a convenient <B>shorthand</B> way to express computations in C.
+<BR>
+<P>
+It is very common to have expressions like: <I>i</I> = <I>i</I> + 3 or <I>x</I> = <I>x</I>*(<I>y</I> + 2)
+<BR>
+<P>
+This can written in C (generally) in a <EM>shorthand</EM> form like this:
+<P>&nbsp;&nbsp;&nbsp;<IMG WIDTH="144" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.gif"
+ ALT="$\mbox{{\em expr}}_{1} \: \mbox{{\em op}} \: = \:\mbox{{\em expr}}_{2}$">
+<BR>
+<P>
+which is equivalent to (but more efficient than):
+<P>&nbsp;&nbsp;&nbsp;<IMG WIDTH="190" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.gif"
+ ALT="$\mbox{{\em expr}}_{1} \: = \: \mbox{{\em expr}}_{1} \: \mbox{{\em
+op}} \: \mbox{{\em expr}}_{2}$">
+<BR>
+<P>
+So we can rewrite &nbsp;&nbsp;&nbsp;<I>i</I> = <I>i</I> + 3 as <I>i</I> += 3
+<BR>
+<P>
+and &nbsp;&nbsp;&nbsp;<I>x</I> = <I>x</I>*(<I>y</I> + 2) as <I>x</I> *= <I>y</I> + 2.
+<BR>
+<P><B>NOTE:</B> that <I>x</I> *= <I>y</I> + 2 means <I>x</I> = <I>x</I>*(<I>y</I> + 2) and <U><B>NOT</B></U>
+<I>x</I> = <I>x</I>*<I>y</I> + 2.
+<P></TT></TT><H1><A NAME="SECTION00470000000000000000">
+Comparison Operators</A>
+</H1>
+<P>
+To test for equality is ==
+<BR>
+<P><B>A warning:</B>&nbsp; Beware of using ``='' instead of ``=='', such as writing
+accidentally
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>if ( i = j ) ....</TT>.  
+<BR>
+<P>
+This is a perfectly <B>LEGAL</B> C statement (syntactically speaking) which copies
+the value in &quot;j&quot; into  &quot;i&quot;,  and delivers  this  value,  which  will then be
+interpreted as TRUE if <TT>j</TT> is non-zero. This is called <B>
+assignment by value</B> -- a key feature of C.
+<BR>
+<P>
+Not equals is: !=
+<BR>
+<P>
+Other operators &lt; (less than) , &gt; (grater than), &lt;= (less than or equals),
+&gt;= (greater than or equals) are as usual.
+ <BR>
+<P><H1><A NAME="SECTION00480000000000000000">
+Logical Operators</A>
+</H1>
+<P>
+Logical operators are usually used with conditional statements which we shall
+meet in the next Chapter.
+<BR>
+<P>
+The two basic logical operators are:
+<BR>
+<P>&amp;&amp; for logical AND, || for logical OR.
+<BR>
+<P><B>Beware</B> &amp; and | have a different meaning for bitwise AND and OR (<EM>
+more on this later</EM> in Chapter&nbsp;<A HREF="node13.html#ch:bits">12</A>).
+<P><H1><A NAME="SECTION00490000000000000000">
+Order of Precedence</A>
+</H1>
+<P>
+It is necessary to be careful of the meaning of such expressions as &nbsp;<TT>a +
+b * c</TT>
+<BR>
+<P>
+We may want the effect as either
+     <BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>(a + b) * c</TT>
+<BR>
+<P>
+or
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>a + (b * c)</TT>
+<BR>
+All operators have a priority, and high priority operators are evaluated before 
+lower  priority  ones.   Operators  of  the  same  priority  are evaluated from
+left to right, so that
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>a - b - c</TT>
+<P>
+is evaluated as
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>( a - b ) - c</TT>
+<BR>
+<P>
+as you would expect.
+ <BR>
+<P>
+From high priority to low priority the order for all C operators (we have not
+met all of them yet) is:
+<P><PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp; ( )  [  ]  -&gt; .
+		 !  <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.gif"
+ ALT="$\sim$"> - * &amp; <TT>sizeof cast</TT> ++&nbsp;-
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(these are right-&gt;left)
+		 * / %
+		 + -
+		 &lt; &lt;= &gt;= &gt;
+		 == !=
+		 &amp;
+		 <IMG WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.gif"
+ ALT="$\wedge$">		 |
+		 &amp;&amp;
+		 ||
+		 ?:        (right-&gt;left)
+		 = += -= (right-&gt;left)
+		 ,   (comma)
+</TT></PRE>
+<P>
+Thus
+<P>&nbsp;&nbsp;&nbsp;<TT>a &lt; 10 &amp;&amp; 2 * b &lt; c</TT>
+<BR>
+<P>
+is interpreted as
+<BR>
+&nbsp;&nbsp;&nbsp;<TT>( a &lt; 10 ) &amp;&amp; ( ( 2 * b ) &lt; c )</TT>
+<P>
+and
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;a =
+&nbsp;
+		 b =
+				 spokes / spokes_per_wheel
+				 + spares;
+</TT></PRE>
+</TT>
+<P>
+as<TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;a =
+&nbsp;
+		 ( b =
+				 ( spokes / spokes_per_wheel )
+				 + spares
+		 );
+</PRE>
+</TT>
+<P></TT><H1><A NAME="SECTION004100000000000000000">
+Exercises</A>
+</H1>
+<P>
+Write C programs to perform the following tasks. 
+<P>
+<B>Exercise 12270</B></P>
+<P>
+Input two numbers and work out their sum, average and sum of the
+squares of the numbers.</P>
+<P><P>
+<B>Exercise 12271</B></P>
+<P>
+Input and output your name, address and age to an appropriate
+structure.</P>
+<P><P>
+<B>Exercise 12272</B></P>
+<P>
+Write a program that works out the largest and smallest values
+from a set of 10 inputted numbers.</P>
+<P><P>
+<B>Exercise 12273</B></P>
+<P>
+Write a program to read a &quot;float&quot; representing a number of
+degrees Celsius, and print as a &quot;float&quot; the equivalent temperature in degrees
+Fahrenheit. Print your results in a form such as
+<P>
+100.0 degrees Celsius converts to 212.0 degrees Fahrenheit. 
+</P>
+<P><P>
+<B>Exercise 12274</B></P>
+<P>
+Write a program to print several lines (such as your name and
+address). You may use either several printf instructions, each with a newline
+character in it, or one printf with several newlines in the string. 
+</P>
+<P><P>
+<B>Exercise 12275</B></P>
+<P>
+Write a program to read a positive integer at least equal to 3,
+and print out all possible permutations of three positive integers less or equal
+to than this value. 
+</P>
+<P><P>
+<B>Exercise 12276</B></P>
+<P>
+Write a program to read a number of units of length (a float)
+and print out the area of a circle of that radius. Assume that the value of pi
+is 3.14159 (an appropriate declaration will be given you by ceilidh - select
+setup).
+<P>
+Your output should take the form:
+	    The area of a circle of radius ... units is .... units.
+<P>
+If you want to be clever, and have looked ahead in the notes, print the message
+    Error: Negative values not permitted. if the input value is negative.
+</P>
+<P><P>
+<B>Exercise 12277</B></P>
+<P>
+Given as input a floating (real) number of centimeters, print
+out the equivalent number of feet (integer) and inches (floating, 1 decimal),
+with the inches given to an accuracy of one decimal place.
+<P>
+Assume 2.54 centimeters per inch, and 12 inches per foot.
+<P>
+If the input value is 333.3, the output format should be:
+<P>
+333.3 centimeters is 10 feet 11.2 inches.
+</P>
+<P><P>
+<B>Exercise 12278</B></P>
+<P>
+Given as input an integer number of seconds, print as output
+the equivalent time in 	
+	hours, minutes and seconds. Recommended output format is something like
+<P>
+7322 seconds is equivalent to 2 hours 2 minutes 2 seconds. 
+</P>
+<P><P>
+<B>Exercise 12279</B></P>
+<P>
+Write a program to read two integers with the following
+significance.
+<P>
+The first integer value represents a time of day on a 24 hour clock, so that
+1245
+	represents quarter to one mid-day, for example.
+<P>
+The second integer represents a time duration in a similar way, so that 345
+represents three hours and 45 minutes.
+<P>
+This duration is to be added to the first time, and the result printed out in
+the same notation, in this case 1630 which is the time 3 hours and 45 minutes
+after 12.45.
+<P>
+Typical output might be
+ 	   Start time is 1415.
+  	   Duration is 50.
+   		   End time is 1505.
+<P>
+There are a few extra marks for spotting.
+<P>
+Start time is 2300.
+   	 Duration is 200.
+    	End time is 100.
+</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node4.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:43 GMT -->
+</HTML>

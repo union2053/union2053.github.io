@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12864265/using-pipe-to-pass-integer-values-between-parent-and-child by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Using pipe to pass integer values between parent and child | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Using pipe to pass integer values between parent and child | C Language Knowledge Base">
+        <title>[SOLVED] Using pipe to pass integer values between parent and child | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="using-pipe-to-pass-integer-values-between-parent-and-child">Using pipe to pass integer values between parent and child</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/pipe.html">pipe</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm a little confused on how to properly use pipe() to pass integer values between two processes.</p>
+
+<p>In my program I first create a pipe, then I fork it. I assume I have "Two" pipes then?</p>
+
+<p>From what I understand, this is my assignment. 
+My parent goes through a for loop checking an integer value "i" for a certain operation, increases a count variable, and saves value into an array. After each check my parent should pass an integer value, "i" to my child through a pipe. My child then uses that integer value, does some check on the value, and should increase a count variable, and save the result in a [shared?] array. Eventually; the child should return it's final count to the parent, who then prints out the two counts, and the "Shared" array.</p>
+
+<p>-> I'm not sure I need to have a shared array or to save the results at all. I may only need the counts - the homework was ambiguous and I'm awaiting a response from the professor. Also; can I even do a shared array between processes? It sounds like a start of some problem to me.</p>
+
+<p>-> Here are my questions:
+One; how do I use pipes for integers? I've only seen them for character arrays and previous answers don't seem to think this is possible or legal..? I'm not sure. There was no resolution that I could find on it.</p>
+
+<p>-> How do I use a unidirectional pipe to pass integers to a child? And have the child return something? I'm not sure how I'm able to... differentiate between the two pipes. I do "know" [or think I know] that I have to close one unused portion of each pipe to avoid "Some vague problem". </p>
+
+<p>Sorry for the dumb questions; I haven't been taught processes (aside from fork) or pipes (at all) yet in this class - so I'm not really sure where to start!</p>
+
+<p>Heres parts of my code - it's not pretty and it doesn't work and I don't expect it to. It's more of a shell placeholder. Once I figure out how to use a pipe - I'd Probably make the code make sense.</p>
+
+<pre><code>int main(void)
+{
+int fd[2];
+pid_t childpid;
+pid_t parentpid;
+int i;
+int threecount = 0;
+int fivecount = 0;;
+int results [MAXSIZE];
+
+parentpid = getpid(); //Get current process ID number
+
+pipe(fd);
+childpid = fork(); 
+
+if(childpid == 0){
+close(fd[0]); //Closing this for some other reason
+
+}
+int j = 0;
+
+if(childpid &gt; 0)
+close(fd[1]); //Closing this for some reason
+
+
+if( childpid == -1 )
+{
+    perror("Failed to fork\n");
+    return 1;
+}
+if (childpid &gt; 0)
+{
+    for(i = 1; i &lt; MAXSIZE;i++)
+    {
+        if(i % 5 == 0)
+        {
+            fivecount++;
+            i = results[j];
+            j++; 
+            wait(NULL);
+        }
+    }
+}
+else if (childpid == 0)
+    {
+        if(i % 3 == 0) //This i here should probably be the i value above, piped to the child
+        {
+            threecount++;
+            i = results[j];  //This should be part of th pipe
+            j++;    //Trying to keep count of that shared array, not really the right way to do it though.
+        }
+
+    }
+    printf("%d  %d  \n", fivecount,threecount);
+    return 0;
+</code></pre>
+
+<p>}</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/0/user1741874" target="_blank"><span itemprop="name">user1741874</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">17</div>
+                                    <div itemprop="dateCreated">10/12/2012 5:36:44 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>This is about as lame (and no error checking, btw) a sample as I can muster for using a pipe to send int from a parent to a child process, where the child was launched from fork(). It gets more complicated (obviously) for sending <em>and</em> receiving data, but i can't do <em>everything</em> for you. This just forks and waits for an int (actually, the number of bytes that are used by an int) from the child.</p>
+
+<p><strong>Update:</strong> Added send+response two-way communication example after this one. See the second code listing for more information.</p>
+
+<p>Hope it helps.</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc, char *argv[])
+{
+    int fd[2];
+    int val = 0;
+
+    // create pipe descriptors
+    pipe(fd);
+
+    // fork() returns 0 for child process, child-pid for parent process.
+    if (fork() != 0)
+    {
+        // parent: writing only, so close read-descriptor.
+        close(fd[0]);
+
+        // send the value on the write-descriptor.
+        val = 100;
+        write(fd[1], &amp;val, sizeof(val));
+        printf("Parent(%d) send value: %d\n", getpid(), val);
+
+        // close the write descriptor
+        close(fd[1]);
+    }
+    else
+    {   // child: reading only, so close the write-descriptor
+        close(fd[1]);
+
+        // now read the data (will block)
+        read(fd[0], &amp;val, sizeof(val));
+        printf("Child(%d) received value: %d\n", getpid(), val);
+
+        // close the read-descriptor
+        close(fd[0]);
+    }
+    return 0;
+}
+</code></pre>
+
+<p>Output:</p>
+
+<pre class="lang-none prettyprint-override"><code>Parent(5943) send value: 100
+Child(5945) received value: 100
+</code></pre>
+
+<hr>
+
+<p><strong>Update:</strong> Expanded to include send+response using two pipe sets</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+// some macros to make the code more understandable
+//  regarding which pipe to use to a read/write operation
+//
+//  Parent: reads from P1_READ, writes on P1_WRITE
+//  Child:  reads from P2_READ, writes on P2_WRITE
+#define P1_READ     0
+#define P2_WRITE    1
+#define P2_READ     2
+#define P1_WRITE    3
+
+// the total number of pipe *pairs* we need
+#define NUM_PIPES   2
+
+int main(int argc, char *argv[])
+{
+    int fd[2*NUM_PIPES];
+    int val = 0, len, i;
+    pid_t pid;
+
+    // create all the descriptor pairs we need
+    for (i=0; i&lt;NUM_PIPES; ++i)
+    {
+        if (pipe(fd+(i*2)) &lt; 0)
+        {
+            perror("Failed to allocate pipes");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // fork() returns 0 for child process, child-pid for parent process.
+    if ((pid = fork()) &lt; 0)
+    {
+        perror("Failed to fork process");
+        return EXIT_FAILURE;
+    }
+
+    // if the pid is zero, this is the child process
+    if (pid == 0)
+    {
+        // Child. Start by closing descriptors we
+        //  don't need in this process
+        close(fd[P1_READ]);
+        close(fd[P1_WRITE]);
+
+        // used for output
+        pid = getpid();
+
+        // wait for parent to send us a value
+        len = read(fd[P2_READ], &amp;val, sizeof(val));
+        if (len &lt; 0)
+        {
+            perror("Child: Failed to read data from pipe");
+            exit(EXIT_FAILURE);
+        }
+        else if (len == 0)
+        {
+            // not an error, but certainly unexpected
+            fprintf(stderr, "Child: Read EOF from pipe");
+        }
+        else
+        {
+            // report what we received
+            printf("Child(%d): Received %d\n", pid, val);
+
+            // now double it and send it back
+            val *= 2;
+
+            printf("Child(%d): Sending %d back\n", pid, val);
+            if (write(fd[P2_WRITE], &amp;val, sizeof(val)) &lt; 0)
+            {
+                perror("Child: Failed to write response value");
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        // finished. close remaining descriptors.
+        close(fd[P2_READ]);
+        close(fd[P2_WRITE]);
+
+        return EXIT_SUCCESS;
+    }
+
+    // Parent. close unneeded descriptors
+    close(fd[P2_READ]);
+    close(fd[P2_WRITE]);
+
+    // used for output
+    pid = getpid();
+
+    // send a value to the child
+    val = 42;
+    printf("Parent(%d): Sending %d to child\n", pid, val);
+    if (write(fd[P1_WRITE], &amp;val, sizeof(val)) != sizeof(val))
+    {
+        perror("Parent: Failed to send value to child ");
+        exit(EXIT_FAILURE);
+    }
+
+    // now wait for a response
+    len = read(fd[P1_READ], &amp;val, sizeof(val));
+    if (len &lt; 0)
+    {
+        perror("Parent: failed to read value from pipe");
+        exit(EXIT_FAILURE);
+    }
+    else if (len == 0)
+    {
+        // not an error, but certainly unexpected
+        fprintf(stderr, "Parent(%d): Read EOF from pipe", pid);
+    }
+    else
+    {
+        // report what we received
+        printf("Parent(%d): Received %d\n", pid, val);
+    }
+
+    // close down remaining descriptors
+    close(fd[P1_READ]);
+    close(fd[P1_WRITE]);
+
+    // wait for child termination
+    wait(NULL);
+
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p>(compile with, e.g., <code>gcc thisfile.c -o test</code>)</p>
+
+<p><strong>Output</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>Parent(2794): Sending 42 to child
+Child(2797): Received 42
+Child(2797): Sending 84 back
+Parent(2794): Received 84
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1322972/whozcraig" target="_blank"><span itemprop="name">WhozCraig</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12864265/using-pipe-to-pass-integer-values-between-parent-and-child#answer-0</div>
+                                            <div itemprop="upvoteCount">25</div>
+                                            <div itemprop="dateCreated">5/4/2017 4:29:45 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12864265" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12864265/using-pipe-to-pass-integer-values-between-parent-and-child by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+</html>

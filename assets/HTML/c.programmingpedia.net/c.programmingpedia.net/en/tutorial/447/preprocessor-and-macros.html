@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/447/preprocessor-and-macros by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Preprocessor and Macros | C Language Tutorial">
+        <meta name="description" property="og:description" content="Preprocessor and Macros | C Language Tutorial">
+        <title>Preprocessor and Macros | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="preprocessor-and-macros">Preprocessor and Macros</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>All preprocessor commands begins with the hash (pound) symbol <code>#</code>.
+A C macro is just a preprocessor command that is defined using the <code>#define</code> preprocessor directive. During the preprocessing stage, the C preprocessor (a part of the C compiler) simply substitutes the body of the macro wherever its name appears.</p>
+
+
+            </div>
+
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>When a compiler encounters a macro in the code, it performs simple string replacement, no additional operations are performed.   Because of this, changes by the preprocessor do not respect scope of C programs - for example, a macro definition is not limited to being within a block, so is unaffected by a <code>'}'</code> that ends a block statement.</p>
+<p>The preprocessor is, by design, not turing complete - there are several types of computation that cannot be done by the preprocessor alone.</p>
+<p>Usually compilers have a command line flag (or configuration setting) that allows us to stop compilation after the preprocessing phase and to inspect the result. On POSIX platforms this flag is <code>-E</code>. So, running gcc with this flag  prints the expanded source to stdout:</p>
+<pre><code>$ gcc -E cprog.c
+</code></pre>
+<p>Often the preprocessor is implemented as a separate program, which is invoked by the compiler, common name for that program is <code>cpp</code>.  A number of preprocessors emit supporting information, such as information about line numbers - which is used by subsequent phases of compilation to generate debugging information.   In the case the preprocessor is based on gcc, the -P option suppresses such information.</p>
+<pre><code>$ cpp -P cprog.c
+</code></pre>
+
+
+            </div>
+
+
+            <h2 id="sharpif-0-to-block-out-code-sections">#if 0 to block out code sections</h2>
+            <div>
+                <p>If there are sections of code that you are considering removing or want to temporarily disable, you can comment it out with a block comment.</p>
+<pre><code>/* Block comment around whole function to keep it from getting used.
+ * What's even the purpose of this function?
+int myUnusedFunction(void)
+{
+    int i = 5;
+    return i;
+}
+*/
+</code></pre>
+<p>However, if the source code you have surrounded with a block comment has block style comments in the source, the ending */ of the existing block comments can cause your new block comment to be invalid and cause compilation problems.</p>
+<pre><code>/* Block comment around whole function to keep it from getting used.
+ * What's even the purpose of this function?
+int myUnusedFunction(void)
+{
+    int i = 5;
+
+    /* Return 5 */
+    return i;
+}
+*/ 
+</code></pre>
+<p>In the previous example, the last two lines of the function and the last '*/' are seen by the compiler, so it would compile with errors.  A safer method is to use an <code>#if 0</code> directive around the code you want to block out.</p>
+<pre><code>#if 0
+/* #if 0 evaluates to false, so everything between here and the #endif are
+ * removed by the preprocessor. */
+int myUnusedFunction(void)
+{
+    int i = 5;
+    return i;
+}
+#endif
+</code></pre>
+<p>A benefit with this is that when you want to go back and find the code, it's much easier to do a search for &quot;#if 0&quot; than searching all your comments.</p>
+<p>Another very important benefit is that you can nest commenting out code with <code>#if 0</code>. This cannot be done with comments.</p>
+<p>An alternative to using <code>#if 0</code> is to use a name that will not be <code>#defined</code> but is more descriptive of why the code is being blocked out. For instance if there is a function that seems to be useless dead code you might use <code>#if defined(POSSIBLE_DEAD_CODE)</code> or <code>#if defined(FUTURE_CODE_REL_020201)</code> for code needed once other functionality is in place or something similar. Then when going back through to remove or enable that source, those sections of source are easy to find.</p>
+
+
+            </div>
+            <h2 id="-cplusplus-for-using-c-externals-in-cplusplus-code-compiled-with-cplusplus-name-mangling">__cplusplus for using C externals in C++ code compiled with C++ - name mangling</h2>
+            <div>
+                <p>There are times when an include file has to generate different output from the preprocessor depending on whether the compiler is a C compiler or a C++ compiler due to language differences.</p>
+<p>For example a function or other external is defined in a C source file but is used in a C++ source file. Since C++ uses name mangling (or name decoration) in order to generate unique function names based on function argument types, a C function declaration used in a C++ source file will cause link errors. The C++ compiler will modify the specified external name for the compiler output using the name mangling rules for C++. The result is link errors due to externals not found when the C++ compiler output is linked with the C compiler output.</p>
+<p>Since C compilers do not do name mangling but C++ compilers do for all external labels (function names or variable names) generated by the C++ compiler, a predefined preprocessor macro, <code>__cplusplus</code>, was introduced to allow for compiler detection.</p>
+<p>In order to work around this problem of incompatible compiler output for external names between C and C++, the macro <code>__cplusplus</code> is defined in the C++ Preprocessor and is not defined in the C Preprocessor. This macro name can be used with the conditional preprocessor <code>#ifdef</code> directive or <code>#if</code> with the <code>defined()</code> operator to tell whether a source code or include file is being compiled as C++ or C.</p>
+<pre><code>#ifdef __cplusplus
+printf(&quot;C++\n&quot;);
+#else
+printf(&quot;C\n&quot;);
+#endif
+</code></pre>
+<p>Or you could use</p>
+<pre><code>#if defined(__cplusplus)
+printf(&quot;C++\n&quot;);
+#else
+printf(&quot;C\n&quot;);
+#endif
+</code></pre>
+<p>In order to specify the correct function name of a function from a C source file compiled with the C compiler that is being used in a C++ source file you could check for the <code>__cplusplus</code> defined constant in order to cause the <code>extern &quot;C&quot; { /* ... */ };</code> to be used to declare C externals when the header file is included in a C++ source file. However when compiled with a C compiler, the <code>extern &quot;C&quot; { */ ... */ };</code> is not used. This conditional compilation is needed because <code>extern &quot;C&quot; { /* ... */ };</code> is valid in C++ but not in C.</p>
+<pre><code>#ifdef __cplusplus
+// if we are being compiled with a C++ compiler then declare the
+// following functions as C functions to prevent name mangling.
+extern &quot;C&quot; {
+#endif
+
+// exported C function list.
+int foo (void);
+
+#ifdef __cplusplus
+// if this is a C++ compiler, we need to close off the extern declaration.
+};
+#endif
+</code></pre>
+
+
+            </div>
+            <h2 id="conditional-inclusion-and-conditional-function-signature-modification">Conditional inclusion and conditional function signature modification</h2>
+            <div>
+                <p>To conditionally include a block of code, the preprocessor has several directives (e.g <code>#if</code>, <code>#ifdef</code>, <code>#else</code>, <code>#endif</code>, etc).</p>
+<pre><code>/* Defines a conditional `printf` macro, which only prints if `DEBUG`
+ * has been defined
+ */
+#ifdef DEBUG
+#define DLOG(x) (printf(x))
+#else
+#define DLOG(x)
+#endif
+</code></pre>
+<p>Normal C relational operators may be used for the <code>#if</code> condition</p>
+<pre><code>#if __STDC_VERSION__ &gt;= 201112L
+/* Do stuff for C11 or higher */
+#elif __STDC_VERSION__ &gt;= 199901L
+/* Do stuff for C99 */
+#else
+/* Do stuff for pre C99 */
+#endif
+</code></pre>
+<p>The <code>#if</code> directives behaves similar to the C <code>if</code> statement, it shall only contain integral constant expressions, and no casts. It supports one additional unary operator, <code>defined( identifier )</code>, which returns <code>1</code> if the identifier is defined, and <code>0</code> otherwise.</p>
+<pre><code>#if defined(DEBUG) &amp;&amp; !defined(QUIET)
+#define DLOG(x) (printf(x))
+#else
+#define DLOG(x)
+#endif
+</code></pre>
+<p><strong>Conditional Function Signature Modification</strong></p>
+<p>In most cases a release build of an application is expected to have as little overhead as possible. However during testing of an interim build, additional logs and information about problems found can be helpful.</p>
+<p>For example assume there is some function <code>SHORT SerOpPluAllRead(PLUIF *pPif, USHORT usLockHnd)</code> which when doing a test build it is desired will generate a log about its use. However this function is used in multiple places and it is desired that when generating the log, part of the information is to know where is the function being called from.</p>
+<p>So using conditional compilation you can have something like the following in the include file declaring the function. This replaces the standard version of the function with a debug version of the function. The preprocessor is used to replace calls to the function <code>SerOpPluAllRead()</code> with calls to the function <code>SerOpPluAllRead_Debug()</code> with two additional arguments, the name of the file and the line number of where the function is used.</p>
+<p>Conditional compilation is used to choose whether to override the standard function with a debug version or not.</p>
+<pre><code>#if 0
+// function declaration and prototype for our debug version of the function.
+SHORT   SerOpPluAllRead_Debug(PLUIF *pPif, USHORT usLockHnd, char *aszFilePath, int nLineNo);
+
+// macro definition to replace function call using old name with debug function with additional arguments.
+#define SerOpPluAllRead(pPif,usLock) SerOpPluAllRead_Debug(pPif,usLock,__FILE__,__LINE__)
+#else
+// standard function declaration that is normally used with builds.
+SHORT   SerOpPluAllRead(PLUIF *pPif, USHORT usLockHnd);
+#endif
+</code></pre>
+<p>This allows you to override the standard version of the function <code>SerOpPluAllRead()</code> with a version that will provide the name of the file and line number in the file of where the function is called.</p>
+<p><strong>There is one important consideration:</strong> <em>any file using this function must include the header file where this approach is used in order for the preprocessor to modify the function. Otherwise you will see a linker error.</em></p>
+<p>The definition of the function would look something like the following. What this source does is to request that the preprocessor rename the function <code>SerOpPluAllRead()</code> to be <code>SerOpPluAllRead_Debug()</code> and to modify the argument list to include two additional arguments, a pointer to the name of the file where the function was called and the line number in the file at which the function is used.</p>
+<pre><code>#if defined(SerOpPluAllRead)
+// forward declare the replacement function which we will call once we create our log.
+SHORT    SerOpPluAllRead_Special(PLUIF *pPif, USHORT usLockHnd);
+
+SHORT    SerOpPluAllRead_Debug(PLUIF *pPif, USHORT usLockHnd, char *aszFilePath, int nLineNo)
+{
+    int iLen = 0;
+    char  xBuffer[256];
+
+    // only print the last 30 characters of the file name to shorten the logs.
+    iLen = strlen (aszFilePath);
+    if (iLen &gt; 30) {
+        iLen = iLen - 30;
+    }
+    else {
+        iLen = 0;
+    }
+
+    sprintf (xBuffer, &quot;SerOpPluAllRead_Debug(): husHandle = %d, File %s, lineno = %d&quot;, pPif-&gt;husHandle, aszFilePath + iLen, nLineNo);
+    IssueDebugLog(xBuffer);
+
+    // now that we have issued the log, continue with standard processing.
+    return SerOpPluAllRead_Special(pPif, usLockHnd);
+}
+
+// our special replacement function name for when we are generating logs.
+SHORT    SerOpPluAllRead_Special(PLUIF *pPif, USHORT usLockHnd)
+#else
+// standard, normal function name (signature) that is replaced with our debug version.
+SHORT   SerOpPluAllRead(PLUIF *pPif, USHORT usLockHnd)
+#endif
+{
+    if (STUB_SELF == SstReadAsMaster()) {
+        return OpPluAllRead(pPif, usLockHnd);
+    } 
+    return OP_NOT_MASTER;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="error-directive">Error directive</h2>
+            <div>
+                <p>If the preprocessor encounters an <code>#error</code> directive, compilation is halted and the diagnostic message included is printed.</p>
+<pre><code>#define DEBUG
+
+#ifdef DEBUG
+#error &quot;Debug Builds Not Supported&quot;
+#endif
+
+int main(void) {
+    return 0;
+}
+</code></pre>
+<p>Possible output:</p>
+<pre><code>$ gcc error.c
+error.c: error: #error &quot;Debug Builds Not Supported&quot;
+</code></pre>
+
+
+            </div>
+            <h2 id="foreach-implementation">FOREACH implementation</h2>
+            <div>
+                <p>We can also use macros for making code easier to read and write. For example we can implement macros for implementing the <code>foreach</code> construct  in C for some data structures like singly- and doubly-linked lists, queues, etc.</p>
+<p>Here is a small example.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct LinkedListNode
+{
+    int data;
+    struct LinkedListNode *next;
+};
+
+#define FOREACH_LIST(node, list) \
+     for (node=list; node; node=node-&gt;next)
+
+/* Usage */
+int main(void)
+{
+    struct LinkedListNode *list, **plist = &amp;list, *node;
+    int i;
+
+    for (i=0; i&lt;10; i++)
+    {
+         *plist = malloc(sizeof(struct LinkedListNode));
+         (*plist)-&gt;data = i;
+         (*plist)-&gt;next = NULL;
+         plist          = &amp;(*plist)-&gt;next;
+    }
+
+    /* printing the elements here */
+    FOREACH_LIST(node, list)
+    {
+        printf(&quot;%d\n&quot;, node-&gt;data);
+    }
+}
+</code></pre>
+<p>You can make a standard interface for such data-structures and write a generic implementation of <code>FOREACH</code> as:</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct CollectionItem_
+{
+    int data;
+    struct CollectionItem_ *next;
+} CollectionItem;
+
+typedef struct Collection_
+{
+    /* interface functions */
+    void* (*first)(void *coll);
+    void* (*last) (void *coll);
+    void* (*next) (void *coll, CollectionItem *currItem);
+
+    CollectionItem *collectionHead;
+    /* Other fields */
+} Collection;
+
+/* must implement */
+void *first(void *coll)
+{
+    return ((Collection*)coll)-&gt;collectionHead;
+}
+
+/* must implement */
+void *last(void *coll)
+{
+    return NULL;
+}
+
+/* must implement */
+void *next(void *coll, CollectionItem *curr)
+{
+    return curr-&gt;next;
+}
+
+CollectionItem *new_CollectionItem(int data)
+{
+    CollectionItem *item = malloc(sizeof(CollectionItem));
+    item-&gt;data = data;
+    item-&gt;next = NULL;
+    return item;
+}
+
+void Add_Collection(Collection *coll, int data)
+{
+    CollectionItem **item = &amp;coll-&gt;collectionHead;
+    while(*item)
+        item = &amp;(*item)-&gt;next;
+    (*item) = new_CollectionItem(data);
+}
+
+Collection *new_Collection()
+{
+    Collection *nc = malloc(sizeof(Collection));
+    nc-&gt;first = first;
+    nc-&gt;last  = last;
+    nc-&gt;next  = next;
+    return nc;
+}
+
+/* generic implementation */
+#define FOREACH(node, collection)                      \
+    for (node  = (collection)-&gt;first(collection);      \
+         node != (collection)-&gt;last(collection);       \
+         node  = (collection)-&gt;next(collection, node))
+
+int main(void)
+{
+    Collection *coll = new_Collection();
+    CollectionItem *node;
+    int i;
+
+    for(i=0; i&lt;10; i++)
+    {
+         Add_Collection(coll, i);
+    }
+
+    /* printing the elements here */
+    FOREACH(node, coll)
+    {
+        printf(&quot;%d\n&quot;, node-&gt;data);
+    }
+}
+</code></pre>
+<p>To use this generic implementation just implement these functions for your data structure.</p>
+<pre><code>1.  void* (*first)(void *coll);
+2.  void* (*last) (void *coll);
+3.  void* (*next) (void *coll, CollectionItem *currItem);
+</code></pre>
+
+
+            </div>
+            <h2 id="function-like-macros">Function-like macros</h2>
+            <div>
+                <p>Function-like macros are similar to <code>inline</code> functions, these are useful in some cases, such as temporary debug log:</p>
+<pre><code>#ifdef DEBUG
+# define LOGFILENAME &quot;/tmp/logfile.log&quot;
+
+# define LOG(str) do {                            \
+  FILE *fp = fopen(LOGFILENAME, &quot;a&quot;);            \
+  if (fp) {                                       \
+    fprintf(fp, &quot;%s:%d %s\n&quot;, __FILE__, __LINE__, \
+                 /* don't print null pointer */   \
+                 str ?str :&quot;&lt;null&gt;&quot;);             \
+    fclose(fp);                                   \
+  }                                               \
+  else {                                          \
+    perror(&quot;Opening '&quot; LOGFILENAME &quot;' failed&quot;);   \
+  }                                               \
+} while (0)
+#else
+  /* Make it a NOOP if DEBUG is not defined. */
+# define LOG(LINE) (void)0
+#endif
+
+
+#include &lt;stdio.h&gt;
+
+int main(int argc, char* argv[])
+{
+    if (argc &gt; 1)
+        LOG(&quot;There are command line arguments&quot;);
+    else
+        LOG(&quot;No command line arguments&quot;);
+    return 0;
+}
+</code></pre>
+<p>Here in both cases (with <code>DEBUG</code> or not) the call behaves the same way
+as a function with <code>void</code> return type. This ensures that the <code>if/else</code> conditionals are interpreted as expected.</p>
+<p>In the <code>DEBUG</code> case this is implemented through a <code>do { ... } while(0)</code> construct. In the other case, <code>(void)0</code> is a statement with no side effect that is just ignored.</p>
+<p>An alternative for the latter would be</p>
+<pre><code>#define LOG(LINE) do { /* empty */ } while (0)
+</code></pre>
+<p>such that it is in all cases syntactically equivalent to the first.</p>
+<p>If you use GCC, you can also implement a function-like macro that returns result using a non-standard GNU extension — <a href="https://gcc.gnu.org/onlinedocs/gcc-7.1.0/gcc/Statement-Exprs.html#Statement-Exprs" rel="nofollow noreferrer">statement expressions</a>.  For example:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+#define POW(X, Y) \
+({ \
+        int i, r = 1; \
+        for (i = 0; i &lt; Y; ++i) \
+                r *= X; \
+        r; \ // returned value is result of last operation
+})
+
+int main(void)
+{
+        int result;
+
+        result = POW(2, 3); 
+        printf(&quot;Result: %d\n&quot;, result);
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="header-include-guards">Header Include Guards</h2>
+            <div>
+                <p>Pretty much every header file should follow the <a href="https://en.wikipedia.org/wiki/Include_guard" rel="nofollow noreferrer">include guard</a> idiom:</p>
+<p><strong>my-header-file.h</strong></p>
+<pre><code>#ifndef MY_HEADER_FILE_H
+#define MY_HEADER_FILE_H
+
+// Code body for header file
+
+#endif
+</code></pre>
+<p>This ensures that when you <code>#include &quot;my-header-file.h&quot;</code> in multiple places, you don't get duplicate declarations of functions, variables, etc. Imagine the following hierarchy of files:</p>
+<p><strong>header-1.h</strong></p>
+<pre><code>typedef struct {
+    …
+} MyStruct;
+
+int myFunction(MyStruct *value);
+</code></pre>
+<p><strong>header-2.h</strong></p>
+<pre><code>#include &quot;header-1.h&quot;
+
+int myFunction2(MyStruct *value);
+</code></pre>
+<p><strong>main.c</strong></p>
+<pre><code>#include &quot;header-1.h&quot;
+#include &quot;header-2.h&quot;
+
+int main() {
+    // do something
+}
+</code></pre>
+<p>This code has a serious problem: the detailed contents of <code>MyStruct</code> is defined twice, which is not allowed. This would result in a compilation error that can be difficult to track down, since one header file includes another. If you instead did it with header guards:</p>
+<p><strong>header-1.h</strong></p>
+<pre><code>#ifndef HEADER_1_H
+#define HEADER_1_H
+
+typedef struct {
+    …
+} MyStruct;
+
+int myFunction(MyStruct *value);
+
+#endif
+</code></pre>
+<p><strong>header-2.h</strong></p>
+<pre><code>#ifndef HEADER_2_H
+#define HEADER_2_H
+
+#include &quot;header-1.h&quot;
+
+int myFunction2(MyStruct *value);
+
+#endif
+</code></pre>
+<p><strong>main.c</strong></p>
+<pre><code>#include &quot;header-1.h&quot;
+#include &quot;header-2.h&quot;
+
+int main() {
+    // do something
+}
+</code></pre>
+<p>This would then expand to:</p>
+<pre><code>#ifndef HEADER_1_H
+#define HEADER_1_H
+
+typedef struct {
+    …
+} MyStruct;
+
+int myFunction(MyStruct *value);
+
+#endif
+
+#ifndef HEADER_2_H
+#define HEADER_2_H
+
+#ifndef HEADER_1_H // Safe, since HEADER_1_H was #define'd before.
+#define HEADER_1_H
+
+typedef struct {
+    …
+} MyStruct;
+
+int myFunction(MyStruct *value);
+
+#endif
+
+int myFunction2(MyStruct *value);
+
+#endif
+
+int main() {
+    // do something
+}
+</code></pre>
+<p>When the compiler reaches the second inclusion of <strong>header-1.h</strong>, <code>HEADER_1_H</code> was already defined by the previous inclusion. Ergo, it boils down to the following:</p>
+<pre><code>#define HEADER_1_H
+
+typedef struct {
+    …
+} MyStruct;
+
+int myFunction(MyStruct *value);
+
+#define HEADER_2_H
+
+int myFunction2(MyStruct *value);
+
+int main() {
+    // do something
+}
+</code></pre>
+<p>And thus there is no compilation error.</p>
+<p>Note: There are multiple different conventions for naming the header guards. Some people like to name it <code>HEADER_2_H_</code>, some include the project name like <code>MY_PROJECT_HEADER_2_H</code>. The important thing is to ensure that the convention you follow makes it so that each file in your project has a unique header guard.</p>
+<hr>
+<p>If the structure details were not included in the header, the type declared would be incomplete or an <a href="https://en.wikipedia.org/wiki/Opaque_data_type" rel="nofollow noreferrer">opaque type</a>.  Such types can be useful, hiding implementation details from users of the functions.  For many purposes, the <code>FILE</code> type in the standard C library can be regarded as an opaque type (though it usually isn't opaque so that macro implementations of the standard I/O functions can make use of the internals of the structure).  In that case, the <code>header-1.h</code> could contain:</p>
+<pre><code>#ifndef HEADER_1_H
+#define HEADER_1_H
+
+typedef struct MyStruct MyStruct;
+
+int myFunction(MyStruct *value);
+
+#endif
+</code></pre>
+<p>Note that the structure must have a tag name (here <code>MyStruct</code> — that's in the tags namespace, separate from the ordinary identifiers namespace of the typedef name <code>MyStruct</code>), and that the <code>{ … }</code> is omitted.  This says &quot;there is a structure type <code>struct MyStruct</code> and there is an alias for it <code>MyStruct</code>&quot;.</p>
+<p>In the implementation file, the details of the structure can be defined to make the type complete:</p>
+<pre><code>struct MyStruct {
+    …
+};
+</code></pre>
+<p>If you are using C11, you could repeat the <code>typedef struct MyStruct MyStruct;</code> declaration without causing a compilation error, but earlier versions of C would complain.  Consequently, it is still best to use the include guard idiom, even though in this example, it would be optional if the code was only ever compiled with compilers that supported C11.</p>
+<hr />
+<p>Many compilers support the <code>#pragma once</code> directive, which has the same results:</p>
+<p><strong>my-header-file.h</strong></p>
+<pre><code>#pragma once
+
+// Code for header file
+</code></pre>
+<p>However, <code>#pragma once</code> is not part of the C standard, so the code is less portable if you use it.</p>
+<hr>
+<p>A few headers do not use the include guard idiom.  One specific example is the standard <code>&lt;assert.h&gt;</code> header.  It may be included multiple times in a single translation unit, and the effect of doing so depends on whether the macro <code>NDEBUG</code> is defined each time the header is included.  You may occasionally have an analogous requirement; such cases will be few and far between.  Ordinarily, your headers should be protected by the include guard idiom.</p>
+
+
+            </div>
+            <h2 id="macro-replacement">Macro Replacement</h2>
+            <div>
+                <p>The simplest form of macro replacement is to define a <code>manifest constant</code>, as in</p>
+<pre><code>#define ARRSIZE 100
+int array[ARRSIZE];
+</code></pre>
+<p>This defines a <em>function-like</em> macro that multiplies a variable by <code>10</code> and stores the new value:</p>
+<pre><code>#define TIMES10(A) ((A) *= 10)
+
+double b = 34;
+int c = 23;
+
+TIMES10(b);   // good: ((b) *= 10);
+TIMES10(c);   // good: ((c) *= 10);
+TIMES10(5);   // bad:  ((5) *= 10);
+</code></pre>
+<p>The replacement is done before any other interpretation of the program text. In the first call to <code>TIMES10</code> the name <code>A</code> from the definition is replaced by <code>b</code> and the so expanded text is then put in place of the call. Note that this definition of <code>TIMES10</code> is not equivalent to</p>
+<pre><code>#define TIMES10(A) ((A) = (A) * 10)
+</code></pre>
+<p>because this could evaluate the replacement of <code>A</code>, twice, which can have unwanted side effects.</p>
+<p>The following defines a function-like macro which value is the maximum of its arguments. It has the advantages of working for any compatible types of the arguments and of generating in-line code without the overhead of function calling. It has the disadvantages of evaluating one or the other of its arguments a second time (including side effects) and of generating more code than a function if invoked several times.</p>
+<pre><code>#define max(a, b) ((a) &gt; (b) ? (a) : (b))
+
+int maxVal = max(11, 43);              /* 43 */
+int maxValExpr = max(11 + 36, 51 - 7); /* 47 */
+
+/* Should not be done, due to expression being evaluated twice */
+int j = 0, i = 0;
+int sideEffect = max(++i, ++j);       /* i == 4 */
+</code></pre>
+<p>Because of this, such macros that evaluate their arguments multiple times are usually avoided in production code. Since C11 there is the <code>_Generic</code> feature that allows to avoid such multiple invocations.</p>
+<p>The abundant parentheses in the macro expansions (right hand side of the definition) ensure that the arguments and the resulting expression are bound properly and fit well into the context in which the macro is called.</p>
+
+
+            </div>
+            <h2 id="predefined-macros">Predefined Macros</h2>
+            <div>
+                <p>A predefined macro is a macro that is already understood by the C pre processor without the program needing to define it. Examples include</p>
+<h3 id="mandatory-pre-defined-macros">Mandatory Pre-Defined Macros</h3>
+<ul>
+<li><code>__FILE__</code>, which gives the file name of the current source file (a string literal),</li>
+<li><code>__LINE__</code> for the current line number (an integer constant),</li>
+<li><code>__DATE__</code> for the compilation date (a string literal),</li>
+<li><code>__TIME__</code> for the compilation time (a string literal).</li>
+</ul>
+<p>There's also a related predefined identifier, <code>__func__</code> (ISO/IEC 9899:2011 §6.4.2.2), which is <em>not</em> a macro:</p>
+<blockquote>
+<p>The identifier <code>__func__</code> shall be implicitly declared by the translator as if,
+immediately following the opening brace of each function definition, the declaration:</p>
+<pre><code> static const char __func__[] = &quot;function-name&quot;;
+</code></pre>
+<p>appeared, where <em>function-name</em> is the name of the lexically-enclosing function.</p>
+</blockquote>
+<p><code>__FILE__</code>, <code>__LINE__</code> and <code>__func__</code> are especially useful for debugging purposes. For example:</p>
+<pre><code>fprintf(stderr, &quot;%s: %s: %d: Denominator is 0&quot;, __FILE__, __func__, __LINE__);
+</code></pre>
+<p>Pre-C99 compilers, may or may not support <code>__func__</code> or may have a macro that acts the same that is named differently.  For example, gcc used <code>__FUNCTION__</code> in C89 mode.</p>
+<p>The below macros allow to ask for detail on the implementation:</p>
+<ul>
+<li><code>__STDC_VERSION__</code> The version of the C Standard implemented. This is a constant integer using the format <code>yyyymmL</code> (the value <code>201112L</code> for C11, the value <code>199901L</code> for C99; it wasn't defined for C89/C90)</li>
+<li><code>__STDC_HOSTED__</code> <code>1</code> if it's a hosted implementation, else <code>0</code>.</li>
+<li><code>__STDC__</code> If <code>1</code>, the implementation conforms to the C Standard.</li>
+</ul>
+<h3 id="other-pre-defined-macros-non-mandatory-">Other Pre-Defined Macros (non mandatory)</h3>
+<p>ISO/IEC 9899:2011 §6.10.9.2 Environment macros:</p>
+<blockquote>
+<ul>
+<li>
+<p><code>__STDC_ISO_10646__</code>
+An integer constant of the form <code>yyyymmL</code> (for example,
+199712L). If this symbol is defined, then every character in the Unicode
+required set, when stored in an object of type <code>wchar_t</code>, has the same
+value as the short identifier of that character. The Unicode required set
+consists of all the characters that are defined by ISO/IEC 10646, along with
+all amendments and technical corrigenda, as of the specified year and
+month. If some other encoding is used, the macro shall not be defined and
+the actual encoding used is implementation-defined.</p>
+</li>
+<li>
+<p><code>__STDC_MB_MIGHT_NEQ_WC__</code>
+The integer constant 1, intended to indicate that, in
+the encoding for <code>wchar_t</code>, a member of the basic character set need not
+have a code value equal to its value when used as the lone character in an
+integer character constant.</p>
+</li>
+<li>
+<p><code>__STDC_UTF_16__</code>
+The integer constant 1, intended to indicate that values of type
+<code>char16_t</code> are UTF−16 encoded. If some other encoding is used, the
+macro shall not be defined and the actual encoding used is implementation-defined.</p>
+</li>
+<li>
+<p><code>__STDC_UTF_32__</code>
+The integer constant 1, intended to indicate that values of type
+<code>char32_t</code> are UTF−32 encoded. If some other encoding is used, the
+macro shall not be defined and the actual encoding used is implementation-defined.</p>
+</li>
+</ul>
+</blockquote>
+<p>ISO/IEC 9899:2011 §6.10.8.3 Conditional feature macros</p>
+<blockquote>
+<ul>
+<li><code>__STDC_ANALYZABLE__</code>
+The integer constant 1, intended to indicate conformance to
+the specifications in annex L (Analyzability).</li>
+<li><code>__STDC_IEC_559__</code>
+The integer constant 1, intended to indicate conformance to the
+specifications in annex F (IEC 60559 floating-point arithmetic).</li>
+<li><code>__STDC_IEC_559_COMPLEX__</code> The integer constant 1, intended to indicate
+adherence to the specifications in annex G (IEC 60559 compatible complex
+arithmetic).</li>
+<li><code>__STDC_LIB_EXT1__</code> The integer constant <code>201112L</code>, intended to indicate support
+for the extensions defined in annex K (Bounds-checking interfaces).</li>
+<li><code>__STDC_NO_ATOMICS__</code>
+The integer constant 1, intended to indicate that the
+implementation does not support atomic types (including the <code>_Atomic</code>
+type qualifier) and the <code>&lt;stdatomic.h&gt;</code> header.</li>
+<li><code>__STDC_NO_COMPLEX__</code>
+The integer constant 1, intended to indicate that the
+implementation does not support complex types or the <code>&lt;complex.h&gt;</code>
+header.</li>
+<li><code>__STDC_NO_THREADS__</code> The integer constant 1, intended to indicate that the
+implementation does not support the <code>&lt;threads.h&gt;</code> header.</li>
+<li><code>__STDC_NO_VLA__</code>
+The integer constant 1, intended to indicate that the
+implementation does not support variable length arrays or variably
+modified types.</li>
+</ul>
+</blockquote>
+
+
+            </div>
+            <h2 id="source-file-inclusion">Source file inclusion</h2>
+            <div>
+                <p>The most common uses of <code>#include</code> preprocessing directives are as in the following:</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &quot;myheader.h&quot;
+</code></pre>
+<p><code>#include</code> replaces the statement with the contents of the file referred to. Angle brackets (&lt;&gt;) refer to header files installed on the system, while quotation marks (&quot;&quot;) are for user-supplied files.</p>
+<p>Macros themselves can expand other macros once, as this example illustrates:</p>
+<pre><code>#if VERSION == 1
+    #define INCFILE  &quot;vers1.h&quot;
+#elif VERSION == 2
+    #define INCFILE  &quot;vers2.h&quot;
+    /*  and so on */
+#else
+    #define INCFILE  &quot;versN.h&quot;
+#endif
+/* ... */
+#include INCFILE
+</code></pre>
+
+
+            </div>
+            <h2 id="token-pasting">Token pasting</h2>
+            <div>
+                <p>Token pasting allows one to glue together two macro arguments. For example, <code>front##back</code> yields <code>frontback</code>. A famous example is Win32's <code>&lt;TCHAR.H&gt;</code> header. In standard C, one can write <code>L&quot;string&quot;</code> to declare a wide character string. However, Windows API allows one to convert between wide character strings and narrow character strings simply by <code>#define</code>ing <code>UNICODE</code>. In order to implement the string literals, <code>TCHAR.H</code> uses this</p>
+<pre><code>#ifdef UNICODE
+#define TEXT(x) L##x
+#endif
+</code></pre>
+<p>Whenever a user writes <code>TEXT(&quot;hello, world&quot;)</code>, and UNICODE is defined, the C preprocessor concatenates <code>L</code> and the macro argument. <code>L</code> concatenated with <code>&quot;hello, world&quot;</code> gives <code>L&quot;hello, world&quot;</code>.</p>
+
+
+            </div>
+            <h2 id="variadic-arguments-macro">Variadic arguments macro</h2>
+            <div>
+                <div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<p>Macros with variadic args:</p>
+<p>Let's say you want to create some print-macro for debugging your code, let's take this macro as an example:</p>
+<pre><code>#define debug_print(msg) printf(&quot;%s:%d %s&quot;, __FILE__, __LINE__, msg)
+</code></pre>
+<p>Some examples of usage:</p>
+<p>The function <code>somefunc()</code> returns -1 if failed and 0 if succeeded, and it is called from plenty different places within the code:</p>
+<pre><code>int retVal = somefunc();
+
+if(retVal == -1)
+{
+    debug_printf(&quot;somefunc() has failed&quot;);
+}
+
+/* some other code */
+
+ retVal = somefunc();
+
+if(retVal == -1)
+{
+    debug_printf(&quot;somefunc() has failed&quot;);
+}
+</code></pre>
+<p>What happens if the implementation of <code>somefunc()</code> changes, and it now returns different values matching different possible error types? You still want use the debug macro and print the error value.</p>
+<pre><code>debug_printf(retVal);      /* this would obviously fail */
+debug_printf(&quot;%d&quot;,retVal); /* this would also fail */
+</code></pre>
+<p>To solve this problem the <code>__VA_ARGS__</code> macro was introduced. This macro allows multiple parameters X-macro's:</p>
+<p>Example:</p>
+<pre><code> #define debug_print(msg, ...) printf(msg, __VA_ARGS__) \
+                               printf(&quot;\nError occurred in file:line (%s:%d)\n&quot;, __FILE__, __LINE)
+</code></pre>
+<p>Usage:</p>
+<pre><code>int retVal = somefunc();
+
+debug_print(&quot;retVal of somefunc() is-&gt; %d&quot;, retVal);
+</code></pre>
+<p>This macro allows you to pass multiple parameters and print them, but now it forbids you from sending any parameters at all.</p>
+<pre><code>debug_print(&quot;Hey&quot;);
+</code></pre>
+<p>This would raise some syntax error as the macro expects at least one more argument and the pre-processor would not ignore the lack of comma in the <code>debug_print()</code> macro.
+Also <code>debug_print(&quot;Hey&quot;,);</code> would raise a syntax error as you cant keep the argument passed to macro empty.</p>
+<p>To solve this, <code>##__VA_ARGS__</code> macro was introduced, this macro states that if no variable arguments exist, the comma is deleted by the pre-processor from code.</p>
+<p>Example:</p>
+<pre><code> #define debug_print(msg, ...) printf(msg, ##__VA_ARGS__) \
+                               printf(&quot;\nError occured in file:line (%s:%d)\n&quot;, __FILE__, __LINE)
+</code></pre>
+<p>Usage:</p>
+<pre><code> debug_print(&quot;Ret val of somefunc()?&quot;);
+ debug_print(&quot;%d&quot;,somefunc());
+</code></pre>
+</div></div>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../1108/pointers.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../365/random-number-generation.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-04-13</div>
+        <div itemprop="datePublished">2016-04-13</div>
+        <div itemprop="dateModified">2017-06-15</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=447" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_569683070" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#sharpif-0-to-block-out-code-sections">
+                    #if 0 to block out code sections
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#-cplusplus-for-using-c-externals-in-cplusplus-code-compiled-with-cplusplus-name-mangling">
+                    __cplusplus for using C externals in C++ code compiled with C++ - name mangling
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#conditional-inclusion-and-conditional-function-signature-modification">
+                    Conditional inclusion and conditional function signature modification
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#error-directive">
+                    Error directive
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#foreach-implementation">
+                    FOREACH implementation
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#function-like-macros">
+                    Function-like macros
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#header-include-guards">
+                    Header Include Guards
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#macro-replacement">
+                    Macro Replacement
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#predefined-macros">
+                    Predefined Macros
+                </a>
+            
+
+
+<ul id="accordion_1831879661" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#mandatory-pre-defined-macros">
+                    Mandatory Pre-Defined Macros
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#other-pre-defined-macros-non-mandatory-">
+                    Other Pre-Defined Macros (non mandatory)
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#source-file-inclusion">
+                    Source file inclusion
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#token-pasting">
+                    Token pasting
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#variadic-arguments-macro">
+                    Variadic arguments macro
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/447/preprocessor-and-macros by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

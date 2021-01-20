@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/275004/timer-function-to-provide-time-in-nano-seconds-using-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Timer function to provide time in nano seconds using C++ | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Timer function to provide time in nano seconds using C++ | C Language Knowledge Base">
+        <title>[SOLVED] Timer function to provide time in nano seconds using C++ | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="timer-function-to-provide-time-in-nano-seconds-using-cplusplus">Timer function to provide time in nano seconds using C++</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/timer.html">timer</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I wish to calculate the time it took for an API to return a value.
+The time taken for such an action is in the space of nano seconds. As the API is a C++ class/function, I am using the timer.h to caculate the same:</p>
+
+<pre><code>  #include &lt;ctime&gt;
+  #include &lt;cstdio&gt;
+
+  using namespace std;
+
+  int main(int argc, char** argv) {
+
+      clock_t start;
+      double diff;
+      start = clock();
+      diff = ( std::clock() - start ) / (double)CLOCKS_PER_SEC;
+      cout&lt;&lt;"printf: "&lt;&lt; diff &lt;&lt;'\n';
+
+      return 0;
+  }
+</code></pre>
+
+<p>The above code gives the time in seconds. How do I get the same in nano seconds and with more precision?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/35416/gagneet" target="_blank"><span itemprop="name">gagneet</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">100</div>
+                                    <div itemprop="dateCreated">7/14/2015 1:22:56 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>What others have posted about running the function repeatedly in a loop is correct.</p>
+
+<p>For Linux (and BSD) you want to use <A href="http://opengroup.org/onlinepubs/007908799/xsh/clock_gettime.html" rel="nofollow noreferrer">clock_gettime()</A>.</p>
+
+<pre><code>#include &lt;sys/time.h&gt;
+
+int main()
+{
+   timespec ts;
+   // clock_gettime(CLOCK_MONOTONIC, &amp;ts); // Works on FreeBSD
+   clock_gettime(CLOCK_REALTIME, &amp;ts); // Works on Linux
+}
+</code></pre>
+
+<p>For windows you want to use the <A href="http://support.microsoft.com/kb/172338" rel="nofollow noreferrer">QueryPerformanceCounter</A>. And here is more on <A href="http://msdn.microsoft.com/en-us/library/ms979201.aspx" rel="nofollow noreferrer">QPC</A></p>
+
+<p>Apparently there is a known <A href="http://support.microsoft.com/kb/274323" rel="nofollow noreferrer">issue</A> with QPC on some chipsets, so you may want to make sure you do not have those chipset. Additionally some dual core AMDs may also cause a <A href="http://forum.beyond3d.com/showthread.php?t=47951" rel="nofollow noreferrer">problem</A>. See the second post by sebbbi, where he states:</p>
+
+<blockquote>
+  <p>QueryPerformanceCounter() and
+  QueryPerformanceFrequency() offer a
+  bit better resolution, but have
+  different issues. For example in
+  Windows XP, all AMD Athlon X2 dual
+  core CPUs return the PC of either of
+  the cores "randomly" (the PC sometimes
+  jumps a bit backwards), unless you
+  specially install AMD dual core driver
+  package to fix the issue. We haven't
+  noticed any other dual+ core CPUs
+  having similar issues (p4 dual, p4 ht,
+  core2 dual, core2 quad, phenom quad).</p>
+</blockquote>
+
+<p><strong>EDIT 2013/07/16:</strong></p>
+
+<p>It looks like there is some controversy on the efficacy of QPC under certain circumstances as stated in <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ee417693(v=vs.85).aspx" rel="nofollow noreferrer">http://msdn.microsoft.com/en-us/library/windows/desktop/ee417693(v=vs.85).aspx</a></p>
+
+<blockquote>
+  <p>...While QueryPerformanceCounter and QueryPerformanceFrequency typically adjust for
+  multiple processors, bugs in the BIOS or drivers may result in these routines returning
+  different values as the thread moves from one processor to another...</p>
+</blockquote>
+
+<p>However this StackOverflow answer <a href="https://stackoverflow.com/a/4588605/34329">https://stackoverflow.com/a/4588605/34329</a> states that QPC should work fine on any MS OS after Win XP service pack 2.</p>
+
+<p>This article shows that Windows 7 can determine if the processor(s) have an invariant TSC and falls back to an external timer if they don't. <a href="http://performancebydesign.blogspot.com/2012/03/high-resolution-clocks-and-timers-for.html" rel="nofollow noreferrer">http://performancebydesign.blogspot.com/2012/03/high-resolution-clocks-and-timers-for.html</a> Synchronizing across processors is still an issue.</p>
+
+<p>Other fine reading related to timers:</p>
+
+<ul>
+<li><a href="https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks" rel="nofollow noreferrer">https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks</a></li>
+<li><a href="http://lwn.net/Articles/209101/" rel="nofollow noreferrer">http://lwn.net/Articles/209101/</a></li>
+<li><a href="http://performancebydesign.blogspot.com/2012/03/high-resolution-clocks-and-timers-for.html" rel="nofollow noreferrer">http://performancebydesign.blogspot.com/2012/03/high-resolution-clocks-and-timers-for.html</a></li>
+<li><a href="https://stackoverflow.com/questions/7287663/queryperformancecounter-status">QueryPerformanceCounter Status?</a></li>
+</ul>
+
+<p>See the comments for more details.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/34329/grieve" target="_blank"><span itemprop="name">grieve</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/275004/timer-function-to-provide-time-in-nano-seconds-using-cplusplus#answer-0</div>
+                                            <div itemprop="upvoteCount">82</div>
+                                            <div itemprop="dateCreated">5/23/2017 12:32:26 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>This new answer uses C++11's <code>&lt;chrono&gt;</code> facility.  While there are other answers that show how to use <code>&lt;chrono&gt;</code>, none of them shows how to use <code>&lt;chrono&gt;</code> with the <code>RDTSC</code> facility mentioned in several of the other answers here.  So I thought I would show how to use <code>RDTSC</code> with <code>&lt;chrono&gt;</code>.  Additionally I'll demonstrate how you can templatize the testing code on the clock so that you can rapidly switch between <code>RDTSC</code> and your system's built-in clock facilities (which will likely be based on <code>clock()</code>, <code>clock_gettime()</code> and/or <code>QueryPerformanceCounter</code>.</p>
+
+<p>Note that the <code>RDTSC</code> instruction is x86-specific.  <code>QueryPerformanceCounter</code> is Windows only.  And <code>clock_gettime()</code> is POSIX only.  Below I introduce two new clocks: <code>std::chrono::high_resolution_clock</code> and <code>std::chrono::system_clock</code>, which, if you can assume C++11, are now cross-platform.</p>
+
+<p>First, here is how you create a C++11-compatible clock out of the Intel <code>rdtsc</code> assembly instruction.  I'll call it <code>x::clock</code>:</p>
+
+<pre><code>#include &lt;chrono&gt;
+
+namespace x
+{
+
+struct clock
+{
+    typedef unsigned long long                 rep;
+    typedef std::ratio&lt;1, 2'800'000'000&gt;       period; // My machine is 2.8 GHz
+    typedef std::chrono::duration&lt;rep, period&gt; duration;
+    typedef std::chrono::time_point&lt;clock&gt;     time_point;
+    static const bool is_steady =              true;
+
+    static time_point now() noexcept
+    {
+        unsigned lo, hi;
+        asm volatile("rdtsc" : "=a" (lo), "=d" (hi));
+        return time_point(duration(static_cast&lt;rep&gt;(hi) &lt;&lt; 32 | lo));
+    }
+};
+
+}  // x
+</code></pre>
+
+<p>All this clock does is count CPU cycles and store it in an unsigned 64-bit integer.  You may need to tweak the assembly language syntax for your compiler.  Or your compiler may offer an intrinsic you can use instead (e.g. <code>now() {return __rdtsc();}</code>).</p>
+
+<p>To build a clock you have to give it the representation (storage type).  You must also supply the clock period, which must be a compile time constant, even though your machine may change clock speed in different power modes.  And from those you can easily define your clock's "native" time duration and time point in terms of these fundamentals.</p>
+
+<p>If all you want to do is output the number of clock ticks, it doesn't really matter what number you give for the clock period.  This constant only comes into play if you want to convert the number of clock ticks into some real-time unit such as nanoseconds.  And in that case, the more accurate you are able to supply the clock speed, the more accurate will be the conversion to nanoseconds, (milliseconds, whatever).</p>
+
+<p>Below is example code which shows how to use <code>x::clock</code>.  Actually I've templated the code on the clock as I'd like to show how you can use many different clocks with the exact same syntax.  This particular test is showing what the looping overhead is when running what you want to time under a loop:</p>
+
+<pre><code>#include &lt;iostream&gt;
+
+template &lt;class clock&gt;
+void
+test_empty_loop()
+{
+    // Define real time units
+    typedef std::chrono::duration&lt;unsigned long long, std::pico&gt; picoseconds;
+    // or:
+    // typedef std::chrono::nanoseconds nanoseconds;
+    // Define double-based unit of clock tick
+    typedef std::chrono::duration&lt;double, typename clock::period&gt; Cycle;
+    using std::chrono::duration_cast;
+    const int N = 100000000;
+    // Do it
+    auto t0 = clock::now();
+    for (int j = 0; j &lt; N; ++j)
+        asm volatile("");
+    auto t1 = clock::now();
+    // Get the clock ticks per iteration
+    auto ticks_per_iter = Cycle(t1-t0)/N;
+    std::cout &lt;&lt; ticks_per_iter.count() &lt;&lt; " clock ticks per iteration\n";
+    // Convert to real time units
+    std::cout &lt;&lt; duration_cast&lt;picoseconds&gt;(ticks_per_iter).count()
+              &lt;&lt; "ps per iteration\n";
+}
+</code></pre>
+
+<p>The first thing this code does is create a "real time" unit to display the results in.  I've chosen picoseconds, but you can choose any units you like, either integral or floating point based.  As an example there is a pre-made <code>std::chrono::nanoseconds</code> unit I could have used.</p>
+
+<p>As another example I want to print out the average number of clock cycles per iteration as a floating point, so I create another duration, based on double, that has the same units as the clock's tick does (called <code>Cycle</code> in the code).</p>
+
+<p>The loop is timed with calls to <code>clock::now()</code> on either side.  If you want to name the type returned from this function it is:</p>
+
+<pre><code>typename clock::time_point t0 = clock::now();
+</code></pre>
+
+<p>(as clearly shown in the <code>x::clock</code> example, and is also true of the system-supplied clocks).</p>
+
+<p>To get a duration in terms of floating point clock ticks one merely subtracts the two time points, and to get the per iteration value, divide that duration by the number of iterations.</p>
+
+<p>You can get the count in any duration by using the <code>count()</code> member function.  This returns the internal representation.  Finally I use <code>std::chrono::duration_cast</code> to convert the duration <code>Cycle</code> to the duration <code>picoseconds</code> and print that out.</p>
+
+<p>To use this code is simple:</p>
+
+<pre><code>int main()
+{
+    std::cout &lt;&lt; "\nUsing rdtsc:\n";
+    test_empty_loop&lt;x::clock&gt;();
+
+    std::cout &lt;&lt; "\nUsing std::chrono::high_resolution_clock:\n";
+    test_empty_loop&lt;std::chrono::high_resolution_clock&gt;();
+
+    std::cout &lt;&lt; "\nUsing std::chrono::system_clock:\n";
+    test_empty_loop&lt;std::chrono::system_clock&gt;();
+}
+</code></pre>
+
+<p>Above I exercise the test using our home-made <code>x::clock</code>, and compare those results with using two of the system-supplied clocks:  <code>std::chrono::high_resolution_clock</code> and <code>std::chrono::system_clock</code>.  For me this prints out:</p>
+
+<pre class="lang-none prettyprint-override"><code>Using rdtsc:
+1.72632 clock ticks per iteration
+616ps per iteration
+
+Using std::chrono::high_resolution_clock:
+0.620105 clock ticks per iteration
+620ps per iteration
+
+Using std::chrono::system_clock:
+0.00062457 clock ticks per iteration
+624ps per iteration
+</code></pre>
+
+<p>This shows that each of these clocks has a different tick period, as the ticks per iteration is vastly different for each clock.  However when converted to a known unit of time (e.g. picoseconds), I get approximately the same result for each clock (your mileage may vary).</p>
+
+<p>Note how my code is completely free of "magic conversion constants".  Indeed, there are only two magic numbers in the entire example:</p>
+
+<ol>
+<li>The clock speed of my machine in order to define <code>x::clock</code>.</li>
+<li>The number of iterations to test over.  If changing this number makes your results vary greatly, then you should probably make the number of iterations higher, or empty your computer of competing processes while testing.</li>
+</ol>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/576911/howard-hinnant" target="_blank">Howard Hinnant</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/275004" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/275004/timer-function-to-provide-time-in-nano-seconds-using-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:49 GMT -->
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/455/variable-arguments by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Variable arguments | C Language Tutorial">
+        <meta name="description" property="og:description" content="Variable arguments | C Language Tutorial">
+        <title>Variable arguments | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="variable-arguments">Variable arguments</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p><strong>Variable arguments</strong> are used by functions in the printf family (<code>printf</code>, <code>fprintf</code>, etc) and others to allow a function to be called with a different number of arguments each time, hence the name <em>varargs</em>.</p>
+<p>To implement functions using the variable arguments feature, use <code>#include &lt;stdarg.h&gt;</code>.</p>
+<p>To call functions which take a variable number of arguments, ensure there is a full prototype with the trailing ellipsis in scope: <code>void err_exit(const char *format, ...);</code> for example.</p>
+
+
+            </div>
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>void va_start(va_list ap, <em>last</em>); /* Start variadic argument processing; <em>last</em> is the last function parameter before the ellipsis (“...”) */</li>
+<li><em>type</em> va_arg(va_list ap, <em>type</em>); /* Get next variadic argument in list; be sure to pass the correct <em>promoted</em> type */</li>
+<li>void va_end(va_list ap); /* End argument processing */</li>
+<li>void va_copy(va_list dst, va_list src); /* C99 or later: copy argument list, i.e. current position in argument processing, into another list (e.g. to pass over arguments multiple times) */</li>
+</ul>
+
+
+            </div>
+
+            <h2 id="parameters">Parameters</h2>
+            <div>
+                <table><thead><tr><th>Parameter</th><th>Details</th></tr></thead><tbody><tr><td><code>va_list</code> ap</td><td>argument pointer, current position in the list of variadic arguments</td></tr><tr><td><em>last</em></td><td>name of last non-variadic function argument, so the compiler finds the correct place to start processing variadic arguments; may not be declared as a <code>register</code> variable, a function, or an array type</td></tr><tr><td><em>type</em></td><td><strong>promoted</strong> type of the variadic argument to read (e.g. <code>int</code> for a <code>short int</code> argument)</td></tr><tr><td><code>va_list</code> src</td><td>current argument pointer to copy</td></tr><tr><td><code>va_list</code> dst</td><td>new argument list to be filled in</td></tr></tbody></table>
+
+            </div>
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>The <code>va_start</code>, <code>va_arg</code>, <code>va_end</code>, and <code>va_copy</code> functions are actually macros.</p>
+<p>Be sure to <em>always</em> call <code>va_start</code> first, and only once, and to call <code>va_end</code> last, and only once, and on every exit point of the function. Not doing so <em>may</em> work on <em>your</em> system but surely is <strong>not</strong> portable and thus invites bugs.</p>
+<p>Take care to declare your function correctly, i.e. with a prototype, and mind the restrictions on the <em>last</em> non-variadic argument (not <code>register</code>, not a function or array type). It is not possible to declare a function that takes only variadic arguments, as at least one non-variadic argument is needed to be able to start argument processing.</p>
+<p>When calling <code>va_arg</code>, you must request the <strong>promoted</strong> argument type, that is:</p>
+<ul>
+<li><code>short</code> is promoted to <code>int</code> (and <code>unsigned short</code> is also promoted to <code>int</code> unless <code>sizeof(unsigned short) == sizeof(int)</code>, in which case it is promoted to <code>unsigned int</code>).</li>
+<li><code>float</code> is promoted to <code>double</code>.</li>
+<li><code>signed char</code> is promoted to <code>int</code>; <code>unsigned char</code> is also promoted to <code>int</code> unless <code>sizeof(unsigned char) == sizeof(int)</code>, which is seldom the case.</li>
+<li><code>char</code> is usually promoted to <code>int</code>.</li>
+<li>C99 types like <code>uint8_t</code> or <code>int16_t</code> are similarly promoted.</li>
+</ul>
+<p>Historic (i.e. K&amp;R) variadic argument processing is declared in <code>&lt;varargs.h&gt;</code> but should not be used as it’s obsolete. Standard variadic argument processing (the one described here and declared in <code>&lt;stdarg.h&gt;</code>) was introduced in C89; the <code>va_copy</code> macro was introduced in C99 but provided by many compilers prior to that.</p>
+
+
+            </div>
+
+
+            <h2 id="implementing-functions-with-a-printf-like-interface">Implementing functions with a `printf()`-like interface</h2>
+            <div>
+                <p>One common use of variable-length argument lists is to implement functions
+that are a thin wrapper around the <code>printf()</code> family of functions.
+One such example is a set of error reporting functions.</p>
+<p><strong><code>errmsg.h</code></strong></p>
+<pre><code>#ifndef ERRMSG_H_INCLUDED
+#define ERRMSG_H_INCLUDED
+
+#include &lt;stdarg.h&gt;
+#include &lt;stdnoreturn.h&gt;    // C11
+
+void verrmsg(int errnum, const char *fmt, va_list ap);
+noreturn void errmsg(int exitcode, int errnum, const char *fmt, ...);
+void warnmsg(int errnum, const char *fmt, ...);
+
+#endif
+</code></pre>
+<p>This is a bare-bones example; such packages can be much elaborate.
+Normally, programmers will use either <code>errmsg()</code> or <code>warnmsg()</code>, which themselves use <code>verrmsg()</code> internally.
+If someone comes up with a need to do more, though, then the exposed <code>verrmsg()</code> function will be useful.
+You could avoid exposing it until you have a need for it (<a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it" rel="nofollow noreferrer">YAGNI — you aren't gonna need it</a>), but the need will arise eventually (you <em>are</em> gonna need it — YAGNI).</p>
+<p><strong><code>errmsg.c</code></strong></p>
+<p>This code only needs to forward the variadic arguments to the <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html" rel="nofollow noreferrer"><code>vfprintf()</code></a> function for outputting to standard error.
+It also reports the system error message corresponding to the system error number (<code>errno</code>) passed to the functions.</p>
+<pre><code>#include &quot;errmsg.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+void
+verrmsg(int errnum, const char *fmt, va_list ap)
+{
+    if (fmt)
+        vfprintf(stderr, fmt, ap);
+    if (errnum != 0)
+        fprintf(stderr, &quot;: %s&quot;, strerror(errnum));
+    putc('\n', stderr);
+}
+
+void
+errmsg(int exitcode, int errnum, const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    verrmsg(errnum, fmt, ap);
+    va_end(ap);
+    exit(exitcode);
+}
+
+void
+warnmsg(int errnum, const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    verrmsg(errnum, fmt, ap);
+    va_end(ap);
+}
+</code></pre>
+<p><strong>Using <code>errmsg.h</code></strong></p>
+<p>Now you can use those functions as follows:</p>
+<pre><code>#include &quot;errmsg.h&quot;
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc, char **argv)
+{
+    char buffer[BUFSIZ];
+    int fd;
+    if (argc != 2)
+    {
+        fprintf(stderr, &quot;Usage: %s filename\n&quot;, argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    const char *filename = argv[1];
+
+    if ((fd = open(filename, O_RDONLY)) == -1)
+        errmsg(EXIT_FAILURE, errno, &quot;cannot open %s&quot;, filename);
+    if (read(fd, buffer, sizeof(buffer)) != sizeof(buffer))
+        errmsg(EXIT_FAILURE, errno, &quot;cannot read %zu bytes from %s&quot;, sizeof(buffer), filename);
+    if (close(fd) == -1)
+        warnmsg(errno, &quot;cannot close %s&quot;, filename);
+    /* continue the program */
+    return 0;
+}
+</code></pre>
+<p>If either the
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/open.html" rel="nofollow noreferrer"><code>open()</code></a>
+or
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/read.html" rel="nofollow noreferrer"><code>read()</code></a>
+system calls fails, the error is written to standard error and the
+program exits with exit code 1.
+If the
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/close.html" rel="nofollow noreferrer"><code>close()</code></a>
+system call fails, the error is merely printed as a warning message, and
+the program continues.</p>
+<p><strong>Checking the correct use of <code>printf()</code> formats</strong></p>
+<p>If you are using GCC (the GNU C Compiler, which is part of the GNU
+Compiler Collection), or using Clang, then you can have the compiler
+check that the arguments you pass to the error message functions match
+what <code>printf()</code> expects.
+Since not all compilers support the extension, it needs to be compiled
+conditionally, which is a little bit fiddly.
+However, the protection it gives is worth the effort.</p>
+<p>First, we need to know how to detect that the compiler is GCC or Clang
+emulating GCC.
+The answer is that GCC defines <code>__GNUC__</code> to indicate that.</p>
+<p>See <a href="https://gcc.gnu.org/onlinedocs/gcc-7.1.0/gcc/Common-Function-Attributes.html#Common-Function-Attributes" rel="nofollow noreferrer">common function
+attributes</a>
+for information about the attributes — specifically the <code>format</code>
+attribute.</p>
+<p><strong>Rewritten <code>errmsg.h</code></strong></p>
+<pre><code>#ifndef ERRMSG_H_INCLUDED
+#define ERRMSG_H_INCLUDED
+
+#include &lt;stdarg.h&gt;
+#include &lt;stdnoreturn.h&gt;    // C11
+
+#if !defined(PRINTFLIKE)
+#if defined(__GNUC__)
+#define PRINTFLIKE(n,m) __attribute__((format(printf,n,m)))
+#else
+#define PRINTFLIKE(n,m) /* If only */
+#endif /* __GNUC__ */
+#endif /* PRINTFLIKE */
+
+void verrmsg(int errnum, const char *fmt, va_list ap);
+void noreturn errmsg(int exitcode, int errnum, const char *fmt, ...)
+        PRINTFLIKE(3, 4);
+void warnmsg(int errnum, const char *fmt, ...)
+        PRINTFLIKE(2, 3);
+
+#endif
+</code></pre>
+<p>Now, if you make a mistake like:</p>
+<pre><code>errmsg(EXIT_FAILURE, errno, &quot;Failed to open file '%d' for reading&quot;, filename);
+</code></pre>
+<p>(where the <code>%d</code> should be <code>%s</code>), then the compiler will complain:</p>
+<pre><code>$ gcc -O3 -g -std=c11 -Wall -Wextra -Werror -Wmissing-prototypes -Wstrict-prototypes \
+&gt;     -Wold-style-definition -c erruse.c
+erruse.c: In function ‘main’:
+erruse.c:20:64: error: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘const char *’ [-Werror=format=]
+         errmsg(EXIT_FAILURE, errno, &quot;Failed to open file '%d' for reading&quot;, filename);
+                                                           ~^
+                                                           %s
+cc1: all warnings being treated as errors
+$
+</code></pre>
+
+
+            </div>
+            <h2 id="using-a-format-string">Using a format string</h2>
+            <div>
+                <p>Using a format string provides information about the expected number and type of the subsequent variadic arguments in such a way as to avoid the need for an explicit count argument or a terminator value.</p>
+<p>The example below shows a a function that wraps the standard <code>printf()</code> function, only allowing for the use of variadic arguments of the type <code>char</code>, <code>int</code> and <code>double</code> (in decimal floating point format). Here, like with <code>printf()</code>, the first argument to the wrapping function is the format string. As the format string is parsed the function is able to determine if there is another variadic argument expected and what it's type should be.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+int simple_printf(const char *format, ...)
+{
+    va_list ap; /* hold information about the variadic argument list. */
+    int printed = 0; /* count of printed characters */
+
+    va_start(ap, format); /* start variadic argument processing */
+
+    while (*format != '\0') /* read format string until string terminator */
+    {
+        int f = 0;
+
+        if (*format == '%')
+        {
+            ++format;
+            switch(*format)
+            {
+                case 'c' :
+                    f = printf(&quot;%d&quot;, va_arg(ap, int)); /* print next variadic argument, note type promotion from char to int */
+                    break;
+                case 'd' :
+                    f = printf(&quot;%d&quot;, va_arg(ap, int)); /* print next variadic argument */
+                    break;
+
+                case 'f' :
+                    f = printf(&quot;%f&quot;, va_arg(ap, double)); /* print next variadic argument */
+                    break;
+                default :
+                    f = -1; /* invalid format specifier */
+                    break;
+            }
+        }
+        else
+        {
+            f = printf(&quot;%c&quot;, *format); /* print any other characters */
+        }
+
+        if (f &lt; 0) /* check for errors */
+        {
+            printed = f;
+            break;
+        }
+        else
+        {
+            printed += f;
+        }
+        ++format; /* move on to next character in string */
+    }
+
+    va_end(ap); /* end variadic argument processing */
+
+    return printed;
+}
+
+int main (int argc, char *argv[])
+{
+    int x = 40;
+    int y = 0;
+
+    y = simple_printf(&quot;There are %d characters in this sentence&quot;, x);
+    simple_printf(&quot;\n%d were printed\n&quot;, y);
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="using-an-explicit-count-argument-to-determine-the-length-of-the-va-list">Using an explicit count argument to determine the length of the va_list</h2>
+            <div>
+                <p>With any variadic function, the function must know how to interpret the variable arguments list.  With the <code>printf()</code> or <code>scanf()</code> functions, the format string tells the function what to expect.</p>
+<p>The simplest technique is to pass an explicit count of the other arguments (which are normally all the same type). This is demonstrated in the variadic function in the code below which calculates the sum of a series of integers, where there may be any number of integers but that count is specified as an argument prior to the variable argument list.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+/* first arg is the number of following int args to sum. */
+int sum(int n, ...) {
+    int sum = 0;
+    va_list it; /* hold information about the variadic argument list. */
+
+    va_start(it, n); /* start variadic argument processing */
+    while (n--)
+      sum += va_arg(it, int); /* get and sum the next variadic argument */
+    va_end(it); /* end variadic argument processing */
+
+    return sum;
+}
+
+int main(void)
+{
+    printf(&quot;%d\n&quot;, sum(5, 1, 2, 3, 4, 5)); /* prints 15 */
+    printf(&quot;%d\n&quot;, sum(10, 5, 9, 2, 5, 111, 6666, 42, 1, 43, -6218)); /* prints 666 */
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="using-terminator-values-to-determine-the-end-of-va-list">Using terminator values to determine the end of va_list</h2>
+            <div>
+                <p>With any variadic function, the function must know how to interpret the variable arguments list.
+The “traditional” approach (exemplified by <code>printf</code>) is to specify number of arguments up front. However, this is not always a good idea:</p>
+<pre><code>/* First argument specifies the number of parameters; the remainder are also int */
+extern int sum(int n, ...);
+
+/* But it's far from obvious from the code. */
+sum(5, 2, 1, 4, 3, 6)
+
+/* What happens if i.e. one argument is removed later on? */
+sum(5, 2, 1, 3, 6)  /* Disaster */
+</code></pre>
+<p>Sometimes it's more robust to add an explicit terminator, exemplified by the POSIX <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/execlp.html" rel="nofollow noreferrer"><code>execlp()</code></a>
+function. Here's another function to calculate the sum of a series of <code>double</code> numbers:</p>
+<pre><code>#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+/* Sums args up until the terminator NAN */
+double sum (double x, ...) {
+  double sum = 0;
+  va_list va;
+
+  va_start(va, x);
+  for (; !isnan(x); x = va_arg(va, double)) {
+    sum += x;
+  }
+  va_end(va);
+
+  return sum;
+}
+
+int main (void) {
+  printf(&quot;%g\n&quot;, sum(5., 2., 1., 4., 3., 6., NAN));
+  printf(&quot;%g\n&quot;, sum(1, 0.5, 0.25, 0.125, 0.0625, 0.03125, NAN));
+}
+</code></pre>
+<p>Good terminator values:</p>
+<ul>
+<li>integer (supposed to be all positive or non-negative) — <code>0</code> or <code>-1</code></li>
+<li>floating point types — <code>NAN</code></li>
+<li>pointer types — <code>NULL</code></li>
+<li>enumerator types — some special value</li>
+</ul>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../2674/valgrind.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../628/x-macros.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-04-14</div>
+        <div itemprop="datePublished">2016-04-14</div>
+        <div itemprop="dateModified">2017-05-29</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=455" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1852809441" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#parameters">
+                    Parameters
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#implementing-functions-with-a-printf-like-interface">
+                    Implementing functions with a `printf()`-like interface
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-a-format-string">
+                    Using a format string
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-an-explicit-count-argument-to-determine-the-length-of-the-va-list">
+                    Using an explicit count argument to determine the length of the va_list
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-terminator-values-to-determine-the-end-of-va-list">
+                    Using terminator values to determine the end of va_list
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/455/variable-arguments by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

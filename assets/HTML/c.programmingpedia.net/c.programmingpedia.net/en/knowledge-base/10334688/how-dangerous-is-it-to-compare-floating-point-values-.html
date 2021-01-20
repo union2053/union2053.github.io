@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10334688/how-dangerous-is-it-to-compare-floating-point-values- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How dangerous is it to compare floating point values? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How dangerous is it to compare floating point values? | C Language Knowledge Base">
+        <title>[SOLVED] How dangerous is it to compare floating point values? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-dangerous-is-it-to-compare-floating-point-values-">How dangerous is it to compare floating point values?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/floating-accuracy.html">floating-accuracy</a></span>
+                        <span class="tag-item"><a href="../tag/floating-point.html">floating-point</a></span>
+                        <span class="tag-item"><a href="../tag/ios.html">ios</a></span>
+                        <span class="tag-item"><a href="../tag/objective-c.html">objective-c</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I know <code>UIKit</code> uses <code>CGFloat</code> because of the resolution independent coordinate system.</p>
+
+<p>But every time I want to check if for example <code>frame.origin.x</code> is <code>0</code> it makes me feel sick:</p>
+
+<pre><code>if (theView.frame.origin.x == 0) {
+    // do important operation
+}
+</code></pre>
+
+<p>Isn't <code>CGFloat</code> vulnerable to false positives when comparing with <code>==</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code>?
+It is a floating point and they have unprecision problems: <code>0.0000000000041</code> for example.</p>
+
+<p>Is <code>Objective-C</code> handling this internally when comparing or can it happen that a <code>origin.x</code> which reads as zero does not compare to <code>0</code> as true?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/472300/proud-member" target="_blank"><span itemprop="name">Proud Member</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">380</div>
+                                    <div itemprop="dateCreated">12/17/2015 12:09:49 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>First of all, floating point values are not "random" in their behavior. Exact comparison can and does make sense in plenty of real-world usages. But if you're going to use floating point you need to be aware of how it works. Erring on the side of assuming floating point works like real numbers will get you code that quickly breaks. Erring on the side of assuming floating point results have large random fuzz associated with them (like most of the answers here suggest) will get you code that appears to work at first but ends up having large-magnitude errors and broken corner cases.</p>
+
+<p>First of all, if you want to program with floating point, you should read this:</p>
+
+<p><a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">What Every Computer Scientist Should Know About Floating-Point Arithmetic</a></p>
+
+<p>Yes, read all of it. If that's too much of a burden, you should use integers/fixed point for your calculations until you have time to read it. :-)</p>
+
+<p>Now, with that said, the biggest issues with exact floating point comparisons come down to:</p>
+
+<ol>
+<li><p>The fact that lots of values you may write in the source, or read in with <code>scanf</code> or <code>strtod</code>, <em>do not exist</em> as floating point values and get silently converted to the nearest approximation. This is what demon9733's answer was talking about.</p></li>
+<li><p>The fact that many results get rounded due to not having enough precision to represent the actual result. An easy example where you can see this is adding <code>x = 0x1fffffe</code> and <code>y = 1</code> as floats. Here, <code>x</code> has 24 bits of precision in the mantissa (ok) and <code>y</code> has just 1 bit, but when you add them, their bits are not in overlapping places, and the result would need 25 bits of precision. Instead, it gets rounded (to <code>0x2000000</code> in the default rounding mode).</p></li>
+<li><p>The fact that many results get rounded due to needing infinitely many places for the correct value. This includes both rational results like 1/3 (which you're familiar with from decimal where it takes infinitely many places) but also 1/10 (which also takes infinitely many places in binary, since 5 is not a power of 2), as well as irrational results like the square root of anything that's not a perfect square.</p></li>
+<li><p>Double rounding. On some systems (particularly x86), floating point expressions are evaluated in higher precision than their nominal types. This means that when one of the above types of rounding happens, you'll get two rounding steps, first a rounding of the result to the higher-precision type, then a rounding to the final type. As an example, consider what happens in decimal if you round 1.49 to an integer (1), versus what happens if you first round it to one decimal place (1.5) then round that result to an integer (2). This is actually one of the nastiest areas to deal with in floating point, since the behaviour of the compiler (especially for buggy, non-conforming compilers like GCC) is unpredictable.</p></li>
+<li><p>Transcendental functions (<code>trig</code>, <code>exp</code>, <code>log</code>, etc.) are not specified to have correctly rounded results; the result is just specified to be correct within one unit in the last place of precision (usually referred to as <strong>1ulp</strong>).</p></li>
+</ol>
+
+<p>When you're writing floating point code, you need to keep in mind what you're doing with the numbers that could cause the results to be inexact, and make comparisons accordingly. Often times it will make sense to compare with an "epsilon", but that epsilon should be based on the <em>magnitude of the numbers you are comparing</em>, not an absolute constant. (In cases where an absolute constant epsilon would work, that's strongly indicative that fixed point, not floating point, is the right tool for the job!)</p>
+
+<p><strong>Edit:</strong> In particular, a magnitude-relative epsilon check should look something like:</p>
+
+<pre><code>if (fabs(x-y) &lt; K * FLT_EPSILON * fabs(x+y))
+</code></pre>
+
+<p>Where <code>FLT_EPSILON</code> is the constant from <code>float.h</code> (replace it with <code>DBL_EPSILON</code> for<code>double</code>s or <code>LDBL_EPSILON</code> for <code>long double</code>s) and <code>K</code> is a constant you choose such that the accumulated error of your computations is definitely bounded by <code>K</code> units in the last place (and if you're not sure you got the error bound calculation right, make <code>K</code> a few times bigger than what your calculations say it should be).</p>
+
+<p>Finally, note that if you use this, some special care may be needed near zero, since <code>FLT_EPSILON</code> does not make sense for denormals. A quick fix would be to make it:</p>
+
+<pre><code>if (fabs(x-y) &lt; K * FLT_EPSILON * fabs(x+y) || fabs(x-y) &lt; FLT_MIN)
+</code></pre>
+
+<p>and likewise substitute <code>DBL_MIN</code> if using doubles.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/379897/r--" target="_blank"><span itemprop="name">R..</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/10334688/how-dangerous-is-it-to-compare-floating-point-values-#answer-0</div>
+                                            <div itemprop="upvoteCount">452</div>
+                                            <div itemprop="dateCreated">9/28/2015 12:32:03 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Since 0 is exactly representable as an IEEE754 floating-point number (or using any other implementation of f-p numbers I've ever worked with) comparison with 0 is probably safe.  You might get bitten, however, if your program computes a value (such as <code>theView.frame.origin.x</code>) which you have reason to believe ought to be 0 but which your computation cannot guarantee to be 0.</p>
+
+<p>To clarify a little, a computation such as :</p>
+
+<pre><code>areal = 0.0
+</code></pre>
+
+<p>will (unless your language or system is broken) create a value such that (areal==0.0) returns true but another computation such as</p>
+
+<pre><code>areal = 1.386 - 2.1*(0.66)
+</code></pre>
+
+<p>may not.</p>
+
+<p>If you can assure yourself that your computations produce values which are 0 (and not just that they produce values which ought to be 0) then you can go ahead and compare f-p values with 0.  If you can't assure yourself to the required degree, best stick to the usual approach of 'toleranced equality'.</p>
+
+<p>In the worst cases the careless comparison of f-p values can be extremely dangerous: think avionics, weapons-guidance, power-plant operations, vehicle navigation, almost any application in which computation meets the real world.  </p>
+
+<p>For Angry Birds, not so dangerous.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/44309/high-performance-mark" target="_blank">High Performance Mark</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/10334688" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10334688/how-dangerous-is-it-to-compare-floating-point-values- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:17 GMT -->
+</html>

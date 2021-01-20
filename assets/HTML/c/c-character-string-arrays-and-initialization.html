@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-arrays-and-initialization.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Character String Arrays and Initialization</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Character String Arrays and Initialization'>C Character String Arrays and Initialization</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Character String Arrays and Initialization</h1>
+<a class ='btn btn-outline-dark' href=c-character-string-literals.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-arrays-of-character-strings.html>Next</a><p>When you define a character string array, you must let the compiler know 
+how much space is needed. 
+
+</p><p>One way is to specify an array size large enough to hold the string. 
+
+</p><p>The following declaration initializes the array m1 to the characters 
+of the indicated string:
+</p><div class='myCodeDiv'><button id='SBGAX' class='myCopyButton' data-clipboard-target='#AOZRC'>Copy</button><pre  id='AOZRC' style='font-size:18px;' class='code'><span class='r'>const</span> <span class='r'>char</span> m1[40] = <span class='q'>"this is a test."</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SBGAX');clipboard.on('success', function(e) {$('#SBGAX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SBGAX').text('error');});</script></div><p>The const indicates the intent to not alter this string.
+
+</p><p>This form of initialization is short for the standard array initialization form.
+
+</p><p>Without the closing null character, you have a character array, but not a string.
+
+</p><p>When you specify the array size, be sure that the number of elements is at 
+least one more (null ending character) than the string length. 
+
+</p><p>Any unused elements are automatically initialized to 0, 
+which in char form is the null character, not the zero digit character.
+
+</p><p>It is convenient to let the compiler determine the array size.
+
+</p><p>If you omit the size in an initializing declaration, the compiler determines the 
+size for you:
+</p><div class='myCodeDiv'><button id='YEGXU' class='myCopyButton' data-clipboard-target='#LYOCH'>Copy</button><pre  id='LYOCH' style='font-size:18px;' class='code'><span class='r'>const</span> <span class='r'>char</span> m2[] = <span class='q'>"this is a test from demo2s.com."</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YEGXU');clipboard.on('success', function(e) {$('#YEGXU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YEGXU').text('error');});</script></div><p>Letting the compiler compute the size of the array works only if you initialize the array. 
+
+</p><p>If you create an array you intend to fill later, you need to specify the size 
+when you declare it. 
+
+</p><p>When you do declare an array size, the array size must evaluate to an integer. 
+
+</p><p>Prior to the advent of variable length arrays (<b>VLAs</b>) with C99, the size had to be 
+an integer constant, which includes the possibility of an expression formed from constant integer values.
+</p><div class='myCodeDiv'><button id='EFCZS' class='myCopyButton' data-clipboard-target='#GIPXM'>Copy</button><pre  id='GIPXM' style='font-size:18px;' class='code'><span class='r'>int</span> n = 8;
+<span class='r'>char</span> cookies[1];    <span class='c'>// valid</span>
+<span class='r'>char</span> cakes[2 + 5]; <span class='c'>// valid, size is a constant expression</span>
+<span class='r'>char</span> pies[2*<span class='r'>sizeof</span>(<span class='r'>long</span> <span class='r'>double</span>) + 1]; <span class='c'>// valid</span>
+<span class='r'>char</span> my_array[n];     <span class='c'>// invalid prior to C99, a VLA after C99</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EFCZS');clipboard.on('success', function(e) {$('#EFCZS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EFCZS').text('error');});</script></div><p>The name of a character array, like any array name, yields the address of the 
+first element of the array. 
+
+</p><p>Therefore, the following holds:
+</p><div class='myCodeDiv'><button id='NENOO' class='myCopyButton' data-clipboard-target='#VXNAE'>Copy</button><pre  id='VXNAE' style='font-size:18px;' class='code'><span class='r'>char</span> car[10] = <span class='q'>"test"</span>;
+car == &amp;car[0] , 
+*car == <span class='q'>'T'</span>, <span class='r'>and</span> 
+*(car+1) == car[1] == <span class='q'>'a'</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NENOO');clipboard.on('success', function(e) {$('#NENOO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NENOO').text('error');});</script></div><p>Indeed, you can use pointer notation to set up a string. 
+
+</p><p>For example:
+</p><div class='myCodeDiv'><button id='RYDMD' class='myCopyButton' data-clipboard-target='#XIVAK'>Copy</button><pre  id='XIVAK' style='font-size:18px;' class='code'><span class='r'>const</span> <span class='r'>char</span> * pt1 = <span class='q'>"Something is pointing at me."</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RYDMD');clipboard.on('success', function(e) {$('#RYDMD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RYDMD').text('error');});</script></div><p>This declaration is very nearly the same as this one:
+</p><div class='myCodeDiv'><button id='HYWIY' class='myCopyButton' data-clipboard-target='#QXWSD'>Copy</button><pre  id='QXWSD' style='font-size:18px;' class='code'><span class='r'>const</span> <span class='r'>char</span> ar1[] = <span class='q'>"Something is pointing at me."</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HYWIY');clipboard.on('success', function(e) {$('#HYWIY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HYWIY').text('error');});</script></div><p>The declarations is saying that both pt1 and ar1 are addresses of strings. In both
+cases, the quoted string itself determines the amount of storage set aside for the string.
+Nonetheless, the forms are not identical.
+
+</p><h3>Array Versus Pointer
+
+</h3><p>Initializing the array copies a string from static storage to the array, whereas 
+initializing the pointer merely copies the address of the string. 
+
+</p><p>The following code illustrates these points.
+</p><div class='myCodeDiv'><button id='ZEKTC' class='myCopyButton' data-clipboard-target='#FYONQ'>Copy</button><pre  id='FYONQ' style='font-size:18px;' class='code'>#define MSG <span class='q'>"Hi'"</span>
+
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main()
+{
+    <span class='r'>char</span> ar[] = MSG;
+    <span class='r'>const</span> <span class='r'>char</span> *pt = MSG;
+    printf(<span class='q'>"address of \"Hi'\": %p \n", "Hi'"</span>);
+    printf(<span class='q'>"        address ar: %p\n"</span>, ar);
+    printf(<span class='q'>"        address pt: %p\n"</span>, pt);
+    printf(<span class='q'>"    address of MSG: %p\n"</span>, MSG);
+    printf(<span class='q'>"address of \"Hi'\": %p \n", "Hi'"</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZEKTC');clipboard.on('success', function(e) {$('#ZEKTC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZEKTC').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p><i style='color:blue'>pt</i> and <b>MSG</b> are the same address, while <i style='color:blue'>ar</i> is a different address. 
+
+</p><p>Although the string literal "Hi'." occurs twice in the <i style='color:blue'>printf</i>() statements, 
+the compiler chose to use one storage location, but not the same address as MSG. 
+
+</p><p>The compiler can store a literal that's used more than once in one or more locations. 
+
+</p><p>The part of memory used for static data is different from that used for dynamic memory, 
+the memory used for ar. 
+
+</p><h3>Array and Pointer Differences
+
+</h3><p>For example, consider these two declarations:
+</p><div class='myCodeDiv'><button id='MOGEQ' class='myCopyButton' data-clipboard-target='#STVCK'>Copy</button><pre  id='STVCK' style='font-size:18px;' class='code'><span class='r'>char</span> my_string[] = <span class='q'>"I love C!"</span>;
+<span class='r'>const</span> <span class='r'>char</span> *my_string_pointer = <span class='q'>"I love C++!"</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MOGEQ');clipboard.on('success', function(e) {$('#MOGEQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MOGEQ').text('error');});</script></div><p>The main difference is that the array name my_string is a constant, 
+but the pointer my_string_pointer is a variable. 
+
+</p><p>First, both can use array notation:
+</p><div class='myCodeDiv'><button id='OGXQI' class='myCopyButton' data-clipboard-target='#YDYGE'>Copy</button><pre  id='YDYGE' style='font-size:18px;' class='code'><span class='r'>for</span> (i = 0; i &lt; 6; i++)
+    putchar(my_string[i]);
+putchar(<span class='q'>'\n'</span>);
+<span class='r'>for</span> (i = 0; i &lt; 6; i++)
+    putchar(my_string_pointer[i]));
+putchar(<span class='q'>'\n'</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OGXQI');clipboard.on('success', function(e) {$('#OGXQI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OGXQI').text('error');});</script></div><p>This is the output:
+</p><div class='myCodeDiv'><button id='FBHXS' class='myCopyButton' data-clipboard-target='#DAJBR'>Copy</button><pre  id='DAJBR' style='font-size:18px;' class='code'>I love
+I love
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FBHXS');clipboard.on('success', function(e) {$('#FBHXS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FBHXS').text('error');});</script></div><p>Next, both can use pointer addition:
+</p><div class='myCodeDiv'><button id='YQISC' class='myCopyButton' data-clipboard-target='#HCMGK'>Copy</button><pre  id='HCMGK' style='font-size:18px;' class='code'><span class='r'>for</span> (i = 0; i &lt; 6; i++)
+    putchar(*(my_string + i));
+putchar(<span class='q'>'\n'</span>);
+<span class='r'>for</span> (i = 0; i &lt; 6; i++)
+    putchar(*(my_string_pointer + i));
+putchar(<span class='q'>'\n'</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YQISC');clipboard.on('success', function(e) {$('#YQISC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YQISC').text('error');});</script></div><p>the output is as follows:
+</p><div class='myCodeDiv'><button id='GWSUQ' class='myCopyButton' data-clipboard-target='#SAPXI'>Copy</button><pre  id='SAPXI' style='font-size:18px;' class='code'>I love
+I love
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GWSUQ');clipboard.on('success', function(e) {$('#GWSUQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GWSUQ').text('error');});</script></div><p>Only the pointer version, however, can use the increment operator:
+</p><div class='myCodeDiv'><button id='QNUPO' class='myCopyButton' data-clipboard-target='#XJJAY'>Copy</button><pre  id='XJJAY' style='font-size:18px;' class='code'><span class='r'>while</span> (*(my_string_pointer) != <span class='q'>'\0'</span>)     <span class='c'>/* stop at end of string            */</span>
+    putchar(*(my_string_pointer++));     <span class='c'>/* print character, advance pointer */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QNUPO');clipboard.on('success', function(e) {$('#QNUPO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QNUPO').text('error');});</script></div><p>This produces the following output:
+</p><div class='myCodeDiv'><button id='FWGZH' class='myCopyButton' data-clipboard-target='#SIVEA'>Copy</button><pre  id='SIVEA' style='font-size:18px;' class='code'>I love C++!
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FWGZH');clipboard.on('success', function(e) {$('#FWGZH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FWGZH').text('error');});</script></div><p>Suppose you want assign my_string_pointer with my_string. You can do the following:
+</p><div class='myCodeDiv'><button id='HPGKU' class='myCopyButton' data-clipboard-target='#WIKJD'>Copy</button><pre  id='WIKJD' style='font-size:18px;' class='code'><span class='c'>/* my_string_pointer now points to the array my_string */</span>
+my_string_pointer = my_string;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HPGKU');clipboard.on('success', function(e) {$('#HPGKU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HPGKU').text('error');});</script></div><p>This makes the my_string_pointer pointer point to the first element of the my_string array.
+
+</p><p>However, you cannot say
+</p><div class='myCodeDiv'><button id='LXUQA' class='myCopyButton' data-clipboard-target='#UFDPC'>Copy</button><pre  id='UFDPC' style='font-size:18px;' class='code'>my_string = my_string_pointer;    <span class='c'>/* illegal construction */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LXUQA');clipboard.on('success', function(e) {$('#LXUQA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LXUQA').text('error');});</script></div><p>The situation is analogous to x = 3; versus 3 = x;. 
+
+</p><p>The left side of the assignment statement must be a variable or, more generally, 
+a modifiable lvalue, such as *p_int. 
+
+</p><p>Incidentally, my_string_pointer = my_string; does not make the Millie string vanish; it just changes 
+the address stored in my_string_pointer.
+
+</p><p>Unless you've saved the address of "I love C++!" elsewhere, however, you won't be able
+to access that string when my_string_pointer points to another location.
+
+There is a way to alter the my_string message-go to the individual array elements:
+</p><div class='myCodeDiv'><button id='DYQRV' class='myCopyButton' data-clipboard-target='#YETSE'>Copy</button><pre  id='YETSE' style='font-size:18px;' class='code'>my_string[7]= <span class='q'>'M'</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DYQRV');clipboard.on('success', function(e) {$('#DYQRV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DYQRV').text('error');});</script></div><p>or
+</p><div class='myCodeDiv'><button id='DDLJY' class='myCopyButton' data-clipboard-target='#AWDNW'>Copy</button><pre  id='AWDNW' style='font-size:18px;' class='code'>*(my_string + 7) = <span class='q'>'M'</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DDLJY');clipboard.on('success', function(e) {$('#DDLJY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DDLJY').text('error');});</script></div><p>The elements of an array are variables unless the array was declared as const, but the name is
+not a variable.
+</p><a class ='btn btn-outline-dark' href=c-character-string-literals.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-arrays-of-character-strings.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointer-exercise-4.html'>C pointer exercise 4</a></LI><LI><a href='c-char-string-introduction.html'>C Char String Introduction</a></LI><LI><a href='c-character-string-literals.html'>C Character String Literals</a></LI><LI><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings</a></LI><LI><a href='c-pointers-and-strings.html'>C Pointers and Strings</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-arrays-and-initialization.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

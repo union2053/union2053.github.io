@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-float-double-and-long-double.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C float, double, and long double</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C float, double, and long double'>C float, double, and long double</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C float, double, and long double</h1>
+<a class ='btn btn-outline-dark' href=c-bool-type.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printing-floating-point-values.html>Next</a><p>C  type <i style='color:blue'>float</i>,  <i style='color:blue'>double</i>, or  <i style='color:blue'>long</i> <i style='color:blue'>double</i> correspond to the  real  types.
+
+</p><p>The floating-point approach enables you to
+represent a much greater range of numbers, including decimal fractions.
+
+</p><p>Floating-point number representation is similar to  scientific notation , a system used by scientists to express very large
+and very small numbers.
+
+</p><p>In scientific notation, numbers are represented as decimal numbers times powers of 10.
+
+</p><p>Here are some examples.
+</p><table class='table table-hover'><thead><tr><th>Number</th><th> Exponential Notation</th></tr></thead><tbody><tr><td>1,000,000,000</td><td>   1.0e9</td></tr><tr><td>123,000</td><td> 1.23e5</td></tr><tr><td>322.56</td><td> 3.2256e2</td></tr><tr><td>0.000056</td><td>   5.6e-5</td></tr></tbody></table><p>The first column shows the usual notation, the second column exponential notation,
+or  e-notation, which is the way scientific notation is usually
+written for and by computers, with the  e  followed by the power of 10.
+</p><h3>double
+</h3><p>C has a  double floating-point type. The double  type has the same
+minimum range requirements as float , but it extends the minimum number of significant
+figures.
+
+</p><p>Typical <i style='color:blue'>double</i>  representations use 64 bits instead of 32.
+
+</p><p>C has a third floating-point type: long double.
+
+</p><p>It provides for even more precision than double.
+
+</p><p>However, C guarantees only that  long double  is at least as precise as double.
+</p><p>The three types of floating-point variables are listed in the following table.
+</p><table class='table table-hover'><thead><tr><th>Keyword<br/></th><th>   Number of bytes<br/></th><th>   Range of values<br/></th></tr></thead><tbody><tr><td>float<br/></td><td>   4<br/></td><td>   +/-3.4E+/-38 (6-7 decimal digits of precision)<br/></td></tr><tr><td>double<br/></td><td>   8<br/></td><td>   +/-1.7E+/-308 (15 decimal digits of precision)<br/></td></tr><tr><td>long double<br/></td><td>   12<br/></td><td>   +/-1.19E+/-4932 (18 decimal digits of precision)<br/></td></tr></tbody></table><h3>Declaring Floating-Point Variables
+
+</h3><p>Floating-point variables are declared and initialized in the same manner as integer.
+
+</p><p>Here are some examples:
+</p><div class='myCodeDiv'><button id='XXANP' class='myCopyButton' data-clipboard-target='#MLGBL'>Copy</button><pre  id='MLGBL' style='font-size:18px;' class='code'><span class='r'>float</span>          n, j;
+<span class='r'>double</span>         t;
+<span class='r'>float</span>          p = 6.63e-34;
+<span class='r'>long</span> <span class='r'>double</span>    g;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XXANP');clipboard.on('success', function(e) {$('#XXANP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XXANP').text('error');});</script></div><h3>Floating-Point Constants (Literals)
+
+</h3><p>To write a constant of type float, you append an f to the number to distinguish it from type double. 
+
+</p><p>You could initialize the variables when you declare them like this: 
+</p><div class='myCodeDiv'><button id='QKRKD' class='myCopyButton' data-clipboard-target='#RXIZK'>Copy</button><pre  id='RXIZK' style='font-size:18px;' class='code'><span class='r'>float</span> radius = 2.5f; 
+<span class='r'>double</span> biggest = 123E30;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QKRKD');clipboard.on('success', function(e) {$('#QKRKD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QKRKD').text('error');});</script></div><p>To specify a long double constant, you append an uppercase or lowercase letter  L, as in the following
+example:
+</p><div class='myCodeDiv'><button id='CERGW' class='myCopyButton' data-clipboard-target='#GBMSP'>Copy</button><pre  id='GBMSP' style='font-size:18px;' class='code'><span class='r'>long</span> <span class='r'>double</span> huge = 1234567.89123L;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CERGW');clipboard.on('success', function(e) {$('#CERGW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CERGW').text('error');});</script></div><p>The basic form of a floating-point literal is a signed series of digits,
+including a decimal point, followed by an  e  or  E, followed by a signed exponent
+indicating the power of 10 used.
+
+</p><p>Here are two valid floating-point constants:
+</p><div class='myCodeDiv'><button id='EWACS' class='myCopyButton' data-clipboard-target='#HGNBA'>Copy</button><pre  id='HGNBA' style='font-size:18px;' class='code'>-1.56E+12
+2.87e-3
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EWACS');clipboard.on('success', function(e) {$('#EWACS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EWACS').text('error');});</script></div><p>You can leave out positive signs. You can do without a decimal point (2E5) or an
+exponential part (123.456), but not both simultaneously.
+
+</p><p>You can omit a fractional part (3.E16) or an integer
+part (.45E-6), but not both.
+
+</p><p>Here are some more valid floating-point constants:
+</p><div class='myCodeDiv'><button id='JKPPO' class='myCopyButton' data-clipboard-target='#FLDWS'>Copy</button><pre  id='FLDWS' style='font-size:18px;' class='code'>3.14159
+.2
+4e16
+.8E-5
+100.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JKPPO');clipboard.on('success', function(e) {$('#JKPPO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JKPPO').text('error');});</script></div><p>Don't use spaces in a floating-point constant.
+</p><div class='myCodeDiv'><button id='BPNBF' class='myCopyButton' data-clipboard-target='#KWMDN'>Copy</button><pre  id='KWMDN' style='font-size:18px;' class='code'>Wrong: 1.56 E+12
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BPNBF');clipboard.on('success', function(e) {$('#BPNBF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BPNBF').text('error');});</script></div><p>By default, the compiler assumes floating-point constants are  double  precision.
+
+</p><p>Suppose, for example, that some  is a  float  variable and that you have the following statement:
+</p><div class='myCodeDiv'><button id='EKVEO' class='myCopyButton' data-clipboard-target='#KJEJN'>Copy</button><pre  id='KJEJN' style='font-size:18px;' class='code'><span class='r'>double</span> some = 4.0 * 2.0;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EKVEO');clipboard.on('success', function(e) {$('#EKVEO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EKVEO').text('error');});</script></div><p>Then  4.0  and  2.0  are stored as  double , using typically 64 bits for each.
+
+</p><p>The product is calculated using double precision arithmetic, and only then is the answer trimmed to regular float
+size.
+
+</p><p>This ensures greater precision for your calculations.
+
+</p><p>C enables you to override this default by using an f  or  F  suffix to make the compiler treat a
+floating-point constant as type float; examples are  2.3f  and  9.11E9F.
+
+</p><p>If the floating-point number has no suffix, it is type  <i style='color:blue'>double</i>.
+
+</p><p>Since C99, C has a new format for expressing floating-point constants.
+
+</p><p>It uses a hexadecimal prefix ( 0x  or  0X ) with hexadecimal digits, a <i style='color:blue'>p</i> or <b>P</b> instead of  e  or  E,
+and an exponent that is a power of 2 instead of a power of 10.
+
+</p><p>Here's what such a number might look like:
+</p><div class='myCodeDiv'><button id='BRMBR' class='myCopyButton' data-clipboard-target='#GWJJL'>Copy</button><pre  id='GWJJL' style='font-size:18px;' class='code'>0xa.1fp10
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BRMBR');clipboard.on('success', function(e) {$('#BRMBR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BRMBR').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-bool-type.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printing-floating-point-values.html>Next</a><h2>Related</h2><UL><LI><a href='c-character-strings.html'>C Character Strings</a></LI><LI><a href='c-using-strlen-function-to-get-char-string-length.html'>C Using strlen() Function to get char string length</a></LI><LI><a href='c-bool-type.html'>C _Bool Type</a></LI><LI><a href='c-printing-floating-point-values.html'>C Printing Floating-Point Values</a></LI><LI><a href='c-floating-point-round-off-errors.html'>C Floating-Point Round-off Errors</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-float-double-and-long-double.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Character Strings</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Character Strings'>C Character Strings</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Character Strings</h1>
+<a class ='btn btn-outline-dark' href=c-use-arithmetic-operations-on-type-char.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-using-strlen-function-to-get-char-string-length.html>Next</a><p>A character string is a series of one or more characters.
+
+</p><p>Here is an example of a string:
+"Zing went the strings of my heart!"
+
+</p><p>The double quotation marks are not part of the string.
+
+</p><p>They inform the compiler that they enclose a string,
+just as single quotation marks identify a character.
+
+
+</p><h3>Type char Arrays and the Null Character
+
+</h3><p>C has no special variable type for strings.
+
+</p><p>Instead, strings are stored in an array of type char.
+
+</p><p>Characters in a string are stored in adjacent memory cells, one character per cell,
+and an array consists of adjacent memory locations.
+
+</p><center><img alt='c-char-string.png' src='data:image/png;base64,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'/></center><br/><p>Note that the figure above shows the character \0 in the last array position.
+
+</p><p>This is the null character, and C uses it to mark the end of a string.
+
+</p><p>The null character is not the digit zero;
+it is the non-printing character whose ASCII code value is 0.
+
+Strings in C are always stored with this terminating null character.
+
+</p><p>The presence of the null character means that the
+array must have at least one more cell than the number of characters to be stored.
+
+</p><p>So when the preceding program said it had 40 bytes to store the string, that meant it could hold up to 39
+characters in addition to the null character.
+
+</p><p>An array is an ordered sequence of data elements of one type. This
+example creates an array of 40 memory cells, or elements, each of which can store one
+char-type value by using this declaration:
+
+</p><div class='myCodeDiv'><button id='IMIYE' class='myCopyButton' data-clipboard-target='#FTXVE'>Copy</button><pre  id='FTXVE' style='font-size:18px;' class='code'><span class='r'>char</span> name[40];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IMIYE');clipboard.on('success', function(e) {$('#IMIYE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IMIYE').text('error');});</script></div><p>The brackets after name identify it as an array.
+
+</p><p>The 40 within the brackets indicates the number of elements in the array.
+
+</p><p>The char identifies the type of each element.
+
+</p><h3>Using Strings
+</h3><p>The program shows how to use strings.
+
+</p><div class='myCodeDiv'><button id='IENZT' class='myCopyButton' data-clipboard-target='#LYLVU'>Copy</button><pre  id='LYLVU' style='font-size:18px;' class='code'><span class='c'>/* main.c -- uses an assortment of strings */</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define PRAISE <span class='q'>"Hi."</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> name[40];
+
+    printf(<span class='q'>"What's your name? "</span>);
+    scanf(<span class='q'>"%s"</span>, name);
+    printf(<span class='q'>"Hello, %s. %s\n"</span>, name, PRAISE);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IENZT');clipboard.on('success', function(e) {$('#IENZT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IENZT').text('error');});</script></div><p>The %s tells <i style='color:blue'>printf</i>() to print a string.
+
+</p><p>The %s appears twice because the program prints two strings:
+the one stored in the name array and the one represented by PRAISE.
+
+</p><p>Running praise1.c should produce an output similar to this:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABACAIAAADH6BVtAAAE5klEQVR42u3dQZLbNhAFUB9C9z9jUpW94soi5RqRjUajSZHSe+XFWKYoEBwLXw2Q+vUEALiJX7oAABBcAAAEFwBAcAEAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcAAAEFwBAcAEAEFwAAAQXAEBwAQAQXAAABBc43uPx0AkAtwkuj/+cNkKc+XIMT4RzUQ4ueg+gP7hsjk+vD7a8/2Z2YrC84DhdPh2PF++NX0c0IN6n32SA5uASvLf+iDKnfWz1Xn/BAsPiSXnLOX2NX4ILwKcFl/jn4UfnvQ0eO2bf68sfoJOFpfgY945r75FCmeHPQyt09Y+nBwP2bBXkiOBS/nVaj1/JjoobkPmtTp5NACrB5Uca2BwR8x/Ky5/ak4GmMAzMtjlzCHuPlOtVi129NxIH7UlO4R1awilsUOjJOGLGGatccemadwMQXOaCy+xIdsHphrhJmRErGVxWmrrY1cOfCwNze88P2zDbyGF0yJ/69uDS/msMILj0BJfhTFDL+Nc4fTA7mpZrMO3BJejqTHBpmbbrra88t+pGvWt7ZztKcAG4dHDZXNGyMhSd8JZdmz64e3CpFQ9qF4i9Mbgc8Z9BcAEQXG4WXDaPTnA5+ry8JbgsdpTgAvBFwSUzVdS+tHYxuDxLK0bfHlwKMyD50HbElNxpiTDomeOCS9cSdQDBZemz6d41w5vj3OuFpnvbFMahlhUP+SuuhxsEV1PXrnta6erX2wbuXeubXOCy0s/Dp091dXlaMO7AuKOS62yGdwHo6lIAweVLGTkAQHCRWoAb++fvv37/0Q8guFwlr7iBKRCnlvcGl//bID8huACQyg1XSC2yC4ILANcNLj9eWnZBcAHg0sHlOo0BwQX40hDwZ+Vgcx7kdX6kfeNkOzezwt7ETfxCwUvnSynDxuR3MtuY8tGB4AJ8Wg1j85GjN87UOfZG6GAszySnZBoYdt3wYIdPTzamdnQguDDm2igEl5XgMtzDsMrStbdhqHruzCVNPT3fmMLRwf2Cy+wNZxFc+Obg8mcCOGHjTMPissqw3pCZTsq0oSUoxBsnj11w4brBpffG5MNnvX24bfzqgOPa1nIu4GrZ5XUpSTzYN268PngXKkkrwWVz4/L6GMGFT6u4NH4V3PWDy8UrFr6WD8Hly4NLXIYprI8RXPjS4JIsUawEl5OrIFNfmHdaI5NfSa0Mw+2Cy+u4GAyf7Rt/QHDJl14EFwSXwV9bgkv+Jc6MCOc3Ml9xEVy4V3YpXzDctXFh8F5cGlwILsk0kIkm+QU0ggu3DC7Byo+9ykRjcJl6iYMiwrAN5zQyPheCC4JLS3B55q4Diq+ILuwtzijDubDZwsze9oV/FVy4U8XlseNewaVWPin3g4oL1Ia9gzbOXIU0vN/dytCevC5p6hUzRxfcQC9zyxnBhbsGl5Vx95OCywknTHDhU7NLvmBwxMbB/MjsnXPjiBM88Tm6WW0cXJ65O/nGjR82ZuXoQHARXAQXAASXjkG9d6romV73ujI7M7tgJXmx1V4ju26EU+tqVx4B8JnBJXnTs3hhx3DxR2Z1SGbhyOJInNl//nLo4TbrzQseiZshuADwmcHlRozEACC43Cm4OKMAILgILgCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAADf1L0J6wkcPqSkWAAAAAElFTkSuQmCC'><p>You do not have to put the null character into the name array yourself.
+
+</p><p>That task is done for you by <i style='color:blue'>scanf</i>() when it reads the input.
+
+</p><p>Nor do you include a null character in the character string constant PRAISE.
+
+</p><p>The compiler takes care of putting in the null character.
+
+</p><p>Note that <i style='color:blue'>scanf</i>() just reads Joe Smith's first name.
+
+</p><p>After <i style='color:blue'>scanf</i>() starts to read input, it stops reading at the first whitespace (blank, tab, or newline) it encounters.
+
+</p><p>Therefore, it stops scanning for name when it reaches the blank between Joe and Smith.
+
+</p><p>In general, <i style='color:blue'>scanf</i>() is used with %s to read only a single word, not a whole phrase, as a string.
+
+</p><p>C has other input-reading functions, such as <i style='color:blue'>fgets</i>(), for handling general strings.
+</p><h3>Strings Versus Characters
+
+</h3><p>The string constant "x" is not the same as the character constant 'x'.
+
+</p><p>One difference is that 'x' is a basic type (char), but "x" is a derived type, an array of char.
+
+</p><p>A second difference is that "x" really consists of two characters, 'x' and '\0',
+the null character.
+</p><a class ='btn btn-outline-dark' href=c-use-arithmetic-operations-on-type-char.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-using-strlen-function-to-get-char-string-length.html>Next</a><h2>Related</h2><UL><LI><a href='c-ascii-character-code-definitions.html'>C ASCII Character Code Definitions</a></LI><LI><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C output the printable characters for character code values from 0 to 127</a></LI><LI><a href='c-use-arithmetic-operations-on-type-char.html'>C Use arithmetic operations on type char</a></LI><LI><a href='c-using-strlen-function-to-get-char-string-length.html'>C Using strlen() Function to get char string length</a></LI><LI><a href='c-bool-type.html'>C _Bool Type</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

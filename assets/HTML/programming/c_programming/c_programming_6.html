@@ -1,0 +1,622 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:42 GMT -->
+<head>
+	<title>C Programlama Ders: VI</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C Programlama, Bitwise Operators, Bit bazında operatörler, and, or, xor, not, kaydırma, Shift Right, Shift Left, Sayı Tabanları, Binary, Hexadecimal, İkilik, Onaltılık, Decimal">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">13 Ağustos 2006</font></div>
+	<h2>C Programlama Dersi - VI</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Sayı tabanları</p>
+				<p>- Bit Bazında (&nbsp;Bitwise&nbsp;) Operatörler</p>
+				<p>- AND (&nbsp;&amp;&nbsp;) Operatörü</p>
+				<p>- OR (&nbsp;|&nbsp;) Operatörü</p>
+				<p>- NOT (&nbsp;~&nbsp;) Operatörü</p>
+				<p>- XOR (&nbsp;^&nbsp;) Operatörü</p>
+				<p>- Kaydırma (&nbsp;Shift&nbsp;) Operatörleri</p>				
+				<p>- Operatör Öncelikleri</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+		<br/>
+		<h3>Sayı Tabanları</h3>
+	<p>	
+		Bilgisayar programlamayla, matematik arasında çok güçlü bir ilişki vardır. 
+		Geçmişe bakarsanız, bilgisayar alanında önemli adımların, hep matematik kökenli 
+		insanlar tarafından atıldığını görürsünüz. Bir bilgisayar programcısı için, 
+		matematikten uzak durmak düşünülemez. 
+	</p>
+	<p>
+		Bugün ki dersimizde, biraz matematik içersine gireceğiz ve sayı sistemleriyle, 
+		Boole Cebiri (Boolean Algebra) konularını ele alacağız.
+	</p>
+	<p>
+		Genel kabul görmüş sayı sistemleri vardır ve içlerinde en yaygını, hepimizin gündelik 
+		hayatta kullandığı 10'luk sayı sistemidir. Yazması, okunması ve işlem yapması son 
+		derece kolay olduğundan bunu daha çocuk yaşta öğrenir ve bu şekilde sürdürürüz.
+		Ancak bilgisayarlar bizim gibi işlem yapabilme yetisine sahip değildir. Onlar için
+		iki ihtimal vardır. Bir şey ya 1'dir ya da 0. Bunu ikilik sayı sistemi olarak 
+		adlandırırız. Yani bizim yazdığımız bütün sayılar, bütün harfler ve aklınıza 
+		gelen-gelmeyen	bütün işaretler, bilgisayar için 0 ve 1'in kombinasyonlarından ibarettir.
+		İşte bu yüzden bizlerin, ikilik sayı sistemine hakim olması gerekir.
+	</p>
+	<p>
+		Sayı sistemlerini genel olarak aşağıdaki gibi ifade edebiliriz:
+	</p>
+	<p>
+		<img src="c_operands/general_number_system.png" alt="[number systems]" border="0"/>
+	</p>
+	<p>
+		Burada, N sayı tabanına göstermektedir. k sayının hangi hanesinde olduğumuzu ifade 
+		ederken, d<sub>k</sub> ise, ilgili sayıdaki rakamı temsil eder. Şimdi basit bir 
+		örnek yapalım ve ikilik tabandaki 10011 sayısının, 10 tabanındaki eş değerini bulalım:
+	</p>
+	<pre>
+( d<sub>4</sub>d<sub>3</sub>d<sub>2</sub>d<sub>1</sub>d<sub>0</sub> )<sub>2</sub> = ( d<sub>0</sub> . 2<sup>0</sup> ) + ( d<sub>1</sub> . 2<sup>1</sup> ) + ( d<sub>2</sub> . 2<sup>2</sup> ) + ( d<sub>3</sub> . 2<sup>3</sup> ) + ( d<sub>4</sub> . 2<sup>4</sup> )
+( 10011 )<sub>2</sub> = ( 1 . 2<sup>0</sup> ) + ( 1 . 2<sup>1</sup> ) + ( 0 . 2<sup>2</sup> ) + ( 0 . 2<sup>3</sup> ) + ( 1 . 2<sup>4</sup> ) = 19
+</pre>
+	<p>ikilik sayı sistemi dışında, 16'lık (Hexadecimal) sayı sistemi de oldukça önemli bir 
+	başka tabandır. 16'lık sayı sisteminde, rakamları ifade etmek için 16 adet sembole gereksinim 
+	duyarız. Bu yüzden 0 ile 9 arasında olan 10 rakamı kullandıktan sonra, A, B, C, D, E ve F
+	harflerini de rakam olarak değerlendiririz. </p>
+
+	<table align="center" cellspacing="8" border="0">
+		<tr align="center">
+			<td align="left"><b>Decimal</b></td>
+			<td><b>:</b></td>
+			<td>0</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+			<td>11</td>
+			<td>12</td>
+			<td>13</td>
+			<td>14</td>
+			<td>15</td>
+		</tr>
+		<tr align="center">
+			<td align="left"><b>Hexadecimal</b></td>
+			<td><b>:</b></td>
+			<td>0</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>			
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+			<td>D</td>
+			<td>E</td>
+			<td>F</td>
+		</tr>
+	</table>
+	<br/>
+	<p>Hexadecimal/16'lık sayı tabanıyla ilgili aşağıdaki örneklere göz atalım:</p>
+	<pre>
+(&nbsp;3FC&nbsp;)<sub>16</sub> = ( 3 . 16<sup>2</sup> ) + ( F . 16<sup>1</sup> ) + ( C . 16<sup>0</sup> ) = 768 + 240 + 12 = 1020
+(&nbsp;1FA9&nbsp;)<sub>16</sub> = ( 1 . 16<sup>3</sup> ) + ( F . 16<sup>2</sup> ) + ( A . 16<sup>1</sup> ) + ( 9 . 16<sup>0</sup> ) = 4096 + 3840 + 160 + 9 = 8105
+(&nbsp;75&nbsp;)<sub>16</sub> = ( 7 . 16<sup>1</sup> ) + ( 7 . 16<sup>0</sup> ) = 112 + 5 = 117
+</pre>
+
+	<p>16'lık sayı sisteminin diğer bir ismi Hexadecimal olduğundan, bazı yerlerde, 
+	bunu ifade etmek için 16 yerine 'H' harfi de kullanılabilir:</p>
+	<p>
+	(&nbsp;BA3&nbsp;)<sub>16</sub>&nbsp;=&nbsp;(&nbsp;BA3&nbsp;)<sub>H</sub>&nbsp;;&nbsp;&nbsp;
+	(&nbsp;A1E&nbsp;)<sub>16</sub>&nbsp;=&nbsp;(&nbsp;A1E&nbsp;)<sub>H</sub>&nbsp;gibi...
+	</p>
+	
+	<p>
+	Tabanlar arasında dönüştürme işlemi, üzerinde duracağımız bir başka konudur.
+	Elinizde 16'lık sayı sisteminde bir sayı varsa ve bunu 2'lik sayı 
+	sistemiyle yazmak isterseniz önce 10'luk sayı sistemine çevirip daha sonra 
+	2'lik sayı sistemine dönüştürebilirsiniz. Ancak	16'lık ve 2'lik sayı sistemlerini 
+	çok daha kolay birbirine dönüştürmeniz	mümkündür. Aşağıdaki tabloda 16'lık sayı 
+	sistemindeki rakamlar ve bunun 2'lik sayı sistemindeki karşılığı verilmiştir:
+	</p>
+
+	<table align="center" cellspacing="8" border="0">
+		<tr align="center">
+			<td align="left"><b>Hexadecimal</b></td>
+			<td><b>:</b></td>
+			<td>0</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>			
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+			<td>D</td>
+			<td>E</td>
+			<td>F</td>
+		</tr>
+		<tr align="center" style="font-size:10px">
+			<td align="left" style="font-size:16px"><b>Binary ( İkilik )</b></td>
+			<td style="font-size:16px"><b>:</b></td>
+			<td>0000</td>
+			<td>0001</td>
+			<td>0010</td>
+			<td>0011</td>
+			<td>0100</td>
+			<td>0101</td>
+			<td>0110</td>
+			<td>0111</td>
+			<td>1000</td>
+			<td>1001</td>
+			<td>1010</td>
+			<td>1011</td>
+			<td>1100</td>
+			<td>1101</td>
+			<td>1110</td>
+			<td>1111</td>
+		</tr>
+	</table>
+	<br/>	
+	<p>Bu durumu bir örnekle şöyle gösterebiliriz:</p>
+	
+	<table align="center" cellspacing="8" border="0">
+		<tr align="center">
+			<td align="left"><b>(&nbsp;A3F1&nbsp;)<sub>H</sub></b></td>
+			<td><b>:</b></td>			
+			<td>A</td>
+			<td>3</td>
+			<td>F</td>
+			<td>1</td>
+		</tr>
+		<tr align="center" style="font-size:10px">
+			<td align="left" style="font-size:16px"></td>
+			<td style="font-size:16px"><b>:</b></td>
+			<td>1010</td>
+			<td>0011</td>
+			<td>1111</td>
+			<td>0001</td>
+		</tr>
+	</table>
+	<br/>
+	<p>16'lık tabandaki her rakamın, 2'lik tabandaki karşılığını koyduğumuzda yukardaki 
+	eşitliği elde ediyoruz ve buna göre	(&nbsp;A3F1&nbsp;) = (&nbsp;1010 0011 1111 0001&nbsp;)<sub>2</sub>
+	eşitliğini kurabiliyoruz. (2'lik tabandaki sayıya ait boşluklar, sayının daha rahat 
+	okunması için bırakılmıştır.) Bu tarz dönüşümler, 2 ve 2'nin katında olan sayı tabanlarında 
+	rahatlıkla yapılabilir. 
+	</p>
+	<p>
+	Hatırlarsanız, değişken tiplerinde, işaretli ve işaretsiz değişken tanımlamalarından 
+	bahsetmiştik. Şimdi olayın biraz daha derinine inelim. Bir char, 1 byte alan kaplar ve 
+	1 byte, 8 bit'ten oluşur. Aşağıdaki kutuların her birini bir bit ve kutuların 
+	oluşturduğu bütünü bir byte olarak düşünün:
+	</p>
+	<table align="center" cellspacing="2" border="1">
+		<tr align="center">
+			<td bgcolor="#fff700">&nbsp;a<sub>7</sub>&nbsp;</td>
+			<td>&nbsp;a<sub>6</sub>&nbsp;</td>			
+			<td>&nbsp;a<sub>5</sub>&nbsp;</td>
+			<td>&nbsp;a<sub>4</sub>&nbsp;</td>			
+			<td>&nbsp;a<sub>3</sub>&nbsp;</td>			
+			<td>&nbsp;a<sub>2</sub>&nbsp;</td>
+			<td>&nbsp;a<sub>1</sub>&nbsp;</td>
+			<td>&nbsp;a<sub>0</sub>&nbsp;</td>
+		</tr>
+	</table>
+	<br/>
+	<p>
+	Yukardaki kutuların toplamı olan bir byte, char değişkeninin kapladığı alanı temsil 
+	etmektedir. Pozitif sayıları ifade etmeyi zaten öğrenmiştik. Sayının karşılığını, 
+	2'lik tabanda yazarak, gerekli sonuca ulaşırız. Ancak sayımız Negatif değerliyse, 
+	işler biraz farklılaşır. Burada devreye işaret biti (sign bit) devreye girer. 
+	Yukardaki şekilde, diğer kutulardan farklı renkte olan a<sub>7</sub> işaret bitidir.
+	<i>Özetle, a<sub>7</sub> 0 ise, sayı pozitiftir. Eğer a<sub>7</sub> 1 ise, sayı 
+	negatiftir.</i> 
+	</p>
+	<p>İkilik tabandaki işaretli bir sayının, 10'luk tabandaki karşılığını şu şekilde bulabiliriz:</p>
+<pre>
+( a<sub>7</sub>a<sub>6</sub>a<sub>5</sub>a<sub>4</sub>a<sub>3</sub>a<sub>2</sub>a<sub>1</sub>a<sub>0</sub> )<sub>2</sub> = ( a<sub>7</sub> . -2<sup>7</sup> ) + ( a<sub>6</sub> . 2<sup>6</sup> ) + ... + ( a<sub>1</sub> . 2<sup>1</sup> ) + ( a<sub>0</sub> . 2<sup>0</sup> )
+</pre>
+	<p>
+	İkilik tabanda yazılmış (&nbsp;10000011&nbsp;)<sub>2</sub> sayısı, işaretsiz olarak 
+	düşünülürse, 131'e eşittir. Ancak işaretli bir sayı olduğu düşünülürse, karşılığı, 
+	-125 olacaktır. Konunun pekişmesi açısından aşağıdaki örneklere göz atabilirsiniz:
+	</p>
+	<pre>
+* (&nbsp;1011&nbsp;1011&nbsp;)<sub>2</sub>&nbsp;=&nbsp;-69 (Sayı işaretliyse)
+  (&nbsp;1011&nbsp;1011&nbsp;)<sub>2</sub>&nbsp;=&nbsp;187 (Sayı işaretsizse)
+* (&nbsp;1100&nbsp;1101&nbsp;)<sub>2</sub>&nbsp;=&nbsp;-51 (Sayı işaretliyse)
+  (&nbsp;1100&nbsp;1101&nbsp;)<sub>2</sub>&nbsp;=&nbsp;205 (Sayı işaretsizse)
+* (&nbsp;0110&nbsp;1101&nbsp;)<sub>2</sub>&nbsp;=&nbsp;109 (Sayı işaretliyse)
+  (&nbsp;0110&nbsp;1101&nbsp;)<sub>2</sub>&nbsp;=&nbsp;109 (Sayı işaretsizse)
+</pre>
+	<p>
+		Negatif bir sayının 2'lik tabandaki karşılığını bulmak için, önce (<i>i</i>) 
+		sayıyı pozitif olarak ikilik tabanda yazarız. Daha sonra, (<i>ii</i>) ikilik 
+		tabanda yazılmış sayının 1 yazan rakamları 0, 0 yazan rakamları 1'e çevrilir. 
+		Son olarak (<i>iii</i>) çıkan sayıya, 1 eklenir. Bu size istediğiniz sayının 
+		ikilik tabanındaki eşini verecektir. Şimdi bir uygulama yapalım ve -7 sayını
+		ikilik tabana çevirmeye çalışalım:
+	</p>
+	<p>
+		<i>i</i> ) -7 ==> (&nbsp;7&nbsp;)<sub>10</sub>&nbsp;=&nbsp;(&nbsp;0000&nbsp;0111&nbsp;)<sub>2</sub> 
+	</p>
+	<p>
+		<i>ii</i> ) (&nbsp;0000&nbsp;0111&nbsp;) ==> (&nbsp;1111&nbsp;1000&nbsp;)
+	</p>
+	<p>
+		<i>iii</i> ) (&nbsp;1111&nbsp;1000&nbsp;) + 1 = (&nbsp;1111&nbsp;1001&nbsp;) 
+		==> (&nbsp;-7&nbsp;)<sub>10</sub>&nbsp;=&nbsp;(&nbsp;1111&nbsp;1001&nbsp;)<sub>2</sub> 
+	</p>
+	<h3>Bit Bazında (&nbsp;Bitwise&nbsp;) Operatörler</h3>
+	<p>
+	Bit bazında operatörlerin, İngilizce'deki karşılığı Bitwise Operators 
+	( yani Bit bit Operatörler ) olarak geçmektedir. Bit bazında operatörler, ikilik sayı 
+	tabanında yapabileceğimiz işlemleri temsil eder. Kullanılan operatörleri aşağıda  
+	inceleyeceğiz. 
+	</p>
+	<h3>AND (&nbsp;&amp;&nbsp;) Operatörü</h3>
+	<p>
+	AND operatörü, kendisine verilen iki değişkenin bütün bitleri 1'e eşit 
+	olduğu takdirde, geriye 1 döndürür. Aksi halde -yani en ufak bir fark varsa- 
+	0 değeri dönmektedir. 
+	</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr align="center">
+				<td><b>p</b></td>
+				<td><b>q</b></td>
+				<td><b>p&q</b></td>
+			</tr>
+			<tr align="right">
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>		
+			<tr align="right">
+				<td>0</td>
+				<td>1</td>
+				<td>0</td>
+			</tr>			
+			<tr align="right">
+				<td>1</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr align="right">
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>1</td>
+				<td>x</td>
+			</tr>
+		</table>
+	</div>
+	<br/>
+	<p>Şimdi, AND (&nbsp;&amp;&nbsp;) operatörünü 25 ve 14 sayılarını karşılaştırmak için kullanalım:</p>
+	<pre>
+  25 ==> ( 0001 1001 )<sub>2</sub>
+  14 ==> ( 0000 1110 )<sub>2</sub>
+&
+----------------------------
+   8 ==> ( 0000 1000)<sub>2</sub>
+</pre>
+	<h3>OR (&nbsp;|&nbsp;) Operatörü</h3>
+	<p>
+	İki değişkenden herhangi biri 1 içeriyorsa, geriye 1 döner. Eğer her ikisi de 0
+	içeriyorsa, geriye 0 dönmektedir. 
+	</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr align="center">
+				<td><b>p</b></td>
+				<td><b>q</b></td>
+				<td><b>p|q</b></td>
+			</tr>
+			<tr align="right">
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>		
+			<tr align="right">
+				<td>0</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>			
+			<tr align="right">
+				<td>1</td>
+				<td>0</td>
+				<td>1</td>
+			</tr>
+			<tr align="right">
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>0</td>
+				<td>x</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+		</table>
+	</div>
+	<br/>
+	<p>
+	Daha önce kullandığımız 25 ve 14 sayıları üzerinde OR (&nbsp;|&nbsp;) işlemi kullanalım:
+	</p>
+	<pre>
+  25 ==> ( 0001 1001 )<sub>2</sub>
+  14 ==> ( 0000 1110 )<sub>2</sub>
+|
+----------------------------
+  31 ==> ( 0001 1111)<sub>2</sub>
+</pre>
+	<p><b>ÖNEMLİ NOT:</b> Bit bazında kullanılan, AND(&nbsp;&amp;&nbsp;) ve OR (&nbsp;|&nbsp;) 
+	operatörleri, koşullu ifadelerde kullanılan, AND(&nbsp;&amp;&amp;&nbsp;) ve OR 
+	(&nbsp;||&nbsp;) ifadelerinden farklıdır. Şayet, &amp; veya | bir koşullu ifade gibi 
+	kullanmaya kalkarsanız, işlem yine yapılacaktır. Ancak bunu yapmanız tavsiye 
+	edilmez. İlerki konularımızda neden uygun olmadığı, short-circuit ile ilgili 
+	bilgi verilirken açıklanacaktır.
+	</p>
+	<h3>NOT (&nbsp;~&nbsp;) Operatörü</h3>
+	<p>
+	NOT (&nbsp;~&nbsp;) Operatörü, kendisine verilen sayıya ait bit'leri tam tersine 
+	çevirir. Yani 0 gördüğü yeri 1; 1 gördüğü yeri 0 yapar.
+	</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr align="center">
+				<td><b>p</b></td>
+				<td><b>~p</b></td>
+			</tr>
+			<tr align="right">
+				<td>0</td>
+				<td>1</td>
+			</tr>		
+			<tr align="right">
+				<td>1</td>
+				<td>0</td>
+			</tr>
+		</table>
+	</div>
+	<br/>	
+	<pre>
+  25 ==> ( 0001 1001 )<sub>2</sub>
+~
+----------------------------
+ 230 ==> ( 1110 0110 )<sub>2</sub>
+</pre>
+	<h3>XOR (&nbsp;^&nbsp;) Operatörü</h3>
+	<p>
+	XOR (&nbsp;Exclusive OR&nbsp;) Operatörü, sadece ve sadece 
+	karşılaştırma yapılan bitlerden biri, 1 değerine sahipse, geriye 1 döndürür. 
+	Eğer karşılaştırma yapılan bit'lerden her ikisi de 0 veya 1'se, o zaman sonuç 
+	0 olarak çıkar.
+	</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr align="center">
+				<td><b>p</b></td>
+				<td><b>q</b></td>
+				<td><b>p^q</b></td>
+			</tr>
+			<tr align="right">
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>		
+			<tr align="right">
+				<td>0</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>			
+			<tr align="right">
+				<td>1</td>
+				<td>0</td>
+				<td>1</td>
+			</tr>
+			<tr align="right">
+				<td>1</td>
+				<td>1</td>
+				<td>0</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>0</td>
+				<td>x</td>
+			</tr>
+			<tr align="right">
+				<td>x</td>
+				<td>1</td>
+				<td>~x</td>
+			</tr>
+		</table>
+	</div>
+	<br/>
+<pre>
+  25 ==> ( 0001 1001 )<sub>2</sub>
+  14 ==> ( 0000 1110 )<sub>2</sub>
+^
+----------------------------
+  23 ==> ( 0001 0111 )<sub>2</sub>
+</pre>
+	<h3>Kaydırma (&nbsp;Shift&nbsp;) Operatörleri</h3>
+	<p>
+	Kaydırma operatörleri, özellikle Assembly ile uğraşanlara tanıdık gelecektir.
+	Bunları kullanarak son derece hızlı çarpma ve bölme yapılabilir. C'deyse benzer 
+	amaçlarla kullanmanız elbette mümkündür. İki çeşit kaydırma operatörü vardır:
+	</p>
+	<p><i>i</i>)&nbsp;&nbsp;Sola Kaydırma - Shift Left (&nbsp;<<&nbsp;)</p>
+	<p><i>ii</i>)&nbsp;Sağa Kaydırma - Shift Right (&nbsp;>>&nbsp;)</p>
+	<p>Her iki durumda da genel kullanım şekli aşağıdaki gibidir:</p>
+	<p>
+		&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<i>Tam Sayı</i>&nbsp;][&nbsp;<i>Operatör</i>&nbsp;][&nbsp;<i>Kaydırma Adım Sayısı</i>&nbsp;]
+	</p>
+	<p>
+	Aşağıdaki örnek, sola kaydırma operatörü kullanılarak yapılan bir işlemi 
+	göstermektedir. x değişkeni, 10 tabanında 22 sayısını tutmaktadır. 2 adım sola 
+	kaydırılması sonucu, sayı 88 olmuş ve y'ye atanmıştır. 
+	</p>
+	<pre>
+x = (&nbsp;0001 0110&nbsp;)<sub>2</sub> ==> 22
+y = x << 2<sub>&nbsp;</sub>
+y = (&nbsp;0101 1000&nbsp;)<sub>2</sub> ==> 88
+</pre>
+	<h3>Operatör Öncelikleri</h3>
+	<p>
+	Hatırlarsanız, aritmetik işlemlerde önceliklerin olduğunu ve örneğin çarpmanın, 
+	toplamadan daha önce yapılacağını anlatmıştık. Benzer bir durum, operatörler 
+	içinde geçerlidir. Altta bulunan tabloda, hangi operatörün daha 
+	önce işleme alındığını bulabilirsiniz:
+	</p>
+	<div align="center">
+		<b><i>OPERATÖR ÖNCELİK SIRASI</i></b>
+	</div>
+	<table align="center" border="1" cellspacing="2" cellpadding="3">
+	<tr align="center">
+			<td bgcolor="#90EE90"><b>&nbsp;DÜŞÜK&nbsp;</b></td>
+			<td>&nbsp;|&nbsp;</td>
+			<td>&nbsp;^&nbsp;</td>
+			<td>&nbsp;&amp;&nbsp;</td>
+			<td>&nbsp;<<&nbsp;&nbsp;>>&nbsp;</td>
+			<td>&nbsp;+&nbsp;&nbsp;-&nbsp;</td>
+			<td>&nbsp;*&nbsp;/&nbsp;%&nbsp;</td>				
+			<td>&nbsp;!&nbsp;&nbsp;~&nbsp;&nbsp;-&nbsp;&nbsp;++&nbsp;&nbsp;--&nbsp;</td>
+			<td>&nbsp;(&nbsp;&nbsp;)&nbsp;</td>
+			<td bgcolor="#CF6038"><b>&nbsp;YÜKSEK&nbsp;</b></td>
+		</tr>
+	</table>	
+	<br/>
+	<p>
+	Aşağıda bulunan tablo, ilişkisel ve mantıksal operatörlerde ki öncelik 
+	sırasını göstermektedir:
+	</p>
+	<div align="center">
+		<b><i>İLİŞKİSEL ve MANTIKSAL OPERATÖR ÖNCELİK SIRASI</i></b>
+	</div>
+	<table align="center" border="1" cellspacing="2" cellpadding="3">
+	<tr align="center">
+			<td bgcolor="#90EE90"><b>&nbsp;DÜŞÜK&nbsp;</b></td>
+			<td>&nbsp;||&nbsp;</td>
+			<td>&nbsp;&amp;&amp;&nbsp;</td>
+			<td>&nbsp;==&nbsp;!=&nbsp;</td>		
+			<td>&nbsp;>&nbsp;>=&nbsp;<&nbsp;<=&nbsp;</td>					
+			<td>&nbsp;!&nbsp;</td>
+			<td bgcolor="#CF6038"><b>&nbsp;YÜKSEK&nbsp;</b></td>
+		</tr>
+	</table>	
+	<br/>
+	<p>
+	Yukardaki tablolarda, aynı hücrede olan operatörlerin işlem öncelikleri 
+	aynıdır. Önce hangisi yazılmışsa, ilk olarak o dikkate alınır. Ama bunun dışında
+	tanınan bir işlem önceliği bulunmamaktadır.
+	</p>
+	<p>Aşağıdaki örnek, operatör önceliklerini pekiştirmek açısından incelenebilir:</p>
+	<pre>
+7&nbsp;&amp;&nbsp;13&nbsp;^&nbsp;11&nbsp;%&nbsp;4&nbsp;*&nbsp;2&nbsp;<<&nbsp;14&nbsp;/&nbsp;4
+==>&nbsp;7&nbsp;&amp;&nbsp;13&nbsp;^&nbsp;6&nbsp;<<&nbsp;3
+==>&nbsp;5&nbsp;^&nbsp;48&nbsp;=&nbsp;53
+</pre>
+	<p>
+		Şimdi de benzer bir örneği, C programı yazarak yapalım:
+	</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	printf( "İşlem Sonucu: %d\n", 117 & 11 << 2 * 3 );
+	return 0;
+}	
+</pre>
+	<p>
+		Yukardaki program, 64 sonucunu vermektedir. Programı çalıştırdığınızda, 
+		ikilik düzeyde işlemler yapılacak ve 64 cevabına ulaşılacaktır. Siz de 
+		hesaplayarak, aynı yanıtı bulabilirsiniz.   
+	</p>	
+	<p>
+	Bir sonraki dersimizde, konu anlatımı olmayacak. Onun yerine bol bol örnek yapıp,
+	şimdiye kadar işlediğimiz konuların üzerinden geçeceğiz. Görüşmek üzere...
+	</p>
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_5.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_7.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+
+<br/>	
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/47873551/usb-hid-multitouch-serial-reporting by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="USB HID Multitouch Serial Reporting | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="USB HID Multitouch Serial Reporting | C Language Knowledge Base">
+        <title>USB HID Multitouch Serial Reporting | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="usb-hid-multitouch-serial-reporting">USB HID Multitouch Serial Reporting</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/hid.html">hid</a></span>
+                        <span class="tag-item"><a href="../tag/usb.html">usb</a></span>
+                        <span class="tag-item"><a href="../tag/windows.html">windows</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am creating an Arduino device that connects to a Windows computer, and simulates a touchscreen on the computer. The screen does not belong to the Arduino, but rather the Arduino relays HID touch messages to the Windows 10 computer via USB.</p>
+
+<p>The first thing I did was to relay AbsoluteMouse events instead of Digitizer events. This worked fine for me. However, as my device supports multiple touches, I would like to use multi-touch HID messages instead of AbsoluteMouse. As a proof of concept, I am starting with relaying only one finger's data. (I plan to add more fingers after I get this to work). I am taking the SerialReport approach, as it seems to be the easiest to implement:</p>
+
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/sample-report-descriptor--serial-reporting-mode-" rel="nofollow noreferrer">https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/sample-report-descriptor--serial-reporting-mode-</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/selecting-packet-reporting-modes-in-multitouch-drivers" rel="nofollow noreferrer">https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/selecting-packet-reporting-modes-in-multitouch-drivers</a></li>
+</ul>
+
+<p>I have found many examples of using AbsoluteMouse, so basically I didn't have to do much more than copy-paste the HID reports. However, with touchscreens it is very hard to come by code samples. (I have only found the synaptic touch<em>pad</em> sample which is not a touchscreen). As such I have tried to implement my own code to report touch messages. But this fail. I think I understand how to interpret the HID descriptor, but this is my first time, so I am not sure... Is there anything wrong with my message structure?</p>
+
+<pre><code>#define REPORTID_MTOUCH                 1
+
+static const uint8_t _hidSerialMultiTouchDescriptor[] PROGMEM = {
+    //https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/sample-report-descriptor--serial-reporting-mode-
+    //linked from: https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/selecting-packet-reporting-modes-in-multitouch-drivers
+    0x05, 0x0d,                         // USAGE_PAGE (Digitizers)
+    0x09, 0x04,                         // USAGE (Touch Screen)
+    0xa1, 0x01,                         // COLLECTION (Application)
+    0x85, REPORTID_MTOUCH,              //   REPORT_ID (Touch)
+    0x09, 0x22,                         //   USAGE (Finger)
+    0xa1, 0x00,                         //   COLLECTION (Physical)
+    0x09, 0x42,                         //     USAGE (Tip Switch)
+    0x15, 0x00,                         //     LOGICAL_MINIMUM (0)
+    0x25, 0x01,                         //     LOGICAL_MAXIMUM (1)
+    0x75, 0x01,                         //     REPORT_SIZE (1)
+    0x95, 0x01,                         //     REPORT_COUNT (1)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x95, 0x03,                         //     REPORT_COUNT (3)
+    0x81, 0x03,                         //     INPUT (Cnst,Ary,Abs)
+    0x09, 0x32,                         //     USAGE (In Range)
+    0x09, 0x47,                         //     USAGE (Confidence)
+    0x95, 0x02,                         //     REPORT_COUNT (2)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x95, 0x0a,                         //     REPORT_COUNT (10)
+    0x81, 0x03,                         //     INPUT (Cnst,Ary,Abs)
+    0x05, 0x01,                         //     USAGE_PAGE (Generic Desk..
+    0x26, 0xff, 0x7f,                   //     LOGICAL_MAXIMUM (32767)
+    0x75, 0x10,                         //     REPORT_SIZE (16)
+    0x95, 0x01,                         //     REPORT_COUNT (1)
+    0x65, 0x00,                         //     UNIT (None)
+    0x09, 0x30,                         //     USAGE (X)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x09, 0x31,                         //     USAGE (Y)
+    0x46, 0x00, 0x00,                   //     PHYSICAL_MAXIMUM (0)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x05, 0x0d,                         //     USAGE PAGE (Digitizers)
+    0x09, 0x48,                         //     USAGE (Width)
+    0x09, 0x49,                         //     USAGE (Height)
+    0x95, 0x01,                         //     REPORT_COUNT (2)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x81, 0x03,                         //     INPUT (Cnst,Ary,Abs)
+    0x09, 0x51,                         //     USAGE (Contact Identifier)
+    0x75, 0x10,                         //     REPORT_SIZE (16) 
+    0x95, 0x02,                         //     REPORT_COUNT (1)
+    0x81, 0x02,                         //     INPUT (Data,Var,Abs)
+    0x09, 0x55,                         //    USAGE(Maximum Count)
+    0x15, 0x00,                         //   LOGICAL_MINIMUM (0)
+    0x25, 0x08,                         //   LOGICAL_MAXIMUM (255)
+    0x75, 0x08,                         //   REPORT_SIZE (8)
+    0x95, 0x01,                         //   REPORT_COUNT (1)
+    0xb1, 0x02,                         //   FEATURE (Data,Var,Abs)
+    0xc0,                               //   END_COLLECTION
+    0xc0                               // END_COLLECTION
+};
+</code></pre>
+
+<p>This is my implementation of said message:</p>
+
+<pre><code>typedef union {
+  struct{
+    uint8_t TipSwitchLsb4Bits_InRange_Confidence_Empty2Bits;
+    uint8_t Padding8_10Minus2;
+    int16_t xAxis;
+    int16_t yAxis;
+    int16_t width;
+    int16_t height;
+    int16_t ContactId;
+    uint8_t MaximumCount;
+  };
+} HID_SerialTouchReport;
+
+void reportTouch(unsigned int x, unsigned int y) {
+  HID_SerialTouchReport report;
+  report.TipSwitchLsb4Bits_InRange_Confidence_Empty2Bits=0xff;
+  report.xAxis=x;
+  report.yAxis=y;
+  report.width=4;
+  report.height=4;
+  report.ContactId=0;
+  report.MaximumCount=1;
+  HID().SendReport(REPORTID_MTOUCH,&amp;report,sizeof(report));
+}
+
+...
+  static HIDSubDescriptor node(_hidSerialMultiTouchDescriptor, sizeof(_hidSerialMultiTouchDescriptor));
+HID().AppendDescriptor(&amp;node);
+...
+
+//Move the pointer diagonally across the screen:
+for(unsigned int x=0;x&lt;32767;x+=1000) {
+  reportTouch(x,x);
+  delay(50);
+}
+</code></pre>
+
+<p>The test code is supposed to draw a diagonal line from top left to bottom right on MSPaint.</p>
+
+<p>When I test this with an AbsoluteMouse descriptor/Message everything works. So I presume the problem is in my definition of HID_SerialTouchReport.</p>
+
+<p>Some things that have grabbed my attention:</p>
+
+<ol>
+<li>Why does "PHYSICAL_MAXIMUM (0)" come while still defining "USAGE (Y)". Is it somehow relevant to Y and not X? And why is it "0"?</li>
+<li>What is the significance of "Ary" in "INPUT (Cnst, Ary, Abs)" for height and width?</li>
+<li>I am sort of "fudging" things with: "report.TipSwitchLsb4Bits_InRange_Confidence_Empty2Bits=0xff;". However this seems alright to me because I think all the non-padded bits need to be set to "1" anyway.</li>
+<li>I am not sure what I should set report.MaximumCount to be. I have tried experimenting with different Count &amp; Id values, but all had no effect.</li>
+<li>My Arduino does show up as a "composite device" in the device manager so I figure not all is wrong.</li>
+<li>In the article I linked "Serial Packet" mode is for Legacy Windows 7, and I am using Windows 10. But I figure this should not be a problem.</li>
+<li>While I did copy the HID descriptor directly from the microsoft site, I am not sure I properly constructed the message structure. (Did I forget a few bits?)</li>
+</ol>
+
+<p>Or is it something entirely other which is causing my code to fail?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/508459/eshalev" target="_blank"><span itemprop="name">eshalev</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">3</div>
+                                    <div itemprop="dateCreated">12/19/2017 4:59:49 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>It's hard to say for sure but it looks like the HID report descriptor does not match your HID_SerialTouchReport structure. The following is how I decoded your descriptor:</p>
+
+<pre><code>//--------------------------------------------------------------------------------
+// Decoded Application Collection
+//--------------------------------------------------------------------------------
+
+/*
+05 0D        (GLOBAL) USAGE_PAGE         0x000D Digitizer Device Page 
+09 04        (LOCAL)  USAGE              0x000D0004 Touch Screen (CA=Application Collection) 
+A1 01        (MAIN)   COLLECTION         0x00000001 Application (Usage=0x000D0004: Page=Digitizer Device Page, Usage=Touch Screen, Type=CA)
+85 01          (GLOBAL) REPORT_ID          0x01 (1) 
+09 22          (LOCAL)  USAGE              0x000D0022 Finger (CL=Logical Collection) 
+A1 00          (MAIN)   COLLECTION         0x00000000 Physical (Usage=0x000D0022: Page=Digitizer Device Page, Usage=Finger, Type=CL) &lt;-- Warning: USAGE type should be CP (Physical)
+09 42            (LOCAL)  USAGE              0x000D0042 Tip Switch (MC=Momentary Control) 
+15 00            (GLOBAL) LOGICAL_MINIMUM    0x00 (0) &lt;-- Redundant: LOGICAL_MINIMUM is already 0 &lt;-- Info: Consider replacing 15 00 with 14
+25 01            (GLOBAL) LOGICAL_MAXIMUM    0x01 (1)  
+75 01            (GLOBAL) REPORT_SIZE        0x01 (1) Number of bits per field  
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 1 bit) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+95 03            (GLOBAL) REPORT_COUNT       0x03 (3) Number of fields  
+81 03            (MAIN)   INPUT              0x00000003 (3 fields x 1 bit) 1=Constant 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 32            (LOCAL)  USAGE              0x000D0032 In Range (MC=Momentary Control) 
+09 47            (LOCAL)  USAGE              0x000D0047 Confidence (DV=Dynamic Value) 
+95 02            (GLOBAL) REPORT_COUNT       0x02 (2) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (2 fields x 1 bit) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+95 0A            (GLOBAL) REPORT_COUNT       0x0A (10) Number of fields  
+81 03            (MAIN)   INPUT              0x00000003 (10 fields x 1 bit) 1=Constant 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+05 01            (GLOBAL) USAGE_PAGE         0x0001 Generic Desktop Page 
+26 FF7F          (GLOBAL) LOGICAL_MAXIMUM    0x7FFF (32767)  
+75 10            (GLOBAL) REPORT_SIZE        0x10 (16) Number of bits per field  
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+65 00            (GLOBAL) UNIT               0x00000000 No unit (0=None) &lt;-- Redundant: UNIT is already 0x00000000
+09 30            (LOCAL)  USAGE              0x00010030 X (DV=Dynamic Value) 
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 31            (LOCAL)  USAGE              0x00010031 Y (DV=Dynamic Value) 
+46 0000          (GLOBAL) PHYSICAL_MAXIMUM   0x0000 (0) &lt;-- Redundant: PHYSICAL_MAXIMUM is already 0 &lt;-- Info: Consider replacing 46 0000 with 44
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+05 0D            (GLOBAL) USAGE_PAGE         0x000D Digitizer Device Page 
+09 48            (LOCAL)  USAGE              0x000D0048 Width (DV=Dynamic Value) 
+09 49            (LOCAL)  USAGE              0x000D0049 Height (DV=Dynamic Value) 
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields &lt;-- Redundant: REPORT_COUNT is already 1 
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+81 03            (MAIN)   INPUT              0x00000003 (1 field x 16 bits) 1=Constant 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 51            (LOCAL)  USAGE              0x000D0051 Contact Identifier (DV=Dynamic Value) 
+75 10            (GLOBAL) REPORT_SIZE        0x10 (16) Number of bits per field &lt;-- Redundant: REPORT_SIZE is already 16 
+95 02            (GLOBAL) REPORT_COUNT       0x02 (2) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (2 fields x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 55            (LOCAL)  USAGE              0x000D0055 Contact Count Maximum (SV=Static Value) 
+15 00            (GLOBAL) LOGICAL_MINIMUM    0x00 (0) &lt;-- Redundant: LOGICAL_MINIMUM is already 0 &lt;-- Info: Consider replacing 15 00 with 14
+25 08            (GLOBAL) LOGICAL_MAXIMUM    0x08 (8)  
+75 08            (GLOBAL) REPORT_SIZE        0x08 (8) Number of bits per field  
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+B1 02            (MAIN)   FEATURE            0x00000002 (1 field x 8 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+C0             (MAIN)   END_COLLECTION     Physical 
+C0           (MAIN)   END_COLLECTION     Application 
+*/
+
+//--------------------------------------------------------------------------------
+// Digitizer Device Page featureReport 01 (Device &lt;-&gt; Host)
+//--------------------------------------------------------------------------------
+
+typedef struct
+{
+  uint8_t  reportId;                                 // Report ID = 0x01 (1)
+                                                     // Collection: TouchScreen Finger
+  uint8_t  DIG_TouchScreenFingerContactCountMaximum; // Usage 0x000D0055: Contact Count Maximum, Value = 0 to 8
+} featureReport01_t;
+
+
+//--------------------------------------------------------------------------------
+// Digitizer Device Page inputReport 01 (Device --&gt; Host)
+//--------------------------------------------------------------------------------
+
+typedef struct
+{
+  uint8_t  reportId;                                 // Report ID = 0x01 (1)
+                                                     // Collection: TouchScreen Finger
+  uint8_t  DIG_TouchScreenFingerTipSwitch : 1;       // Usage 0x000D0042: Tip Switch, Value = 0 to 1
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  DIG_TouchScreenFingerInRange : 1;         // Usage 0x000D0032: In Range, Value = 0 to 1
+  uint8_t  DIG_TouchScreenFingerConfidence : 1;      // Usage 0x000D0047: Confidence, Value = 0 to 1
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint16_t GD_TouchScreenFingerX;                    // Usage 0x00010030: X, Value = 0 to 32767
+  uint16_t GD_TouchScreenFingerY;                    // Usage 0x00010031: Y, Value = 0 to 32767
+  uint16_t DIG_TouchScreenFingerWidth;               // Usage 0x000D0048: Width, Value = 0 to 32767
+                                                     // Usage 0x000D0049 Height (DV=Dynamic Value) Value = 0 to 32767 &lt;-- Ignored: REPORT_COUNT (1) is too small
+  uint16_t pad_8;                                    // Pad
+  uint16_t DIG_TouchScreenFingerContactIdentifier[2]; // Usage 0x000D0051: Contact Identifier, Value = 0 to 32767
+} inputReport01_t;
+</code></pre>
+
+<p>When I set the correct report count for Width and Height and remove the (unnecessary?) pad byte, the unnecessary UNIT and PHYSICAL_MAXIMUM, and redundant GLOBAL items, and change the contact identifier REPORT_COUNT from 2 to 1, it looks better to me:</p>
+
+<pre><code>//--------------------------------------------------------------------------------
+// Decoded Application Collection
+//--------------------------------------------------------------------------------
+
+/*
+05 0D        (GLOBAL) USAGE_PAGE         0x000D Digitizer Device Page 
+09 04        (LOCAL)  USAGE              0x000D0004 Touch Screen (CA=Application Collection) 
+A1 01        (MAIN)   COLLECTION         0x00000001 Application (Usage=0x000D0004: Page=Digitizer Device Page, Usage=Touch Screen, Type=CA)
+85 01          (GLOBAL) REPORT_ID          0x01 (1) 
+09 22          (LOCAL)  USAGE              0x000D0022 Finger (CL=Logical Collection) 
+A1 00          (MAIN)   COLLECTION         0x00000000 Physical (Usage=0x000D0022: Page=Digitizer Device Page, Usage=Finger, Type=CL) &lt;-- Warning: USAGE type should be CP (Physical)
+09 42            (LOCAL)  USAGE              0x000D0042 Tip Switch (MC=Momentary Control) 
+15 00            (GLOBAL) LOGICAL_MINIMUM    0x00 (0) &lt;-- Redundant: LOGICAL_MINIMUM is already 0 &lt;-- Info: Consider replacing 15 00 with 14
+25 01            (GLOBAL) LOGICAL_MAXIMUM    0x01 (1)  
+75 01            (GLOBAL) REPORT_SIZE        0x01 (1) Number of bits per field  
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 1 bit) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+95 03            (GLOBAL) REPORT_COUNT       0x03 (3) Number of fields  
+81 03            (MAIN)   INPUT              0x00000003 (3 fields x 1 bit) 1=Constant 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 32            (LOCAL)  USAGE              0x000D0032 In Range (MC=Momentary Control) 
+09 47            (LOCAL)  USAGE              0x000D0047 Confidence (DV=Dynamic Value) 
+95 02            (GLOBAL) REPORT_COUNT       0x02 (2) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (2 fields x 1 bit) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+95 0A            (GLOBAL) REPORT_COUNT       0x0A (10) Number of fields  
+81 03            (MAIN)   INPUT              0x00000003 (10 fields x 1 bit) 1=Constant 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+05 01            (GLOBAL) USAGE_PAGE         0x0001 Generic Desktop Page 
+26 FF7F          (GLOBAL) LOGICAL_MAXIMUM    0x7FFF (32767)  
+75 10            (GLOBAL) REPORT_SIZE        0x10 (16) Number of bits per field  
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+09 30            (LOCAL)  USAGE              0x00010030 X (DV=Dynamic Value) 
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 31            (LOCAL)  USAGE              0x00010031 Y (DV=Dynamic Value) 
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+05 0D            (GLOBAL) USAGE_PAGE         0x000D Digitizer Device Page 
+09 48            (LOCAL)  USAGE              0x000D0048 Width (DV=Dynamic Value) 
+09 49            (LOCAL)  USAGE              0x000D0049 Height (DV=Dynamic Value) 
+95 02            (GLOBAL) REPORT_COUNT       0x02 (2) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (2 fields x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 51            (LOCAL)  USAGE              0x000D0051 Contact Identifier (DV=Dynamic Value) 
+95 01            (GLOBAL) REPORT_COUNT       0x01 (1) Number of fields  
+81 02            (MAIN)   INPUT              0x00000002 (1 field x 16 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+09 55            (LOCAL)  USAGE              0x000D0055 Contact Count Maximum (SV=Static Value) 
+25 08            (GLOBAL) LOGICAL_MAXIMUM    0x08 (8)  
+75 08            (GLOBAL) REPORT_SIZE        0x08 (8) Number of bits per field  
+B1 02            (MAIN)   FEATURE            0x00000002 (1 field x 8 bits) 0=Data 1=Variable 0=Absolute 0=NoWrap 0=Linear 0=PrefState 0=NoNull 0=NonVolatile 0=Bitmap 
+C0             (MAIN)   END_COLLECTION     Physical 
+C0           (MAIN)   END_COLLECTION     Application 
+*/
+
+//--------------------------------------------------------------------------------
+// Digitizer Device Page featureReport 01 (Device &lt;-&gt; Host)
+//--------------------------------------------------------------------------------
+
+typedef struct
+{
+  uint8_t  reportId;                                 // Report ID = 0x01 (1)
+                                                     // Collection: TouchScreen Finger
+  uint8_t  DIG_TouchScreenFingerContactCountMaximum; // Usage 0x000D0055: Contact Count Maximum, Value = 0 to 8
+} featureReport01_t;
+
+
+//--------------------------------------------------------------------------------
+// Digitizer Device Page inputReport 01 (Device --&gt; Host)
+//--------------------------------------------------------------------------------
+
+typedef struct
+{
+  uint8_t  reportId;                                 // Report ID = 0x01 (1)
+                                                     // Collection: TouchScreen Finger
+  uint8_t  DIG_TouchScreenFingerTipSwitch : 1;       // Usage 0x000D0042: Tip Switch, Value = 0 to 1
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  DIG_TouchScreenFingerInRange : 1;         // Usage 0x000D0032: In Range, Value = 0 to 1
+  uint8_t  DIG_TouchScreenFingerConfidence : 1;      // Usage 0x000D0047: Confidence, Value = 0 to 1
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint8_t  : 1;                                      // Pad
+  uint16_t GD_TouchScreenFingerX;                    // Usage 0x00010030: X, Value = 0 to 32767
+  uint16_t GD_TouchScreenFingerY;                    // Usage 0x00010031: Y, Value = 0 to 32767
+  uint16_t DIG_TouchScreenFingerWidth;               // Usage 0x000D0048: Width, Value = 0 to 32767
+  uint16_t DIG_TouchScreenFingerHeight;              // Usage 0x000D0049: Height, Value = 0 to 32767
+  uint16_t DIG_TouchScreenFingerContactIdentifier;   // Usage 0x000D0051: Contact Identifier, Value = 0 to 32767
+} inputReport01_t;
+</code></pre>
+
+<p>These HID report descriptors are so tricky to handcraft that I'm not surprised that even Microsoft gets it wrong from time to time. If only some programming whiz (i.e way better than me) could come up with some decent software to create them I think the world would be a better place :)</p>
+
+<p>Disclosure: I decoded your report descriptor using some free software I wrote called <a href="https://sourceforge.net/projects/hidrdd/" rel="nofollow noreferrer">hidrdd</a>. I've been meaning to port it to Python but haven't got around to learning Python yet.</p>
+
+<p>BTW, the difference between var and ary can be best understood as the difference between C declarations:</p>
+
+<pre><code>// var is like:
+uint8_t my_value1;
+uint8_t my_value2;
+
+// ary is like:
+uint8_t my_value[2];
+</code></pre>
+
+<p>The maximumcount thing appears to be the "Contact Count Maximum" usage - i.e. the maximum number of fingers pressed concurrently and is part of a feature report (that can be sent or received from the device). The report descriptor indicates that it can have a value of between 0 fingers and 8 fingers concurrently pressed.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/797152/aja" target="_blank"><span itemprop="name">aja</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/47873551/usb-hid-multitouch-serial-reporting#answer-0</div>
+                                            <div itemprop="upvoteCount">1</div>
+                                            <div itemprop="dateCreated">12/19/2017 10:49:08 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/47873551" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/47873551/usb-hid-multitouch-serial-reporting by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+</html>

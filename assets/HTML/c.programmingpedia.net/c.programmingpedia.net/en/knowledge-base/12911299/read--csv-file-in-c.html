@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12911299/read--csv-file-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:03:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Read .CSV file in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Read .CSV file in C | C Language Knowledge Base">
+        <title>[SOLVED] Read .CSV file in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="read-csv-file-in-c">Read .CSV file in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/csv.html">csv</a></span>
+                        <span class="tag-item"><a href="../tag/parsing.html">parsing</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I Have a .csv file : </p>
+
+<pre><code>lp;imie;nazwisko;ulica;numer;kod;miejscowosc;telefon;email;data_ur
+1;Jan;Kowalski;ul. Nowa;1a;11-234;Budry;123-123-456;jan@go.xxx;1980.05.13
+2;Jerzy;Nowak;ul. Konopnicka;13a/3;00-900;Lichowice;(55)333-44-55;jer@wu.to;1990.03.23
+</code></pre>
+
+<p>and i need to read this in C. I have some code, but only for connection.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1749489/zesss" target="_blank"><span itemprop="name">Zesss</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">33</div>
+                                    <div itemprop="dateCreated">10/16/2012 9:15:46 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Hopefully this would get you started</p>
+
+<p>See it live on <strong><a href="http://ideone.com/l23He">http://ideone.com/l23He</a></strong> (using stdin)</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+const char* getfield(char* line, int num)
+{
+    const char* tok;
+    for (tok = strtok(line, ";");
+            tok &amp;&amp; *tok;
+            tok = strtok(NULL, ";\n"))
+    {
+        if (!--num)
+            return tok;
+    }
+    return NULL;
+}
+
+int main()
+{
+    FILE* stream = fopen("input", "r");
+
+    char line[1024];
+    while (fgets(line, 1024, stream))
+    {
+        char* tmp = strdup(line);
+        printf("Field 3 would be %s\n", getfield(tmp, 3));
+        // NOTE strtok clobbers tmp
+        free(tmp);
+    }
+}
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Field 3 would be nazwisko
+Field 3 would be Kowalski
+Field 3 would be Nowak
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/85371/sehe" target="_blank"><span itemprop="name">sehe</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12911299/read--csv-file-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">55</div>
+                                            <div itemprop="dateCreated">10/16/2012 9:23:31 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>The following code is in plain c language and handles blank spaces.
+It only allocates memory once, so one free() is needed, for each processed line.</p>
+
+<p><a href="http://ideone.com/mSCgPM" rel="noreferrer">http://ideone.com/mSCgPM</a></p>
+
+<pre><code>/* Tiny CSV Reader */
+/* Copyright (C) 2015, Deligiannidis Konstantinos
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://w...content-available-to-author-only...u.org/licenses/&gt;.  */
+
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+/* For more that 100 columns or lines (when delimiter = \n), minor modifications are needed. */
+int getcols( const char * const line, const char * const delim, char ***out_storage )
+
+{
+const char *start_ptr, *end_ptr, *iter;
+char **out;
+int i;                                          //For "for" loops in the old c style.
+int tokens_found = 1, delim_size, line_size;    //Calculate "line_size" indirectly, without strlen() call.
+int start_idx[100], end_idx[100];   //Store the indexes of tokens. Example "Power;": loc('P')=1, loc(';')=6
+//Change 100 with MAX_TOKENS or use malloc() for more than 100 tokens. Example: "b1;b2;b3;...;b200"
+
+if ( *out_storage != NULL )                 return -4;  //This SHOULD be NULL: Not Already Allocated
+if ( !line || !delim )                      return -1;  //NULL pointers Rejected Here
+if ( (delim_size = strlen( delim )) == 0 )  return -2;  //Delimiter not provided
+
+start_ptr = line;   //Start visiting input. We will distinguish tokens in a single pass, for good performance.
+                    //Then we are allocating one unified memory region &amp; doing one memory copy.
+while ( ( end_ptr = strstr( start_ptr, delim ) ) ) {
+
+    start_idx[ tokens_found -1 ] = start_ptr - line;    //Store the Index of current token
+    end_idx[ tokens_found - 1 ] = end_ptr - line;       //Store Index of first character that will be replaced with
+                                                        //'\0'. Example: "arg1||arg2||end" -&gt; "arg1\0|arg2\0|end"
+    tokens_found++;                                     //Accumulate the count of tokens.
+    start_ptr = end_ptr + delim_size;                   //Set pointer to the next c-string within the line
+}
+
+for ( iter = start_ptr; (*iter!='\0') ; iter++ );
+
+start_idx[ tokens_found -1 ] = start_ptr - line;    //Store the Index of current token: of last token here.
+end_idx[ tokens_found -1 ] = iter - line;           //and the last element that will be replaced with \0
+
+line_size = iter - line;    //Saving CPU cycles: Indirectly Count the size of *line without using strlen();
+
+int size_ptr_region = (1 + tokens_found)*sizeof( char* );   //The size to store pointers to c-strings + 1 (*NULL).
+out = (char**) malloc( size_ptr_region + ( line_size + 1 ) + 5 );   //Fit everything there...it is all memory.
+//It reserves a contiguous space for both (char**) pointers AND string region. 5 Bytes for "Out of Range" tests.
+*out_storage = out;     //Update the char** pointer of the caller function.
+
+//"Out of Range" TEST. Verify that the extra reserved characters will not be changed. Assign Some Values.
+//char *extra_chars = (char*) out + size_ptr_region + ( line_size + 1 );
+//extra_chars[0] = 1; extra_chars[1] = 2; extra_chars[2] = 3; extra_chars[3] = 4; extra_chars[4] = 5;
+
+for ( i = 0; i &lt; tokens_found; i++ )    //Assign adresses first part of the allocated memory pointers that point to
+    out[ i ] = (char*) out + size_ptr_region + start_idx[ i ];  //the second part of the memory, reserved for Data.
+out[ tokens_found ] = (char*) NULL; //[ ptr1, ptr2, ... , ptrN, (char*) NULL, ... ]: We just added the (char*) NULL.
+                                                    //Now assign the Data: c-strings. (\0 terminated strings):
+char *str_region = (char*) out + size_ptr_region;   //Region inside allocated memory which contains the String Data.
+memcpy( str_region, line, line_size );   //Copy input with delimiter characters: They will be replaced with \0.
+
+//Now we should replace: "arg1||arg2||arg3" with "arg1\0|arg2\0|arg3". Don't worry for characters after '\0'
+//They are not used in standard c lbraries.
+for( i = 0; i &lt; tokens_found; i++) str_region[ end_idx[ i ] ] = '\0';
+
+//"Out of Range" TEST. Wait until Assigned Values are Printed back.
+//for ( int i=0; i &lt; 5; i++ ) printf("c=%x ", extra_chars[i] ); printf("\n");
+
+// *out memory should now contain (example data):
+//[ ptr1, ptr2,...,ptrN, (char*) NULL, "token1\0", "token2\0",...,"tokenN\0", 5 bytes for tests ]
+//   |__________________________________^           ^              ^             ^
+//          |_______________________________________|              |             |
+//                   |_____________________________________________|      These 5 Bytes should be intact.
+
+return tokens_found;
+}
+
+
+int main()
+
+{
+
+char in_line[] = "Arg1;;Th;s is not Del;m;ter;;Arg3;;;;Final";
+char delim[] = ";;";
+char **columns;
+int i;
+
+printf("Example1:\n");
+columns = NULL; //Should be NULL to indicate that it is not assigned to allocated memory. Otherwise return -4;
+
+int cols_found = getcols( in_line, delim, &amp;columns);
+for ( i = 0; i &lt; cols_found; i++ ) printf("Column[ %d ] = %s\n", i, columns[ i ] );  //&lt;- (1st way).
+// (2nd way) // for ( i = 0; columns[ i ]; i++) printf("start_idx[ %d ] = %s\n", i, columns[ i ] );
+
+free( columns );    //Release the Single Contiguous Memory Space.
+columns = NULL;     //Pointer = NULL to indicate it does not reserve space and that is ready for the next malloc().
+
+printf("\n\nExample2, Nested:\n\n");
+
+char example_file[] = "ID;Day;Month;Year;Telephone;email;Date of registration\n"
+        "1;Sunday;january;2009;123-124-456;jitter@go.xyz;2015-05-13\n"
+        "2;Monday;March;2011;(+30)333-22-55;buffer@wl.it;2009-05-23";
+
+char **rows;
+int j;
+
+rows = NULL; //getcols() requires it to be NULL. (Avoid dangling pointers, leaks e.t.c).
+
+getcols( example_file, "\n", &amp;rows);
+for ( i = 0; rows[ i ]; i++) {
+    {
+        printf("Line[ %d ] = %s\n", i, rows[ i ] );
+        char **columnX = NULL;
+        getcols( rows[ i ], ";", &amp;columnX);
+        for ( j = 0; columnX[ j ]; j++) printf("  Col[ %d ] = %s\n", j, columnX[ j ] );
+        free( columnX );
+    }
+}
+
+free( rows );
+rows = NULL;
+
+return 0;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5175223/user5175223" target="_blank">user5175223</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12911299" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12911299/read--csv-file-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:03:09 GMT -->
+</html>

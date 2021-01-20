@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7011238/setup-opencv-2-3-for-visual-studio-2010 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:54:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Setup OpenCV-2.3 for Visual Studio 2010 | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Setup OpenCV-2.3 for Visual Studio 2010 | C Language Knowledge Base">
+        <title>[SOLVED] Setup OpenCV-2.3 for Visual Studio 2010 | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="setup-opencv-2-3-for-visual-studio-2010">Setup OpenCV-2.3 for Visual Studio 2010</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                        <span class="tag-item"><a href="../tag/visual-studio.html">visual-studio</a></span>
+                        <span class="tag-item"><a href="../tag/visual-studio-2010.html">visual-studio-2010</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to use opencv 2.3 with Visual Studio 2010 Express. My code is from example: </p>
+
+<pre><code>#include "stdafx.h"
+#include &lt;highgui.h&gt;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    int c;
+    // allocate memory for an image
+    IplImage *img;
+    // capture from video device #1
+    CvCapture* capture = cvCaptureFromCAM(1);
+    // create a window to display the images
+    cvNamedWindow("mainWin", CV_WINDOW_AUTOSIZE);
+    // position the window
+    cvMoveWindow("mainWin", 5, 5);
+    while(1)
+    {
+        // retrieve the captured frame
+        img=cvQueryFrame(capture);
+        // show the image in the window
+        cvShowImage("mainWin", img );
+        // wait 10 ms for a key to be pressed
+        c=cvWaitKey(10);
+        // escape key terminates program
+        if(c == 27)         
+            break;
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>What have I done so far?</p>
+
+<ul>
+<li>Added <code>build\bin</code> and one of <code>build\{x86|x64}\{vc9\vc10\mingw}\bin</code> to my system path (to use DLLs).</li>
+<li>Added <code>build\{x86|x64}\{vc9\vc10\mingw}\lib</code> or <code>build\{x86|x64}\{vc9\vc10\mingw}\staticlib</code> as library directories to my linker settings.</li>
+<li>Added <code>build\include</code> and <code>build\include\opencv</code> as include directories to my compiler settings.</li>
+</ul>
+
+<p>And the result is: </p>
+
+<blockquote>
+  <p><strong>1>LINK : fatal error LNK1104: cannot open file 'c:\OpenCV2.3\build\x86\vc10\lib.obj'</strong></p>
+</blockquote>
+
+<p>There's no <code>lib.obj</code> in OpenCV folders. I've only unziped <code>OpenCV-2.3.0-win-superpack.exe</code>, without using CMake software.</p>
+
+<p>What am I doing wrong?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/684570/elfoc" target="_blank"><span itemprop="name">Elfoc</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">36</div>
+                                    <div itemprop="dateCreated">3/27/2015 1:54:14 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Well, the <a href="http://opencv.willowgarage.com/wiki/VisualC++_VS2010" rel="noreferrer"><strong>official guide</strong></a> is for installing <strong>OpenCV 2.1</strong> on VS2010, so I wrote some instructions below that shows how to properly install and configure the <strong>x86</strong> version of <strong>OpenCV 2.3</strong> on <strong>Visual Studio 2010</strong> (Express), since a lot of folks seem to have problems setting it up correctly.</p>
+
+<p>Download <a href="http://tenet.dl.sourceforge.net/project/opencvlibrary/opencv-win/2.3/OpenCV-2.3.0-win-superpack.exe" rel="noreferrer"><em>OpenCV-2.3.0-win-superpack.exe</em></a> and execute it to extract all files to a folder named <code>OpenCV2.3</code>. Inside this folder there are 2 directories: <code>build</code> and <code>opencv</code>. All the setup on VS2010 will refer to the <code>build</code> directory. For practical purposes I moved the folder <code>OpenCV2.3</code> to my <code>C:\</code> drive, so pay attention to the paths I suggest on this guide as yours might be different.</p>
+
+<p>On Visual Studio, create a new <strong>Win32 Console Application</strong> project and name it whatever you like. After that, a new window will show up. Click on the tab <strong>Application Settings</strong> and make sure the option <strong>Empty Project</strong> gets selected:</p>
+
+<p><img src="https://i.stack.imgur.com/kcO26.jpg" alt="enter image description here"></p>
+
+<p>Add a new file <code>main.cpp</code> to the folder <code>Source Files</code>, then add this code to <code>main.cpp</code>:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;cv.h&gt;
+#include &lt;highgui.h&gt;
+
+int main(int argc, char* argv[])
+{
+if (argc &lt; 2)
+{
+    printf("Usage: ./opencv_hello &lt;file.png&gt;\n");
+    return -1;
+}
+
+    IplImage* img = cvLoadImage(argv[1], CV_LOAD_IMAGE_UNCHANGED);
+if (!img)
+{
+    return -1;
+}
+
+cvNamedWindow("display", CV_WINDOW_AUTOSIZE);
+    cvShowImage("display", img );
+
+    cvWaitKey(0);        
+
+    return 0;
+}
+</code></pre>
+
+<p>At this point, we need to configure the project so it can locate OpenCV headers and libraries. Go to the Project Properties (<strong>ALT+F7</strong>), and once the new window shows up do the following:</p>
+
+<ul>
+<li><p>On the <strong>Configuration</strong> box, select <strong>All Configurations</strong></p></li>
+<li><p>Open <strong>Configuration Properties > C/C++ > General</strong>, and edit the field <strong>Additional Include Directories</strong> to add these 3 paths (for the headers):</p>
+
+<p><code>C:\OpenCV2.3\build\include\opencv</code></p>
+
+<p><code>C:\OpenCV2.3\build\include\opencv2</code></p>
+
+<p><code>C:\OpenCV2.3\build\include</code></p></li>
+</ul>
+
+<p><img src="https://i.stack.imgur.com/uL750.jpg" alt="enter image description here"></p>
+
+<p>Note that <code>include\opencv</code> is for the C interface of OpenCV and <code>include\opencv2</code> if for the C++ interface. We are also adding the folder <code>include</code> to prevent our build from being broken by some headers of the C interface that refer to C++ headers as <code>opencv2\core</code>.</p>
+
+<ul>
+<li>Then, add the path of the libraries on <strong>Configuration Properties > Linker > General</strong>, and on the <strong>Additional Library Directories</strong> field, add this: <code>C:\OpenCV2.3\build\x86\vc9\lib</code>:</li>
+</ul>
+
+<p><img src="https://i.stack.imgur.com/GXqJx.jpg" alt="enter image description here"></p>
+
+<ul>
+<li>Finally, for this simple test we are going to add the libraries <code>opencv_core230.lib</code> and <code>opencv_highgui230.lib</code>. So go to <strong>Configuration Properties > Linker > Input</strong> and add them:</li>
+</ul>
+
+<p><img src="https://i.stack.imgur.com/ImHtF.jpg" alt="enter image description here"></p>
+
+<p>When writing more complex applications you'll probably need to add other OpenCV libs that I did not 
+mentioned on this little project of ours.</p>
+
+<p>Press <strong>F7</strong> to <em>Build Solution</em> and you should see:</p>
+
+<pre><code>========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+</code></pre>
+
+<p>To be able to execute the application you'll need to <a href="http://geekswithblogs.net/renso/archive/2009/10/21/how-to-set-the-windows-path-in-windows-7.aspx" rel="noreferrer">modify the <strong>PATH</strong> environment variable</a> of your system to add the location of OpenCV's DLLs. Add this to end of PATH:</p>
+
+<pre><code>; C:\OpenCV2.3\build\x86\vc9\bin
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/176769/karlphillip" target="_blank"><span itemprop="name">karlphillip</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7011238/setup-opencv-2-3-for-visual-studio-2010#answer-0</div>
+                                            <div itemprop="upvoteCount">93</div>
+                                            <div itemprop="dateCreated">8/12/2011 3:04:02 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>If you are struggling with editing the PATH environment variables, you can also copy the required .dll files to your project folder:
+<strong>The dll files are located in this folder ../OpenCV2.3/build.x86/vc9/bin</strong></p>
+
+<p>Then copy them to the folder where .exe file is created:
+<strong>c:\Users\PIMMES\Documents\Visual Studio 2010\Projects\eigenfaces\Debug</strong> (Ofcourse you have to change the path to your Debug folder)</p>
+
+<p>You only have to copy the .dll files which you are using in your project (#include  for example) For example if you get an error message saying opencv_core231d.dll is not found then get this .dll file from the above location (bin folder) and copy to your project Debug folder.</p>
+
+<p>Hope this helps..</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/1256736/pimmes111" target="_blank">pimmes111</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7011238" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7011238/setup-opencv-2-3-for-visual-studio-2010 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:54:17 GMT -->
+</html>

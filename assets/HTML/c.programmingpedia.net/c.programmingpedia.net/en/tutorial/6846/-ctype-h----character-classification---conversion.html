@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/6846/-ctype-h----character-classification---conversion by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="&lt;ctype.h&gt; — character classification &amp; conversion | C Language Tutorial">
+        <meta name="description" property="og:description" content="&lt;ctype.h&gt; — character classification &amp; conversion | C Language Tutorial">
+        <title>&lt;ctype.h&gt; — character classification &amp; conversion | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="-character-classification-conversion"><ctype.h> — character classification & conversion</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+
+
+            <h2 id="classifying-characters-from-a-string">Classifying characters from a string</h2>
+            <div>
+                <pre><code>#include &lt;ctype.h&gt;
+#include &lt;stddef.h&gt;
+
+typedef struct {
+  size_t space;
+  size_t alnum;
+  size_t punct;
+} chartypes;
+
+chartypes classify(const char *s) {
+  chartypes types = { 0, 0, 0 };
+  const char *p;
+  for (p= s; p != '\0'; p++) {
+    types.space += !!isspace((unsigned char)*p);
+    types.alnum += !!isalnum((unsigned char)*p);
+    types.punct += !!ispunct((unsigned char)*p);
+  }
+
+  return types;
+}
+</code></pre>
+<p>The <code>classify</code> function examines all characters from a string and counts the number of spaces, alphanumeric and punctuation characters. It avoids several pitfalls.</p>
+<ul>
+<li>The character classification functions (e.g. <code>isspace</code>) expect their argument to be <em>either representable as an <code>unsigned char</code>, or the value of the <code>EOF</code> macro</em>.</li>
+<li>The expression <code>*p</code> is of type <code>char</code> and must therefore be converted to match the above wording.</li>
+<li>The <code>char</code> type is defined to be equivalent to either <code>signed char</code> or <code>unsigned char</code>.</li>
+<li>When <code>char</code> is equivalent to <code>unsigned char</code>, there is no problem, since every possible value of the <code>char</code> type is representable as <code>unsigned char</code>.</li>
+<li>When <code>char</code> is equivalent to <code>signed char</code>, it must be converted to <code>unsigned char</code> before being passed to the character classification functions. And although the value of the character may change because of this conversion, this is exactly what these functions expect.</li>
+<li>The return value of the character classification functions only distinguishes between zero (meaning <code>false</code>) and nonzero (meaning <code>true</code>). For counting the number of occurrences, this value needs to be converted to a 1 or 0, which is done by the double negation, <code>!!</code>.</li>
+</ul>
+
+
+            </div>
+            <h2 id="classifying-characters-read-from-a-stream">Classifying characters read from a stream</h2>
+            <div>
+                <pre><code>#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+
+typedef struct {
+  size_t space;
+  size_t alnum;
+  size_t punct;
+} chartypes;
+
+chartypes classify(FILE *f) {
+  chartypes types = { 0, 0, 0 };
+  int ch;
+
+  while ((ch = fgetc(f)) != EOF) {
+    types.space += !!isspace(ch);
+    types.alnum += !!isalnum(ch);
+    types.punct += !!ispunct(ch);
+  }
+
+  return types;
+}
+</code></pre>
+<p>The <code>classify</code> function reads characters from a stream and counts the number of spaces, alphanumeric and punctuation characters. It avoids several pitfalls.</p>
+<ul>
+<li>When reading a character from a stream, the result is saved as an <code>int</code>, since otherwise there would be an ambiguity between reading <code>EOF</code> (the end-of-file marker) and a character that has the same bit pattern.</li>
+<li>The character classification functions (e.g. <code>isspace</code>) expect their argument to be <em>either representable as an <code>unsigned char</code>, or the value of the <code>EOF</code> macro</em>. Since this is exactly what the <code>fgetc</code> returns, there is no need for conversion here.</li>
+<li>The return value of the character classification functions only distinguishes between zero (meaning <code>false</code>) and nonzero (meaning <code>true</code>). For counting the number of occurrences, this value needs to be converted to a 1 or 0, which is done by the double negation, <code>!!</code>.</li>
+</ul>
+
+
+            </div>
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>The header <code>ctype.h</code> is a part of the standard C library. It provides functions for classifying and converting characters.</p>
+<p>All of these functions take one parameter, an <code>int</code> that must be either <em>EOF</em> or representable as an unsigned char.</p>
+<p>The names of the classifying functions are prefixed with 'is'. Each returns an integer non-zero value (TRUE) if the character passed to it satisfies the related condition. If the condition is not satisfied then the function returns a zero value (FALSE).</p>
+<p>These classifying functions operate as shown, assuming the default C locale:</p>
+<pre><code>int a;
+int c = 'A';
+a = isalpha(c); /* Checks if c is alphabetic (A-Z, a-z), returns non-zero here. */
+a = isalnum(c); /* Checks if c  is alphanumeric (A-Z, a-z, 0-9), returns non-zero here. */
+a = iscntrl(c); /* Checks is c is a control character (0x00-0x1F, 0x7F), returns zero here. */
+a = isdigit(c); /* Checks if c is a digit (0-9), returns zero here. */
+a = isgraph(c); /* Checks if c has a graphical representation (any printing character except space), returns non-zero here. */
+a = islower(c); /* Checks if c is a lower-case letter (a-z), returns zero here. */
+a = isprint(c); /* Checks if c is any printable character (including space), returns non-zero here. */
+a = isupper(c); /* Checks if c is a upper-case letter (a-z), returns zero here. */
+a = ispunct(c); /* Checks if c is a punctuation character, returns zero here. */
+a = isspace(c); /* Checks if c is a white-space character, returns zero here. */
+a = isupper(c); /* Checks if c is an upper-case letter (A-Z), returns non-zero here. */
+a = isxdigit(c); /* Checks if c is a hexadecimal digit (A-F, a-f, 0-9), returns non-zero here. */
+</code></pre>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<pre><code>a = isblank(c); /* Checks if c is a blank character (space or tab), returns non-zero here. */
+</code></pre>
+</div></div>
+<p>There are two conversion functions. These are named using the prefix 'to'. These functions take the same argument as those above. However the return value is not a simple zero or non-zero but the passed argument changed in some manner.</p>
+<p>These conversion functions operate as shown, assuming the default C locale:</p>
+<pre><code>int a;
+int c = 'A';
+
+/* Converts c to a lower-case letter (a-z). 
+ * If conversion is not possible the unchanged value is returned. 
+ * Returns 'a' here. 
+ */
+a = tolower(c);
+
+/* Converts c to an upper-case letter (A-Z). 
+ * If conversion is not possible the unchanged value is returned. 
+ * Returns 'A' here. 
+ */
+a = toupper(c);
+</code></pre>
+<p>The below information is quoted from <a href="http://www.cplusplus.com/reference/cctype/" rel="nofollow">cplusplus.com</a> mapping how the original 127-character ASCII set is considered by each of the classifying type functions (a • indicates that the function returns non-zero for that character)</p>
+<table><thead><tr><th>ASCII values</th><th>characters</th><th>iscntrl</th><th>isblank</th><th>isspace</th><th>isupper</th><th>islower</th><th>isalpha</th><th>isdigit</th><th>isxdigit</th><th>isalnum</th><th>ispunct</th><th>isgraph</th><th>isprint</th></tr></thead><tbody><tr><td>0x00 .. 0x08</td><td>NUL, (other control codes)</td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>0x09</td><td>tab ('\t')</td><td>•</td><td>•</td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>0x0A .. 0x0D</td><td>(white-space control codes: '\f','\v','\n','\r')</td><td>•</td><td></td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>0x0E .. 0x1F</td><td>(other control codes)</td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>0x20</td><td>space (' ')</td><td></td><td>•</td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td></tr><tr><td>0x21 .. 0x2F</td><td>!&quot;#$%&amp;'()*+,-./</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td>•</td></tr><tr><td>0x30 .. 0x39</td><td>0123456789</td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td>•</td><td></td><td>•</td><td>•</td></tr><tr><td>0x3a .. 0x40</td><td>:;&lt;=&gt;?@</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td>•</td></tr><tr><td>0x41 .. 0x46</td><td>ABCDEF</td><td></td><td></td><td></td><td>•</td><td></td><td>•</td><td></td><td>•</td><td>•</td><td></td><td>•</td><td>•</td></tr><tr><td>0x47 .. 0x5A</td><td>GHIJKLMNOPQRSTUVWXYZ</td><td></td><td></td><td></td><td>•</td><td></td><td>•</td><td></td><td></td><td>•</td><td></td><td>•</td><td>•</td></tr><tr><td>0x5B .. 0x60</td><td>[]^_`</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td>•</td></tr><tr><td>0x61 .. 0x66</td><td>abcdef</td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td></td><td>•</td><td>•</td><td></td><td>•</td><td>•</td></tr><tr><td>0x67 .. 0x7A</td><td>ghijklmnopqrstuvwxyz</td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td></td><td></td><td>•</td><td></td><td>•</td><td>•</td></tr><tr><td>0x7B .. 0x7E</td><td>{}~bar</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>•</td><td>•</td><td>•</td></tr><tr><td>0x7F</td><td>(DEL)</td><td>•</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                        <a href="../../../index.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../1301/aliasing-and-effective-type.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-09-18</div>
+        <div itemprop="datePublished">2016-09-18</div>
+        <div itemprop="dateModified">2016-09-21</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=6846" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1033493680" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#classifying-characters-from-a-string">
+                    Classifying characters from a string
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#classifying-characters-read-from-a-stream">
+                    Classifying characters read from a stream
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/6846/-ctype-h----character-classification---conversion by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+</html>

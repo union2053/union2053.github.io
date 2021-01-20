@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How do I achieve the theoretical maximum of 4 FLOPs per cycle? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How do I achieve the theoretical maximum of 4 FLOPs per cycle? | C Language Knowledge Base">
+        <title>[SOLVED] How do I achieve the theoretical maximum of 4 FLOPs per cycle? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle-">How do I achieve the theoretical maximum of 4 FLOPs per cycle?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/architecture.html">architecture</a></span>
+                        <span class="tag-item"><a href="../tag/assembly.html">assembly</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/optimization.html">optimization</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>How can the theoretical peak performance of 4 floating point operations (double precision) per cycle be achieved on a modern x86-64 Intel CPU?</p>
+
+<p>As far as I understand it take three cycles for an <a href="https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions" rel="noreferrer">SSE</a> <code>add</code> and five cycles for a <code>mul</code> to complete on most of the modern Intel CPUs (see for example <a href="http://agner.org/optimize/instruction_tables.pdf" rel="noreferrer">Agner Fog's 'Instruction Tables'</a> ). Due to pipelining one can get a throughput of one <code>add</code> per cycle if the algorithm has at least three independent summations. Since that is true for packed <code>addpd</code> as well as the scalar <code>addsd</code> versions and SSE registers can contain two <code>double</code>'s the throughput can be as much as two flops per cycle.</p>
+
+<p>Furthermore, it seems (although I've not seen any proper documentation on this) <code>add</code>'s and <code>mul</code>'s can be executed in parallel giving a theoretical max throughput of four flops per cycle.</p>
+
+<p>However, I've not been able to replicate that performance with a simple C/C++ programme. My best attempt resulted in about 2.7 flops/cycle. If anyone can contribute a simple C/C++ or assembler programme which demonstrates peak performance that'd be greatly appreciated.</p>
+
+<p>My attempt:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;sys/time.h&gt;
+
+double stoptime(void) {
+   struct timeval t;
+   gettimeofday(&amp;t,NULL);
+   return (double) t.tv_sec + t.tv_usec/1000000.0;
+}
+
+double addmul(double add, double mul, int ops){
+   // Need to initialise differently otherwise compiler might optimise away
+   double sum1=0.1, sum2=-0.1, sum3=0.2, sum4=-0.2, sum5=0.0;
+   double mul1=1.0, mul2= 1.1, mul3=1.2, mul4= 1.3, mul5=1.4;
+   int loops=ops/10;          // We have 10 floating point operations inside the loop
+   double expected = 5.0*add*loops + (sum1+sum2+sum3+sum4+sum5)
+               + pow(mul,loops)*(mul1+mul2+mul3+mul4+mul5);
+
+   for (int i=0; i&lt;loops; i++) {
+      mul1*=mul; mul2*=mul; mul3*=mul; mul4*=mul; mul5*=mul;
+      sum1+=add; sum2+=add; sum3+=add; sum4+=add; sum5+=add;
+   }
+   return  sum1+sum2+sum3+sum4+sum5+mul1+mul2+mul3+mul4+mul5 - expected;
+}
+
+int main(int argc, char** argv) {
+   if (argc != 2) {
+      printf("usage: %s &lt;num&gt;\n", argv[0]);
+      printf("number of operations: &lt;num&gt; millions\n");
+      exit(EXIT_FAILURE);
+   }
+   int n = atoi(argv[1]) * 1000000;
+   if (n&lt;=0)
+       n=1000;
+
+   double x = M_PI;
+   double y = 1.0 + 1e-8;
+   double t = stoptime();
+   x = addmul(x, y, n);
+   t = stoptime() - t;
+   printf("addmul:\t %.3f s, %.3f Gflops, res=%f\n", t, (double)n/t/1e9, x);
+   return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p>Compiled with</p>
+
+<pre><code>g++ -O2 -march=native addmul.cpp ; ./a.out 1000
+</code></pre>
+
+<p>produces the following output on an Intel Core i5-750, 2.66&nbsp;GHz.</p>
+
+<pre><code>addmul:  0.270 s, 3.707 Gflops, res=1.326463
+</code></pre>
+
+<p>That is, just about 1.4 flops per cycle. Looking at the assembler code with
+<code>g++ -S -O2 -march=native -masm=intel addmul.cpp</code> the main loop seems kind of
+optimal to me:</p>
+
+<pre><code>.L4:
+inc    eax
+mulsd    xmm8, xmm3
+mulsd    xmm7, xmm3
+mulsd    xmm6, xmm3
+mulsd    xmm5, xmm3
+mulsd    xmm1, xmm3
+addsd    xmm13, xmm2
+addsd    xmm12, xmm2
+addsd    xmm11, xmm2
+addsd    xmm10, xmm2
+addsd    xmm9, xmm2
+cmp    eax, ebx
+jne    .L4
+</code></pre>
+
+<p>Changing the scalar versions with packed versions (<code>addpd</code> and <code>mulpd</code>) would double the flop count without changing the execution time and so I'd get just short of 2.8 flops per cycle. Is there a simple example which achieves four flops per cycle?</p>
+
+<p>Nice little programme by Mysticial; here are my results (run just for a few seconds though):</p>
+
+<ul>
+<li><code>gcc -O2 -march=nocona</code>: 5.6 Gflops out of 10.66 Gflops (2.1 flops/cycle)</li>
+<li><code>cl /O2</code>, openmp removed: 10.1 Gflops out of 10.66 Gflops (3.8 flops/cycle)</li>
+</ul>
+
+<p>It all seems a bit complex, but my conclusions so far:</p>
+
+<ul>
+<li><p><code>gcc -O2</code> changes the order of independent floating point operations with
+the aim of alternating
+<code>addpd</code> and <code>mulpd</code>'s if possible. Same applies to <code>gcc-4.6.2 -O2 -march=core2</code>.</p></li>
+<li><p><code>gcc -O2 -march=nocona</code> seems to keep the order of floating point operations as defined in
+the C++ source.</p></li>
+<li><p><code>cl /O2</code>, the 64-bit compiler from the
+<a href="http://www.microsoft.com/download/en/details.aspx?id=3138" rel="noreferrer">SDK for Windows 7</a>
+does loop-unrolling automatically and seems to try and arrange operations
+so that groups of three <code>addpd</code>'s alternate with three <code>mulpd</code>'s (well, at least on my system and for my simple programme).</p></li>
+<li><p>My <a href="http://en.wikipedia.org/wiki/List_of_Intel_Core_i5_microprocessors#Based_on_Nehalem_microarchitecture" rel="noreferrer">Core i5 750</a> (<a href="http://en.wikipedia.org/wiki/Nehalem_(microarchitecture)" rel="noreferrer">Nehalem architecture</a>)
+doesn't like alternating add's and mul's and seems unable
+to run both operations in parallel. However, if grouped in 3's it suddenly works like magic.</p></li>
+<li><p>Other architectures (possibly <a href="http://en.wikipedia.org/wiki/Sandy_bridge" rel="noreferrer">Sandy Bridge</a> and others) appear to
+be able to execute add/mul in parallel without problems
+if they alternate in the assembly code.</p></li>
+<li><p>Although difficult to admit, but on my system <code>cl /O2</code> does a much better job at low-level optimising operations for my system and achieves close to peak performance for the little C++ example above. I measured between
+1.85-2.01 flops/cycle (have used clock() in Windows which is not that precise. I guess, need to use a better timer - thanks Mackie Messer).</p></li>
+<li><p>The best I managed  with <code>gcc</code> was to manually loop unroll and arrange
+additions and multiplications in groups of three. With
+<code>g++ -O2 -march=nocona  addmul_unroll.cpp</code>
+I get at best <code>0.207s, 4.825 Gflops</code> which corresponds to 1.8 flops/cycle
+which I'm quite happy with now.</p></li>
+</ul>
+
+<p>In the C++ code I've replaced the <code>for</code> loop with</p>
+
+<pre><code>   for (int i=0; i&lt;loops/3; i++) {
+       mul1*=mul; mul2*=mul; mul3*=mul;
+       sum1+=add; sum2+=add; sum3+=add;
+       mul4*=mul; mul5*=mul; mul1*=mul;
+       sum4+=add; sum5+=add; sum1+=add;
+
+       mul2*=mul; mul3*=mul; mul4*=mul;
+       sum2+=add; sum3+=add; sum4+=add;
+       mul5*=mul; mul1*=mul; mul2*=mul;
+       sum5+=add; sum1+=add; sum2+=add;
+
+       mul3*=mul; mul4*=mul; mul5*=mul;
+       sum3+=add; sum4+=add; sum5+=add;
+   }
+</code></pre>
+
+<p>And the assembly now looks like</p>
+
+<pre><code>.L4:
+mulsd    xmm8, xmm3
+mulsd    xmm7, xmm3
+mulsd    xmm6, xmm3
+addsd    xmm13, xmm2
+addsd    xmm12, xmm2
+addsd    xmm11, xmm2
+mulsd    xmm5, xmm3
+mulsd    xmm1, xmm3
+mulsd    xmm8, xmm3
+addsd    xmm10, xmm2
+addsd    xmm9, xmm2
+addsd    xmm13, xmm2
+...
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1059432/user1059432" target="_blank"><span itemprop="name">user1059432</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">609</div>
+                                    <div itemprop="dateCreated">4/18/2019 2:36:32 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I've done this exact task before. But it was mainly to measure power consumption and CPU temperatures. The following code (which is fairly long) achieves close to optimal on my Core i7 2600K.</p>
+
+<p>The key thing to note here is the massive amount of manual loop-unrolling as well as interleaving of multiplies and adds...</p>
+
+<p>The full project can be found on my GitHub: <a href="https://github.com/Mysticial/Flops">https://github.com/Mysticial/Flops</a></p>
+
+<h1 id="warning-">Warning:</h1>
+
+<p><strong>If you decide to compile and run this, pay attention to your CPU temperatures!!!</strong><br>Make sure you don't overheat it. And make sure CPU-throttling doesn't affect your results!</p>
+
+<p>Furthermore, I take no responsibility for whatever damage that may result from running this code.</p>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+<li>This code is optimized for x64. x86 doesn't have enough registers for this to compile well.</li>
+<li>This code has been tested to work well on Visual Studio 2010/2012 and GCC 4.6.<br>ICC 11 (Intel Compiler 11) surprisingly has trouble compiling it well.</li>
+<li>These are for pre-FMA processors. In order to achieve peak FLOPS on Intel Haswell and AMD Bulldozer processors (and later), FMA (Fused Multiply Add) instructions will be needed. These are beyond the scope of this benchmark.</li>
+</ul>
+
+<p></p>
+
+<pre><code>#include &lt;emmintrin.h&gt;
+#include &lt;omp.h&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+typedef unsigned long long uint64;
+
+double test_dp_mac_SSE(double x,double y,uint64 iterations){
+    register __m128d r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,rA,rB,rC,rD,rE,rF;
+
+    //  Generate starting data.
+    r0 = _mm_set1_pd(x);
+    r1 = _mm_set1_pd(y);
+
+    r8 = _mm_set1_pd(-0.0);
+
+    r2 = _mm_xor_pd(r0,r8);
+    r3 = _mm_or_pd(r0,r8);
+    r4 = _mm_andnot_pd(r8,r0);
+    r5 = _mm_mul_pd(r1,_mm_set1_pd(0.37796447300922722721));
+    r6 = _mm_mul_pd(r1,_mm_set1_pd(0.24253562503633297352));
+    r7 = _mm_mul_pd(r1,_mm_set1_pd(4.1231056256176605498));
+    r8 = _mm_add_pd(r0,_mm_set1_pd(0.37796447300922722721));
+    r9 = _mm_add_pd(r1,_mm_set1_pd(0.24253562503633297352));
+    rA = _mm_sub_pd(r0,_mm_set1_pd(4.1231056256176605498));
+    rB = _mm_sub_pd(r1,_mm_set1_pd(4.1231056256176605498));
+
+    rC = _mm_set1_pd(1.4142135623730950488);
+    rD = _mm_set1_pd(1.7320508075688772935);
+    rE = _mm_set1_pd(0.57735026918962576451);
+    rF = _mm_set1_pd(0.70710678118654752440);
+
+    uint64 iMASK = 0x800fffffffffffffull;
+    __m128d MASK = _mm_set1_pd(*(double*)&amp;iMASK);
+    __m128d vONE = _mm_set1_pd(1.0);
+
+    uint64 c = 0;
+    while (c &lt; iterations){
+        size_t i = 0;
+        while (i &lt; 1000){
+            //  Here's the meat - the part that really matters.
+
+            r0 = _mm_mul_pd(r0,rC);
+            r1 = _mm_add_pd(r1,rD);
+            r2 = _mm_mul_pd(r2,rE);
+            r3 = _mm_sub_pd(r3,rF);
+            r4 = _mm_mul_pd(r4,rC);
+            r5 = _mm_add_pd(r5,rD);
+            r6 = _mm_mul_pd(r6,rE);
+            r7 = _mm_sub_pd(r7,rF);
+            r8 = _mm_mul_pd(r8,rC);
+            r9 = _mm_add_pd(r9,rD);
+            rA = _mm_mul_pd(rA,rE);
+            rB = _mm_sub_pd(rB,rF);
+
+            r0 = _mm_add_pd(r0,rF);
+            r1 = _mm_mul_pd(r1,rE);
+            r2 = _mm_sub_pd(r2,rD);
+            r3 = _mm_mul_pd(r3,rC);
+            r4 = _mm_add_pd(r4,rF);
+            r5 = _mm_mul_pd(r5,rE);
+            r6 = _mm_sub_pd(r6,rD);
+            r7 = _mm_mul_pd(r7,rC);
+            r8 = _mm_add_pd(r8,rF);
+            r9 = _mm_mul_pd(r9,rE);
+            rA = _mm_sub_pd(rA,rD);
+            rB = _mm_mul_pd(rB,rC);
+
+            r0 = _mm_mul_pd(r0,rC);
+            r1 = _mm_add_pd(r1,rD);
+            r2 = _mm_mul_pd(r2,rE);
+            r3 = _mm_sub_pd(r3,rF);
+            r4 = _mm_mul_pd(r4,rC);
+            r5 = _mm_add_pd(r5,rD);
+            r6 = _mm_mul_pd(r6,rE);
+            r7 = _mm_sub_pd(r7,rF);
+            r8 = _mm_mul_pd(r8,rC);
+            r9 = _mm_add_pd(r9,rD);
+            rA = _mm_mul_pd(rA,rE);
+            rB = _mm_sub_pd(rB,rF);
+
+            r0 = _mm_add_pd(r0,rF);
+            r1 = _mm_mul_pd(r1,rE);
+            r2 = _mm_sub_pd(r2,rD);
+            r3 = _mm_mul_pd(r3,rC);
+            r4 = _mm_add_pd(r4,rF);
+            r5 = _mm_mul_pd(r5,rE);
+            r6 = _mm_sub_pd(r6,rD);
+            r7 = _mm_mul_pd(r7,rC);
+            r8 = _mm_add_pd(r8,rF);
+            r9 = _mm_mul_pd(r9,rE);
+            rA = _mm_sub_pd(rA,rD);
+            rB = _mm_mul_pd(rB,rC);
+
+            i++;
+        }
+
+        //  Need to renormalize to prevent denormal/overflow.
+        r0 = _mm_and_pd(r0,MASK);
+        r1 = _mm_and_pd(r1,MASK);
+        r2 = _mm_and_pd(r2,MASK);
+        r3 = _mm_and_pd(r3,MASK);
+        r4 = _mm_and_pd(r4,MASK);
+        r5 = _mm_and_pd(r5,MASK);
+        r6 = _mm_and_pd(r6,MASK);
+        r7 = _mm_and_pd(r7,MASK);
+        r8 = _mm_and_pd(r8,MASK);
+        r9 = _mm_and_pd(r9,MASK);
+        rA = _mm_and_pd(rA,MASK);
+        rB = _mm_and_pd(rB,MASK);
+        r0 = _mm_or_pd(r0,vONE);
+        r1 = _mm_or_pd(r1,vONE);
+        r2 = _mm_or_pd(r2,vONE);
+        r3 = _mm_or_pd(r3,vONE);
+        r4 = _mm_or_pd(r4,vONE);
+        r5 = _mm_or_pd(r5,vONE);
+        r6 = _mm_or_pd(r6,vONE);
+        r7 = _mm_or_pd(r7,vONE);
+        r8 = _mm_or_pd(r8,vONE);
+        r9 = _mm_or_pd(r9,vONE);
+        rA = _mm_or_pd(rA,vONE);
+        rB = _mm_or_pd(rB,vONE);
+
+        c++;
+    }
+
+    r0 = _mm_add_pd(r0,r1);
+    r2 = _mm_add_pd(r2,r3);
+    r4 = _mm_add_pd(r4,r5);
+    r6 = _mm_add_pd(r6,r7);
+    r8 = _mm_add_pd(r8,r9);
+    rA = _mm_add_pd(rA,rB);
+
+    r0 = _mm_add_pd(r0,r2);
+    r4 = _mm_add_pd(r4,r6);
+    r8 = _mm_add_pd(r8,rA);
+
+    r0 = _mm_add_pd(r0,r4);
+    r0 = _mm_add_pd(r0,r8);
+
+
+    //  Prevent Dead Code Elimination
+    double out = 0;
+    __m128d temp = r0;
+    out += ((double*)&amp;temp)[0];
+    out += ((double*)&amp;temp)[1];
+
+    return out;
+}
+
+void test_dp_mac_SSE(int tds,uint64 iterations){
+
+    double *sum = (double*)malloc(tds * sizeof(double));
+    double start = omp_get_wtime();
+
+#pragma omp parallel num_threads(tds)
+    {
+        double ret = test_dp_mac_SSE(1.1,2.1,iterations);
+        sum[omp_get_thread_num()] = ret;
+    }
+
+    double secs = omp_get_wtime() - start;
+    uint64 ops = 48 * 1000 * iterations * tds * 2;
+    cout &lt;&lt; "Seconds = " &lt;&lt; secs &lt;&lt; endl;
+    cout &lt;&lt; "FP Ops  = " &lt;&lt; ops &lt;&lt; endl;
+    cout &lt;&lt; "FLOPs   = " &lt;&lt; ops / secs &lt;&lt; endl;
+
+    double out = 0;
+    int c = 0;
+    while (c &lt; tds){
+        out += sum[c++];
+    }
+
+    cout &lt;&lt; "sum = " &lt;&lt; out &lt;&lt; endl;
+    cout &lt;&lt; endl;
+
+    free(sum);
+}
+
+int main(){
+    //  (threads, iterations)
+    test_dp_mac_SSE(8,10000000);
+
+    system("pause");
+}
+</code></pre>
+
+<p><strong>Output (1 thread, 10000000 iterations) - Compiled with Visual Studio 2010 SP1 - x64 Release:</strong></p>
+
+<pre><code>Seconds = 55.5104
+FP Ops  = 960000000000
+FLOPs   = 1.7294e+010
+sum = 2.22652
+</code></pre>
+
+<p>The machine is a Core i7 2600K @ 4.4 GHz. Theoretical SSE peak is 4 flops * 4.4 GHz = <strong>17.6 GFlops</strong>. This code achieves <strong>17.3 GFlops</strong> - not bad.</p>
+
+<p><strong>Output (8 threads, 10000000 iterations) - Compiled with Visual Studio 2010 SP1 - x64 Release:</strong></p>
+
+<pre><code>Seconds = 117.202
+FP Ops  = 7680000000000
+FLOPs   = 6.55279e+010
+sum = 17.8122
+</code></pre>
+
+<p>Theoretical SSE peak is 4 flops * 4 cores * 4.4 GHz = <strong>70.4 GFlops.</strong> Actual is <strong>65.5 GFlops</strong>.</p>
+
+<hr>
+
+<h2 id="let-s-take-this-one-step-further-avx-">Let's take this one step further. AVX...</h2>
+
+<pre><code>#include &lt;immintrin.h&gt;
+#include &lt;omp.h&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+typedef unsigned long long uint64;
+
+double test_dp_mac_AVX(double x,double y,uint64 iterations){
+    register __m256d r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,rA,rB,rC,rD,rE,rF;
+
+    //  Generate starting data.
+    r0 = _mm256_set1_pd(x);
+    r1 = _mm256_set1_pd(y);
+
+    r8 = _mm256_set1_pd(-0.0);
+
+    r2 = _mm256_xor_pd(r0,r8);
+    r3 = _mm256_or_pd(r0,r8);
+    r4 = _mm256_andnot_pd(r8,r0);
+    r5 = _mm256_mul_pd(r1,_mm256_set1_pd(0.37796447300922722721));
+    r6 = _mm256_mul_pd(r1,_mm256_set1_pd(0.24253562503633297352));
+    r7 = _mm256_mul_pd(r1,_mm256_set1_pd(4.1231056256176605498));
+    r8 = _mm256_add_pd(r0,_mm256_set1_pd(0.37796447300922722721));
+    r9 = _mm256_add_pd(r1,_mm256_set1_pd(0.24253562503633297352));
+    rA = _mm256_sub_pd(r0,_mm256_set1_pd(4.1231056256176605498));
+    rB = _mm256_sub_pd(r1,_mm256_set1_pd(4.1231056256176605498));
+
+    rC = _mm256_set1_pd(1.4142135623730950488);
+    rD = _mm256_set1_pd(1.7320508075688772935);
+    rE = _mm256_set1_pd(0.57735026918962576451);
+    rF = _mm256_set1_pd(0.70710678118654752440);
+
+    uint64 iMASK = 0x800fffffffffffffull;
+    __m256d MASK = _mm256_set1_pd(*(double*)&amp;iMASK);
+    __m256d vONE = _mm256_set1_pd(1.0);
+
+    uint64 c = 0;
+    while (c &lt; iterations){
+        size_t i = 0;
+        while (i &lt; 1000){
+            //  Here's the meat - the part that really matters.
+
+            r0 = _mm256_mul_pd(r0,rC);
+            r1 = _mm256_add_pd(r1,rD);
+            r2 = _mm256_mul_pd(r2,rE);
+            r3 = _mm256_sub_pd(r3,rF);
+            r4 = _mm256_mul_pd(r4,rC);
+            r5 = _mm256_add_pd(r5,rD);
+            r6 = _mm256_mul_pd(r6,rE);
+            r7 = _mm256_sub_pd(r7,rF);
+            r8 = _mm256_mul_pd(r8,rC);
+            r9 = _mm256_add_pd(r9,rD);
+            rA = _mm256_mul_pd(rA,rE);
+            rB = _mm256_sub_pd(rB,rF);
+
+            r0 = _mm256_add_pd(r0,rF);
+            r1 = _mm256_mul_pd(r1,rE);
+            r2 = _mm256_sub_pd(r2,rD);
+            r3 = _mm256_mul_pd(r3,rC);
+            r4 = _mm256_add_pd(r4,rF);
+            r5 = _mm256_mul_pd(r5,rE);
+            r6 = _mm256_sub_pd(r6,rD);
+            r7 = _mm256_mul_pd(r7,rC);
+            r8 = _mm256_add_pd(r8,rF);
+            r9 = _mm256_mul_pd(r9,rE);
+            rA = _mm256_sub_pd(rA,rD);
+            rB = _mm256_mul_pd(rB,rC);
+
+            r0 = _mm256_mul_pd(r0,rC);
+            r1 = _mm256_add_pd(r1,rD);
+            r2 = _mm256_mul_pd(r2,rE);
+            r3 = _mm256_sub_pd(r3,rF);
+            r4 = _mm256_mul_pd(r4,rC);
+            r5 = _mm256_add_pd(r5,rD);
+            r6 = _mm256_mul_pd(r6,rE);
+            r7 = _mm256_sub_pd(r7,rF);
+            r8 = _mm256_mul_pd(r8,rC);
+            r9 = _mm256_add_pd(r9,rD);
+            rA = _mm256_mul_pd(rA,rE);
+            rB = _mm256_sub_pd(rB,rF);
+
+            r0 = _mm256_add_pd(r0,rF);
+            r1 = _mm256_mul_pd(r1,rE);
+            r2 = _mm256_sub_pd(r2,rD);
+            r3 = _mm256_mul_pd(r3,rC);
+            r4 = _mm256_add_pd(r4,rF);
+            r5 = _mm256_mul_pd(r5,rE);
+            r6 = _mm256_sub_pd(r6,rD);
+            r7 = _mm256_mul_pd(r7,rC);
+            r8 = _mm256_add_pd(r8,rF);
+            r9 = _mm256_mul_pd(r9,rE);
+            rA = _mm256_sub_pd(rA,rD);
+            rB = _mm256_mul_pd(rB,rC);
+
+            i++;
+        }
+
+        //  Need to renormalize to prevent denormal/overflow.
+        r0 = _mm256_and_pd(r0,MASK);
+        r1 = _mm256_and_pd(r1,MASK);
+        r2 = _mm256_and_pd(r2,MASK);
+        r3 = _mm256_and_pd(r3,MASK);
+        r4 = _mm256_and_pd(r4,MASK);
+        r5 = _mm256_and_pd(r5,MASK);
+        r6 = _mm256_and_pd(r6,MASK);
+        r7 = _mm256_and_pd(r7,MASK);
+        r8 = _mm256_and_pd(r8,MASK);
+        r9 = _mm256_and_pd(r9,MASK);
+        rA = _mm256_and_pd(rA,MASK);
+        rB = _mm256_and_pd(rB,MASK);
+        r0 = _mm256_or_pd(r0,vONE);
+        r1 = _mm256_or_pd(r1,vONE);
+        r2 = _mm256_or_pd(r2,vONE);
+        r3 = _mm256_or_pd(r3,vONE);
+        r4 = _mm256_or_pd(r4,vONE);
+        r5 = _mm256_or_pd(r5,vONE);
+        r6 = _mm256_or_pd(r6,vONE);
+        r7 = _mm256_or_pd(r7,vONE);
+        r8 = _mm256_or_pd(r8,vONE);
+        r9 = _mm256_or_pd(r9,vONE);
+        rA = _mm256_or_pd(rA,vONE);
+        rB = _mm256_or_pd(rB,vONE);
+
+        c++;
+    }
+
+    r0 = _mm256_add_pd(r0,r1);
+    r2 = _mm256_add_pd(r2,r3);
+    r4 = _mm256_add_pd(r4,r5);
+    r6 = _mm256_add_pd(r6,r7);
+    r8 = _mm256_add_pd(r8,r9);
+    rA = _mm256_add_pd(rA,rB);
+
+    r0 = _mm256_add_pd(r0,r2);
+    r4 = _mm256_add_pd(r4,r6);
+    r8 = _mm256_add_pd(r8,rA);
+
+    r0 = _mm256_add_pd(r0,r4);
+    r0 = _mm256_add_pd(r0,r8);
+
+    //  Prevent Dead Code Elimination
+    double out = 0;
+    __m256d temp = r0;
+    out += ((double*)&amp;temp)[0];
+    out += ((double*)&amp;temp)[1];
+    out += ((double*)&amp;temp)[2];
+    out += ((double*)&amp;temp)[3];
+
+    return out;
+}
+
+void test_dp_mac_AVX(int tds,uint64 iterations){
+
+    double *sum = (double*)malloc(tds * sizeof(double));
+    double start = omp_get_wtime();
+
+#pragma omp parallel num_threads(tds)
+    {
+        double ret = test_dp_mac_AVX(1.1,2.1,iterations);
+        sum[omp_get_thread_num()] = ret;
+    }
+
+    double secs = omp_get_wtime() - start;
+    uint64 ops = 48 * 1000 * iterations * tds * 4;
+    cout &lt;&lt; "Seconds = " &lt;&lt; secs &lt;&lt; endl;
+    cout &lt;&lt; "FP Ops  = " &lt;&lt; ops &lt;&lt; endl;
+    cout &lt;&lt; "FLOPs   = " &lt;&lt; ops / secs &lt;&lt; endl;
+
+    double out = 0;
+    int c = 0;
+    while (c &lt; tds){
+        out += sum[c++];
+    }
+
+    cout &lt;&lt; "sum = " &lt;&lt; out &lt;&lt; endl;
+    cout &lt;&lt; endl;
+
+    free(sum);
+}
+
+int main(){
+    //  (threads, iterations)
+    test_dp_mac_AVX(8,10000000);
+
+    system("pause");
+}
+</code></pre>
+
+<p><strong>Output (1 thread, 10000000 iterations) - Compiled with Visual Studio 2010 SP1 - x64 Release:</strong></p>
+
+<pre><code>Seconds = 57.4679
+FP Ops  = 1920000000000
+FLOPs   = 3.34099e+010
+sum = 4.45305
+</code></pre>
+
+<p>Theoretical AVX peak is 8 flops * 4.4 GHz = <strong>35.2 GFlops</strong>. Actual is <strong>33.4 GFlops</strong>.</p>
+
+<p><strong>Output (8 threads, 10000000 iterations) - Compiled with Visual Studio 2010 SP1 - x64 Release:</strong></p>
+
+<pre><code>Seconds = 111.119
+FP Ops  = 15360000000000
+FLOPs   = 1.3823e+011
+sum = 35.6244
+</code></pre>
+
+<p>Theoretical AVX peak is 8 flops * 4 cores * 4.4 GHz = <strong>140.8 GFlops.</strong> Actual is <strong>138.2 GFlops</strong>.</p>
+
+<hr>
+
+<p><strong>Now for some explanations:</strong></p>
+
+<p>The performance critical part is obviously the 48 instructions inside the inner loop. You'll notice that it's broken into 4 blocks of 12 instructions each. Each of these 12 instructions blocks are completely independent from each other - and take on average 6 cycles to execute.</p>
+
+<p>So there's 12 instructions and 6 cycles between issue-to-use. The latency of multiplication is 5 cycles, so it's just enough to avoid latency stalls.</p>
+
+<p>The normalization step is needed to keep the data from over/underflowing. This is needed since the do-nothing code will slowly increase/decrease the magnitude of the data.</p>
+
+<p>So it's actually possible to do better than this if you just use all zeros and get rid of the normalization step. However, since I wrote the benchmark to measure power consumption and temperature, <strong>I had to make sure the flops were on "real" data, rather than zeros</strong> - as the execution units may very well have special case-handling for zeros that use less power and produce less heat.</p>
+
+<hr>
+
+<h2 id="more-results-">More Results:</h2>
+
+<ul>
+<li><strong>Intel Core i7 920 @ 3.5 GHz</strong></li>
+<li>Windows 7 Ultimate x64</li>
+<li>Visual Studio 2010 SP1 - x64 Release</li>
+</ul>
+
+<p><strong>Threads: 1</strong></p>
+
+<pre><code>Seconds = 72.1116
+FP Ops  = 960000000000
+FLOPs   = 1.33127e+010
+sum = 2.22652
+</code></pre>
+
+<p>Theoretical SSE Peak: 4 flops * 3.5 GHz = <strong>14.0 GFlops</strong>. Actual is <strong>13.3 GFlops</strong>.</p>
+
+<p><strong>Threads: 8</strong></p>
+
+<pre><code>Seconds = 149.576
+FP Ops  = 7680000000000
+FLOPs   = 5.13452e+010
+sum = 17.8122
+</code></pre>
+
+<p>Theoretical SSE Peak: 4 flops * 4 cores * 3.5 GHz = <strong>56.0 GFlops</strong>. Actual is <strong>51.3 GFlops</strong>.</p>
+
+<p><em><strong>My processor temps hit 76C on the multi-threaded run! If you runs these, be sure the results aren't affected by CPU throttling.</em></strong></p>
+
+<hr>
+
+<ul>
+<li><strong>2 x Intel Xeon X5482 Harpertown @ 3.2 GHz</strong></li>
+<li>Ubuntu Linux 10 x64</li>
+<li>GCC 4.5.2 x64 - (-O2 -msse3 -fopenmp)</li>
+</ul>
+
+<p><strong>Threads: 1</strong></p>
+
+<pre><code>Seconds = 78.3357
+FP Ops  = 960000000000
+FLOPs   = 1.22549e+10
+sum = 2.22652
+</code></pre>
+
+<p>Theoretical SSE Peak: 4 flops * 3.2 GHz = <strong>12.8 GFlops</strong>. Actual is <strong>12.3 GFlops</strong>.</p>
+
+<p><strong>Threads: 8</strong></p>
+
+<pre><code>Seconds = 78.4733
+FP Ops  = 7680000000000
+FLOPs   = 9.78676e+10
+sum = 17.8122
+</code></pre>
+
+<p>Theoretical SSE Peak: 4 flops * 8 cores * 3.2 GHz = <strong>102.4 GFlops</strong>. Actual is <strong>97.9 GFlops</strong>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/922184/mysticial" target="_blank"><span itemprop="name">Mysticial</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle-#answer-0</div>
+                                            <div itemprop="upvoteCount">496</div>
+                                            <div itemprop="dateCreated">8/16/2013 4:46:41 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>There's a point in the Intel architecture that people often forget, the dispatch ports are shared between Int and FP/SIMD. This means that you will only get a certain amount of bursts of FP/SIMD before the loop logic will create bubbles in your floating point stream. Mystical got more flops out of his code, because he used longer strides in his unrolled loop.</p>
+
+<p>If you look at the Nehalem/Sandy Bridge architecture here 
+<a href="http://www.realworldtech.com/page.cfm?ArticleID=RWT091810191937&amp;p=6" rel="noreferrer">http://www.realworldtech.com/page.cfm?ArticleID=RWT091810191937&amp;p=6</a>
+it's quite clear what happens.</p>
+
+<p>In contrast, it should be easier to reach peak performance on AMD (Bulldozer) as the INT and FP/SIMD pipes have separate issue ports with their own scheduler.</p>
+
+<p>This is only theoretical as I have neither of these processors to test.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/146377/patrick-schluter" target="_blank">Patrick Schlüter</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/8389648" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:20 GMT -->
+</html>

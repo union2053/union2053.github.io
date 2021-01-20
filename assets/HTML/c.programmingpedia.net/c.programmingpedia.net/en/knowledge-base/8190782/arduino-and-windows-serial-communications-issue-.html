@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8190782/arduino-and-windows-serial-communications-issue- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Arduino and Windows serial communications issue? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="Arduino and Windows serial communications issue? | C Language Knowledge Base">
+        <title>Arduino and Windows serial communications issue? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="arduino-and-windows-serial-communications-issue-">Arduino and Windows serial communications issue?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/serial-port.html">serial-port</a></span>
+                        <span class="tag-item"><a href="../tag/visual-studio-2010.html">visual-studio-2010</a></span>
+                        <span class="tag-item"><a href="../tag/windows.html">windows</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am working on a project that involves some 'c' serial communication implemented in Visual Studio 2010 Proffesional on a Windows&nbsp;7 32-bit platform connected to an Arduino Mega device (to control some hardware **not relevant to problem). The code for this works 100%; the ONLY problem I'm having is that something very funny is going on with my serial communication.</p>
+
+<p>The Visual C program is as follows.</p>
+
+<pre><code>HANDLE hDevice = CreateFile(L"COM5",
+                            GENERIC_READ | GENERIC_WRITE,
+                            FILE_SHARE_READ | FILE_SHARE_WRITE,
+                            NULL,
+                            OPEN_EXISTING,
+                            0,
+                            0); //Open COM handle (create file)
+if (hDevice !=INVALID_HANDLE_VALUE) //If COM3 connected
+{
+    printf("Com port opened\n");
+    DCB lpTest;
+    GetCommState(hDevice,&amp;lpTest);
+    lpTest.BaudRate = CBR_9600;
+    lpTest.ByteSize = 8;
+    lpTest.Parity = NOPARITY;
+    lpTest.StopBits = ONESTOPBIT;
+    SetCommState(hDevice,&amp;lpTest);
+    DWORD btsIO;
+    WriteFile(hDevice,c1,strlen(c1),&amp;btsIO,NULL);
+    CloseHandle(hDevice);
+}
+</code></pre>
+
+<p>The output of this program is a text string, and I'm 100% happy with it (should end in Null, have x characters, etc.).</p>
+
+<p>Typing the result obtained from this program in Serial Communicator, it does not seem to work! Using a COM spy program, I am able to obtain the "handshaking" protocols from the terminal application.</p>
+
+<p>However, it seems that communication with the Arduino board works on HyperTerminal and not on Serial Communicator or any other serial applications (no handshaking, etc. is done on the Arduino board **not relevant).</p>
+
+<p>The following "handshaking" was obtained from HyperTerminal (THIS WORKS!!)</p>
+
+<pre><code>*
+COM port is opened
+In/out queue size 8192/8192
+Baud rate 9600
+DTR on
+Data bits=8, Stop bits=1, Parity=None
+Set chars: Eof=0x00, Error=0x00, Break=0x00, Event=0x00, Xon=0x11, Xoff=0x13
+Handflow: ControlHandShake=(DTR_CONTROL, CTS_HANDSHAKE, ERROR_ABORT), FlowReplace=    (TRANSMIT_TOGGLE, RTS_HANDSHAKE, XOFF_CONTINUE), XonLimit=80, XoffLimit=200
+Set timeouts: ReadInterval=10, ReadTotalTimeoutMultiplier=0, ReadTotalTimeoutConstant=0,     WriteTotalTimeoutMultiplier=0,     WriteTotalTimeoutConstant=5000
+*
+</code></pre>
+
+<p>And this is from Serial Communicator (it does not work; incorrect and inconsistent numbers):</p>
+
+<pre><code>*
+COM port is opened
+In/out queue size 2048/2048
+Baud rate 9600
+RTS off
+DTR off
+Data bits=8, Stop bits=1, Parity=None
+Set chars: Eof=0x00, Error=0x00, Break=0x00, Event=0x00, Xon=0x11, Xoff=0x13
+Handflow: ControlHandShake=(), FlowReplace=(), XonLimit=80, XoffLimit=200
+Set timeouts: ReadInterval=0, ReadTotalTimeoutMultiplier=0, ReadTotalTimeoutConstant=0,     WriteTotalTimeoutMultiplier=0, WriteTotalTimeoutConstant=0
+*
+</code></pre>
+
+<p>I can obviously see the differences but need to know how to make the Arduino board independent of these "handshaking" protocols. (DTR, timing, etc.)</p>
+
+<p>And this is from my Visual Studio program (does not work; incorrect and inconsistent numbers)</p>
+
+<pre><code>*
+COM port is opened
+Baud rate 9600
+RTS off
+DTR off
+Data bits=8, Stop bits=1, Parity=None
+Set chars: Eof=0x00, Error=0x00, Break=0x00, Event=0x00, Xon=0x11, Xoff=0x13
+Handflow: ControlHandShake=(), FlowReplace=(), XonLimit=80, XoffLimit=200
+*
+</code></pre>
+
+<p>Thus I would like to get the Arduino board away from DTR and all handshaking, as I want the final implementation to "speak" directly from Visual Studio to the Arduino board.</p>
+
+<p><em><strong></em>**<em>*</em>**</strong><em>UPDATE</em><strong><em>*</em>**<em>*</em>***</strong></p>
+
+<p>Thanks for the advice, the thing is I do not understand is why an open source piece of hardware would require so much handshaking.. That is, why does only the worst serial terminal program work where Serial Communicator, advance serial monitor, terterm, terminal, etc. don't seem to work?</p>
+
+<p>I have updated my code to mirror HyperTerminal exactly (complete all handshaking), but it does not seem to work!</p>
+
+<p>Heres the updated code fragement:</p>
+
+<pre><code>HANDLE hDevice = CreateFile(L"COM5",GENERIC_READ | GENERIC_WRITE,FILE_SHARE_READ |     FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,0); //Open COM handle (create file)
+if (hDevice !=INVALID_HANDLE_VALUE) //If COM3 connected
+{
+    printf("Com port opened\n"); //Show it's open
+    DCB lpTest;
+    // Initialize the DCBlength member.
+    lpTest.DCBlength = sizeof (DCB);
+    GetCommState(hDevice,&amp;lpTest); //com state
+    lpTest.BaudRate = CBR_9600;//load baud
+    lpTest.ByteSize = 8;// load no. bits
+    lpTest.Parity = NOPARITY;//parity
+    lpTest.StopBits = ONESTOPBIT;//stop bits
+
+    lpTest.fBinary = FALSE;            // Binary mode; no EOF check
+    lpTest.fOutxCtsFlow = TRUE;         // No CTS output flow control
+    lpTest.fOutxDsrFlow = FALSE;         // No DSR output flow control
+    lpTest.fDtrControl = DTR_CONTROL_ENABLE;  // DTR flow control type
+    lpTest.fDsrSensitivity = FALSE;      // DSR sensitivity
+    lpTest.fTXContinueOnXoff = TRUE;     // XOFF continues Tx
+    lpTest.fOutX = FALSE;                // No XON/XOFF out flow control
+    lpTest.fInX = FALSE;                 // No XON/XOFF in flow control
+    lpTest.fErrorChar = FALSE;           // Disable error replacement
+    lpTest.fNull = FALSE;                // Disable null stripping
+    //lpTest.fRtsControl = RTS_CONTROL_ENABLE; //// RTS flow control
+    lpTest.fAbortOnError = TRUE;        // Do not abort reads/writes on error
+    SetCommState(hDevice,&amp;lpTest);
+    DWORD btsIO;
+    //ETC
+}
+</code></pre>
+
+<p>The result <strong>is exactly the same as the working result from HyperTerminal</strong> except there is no timing conditions. However, I have used a 1&nbsp;second delay after this code before closing the port.</p>
+
+<p>Is the issue with my write statement?</p>
+
+<pre><code>WriteFile(hDevice,c1,strlen(c1),&amp;btsIO,NULL); //Write string to serial
+</code></pre>
+
+<p>It seems like there is something fundamentally wrong that I am doing, and I can't find it!</p>
+
+<p><em><strong></em>**<em>*</em>**<em>*</em>**<em>*</em>****</strong><em>UPDATE2</em><strong><em>*</em>**<em>*</em>**<em>*</em>**<em>*</em>*</strong></p>
+
+<p>I have stumbled across something, how would I configure my program to send each character individually?</p>
+
+<p>Visual Studio does not allow me to remove the Null or send one character in the code:</p>
+
+<pre><code> WriteFile(hDevice,c1,strlen(c1),&amp;btsIO,NULL);//WRITE STRING TO SERIAL
+</code></pre>
+
+<p>How do I fix this problem? It seems like the Arduino board only accepts one character at a time.</p>
+
+<p>I have edited the character variables to be one char, etc.!</p>
+
+<p><em><strong></em>**<em>*</em>**<em>*</em>***</strong><em>UPDATE3</em><strong><em>*</em>**<em>*</em>**<em>*</em>**<em>*</em>**<em>*</em>**<em>*</em>**<em>*</em>*</strong></p>
+
+<p>This are the results from monitoring the communication from Visual Studio 2010 (or serial communicator) and HyperTerminal. <strong>The issue is sending a bit at a time!</strong></p>
+
+<p>HyperTerminal:</p>
+
+<pre><code>Baud rate 9600
+DTR on
+Data bits=8, Stop bits=1, Parity=None
+Set chars: Eof=0x00, Error=0x00, Break=0x00, Event=0x00, Xon=0x11, Xoff=0x13
+Handflow: ControlHandShake=(DTR_CONTROL, CTS_HANDSHAKE, ERROR_ABORT), FlowReplace=    (TRANSMIT_TOGGLE, RTS_HANDSHAKE, XOFF_CONTINUE), XonLimit=80, XoffLimit=200
+Set timeouts: ReadInterval=10, ReadTotalTimeoutMultiplier=0,     ReadTotalTimeoutConstant=0, WriteTotalTimeoutMultiplier=0, WriteTotalTimeoutConstant=5000
+</code></pre>
+
+<p>and Program/serial communication:</p>
+
+<pre><code>Baud rate 9600
+DTR on
+Data bits=8, Stop bits=1, Parity=None
+Set chars: Eof=0x00, Error=0x00, Break=0x00, Event=0x00, Xon=0x11, Xoff=0x13
+Handflow: ControlHandShake=(DTR_CONTROL, CTS_HANDSHAKE, ERROR_ABORT), FlowReplace=    (TRANSMIT_TOGGLE, RTS_HANDSHAKE, XOFF_CONTINUE), XonLimit=80, XoffLimit=200
+</code></pre>
+
+<p>An X&nbsp;sec wait in program code.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1053648/richie-za" target="_blank"><span itemprop="name">richie za</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">1</div>
+                                    <div itemprop="dateCreated">9/18/2013 4:54:29 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>It's been a long time since I last did serial work -- but it was <em>very</em> clear in those days that your software on the computer <em>had</em> to be configured exactly as the hardware device required. Your non-working example doesn't have DTR or RTS raised, and that's exactly what the board appears to require.</p>
+
+<p>Since software on a full-powered computer is usually far easier to modify than hardware on an embedded board, it'd make sense to look into the configuration options available in your serial software -- any tolerable piece of software will have those settings to fiddle with. If not, I liked both <a href="http://en.wikipedia.org/wiki/Qmodem" rel="nofollow">Qmodem</a> and <a href="http://en.wikipedia.org/wiki/ProComm" rel="nofollow">ProComm</a>, though I had friends that were adamant that <a href="http://en.wikipedia.org/wiki/Telix" rel="nofollow">Telix</a> was the nicer tool. (I had some Trade Wars scripts for Telix that were amazing...)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/377270/sarnold" target="_blank"><span itemprop="name">sarnold</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/8190782/arduino-and-windows-serial-communications-issue-#answer-0</div>
+                                            <div itemprop="upvoteCount">2</div>
+                                            <div itemprop="dateCreated">11/19/2011 12:26:37 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/8190782" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8190782/arduino-and-windows-serial-communications-issue- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:46 GMT -->
+</html>

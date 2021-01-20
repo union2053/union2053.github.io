@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9688200/difference-between-shared-objects---so---static-libraries---a---and-dll-s---so-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Difference between shared objects (.so), static libraries (.a), and DLL&#39;s (.so)? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Difference between shared objects (.so), static libraries (.a), and DLL&#39;s (.so)? | C Language Knowledge Base">
+        <title>[SOLVED] Difference between shared objects (.so), static libraries (.a), and DLL&#39;s (.so)? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="difference-between-shared-objects-so-static-libraries-a-and-dll-s-so-">Difference between shared objects (.so), static libraries (.a), and DLL's (.so)?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/dll.html">dll</a></span>
+                        <span class="tag-item"><a href="../tag/linker.html">linker</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have been involved in some debate with respect to libraries in Linux, and would like to confirm some things.</p>
+
+<p>It is to my understanding (please correct me if I am wrong and I will edit my post later), that there are two ways of using libraries when building an application:</p>
+
+<ol>
+<li>Static libraries (.a files): At link time, a copy of the entire library is put into the final application so that the functions within the library are always available to the calling application</li>
+<li>Shared objects (.so files): At link time, the object is just verified against its API via the corresponding header (.h) file. The library isn't actually used until runtime, where it is needed.</li>
+</ol>
+
+<p>The obvious advantage of static libraries is that they allow the entire application to be self-contained, while the benefit of dynamic libraries is that the ".so" file can be replaced (ie: in case it needs to be updated due to a security bug) without requiring the base application to be recompiled.</p>
+
+<p>I have heard some people make a distinction between shared objects and dynamic linked libraries (DLL's), even though they are both ".so" files. Is there any distinction between shared objects and DLLs when it comes to C/C++ development on Linux or any other POSIX compliant OS (ie: MINIX, UNIX, QNX, etc)? I am told that one key difference (so far) is that shared objects are just used at runtime, while DLL's must be opened first using the dlopen() call within the application.</p>
+
+<p>Finally, I have also heard some developers mention "shared archives", which, to my understanding, are also static libraries themselves, but are never used by an application directly. Instead, other static libraries will link against the "shared archives" to pull some (but not all) functions/resources from the shared archive into the static library being built.</p>
+
+<p>Thank you all in advance for your assistance.</p>
+
+<h1 id="update">Update</h1>
+
+<hr>
+
+<p><strong>In the context in which these terms were provided to me, it was effectively erroneous terms used by a team of Windows developers that had to learn Linux. I tried to correct them, but the (incorrect) language norms stuck.</strong></p>
+
+<ol>
+<li>Shared Object: A library that is automatically linked into a program when the program starts, and exists as a standalone file. The library is included in the linking list at compile time (ie: <code>LDOPTS+=-lmylib</code> for a library file named <code>mylib.so</code>). <strong>The library must be present at compile time, and when the application starts.</strong></li>
+<li>Static Library: A library that is merged into the actual program itself at build time for a single (larger) application containing the application code and the library code that is automatically linked into a program when the program is built, and the final binary containing both the main program and the library itself exists as a single standalone binary file. The library is included in the linking list at compile time (ie: <code>LDOPTS+=-lmylib</code> for a library file named mylib.a). <strong>The library must be present at compile time.</strong></li>
+<li>DLL: Essentially the same as a shared object, but rather than being included in the linking list at compile time, the library is loaded via <code>dlopen()</code>/<code>dlsym()</code> commands so that the library does not need to be present at build time for the program to compile. <strong>Also, the library does not need to be present (necessarily) at application startup or compile time</strong>, as it is only needed at the moment the <code>dlopen</code>/<code>dlsym</code> calls are made.</li>
+<li>Shared Archive: Essentially the same as a static library, but is compiled with the "export-shared" and "-fPIC" flags. The library is included in the linking list at compile time (ie: LDOPTS+=-lmylib<code>S</code> for a library file named mylib<code>S</code>.a). The distinction between the two is that this additional flag is required if a shared object or DLL wants to statically link the shared archive into its own code AND be able to make the functions in the shared object available to other programs, rather than just using them internal to the DLL. This is useful in the case when someone provides you with a static library, and you wish to repackage it as an SO. <strong>The library must be present at compile time.</strong></li>
+</ol>
+
+<h1 id="additional-update">Additional Update</h1>
+
+<p>The distinction between "<code>DLL</code>" and "<code>shared library</code>" was just a (lazy, inaccurate) colloquialism in the company I worked in at the time (Windows developers being forced to shift to Linux development, and the term stuck), adhering to the descriptions noted above.</p>
+
+<p>Additionally, the trailing "<code>S</code>" literal after the library name, in the case of "shared archives" was just a convention used at that company, and not in the industry in general.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1022889/cloud" target="_blank"><span itemprop="name">Cloud</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">247</div>
+                                    <div itemprop="dateCreated">10/22/2018 1:51:17 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I've always thought that DLLs and shared objects are just different terms for the same thing - Windows calls them DLLs, while on UNIX systems they're shared objects, with the general term - dynamically linked library - covering both (even the function to open a .so on UNIX is called <code>dlopen()</code> after 'dynamic library').</p>
+
+<p>They are indeed only linked at application startup, however your notion of verification against the header file is incorrect. The header file defines prototypes which are required in order to compile the code which uses the library, but at link time the linker looks inside the library itself to make sure the functions it needs are actually there. The linker has to find the function bodies somewhere at link time or it'll raise an error. It ALSO does that at runtime, because as you rightly point out the library itself might have changed since the program was compiled. This is why ABI stability is so important in platform libraries, as the ABI changing is what breaks existing programs compiled against older versions.</p>
+
+<p>Static libraries are just bundles of object files straight out of the compiler, just like the ones that you are building yourself as part of your project's compilation, so they get pulled in and fed to the linker in exactly the same way, and unused bits are dropped in exactly the same way.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/241544/matthew-walton" target="_blank"><span itemprop="name">Matthew Walton</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/9688200/difference-between-shared-objects---so---static-libraries---a---and-dll-s---so--#answer-0</div>
+                                            <div itemprop="upvoteCount">86</div>
+                                            <div itemprop="dateCreated">3/13/2012 4:45:32 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>A <strong>static library(.a)</strong> is a library that can be linked directly into the final executable produced by the linker,it is contained in it and there is no need to have the library into the system where the executable will be deployed.</p>
+
+<p>A <strong>shared library(.so)</strong> is a library that is linked but not embedded in the final executable, so will be loaded when the executable is launched and need to be present in the system where the executable is deployed.</p>
+
+<p>A <strong>dynamic link library on windows(.dll)</strong> is like a shared library(.so) on linux but there are some differences between the two implementations that are related to the OS (Windows vs Linux) : </p>
+
+<p>A <strong>DLL</strong> can define two kinds of functions: exported and internal. The exported functions are intended to be called by other modules, as well as from within the DLL where they are defined. Internal functions are typically intended to be called only from within the DLL where they are defined. </p>
+
+<p>An <strong>SO</strong> library on Linux doesn't need special export statement to indicate exportable symbols, since all symbols are available to an interrogating process.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/330280/aleroot" target="_blank">aleroot</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/9688200" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9688200/difference-between-shared-objects---so---static-libraries---a---and-dll-s---so-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:56 GMT -->
+</html>

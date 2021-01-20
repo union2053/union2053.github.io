@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-searching-a-string-for-a-character.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Searching a String for a Character</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Searching a String for a Character'>C Searching a String for a Character</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Searching a String for a Character</h1>
+<a class ='btn btn-outline-dark' href=c-string-to-number-conversions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-searching-a-string-for-a-substring.html>Next</a><p>The <i style='color:blue'>strchr</i>() function searches a given string for a specified character. 
+
+</p><p>The first argument to the function is the string to be searched 
+which will be the address of a char array, and the second argument is the character  
+that you're looking for. 
+
+</p><p>The function will search the string starting at the beginning and return a pointer to the first 
+position in the string where the character is found. 
+
+</p><p>This is the address of this position in memory and is of type char* described as the "pointer to char." 
+
+</p><p>So to store the value that's returned, you must create a variable that can store the address of a character. 
+
+</p><p>If the character isn't found, the function returns a special value NULL,  
+which is the equivalent of 0 for a pointer and represents a pointer that doesn't point to anything. 
+
+</p><p>You can use the  <i style='color:blue'>strchr</i>() function like this: 
+</p><div class='myCodeDiv'><button id='AMJEY' class='myCopyButton' data-clipboard-target='#LZAHA'>Copy</button><pre  id='LZAHA' style='font-size:18px;' class='code'><span class='r'>char</span> str[] = <span class='q'>"The quick brown fox"</span>;    <span class='c'>// The string to be searched </span>
+<span class='r'>char</span> ch = <span class='q'>'q'</span>;                         <span class='c'>// The character we are looking for </span>
+<span class='r'>char</span> *pGot_<span class='r'>char</span> = NULL;                <span class='c'>// Pointer initialized to NULL </span>
+pGot_<span class='r'>char</span> = strchr(str, ch);           <span class='c'>// Stores address where ch is found</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AMJEY');clipboard.on('success', function(e) {$('#AMJEY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AMJEY').text('error');});</script></div><p>The first argument to <i style='color:blue'>strchr</i>() is the address of the first location to be searched. 
+
+</p><p>Here, it is the first element of <i style='color:blue'>str</i>. 
+
+</p><p>The second argument is the character that is sought, so in this case it is ch, which is of type  
+char. 
+
+</p><p>The <i style='color:blue'>strchr</i>() function expects its second argument to be of type  int, so the compiler will convert the  
+value of ch to this type before passing it to the function. 
+
+</p><p>You could just as well define  <i style='color:blue'>ch</i> as type  int like this: 
+</p><div class='myCodeDiv'><button id='QEJZX' class='myCopyButton' data-clipboard-target='#OLXCN'>Copy</button><pre  id='OLXCN' style='font-size:18px;' class='code'><span class='r'>int</span> ch = <span class='q'>'q'</span>;                          <span class='c'>// Initialize with character code for q</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QEJZX');clipboard.on('success', function(e) {$('#QEJZX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QEJZX').text('error');});</script></div><p>Functions are often implemented so that a character is passed as an argument of type int because it's  
+simpler to work with type int than type char. 
+
+</p><p>To dereference a pointer, you precede the pointer variable name with the dereference operator *, for example: 
+</p><div class='myCodeDiv'><button id='YWLRJ' class='myCopyButton' data-clipboard-target='#JWCVQ'>Copy</button><pre  id='JWCVQ' style='font-size:18px;' class='code'>printf(<span class='q'>"Character found was %c."</span>, *pGot_<span class='r'>char</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YWLRJ');clipboard.on('success', function(e) {$('#YWLRJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YWLRJ').text('error');});</script></div><p>You should ensure that you don't attempt to dereference a NULL pointer. If you do try to dereference 
+a NULL pointer, your program will crash. This is very easy to avoid with an if statement, like this: 
+</p><div class='myCodeDiv'><button id='RTNDE' class='myCopyButton' data-clipboard-target='#LLTNB'>Copy</button><pre  id='LLTNB' style='font-size:18px;' class='code'><span class='r'>if</span>(pGot_<span class='r'>char</span>) 
+  printf(<span class='q'>"Character found was '%c'."</span>, *pGot_<span class='r'>char</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RTNDE');clipboard.on('success', function(e) {$('#RTNDE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RTNDE').text('error');});</script></div><p>A NULL pointer value converts to the bool value false, and a non-NULL pointer value converts to true. 
+
+</p><p>If <i style='color:blue'>pGot_char</i> is NULL, the if expression will be false, so the <i style='color:blue'>printf</i>() function will not be called. 
+
+</p><p>You can search for multiple occurrences of a character quite easily using 
+</p><div class='myCodeDiv'><button id='LTXDF' class='myCopyButton' data-clipboard-target='#IGUPY'>Copy</button><pre  id='IGUPY' style='font-size:18px;' class='code'><span class='c'>// The string to be searched </span>
+<span class='r'>char</span> str[] = <span class='q'>"Peter piper picked a peck of pickled pepper."</span>;    
+<span class='r'>char</span> ch = <span class='q'>'p'</span>;               <span class='c'>// The character we are looking for </span>
+<span class='r'>char</span> *pGot_<span class='r'>char</span> = str;       <span class='c'>// Pointer initialized to string start </span>
+<span class='r'>int</span> count = 0;               <span class='c'>// Number of times found </span>
+<span class='r'>while</span>(pGot_<span class='r'>char</span> = strchr(pGot_<span class='r'>char</span>, ch))<span class='c'>// As long as NULL is not returned... </span>
+{                            <span class='c'>// ...continue the loop. </span>
+  ++count;                   <span class='c'>// Increment the count </span>
+  ++pGot_<span class='r'>char</span>;               <span class='c'>// Move to next character address </span>
+} 
+printf(<span class='q'>"The character '%c' was "</span>
+       <span class='q'>"found %d times in the following string:\n\"%s\"\n"</span>, 
+                                        ch, count, str);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LTXDF');clipboard.on('success', function(e) {$('#LTXDF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LTXDF').text('error');});</script></div><p>You may get a warning from your compiler that the  = operator is used in the loop condition. Many  
+compilers issue this warning because it is usually a mistake, indicating it should be ==, but not in this case.  
+This code fragment produced the output  
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-string-to-number-conversions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-searching-a-string-for-a-substring.html>Next</a><h2>Related</h2><UL><LI><a href='c-character-string-count-punctuation-characters.html'>C Character String count punctuation characters</a></LI><LI><a href='c-command-line-arguments.html'>C Command-Line Arguments</a></LI><LI><a href='c-string-to-number-conversions.html'>C String-to-Number Conversions</a></LI><LI><a href='c-searching-a-string-for-a-substring.html'>C Searching a String for a Substring</a></LI><LI><a href='c-character-string-review-questions-1.html'>C Character String Review Questions 1</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-searching-a-string-for-a-character.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

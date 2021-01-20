@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node16.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Integer Functions, Random Number, String Conversion, Searching
+and Sorting: &lt;stdlib.h&gt;</TITLE>
+<META NAME="description" CONTENT="Integer Functions, Random Number, String Conversion, Searching
+and Sorting: &lt;stdlib.h&gt;">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1055"
+ HREF="node16.html#SECTION001610000000000000000">
+Arithmetic Functions</A>
+<LI><A NAME="tex2html1056"
+ HREF="node16.html#SECTION001620000000000000000">
+Random Numbers</A>
+<LI><A NAME="tex2html1057"
+ HREF="node16.html#SECTION001630000000000000000">
+String Conversion</A>
+<LI><A NAME="tex2html1058"
+ HREF="node16.html#SECTION001640000000000000000">
+Searching and Sorting</A>
+<LI><A NAME="tex2html1059"
+ HREF="node16.html#SECTION001650000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001600000000000000000">
+Integer Functions, Random Number, String Conversion, Searching
+and Sorting: <TT>&lt;stdlib.h&gt;</TT></A>
+</H1>
+<P>
+To use all functions in this library you must:
+<P>&nbsp;&nbsp;&nbsp;<code>#include &lt;stdlib.h&gt;</code>
+<P>
+There are three basic categories of functions:
+<P><UL>
+<LI> Arithmetic
+<LI> Random Numbers
+<LI> String Conversion
+</UL>
+<P>
+The use of all the functions is relatively straightforward. We only
+consider them briefly in turn in this Chapter.
+<P><H1><A NAME="SECTION001610000000000000000">
+Arithmetic Functions</A>
+</H1>
+<P>
+There are 4 basic integer functions:
+<P><PRE>
+int abs(int number);
+long int labs(long int number);
+
+div_t div(int numerator,int denominator);
+ldiv_t ldiv(long int numerator, long int denominator);
+</PRE>
+<P>
+Essentially there are two functions with integer and long integer
+compatibility.
+<P><DL>
+<DT><STRONG><TT>abs</TT></STRONG>
+<DD>functions return the absolute value of its <TT>number</TT>
+arguments. For example, abs(2) returns 2 as does abs(-2).
+<DT><STRONG><TT>div</TT></STRONG>
+<DD>takes two arguments, <TT>numerator</TT> and <TT>
+denominator</TT> and produces a quotient and a remainder of the integer
+division. The <TT>div_t</TT> structure is defined (in <TT>
+stdlib.h</TT>) as follows:
+<P><PRE>
+typedef struct {
+        int  quot; /* quotient */
+        int  rem;  /* remainder */
+} div_t;
+</PRE>
+<P>(<TT>ldiv_t</TT> is similarly defined).
+<P>
+Thus:
+<P><PRE>
+#include &lt;stdlib.h&gt;
+....
+
+int num = 8, den = 3;
+div_t ans;
+
+
+ans = div(num,den);
+
+printf(&quot;Answer:\n\t Quotient = %d\n\t Remainder = %d\n&quot;, \
+ans.quot,ans.rem);
+</PRE>
+<P>
+Produces the following output:
+<P><PRE>
+Answer:
+		Quotient = 2
+  Remainder = 2
+</PRE>
+</DL><H1><A NAME="SECTION001620000000000000000">
+Random Numbers</A>
+</H1>
+<P>
+Random numbers are useful in programs that need to simulate random
+events, such as games, simulations and experimentations. In practice no
+functions produce truly random data -- they produce <EM>pseudo-random</EM>
+numbers. These are computed form a given formula (different generators
+use different formulae) and the number sequences they produce are
+repeatable. A <EM>seed</EM> is usually set from which the sequence is
+generated. Therefore is you set the same seed all the time the same set
+will be be computed.
+<P>
+One common technique to introduce further randomness into a random number
+generator is to use the time of the day to set the seed, as this will
+always be changing. (We will study the standard library time functions
+later in Chapter&nbsp;<A HREF="node21.html#ch:time">20</A>).
+<P>
+There are many (pseudo) random number functions in the standard library.
+They all operate on the same basic idea but generate different number
+sequences (based on different generator functions) over different number
+ranges.
+<P>
+The simplest set of functions is:
+<P><PRE>
+int rand(void);
+void srand(unsigned int seed);
+</pre>
+
+<tt> rand()</tt>  returns successive pseudo-random numbers in the range from
+0 to (2^15)-1.
+<br>
+<tt> srand()</tt> is used to set the seed. A simple example of using the time
+of the day to initiate a seed is via the call:
+
+<pre>
+
+srand( (unsigned int) time( NULL ));
+</PRE>
+<P>
+The following program <TT>card.c</TT> illustrates the use of these functions
+to simulate a pack of cards being shuffled:
+<P><PRE>
+/*
+** Use random numbers to shuffle the &quot;cards&quot; in the deck.  The second
+** argument indicates the number of cards.  The first time this
+** function is called, srand is called to initialize the random
+** number generator.
+*/
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#define	TRUE	1
+#define	FALSE	0
+
+void shuffle( int *deck, int n_cards )
+{
+	int	i;
+	static	int	first_time = TRUE;
+
+	/*
+	** Seed the random number generator with the current time
+	** of day if we haven't done so yet.
+	*/
+	if( first_time ){
+		first_time = FALSE;
+		srand( (unsigned int)time( NULL ) );
+	}
+
+	/*
+	** &quot;Shuffle&quot; by interchanging random pairs of cards.
+	*/
+	for( i = n_cards - 1; i &gt; 0; i -= 1 ){
+		int	where;
+		int	temp;
+
+		where = rand() % i;
+		temp = deck[ where ];
+		deck[ where ] = deck[ i ];
+		deck[ i ] = temp;
+	}
+}
+</PRE>
+<P>
+There are several other random number generators available in the
+standard library:
+<P><PRE>
+double drand48(void);
+double erand48(unsigned short xsubi[3]);
+long lrand48(void);
+long nrand48(unsigned short xsubi[3]);
+long mrand48(void);
+long jrand48(unsigned short xsubi[3]);
+void srand48(long seed);
+unsigned short *seed48(unsigned short seed[3]);
+void lcong48(unsigned short param[7]);
+</PRE>
+<P>
+This family of  functions  generates uniformly distributed
+pseudo-random numbers.
+<P>
+Functions  drand48()  and  erand48()   return   non-negative
+     double-precision floating-point values uniformly distributed
+     over the interval <code>[0.0, 1.0)</code>.
+<P>
+Functions lrand48() and nrand48() return  non-negative  long
+     integers uniformly distributed over the interval <code>[0, 2**31)</code>.
+<P>
+Functions  mrand48()  and  jrand48()  return   signed   long
+     integers    uniformly    distributed   over   the   interval
+     <code>[-2**31, 2**31)</code>.
+<P>
+Functions srand48(), seed48(), and lcong48()  set the seeds for
+drand48(),  lrand48(),  or  mrand48() and one of these should be called
+first.
+<P>
+Further examples of using these functions is given is
+Chapter&nbsp;<A HREF="node21.html#ch:time">20</A>.
+<P><H1><A NAME="SECTION001630000000000000000">
+String Conversion</A>
+</H1>
+<P>
+There are a few functions that exist to convert strings to integer, long
+integer and float values. They are:
+<P> <code>double atof(char *string)</code> -- Convert string to floating point value.
+<BR><code>int atoi(char *string)</code> -- Convert string to an integer value
+<BR><code>int atol(char *string)</code> -- Convert string to a long integer
+value.
+<BR><code>double strtod(char *string, char  *endptr)</code> -- Convert string
+to a floating point value.
+<BR><code>long strtol(char *string, char  *endptr, int radix)</code> --
+Convert string to a long integer using a given radix.
+<BR><code>unsigned long strtoul(char  *string, char *endptr, int radix)</code>
+-- Convert string to unsigned long.
+<P>
+Most of these are fairly straightforward to use. For example:
+<P><PRE>
+char *str1 = &quot;100&quot;;
+char *str2 = &quot;55.444&quot;;
+char *str3 = &quot;      1234&quot;;
+char *str4 = &quot;123four&quot;;
+char *str5 = &quot;invalid123&quot;;
+
+int i;
+float f;
+
+i = atoi(str1);  /* i = 100 */
+f = atof(str2);  /* f = 55.44 */
+i = atoi(str3);  /* i = 1234 */
+i = atoi(str4);  /* i = 123 */
+i = atoi(str5);  /* i = 0 */
+</PRE>
+<P><B>Note</B>: 
+<UL>
+<LI> Leading blank characters are skipped.
+<LI> Trailing illegal characters are ignored.
+<LI> If conversion cannot be made zero is returned and <TT>errno</TT> (See
+Chapter&nbsp;<A HREF="node18.html#ch:io">17</A>) is set with the value <TT>ERANGE</TT>. 
+</UL><H1><A NAME="SECTION001640000000000000000">
+Searching and Sorting</A>
+</H1>
+<A NAME="ch:search">&#160;</A>
+The <TT>stdlib.h</TT> provides 2 useful functions to perform general
+searching and sorting of data on any type. In fact we have already
+introduced the <TT>qsort()</TT> function in Chapter&nbsp;<A HREF="node12.html#ch:ptr2fn">11.3</A>. For
+completeness we list the prototype again here but refer the reader to the
+previous Chapter for an example.
+<P>
+The <TT>qsort</TT> standard library function is very useful function that is
+designed to sort an array by a <EM>key</EM> value of <EM>any type</EM> into
+ascending order, as long as the elements of the array are of fixed type.
+<P>
+qsort is prototyped (in <TT>stdlib.h</TT>):
+<P><PRE>
+void qsort(void *base, size_t num_elements, size_t element_size,
+   int (*compare)(void const *, void  const *));
+</PRE>
+<P>
+Similarly, there is a binary search function, <TT>bsearch()</TT> which is
+prototyped (in <TT>stdlib.h</TT>) as:
+<P><PRE>
+void *bsearch(const void *key, const void *base, size_t nel,
+     size_t size, int (*compare)(const  void  *,  const  void *));
+</PRE>
+<P>
+Using the same <TT>Record</TT> structure and <TT>record_compare</TT> function
+as the <TT>qsort()</TT> example (in Chapter&nbsp;<A HREF="node12.html#ch:ptr2fn">11.3</A>):
+<P><PRE>
+typedef struct {
+        int   key;
+								struct other_data;
+} Record;
+
+int record\_compare(void const *a, void  const *a)
+  {  return ( ((Record *)a)-&gt;key - ((Record *)b)-&gt;key );
+  }
+</PRE>
+<P>
+Also, Assuming that we have an <TT>array</TT> of <TT>array_length Record</TT>s
+suitably filled with date we can call <TT>bsearch()</TT> like this:
+<P><PRE>
+Record key;
+Record *ans;
+
+key.key =  3; /* index value to be searched for */
+ans = bsearch(&amp;key, array, arraylength, sizeof(Record), record_compare);
+</PRE>
+<P>
+The function <TT>bsearch()</TT> return a pointer to the field whose key
+filed is filled with the matched value of <TT>NULL</TT> if no match found.
+<P>
+Note that the type of the <TT>key</TT> argument <B>must</B> be the same as
+the array elements (<TT>Record</TT> above), even though only the <TT>
+key.key</TT> element is required to be set.
+<P><H1><A NAME="SECTION001650000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12534</B></P>
+<P>
+Write a program that simulates throwing a six sided die</P>
+<P><P>
+<B>Exercise 12535</B></P>
+<P>
+Write a program that simulates the UK National lottery by selecting six
+different whole numbers in the range 1 - 49.</P>
+<P><P>
+<B>Exercise 12536</B></P>
+<P>
+Write a program that read a number from command
+line input and generates a random floating point number in the range 0 -
+the input number.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node16.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+</HTML>

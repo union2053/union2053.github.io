@@ -1,0 +1,709 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node35.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Writing Larger Programs</TITLE>
+<META NAME="description" CONTENT="Writing Larger Programs">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1495"
+ HREF="node35.html#SECTION003510000000000000000">
+Header files</A>
+<LI><A NAME="tex2html1496"
+ HREF="node35.html#SECTION003520000000000000000">
+External variables and functions</A>
+<UL>
+<LI><A NAME="tex2html1497"
+ HREF="node35.html#SECTION003521000000000000000">
+Scope of externals</A>
+</UL>
+<LI><A NAME="tex2html1498"
+ HREF="node35.html#SECTION003530000000000000000">
+Advantages of Using Several Files</A>
+<LI><A NAME="tex2html1499"
+ HREF="node35.html#SECTION003540000000000000000">
+How to Divide a Program between Several Files</A>
+<LI><A NAME="tex2html1500"
+ HREF="node35.html#SECTION003550000000000000000">
+Organisation of Data in each File</A>
+<LI><A NAME="tex2html1501"
+ HREF="node35.html#SECTION003560000000000000000">
+The Make Utility</A>
+<LI><A NAME="tex2html1502"
+ HREF="node35.html#SECTION003570000000000000000">
+Make Programming</A>
+<LI><A NAME="tex2html1503"
+ HREF="node35.html#SECTION003580000000000000000">
+Creating a makefile</A>
+<LI><A NAME="tex2html1504"
+ HREF="node35.html#SECTION003590000000000000000">
+Make macros</A>
+<LI><A NAME="tex2html1505"
+ HREF="node35.html#SECTION0035100000000000000000">
+Running Make</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION003500000000000000000">
+Writing Larger Programs</A>
+</H1>
+<A NAME="ch:prog">&#160;</A>
+This Chapter deals with theoretical and practical aspects that need to be
+<BR>
+considered when writing larger programs. 
+<BR>
+<P>
+When writing large programs we should divide programs up into modules.
+<BR>
+These would be separate source files. <TT>main()</TT> would be in one file,
+<TT>main.c</TT> say, the others will contain functions.
+<BR>
+<P>
+We can create our own library of functions by writing a <EM>suite</EM> of
+subroutines in one (or more) modules. In fact modules can be shared amongst many
+programs by simply including the modules at compilation as we will see shortly..
+ <BR>
+<P>
+There are many advantages to this approach:
+<P><UL>
+<LI> the modules will naturally divide into common groups of functions.
+<LI> we can compile each module separately and link in compiled modules (more on
+this later).
+<LI> UNIX utilities such as <B>make</B> help us maintain large systems (see later).
+</UL><H1><A NAME="SECTION003510000000000000000">
+Header files</A>
+</H1>
+<P>
+If we adopt a modular approach then we will naturally want to keep variable
+definitions, function prototypes <EM>etc.</EM> with each module. However what if
+<BR>
+several modules need to share such definitions?
+<BR>
+<P>
+It is best to centralise the definitions in one file and share this file
+amongst the modules. Such a file is usually called a <B>header file</B>.
+<BR>
+<P>
+Convention states that these files have a <TT>.h</TT> suffix.
+<P>
+We have met standard library header files already <EM>e.g</EM>:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>#include &lt;stdio.h&gt;</TT>
+<BR>
+<P>
+We can define our own header files and include then our programs via:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>#include "my_head.h"</TT>
+<BR>
+<P><B>NOTE:</B> Header files usually <U>ONLY</U> contain definitions of
+ data types, <BR>
+function prototypes and C preprocessor commands.
+ <BR>
+<P>
+Consider the following simple example of a large program
+(Fig.&nbsp;<A HREF="#fig:system">34.1</A>)  .
+<P><A NAME="fig:mod">&#160;</A><img src= mod.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node35.html#fig:mod"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> Modular structure of a C program</B>
+The full listings <TT>main.c, WriteMyString.c</TT> and <TT>
+header.h</TT> as as follows:
+<P><EM>main.c</EM>:
+<P><PRE>
+/*
+ *	main.c
+ */
+#include &quot;header.h&quot;
+#include &lt;stdio.h&gt;
+
+char	*AnotherString = &quot;Hello Everyone&quot;;
+
+main()
+{
+	printf(&quot;Running...\n&quot;);
+
+	/*
+	 *	Call WriteMyString() - defined in another file
+	 */
+	WriteMyString(MY_STRING);
+
+	printf(&quot;Finished.\n&quot;);
+}
+</PRE>
+<P><EM>WriteMyString.c</EM>:
+<P><PRE>
+/*
+ *	WriteMyString.c
+ */
+extern char	*AnotherString;
+
+void WriteMyString(ThisString)
+char	*ThisString;
+{
+	printf(&quot;%s\n&quot;, ThisString);
+	printf(&quot;Global Variable = %s\n&quot;, AnotherString);
+}
+</PRE>
+<P><EM>header.h</EM>:
+<P><PRE>
+/*
+ *	header.h
+ */
+#define MY_STRING &quot;Hello World&quot;
+
+void WriteMyString();
+</PRE>
+<P>
+We would usually compile each module separately (more later).
+<BR>
+<P>
+Some modules have a <TT>#include "header.h"</TT> that share common definitions.
+<BR>
+<P>
+Some, like <EM>main.c</EM>, also include standard header files also.
+<BR>
+<P><TT>main</TT> calls the function <TT>WriteMyString()</TT> which is
+in <EM>WriteMyString.c</EM> module.
+<BR>
+<P>
+The function prototype <TT>void</TT> for <TT>WriteMyString</TT> is defined in <EM>
+Header.h</EM>
+ <BR>
+<P>
+NOTE that in general we must resolve a tradeoff between having a desire for
+each <TT>.c</TT> module to have access to the information it needs solely for its
+job and the practical reality of maintaining lots of header files.
+<BR>
+<P>
+Up to some moderate program size it is probably best to one or two header files
+that share more than one modules definitions.
+<BR>
+<P>
+For larger programs get UNIX to help you (see later).
+<P>
+<BR>
+<P><B>One problem left with module approach:</B>
+<BR>
+<P>
+SHARING VARIABLES
+<BR>
+<P>
+If we have global variables declared and  instantiated in one module how
+can pass knowledge of this to other modules.
+<BR>
+<P>
+We could pass values as parameters to functions, BUT:
+<P><UL>
+<LI> this can be laborious if we pass the same parameters to many functions
+and / or if there are long argument lists involved.
+<LI> very large arrays and structures are difficult to store locally --
+memory problems with stack.
+</UL><H1><A NAME="SECTION003520000000000000000">
+External variables and functions</A>
+</H1>
+<P>"Internal" implies arguments and functions are defined inside functions --
+<B>Local</B>
+<BR>
+<P>"External" variables are defined outside of <BR>
+functions -- they are
+<U>potentially</U> available to the whole program (Global) but <B>NOT
+necessarily</B>.
+<BR>
+<P>
+External variables are always permanent.
+<BR>
+<P>
+NOTE: That in C, all function definitions are external. We <U>CANNOT</U>
+have embedded function declarations like in PASCAL.
+<P><H2><A NAME="SECTION003521000000000000000">
+Scope of externals</A>
+</H2>
+<P>
+An external variable (or function) is not always totally global.
+<BR>
+<P>
+C applies the following rule:
+<BR>
+<P><EM>The scope of an external variable (or function) begins at its point of
+declaration and lasts to the end of the file (module) it is declared in.</EM>
+<BR>
+<P>
+Consider the following:
+ <BR>
+<P><TT>
+<PRE><TT>
+main()
+&nbsp;&nbsp;&nbsp;{ .... }
+&nbsp;
+int what_scope;
+float end_of_scope[10]
+&nbsp;
+void what_global()
+		 { .... }
+&nbsp;
+char alone;
+&nbsp;
+float fn()
+		 { .... }
+</TT></PRE>
+</TT>
+<BR>
+<P><TT>main cannot see <TT>what_scope or end_of_scope</TT> but the functions
+<TT>what_global</TT> and <TT>fn</TT> can. ONLY <TT>fn</TT> can see <TT>alone</TT>.
+ <BR>
+<P>
+This is also the one of the reasons why we should <EM>prototype</EM> functions
+before the body of code <EM>etc.</EM> is given.
+<BR>
+<P>
+So here <TT>main</TT> will not know anything about the functions <TT>what_global</TT>
+and <TT>fn</TT>. <TT>what_global</TT> does not know about <TT>fn</TT> but <TT>fn</TT>
+knows about <TT>what_global</TT> since it is declared above.
+ <BR>
+<P>
+NOTE: The other reason we <EM>prototype</EM> functions is that some checking
+can be done the parameters passed to functions.
+<BR>
+<P>
+If we need to refer to an external variable before it is declared <U>or</U>
+if it is defined in another module we must declare it as an <TT>extern</TT>
+variable. <EM>e.g.</EM>
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>extern int  what_global</TT>
+<BR>
+<P>
+So returning to the modular example. We have a global string
+<TT>AnotherString</TT> declared in <TT>main.c</TT> and shared with <TT>
+WriteMyString.c</TT> where it is declared <TT>extern</TT>.
+ <BR>
+<P><B>BEWARE</B> the <TT>extern</TT> prefix is a <EM>declaration</EM> <U>NOT</U> a
+<EM>definition</EM>. <EM>i.e</EM> <B>NO STORAGE</B> is set aside in memory for an <TT>
+extern</TT> variable -- it is just  an announcement of the property of a variable.
+<BR>
+<P>
+The actual variable <U>must</U> only  be defined once in the whole program
+-- you can have as many <TT>extern</TT> declarations as needed.
+<BR>
+<P>
+Array sizes must obviously be given with <BR>
+declarations but are not needed
+with <TT>extern</TT> declarations. <EM>e.g.</EM>:
+<BR>
+<P><TT>
+&nbsp;&nbsp;&nbsp;main.c:&nbsp;&nbsp;&nbsp;&nbsp;int arr[100]:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;file.c:&nbsp;&nbsp;&nbsp;&nbsp;extern int arr[];
+ </TT>
+<P></TT><H1><A NAME="SECTION003530000000000000000">
+Advantages of Using Several Files</A>
+</H1>
+<P>
+The main advantages of spreading a program across several files are:
+<P><UL>
+<LI> Teams of programmers can work on programs. Each programmer
+works on a different file.
+<LI> An object oriented style can be used. Each file defines a
+particular type of object as a datatype and operations on that object as
+       functions. The implementation of the object can be kept private from the rest of the program. This makes for well structured
+       programs which are easy to maintain.
+<LI> Files can contain all functions from a related group. For
+Example all matrix operations. These can then be accessed like a function
+       library.
+<LI> Well implemented objects or function definitions can be
+re-used in other programs, reducing development time.
+<LI> In very large programs each major function can occupy a
+file to itself. Any lower level functions used to implement them can be
+kept
+       in the same file. Then programmers who call the major function need not be distracted by all the lower level work.
+<LI> When changes are made to a file, only that file need be
+re-compiled to rebuild the program. The UNIX make facility is very useful
+       for rebuilding multi-file programs in this way.
+<P></UL><H1><A NAME="SECTION003540000000000000000">
+How to Divide a Program between Several Files</A>
+</H1>
+<P>
+Where a function is spread over several files, each file will contain one or more functions. One file will include main while the others will
+contain functions which are called by others. These other files can be treated as a library of functions.
+<P>
+Programmers usually start designing a program by dividing the problem into easily managed sections. Each of these sections might be
+implemented as one or more functions. All functions from each section will usually live in a single file.
+<P>
+Where objects are implemented as data structures, it is usual to to keep all functions which access that object in the same file. The advantages
+of this are:
+<P><UL>
+<LI> The object can easily be re-used in other programs.
+<LI> All related functions are stored together.
+<LI> Later changes to the object require only one file to be
+modified. 
+</UL>
+<P>
+Where the file contains the definition of an object, or functions which return values, there is a further restriction on calling these functions
+from another file. Unless functions in another file are told about the object or function definitions, they will be unable to compile them
+correctly.
+<P>
+The best solution to this problem is to write a header file for each of the C files. This will have the same name as the C file, but ending in .h.
+The header file contains definitions of all the functions used in the C file.
+<P>
+Whenever a function in another file calls a function from our C file, it
+can define the function by making a <TT>#include</TT> of the appropriate
+<TT>.h</TT> file.
+<P><H1><A NAME="SECTION003550000000000000000">
+Organisation of Data in each File</A>
+</H1>
+<P>
+Any file must have its data organised in a certain order. This will typically be:
+<P><UL>
+<LI> A preamble consisting of <TT>#define</TT>d constants,
+<TT>#include</TT>d header files and <TT>typedef</TT>s of important datatypes.
+<LI> Declaration of global and external variables. Global variables
+may also be initialised here.
+<LI> One or more functions. 
+</UL>
+<P>
+The order of items is important, since every object must be defined before it can be used. Functions which return values must be defined
+before they are called. This definition might be one of the following:
+<P><UL>
+<LI> Where the function is defined and called in the same file, a
+full declaration of the function can be placed ahead of any call to the
+       function.
+<LI> If the function is called from a file where it is not
+defined, a prototype should appear before the call to the function.
+<P></UL>
+<P>
+A function defined as
+<P><PRE>
+  float find_max(float a, float b, float c)
+  {  /* etc ... ... */
+</PRE>
+<P>
+would have a prototype of
+<P><PRE>
+  float find_max(float a, float b, float c);
+</PRE>
+<P>
+The prototype may occur among the global variables at the start of the source file. Alternatively it may be declared in a header file which is
+read in using a <TT>#include</TT>.
+<P>
+It is important to remember that all C objects should be declared before use.
+<P><H1><A NAME="SECTION003560000000000000000">
+The Make Utility</A>
+</H1>
+<P>
+The <EM>make</EM> utility is an intelligent program manager that maintains integrity
+of a collection of program modules, a collection of programs or a complete system
+-- does not have be  programs in practice can be any system of files ( <EM>
+e.g.</EM> chapters of text in book being typeset). 
+<BR>
+<P>
+Its main use has been in assisting the development of software systems. 
+<BR>
+<P>
+Make was originally developed on UNIX but it is now available on most systems.
+<BR>
+<P><B>NOTE</B>: Make is a programmers utility not part of C language or any language
+for that matter.
+ <BR>
+<P>
+Consider the problem of maintaining a large collection of source files:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>main.c f1.c ......... fn.c</TT>
+<BR>
+<P>
+We would normally compile our system via:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>cc -o main main.c f1.c ......... fn.c</TT>
+<BR>
+<P>
+However, if we know that some files have been compiled previously and their
+sources have not changed since then we could try and save overall compilation
+time by linking in the object code from those files say:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>cc -o main main.c f1.c ... fi.o .. fj.o ... fn.c</TT>
+ <BR>
+<P>
+We can use the C compiler option (Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A>) <TT>-c</TT> to
+create a <TT>.o</TT> for a given module. For example:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>cc -c main.c</TT>
+<BR>
+<P>
+will create a <TT>main.o</TT> file. We do not need to supply any library links
+here as these are resolved at the linking stage of compilation.
+<P>
+We have a problem in compiling the whole program in this <EM>long hand</EM> way
+however:
+<P><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$\bullet$"> It is time consuming to compile a .c module -- if
+the module has been compiled before and not been altered there is no need to
+recompiled it. We can just link the object files in. <U>However</U>, it will
+not be easy to remember which files are in fact up to date. If we link in an old
+object file our final executable program will be wrong.
+<P><IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$\bullet$"> It is error prone and laborious to type a long compile sequence
+on the command line. There may be many of our own files to link as well as many
+system library files. It may be very hard to remember the correct sequence. Also
+if we make a slight change to our system editing command line can be error prone.
+<P>
+If we use the <B>make</B> utility all this control is taken care by make. In
+general only modules that have older object files than source files will be
+recompiled.
+<P><H1><A NAME="SECTION003570000000000000000">
+Make Programming</A>
+</H1>
+<P>
+Make programming is fairly straightforward. Basically, we write a sequence of
+commands which describes how our program (or system of programs) can be
+constructed from source files.
+<BR>
+<P>
+The construction sequence is described in <BR>
+makefiles which contain <EM>
+dependency rules</EM> and <EM>construction rules</EM>.
+<BR>
+<P>
+A dependency rule has two parts - a left and right side separated by a :
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>left side : right side</TT>
+<BR>
+<P>
+The <TT>left side</TT> gives the names of a <EM>target(s)</EM> (the names of the
+program or system files) to be built, whilst the <TT>right side</TT> gives names of
+files on which the target depends (eg. source files, header files, data
+files)
+<BR>
+<P>
+If the <EM>target</EM> is <B>out of date</B> with respect to the constituent parts,
+<EM>construction rules</EM> following the dependency rules are obeyed.
+<BR>
+<P>
+So for a typical C program, when a make file is run the following tasks are
+performed:
+<P><DL COMPACT>
+<DT>1.
+<DD>The makefile is read. Makefile says which object and library files need to
+be linked and which header files and sources have to be compiled to create each
+object file.
+<DT>2.
+<DD>Time and date of each object file are checked against source and header
+files it depends on. If any source, header file later than object file then
+files have been altered since last compilation <B>THEREFORE</B> recompile object
+file(s).
+<P><DT>3.
+<DD>Once all object files have been checked the time and date of all object
+files are checked against executable files. If any later object files will be
+recompiled.
+</DL>
+<P><B>NOTE</B>: Make files can obey any commands we type from command line. Therefore
+we can use makefiles to do more than just compile a system source module. For
+example, we could make backups of files, run programs if data files have been
+changed or clean up directories.
+<P><H1><A NAME="SECTION003580000000000000000">
+Creating a makefile</A>
+</H1>
+<P>
+This is fairly simple: just create a text file using any text editor. The
+<EM>makefile</EM> just contains a list of file dependencies and commands needed to
+satisfy them.
+<P>
+Lets look at an example makefile:
+<P><PRE><TT>
+prog: prog.o f1.o f2.o
+&nbsp;&nbsp;c89 prog.o f1.o f2.o -lm <EM>etc.</EM>
+&nbsp;
+prog.o: header.h prog.c
+		 c89 -c prog.c
+&nbsp;
+f1.o: header.h f1.c
+		 c89 -c f1.c
+&nbsp;
+<P>
+f2.o: ---
+		 ----
+</TT></PRE>
+<P>
+Make would interpret the file as follows:
+<P><DL COMPACT>
+<DT>1.
+<DD>prog depends on 3 files: <TT>prog.o, f1.o and f2.o</TT>. If any of the
+object files have been changed since last compilation the files must be
+relinked.
+<DT>2.
+<DD>prog.o depends on 2 files. If these have been changed prog.o must be
+recompiled. Similarly for <TT>f1.o</TT> and <TT>f2.o</TT>.
+</DL>
+<P>
+The last 3 commands in the makefile are called <EM>explicit rules</EM> --  since
+the files in commands are listed by name.
+<BR>
+<P>
+We can use <EM>implicit rules</EM> in our makefile which let us generalise our rules
+and save typing.
+ <BR>
+<P>
+We can take 
+<BR>
+<P><TT>
+<PRE><TT>
+f1.o: f1.c
+&nbsp;&nbsp;cc -c f1.c
+&nbsp;
+f2.o: f2.c
+		 cc -c f2.c
+</TT></PRE>
+</TT>
+<BR>
+<P>
+and generalise to this:
+<P><TT>
+.c.o:
+&nbsp;&nbsp;cc -c $&lt;
+</TT>
+<P>
+We read this as .source_extension.target_extension:
+				<TT>command
+<P><TT>$&lt; is shorthand for file name with .c extension.
+<P>
+We can put comments in a makefile by using the # symbol. All characters
+following # on line are ignored.
+<P>
+Make has many built in commands similar to or actual UNIX commands. Here
+are a few:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;break&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mkdir
+&nbsp;
+> type 		 chdir 		 mv (move or rename)
+		 cd 		 rm (remove) 		 ls
+		 cp (copy) 		 path 		 &nbsp;
+</TT></PRE>
+</TT>
+<P>
+There are many more see manual pages for make (online and printed reference)
+<P></TT></TT><H1><A NAME="SECTION003590000000000000000">
+Make macros</A>
+</H1>
+<P>
+We can define <EM>macros</EM> in make -- they are typically used to store source
+file names, object file names, compiler options and library links.
+<BR>
+<P>
+They are simple to define, <EM>e.g.</EM>:
+<BR>
+<P><TT>
+<PRE><TT>
+SOURCES 		 = main.c f1.c f2.c
+CFLAGS 		 = -g -C
+LIBS 		 = -lm
+PROGRAM 		 = main
+OBJECTS 		 = (SOURCES: .c = .o)
+</TT></PRE>
+</TT>
+<BR>
+<P>
+where <TT>(SOURCES: .c = .o) makes .c extensions of SOURCES .o
+extensions.
+ <BR>
+<P>
+To reference or invoke a macro in make do $(macro_name).<EM>e.g.:</EM>
+<BR>
+<P><TT>
+<PRE><TT>
+$(PROGRAM) : $(OBJECTS)
+$(LINK.C) -o $@ $(OBJECTS) $(LIBS)
+</TT></PRE>
+</TT>
+<BR>
+<P><B>NOTE</B>:
+<UL>
+<LI> <TT>$(PROGRAM) : $(OBJECTS) - makes a list of <BR>
+dependencies
+and targets.
+<LI> The use of an internal macros <EM>i.e.</EM> <TT>$@</TT>.
+</UL>
+<P>
+There are many internal macros (see manual pages) here a few common ones:
+<P><DL>
+<DT><STRONG>$*</STRONG>
+<DD>--	file name part of current dependent (minus .suffix).
+<DT><STRONG>$@</STRONG>
+<DD>--	full target name of current target.
+<DT><STRONG>$&lt;</STRONG>
+<DD>-- .c file of target.
+</DL>
+<P>
+An example makefile for the <TT>
+WriteMyString</TT> modular program discussed in the above is as follows:
+<P><PRE>
+#
+# Makefile
+#
+SOURCES.c= main.c WriteMyString.c
+INCLUDES= 
+CFLAGS=
+SLIBS= 
+PROGRAM= main
+
+OBJECTS= $(SOURCES.c:.c=.o)
+
+.KEEP_STATE:
+
+debug := CFLAGS= -g
+
+all debug: $(PROGRAM)
+
+$(PROGRAM): $(INCLUDES) $(OBJECTS)
+	$(LINK.c) -o $@ $(OBJECTS) $(SLIBS)
+
+clean:
+	rm -f $(PROGRAM) $(OBJECTS)
+</PRE>
+<P></TT></TT><H1><A NAME="SECTION0035100000000000000000">
+Running Make</A>
+</H1>
+<P>
+Simply type <TT>make</TT> from command line.
+<BR>
+<P>
+UNIX automatically looks for a file called <TT>Makefile</TT> (note: capital M rest
+lower case letters).
+<BR>
+<P>
+So if we have a file called <TT>Makefile</TT> and we type make from command
+line. The <TT>Makefile</TT> in our current directory will get executed.
+<BR>
+<P>
+We can override this search for a file by typing <TT>make -f make_filename</TT>
+<BR>
+<P><EM>e.g.</EM>&nbsp;&nbsp;	<TT>make -f my_make</TT>
+<BR>
+<P>
+There are a few more <TT>-options</TT> for makefiles -- see manual pages.
+<BR>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node35.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:26 GMT -->
+</HTML>

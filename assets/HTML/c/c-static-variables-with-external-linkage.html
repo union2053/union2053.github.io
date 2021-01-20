@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-static-variables-with-external-linkage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Static Variables with External Linkage</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Static Variables with External Linkage'>C Static Variables with External Linkage</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-block-scope.html'>C Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-block-scope-without-braces.html'>C Block Scope Without Braces
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Static Variables with External Linkage</h1>
+<a class ='btn btn-outline-dark' href=c-static-variables-with-block-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-external-variable-example.html>Next</a><p>A static variable with external linkage has file scope, external linkage, and static storage duration.
+
+</p><p>It is also called the external storage, and variables of this type are
+called external variables. 
+
+</p><p>You create an external variable by placing a defining declaration outside of any function. 
+
+</p><p>An external variable can additionally be declared inside a function that uses it by using the <i style='color:blue'>extern</i> keyword. 
+
+</p><p>If a particular external variable is defined in one source code file and is used in a second source code file, declaring the
+variable in the second file with <i style='color:blue'>extern</i> is mandatory. 
+
+</p><p>Declarations look like this:
+</p><div class='myCodeDiv'><button id='HZZSQ' class='myCopyButton' data-clipboard-target='#RQPPC'>Copy</button><pre  id='RQPPC' style='font-size:18px;' class='code'><span class='r'>int</span> my_var;              <span class='c'>/*   externally defined variable        */</span>
+<span class='r'>double</span> my_array[100];          <span class='c'>/*   externally defined array           */</span>
+<span class='r'>extern</span> <span class='r'>char</span> Coal;        <span class='c'>/*   mandatory declaration if           */</span>
+                         <span class='c'>/*   Coal defined in another file       */</span>
+<span class='r'>void</span> next(<span class='r'>void</span>);
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>extern</span> <span class='r'>int</span> my_var;     <span class='c'>/* optional declaration                 */</span>
+
+  <span class='r'>extern</span> <span class='r'>double</span> my_array[]; <span class='c'>/* optional declaration                    */</span>
+  ...
+}
+<span class='r'>void</span> next(<span class='r'>void</span>)
+{
+    ...
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HZZSQ');clipboard.on('success', function(e) {$('#HZZSQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HZZSQ').text('error');});</script></div><p>Note that you don't have to give the array size in the optional declaration of double my_array.
+
+</p><p>That's because the original declaration already supplied that information. 
+
+</p><p>The group of <i style='color:blue'>extern</i> declarations inside <i style='color:blue'>main</i>() can be omitted entirely because external variables have file scope, so
+they are known from the point of declaration to the end of the file. 
+
+</p><p>They do serve, however, to document your intention that <i style='color:blue'>main</i>() use these variables.
+
+</p><p>If only extern is omitted from the declaration inside a function, a separate automatic variable
+is set up. That is, replacing 
+</p><div class='myCodeDiv'><button id='JZZGL' class='myCopyButton' data-clipboard-target='#XAIIN'>Copy</button><pre  id='XAIIN' style='font-size:18px;' class='code'><span class='r'>extern</span> <span class='r'>int</span> my_var;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JZZGL');clipboard.on('success', function(e) {$('#JZZGL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JZZGL').text('error');});</script></div><p>with
+</p><div class='myCodeDiv'><button id='PUQGQ' class='myCopyButton' data-clipboard-target='#HRVVL'>Copy</button><pre  id='HRVVL' style='font-size:18px;' class='code'><span class='r'>int</span> my_var;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PUQGQ');clipboard.on('success', function(e) {$('#PUQGQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PUQGQ').text('error');});</script></div><p>in <i style='color:blue'>main</i>() causes the compiler to create an automatic variable named my_var. 
+
+</p><p>It would be a separate, local variable, distinct from the original my_var. 
+
+</p><p>The local variable would be in scope while the program executes <i style='color:blue'>main</i>(), but the external my_var 
+would be in scope for other functions, such as <i style='color:blue'>next</i>(), in the same file. 
+
+</p><p>A variable in block scope "hides" a variable of the same name in file scope while the program executes statements in the block. 
+
+</p><p>External variables have static storage duration. 
+
+</p><p>Therefore, the array my_array maintains its existence and values regardless of whether the program is executing <i style='color:blue'>main</i>(), <i style='color:blue'>next</i>(), or some other
+function.
+
+</p><p>The following three examples show four possible combinations of external and automatic
+variables. 
+
+</p><h3>Example 1
+
+</h3><p>Example 1 contains one external variable: my_variable. It is known to both <i style='color:blue'>main</i>() and my_<i style='color:blue'>function</i>().
+</p><div class='myCodeDiv'><button id='QNXUQ' class='myCopyButton' data-clipboard-target='#WAXGC'>Copy</button><pre  id='WAXGC' style='font-size:18px;' class='code'><span class='c'>/* Example 1 */</span>
+<span class='r'>int</span> my_variable;
+<span class='r'>int</span> my_function();
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+   <span class='r'>extern</span> <span class='r'>int</span> my_variable;     <span class='c'>// my_variable declared external</span>
+   ...
+}
+<span class='r'>int</span> my_function()
+{
+   <span class='r'>extern</span> <span class='r'>int</span> my_variable;     <span class='c'>// same my_variable as above</span>
+   ...
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QNXUQ');clipboard.on('success', function(e) {$('#QNXUQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QNXUQ').text('error');});</script></div><h3>Example 2
+</h3><p>Example 2 has one external variable, my_variable, known to both functions. This time, my_<i style='color:blue'>function</i>()
+knows it by default.
+</p><div class='myCodeDiv'><button id='NTMZW' class='myCopyButton' data-clipboard-target='#EAOLN'>Copy</button><pre  id='EAOLN' style='font-size:18px;' class='code'><span class='c'>/* Example 2 */</span>
+<span class='r'>int</span> my_variable;
+<span class='r'>int</span> my_function();
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+   <span class='r'>extern</span> <span class='r'>int</span> my_variable;     <span class='c'>// my_variable declared external</span>
+   ...
+}
+<span class='r'>int</span> my_function()
+{
+                         <span class='c'>// my_variable not declared but is known</span>
+    ...
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NTMZW');clipboard.on('success', function(e) {$('#NTMZW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NTMZW').text('error');});</script></div><h3>Example 3
+</h3><p>In Example 3, four separate variables are created. 
+
+</p><p>The my_variable variable in <i style='color:blue'>main</i>() is automatic
+by default and is local to main. 
+
+</p><p>The my_variable variable in my_<i style='color:blue'>function</i>() is automatic explicitly and is known only to my_<i style='color:blue'>function</i>(). 
+
+</p><p>The external my_variable variable is not known to <i style='color:blue'>main</i>() or my_<i style='color:blue'>function</i>() but would be known to any 
+other function in the file that did not have its own local my_variable.
+
+</p><p>Finally, my_variable2 is an external variable known to my_<i style='color:blue'>function</i>() but not to <i style='color:blue'>main</i>() because my_variable2
+follows <i style='color:blue'>main</i>().
+</p><div class='myCodeDiv'><button id='ILSWS' class='myCopyButton' data-clipboard-target='#GHFEJ'>Copy</button><pre  id='GHFEJ' style='font-size:18px;' class='code'><span class='c'>/* Example 3 */</span>
+<span class='r'>int</span> my_variable;
+<span class='r'>int</span> my_function();
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>int</span> my_variable;          <span class='c'>// my_variable declared, is auto by default</span>
+   ...
+}
+<span class='r'>int</span> my_variable2;
+<span class='r'>int</span> my_function()
+{
+   <span class='r'>auto</span> <span class='r'>int</span> my_variable;    <span class='c'>// local my_variable declared automatic</span>
+   ...
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ILSWS');clipboard.on('success', function(e) {$('#ILSWS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ILSWS').text('error');});</script></div><p>These examples illustrate the scope of external variables: from the point of declaration to the
+end of the file. 
+
+</p><p>They also illustrate the lifetimes of variables. 
+
+</p><p>The external my_variable and my_variable2 variables persist as long as the program runs, and, 
+because they aren't confined to any one function, 
+they don't fade away when a particular function returns.
+
+</p><h3>Initializing External Variables
+
+</h3><p>Like automatic variables, external variables can be initialized explicitly. 
+
+</p><p>Unlike automatic variables, external variables are initialized automatically to zero if 
+you don't initialize them. 
+
+</p><p>This rule applies to elements of an externally defined array, too. 
+
+</p><p>Unlike the case for automatic variables, you can use only constant expressions to initialize file scope variables:
+
+</p><div class='myCodeDiv'><button id='XQFLJ' class='myCopyButton' data-clipboard-target='#ZJGBY'>Copy</button><pre  id='ZJGBY' style='font-size:18px;' class='code'><span class='r'>int</span> x = 10;                 <span class='c'>//   ok,   10 is constant</span>
+<span class='r'>int</span> y = 3 + 20;             <span class='c'>//   ok,   a constant expression</span>
+size_t z = <span class='r'>sizeof</span>(<span class='r'>int</span>);     <span class='c'>//   ok,   a constant expression</span>
+<span class='r'>int</span> x2 = 2 * x;             <span class='c'>//   not   ok, x is a variable</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XQFLJ');clipboard.on('success', function(e) {$('#XQFLJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XQFLJ').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-static-variables-with-block-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-external-variable-example.html>Next</a><h2>Related</h2><UL><LI><a href='c-initialization-of-automatic-variables.html'>C Initialization of Automatic Variables</a></LI><LI><a href='c-register-variables.html'>C Register Variables</a></LI><LI><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope</a></LI><LI><a href='c-external-variable-example.html'>C External Variable Example</a></LI><LI><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function to allocate more memory</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-static-variables-with-external-linkage.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

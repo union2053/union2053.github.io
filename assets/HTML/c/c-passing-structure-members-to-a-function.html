@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-passing-structure-members-to-a-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Passing Structure Members to a function</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Passing Structure Members to a function'>C Passing Structure Members to a function</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-definition.html'>C Structure Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-defining-a-structure-variable.html'>C Structure Variable
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-structure.html'>C Structure Initialize 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-gaining-access-to-structure-members.html'>C Structure Members
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializers-for-structures.html'>C Structure Initializers 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-structures.html'>C Structure Array
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-nested-structures.html'>C Nested Structures
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-structures.html'>C Structure Pointer
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-structures-by-using-pointers.html'>C struct update via pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-returns-structures-from-a-function.html'>C return structure
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compound-literals-and-structures-c99.html'>C Structure Compound Literal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-anonymous-structures-c11.html'>C Anonymous Structures
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-using-an-array-of-structures.html'>C Array Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-saving-the-structure-contents-in-a-file.html'>C Save Structure 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Passing Structure Members to a function</h1>
+<a class ='btn btn-outline-dark' href=c-pointers-to-structures.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-update-structures-by-using-pointers.html>Next</a><h3>Passing structure members as arguments
+
+</h3><p>As long as a structure member is a data type with a single value (that is, an int or one of its
+relatives, a char, a float, a double, or a pointer), it can be passed as a function argument to
+a function that accepts that particular type. 
+
+</p><div class='myCodeDiv'><button id='LUTNP' class='myCopyButton' data-clipboard-target='#ODMGS'>Copy</button><pre  id='ODMGS' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define FUNDLEN 50
+
+<span class='r'>struct</span> funds {
+    <span class='r'>char</span>   bank[FUNDLEN];
+    <span class='r'>double</span> bankfund;
+    <span class='r'>char</span>   save[FUNDLEN];
+    <span class='r'>double</span> savefund;
+};
+
+<span class='r'>double</span> sum(<span class='r'>double</span>, <span class='r'>double</span>);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>struct</span> funds jack = {
+        <span class='q'>"Bank A"</span>,
+        4.27,
+        <span class='q'>"Loan"</span>,
+        8.94
+    };
+
+    printf(<span class='q'>"Jack has a total of $%.2f.\n"</span>,
+           sum(jack.bankfund, jack.savefund) );
+    <span class='r'>return</span> 0;
+}
+
+<span class='c'>/* adds two double numbers */</span>
+<span class='r'>double</span> sum(<span class='r'>double</span> x, <span class='r'>double</span> y)
+{
+    <span class='r'>return</span>(x + y);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LUTNP');clipboard.on('success', function(e) {$('#LUTNP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LUTNP').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAEYElEQVR42u2dYXLUMAxGe4i9/xkZeoDAANMpTSJLn6TEcd+b/mE3kW0B0VvVyb5tAAAAAA/hjRQAAAAA4gIAAACAuAAAAADiAgAAAIC4AAAAACAuAAAAgLgAAAAAIC4AAAAAiAsAwOr8/PH++4c8ACAuAAAPUJbFxOXzonAyQFwAANYs8KtaC/oCiAsAwIL6sra14C6AuAAAIC6zLwRxAcQFAABxmXQhwzXiLoC4AAAgLlNbC+ICiAsAAOLyJHHZ1trKA4gLAADi8s4yARAXeDav14skLFa09tVreOPJl7fmDCWnwlPR/ffmGKvIzL9kg619+uEQwljRqYaOb0ovzCgurz/cdTrsk3lNSl//kzn38PRh2ORKPZPnH6dWUYSrfGHBaAolVG5P1Tw7ZTjbjJadjZ5pnPjXKI/izJUwaFN6ISUunjpx40fnZWpDfiFVqehOaa2q7v/495WzUb5EECZjT8AzBwh95h7WmEeEEsq2Xd5sR7G7OEafKTN6lVXIr4fi257nXFpTeqGs49J0FUZcEJeOczuOPDvYkCSuNXlxGQrEI0Jl+g1CcTXqq9DuqkpLvt0iiEtoFdrSatMLV4iLp2lvfAb9eEVr6nyEtc9NTjLampJPNII43wqttKkj4hldztW94hL9r8G1prvpIhx/V6ho2e4Ql5IFanMu9LaqDJ8lqsSBkk07aBSXYd9+X7cMcZErpT3P/CSjyclHEOIPB3VOMrPz44Jy7jy99jAtAuLSLS5awbsrVJW4DJ+d3younnIb3QA7jNO07Vc4+AIvhCs6LmfHOItrcjfAUFM6JKOjHEbrn7Dw1j6B36VKXCHfNyrZsBXSTdDKhnF/jdDSvzGUULpkdehrCRSKi/+Y5LZfxOW7iIuzLhqdf/9H3tpND57fpNgHJEtpSc+mQ1yck5xfXAr1q3XDDeJSUmY0RZgzFOISspazDhPigrikhCDacTkbqK/jkm/JdHR9rhcX//HfSlzkv6xoAxK0ymHcwhotMDOEQlyi1pLUF8QFcWkUl8J6ibgsLC4dq5hhgzAgLrXiMvMel5I9K0K3ZpgrxOXx4rLFN6wI+2Q118mIizbJ0Bw6tvcKm3PlPcgzb871/0rOOfrwNrSMirU+BO87uIt9+0boG3DmCRUqq9F7m68UF+3Gonyplp9+O7QoeWmIy0Ti4rm27m8kPiyQ9uaSw1Da9A4j2JMsecLeMA9CkNC7QoRhHsqXsNU9z9AfP3RjuUdchkNEb03neiQoQqhoTRUqLy5bz4Nfq0bfEs9fSe6YFpIc7SdxO/QDxAVgTqj3y4uL8DDZR4TSIhtneZ5EMoO4CNt1S0p+KFeIC+ICgLhAqulSVbRuDxX1Hv+jWTy7Vq9/y7YH58yTX3fQlKsLcgiICwA8T1w0gZg2VOgLkA+/pNpfj6+prEK/RxOX6HdJ+jOcXxrigrgAAPy7psvvzhnKbzb77aKesCG5ybxVMgG/bzlHkTOcye0F6YXP/AKmMVOptBnGZwAAAABJRU5ErkJggg=='><h3>Using the Structure Address
+
+</h3><p>Passing a pointer to a structure
+</p><div class='myCodeDiv'><button id='KUUBI' class='myCopyButton' data-clipboard-target='#MGWDP'>Copy</button><pre  id='MGWDP' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define FUNDLEN 50
+
+<span class='r'>struct</span> funds {
+    <span class='r'>char</span>   bank[FUNDLEN];
+    <span class='r'>double</span> bankfund;
+    <span class='r'>char</span>   save[FUNDLEN];
+    <span class='r'>double</span> savefund;
+};
+
+<span class='r'>double</span> sum(<span class='r'>const</span> <span class='r'>struct</span> funds *);      <span class='c'>/* argument is a pointer */</span>
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>struct</span> funds jack = {
+        <span class='q'>"Bank A"</span>,
+        4.27,
+        <span class='q'>"Loan"</span>,
+        8.94
+    };
+
+    printf(<span class='q'>"Jack has a total of $%.2f.\n"</span>, sum(&amp;jack));
+
+    <span class='r'>return</span> 0;
+}
+
+<span class='r'>double</span> sum(<span class='r'>const</span> <span class='r'>struct</span> funds * money)
+{
+    <span class='r'>return</span>(money-&gt;bankfund + money-&gt;savefund);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KUUBI');clipboard.on('success', function(e) {$('#KUUBI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KUUBI').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAEE0lEQVR42u3dbY7aMBCA4T3E3v+MrXoAWqnSaluIMx92QuB51T+F2BmblnkZJuHjBgAAcBE+bAEAACAuAAAAxAUAABAXAAAA4gIAAEBcAAAAcQEAACAuAAAAxAUALsivnz/+/LEPAHEBgAsoy+XE5XvYrAvEBQDezloulPvvrYW7gLgAwNvpy4Wi3fIYryaICwAQlycKdbwE7gLiAgDE5dnF5Xa1uhGICwDg9cXl5VcB4gIAxfz3PRGOW0G3ekWPH15Y427K351/K56CWHSabYPnLU87JfKJewXiAgCtdPI9NZ44PLu0QbrdzbK7gjVwwXhgqVdt8GBzwmbkE/cKxAWYw+fnp014W3FpfoyeODyb3bdyZNwDvifjcfaNS1JBNSJL6M9Wi3zuXoG4PEg/nQzUHI77zTxmSz//pTP24fDdaZsrjQTvH+c6d0kludXDUzWJQYWgU7BJLSEVWK3cUtirmhvFiy4dVcX1xCWSJ0786PwyuaG/kFlbsXpL56rq/V//PrJ1lv9mKAQzDiASAzrikjKMA4b3xWXcdtOpD2W/Egom77nblbKleOT9vcIrVFwWvQsTF+KyYuyKI7cOHkiS95qyuGy1sqZS5gHDs1l2K8UuKk1NF5fddWXTP3HBCeISKdoPPoN+PVIr6nxNOx7bDDJbmioPHEwSfCq10kUVkcjZy3t1rrhk/2t4rym7S0odzh3+PuISeTarL8QFR4vLbt3+Pm8NxKWcKcdx9oPMbk5/hsL8uycNBtnp/DggnQeHzz2sNgNxKYvLVl4P2sDBw99KXIIRNjtmiAvWVly2jgkm12Y3wK6mrJCMFekwm/8KC19aJ4i71BRX6NeNpjRspXQTwYR3277wJ3j7k4OHTxGXyKXX54pL7dY1cdcZn5S4YF9cgnlxUPmPf+Sd2/QQ+SZlfEAzlU6p2awQl2CQzy8uE/VracMNcem4S1Ydzh0enC0rE6c055ZrLTUVCC4/GzlxIS6VR1KZY13FpV+SWVH1OV5c4se/lbiUX6xsARJTkn3BPI4ZHs/H2Wt3pyfjuCelhCY7MBh/OXLiQlyWi8vEfElcXlhcVqziGRqEcUt+vfI8w1O6E7+F65R7kBQmyVrLuAEoWzHqLL8pKMTlFcTllm9YKfTJ1lynIy61IFMxrGjvLTTnlnuQn7k5N/6VXPDsu5ehdVRs6U3wXthdsk+dOzxiPFu3n99N3ouScaEjpHCPmUKxZ+KPFRCXNxWXyHvr/YXEDxPkuLnk4VS18B7OMA5yyh32dvehMEnq2cIMu/swfQm3efczjM+furA8Ii67p8hemu796FXF5aGmBA+Oa035h3jilhAUl0GpKbtXnR9ZXLFXuJK4AM+JfA8AxAUgLgAA4gIAAEBcAADAO/AbVsJ0E9dJJEUAAAAASUVORK5CYII='><p>The <i style='color:blue'>sum</i>() function uses a pointer (money) to a funds structure for its single argument. 
+
+</p><p>Passing the address &amp;jack to the function causes the pointer money to point to the structure jack.
+
+</p><p>Then the -> operator is used to gain the values of <i style='color:blue'>jack.bankfund</i> and <i style='color:blue'>jack.savefund</i>.
+
+</p><p>Because the function does not alter the contents of the pointed-to value, it declares money as a
+pointer-to-const.
+
+</p><h3>Passing a Structure as an Argument
+
+</h3><p>Passing a structure
+</p><div class='myCodeDiv'><button id='LSEAD' class='myCopyButton' data-clipboard-target='#OKHTJ'>Copy</button><pre  id='OKHTJ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define FUNDLEN 50
+
+<span class='r'>struct</span> funds {
+    <span class='r'>char</span>   bank[FUNDLEN];
+    <span class='r'>double</span> bankfund;
+    <span class='r'>char</span>   save[FUNDLEN];
+    <span class='r'>double</span> savefund;
+};
+
+<span class='r'>double</span> sum(<span class='r'>struct</span> funds rec1);     <span class='c'>/* argument is a structure */</span>
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>struct</span> funds jack = {
+        <span class='q'>"Bank A"</span>,
+        4.27,
+        <span class='q'>"Loan"</span>,
+        8.94
+    };
+
+    printf(<span class='q'>"Jack has a total of $%.2f.\n"</span>, sum(jack));
+
+    <span class='r'>return</span> 0;
+}
+
+<span class='r'>double</span> sum(<span class='r'>struct</span> funds rec1)
+{
+    <span class='r'>return</span>(rec1.bankfund + rec1.savefund);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LSEAD');clipboard.on('success', function(e) {$('#LSEAD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LSEAD').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAELklEQVR42u2dbZLTQAwFOUTuf0f2AgGKqi2Ibc3Tk8af3bV/SGx5RgtRR54xP94AAAAAF+EHKQAAAADEBQAAAABxAQAAAMQFAAAAAHEBAAAAQFwAAAAAcQEAAABAXAAAAAAQFwAAAEBcAABgBj+/vn7/kAcAxAUA4ALKcl1x+Xf8uBcgLgAAT7GWy1X9j8GjL4C4AAA8S18uN+ZAZfi1AuICAIC4nGjM8VxwF0BcAAAQl1Nby3U9DBAXAABAXAAQFwAAxIXpACAucBterxdJuFyFW5a6eKNKsJ/lwCDerIeVXtmwszVmQynqW4S2zvoImI2sj0qfQmPeAHH5U34qFah4OiyTuU9KX/9TOXf19GHY4kyVwfOXUy/8w2p9tiDZoh7X18CTthK4VbPFWi4WckNcVgdTTFqLi7TkDS4jLkqdOPCr821qQ30iXamYndJeVV3+8e8rW1f5iGAMJh6AMoaHu0v2rXMG8Sr6lqPEQVabN3HFTXlSXTJiA6snzTu4N29wyY7LpE9hxAVxmXHujCO3Dg4kic8a7wu04Rw7B0kV4OC6+sHD21ji5VLDK4pLMW8tU2jJG9xNXJSmffAd9PsVr6nzHTY+tzjIbGvKPjEIIr6VmumkjohydTtXx4pL9p8GnzWVVofRFNkzSF1c4vU3xZUZ2aqv1+z21KU8MjuFlrzBrcRl2Ldf1q1AXOxKGY+zPshscuoRjPjDi4qDrKz82KGci6f3HuZFQFyypaLiHPsH8bpKy5ralT27hBviEp+eLfzZTg/igrh0Fozh6oEtq+gqlo31e4fiWql/xsSn9gl0l2pxhXrfqGXBVko3If5SvlpyTh7kgeIyY7MS4gI94iLWxaDzr3/l7V30oNxJiQ8oltKWns0McREHeX5xadSvqQtuEBexrqy+lS1OhwR5mrjo931S7qJfF3FBXBqEINtx2brQvI5LvSUzo+uzv7joxz9KXOxfVrYBCUNd+HjXc46dg7SIiygKh4tL8TE2xbwhLnA6cWmsl4jLjcVlxizOsED4se4SbPTQnzd/bJCtap2qqcMd0b3iYqiJt/YlKy7D/VzGFBCXB4nLO79gxVgn67lORVy8QabGMGN5r7E4116DfObFufotOfHqw21oFRWb+hC8W4qLUeoOD6KfZWzWbS/A9lZw8T6O3aep5wFxQVzUz9blRuLVAhkvLlkN5Q1vNUI8yJYn7A3zYARJvWtEGOahfQrvvucZ6vFTG8sVcRleIrs1/eFNF7tsHBtE2Zek/JcC4l7oxgKceqrbW9t+HBxpPOJ2uEqm5dl6iMttxQXgnHAXBnE5p7hs1eC38CS0SrU2XleWCRefNJPql4h5sKeAuCAuAIgLlNzFeOs8QfRVonFDYtiqEU1IeT2O6VlLvC3L0AJjSW+qi1PMGyAuAAAAAIgLAAAA3IhftwN0oXCH1ZAAAAAASUVORK5CYII='><p>We replaced money, which was a pointer to struct funds, with rec1, which is a struct
+funds variable. 
+
+</p><p>When <i style='color:blue'>sum</i>() is called, an automatic variable called rec1 is created according
+to the funds template. 
+
+</p><p>The members of this structure are then initialized to be copies of the
+values held in the corresponding members of the structure jack. 
+</p><a class ='btn btn-outline-dark' href=c-pointers-to-structures.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-update-structures-by-using-pointers.html>Next</a><h2>Related</h2><UL><LI><a href='c-arrays-of-structures.html'>C Arrays of Structures</a></LI><LI><a href='c-nested-structures.html'>C Nested Structures</a></LI><LI><a href='c-pointers-to-structures.html'>C Pointers to Structures</a></LI><LI><a href='c-update-structures-by-using-pointers.html'>C Update structures by using pointers</a></LI><LI><a href='c-returns-structures-from-a-function.html'>C returns structures from a function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-passing-structure-members-to-a-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

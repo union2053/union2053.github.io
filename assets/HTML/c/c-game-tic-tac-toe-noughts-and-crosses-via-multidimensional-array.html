@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C game tic tac toe, noughts and crosses via multidimensional array</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C game tic tac toe, noughts and crosses via multidimensional array'>C game tic tac toe, noughts and crosses via multidimensional array</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C game tic tac toe, noughts and crosses via multidimensional array</h1>
+<a class ='btn btn-outline-dark' href=c-multi-dimensional-array-sum.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-calculate-averages-with-arrays.html>Next</a><p>The following code allows two people to play tic-tac-toe. 
+
+</p><p>Tic-tac-toe is played on a 3 by 3 grid of squares. 
+
+</p><p>Two players take turns entering either an X or an O in the grid.  
+
+</p><p>The first player to get three of the symbols in a line horizontally, vertically, or diagonally is the winner.  
+
+</p><div class='myCodeDiv'><button id='MCIVH' class='myCopyButton' data-clipboard-target='#ZBBXC'>Copy</button><pre  id='ZBBXC' style='font-size:18px;' class='code'>#define _CRT_SECURE_NO_WARNINGS 
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> player = 0;                 <span class='c'>// Current player number - 1 or 2 </span>
+  <span class='r'>int</span> winner = 0;                 <span class='c'>// The winning player number </span>
+  <span class='r'>int</span> choice = 0;                 <span class='c'>// Chosen square </span>
+  <span class='r'>int</span> row = 0;           <span class='c'>// Row index for a square </span>
+  <span class='r'>int</span> column = 0;        <span class='c'>// Column index for a square </span>
+  <span class='r'>char</span> board[3][3] = {            <span class='c'>// The board </span>
+              {<span class='q'>'1'</span>,<span class='q'>'2'</span>,<span class='q'>'3'</span>},      <span class='c'>// Initial values are characters '1' to '9' </span>
+              {<span class='q'>'4'</span>,<span class='q'>'5'</span>,<span class='q'>'6'</span>},      <span class='c'>// used to select a vacant square </span>
+              {<span class='q'>'7'</span>,<span class='q'>'8'</span>,<span class='q'>'9'</span>}       <span class='c'>// for a player's turn. </span>
+  }; <span style='color:#a999ab'>/</span><span style='color:#abbbab'>*</span><span style='color:#9abbab'>f</span><span style='color:#abaa99'>r</span><span style='color:#9999b9'>o</span><span style='color:#9baaa9'>m</span><span style='color:#9b9aba'> </span><span style='color:#ba9aaa'> </span><span style='color:#ab9abb'> </span><span style='color:#bb99bb'>w</span><span style='color:#9a9aaa'>w</span><span style='color:#bba9ba'> </span><span style='color:#babaab'> </span><span style='color:#baaaaa'>w</span><span style='color:#bbaab9'>.</span><span style='color:#bb999b'> </span><span style='color:#99babb'>d</span><span style='color:#b9baba'> </span><span style='color:#aabbaa'>e</span><span style='color:#b99bba'>m</span><span style='color:#ba9bb9'> </span><span style='color:#b9a9bb'>o</span><span style='color:#9a99ba'> </span><span style='color:#abaa9a'> </span><span style='color:#a999ab'>2</span><span style='color:#a9bb9a'>s</span><span style='color:#abaabb'> </span><span style='color:#b9a9aa'>.</span><span style='color:#9ba9ba'> </span><span style='color:#9ab99b'> </span><span style='color:#baaabb'>c</span><span style='color:#aaab9b'> </span><span style='color:#b99b9b'> </span><span style='color:#abbabb'>o</span><span style='color:#a9bbba'>m</span><span style='color:#9bb9ab'>*</span><span style='color:#9999bb'>/</span>
+
+  <span class='c'>// The game continues for up to 9 turns </span>
+  <span class='c'>// as long as there is no winner </span>
+  <span class='r'>for</span>(<span class='r'>int</span> i = 0; i &lt; 9 &amp;&amp; winner == 0; ++i) 
+  { 
+    <span class='c'>// Display the board </span>
+    printf(<span class='q'>"\n"</span>); 
+    printf(<span class='q'>" %c | %c | %c\n"</span>, board[0][0], board[0][1], board[0][2]); 
+    printf(<span class='q'>"---+---+---\n"</span>); 
+    printf(<span class='q'>" %c | %c | %c\n"</span>, board[1][0], board[1][1], board[1][2]); 
+    printf(<span class='q'>"---+---+---\n"</span>); 
+    printf(<span class='q'>" %c | %c | %c\n"</span>, board[2][0], board[2][1], board[2][2]); 
+
+    player = i%2 + 1;                   <span class='c'>// Select player </span>
+
+    <span class='c'>// Get valid player square selection </span>
+    <span class='r'>do</span> 
+    { 
+      printf(<span class='q'>"Player %d, enter a valid square number "</span> 
+             <span class='q'>"for where you want to place your %c: "</span>, 
+              player,(player == 1) ? <span class='q'>'X'</span> : <span class='q'>'O'</span>); 
+      scanf(<span class='q'>"%d"</span>, &amp;choice); 
+
+      row = --choice/3;                 <span class='c'>// Get row index of square </span>
+      column = choice % 3;              <span class='c'>// Get column index of square </span>
+    }<span class='r'>while</span>(choice &lt; 0 || choice &gt; 8|| board[row][column] &gt; <span class='q'>'9'</span>); 
+    <span class='c'>// Insert player symbol </span>
+    board[row][column] = (player == 1) ? <span class='q'>'X'</span> : <span class='q'>'O'</span>; 
+
+    <span class='c'>// Check for a winning line - diagonals first </span>
+    <span class='r'>if</span>((board[0][0]==board[1][1] &amp;&amp; board[0][0]==board[2][2]) || 
+       (board[0][2]==board[1][1] &amp;&amp; board[0][2]==board[2][0])) 
+      winner = player; 
+    <span class='r'>else</span> 
+    { 
+      <span class='c'>// Check rows and columns for a winning line </span>
+      <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> line = 0; line &lt;= 2; ++line) 
+      { 
+        <span class='r'>if</span>((board[line][0] == board[line][1] &amp;&amp; 
+            board[line][0] == board[line][2]) || 
+           (board[0][line] == board[1][line] &amp;&amp; 
+            board[0][line] == board[2][line])) 
+          winner = player; 
+      } 
+    } 
+  } 
+  <span class='c'>// Game is over so display the final board </span>
+  printf(<span class='q'>"\n"</span>); 
+  printf(<span class='q'>" %c | %c | %c\n"</span>, board[0][0], board[0][1], board[0][2]); 
+  printf(<span class='q'>"---+---+---\n"</span>); 
+  printf(<span class='q'>" %c | %c | %c\n"</span>, board[1][0], board[1][1], board[1][2]); 
+  printf(<span class='q'>"---+---+---\n"</span>); 
+  printf(<span class='q'>" %c | %c | %c\n"</span>, board[2][0], board[2][1], board[2][2]); 
+
+  <span class='c'>// Display result message </span>
+  <span class='r'>if</span>(winner) 
+    printf(<span class='q'>"\nCongratulations, player %d, YOU ARE THE WINNER!\n"</span>, winner); 
+  <span class='r'>else</span> 
+    printf(<span class='q'>"\nHow boring, it is a draw\n"</span>); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MCIVH');clipboard.on('success', function(e) {$('#MCIVH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MCIVH').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-multi-dimensional-array-sum.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-calculate-averages-with-arrays.html>Next</a><h2>Related</h2><UL><LI><a href='c-multidimensional-arrays.html'>C Multidimensional Arrays</a></LI><LI><a href='c-initializing-a-two-dimensional-array.html'>C Initializing a Two-Dimensional Array</a></LI><LI><a href='c-multi-dimensional-array-sum.html'>C Multi dimensional array sum</a></LI><LI><a href='c-calculate-averages-with-arrays.html'>C Calculate Averages With Arrays</a></LI><LI><a href='c-reusing-the-numbers-stored-in-array.html'>C Reusing the numbers stored in array</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

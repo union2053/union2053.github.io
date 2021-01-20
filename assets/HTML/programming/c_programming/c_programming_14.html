@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_14.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+<head>
+	<title>C Programlama Ders: XIV</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, Structure, Yapılar, struct, enum, enumerator, typedef, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+<body>
+<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">29 Kasım 2006</font></div>
+	<h2>C Programlama Dersi - XIV</h2>
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>
+		<div id="content_div" style="display:none">
+			<p>- Yeni Değişken Tipi Oluşturma (&nbsp;enum&nbsp;)</p>
+			<p>- typedef Kullanımı</p>
+			<p>- Yapılar (&nbsp;Structures&nbsp;)</p>
+			<p>- Yapı Etiketleri</p>
+			<p>- Yapı Dizileri</p>
+			<p>- Yapılar ve Fonksiyonlar</p>
+			<p>- Dinamik Yapılar</p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	<h3>Yeni Değişken Tipi Oluşturma</h3>
+	<p>
+		Kullandığımız birçok değişken tipi oldu. Tam sayıları, karakterleri, virgüllü
+		sayıları, katarları gördük. Ancak kullanabileceğimiz değişken tipleri bunlarla
+		sınırlı değildir. Kendi değişken tiplerimizi, yaratabiliriz. Örneğin
+		<i>boolean</i> diye yeni bir tip yaratarak, bunun alabileceği değerleri
+		<i>true</i> ve <i>false</i> olarak belirleyebiliriz; üçüncü bir ihtimal olmaz.
+		Ya da mevsimler diye bir değişken tipi belirleyip, alabileceği değerleri aylar
+		olarak kısıtlayabiliriz. İşte bu tarz işlemleri yapmak için <b>enum</b> kullanılır.
+		<i>enum</i> kelimesi, <b>enumerator</b> yani '<i>sayıcı</i>',
+		'<i>numaralandırmacı</i>'dan gelmektedir.
+	</p>
+	<p>
+		Hayat, rakamlarla ifade edilebilir. Bunun en bariz uygulamalarını programlama
+		yaparken görürsünüz. Bir karakter olan A harfi, ASCII Tablo'da 65 sayısına denk
+		düşer; büyük B harfiyse 66'dır ve bu böyle devam eder. Bilgisayarınız işaretlerden,
+		sembollerden, karakterlerden anlamaz. Onun için tek gerçeklik sayılardır. İşte
+		<i>enum</i> bu felsefeye hizmet ediyor. Örneğin doğruyu göstermek için 1,
+		yanlış içinse 0'ı seçersek; yeni bir değişken tipi belirlemiş oluruz. Bilgisayar
+		doğrunun ya da yanlışın ne olduğunu bilmez, onun için sadece 0 ve 1 vardır. Ancak
+		insanların yararına, okunurluğu artan programlar ortaya çıkar. İsterseniz,
+		<i>boolean</i> diye tabir ettiğimiz değişken tipini oluşturalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Degisken tipinin nasil olacagini tanimliyoruz
+	<b>enum boolean {
+		false = 0,
+		true = 1
+	};</b>
+	// Simdi de 'dogru_mu' adinda bir degisken
+	// tanimliyoruz
+	<b>enum boolean dogru_mu;</b>
+	// Tanimladigimiz 'dogru_mu' degiskenine
+	// deger atayip, bir alt satirda da
+	// kontrol yapiyoruz.
+	<b>dogru_mu = true;</b>
+	if( <b>dogru_mu == true</b> )
+		printf( "Doğru\n" );
+	return 0;
+}
+</pre>
+	<p>
+		Daha önce <i>boolean</i> diye bir veri tipi bulunmuyordu. Şimdiyse, iki farklı
+		değeri olabilen, doğru ve yanlışları göstermekte kullanabileceğimiz yeni bir
+		değişken tipi oluşturduk. Yanlışı göstermek için 0; doğruyu ifade etmek içinse
+		1 rakamları kullandık. Yanlışın ve doğrunun karşılığını belirtmemiz gerekmiyordu;
+		<i>boolean</i> veri tipini tanımlarken, 0 ve 1 yazmadan sadece <i>false</i> ya da
+		<i>true</i> da yazabilirdik. Programınız derlenirken, karşılık girilmeyen değerlere
+		sırayla değer atanmaktadır. İlla ki sizin bir eşitlik oluşturmanız gerekmez. Mesela
+		üç ana rengi (&nbsp;Kırmızı, Sarı ve Mavi&nbsp;)alabilecek <i>ana_renkler</i>
+		veri tipini oluşturalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Degisken tipinin nasil olacagini tanimliyoruz
+	<b>enum ana_renkler {
+		Kirmizi,
+		Mavi,
+		Sari
+	};</b>
+
+	// Degiskeni tanimliyoruz.
+	<b>enum ana_renkler piksel;</b>
+
+	// Degisken degerini Mavi olarak belirliyoruz.
+	// Dilersek Sari ve Kirmizi da girebiliriz.
+	<b>piksel = Mavi;</b>
+
+	// Degisken degeri karsilastiriliyor.
+	if( <b>piksel == Kirmizi</b> )
+		printf( "Kırmızı piksel\n" );
+	else if( <b>piksel == Mavi</b> )
+		printf( "Mavi piksel\n" );
+	else
+		printf( "Sarı piksel\n" );
+	return 0;
+}
+</pre>
+	<p>
+		Kirmizi, Mavi ya da Sari'nin nümerik değerini bilmiyoruz; muhtemelen birden
+		başlamış ve sırayla üçe kadar devam etmişlerdir. Değerlerin nümerik karşılığını
+		bilmesek bile, bu onlarla işlem yapmamızı engellemiyor. Bir önceki örnekte olduğu
+		gibi rahatça kullanabiliyoruz.
+	</p>
+	<p>
+		Oluşturduğumuz yeni veri tiplerinden, değişken tanımlarken her defasında <i>enum</i>
+		koyduğumuzu görmüşsünüzdür. Bunu defalarca yazmak yerine iki alternatif biçim
+		bulunuyor. Birincisi yeni veri tipini oluştururken, değişkeni tanımlamak
+		şeklinde... boolean örneğimize geri dönüp, farklı şekilde nasıl tanımlama
+		yapabileceğimizi görelim:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Yeni veri tipini olusturuyoruz
+	// Ayrica yeni veri tipinden,
+	// bir degisken tanimliyoruz.
+	enum boolean {
+		false = 0,
+		true = 1
+	} <b>dogru_mu</b>;
+
+	dogru_mu = true;
+	if( dogru_mu == true )
+		printf( "Doğru\n" );
+	return 0;
+}
+</pre>
+	<p>
+		Yukarda gördüğünüz yöntem, yeni veri tipini oluşturduğunuz anda, bu veri
+		tipinden bir değişken tanımlamanızı sağlar. Her seferinde <i>enum</i> yazmanızdan
+		kurtaracak diğer yöntemse,	<b>typedef</b> kullanmaktan geçer. <i>typedef</i>
+		kullanımı şu şekildedir:
+	</p>
+<pre>
+<b>typedef</b> <i>veri_tipi_eski_adi</i> <i>veri_tipi_yeni_adi</i>
+</pre>
+	<p>
+		Kullanacağınız <i>typedef</i> ile herhangi bir değişken tipini, bir başka isimle
+		adlandırabilirsiniz. Örneğin yazacağınız "<i>typedef int tam_sayi;</i>" komutuyla,
+		değişken tanımlarken <i>int</i> yerine <i>tam_sayi</i> da yazabilirsiniz. Bunun
+		<i>enum</i> için uygulamasına bakalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Yeni veri tipini olusturuyoruz
+	// Ayrica yeni veri tipinden,
+	// bir degisken tanimliyoruz.
+	enum boolean {
+		false = 0,
+		true = 1
+	};
+	// Alttaki komut sayesinde, boolean
+	// veri tipini tek adimda yaratabiliyoruz.
+	<b>typedef enum boolean bool;</b>
+
+	<b>bool dogru_mu;</b>
+
+	dogru_mu = true;
+	if( dogru_mu == true )
+		printf( "Doğru\n" );
+	return 0;
+}
+</pre>
+	<h3>Özel Değişken Tipleri ve Fonksiyonlar</h3>
+	<p>
+		<i>enum</i> konusu genişletilebilir. Örneğin <i>enum</i> tanımlamasını, global
+		olarak yaparsanız, fonksiyon parametresi olarak kullanabilirsiniz. Çok basit bir
+		fonksiyon oluşturalım. Alacağı değişken bilgisine göre, ekrana ona dair bilgi
+		yazdırılsın:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+// Ay listesini olusturuyoruz. Ocak
+// ayi 1 olacak sekilde, aylar sirayla
+// numerik degerler aliyor.
+<b>enum ay_listesi</b> {
+	<b>ocak = 1</b>, subat, mart, nisan,
+	mayis, haziran, temmuz, agustos,
+	eylul, ekim, kasim, aralik
+};
+// Degisken tanimlamasini kolaylastirmak
+// icin typedef kullaniliyoruz. aylar diyerek
+// tanimlama yapmak mumkun hale geliyor.
+<b>typedef enum ay_listesi aylar;</b>
+
+void ay_ismini_yazdir( <b>aylar</b> );
+int main( void )
+{
+	// aylar tipinde bir degisken
+	// yaratip, 'kasim' degerini atiyoruz.
+	aylar bu_ay = kasim;
+	// kasim, numerik olarak 11'i ifade edecektir.
+	printf( "%d. ay: ", <b>bu_ay</b> );
+	// fonksiyonumuzu cagiriyoruz.
+	<b>ay_ismini_yazdir( bu_ay );</b>
+	return 0;
+}
+// Kendisine verilen aylar tipindeki degiskene gore
+// hangi ayin oldugunu ekrana yazmaktadir.
+void ay_ismini_yazdir( <b>aylar ay_adi</b> )
+{
+	switch( <b>ay_adi</b> ) {
+		case ocak: printf( "Ocak\n" );break;
+		case subat: printf( "Şubat\n" );break;
+		case mart: printf( "Mart\n" );break;
+		case nisan: printf( "Nisan\n" );break;
+		case mayis: printf( "Mayıs\n" );break;
+		case haziran: printf( "Haziran\n" );break;
+		case temmuz: printf( "Temmuz\n" );break;
+		case agustos: printf( "Ağustos\n" );break;
+		case eylul: printf( "Eylül\n" );break;
+		case ekim: printf( "Ekim\n" );break;
+		case kasim: printf( "Kasım\n" );break;
+		case aralik: printf( "Aralık\n" );break;
+	}
+}
+</pre>
+	<p>
+		Gördüğünüz gibi <i>enum</i> ile oluşturacağınız özel veri tiplerini fonksiyonlara
+		aktarmak mümkün. <i>enum</i> aracılığı ile yeni bir değişken tipi yaratmak, birçok
+		konuda işinizi basit hâle getirir. Özellikle gruplandırılması/tasnif edilmesi
+		gereken veriler varsa, <i>enum</i> kullanmak yararlıdır. Örnek olması açısından
+		aşağıda <i>enum</i> ile tanımlanmış bazı veri tiplerini bulabilirsiniz:
+	</p>
+<pre>
+enum medeni_durum { bekar, evli, dul };
+enum medeni_durum ayse = bekar;
+</pre>
+<pre>
+enum egitim_durumu { ilkokul, ortaokul, lise, universite, master };
+enum egitim_durumu ogrenci;
+</pre>
+<pre>
+enum cinsiyet { erkek, kadin };
+enum cinsiyet kisi;
+</pre>
+
+	<h3>Yapılar (&nbsp;Structures&nbsp;)</h3>
+	<p>
+		Yapılar (&nbsp;structures&nbsp;); tam sayı, karakter vb. veri tiplerini gruplayıp,
+		tek bir çatı altında toplar. Bu gruplandırma içinde aynı ya da farklı veri tipinden
+		dilediğiniz sayıda eleman olabilir. Yapılar, nesne tabanlı programlama
+		(&nbsp;Object Oriented Programming&nbsp;) dilleri için önemli bir konudur. Eğer
+		Java, C# gibi modern dillerle çalışmayı düşünüyorsanız, bu konuya daha bir önem
+		vermeniz gerekir.
+	</p>
+	<p>
+		Vakit kaybetmeden bir örnekle konumuza girelim. Doğum günü bilgisi isteyip,
+		bunu ekrana yazdıran bir program oluşturalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	<b>struct {
+		int yil;
+		int ay;
+		int gun;
+	} dogum_gunu;</b>
+
+	printf( "Doğum gününüzü " );
+	printf( "GG-AA-YYYY olarak giriniz> ");
+	scanf( "%d-%d-%d", 	<b>&dogum_gunu.gun</b>,
+				<b>&dogum_gunu.ay</b>,
+				<b>&dogum_gunu.yil</b> );
+	printf( "Doğum gününüz: " );
+	printf( "%d/%d/%d\n",	<b>dogum_gunu.gun</b>,
+				<b>dogum_gunu.ay</b>,
+				<b>dogum_gunu.yil</b> );
+	return 0;
+}
+</pre>
+	<p>
+		Bir kullanıcının doğum gününü sorup, gün, ay ve yıl bilgilerini üç farklı <i>int</i>
+		değişken içersinde tutabilirdik. Ancak gruplandırmak her zaman daha iyidir.
+		Hem yaptığınız işlerin takibi kolaylaşır, hem de hata yapma riskinizi azaltır.
+		Bunu daha iyi anlatmak için aynı anda sizin ve iki kardeşinizin doğum günlerini
+		soran bir program yazalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	struct {
+		int yil;
+		int ay;
+		int gun;
+	} <b>siz</b>, <b>kiz_kardes</b>, <b>erkek_kardes</b>;
+
+	printf( "Doğum gününüzü giriniz> ");
+	scanf( "%d-%d-%d",	&siz.gun,
+				&siz.ay,
+				&siz.yil );
+	printf( "Kız kardeşiniz> " );
+	scanf( "%d-%d-%d", 	&kiz_kardes.gun,
+				&kiz_kardes.ay,
+				&kiz_kardes.yil );
+	printf( "Erkek kardeşiniz> " );
+	scanf( "%d-%d-%d", 	&erkek_kardes.gun,
+				&erkek_kardes.ay,
+				&erkek_kardes.yil );
+	return 0;
+}
+</pre>
+	<p>
+		Eğer yapılardan (&nbsp;structures&nbsp;) yararlanmasaydık; üç kişinin doğum günü
+		bilgilerini tutmak için toplamda 9 adet farklı değişken tanımlamak gerekecekti.
+		Tanımlama zahmeti bir yana, değişkenlerin karıştırılma ihtimali de ayrı bir
+		sıkıntı yaratacaktı. Sadece üç değişken olarak düşünmeyelim; nüfus cüzdanı
+		bilgilerini soracağımız bir program, yirminin üzerinde değişkene ihtiyaç duyar.
+		Bu kadar çok değişken barındırıp, yapıları kullanmadan hazırlanacak bir programı
+		görmek bile istemezsiniz.
+	</p>
+	<p>
+		Yapıları kullanmanın bir diğer avantajı, kopyalama konusundadır. Örneğin, sizin
+		bilgilerinizi,	erkek kardeşinize kopyalamak için tek yapmanız gereken,
+		"<i>erkek_kardes&nbsp;=&nbsp;siz</i>" yazmaktır. Bu basit işlem ilgili bütün
+		değişkenlerin kopyalamasını yapar.
+	</p>
+	<h3>İç İçe Yapılar</h3>
+	<p>
+		Bir yapı içersine tıpkı bir değişken koyar gibi, bir başka yapı da
+		koyulabilir. Örneğin kullanıcı bilgisi alan bir programda, isim, boy ve doğum
+		tarihi bilgilerini aynı yapı altına toplayabilirsiniz. Ancak doğum tarihi
+		bilgilerini daha alt bir yapı içersinde tutmak yararlı olabilir. Bunu koda
+		dökersek şöyle olur:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	struct {
+		char isim[40];
+		int boy;
+		<b>struct {
+			int yil;
+			int ay;
+			int gun;
+		} dogum_bilgileri;</b>
+	} kisi;
+
+	printf( "Adınız: " );
+	scanf( "%s", kisi.isim );
+	printf( "Boyunuz: " );
+	scanf( "%d", &kisi.boy );
+	printf( "Doğum tarihi: ");
+	scanf( "%d-%d-%d", 	&kisi<b>.dogum_bilgileri</b>.gun,
+				&kisi<b>.dogum_bilgileri</b>.ay,
+				&kisi<b>.dogum_bilgileri</b>.yil );
+
+	printf( "Girilen bilgiler:\n" );
+	printf( "İsim: %s\n", kisi.isim );
+	printf( "Boy: %d\n", kisi.boy );
+	printf( "Doğum tarihi: %d/%d/%d\n", 	kisi<b>.dogum_bilgileri</b>.gun,
+						kisi<b>.dogum_bilgileri</b>.ay,
+						kisi<b>.dogum_bilgileri</b>.yil );
+	return 0;
+}
+</pre>
+	<p>
+		Alt yapıya ulaşmak için nokta kullanıp, ardından yapının adını yazdığımızı
+		görüyorsunuz. Yapıları kullanarak, bir arada durması yararlı olan değişkenleri
+		gruplarız. İç içe yapıları kullanaraksa, bu gruplandırmayı daha da ufak boyutlara
+		indirgemekteyiz. Kısacası her şey, daha derli toplu çalışma için yapılıyor. Yoksa
+		programın temelinde değişen bir şey yok.
+	</p>
+
+	<h3>Yapı Etiketleri</h3>
+	<p>
+		Yapılara etiket koyabilir ve etiketleri kullanarak ilgili yapıyı temel alan
+		değişkenler	tanımlayabilirsiniz. Az evvel yaptığımıza benzer bir örnek yapalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	// sahis_bilgileri, yapimizin
+	// etiketidir.
+	struct <b>sahis_bilgileri</b> {
+		char isim[40];
+		int boy;
+	};
+
+	// Yapidan iki adet degisken
+	// tanimliyoruz.
+	<b>struct sahis_bilgileri kisi_1;</b>
+	<b>struct sahis_bilgileri kisi_2;</b>
+
+	// Birinci sahsin bilgilerini
+	// kaydediyoruz.
+	strcpy( kisi_1.isim, "AHMET" );
+	kisi_1.boy = 170;
+
+	// Ikinci sahsin bilgilerini
+	// kaydediyoruz.
+	strcpy( kisi_2.isim, "MEHMET" );
+	kisi_2.boy = 176;
+
+	return 0;
+}
+</pre>
+	<p>
+		Yapıların etiket konarak tanımlanması, daha mantıklıdır. Aksi hâlde sadece yapıyı
+		oluştururken tanımlama yaparsınız. Etiket koyduğunuz zamansa, programın herhangi
+		bir yerinde istediğiniz kadar yapı değişkeni tanımlayabilirsiniz. Önemli bir
+		noktayı belirtmek isterim: yapılarda etiket kullandığınız zaman elinizde sadece bir
+		şablon vardır. O etiketi kullanarak yapıdan bir değişken yaratana kadar,
+		üzerinde işlem yapabileceğiniz bir şey olmaz. Yapı (&nbsp;structure&nbsp;) bir
+		kalıptır; bu kalıbın etiketini kullanarak değişken tanımlamanız gerekir.
+	</p>
+
+	<h3>Yapılarda İlk Değer Atama</h3>
+	<p>
+		Yapılarda da ilk değer ataması yapabilirsiniz. Aşağıdaki örnek etiket kullanmadan
+		oluşturduğunuz yapılarda, ilk değer atamasının nasıl olduğunu göstermektedir.
+		'<i>kisi</i>' isimli yapı içersinde bulunan <i>isim</i> ve <i>boy</i> değişkenlerine
+		sırasıyla <i>Ali</i> ve <i>167</i> değerleri atanmaktadır.
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// kisi adinda bir yapi olusturulup
+	// baslangic degerleri 'Ali' ve '167'
+	// olacak sekilde atanir.
+	struct {
+		char isim[40];
+		int boy;
+	} <b>kisi = { "Ali", 167 };</b>
+
+	return 0;
+}
+</pre>
+	<p>
+		Etiket kullanarak oluşturduğunuz yapılarda, ilk değer ataması değişkenlerin
+		tanımlanması aşamasında gerçekleşir. Önce yapıyı kurar ve ardından değişken
+		tanımlarken, ilk değerleri atarsınız. Kullanımı aşağıdaki kod içersinde
+		görülmektedir:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// sahis_bilgileri adinda bir yapi
+	// olusturuyoruz
+	struct sahis_bilgileri {
+		char isim[40];
+		int boy;
+	};
+
+	// sahis_bilgileri yapisindan kisi adinda
+	// bir degisken tanimliyoruz. Tanimlama
+	// esnasinda atanacak ilk degerler belirleniyor.
+	<b>struct sahis_bilgileri kisi = { "Ali", 167 };</b>
+
+	return 0;
+}
+</pre>
+	<p>
+		Bir yapı değişkenine, ilk değer ataması yapıyorsanız sıra önemlidir. Atayacağınız
+		değerlerin sırası, ilgili değişkenlere göre olmalıdır. Yani ilk yazacağınız
+		değer, ilk yapı içi değişkene; ikinci yazacağınız değer, ikinci yapı içi değişkene
+		atanır. Sırayı şaşırmadığınız sürece bir problem yaşamazsınız. Aksi durumda, yanlış
+		değer yanlış değişkene atanacaktır. Sırayı şaşırmamak için, ekstra ayraç işaretleri 
+		kullanabilirsiniz. Örneğin
+		{&nbsp;"Mehmet", 160, 23, 3, 1980&nbsp;} yerine
+		{&nbsp;"Mehmet", 160, {23, 3, 1980}&nbsp;} yazmakta mümkündür.
+	</p>
+
+	<h3>Yapı Dizileri</h3>
+	<p>
+		Veri tiplerine ait dizileri nasıl oluşturacağımızı biliyoruz. Bir tam sayı dizisi,
+		bir karakter dizisi rahatlıkla oluşturabiliriz. Benzer şekilde yapı
+		(&nbsp;structure&nbsp;) dizileri de tanımlanabilir. 3 kişilik bir personel listesi
+		tutacağımızı düşünüp, ona göre bir program oluşturalım. Her eleman için ayrı ayrı
+		değişken tanımlamaya gerek yoktur; yapılardan oluşan bir dizi yaratabiliriz.
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i;
+	// Dogum tarihi tutmak icin
+	// 'dogum_tarihi' adinda bir yapi
+	// olusturuyoruz
+	struct dogum_tarihi {
+		int gun;
+		int ay;
+		int yil;
+	};
+
+	// Kisiye ait bilgileri tutmak
+	// icin 'sahis_bilgileri' adinda
+	// bir yapi kuruluyor.
+	struct sahis_bilgileri {
+		char isim[40];
+		int boy;
+		// Yapi icinde bir baska yapiyi
+		// kullanmak mumkundur. dogum_tarihi
+		// yapisindan 'tarih' adinda bir
+		// degisken tanimlaniyor.
+		<b>struct dogum_tarihi tarih;</b>
+	};
+
+	// Dizi elemanlarina ilk deger atamasi yapiyoruz. Dilerseniz
+	// klavyeden deger girmeyi tercih edebilirsiniz.
+	<b>struct sahis_bilgileri kisi[3]</b> = { "Ali", 170, { 17, 2, 1976 },
+					"Veli", 178, { 14, 4, 1980 },
+					"Cenk", 176, { 4, 11, 1983 } };
+
+	// Yapi dizisi yazdiriliyor:
+	for( i = 0; i < 3; i++ ) {
+		printf( "Kayıt no.: %d\n", ( i + 1 ) );
+		printf( "Ad: %s\n", <b>kisi[i].isim</b> );
+		printf( "Boy: %d\n", <b>kisi[i].boy</b> );
+		printf( "Doğum Tarihi: %d/%d/%d\n\n", <b>kisi[i].tarih.gun</b>,
+						<b>kisi[i].tarih.ay</b>,
+						<b>kisi[i].tarih.yil</b> );
+	}
+
+	return 0;
+}
+</pre>
+	<p>
+		Tek bir yapı değişkeniyle, bir yapı dizisi arasında büyük fark bulunmuyor. Sadece
+		köşeli parantezlerle eleman indisini belirtmek yetiyor. Yoksa, değer okuma, değer
+		yazma... bunların hepsi tıpatıp aynı. Bu yüzden ayrıca detaya inmiyorum.
+	</p>
+
+	<h3>Yapı Dizilerine Pointer ile Erişim</h3>
+	<p>
+		Kambersiz düğün olmaz. Aynı şekilde, dizilerden bahsettiğimiz bir yerde
+		pointer'lardan bahsetmemek mümkün değil. Bir yapı dizisinin başlangıç adresini
+		pointer'a atadığınız takdirde, elemanlara bu işaretçi üzerinde de ulaşabilirsiniz.
+		Bir üstteki örneğimizi pointer'larla kullanalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i;
+	// Dogum tarihi tutmak icin
+	// 'dogum_tarihi' adinda bir yapi
+	// olusturuyoruz
+	struct dogum_tarihi {
+		int gun;
+		int ay;
+		int yil;
+	};
+
+	// Kisiye ait bilgileri tutmak
+	// icin 'sahis_bilgileri' adinda
+	// bir yapi kuruluyor.
+	struct sahis_bilgileri {
+		char isim[40];
+		int boy;
+		// Yapi icinde bir baska yapiyi
+		// kullanmak mumkundur. dogum_tarihi
+		// yapisindan 'tarih' adinda bir
+		// degisken tanimlaniyor.
+		struct dogum_tarihi tarih;
+	};
+
+	<b>struct sahis_bilgileri *ptr;</b>
+
+	// Dizi elemanlarina ilk deger atamasi yapiyoruz. Dilerseniz
+	// klavyeden deger girmeyi tercih edebilirsiniz.
+	struct sahis_bilgileri kisi[3] = { "Ali", 170, { 17, 2, 1976 },
+					"Veli", 178, { 14, 4, 1980 },
+					"Cenk", 176, { 4, 11, 1983 } };
+
+	// Yapi dizisi yazdiriliyor:
+	for( i = 0, <b>ptr = &kisi[0]</b>; <b>ptr <= &kisi[2]</b>; <b>ptr++</b>, i++ ) {
+		printf( "Kayıt no.: %d\n", ( i + 1 ) );
+		printf( "Ad: %s\n", <b>ptr->isim</b> );
+		printf( "Boy: %d\n", <b>ptr->boy</b> );
+		printf( "Doğum Tarihi: %d/%d/%d\n\n", <b>ptr->tarih.gun</b>,
+						<b>ptr->tarih.ay</b>,
+						<b>ptr->tarih.yil</b> );
+	}
+
+	return 0;
+}
+</pre>
+	<p>
+		Pointer'ın tanımlamasını yaparken, '<i>sahis_bilgileri</i>' şablonundan türetilen
+		değişkenlerin işaret edileceğini bildirmemiz gerekiyor. Yazmış olduğumuz
+		"<i>struct sahis_bilgileri *ptr;</i>" kodu bundan kaynaklanmaktadır. for döngüsüne
+		gelirsek, <i>kisi</i> isimli yapı dizisinin ilk elemanının adresini, <i>ptr</i>
+		işaretçisine atadığımızı görmüşsünüzdür. Her seferinde de, <i>ptr</i> değeri
+		bir adres bloğu kadar artmaktadır. Döngünün devamı, adresin son dizi elemanından
+		küçük olmasına bağlıdır. Kullandığımız <b>-></b> operatörüyse, pointer ile dizi
+		elemanlarını göstermemizi sağlar. Bu cümleler size muhtemelen karışık gelecektir
+		-ki bu kesinlike normal... İnanıyorum ki kodu incelerseniz, durumu daha basit
+		kavrarsınız.
+	</p>
+
+	<h3>Yapılar ve Fonksiyonlar</h3>
+	<p>
+		<i>enum</i> ile yarattığımız değişken tiplerini, fonksiyonlarda kullanmak için
+		global olarak tanımlıyorduk. Yapıları, fonksiyonlarda kullanılmak için izlenecek
+		yöntem aynıdır; yine global tanımlanması gerekir. Çok basit bir örnekle yapıların
+		fonksiyonlarla kullanımını görelim:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+struct sahis_bilgileri {
+	char isim[40];
+	int boy;
+};
+
+struct sahis_bilgileri bilgileri_al( void );
+void bilgileri_goster( struct sahis_bilgileri );
+
+int main( void )
+{
+	struct sahis_bilgileri kisi;
+	kisi = <b>bilgileri_al( )</b>;
+	<b>bilgileri_goster(</b> kisi <b>)</b>;
+
+	return 0;
+}
+<b>struct sahis_bilgileri bilgileri_al( void )</b>
+{
+	<b>struct sahis_bilgileri sahis;</b>
+	printf( "İsim> " );
+	gets( sahis.isim );
+	printf( "Boy> " );
+	scanf( "%d", &sahis.boy );
+	<b>return sahis;</b>
+}
+<b>void bilgileri_goster( struct sahis_bilgileri sahis )</b>
+{
+	printf( "Ad: %s\n", sahis.isim );
+	printf( "Boy: %d\n", sahis.boy );
+}
+</pre>
+
+	<h3>Dinamik Yapılar</h3>
+	<p>
+		Dinamik bellek tahsis etmenin ne olduğunu, niçin bunu kullandığımızı açıklamaya
+		gerek duymuyorum. Daha önceki derslerimizde bu konuya yer vermiştik. Çok basit
+		bir örnekle dinamik yapıların kullanımı göstermek yeterli olacaktır:
+	</p>
+<pre>
+struct sahis_bilgileri *ptr;
+ptr = calloc( 1, sizeof( struct sahis_bilgileri ) );
+free( ptr );
+</pre>
+	<p>
+		Üç adımda, yapıları dinamik kullanmayı görüyorsunuz. En başta ptr adında bir
+		pointer tanımlıyoruz. İkinci aşamada, bellek ayrımı yapılıyor. Bu örnekte, sadece
+		tek değişkenlik yer ayrılıyor. ptr ile işimiz bittikten sonra,
+		<i>free(&nbsp;&nbsp;)</i> fonksiyonuyla, belleği boşaltıyoruz.
+		Sadece üç temel adımla, yapılarda dinamik bellek kullanımını sağlayabilirsiniz.
+		Yalnız <i>calloc(&nbsp;&nbsp;)</i> (&nbsp;ya da <i>malloc(&nbsp;&nbsp;)</i>&nbsp;)
+		fonksiyonunun <i>stdlib.h</i> altında olduğunu unutmayın. (&nbsp;Bu yüzden kodun
+		başına <i>#include&lt;stdlib.h&gt;</i> yazmak gerekmektedir.&nbsp;)
+	</p>
+
+	<h3>Yapılarda typedef Kullanımı</h3>
+	<p>
+		<i>enum</i> konusuna tekrar dönüyoruz. Hatırlayacağınız üzere, <i>typedef</i>
+		orada da geçmişti. <i>typedef</i> kullanarak her seferinde fazladan <i>enum</i>
+		yazma zahmetinden kurtuluyorduk. <i>typedef</i>, yapılar için de kullanılmaktadır.
+		Her defasında tekrar tekrar <i>struct</i> yazmak yerine, bir kereye mahsus
+		<i>typedef</i> kullanarak bu zahmetten kurtulabilirsiniz. Aşağıdaki gibi
+		yazacağınız	kodla, tekrar tekrar struct kelimesi kullanmanıza gerek kalmayacaktır.
+	</p>
+<pre>
+<b>typedef</b> <b>struct</b> <i>sahis_bilgileri</i> <i>kisi_bilgileri</i>;
+</pre>
+
+	<h3>Noktalarken...</h3>
+	<p>
+		C programlama diline dair anlatımlarımız burada bitiyor. Bu demek değildir ki;
+		C üzerine her şeyi anlattık; aksine daha birçok konu bulunuyor.
+		(&nbsp;Örneğin dosya işlemleri, union kullanımı vb... konulara hiç
+		değinilmedi.&nbsp;) Ancak şimdiye kadar öğrendikleriniz, bundan sonrasını
+		öğrenebilmeniz için size temel teşkil edecektir. Programlama dili öğrenmek,
+		yabancı dil öğrenmekle hemen hemen aynıdır. İngilizce üzerine dersler aldığınızda,
+		kimse Shakespeare olacağınızı söyleyemez. Ama çok çalışıp kendinizi geliştirmek
+		size bağlıdır. Programlama dilleri de aynen böyle... Burada ya da bir
+		başka kaynakta anlatılanlarla işin duayeni olamazsınız; fakat işi anlar duruma
+		gelirsiniz. Bundan sonrası sizin elinizdedir... Lütfen bol bol pratik yapıp,
+		olabildiğince çok algoritma kurun. Sizlere temel programlama gramerini
+		vermeye çalıştım; umarım sonunda hepiniz birer "Macbeth" yazarsınız!
+	</p>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_13.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="../index-2.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_14.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+</html>

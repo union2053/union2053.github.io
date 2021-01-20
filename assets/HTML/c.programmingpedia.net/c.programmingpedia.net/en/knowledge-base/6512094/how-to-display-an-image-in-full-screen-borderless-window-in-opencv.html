@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6512094/how-to-display-an-image-in-full-screen-borderless-window-in-opencv by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:48:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to display an image in full screen borderless window in openCV | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to display an image in full screen borderless window in openCV | C Language Knowledge Base">
+        <title>[SOLVED] How to display an image in full screen borderless window in openCV | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-display-an-image-in-full-screen-borderless-window-in-opencv">How to display an image in full screen borderless window in openCV</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/image.html">image</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                        <span class="tag-item"><a href="../tag/winapi.html">winapi</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I want to display an image in OpenCV in a full screen borderless window.
+In other words, only the image pixels will appear, without menu, toolbar, or window background. </p>
+
+<p>Using <code>imshow()</code> or <code>cvShowImage()</code> don't enable it:</p>
+
+<ol>
+<li>The window grows to be full screen
+in width but not in height. It misses few pixels.</li>
+<li>I could not make it borderless even by changing settings of window
+handler.</li>
+</ol>
+
+<p>I think that the problem is rooted in <code>cvNamedWindow()</code> method which creates main <code>WS_OVERLAPPED</code> window, then creates a child and all functions like <code>imshow()</code> or <code>cvGetWindowHandle()</code> operate on the child.</p>
+
+<p>Thus even windows command:</p>
+
+<pre><code>SetWindowLong((HWND)cvGetWindowHandle(winName), GWL_STYLE, WS_VISIBLE | WS_EX_TOPMOST | WS_POPUP);
+</code></pre>
+
+<p>Doesnt help, since the child cannot become borderless <code>WS_POPUP</code>. Someone got a workaround?</p>
+
+<ul>
+<li>Maybe, showing opencv mat to window
+without using opencv built in methods</li>
+<li>Or some kind of windows trick</li>
+</ul>
+
+<p>P.S. I tried the following code:</p>
+
+<pre><code>cvMoveWindow("AAA",0,0);
+cvSetWindowProperty("AAA", CV_WINDOW_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+
+// Also I tried this:
+HWND hwnd = (HWND)cvGetWindowHandle("AAA");
+RECT windowRect;
+windowRect.left = 0;
+windowRect.top = 0;
+windowRect.right = cxScreen; //Display resolution
+windowRect.bottom = cyScreen; //Display resolution
+AdjustWindowRect(&amp;windowRect,WS_VISIBLE,false);
+long p_OldWindowStyle = SetWindowLongPtr(hwnd,GWL_STYLE,WS_POPUP);
+SetWindowPos(hwnd,HWND_TOP,0,0,windowRect.right,windowRect.bottom,SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+SetWindowLong(hwnd, GWL_STYLE, WS_VISIBLE | WS_EX_TOPMOST | WS_POPUP); 
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/757345/danielhsh" target="_blank"><span itemprop="name">DanielHsH</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">9</div>
+                                    <div itemprop="dateCreated">12/13/2011 4:35:07 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Have you issued <code>cvShowImage()</code> to display the window? Because it seems you are not doing it. Anyway, you might want to call the win32 API for this instead, so add a call to <code>ShowWindow(hwnd, SW_SHOW);</code> after <code>SetWindowPos()</code>.</p>
+
+<p>If your current call to <code>SetWindowPos()</code> doesn't do the trick, check this answer: <a href="https://stackoverflow.com/questions/5788115/hide-border-of-window-if-i-know-a-handle-of-this-window/5795633#5795633">Hide border of window, if i know a handle of this window</a></p>
+
+<p>I recommend you doing your tests without calling <code>cvSetWindowProperty()</code> at first, just to make sure you can find a method that works.</p>
+
+<p>Just a note, if you check <code>modules/highgui/src/window_w32.cpp</code> you can see how OpenCV creates windows on Windows.</p>
+
+<p><strong>EDIT</strong>:</p>
+
+<p>The following code implements the tips I gave before and bypasses the problems the OP reported. The trick is NOT using <code>cvGetWindowHandle()</code> to retrieve the windows' handle and use directly <em>win32</em> API for that: <code>FindWindow()</code></p>
+
+<pre><code>IplImage* cv_img = cvLoadImage("test.jpg", CV_LOAD_IMAGE_UNCHANGED);
+if(!cv_img)
+{
+    printf("Failed cvLoadImage\n");
+    return -1;
+}
+
+cvNamedWindow("main_win", CV_WINDOW_AUTOSIZE);
+cvMoveWindow("main_win", 0, 0);
+cvSetWindowProperty("main_win", CV_WINDOW_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+
+cvShowImage("main_win", cv_img);
+
+//HWND cv_hwnd = (HWND)cvGetWindowHandle("main_win");
+//if (!cv_hwnd)
+//{
+//  printf("Failed cvGetWindowHandle\n");
+//}
+//printf("cvGetWindowHandle returned %p\n", *cv_hwnd);
+
+HWND win_handle = FindWindow(0, L"main_win");
+if (!win_handle)
+{
+    printf("Failed FindWindow\n");
+}
+
+SetWindowLong(win_handle, GWL_STYLE, GetWindowLong(win_handle, GWL_EXSTYLE) | WS_EX_TOPMOST);
+ShowWindow(win_handle, SW_SHOW);
+
+cvWaitKey(0);
+
+cvReleaseImage(&amp;cv_img);
+cvDestroyWindow("main_win");
+</code></pre>
+
+<p>This code will make the window created by OpenCV borderless, but you still might have to tweak one thing or another to make this operation <em>perfect</em>. You'll see why. One idea is to resize the window and make it the size of the image.</p>
+
+<p><strong>EDIT</strong>:</p>
+
+<p>Well, since you stated:</p>
+
+<blockquote>
+  <p>writing a demo might be very hard</p>
+</blockquote>
+
+<p>I also decided to do this last part for you, since I'm such a nice guy =]</p>
+
+<p>This is a small improvement of the code above:</p>
+
+<pre><code>HWND win_handle = FindWindow(0, L"main_win");
+if (!win_handle)
+{
+    printf("Failed FindWindow\n");
+}
+
+// Resize
+unsigned int flags = (SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER);
+flags &amp;= ~SWP_NOSIZE;
+unsigned int x = 0;
+unsigned int y = 0;
+unsigned int w = cv_img-&gt;width;
+unsigned int h = cv_img-&gt;height;
+SetWindowPos(win_handle, HWND_NOTOPMOST, x, y, w, h, flags);
+
+// Borderless
+SetWindowLong(win_handle, GWL_STYLE, GetWindowLong(win_handle, GWL_EXSTYLE) | WS_EX_TOPMOST);
+ShowWindow(win_handle, SW_SHOW);
+</code></pre>
+
+<p>And on my system it displays exactly what you asked on the question.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/176769/karlphillip" target="_blank"><span itemprop="name">karlphillip</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6512094/how-to-display-an-image-in-full-screen-borderless-window-in-opencv#answer-0</div>
+                                            <div itemprop="upvoteCount">15</div>
+                                            <div itemprop="dateCreated">5/23/2017 12:08:31 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6512094" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6512094/how-to-display-an-image-in-full-screen-borderless-window-in-opencv by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:48:34 GMT -->
+</html>

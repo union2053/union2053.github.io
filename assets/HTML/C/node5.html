@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node5.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Conditionals</TITLE>
+<META NAME="description" CONTENT="Conditionals">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html877"
+ HREF="node5.html#SECTION00510000000000000000">
+The <TT>if</TT> statement</A>
+<LI><A NAME="tex2html878"
+ HREF="node5.html#SECTION00520000000000000000">
+The <TT>?</TT> operator</A>
+<LI><A NAME="tex2html879"
+ HREF="node5.html#SECTION00530000000000000000">
+The <TT>switch</TT> statement</A>
+<LI><A NAME="tex2html880"
+ HREF="node5.html#SECTION00540000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00500000000000000000">
+Conditionals</A>
+</H1>
+<P>
+This Chapter deals with the various methods that C can control the <EM>flow</EM>
+of logic in a program. Apart from slight syntactic variation they are similar to
+other languages.
+<P>
+As we have seen following logical operations exist in C:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;==, !=, <IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.gif"
+ ALT="$\parallel$">, &amp;&amp;.
+<BR>
+<P>
+One other operator is the unitary - it takes only one argument - <EM>not</EM> <B>
+!</B>.
+<BR>
+<P>
+These operators are used in conjunction with the following statements.
+<P><H1><A NAME="SECTION00510000000000000000">
+The <TT>if</TT> statement</A>
+</H1>
+<P>
+The <TT>if</TT> statement has the same function as
+other languages. It has three basic forms:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>if </TT> <TT>(</TT><I>expression</I>)
+				 <I>statement</I>
+</TT></PRE>
+<P>...or:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>if </TT> <TT>(</TT><I>expression</I><TT>)</TT>
+				 <I>statement<SUB>1</SUB></I>
+		 <TT>else</TT>
+				 <I>statement<SUB>2</SUB></I>
+</TT></PRE>
+<P>...or:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>if </TT> <TT>(</TT><I>expression</I><TT>)</TT>
+				 <I>statement<SUB>1</SUB></I>
+		 <TT>else if (</TT><I>expression</I><TT>)</TT>
+				 <I>statement<SUB>2</SUB></I>
+		 <TT>else</TT>
+				 <I>statement<SUB>3</SUB></I>
+</TT></PRE>
+<P>
+For example:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int x,y,w;
+&nbsp;
+		 main()
+				 {
+&nbsp;
+				 if (x&gt;0)
+						{
+						z=w;
+						........
+						}
+				else
+						{
+						z=y;
+						........
+						}
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P><H1><A NAME="SECTION00520000000000000000">
+The <TT>?</TT> operator</A>
+</H1>
+<P>
+The <TT>?</TT> (<EM>ternary condition</EM>) operator is a more efficient form for
+expressing simple <TT>if</TT> statements. It has the following form:
+<P><PRE><TT>
+&nbsp;&nbsp;<I>expression<SUB>1</SUB></I> <TT>?</TT> <I>expression<SUB>2</SUB></I><TT>:</TT>  <I>expression<SUB>3</SUB></I>
+</TT></PRE>
+<BR>
+<BR>
+<P>
+It simply states:
+<BR>
+<P> <TT>if</TT> <I>expression<SUB>1</SUB></I> <TT>then</TT>  <I>expression<SUB>2</SUB></I>
+<TT>else</TT>  <I>expression<SUB>3</SUB></I>
+<BR>
+<P>
+For example to assign the maximum of <TT>a</TT> and <TT>b</TT> to <TT>z</TT>:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;z = (a&gt;b) ? a : b;
+</TT></PRE>
+</TT>
+<P>
+which is the same as:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;if (a&gt;b)
+				 z = a;
+		 else
+				 z=b;
+</PRE>
+</TT>
+<P></TT><H1><A NAME="SECTION00530000000000000000">
+The <TT>switch</TT> statement</A>
+</H1>
+<P>
+The C <TT>switch</TT> is similar to Pascal's <TT>case</TT> statement and it allows
+multiple choice of a selection of items at one level of a conditional where it is
+a far neater way of writing multiple <TT>if</TT> statements:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>switch</TT> <TT>(</TT><I>expression</I><TT>)</TT>&nbsp;<TT>{</TT>
+				 <TT>case</TT> <I>item<SUB>1</SUB></I><TT>:</TT>
+						 <I>statement<SUB>1</SUB></I><TT>;</TT>
+						 <TT>break;</TT>
+				 <TT>case</TT> <I>item<SUB>2</SUB></I><TT>:</TT>
+						 <I>statement<SUB>2</SUB></I><TT>;</TT>
+						 <TT>break;</TT>
+						 <IMG WIDTH="8" HEIGHT="27" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.gif"
+ ALT="$\vdots$">						 <IMG WIDTH="8" HEIGHT="27" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.gif"
+ ALT="$\vdots$">				 <TT>case</TT> <I>item<SUB><I>n</I></SUB></I><TT>:</TT>
+						 <I>statement<SUB><I>n</I></SUB></I><TT>;</TT>
+						 <TT>break;</TT>
+				 <TT>default:</TT>
+						 <I>statement</I><TT>;</TT>
+						 <TT>break;</TT>
+				<TT>}</TT>
+</TT></PRE>
+<P>
+In each case the value of <I>item<SUB><I>i</I></SUB></I> must be a constant, variables are
+<U>not</U> allowed.
+<P>
+The <TT>break</TT> is needed if you want to terminate the <TT>switch</TT> after
+execution of one choice. Otherwise the next case would get evaluated.
+<B>Note:</B> This is unlike most other languages.
+<P>
+We can also have <B>null</B> statements by just including a ; or let the switch
+statement <EM>fall through</EM> by omitting any statements (see <EM>e.g.</EM> below).
+<P>
+The <TT>default</TT> case is optional and catches any other cases.
+  <BR>
+<BR>
+<P>
+For example:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch (letter)
+				{
+				 case `A':
+				 case `E':
+				 case `I':
+				 case `O':
+				 case `U':
+						 numberofvowels++;
+						 break;
+&nbsp;
+				 case ` ':
+						 numberofspaces++;
+						 break;
+&nbsp;
+				 default:
+						 numberofconstants++;
+						 break;
+				}
+</TT></PRE>
+</TT>
+<P>
+In the above example if the value of <TT>letter is `A', `E', `I', `O' or `U'
+then <TT>numberofvowels</TT> is incremented.
+<P>
+If the value of <TT>letter</TT> is `&nbsp;'
+then <TT>numberofspaces</TT> is incremented.
+<P>
+If none of these is true then the <TT>
+default</TT> condition is executed, that is <TT>numberofconstants</TT> is
+incremented.
+<P></TT><H1><A NAME="SECTION00540000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12304</B></P>
+<P>
+Write a program to read two characters, and print their value
+when interpreted as a 2-digit hexadecimal number. Accept upper case letters for
+values from 10 to 15. 
+</P>
+<P>
+<P>
+<B>Exercise 12305</B></P>
+<P>
+Read an integer value. Assume it is the number of a month of
+the year; print out the name of that month.
+</P>
+<P>
+<P>
+<B>Exercise 12306</B></P>
+<P>
+Given as input three integers representing a date as day, month, year, print
+out the number day, month and year for the following day's date.
+<P>
+Typical input:
+        28 2 1992
+	Typical output:
+        Date following 28:02:1992 is 29:02:1992
+<P></P>
+<P>
+<P>
+<B>Exercise 12307</B></P>
+<P>
+Write a program which reads two integer values. If the first is less than
+the second, print the message up. If the second is less than the first, print
+the message down
+	If the numbers are equal, print the message equal
+	If there is an error reading the data, print a message containing the word
+        Error and perform exit( 0 );
+</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node5.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:45 GMT -->
+</HTML>

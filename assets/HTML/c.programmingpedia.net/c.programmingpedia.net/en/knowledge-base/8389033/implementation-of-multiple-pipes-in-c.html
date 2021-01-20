@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8389033/implementation-of-multiple-pipes-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Implementation of multiple pipes in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Implementation of multiple pipes in C | C Language Knowledge Base">
+        <title>[SOLVED] Implementation of multiple pipes in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="implementation-of-multiple-pipes-in-c">Implementation of multiple pipes in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/pipe.html">pipe</a></span>
+                        <span class="tag-item"><a href="../tag/shell.html">shell</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to implement multiple pipes in my shell in C. I found a tutorial on this <a href="http://www.cs.loyola.edu/~jglenn/702/S2005/Examples/dup2.html" rel="noreferrer">website</a> and the function I made is based on this example. Here's the function</p>
+
+<pre><code>void executePipes(cmdLine* command, char* userInput) {
+    int numPipes = 2 * countPipes(userInput);
+    int status;
+    int i = 0, j = 0;
+    int pipefds[numPipes];
+
+    for(i = 0; i &lt; (numPipes); i += 2)
+        pipe(pipefds + i);
+
+    while(command != NULL) {
+        if(fork() == 0){
+
+            if(j != 0){
+                dup2(pipefds[j - 2], 0);
+            }
+
+            if(command-&gt;next != NULL){
+                dup2(pipefds[j + 1], 1);
+            }    
+
+            for(i = 0; i &lt; (numPipes); i++){
+                close(pipefds[i]);
+            }
+            if( execvp(*command-&gt;arguments, command-&gt;arguments) &lt; 0 ){
+                perror(*command-&gt;arguments);
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        else{
+                if(command != NULL)
+                    command = command-&gt;next;
+
+                j += 2;
+                for(i = 0; i &lt; (numPipes ); i++){
+                   close(pipefds[i]);
+                }
+               while(waitpid(0,0,0) &lt; 0);
+        }
+    }
+
+}
+</code></pre>
+
+<p>After executing it and typing a command like for example <code>ls | grep bin</code>, the shell just hangs there and doesn't output any result. I made sure I closed all pipes. But it just hangs there. I thought that it was the <code>waitpid</code> that's was the problem. I removed the <code>waitpid</code> and after executing I get no results. What did I do wrong? Thanks.</p>
+
+<p>Added code:</p>
+
+<pre><code>void runPipedCommands(cmdLine* command, char* userInput) {
+    int numPipes = countPipes(userInput);
+
+    int status;
+    int i = 0, j = 0;
+
+    pid_t pid;
+
+    int pipefds[2*numPipes];
+
+    for(i = 0; i &lt; 2*(numPipes); i++){
+        if(pipe(pipefds + i*2) &lt; 0) {
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    while(command) {
+        pid = fork();
+        if(pid == 0) {
+
+            //if not first command
+            if(j != 0){
+                if(dup2(pipefds[(j-1) * 2], 0) &lt; 0){
+                    perror(" dup2");///j-2 0 j+1 1
+                    exit(EXIT_FAILURE);
+                    //printf("j != 0  dup(pipefd[%d], 0])\n", j-2);
+                }
+            //if not last command
+            if(command-&gt;next){
+                if(dup2(pipefds[j * 2 + 1], 1) &lt; 0){
+                    perror("dup2");
+                    exit(EXIT_FAILURE);
+                }
+            }
+
+            for(i = 0; i &lt; 2*numPipes; i++){
+                    close(pipefds[i]);
+            }
+
+            if( execvp(*command-&gt;arguments, command-&gt;arguments) &lt; 0 ){
+                    perror(*command-&gt;arguments);
+                    exit(EXIT_FAILURE);
+            }
+        } else if(pid &lt; 0){
+            perror("error");
+            exit(EXIT_FAILURE);
+        }
+
+        command = command-&gt;next;
+        j++;
+    }
+        for(i = 0; i &lt; 2 * numPipes; i++){
+            close(pipefds[i]);
+            puts("closed pipe in parent");
+        }
+
+        while(waitpid(0,0,0) &lt;= 0);
+
+    }
+
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/688859/mkab" target="_blank"><span itemprop="name">mkab</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">12</div>
+                                    <div itemprop="dateCreated">12/8/2011 12:29:51 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I believe the issue here is that your waiting and closing inside the same loop that's creating children.  On the first iteration, the child will exec (which will destroy the child program, overwriting it with your first command)  and then the parent closes all of its file descriptors  and waits for the child to finish before it iterates on to creating the next child.  At that point, since the parent has closed all of its pipes, any further children will have nothing to write to or read from.  Since you are not checking for the success of your dup2 calls, this is going un-noticed.</p>
+
+<p>If you want to keep the same loop structure, you'll need to make sure the parent only closes the file descriptors that have already been used, but leaves those that haven't alone.  Then, after all children have been created, your parent can wait.</p>
+
+<p><strong>EDIT</strong>: I mixed up the parent/child in my answer, but the reasoning still holds: the process that goes on to fork again closes all of its copies of the pipes, so any process after the first fork will not have valid file descriptors to read to/write from.</p>
+
+<p>pseudo code, using an array of pipes created up-front:</p>
+
+<pre><code>/* parent creates all needed pipes at the start */
+for( i = 0; i &lt; num-pipes; i++ ){
+    if( pipe(pipefds + i*2) &lt; 0 ){
+        perror and exit
+    }
+}
+
+commandc = 0
+while( command ){
+    pid = fork()
+    if( pid == 0 ){
+        /* child gets input from the previous command,
+            if it's not the first command */
+        if( not first command ){
+            if( dup2(pipefds[(commandc-1)*2], 0) &lt; ){
+                perror and exit
+            }
+        }
+        /* child outputs to next command, if it's not
+            the last command */
+        if( not last command ){
+            if( dup2(pipefds[commandc*2+1], 1) &lt; 0 ){
+                perror and exit
+            }
+        }
+        close all pipe-fds
+        execvp
+        perror and exit
+    } else if( pid &lt; 0 ){
+        perror and exit
+    }
+    cmd = cmd-&gt;next
+    commandc++
+}
+
+/* parent closes all of its copies at the end */
+for( i = 0; i &lt; 2 * num-pipes; i++ ){
+    close( pipefds[i] );
+}
+</code></pre>
+
+<p>In this code, the original parent process creates a child for each command and therefore survives the entire ordeal.  The children check to see if they should get their input from the previous command and if they should send their output to the next command. Then they close all of their copies of the pipe file descriptors and then exec.  The parent doesn't do anything but fork until it's created a child for each command.  It then closes all of its copies of the descriptors and can go on to wait.</p>
+
+<p>Creating all of the pipes you need first, and then managing them in the loop, is tricky and requires some array arithmetic.  The goal, though, looks like this:</p>
+
+<pre><code>cmd0    cmd1   cmd2   cmd3   cmd4
+   pipe0   pipe1  pipe2  pipe3
+   [0,1]   [2,3]  [4,5]  [6,7]
+</code></pre>
+
+<p>Realizing that, at any given time, you only need two sets of pipes (the pipe to the previous command and the pipe to the next command) will simplify your code and make it a little more robust.  Ephemient gives pseudo-code for this <a href="https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/">here</a>.  His code is cleaner, because the parent and child do not have to do unnecessary looping to close un-needed file descriptors and because the parent can easily close its copies of the file descriptors immediately after the fork.</p>
+
+<p>As a side note: you should always check the return values of pipe, dup2, fork, and exec.</p>
+
+<p><strong>EDIT 2</strong>: typo in pseudo code.  OP: num-pipes would be the number of pipes.  E.g., "ls | grep foo | sort -r" would have 2 pipes.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/319479/christopher-neylan" target="_blank"><span itemprop="name">Christopher Neylan</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/8389033/implementation-of-multiple-pipes-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">14</div>
+                                            <div itemprop="dateCreated">5/23/2017 11:54:36 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Here's the correct functioning code</p>
+
+<pre><code>void runPipedCommands(cmdLine* command, char* userInput) {
+    int numPipes = countPipes(userInput);
+
+
+    int status;
+    int i = 0;
+    pid_t pid;
+
+    int pipefds[2*numPipes];
+
+    for(i = 0; i &lt; (numPipes); i++){
+        if(pipe(pipefds + i*2) &lt; 0) {
+            perror("couldn't pipe");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+
+    int j = 0;
+    while(command) {
+        pid = fork();
+        if(pid == 0) {
+
+            //if not last command
+            if(command-&gt;next){
+                if(dup2(pipefds[j + 1], 1) &lt; 0){
+                    perror("dup2");
+                    exit(EXIT_FAILURE);
+                }
+            }
+
+            //if not first command&amp;&amp; j!= 2*numPipes
+            if(j != 0 ){
+                if(dup2(pipefds[j-2], 0) &lt; 0){
+                    perror(" dup2");///j-2 0 j+1 1
+                    exit(EXIT_FAILURE);
+
+                }
+            }
+
+
+            for(i = 0; i &lt; 2*numPipes; i++){
+                    close(pipefds[i]);
+            }
+
+            if( execvp(*command-&gt;arguments, command-&gt;arguments) &lt; 0 ){
+                    perror(*command-&gt;arguments);
+                    exit(EXIT_FAILURE);
+            }
+        } else if(pid &lt; 0){
+            perror("error");
+            exit(EXIT_FAILURE);
+        }
+
+        command = command-&gt;next;
+        j+=2;
+    }
+    /**Parent closes the pipes and wait for children*/
+
+    for(i = 0; i &lt; 2 * numPipes; i++){
+        close(pipefds[i]);
+    }
+
+    for(i = 0; i &lt; numPipes + 1; i++)
+        wait(&amp;status);
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/688859/mkab" target="_blank">mkab</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/8389033" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/8389033/implementation-of-multiple-pipes-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+</html>

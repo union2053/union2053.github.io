@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/operators.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Operators</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Operators</H1>
+<H2>Operator Return Values</H2>
+<UL>
+<LI>In C, every operator returns a value
+</UL>
+<HR>
+<H2>Simple Assignment: <CODE>=</CODE></H2>
+<UL>
+<LI>assignment operators return the value being assigned
+<LI><CODE>a = 1</CODE> sets <CODE>a</CODE> to 1 (and returns 1)
+<LI><CODE>b = 1.23</CODE> sets <CODE>b</CODE> to 1.23 (and returns 1.23)
+<LI><CODE>c = a</CODE> sets <CODE>c</CODE> to whatever is in <CODE>a</CODE>
+(and returns the value of <CODE>a</CODE>)
+</UL>
+<H2>Unary Plus and Minus: <CODE>+</CODE> and <CODE>-</CODE></H2>
+<UL>
+<LI><CODE>a = -32</CODE> sets <CODE>a</CODE> to -32
+<LI><CODE>b = -1.4</CODE> sets <CODE>b</CODE> to -1.4
+<LI><CODE>c = +10</CODE> sets <CODE>c</CODE> to 10
+</UL>
+<HR>
+<H2>Addition and Subtraction: <CODE>+</CODE> and <CODE>-</CODE>"</H2>
+<UL>
+<LI><CODE>a = 1 + 1</CODE> sets <CODE>a</CODE> to 2
+<LI><CODE>b = 3.5 + 2.1</CODE> sets <CODE>b</CODE> to 5.6
+<LI><CODE>c = a - 2 + 1</CODE> sets <CODE>c</CODE> to whatever is in
+<CODE>a</CODE> less 1, because the statement is evaluated from left
+to right.  If <CODE>a</CODE> is set to 4, evaluation would proceed like:
+<PRE>
+	a - 2 + 1
+	4 - 2 + 1
+	2 + 1
+	3
+</PRE>
+<LI>Note that the result of an addition overflow (where the result is
+larger than the maximum value storeable in the variable) is undefined
+</UL>
+<H2>Multiplication and Division: <CODE>*</CODE> and <CODE>/</CODE></H2>
+<UL>
+<LI><CODE>a = 5 * 2</CODE> sets <CODE>a</CODE> to 10 (5 times 2)
+<LI><CODE>b = 7.0 / 4.0</CODE> sets <CODE>b</CODE> to 1.75
+<LI><CODE>c = 7 / 4</CODE> sets <CODE>c</CODE> to 1 (because integer
+divison always rounds down)
+<LI>Note that the result of division by 0 or multiplication overflow
+is undefined
+</UL>
+<H2>Remainder: <CODE>%</CODE></H2>
+<UL>
+<LI><CODE>a = 5 % 2</CODE> sets <CODE>a</CODE> to 1
+<LI><CODE>c = 7 % 4</CODE> sets <CODE>c</CODE> to 3
+<LI>Note that the result of remainder by 0 is undefined
+<LI>Note also that this only works for integral types (since it doesn't
+make sense for floating-point numbers, where there is no remainder)
+<LI>It is always true that <CODE>(a/b)*b + a%b</CODE> is equal to <CODE>a</CODE>
+<LI>It is always true that <CODE>a%b</CODE> is equal to <CODE>a</CODE>
+if <CODE>0 < a < b</CODE> or <CODE>0 < -a < -b</CODE>
+</UL>
+<HR>
+<H2>Prefix Increment and Prefix Decrement: <CODE>++</CODE> and <CODE>--</CODE></H2>
+<UL>
+<LI><CODE>++a</CODE> sets <CODE>a</CODE> to <CODE>(a+1)</CODE> and returns
+that value
+<LI><CODE>b = ++a</CODE> sets both <CODE>a</CODE> and <CODE>b</CODE> to
+<CODE>(a+1)</CODE>
+</UL>
+<H2>Postfix Increment and Postfix Decrement: <CODE>++</CODE> and <CODE>--</CODE></H2>
+<UL>
+<LI><CODE>a++</CODE> sets <CODE>a</CODE> to <CODE>(a+1)</CODE> but returns
+the original value of <CODE>a</CODE>
+<LI><CODE>b = a++</CODE> sets <CODE>b</CODE> to <CODE>a</CODE>
+and <CODE>a</CODE> to <CODE>(a+1)</CODE>
+</UL>
+<HR>
+<H2>Parentheses: <CODE>(</CODE> and <CODE>)</CODE></H2>
+<UL>
+<LI>parentheses are a way of grouping operators so that they are evaluated
+together
+<LI>since expressions are normally evaluated from left to right,
+<LI><CODE>3 * 5 / 2</CODE> is the same as <CODE>(3 * 5) / 2</CODE>,
+which is evaluated as:
+<UL>
+<LI>(3 * 5) / 2
+<LI>15 / 2
+<LI>7
+</UL>
+<LI>if the expression is parenthesized as <CODE>3 * (5 / 2)</CODE>,
+it is evaluated as:
+<UL>
+<LI>3 * (5 / 2)
+<LI>3 * 2
+<LI>6
+</UL>
+</UL>
+<HR>
+<H2>Logical OR: <CODE>||</CODE></H2>
+<UL>
+<LI><CODE>a || b</CODE> returns 1 if either <CODE>a</CODE> or <CODE>b</CODE>
+are non-zero, and returns 0 otherwise
+<LI><CODE>0 || 0 || 1</CODE> returns 1
+<LI><CODE>0 || 0 || 0</CODE> returns 0
+<LI>if <CODE>a</CODE> is set to 0,
+<CODE>(a-- || ++a || a++ || a++ || --a)</CODE>
+returns 1 and sets <CODE>a</CODE> to 2 because:
+<UL>
+<LI><CODE>a--</CODE> sets <CODE>a</CODE> to -1 and returns 0, so evaluation moves on to:
+<LI><CODE>++a</CODE> sets <CODE>a</CODE> to 0 and returns 0, so evaluation moves on to:
+<LI><CODE>a++</CODE> sets <CODE>a</CODE> to 1 and returns 0, so evaluation moves on to:
+<LI><CODE>a++</CODE> sets <CODE>a</CODE> to 2 and returns 1, so evaluation stops
+<LI>leaving the final <CODE>--a</CODE> untouched
+</UL>
+</UL>
+<H2>Logical AND: <CODE>&&</CODE></H2>
+<UL>
+<LI><CODE>a && b</CODE> returns 1 if both <CODE>a</CODE> and <CODE>b</CODE>
+are non-zero, and returns 0 otherwise
+<LI><CODE>1 && 1 && 0</CODE> returns 0
+<LI><CODE>1 && 1 && 1</CODE> returns 1
+<LI>similar to logical OR, evaluation stops at the first 0 result
+</UL>
+<H2>Equality and Inequality: <CODE>==</CODE> and <CODE>!=</CODE></H2>
+<UL>
+<LI><CODE>a == b</CODE> returns 1 if both <CODE>a</CODE> and <CODE>b</CODE>
+<LI><CODE>a != b</CODE> returns 1 if <CODE>a</CODE> and <CODE>b</CODE>
+<STRONG>do not</STRONG> hold the same value, and returns 0 otherwise
+<LI><CODE>1 == 0</CODE> returns 0 and <CODE>1 != 0</CODE> returns 1
+<LI><CODE>17 == 17</CODE> returns 1 and <CODE>17 != 17</CODE> returns 0
+<LI>is almost never a good idea to use <CODE>==</CODE> or <CODE>!=</CODE>
+when comparing floating-point values
+</UL>
+<H2>Aritmetic Relations: <CODE>&gt</CODE>, <CODE>&lt</CODE>,
+<CODE>&gt;=</CODE> and <CODE>&lt;=</CODE></H2>
+<UL>
+<LI><CODE>a &gt; b</CODE> returns 1 if <CODE>a</CODE> is greater than
+<CODE>b</CODE>
+<LI><CODE>a &lt; b</CODE> returns 1 if <CODE>a</CODE> is less than
+<CODE>b</CODE>
+<LI><CODE>a &gt;= b</CODE> returns 1 if <CODE>a</CODE> is greater than
+or equal to <CODE>b</CODE>
+<LI><CODE>a &lt;= b</CODE> returns 1 if <CODE>a</CODE> is less than
+or equal to <CODE>b</CODE>
+<LI>note that order is important, and
+<CODE>=&gt;</CODE> and <CODE>=&lt;</CODE> will cause errors
+</UL>
+<H2>Logical NOT: <CODE>!</CODE></H2>
+<UL>
+<LI><CODE>!a</CODE> returns 1 if <CODE>a</CODE> is non-zero, and returns 0 otherwise
+</UL>
+<HR>
+<H2>Bitwise OR: <CODE>|</CODE></H2>
+<UL>
+<LI>the expression <CODE>9 | 3</CODE> is <CODE>(1001 | 0011)</CODE> in
+binary which evaluates to <CODE>1011</CODE>,
+since the OR operator sets every result bit to 1 if it is set to 1 in either
+of the arguments.<BR><BR>
+For instance, <CODE>(0 | 0)</CODE> is <CODE>0</CODE>,
+but <CODE>(0 | 1)</CODE>, <CODE>(1 | 0)</CODE>, and <CODE>(1 | 0)</CODE>
+are all <CODE>1</CODE>.
+</UL>
+<H2>Bitwise AND: <CODE>&</CODE></H2>
+<UL>
+<LI><CODE>9 & 3</CODE> evaluates to <CODE>0001</CODE> or <CODE>1</CODE>,
+since the AND operator only sets a result bit to <CODE>1</CODE> when both
+of the bits are set to <CODE>1</CODE>.<BR><BR>
+For instance, <CODE>(1 & 1)</CODE> is <CODE>1</CODE>,
+but <CODE>(0 & 0)</CODE>, <CODE>(0 & 1)</CODE>, and <CODE>(1 & 0)</CODE>
+are all <CODE>0</CODE>.
+</UL>
+<H2>Bitwise XOR: <CODE>^</CODE></H2>
+<UL>
+<LI><CODE>9 ^ 3</CODE> evaluates to <CODE>1010</CODE>, since the XOR
+operator only sets a result bit to <CODE>1</CODE> when only <CODE>1</CODE>
+of the two bits is set to <CODE>1</CODE> and the other is set to
+<CODE>0</CODE>.<BR><BR>
+For instance, both <CODE>(0 ^ 1)</CODE> and <CODE>(1 ^ 0)</CODE>
+are <CODE>1</CODE> but both <CODE>(0 ^ 0)</CODE> and <CODE>(1 ^ 1)</CODE>
+are <CODE>0</CODE>.
+</UL>
+<H2>Left Shift and Right Shift: <CODE>&lt;&lt</CODE> and <CODE>&gt;&gt</CODE></H2>
+<UL>
+<LI><CODE>a = 2 &lt;&lt 3</CODE> sets <CODE>a</CODE> to <CODE>16</CODE>
+(because it shifts <CODE>000010</CODE> 3 bits left to <CODE>010000</CODE>)
+<LI><CODE>b = 13 &gt;&gt 2</CODE> sets <CODE>b</CODE> to <CODE>3</CODE>
+(because it shifts <CODE>01110</CODE> 2 bits right to <CODE>00011</CODE>)
+<LI>Note that the result of a left or right shift request with a negative
+number or a number larger than the number of bits in a datatype are undefined
+</UL>
+<H2>Bitwise NOT: <CODE>~</CODE></H2>
+<UL>
+<LI><CODE>~a</CODE> inverts all the bits
+<LI>a binary expression like <CODE>~0100101</CODE> evaluates to
+<CODE>1011010</CODE>
+</UL>
+<H2>Shift/Bitwise Operator types</H2>
+<UL>
+<LI>the shift and bitwise operators may only be used on integral types
+<LI>results of the shift and bitwise operators on signed integrals are not
+necessarily identical on all machines (those using one's complement and
+two's complement arithmetic will differ, for example)
+<LI>it is therefore recommended that these operators only be used
+on unsigned integers
+</UL>
+<HR>
+<H2>Operator assignment: <CODE>+=</CODE>, <CODE>-=</CODE>,
+<CODE>*=</CODE>, <CODE>/=</CODE>, <CODE>%=</CODE>,
+<CODE>&lt;&lt;=</CODE>, <CODE>&gt;&gt;=</CODE>,
+<CODE>&=</CODE>, <CODE>^=</CODE>, <CODE>|=</CODE></H2>
+<UL>
+<LI><CODE>a *= 2</CODE> multiplies <CODE>a</CODE> by 2 and stores the result
+in <CODE>a</CODE>
+<LI><CODE>a &gt;&gt;= 2</CODE> shifts <CODE>a</CODE> right 2 bits and stores the result
+in <CODE>a</CODE>
+</UL>
+<HR>
+<H2>Variable/datatype size: <CODE>sizeof</CODE></H2>
+<UL>
+<LI>the <CODE>sizeof</CODE> operator returns the size in <VAR>units</VAR>
+(where a <VAR>unit</VAR> is typically a byte) of its argument
+<LI><CODE>sizeof char</CODE> (or <CODE>sizeof(char)</CODE>) returns 1
+<LI><CODE>sizeof(int)</CODE> returns 4 on a machine which uses 32 bit
+<CODE>int</CODE>s
+<LI><CODE>int a; sizeof(a)</CODE> returns 4 (for 32 bit <CODE>int</CODE>s)
+<LI><CODE>sizeof(1 + 3)</CODE> returns 4 (for 32 bit <CODE>int</CODE>s)
+<LI>note that the expression itself is not evaluated so something like
+<PRE>
+  int a;
+  a = 3;
+  sizeof(a++);
+</PRE> would leave <CODE>a</CODE> set to 3
+</UL>
+<A HREF="functions.html">Previous</A>, 
+<A HREF="comments.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/operators.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

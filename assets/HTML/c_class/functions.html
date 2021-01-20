@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Functions</H1>
+<H2>Function Definitions</H2>
+<UL>
+<LI>A function definition follows this general form:<BR>
+<VAR>datatype</VAR><BR>
+<VAR>name</VAR>(<VAR>parameter-list</VAR>)<BR>
+{<BR>
+  <VAR>body</VAR><BR>
+}<BR>
+<UL>
+<LI><VAR>datatype</VAR> is any valid datatype
+<LI><VAR>datatype</VAR> can also be
+<CODE>void</CODE>, which means the function does not return a value
+<LI><VAR>parameter-list</VAR> is a list of one or more declarations
+of variables used to hold the values passed to this function
+<LI>If the <VAR>parameter-list</VAR> is set to
+<CODE>void</CODE>, the function takes no parameters
+</UL>
+<LI>As an example, a simple function definition could look like:
+<PRE>
+int
+add(int a, int b)
+{
+	return a + b;
+}
+</PRE>
+<UL>
+<LI>Pre-ANSI C functions must list the parameters without
+datatypes inside the parentheses, then declare the same parameters
+with datatypes (though in a possibly different order)
+immediately after the parentheses like:
+<PRE>
+int
+add(a, b);
+int a, b;
+{
+	return a + b;
+}
+</PRE>
+</UL>
+<LI><VAR>datatype</VAR> and <VAR>parameter-list</VAR> are optional,
+(though strongly recommended)
+<UL>
+<LI>If <VAR>datatype</VAR> is not specified, it is assumed that
+the function returns <CODE>int</CODE>
+<LI>If no <VAR>parameter-list</VAR> is specified, it is assumed that
+the function takes no parameters
+<LI>The smallest possible function definition is therefore <CODE>a(){}</CODE>,
+which is the same as the somewhat more explicit:
+<PRE>
+int
+a(void)
+{
+}
+</PRE>
+though, since it doesn't return a value, it would be better defined as:
+<PRE>
+void
+a(void)
+{
+}
+</PRE>
+</UL>
+<LI>Functions may not be defined inside other functions (as can be done
+in Pascal)
+<LI>Functions may call themselves, as in:
+<PRE>
+int
+factorial(int n)
+{
+	if (n &lt;= 1)
+		return 1;
+	else
+		return n * factorial(n - 1);
+}
+</PRE>
+</UL>
+<H2>Returning a Value</H2>
+<UL>
+<LI>The <CODE>return</CODE> statement exits the current function
+<LI><CODE>return</CODE> may also be given an expression whose value
+is used as the value returned to the caller
+<UL>
+<LI>The returned expression will be converted to match the specified return
+type for the function
+</UL>
+</UL>
+<H2>Function Declaration</H2>
+<UL>
+<LI>Functions are typically declared before being defined, using a
+function prototype
+<LI>A function prototype tells the compiler the datatype of the return
+value and the number and datatypes of any values passed to the function,
+allowing it to automatically convert to the appropriate value when necessary
+<LI>A function prototype is nearly identical to a function definition
+without the body
+<UL>
+<LI>The general form of a function prototype is:<BR>
+<VAR>datatype</VAR> <VAR>name</VAR>(<VAR>parameter-list</VAR>);
+</UL>
+<LI>A prototype for the <CODE>add()</CODE> function would look like:<BR>
+<CODE>int add(int a, int b);</CODE>
+<LI>The parameter list for a function prototype only needs to
+contain the datatypes, not the identifiers
+<UL>
+<LI>The <CODE>add()</CODE> function could have been written as<BR>
+<CODE>int add(int, int);</CODE>
+</UL>
+The identifiers are usually left in since (if well-named) they provide a
+concise summary of the function
+<LI>The prototype need not contain <VAR>parameter-list</VAR>
+<UL>
+<LI>If this is true, nothing is assumed about the parameters
+<LI>The compiler will not, however, be able to automatically convert
+to the datatype expected by a function:
+<UL>
+<LI>For example, if you define a function like
+<CODE>double dfunc(double d);</CODE>
+and, in another file, you do <CODE>i = dfunc(3);</CODE> (where <CODE>i</CODE>
+is an <CODE>int</CODE> variable
+and <CODE>3</CODE> is an <CODE>int</CODE> constant), the compiler will not
+know that <CODE>3</CODE> should be passed as a <CODE>double</CODE>, so it
+will not do the conversion and <CODE>dfunc</CODE> will not operate as expected
+</UL>
+</UL>
+<LI>If no prototype (or definition) is found before the first use of
+a function, a prototype of<BR>
+<CODE>int <VAR>name</VAR>();</CODE> is assumed
+<LI>Prototypes are usually placed in a header file and <CODE>#include</CODE>d
+in every file where the function is called
+</UL>
+<H2>Parameters Passed By Value</H2>
+<UL>
+<LI>Unless otherwise specified, parameters are passed by value
+<LI>Given this function definition:
+<PRE>
+void
+subfunc(int a)
+{
+	a = 3;
+}
+
+void
+func(void)
+{
+	int a, b;
+
+	a = 0;
+	subfunc(a);
+	b = a;
+}
+</PRE>
+the <CODE>b</CODE> variable in <CODE>func()</CODE> would be set to 0, not 3,
+since <CODE>subfunc()</CODE> operates on a copy of the <EM>value</EM> of
+<CODE>a</CODE>, not the actual variable
+<LI>There is a way of having functions operate on the actual variable;
+this will be discussed later
+</UL>
+<A HREF="constants.html">Previous</A>, 
+<A HREF="operators.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

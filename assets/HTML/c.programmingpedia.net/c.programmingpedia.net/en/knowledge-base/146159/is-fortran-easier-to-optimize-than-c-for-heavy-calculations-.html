@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/146159/is-fortran-easier-to-optimize-than-c-for-heavy-calculations- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:23:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Is Fortran easier to optimize than C for heavy calculations? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Is Fortran easier to optimize than C for heavy calculations? | C Language Knowledge Base">
+        <title>[SOLVED] Is Fortran easier to optimize than C for heavy calculations? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="is-fortran-easier-to-optimize-than-c-for-heavy-calculations-">Is Fortran easier to optimize than C for heavy calculations?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/fortran.html">fortran</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>From time to time I read that Fortran is or can be faster then C for heavy calculations. Is that really true? I must admit that I hardly know Fortran, but the Fortran code I have seen so far did not show that the language has features that C doesn't have.</p>
+
+<p>If it is true, please tell me why. Please don't tell me what languages or libs are good for number crunching, I don't intend to write an app or lib to do that, I'm just curious.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/18687/quinmars" target="_blank"><span itemprop="name">quinmars</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">391</div>
+                                    <div itemprop="dateCreated">1/28/2018 8:40:11 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The languages have similar feature-sets. The performance difference comes from the fact that Fortran says aliasing is not allowed, unless an EQUIVALENCE statement is used. Any code that has aliasing is not valid Fortran, but it is up to the programmer and not the compiler to detect these errors. Thus Fortran compilers ignore possible aliasing of memory pointers and allow them to generate more efficient code. Take a look at this little example in C:</p>
+
+<pre><code>void transform (float *output, float const * input, float const * matrix, int *n)
+{
+    int i;
+    for (i=0; i&lt;*n; i++)
+    {
+        float x = input[i*2+0];
+        float y = input[i*2+1];
+        output[i*2+0] = matrix[0] * x + matrix[1] * y;
+        output[i*2+1] = matrix[2] * x + matrix[3] * y;
+    }
+}
+</code></pre>
+
+<p>This function would run slower than the Fortran counterpart after optimization. Why so? If you write values into the output array, you may change the values of matrix. After all, the pointers could overlap and point to the same chunk of memory (including the <code>int</code> pointer!). The C compiler is forced to reload the four matrix values from memory for all computations.</p>
+
+<p>In Fortran the compiler can load the matrix values once and store them in registers. It can do so because the Fortran compiler assumes pointers/arrays do not overlap in memory.</p>
+
+<p>Fortunately, the <a href="https://en.wikipedia.org/wiki/Restrict" rel="noreferrer"><code>restrict</code></a> keyword and strict-aliasing have been introduced to the C99 standard to address this problem. It's well supported in most C++ compilers these days as well. The keyword allows you to give the compiler a hint that the programmer promises that a pointer does not alias with any other pointer. The strict-aliasing means that the programmer promises that pointers of different type will never overlap, for example a <code>double*</code> will not overlap with an <code>int*</code> (with the specific exception that <code>char*</code> and <code>void*</code> can overlap with anything).</p>
+
+<p>If you use them you will get the same speed from C and Fortran. However, the ability to use the <code>restrict</code> keyword only with performance critical functions means that C (and C++) programs are much safer and easier to write. For example, consider the invalid Fortran code: <code>CALL TRANSFORM(A(1, 30), A(2, 31), A(3, 32), 30)</code>, which most Fortran compilers will happily compile without any warning but introduces a bug that only shows up on some compilers, on some hardware and with some optimization options.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/15955/nils-pipenbrinck" target="_blank"><span itemprop="name">Nils Pipenbrinck</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/146159/is-fortran-easier-to-optimize-than-c-for-heavy-calculations-#answer-0</div>
+                                            <div itemprop="upvoteCount">425</div>
+                                            <div itemprop="dateCreated">3/7/2019 9:34:33 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <h2 id="yes-in-1980-in-2008-depends">Yes, in 1980; in 2008? depends</h2>
+
+<p>When I started programming professionally the speed dominance of Fortran was just being challenged. I remember <a href="http://web.archive.org/web/20090401205830/http://ubiety.uwaterloo.ca/~tveldhui/papers/DrDobbs2/drdobbs2.html" rel="noreferrer">reading about it in Dr. Dobbs</a> and telling the older programmers about the article--they laughed.</p>
+
+<p>So I have two views about this, theoretical and practical. <em>In theory</em> Fortran today has no intrinsic advantage to C/C++ or even any language that allows assembly code. <em>In practice</em> Fortran today still enjoys the benefits of legacy of a history and culture built around optimization of numerical code.</p>
+
+<p>Up until and including Fortran 77, language design considerations had optimization as a main focus. Due to the state of compiler theory and technology, this often meant <em>restricting</em> features and capability in order to give the compiler the best shot at optimizing the code. A good analogy is to think of Fortran 77 as a professional race car that sacrifices features for speed. These days compilers have gotten better across all languages and features for programmer productivity are more valued. However, there are still places where the people are mainly concerned with speed in scientific computing; these people most likely have inherited code, training and culture from people who themselves were Fortran programmers.</p>
+
+<p>When one starts talking about optimization of code there are many issues and the best way to get a feel for this is <a href="http://www.physicsforums.com/showthread.php?t=169974" rel="noreferrer">to lurk where people are whose job it is to have fast numerical code</a>. But keep in mind that such critically sensitive code is usually a small fraction of the overall lines of code and very specialized: A lot of Fortran code is just as "inefficient" as a lot of other code in other languages and <a href="http://en.wikipedia.org/wiki/Optimization_(computer_science)#When_to_optimize" rel="noreferrer">optimization should not even be a primary concern of such code</a>.</p>
+
+<p>A wonderful place to start in learning about the history and culture of Fortran is wikipedia. <a href="http://en.wikipedia.org/wiki/Fortran" rel="noreferrer">The Fortran Wikipedia entry</a> is superb and I very much appreciate those who have taken the time and effort to make it of value for the Fortran community.</p>
+
+<p>(A shortened version of this answer would have been a comment in the excellent thread started by <strong>Nils</strong> but I don't have the karma to do that. Actually, I probably wouldn't have written anything at all but for that this thread has actual information content and sharing as opposed to flame wars and language bigotry, which is my main experience with this subject. I was overwhelmed and had to share the love.)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/24893/jaredor" target="_blank">jaredor</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/146159" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/146159/is-fortran-easier-to-optimize-than-c-for-heavy-calculations- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:23:49 GMT -->
+</html>

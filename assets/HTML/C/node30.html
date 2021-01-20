@@ -1,0 +1,732 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node30.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Further Threads Programming:Thread Attributes (POSIX)</TITLE>
+<META NAME="description" CONTENT="Further Threads Programming:Thread Attributes (POSIX)">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1361"
+ HREF="node30.html#SECTION003010000000000000000">
+Attributes</A>
+<LI><A NAME="tex2html1362"
+ HREF="node30.html#SECTION003020000000000000000">
+Initializing Thread Attributes</A>
+<LI><A NAME="tex2html1363"
+ HREF="node30.html#SECTION003030000000000000000">
+Destroying Thread Attributes</A>
+<LI><A NAME="tex2html1364"
+ HREF="node30.html#SECTION003040000000000000000">
+Thread's Detach State</A>
+<LI><A NAME="tex2html1365"
+ HREF="node30.html#SECTION003050000000000000000">
+Thread's Set Scope</A>
+<LI><A NAME="tex2html1366"
+ HREF="node30.html#SECTION003060000000000000000">
+Thread Scheduling Policy</A>
+<UL>
+<LI><A NAME="tex2html1367"
+ HREF="node30.html#SECTION003061000000000000000">
+Thread Inherited Scheduling Policy</A>
+<LI><A NAME="tex2html1368"
+ HREF="node30.html#SECTION003062000000000000000">
+Set Scheduling Parameters</A>
+</UL>
+<LI><A NAME="tex2html1369"
+ HREF="node30.html#SECTION003070000000000000000">
+Thread  Stack Size</A>
+<UL>
+<LI><A NAME="tex2html1370"
+ HREF="node30.html#SECTION003071000000000000000">
+Building Your Own Thread Stack</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION003000000000000000000">
+Further Threads Programming:Thread Attributes (POSIX)</A>
+</H1>
+<P>
+The previous chapter covered the basics of threads creation using default attributes. This chapter discusses
+setting attributes at thread creation time.
+<P>
+Note that only pthreads uses attributes and cancellation, so the API covered in this chapter is for POSIX
+threads only. Otherwise, the functionality for Solaris threads and pthreads is largely the same.
+<P><H1><A NAME="SECTION003010000000000000000">
+Attributes</A>
+</H1>
+<P>
+Attributes are a way to specify behavior that is different from the default. When a thread is created with
+<TT>pthread_create()</TT>
+ or when a synchronization variable is initialized, an attribute object can be specified.
+<B>Note:</B> however that the default atributes are usually sufficient for most applications.
+<P><B>Impottant Note</B>: Attributes are specified <EM>only at thread creation time</EM>; they <B>cannot</B> be
+altered while the thread is <B>being used</B>.
+<P>
+Thus three functions are usually called in tandem
+<P><UL>
+<LI> Thread attibute intialisation -- <TT>pthread_attr_init()</TT> create a default <TT>pthread_attr_t
+tattr</TT>
+<LI> Thread attribute value change (unless defaults appropriate) -- a variety of <TT>
+pthread_attr_*()</TT> functions are available to set individual attribute values for the <TT>
+pthread_attr_t tattr</TT> structure. (see below).
+<LI> Thread creation -- a call to <TT>pthread_create()</TT> with approriate attribute values set in a 
+<TT>pthread_attr_t tattr</TT> structure.
+</UL>
+<P>
+The following code fragment should make this point clearer:
+<P><PRE>
+#include &lt;pthread.h&gt; 
+
+pthread_attr_t tattr;
+pthread_t tid;
+void *start_routine;
+void arg
+int ret;
+
+/* initialized with default attributes */
+ret = pthread_attr_init(&amp;tattr);
+
+/* call an appropriate functions to alter a default value */
+ret = pthread_attr_*(&amp;tattr,SOME_ATRIBUTE_VALUE_PARAMETER);
+
+/* create the thread */
+ret = pthread_create(&amp;tid, &amp;tattr, start_routine, arg);
+</PRE>
+<P>
+In order to save space, code examples mainly focus on the attribute setting functions and the intializing
+and creation functions are ommitted. These <B>must</B> of course be present in all actual code fragtments.
+<P>
+An attribute object is opaque, and cannot be directly modified by assignments. A set of functions is
+provided to initialize, configure, and destroy each object type.
+Once an attribute is initialized and configured, it has process-wide scope. The suggested method for using
+attributes is to configure all required state specifications at one time in the early stages of program
+execution. The appropriate attribute object can then be referred to as needed.
+Using attribute objects has two primary advantages:
+<UL>
+<LI> First, it adds to code portability.
+Even though supported attributes might vary between implementations, you need not modify function
+calls that create thread entities because the attribute object is hidden from the interface.
+If the target port supports attributes that are not found in the current port, provision must be made to
+manage the new attributes. This is an easy porting task though, because attribute objects need only be
+initialized once in a well-defined location.
+<LI> Second, state specification in an application is simplified.
+As an example, consider that several sets of threads might exist within a process, each providing a
+separate service, and each with its own state requirements.
+At some point in the early stages of the application, a thread attribute object can be initialized for each
+set. All future thread creations will then refer to the attribute object initialized for that type of thread.
+The initialization phase is simple and localized, and any future modifications can be made quickly and
+reliably.
+</UL>
+<P>
+Attribute objects require attention at process exit time. When the object is initialized, memory is allocated
+for it. This memory must be returned to the system. The pthreads standard provides function calls to
+destroy attribute objects.
+<P><H1><A NAME="SECTION003020000000000000000">
+Initializing Thread Attributes</A>
+</H1>
+<A NAME="sec:init_attr">&#160;</A>
+<P>
+The function <TT>pthread_attr_init()</TT> is used to initialize object attributes to their default values.
+The storage is allocated by the thread system during execution.
+<P>
+The function is prototyped by:
+<P><PRE>
+int pthread_attr_init(pthread_attr_t *tattr);
+</PRE>
+<P>
+An example call to this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int ret;
+/* initialize an attribute to the default value */
+ret = pthread_attr_init(&amp;tattr);
+</PRE>
+<P>
+The default values for attributes (<TT>tattr</TT>) are:
+<P><TABLE CELLPADDING=3 BORDER="1">
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>Attribute</TD>
+<TD ALIGN="CENTER" NOWRAP>Value</TD>
+<TD ALIGN="LEFT" NOWRAP>Result</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>scope</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>PTHREAD_SCOPE_PROCESS</TT></TD>
+<TD ALIGN="LEFT" NOWRAP>New thread is</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>unbound -</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>not</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>permanently</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>attached to</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>LWP.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>detachstate</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>PTHREAD_CREATE_JOINABLE</TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Exit status</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>and thread are</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>preserved</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>after the</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>terminates.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>stackaddr</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>NULL</TT></TD>
+<TD ALIGN="LEFT" NOWRAP>New thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>has</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>system-allocated stack</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>address.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>stacksize</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>1 </TT> megabyte</TD>
+<TD ALIGN="LEFT" NOWRAP>New thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>has</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>system-defined</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>stack size.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>priority New thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>inherits</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>parent thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>priority.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>inheritsched</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>PTHREAD_INHERIT_SCHED</TT></TD>
+<TD ALIGN="LEFT" NOWRAP>New thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>inherits</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>parent thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>scheduling</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>priority.</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>schedpolicy</TD>
+<TD ALIGN="CENTER" NOWRAP><TT>SCHED_OTHER</TT></TD>
+<TD ALIGN="LEFT" NOWRAP>New thread</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>uses</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>Solaris-defined</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>fixed priority</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>scheduling;</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>threads run</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>until</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>preempted by a</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>higher-priority</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>thread or</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>until they</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>block or</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>yield.</TD>
+</TR>
+</TABLE>
+<P>
+This function  zero after completing successfully. Any other returned value indicates that an error
+occurred. If the following condition occurs, the function fails and returns an error value (to <TT>
+errno</TT>).
+<P><H1><A NAME="SECTION003030000000000000000">
+Destroying Thread Attributes</A>
+</H1>
+<P>
+The function <TT>pthread_attr_destroy()</TT> is used to remove the storage allocated during initialization.
+The attribute object becomes invalid.
+It is prototyped by:
+<P><PRE>
+int pthread_attr_destroy(pthread_attr_t *tattr);
+</PRE>
+<P>
+A sample call to this functions is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int ret;
+/* destroy an attribute */
+ret = pthread_attr_destroy(&amp;tattr);
+</PRE>
+<P>
+Attribites are declared as for <TT>pthread_attr_init()</TT>  above.
+<P><TT>pthread_attr_destroy()</TT> returns zero after completing successfully. Any other returned value
+indicates that an 
+error occurred.
+<P><H1><A NAME="SECTION003040000000000000000">
+Thread's Detach State</A>
+</H1>
+<P>
+When a thread is created detached (<TT>PTHREAD_CREATE_DETACHED</TT>), its thread ID and other
+resources can be reused as soon as the thread terminates.
+<P>
+If you do not want the calling
+thread  to wait for the thread to terminate then call the function <TT>pthread_attr_setdetachstate()</TT>.
+<P>
+When a thread is created nondetached (<TT>PTHREAD_CREATE_JOINABLE</TT>), it is assumed that you will be
+waiting for it. That is, it is assumed that you will be executing a 
+<TT>pthread_join()</TT> on the thread.
+Whether a thread is created detached or nondetached, the process does not exit until all threads have
+exited.
+<P><TT>pthread_attr_setdetachstate()</TT> is prototyped by:
+<PRE>
+int pthread_attr_setdetachstate(pthread_attr_t *tattr,int detachstate);
+</PRE>
+<P><TT>pthread_attr_setdetachstate()</TT> returns zero after completing successfully. Any other returned value
+indicates that an error occurred. If the following condition occurs, the function fails and returns the
+corresponding value.
+<P>
+An example call to detatch a thread with this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int ret;
+/* set the thread detach state */
+ret = pthread_attr_setdetachstate(&amp;tattr,PTHREAD_CREATE_DETACHED);
+</PRE>
+<P>
+Note - When there is no explicit synchronization to prevent it, a newly created, detached thread can die
+and have its thread ID reassigned to another new thread before its creator returns from
+<TT>pthread_create()</TT>. For nondetached (<TT>PTHREAD_CREATE_JOINABLE</TT>) threads, it is very important
+that some thread join with it after it terminates -- otherwise the resources of that thread are not
+released for use by new threads. This commonly results in a memory leak. So when you do not want a thread
+to be joined, create it as a detached thread.
+<P>
+It is quite common that you will wish to create a thread which is detatched from creation. The following
+code illustrates how this may be achieved with the standard calls to initialise and set and then create a
+thread:
+<P><PRE>
+#include &lt;pthread.h&gt; 
+pthread_attr_t tattr;
+pthread_t tid;
+void *start_routine;
+void arg
+int ret;
+
+/* initialized with default attributes */
+ret = pthread_attr_init(&amp;tattr);
+ret = pthread_attr_setdetachstate(&amp;tattr,PTHREAD_CREATE_DETACHED);
+ret = pthread_create(&amp;tid, &amp;tattr, start_routine, arg);
+</PRE>
+<P>
+The function <TT>pthread_attr_getdetachstate()</TT> may be used to retrieve the thread create state, which
+can be either detached or joined. It is prototyped by:
+<P><PRE>
+int pthread_attr_getdetachstate(const pthread_attr_t *tattr, int *detachstate);
+</PRE>
+<P><TT>pthread_attr_getdetachstate()</TT> returns zero after completing successfully. Any other returned value
+indicates that an error occurred.
+<P>
+An example call to this fuction is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int detachstate;
+int ret;
+
+/* get detachstate of thread */
+ret = pthread_attr_getdetachstate (&amp;tattr, &amp;detachstate);
+</PRE>
+<P><H1><A NAME="SECTION003050000000000000000">
+Thread's Set Scope</A>
+</H1>
+<P>
+A thread may be  bound  (<TT>PTHREAD_SCOPE_SYSTEM</TT>) or an unbound (<TT>PTHREAD_SCOPE_PROCESS</TT>).
+Both these types of  types are accessible <B>only</B> within a given process.
+<P>
+The function <TT>pthread_attr_setscope()</TT> to create a bound or unbound thread. It is prototyped by:
+<P><PRE>
+int pthread_attr_setscope(pthread_attr_t *tattr,int scope);
+</PRE>
+<P>
+Scope takes on the value of either <TT>PTHREAD_SCOP_SYSTEM</TT> or <TT>
+PTHREAD_SCOPE_PROCESS</TT>.
+<P><TT>pthread_attr_setscope()</TT> returns zero after completing successfully. Any other returned value
+indicates that an error occurred and an appropriate value is returned.
+<P>
+So to set a bound thread at thread creation on would do the following function calls:
+<P><PRE>
+#include &lt;pthread.h&gt;
+
+pthread_attr_t attr;
+pthread_t tid;
+void start_routine;
+void arg;
+int ret;
+
+/* initialized with default attributes */
+ret = pthread_attr_init (&amp;tattr);
+/* BOUND behavior */
+ret = pthread_attr_setscope(&amp;tattr, PTHREAD_SCOPE_SYSTEM);
+ret = pthread_create (&amp;tid, &amp;tattr, start_routine, arg);
+</PRE>
+ If the following conditions occur, the function fails and returns the corresponding value.
+<P>
+The function <TT>pthread_attr_getscope()</TT> is used to retrieve the thread scope, which indicates whether
+the thread is bound or unbound. It is prototyped by:
+<P><PRE>
+int pthread_attr_getscope(pthread_attr_t *tattr, int *scope);
+</PRE>
+<P>
+An example use of this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+
+pthread_attr_t tattr;
+int scope;
+int ret;
+
+/* get scope of thread */
+ret = pthread_attr_getscope(&amp;tattr, &amp;scope);
+</PRE>
+<P>
+If successful the approriate (<TT>PTHREAD_SCOP_SYSTEM</TT> or <TT>
+PTHREAD_SCOPE_PROCESS</TT>) wil be stored in <TT>scope</TT>.
+<P><TT>pthread_att_getscope()</TT> returns zero after completing successfully. Any other returned value
+indicates that an error occurred.
+<P><H1><A NAME="SECTION003060000000000000000">
+Thread Scheduling Policy</A>
+</H1>
+<P>
+The POSIX draft standard specifies
+scheduling policy attributes of <TT>SCHED_FIFO</TT> (first-in-first-out), <TT>SCHED_RR</TT> (round-robin), or
+<TT>SCHED_OTHER</TT> (an implementation-defined method).
+<TT>SCHED_FIFO</TT> and <TT>SCHED_RR</TT> are optional in POSIX, and <B>only</B> are supported for <EM>real
+time bound threads</EM>.
+<P><B>Howver Note</B>, currently, only the Solaris <TT>SCHED_OTHER</TT> default value is supported in pthreads.
+ Attempting  to  set  policy  as  <TT>SCHED_FIFO</TT> or <TT>SCHED_RR</TT> will
+     result in the error <TT>ENOSUP</TT>.
+<P>
+The function  is used to set the scheduling policy.It is 
+prototyped by:
+<PRE>
+int pthread_attr_setschedpolicy(pthread_attr_t *tattr, int policy);
+</PRE>
+<P><TT>pthread_attr_setschedpolicy()</TT> returns zero after completing successfully. Any other returned value
+indicates that an error occurred.
+<P>
+To set the scheduling policy to <TT>SCHED_OTHER</TT> simply do:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int ret;
+
+/* set the scheduling policy to SCHED_OTHER */
+ret = pthread_attr_setschedpolicy(&amp;tattr, SCHED_OTHER);
+</PRE>
+<P>
+There is a function <TT>pthread_attr_getschedpolicy()</TT> that retrieves the scheduling policy.
+But, currently, it is not of great use as it can only return the (Solaris-based) <TT>SCHED_OTHER</TT> default
+value
+<P><H2><A NAME="SECTION003061000000000000000">
+Thread Inherited Scheduling Policy</A>
+</H2>
+<P>
+The function <TT>pthread_attr_setinheritsched()</TT> can be used to the inherited scheduling policy of a
+thread. It is prototyped by:
+<P><PRE>
+int pthread_attr_setinheritsched(pthread_attr_t *tattr, int inherit);
+</PRE>
+<P>
+An <TT>inherit</TT> value of <TT>PTHREAD_INHERIT_SCHED</TT> (the default) means that the scheduling policies
+defined in the creating thread are to be used, and any scheduling attributes defined in the <TT>
+pthread_create()</TT> call are to be ignored. If <TT>PTHREAD_EXPLICIT_SCHED</TT> is used, the attributes from
+the <TT>pthread_create()</TT> call are to be used.
+<P>
+The function returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P>
+An example call of this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int ret;
+
+/* use the current scheduling policy */
+ret = pthread_attr_setinheritsched(&amp;tattr, PTHREAD_EXPLICIT_SCHED);
+</PRE>
+<P>
+The function <TT>pthread_attr_getinheritsched(pthread_attr_t *tattr, int *inherit)</TT> may be used to
+inquire a current threads scheduling policy.
+<P><H2><A NAME="SECTION003062000000000000000">
+Set Scheduling Parameters</A>
+</H2>
+<P>
+Scheduling parameters are defined in the <TT>sched_param</TT> structure; <B>only</B> priority <TT>
+sched_param.sched_priority</TT> is supported. This priority is an integer value the higher the value the
+higher a thread's proiority for scehduling. Newly created threads run with this priority. The 
+<TT>pthread_attr_setschedparam()</TT> is used to set this stucture appropiately. It is prototyped by:
+<P><PRE>
+int pthread_attr_setschedparam(pthread_attr_t *tattr,
+const struct sched_param *param);
+</PRE>
+<P>
+and returns zero after completing successfully. Any other returned value indicates that an error occurred.
+<P>
+An example call to <TT>pthread_attr_setschedparam()</TT> is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+int newprio;
+sched_param param;
+
+
+/* set the priority; others are unchanged */
+newprio = 30;
+param.sched_priority = newprio;
+
+/* set the new scheduling param */
+ret = pthread_attr_setschedparam (&amp;tattr, &amp;param);
+</PRE>
+<P>
+The function <TT>pthread_attr_getschedparam(pthread_attr_t *tattr, const struct sched_param *param)</TT>
+may be used to inquire a current thread's priority of scheduling.
+<P><H1><A NAME="SECTION003070000000000000000">
+Thread  Stack Size</A>
+</H1>
+<P>
+Typically, thread stacks begin on page boundaries and any specified size is rounded up to the next page
+boundary. A page with no access permission is appended to the top of the stack so that most stack
+overflows result in sending a <TT>SIGSEGV</TT> signal to the offending thread. Thread stacks allocated by the
+caller are used as is.
+<P>
+When a stack is specified, the thread should also be created <TT>PTHREAD_CREATE_JOINABLE</TT>. That stack
+cannot be freed until the <TT>pthread_join()</TT> call for that thread has returned, because the thread's
+stack cannot be freed until the thread has terminated. The only reliable way to know if such a thread has
+terminated is through <TT>pthread_join()</TT>.
+<P>
+Generally, you do not need to allocate stack space for threads. The threads library allocates one megabyte
+of virtual memory for each thread's stack with no swap space reserved. (The library uses the
+<TT>MAP_NORESERVE</TT> option of mmap to make the allocations.)
+<P>
+Each thread stack created by the threads library has a red zone. The library creates the red zone by
+appending a page to the top of a stack to catch stack overflows. This page is invalid and causes a memory
+fault if it is accessed. Red zones are appended to all automatically allocated stacks whether the size is
+specified by the application or the default size is used.
+<P><B>Note</B>: Because runtime stack requirements vary, you should be absolutely certain that the specified
+stack will satisfy the runtime requirements needed for library calls and dynamic linking.
+<P>
+There are very few occasions when it is appropriate to specify a stack, its size, or both. It is difficult even
+for an expert to know if the right size was specified. This is because even a program compliant with ABI
+standards cannot determine its stack size statically. Its size is dependent on the needs of the particular
+runtime environment in which it executes.
+<P><H2><A NAME="SECTION003071000000000000000">
+Building Your Own Thread Stack</A>
+</H2>
+<P>
+When you specify the size of a thread stack, be sure to account for the allocations needed by the invoked
+function and by each function called. The accounting should include calling sequence needs, local
+variables, and information structures.
+<P>
+Occasionally you want a stack that is a bit different from the default stack. An obvious situation is when
+the thread needs more than one megabyte of stack space. A less obvious situation is when the default stack
+is too large. You might be creating thousands of threads and not have enough virtual memory to handle the
+gigabytes of stack space that this many default stacks require.
+<P>
+The limits on the maximum size of a stack are often obvious, but what about the limits on its minimum
+size? There must be enough stack space to handle all of the stack frames that are pushed onto the stack,
+along with their local variables, and so on.
+<P>
+You can get the absolute minimum limit on stack size by calling the macro <TT>PTHREAD_STACK_MIN</TT>
+(defined in &lt;pthread.h&gt;), which returns the amount of stack space required for a thread that executes
+a <TT>NULL</TT> procedure. Useful threads need more than this, so be very careful when reducing the stack
+size.
+<P>
+The function
+<TT>pthread_attr_setstacksize()</TT> is used to set this a thread's stack size, it is prototyped  by:
+<P><PRE>
+int pthread_attr_setstacksize(pthread_attr_t *tattr, int stacksize);
+</PRE>
+<P>
+The <TT>stacksize</TT> attribute defines the size of the stack (in bytes) that the system will allocate. The
+size should not be less than the system-defined minimum stack size.
+<P><TT>pthread_attr_setstacksize()</TT> returns  zero after completing successfully. Any other returned value
+indicates that an error occurred.
+<P>
+An example call to set the stacksize is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+
+pthread_attr_t tattr;
+int stacksize;
+int ret;
+
+
+/* setting a new size */
+stacksize = (PTHREAD_STACK_MIN + 0x4000);
+ret = pthread_attr_setstacksize(&amp;tattr, stacksize);
+</PRE>
+<P>
+In the example above, size contains the size, in number of bytes, for the stack that the new thread uses. If
+size is zero, a default size is used. In most cases, a zero value works best.
+<TT>PTHREAD_STACK_MIN</TT> is the amount of stack space required to start a thread. This does not take into
+consideration the threads routine requirements that are needed to execute application code.
+<P>
+The function <TT>pthread_attr_getstacksize(pthread_attr_t *tattr, size_t *size)</TT> may be used to
+inquire about a current threads stack size as follows:
+<P><PRE>
+#include &lt;pthread.h&gt;
+
+pthread_attr_t tattr;
+int stacksize;
+int ret;
+/* getting the stack size */
+ret = pthread_attr_getstacksize(&amp;tattr, &amp;stacksize);
+</PRE>
+<P>
+The function only returns the minimum stack size (in bytes) allocated for the created threads stack to the variable <TT>stacksize</TT>. <b> It DOES NOT RETURN the actual stack size</b> so use the function with care.
+<P>
+You may wish to specify the base adress of thread's stack. The function <TT>
+pthread_attr_setstackaddr()</TT> does this task. It is prototyped by:
+<P><PRE>
+int pthread_attr_setstackaddr(pthread_attr_t *tattr,void *stackaddr);
+</PRE>
+<P>
+The <TT>stackaddr</TT> parameter defines the
+base of the thread's stack. If this is set to non-null (NULL is the default) the system initializes the
+stack at that address.
+<P>
+The function returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P>
+This example shows how to create a thread with both a custom stack address and a custom stack size.
+<PRE>
+#include &lt;pthread.h&gt;
+
+pthread_attr_t tattr;
+pthread_t tid;
+int ret;
+void *stackbase;
+int size = PTHREAD_STACK_MIN + 0x4000;
+stackbase = (void *) malloc(size);
+/* initialized with default attributes */
+ret = pthread_attr_init(&amp;tattr);
+/* setting the size of the stack also */
+ret = pthread_attr_setstacksize(&amp;tattr, size);
+/* setting the base address in the attribute */
+ret = pthread_attr_setstackaddr(&amp;tattr, stackbase);
+/* address and size specified */
+ret = pthread_create(&amp;tid, &amp;tattr, func, arg);
+</PRE>
+<P>
+The function <TT>
+pthread_attr_getstackaddr(pthread_attr_t *tattr,void * *stackaddr)</TT>
+can be used to obtain the base address for a current thread's stack address.
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node30.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:24 GMT -->
+</HTML>

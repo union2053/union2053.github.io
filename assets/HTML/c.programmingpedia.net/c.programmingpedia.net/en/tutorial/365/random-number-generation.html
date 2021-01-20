@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/365/random-number-generation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Random Number Generation | C Language Tutorial">
+        <meta name="description" property="og:description" content="Random Number Generation | C Language Tutorial">
+        <title>Random Number Generation | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="random-number-generation">Random Number Generation</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>Due to the flaws of <code>rand()</code>, many other default implementations have emerged over the years. Among those are:</p>
+<ul>
+<li><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/arc4random.3.html" rel="nofollow"><code>arc4random()</code></a> (available on OS X and BSD)</li>
+<li><a href="http://linux.die.net/man/3/random" rel="nofollow"><code>random()</code></a> (available on Linux)</li>
+<li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/drand48.html" rel="nofollow"><code>drand48()</code></a> (available on POSIX)</li>
+</ul>
+
+
+            </div>
+
+
+            <h2 id="basic-random-number-generation">Basic Random Number Generation</h2>
+            <div>
+                <p>The function <code>rand()</code> can be used to generate a pseudo-random integer value between <code>0</code> and <code>RAND_MAX</code> (<code>0</code> and <code>RAND_MAX</code> included).</p>
+<p><code>srand(int)</code> is used to seed the pseudo-random number generator. Each time <code>rand()</code> is seeded wih the same seed, it must produce the same sequence of values. It should only be seeded once before calling <code>rand()</code>. It should not be repeatedly seeded, or reseeded every time you wish to generate a new batch of pseudo-random numbers.</p>
+<p>Standard practice is to use the result of <code>time(NULL)</code> as a seed. If your random number generator requires to have a deterministic sequence, you can seed the generator with the same value on each program start. This is generally not required for release code, but is useful in debug runs to make bugs reproducible.</p>
+<p>It is advised to always seed the generator, if not seeded, it behaves as if it was seeded with <code>srand(1)</code>.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main(void) {
+    int i;
+    srand(time(NULL));
+    i = rand();
+
+    printf(&quot;Random value between [0, %d]: %d\n&quot;, RAND_MAX, i);
+    return 0;
+}
+</code></pre>
+<p>Possible output:</p>
+<pre><code>Random value between [0, 2147483647]: 823321433
+</code></pre>
+<p><strong>Notes:</strong></p>
+<p>The C Standard does not guarantee the quality of the random sequence produced. In the past, some implementations of <code>rand()</code> had serious issues in distribution and randomness of the generated numbers. <strong>The usage of <code>rand()</code> is not recommended for serious random number generation needs, like cryptography.</strong></p>
+
+
+            </div>
+            <h2 id="permuted-congruential-generator">Permuted Congruential Generator</h2>
+            <div>
+                <p>Here's a standalone random number generator that doesn't rely on <code>rand()</code> or similar library functions.</p>
+<p>Why would you want such a thing?  Maybe you don't trust your platform's builtin random number generator, or maybe you want a reproducible source of randomness independent of any particular library implementation.</p>
+<p>This code is PCG32 from <a href="http://www.pcg-random.org/" rel="nofollow">pcg-random.org</a>, a modern, fast, general-purpose RNG with excellent statistical properties.  It's not cryptographically secure, so don't use it for cryptography.</p>
+<pre><code>#include &lt;stdint.h&gt;
+
+/* *Really* minimal PCG32 code / (c) 2014 M.E. O'Neill / pcg-random.org
+ * Licensed under Apache License 2.0 (NO WARRANTY, etc. see website) */
+
+typedef struct { uint64_t state;  uint64_t inc; } pcg32_random_t;
+
+uint32_t pcg32_random_r(pcg32_random_t* rng) {
+    uint64_t oldstate = rng-&gt;state;
+    /* Advance internal state */
+    rng-&gt;state = oldstate * 6364136223846793005ULL + (rng-&gt;inc | 1);
+    /* Calculate output function (XSH RR), uses old state for max ILP */
+    uint32_t xorshifted = ((oldstate &gt;&gt; 18u) ^ oldstate) &gt;&gt; 27u;
+    uint32_t rot = oldstate &gt;&gt; 59u;
+    return (xorshifted &gt;&gt; rot) | (xorshifted &lt;&lt; ((-rot) &amp; 31));
+}
+
+void pcg32_srandom_r(pcg32_random_t* rng, uint64_t initstate, uint64_t initseq) {
+    rng-&gt;state = 0U;
+    rng-&gt;inc = (initseq &lt;&lt; 1u) | 1u;
+    pcg32_random_r(rng);
+    rng-&gt;state += initstate;
+    pcg32_random_r(rng);
+}
+</code></pre>
+<p>And here's how to call it:</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(void) {
+    pcg32_random_t rng; /* RNG state */
+    int i;
+
+    /* Seed the RNG */
+    pcg32_srandom_r(&amp;rng, 42u, 54u);
+
+    /* Print some random 32-bit integers */
+    for (i = 0; i &lt; 6; i++)
+        printf(&quot;0x%08x\n&quot;, pcg32_random_r(&amp;rng));
+    
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="restrict-generation-to-a-given-range">Restrict generation to a given range</h2>
+            <div>
+                <p>Usually when generating random numbers it is useful to generate integers within a range, or a p value between 0.0 and 1.0. Whilst modulus operation can be used to reduce the seed to a low integer this uses the low bits, which often go through a short cycle, resulting in a slight skewing of distribution if N is large in proportion to RAND_MAX.</p>
+<p>The macro</p>
+<pre><code>#define uniform() (rand() / (RAND_MAX + 1.0))
+</code></pre>
+<p>produces a p value on 0.0 to 1.0 - epsilon, so</p>
+<pre><code>i = (int)(uniform() * N)
+</code></pre>
+<p>will set <code>i</code> to a uniform random number within the range 0 to N - 1.</p>
+<p>Unfortunately there is a technical flaw, in that RAND_MAX is permitted to be larger than a variable of type <code>double</code> can accurately represent. This means that <code>RAND_MAX + 1.0</code> evaluates to RAND_MAX and the function occasionally returns unity. This is unlikely however.</p>
+
+
+            </div>
+            <h2 id="xorshift-generation">Xorshift Generation</h2>
+            <div>
+                <p>A good and easy alternative to the flawed <code>rand()</code> procedures, is <em>xorshift</em>, a class of pseudo-random number generators discovered by <a href="https://en.wikipedia.org/wiki/George_Marsaglia" rel="nofollow">George Marsaglia</a>. The xorshift generator is among the fastest non-cryptographically-secure random number generators. More information and other example implementaions are available on the <a href="https://en.wikipedia.org/wiki/xorshift" rel="nofollow">xorshift Wikipedia page</a></p>
+<p><strong>Example implementation</strong></p>
+<pre><code>#include &lt;stdint.h&gt;
+
+/* These state variables must be initialised so that they are not all zero. */
+uint32_t w, x, y, z;
+
+uint32_t xorshift128(void) 
+{
+    uint32_t t = x;
+    t ^= t &lt;&lt; 11U;
+    t ^= t &gt;&gt; 8U;
+    x = y; y = z; z = w;
+    w ^= w &gt;&gt; 19U;
+    w ^= t;
+    return w;
+}
+</code></pre>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../447/preprocessor-and-macros.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../3073/selection-statements.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-04-07</div>
+        <div itemprop="datePublished">2016-04-07</div>
+        <div itemprop="dateModified">2016-10-26</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=365" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1892420762" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#basic-random-number-generation">
+                    Basic Random Number Generation
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#permuted-congruential-generator">
+                    Permuted Congruential Generator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#restrict-generation-to-a-given-range">
+                    Restrict generation to a given range
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#xorshift-generation">
+                    Xorshift Generation
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/365/random-number-generation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

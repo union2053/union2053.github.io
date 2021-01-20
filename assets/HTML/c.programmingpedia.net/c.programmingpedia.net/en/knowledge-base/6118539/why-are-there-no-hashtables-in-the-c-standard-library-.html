@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6118539/why-are-there-no-hashtables-in-the-c-standard-library- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Why are there no hashtables in the C standard library? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Why are there no hashtables in the C standard library? | C Language Knowledge Base">
+        <title>[SOLVED] Why are there no hashtables in the C standard library? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="why-are-there-no-hashtables-in-the-c-standard-library-">Why are there no hashtables in the C standard library?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/hashtable.html">hashtable</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Why is that there is no Hashtable support as part of Standard C Library? Is there any specific reason for this?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/640607/shankar-raju" target="_blank"><span itemprop="name">Shankar Raju</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">47</div>
+                                    <div itemprop="dateCreated">8/20/2017 6:33:10 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There is no hashtable in the standard C library because either:</p>
+
+<ul>
+<li>no-one has submitted a proposal to the working group; or</li>
+<li>the working group has deemed it unnecessary.</li>
+</ul>
+
+<p>That's the way ISO works. Proposals are put forward and accepted or rejected. </p>
+
+<p>You have to be careful what you add to the standard library since you have two conflicting groups. As a <em>user,</em> you might want every data structure under the sun to be added to the standard to make the language more useful.</p>
+
+<p>But, as a language <em>implementor</em> (as an aside, these are probably the people that tend to make up most of the various working groups so their view is likely to have more impact), you don't really want the hassle of having to implement stuff that may not be used by everyone. All the stuff that was there when C89 appeared was to do with the fact that the primary purpose was to codify existing practice rather than introduce new practices. All iterations of the standards since then have been a little freer in what they can do but backwards compatibility is still an important issue.</p>
+
+<p>Myself, I also have conflicts. I'd love to have all the features of the Java, C++ or Python libraries at my disposal in C. Of course, that would make it so much harder to learn everything for newcomers and, as one commenter stated, probably make it so any code monkey can pump out useful code, reducing my value in the process :-)</p>
+
+<p>And I pretty much <em>have</em> all the data structures I'll ever need, from my long and (mostly) illustrious career. You're not limited to the standard library for this sort of stuff. There are plenty of third-party tools you can get to do the job and (like me) you can also roll your own.</p>
+
+<p>If you want to know why certain decisions were made in each iteration, ISO (and ANSI originally, before ISO took over) usually publish rationale documents. The C89 one from ANSI can be found <a href="http://www.lysator.liu.se/c/rat/title.html" rel="noreferrer">here</a>. It contains this little beauty in the scope:</p>
+
+<blockquote>
+  <p>This Rationale focuses primarily on additions, clarifications, and changes made to the language as described in the Base Documents. It is not a rationale for the C language as a whole: the Committee was charged with codifying an existing language, not designing a new one.  No attempt is made in this Rationale to defend the pre-existing syntax of the language, such as the syntax of declarations or the binding of operators.</p>
+</blockquote>
+
+<p>I especially enjoy the admission that they're not responsible for any unholy mess that may have predated their attempts to standardise.</p>
+
+<p>But, perhaps the real answer to your question lies in this bit, one of the guiding principles:</p>
+
+<hr>
+
+<p><strong>Keep the spirit of C.</strong> The Committee kept as a major goal to preserve the traditional spirit of C.  There are many facets of the spirit of C, but the essence is a community sentiment of the underlying principles upon which the C language is based.  Some of the facets of the spirit of C can be summarized in phrases like:</p>
+
+<ul>
+<li>Trust the programmer.</li>
+<li>Don't prevent the programmer from doing what needs to be done.</li>
+<li>Keep the language small and simple.</li>
+<li>Provide only one way to do an operation.</li>
+<li>Make it fast, even if it is not guaranteed to be portable. </li>
+</ul>
+
+<hr>
+
+<p>That third one is probably the main reason why the library wasn't massively expanded with the initial standardisation effort - that, and the fact that such an expansion from a committee would probably have resulted in ANSI C being labeled C2038 rather than C89.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/14860/paxdiablo" target="_blank"><span itemprop="name">paxdiablo</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6118539/why-are-there-no-hashtables-in-the-c-standard-library-#answer-0</div>
+                                            <div itemprop="upvoteCount">39</div>
+                                            <div itemprop="dateCreated">10/4/2017 11:51:33 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>C seems unusual by today's standards because there are no useful data structures defined.  None.  Not even strings — and if you think a C string is a data structure, well, we'll have to disagree on what a "data structure" is.</p>
+
+<p>If you like C, then think of it as a "blank slate"... your entire application is made of code written by you and libraries you choose to pull in, plus a few fairly primitive standard library functions, with maybe one or two exceptions like <code>qsort</code>.  People use C these days to implement things like Python, Ruby, Apache, or the Linux kernel.  These are projects that use all of their own data structures anyway, and they wouldn't be likely to use something like the STL.</p>
+
+<p>Many C libraries implement generic hash tables.  There are tradeoffs, and you can pick your favorite.  Some of them are configurable using callbacks.</p>
+
+<ul>
+<li>Glib has a hash table object (<a href="http://developer.gnome.org/glib/2.28/glib-Hash-Tables.html">documentation</a>)</li>
+<li>Apache Portable Runtime has a hash table (<a href="http://apr.apache.org/docs/apr/1.4/group__apr__hash.html">documentation</a>)</li>
+<li>Apple's Core Foundation library has a hash table (<a href="http://developer.apple.com/library/ios/#documentation/CoreFoundation/Reference/CFDictionaryRef/Reference/reference.html">documentation</a>) Note: Yes you can insert any object as key or value.</li>
+<li>UTHash is a hash table library (<a href="http://uthash.sourceforge.net/">documentation</a>)</li>
+<li>Another hash table library (<a href="http://pokristensson.com/strmap.html">link</a>)</li>
+</ul>
+
+<p>With all of these libraries that do what you want, what's the point of adding a hash table to the C standard?</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/82294/dietrich-epp" target="_blank">Dietrich Epp</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6118539" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6118539/why-are-there-no-hashtables-in-the-c-standard-library- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:41 GMT -->
+</html>

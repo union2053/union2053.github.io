@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-fprintf-and-fscanf-functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C fprintf() and fscanf() Functions</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C fprintf() and fscanf() Functions'>C fprintf() and fscanf() Functions</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-concept-of-a-file.html'>C File Structure Intro
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-open-a-file-and-display-it.html'>C Open file for read
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C fprintf() and fscanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-random-file-access-fseek-and-ftell.html'>C fseek() ftell()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-append-a-list-of-file-to-a-single-file.html'>C fread() and fwrite() Example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-random-file-access-with-binary-i-o.html'>C Binary File
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-binary-viewer.html'>C file binary viewer
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Questions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-1.html'>C Review Questions 1
+      
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C fprintf() and fscanf() Functions</h1>
+<a class ='btn btn-outline-dark' href=c-open-a-file-and-display-it.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-random-file-access-fseek-and-ftell.html>Next</a><p>The file I/O functions <i style='color:blue'>fprintf</i>() and <i style='color:blue'>fscanf</i>() work just like <i style='color:blue'>printf</i>() and <i style='color:blue'>scanf</i>(), except
+that they require an additional first argument to identify the proper file. 
+
+</p><p>The following program enables you to add words to a file. 
+
+</p><p>By using the "a+" mode, the program can both read and write in the file. 
+
+</p><p>The first time the program is used, it creates the data file and enables you to place 
+words in it, one word per line. 
+
+</p><p>When you use the program subsequently, it enables you to append words to the previous contents. 
+
+</p><p>The append mode only enables you to add material to the end of the file, but the "a+" mode 
+does enable you to read the whole file. 
+
+</p><p>The <i style='color:blue'>rewind</i>() command takes the program to the file beginning so that the final
+while loop can print the file contents. 
+
+</p><p>Note that <i style='color:blue'>rewind</i>() takes a file pointer argument.
+
+</p><p><i style='color:blue'>fprintf</i>() and <i style='color:blue'>fscanf</i>() work like <i style='color:blue'>printf</i>() and <i style='color:blue'>scanf</i>(). 
+
+</p><p>The <i style='color:blue'>fprintf</i>() and <i style='color:blue'>fscanf</i>() functions take the FILE pointer as the first argument instead of
+as the last argument.
+
+
+</p><div class='myCodeDiv'><button id='LIDHL' class='myCopyButton' data-clipboard-target='#VFQCU'>Copy</button><pre  id='VFQCU' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdlib.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+#define MAX 41
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    FILE *fp;
+    <span class='r'>char</span> words[MAX];
+
+    <span class='r'>if</span> ((fp = fopen(<span class='q'>"data"</span>, <span class='q'>"a+"</span>)) == NULL)
+    {
+        fprintf(stdout,<span class='q'>"Can't open \"data\" file.\n"</span>);
+        exit(EXIT_FAILURE);
+    }
+
+    puts(<span class='q'>"Enter words to add to the file; press the #"</span>);
+    puts(<span class='q'>"key at the beginning of a line to terminate."</span>);
+    <span class='r'>while</span> ((fscanf(stdin,<span class='q'>"%40s"</span>, words) == 1) &amp;&amp; (words[0] != <span class='q'>'#'</span>))
+        fprintf(fp, <span class='q'>"%s\n"</span>, words);
+
+    puts(<span class='q'>"File contents:"</span>);
+    rewind(fp);           <span class='c'>/* go back to beginning of file */</span>
+    <span class='r'>while</span> (fscanf(fp,<span class='q'>"%s"</span>,words) == 1)
+        puts(words);
+    puts(<span class='q'>"Done!"</span>);
+    <span class='r'>if</span> (fclose(fp) != 0)
+        fprintf(stderr,<span class='q'>"Error closing file\n"</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LIDHL');clipboard.on('success', function(e) {$('#LIDHL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LIDHL').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-open-a-file-and-display-it.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-random-file-access-fseek-and-ftell.html>Next</a><h2>Related</h2><UL><LI><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C Join four strings into a single string using strnlen_s() and strncat_s()</a></LI><LI><a href='c-concept-of-a-file.html'>C Concept of a File</a></LI><LI><a href='c-open-a-file-and-display-it.html'>C open a file and display it</a></LI><LI><a href='c-random-file-access-fseek-and-ftell.html'>C Random File Access: fseek() and ftell()</a></LI><LI><a href='c-append-a-list-of-file-to-a-single-file.html'>C append a list of file to a single file</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-fprintf-and-fscanf-functions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

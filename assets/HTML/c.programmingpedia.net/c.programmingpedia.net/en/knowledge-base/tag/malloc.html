@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" >
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/malloc by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:39:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="C Language Knowledge Base">
+        <meta name="description" property="og:description" content="C Language Knowledge Base">
+        <title>C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+<div class="kb-search">
+    <div class="search-container d-flex justify-content-center">
+        <form action="https://c.programmingpedia.net/en/knowledge-base/" method="get" class="form-inline">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn-only my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+    </div>
+
+    <h2 id="itemcount-result-for-search-term">
+        ItemCount Result For: <span class="query-searched">Search Term</span>
+    </h2>
+
+
+    <div class="kb-search-box">
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="variable-sized-arrays-vs-calloc-in-c"><a href="../448844/variable-sized-arrays-vs-calloc-in-c.html">Variable Sized Arrays vs calloc in C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        On the discussion of dynamic memory here: &quot;Intro to C Pointers and Dynamic Memory&quot;
+
+The author states:
+
+
+  A memory block like this can effectively be used as a more flexible array. This approach is actually much more common in real-world C programs. It&#39;s...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="algorithm.html">algorithm</a></span>
+                                <span class="tag-item"><a href="arrays.html">arrays</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/1434/nmiller" target="_blank">nmiller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="variable-sized-arrays-vs-calloc-in-c"><a href="../448844/variable-sized-arrays-vs-calloc-in-c.html">Variable Sized Arrays vs calloc in C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        On the discussion of dynamic memory here: &quot;Intro to C Pointers and Dynamic Memory&quot;
+
+The author states:
+
+
+  A memory block like this can effectively be used as a more flexible array. This approach is actually much more common in real-world C programs. It&#39;s...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="algorithm.html">algorithm</a></span>
+                                <span class="tag-item"><a href="arrays.html">arrays</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/1434/nmiller" target="_blank">nmiller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-malloc-and-free-work-"><a href="../1119134/how-do-malloc---and-free---work-.html">How do malloc() and free() work?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I want to know how malloc and free work.
+
+int main() {
+    unsigned char *p = (unsigned char*)malloc(4*sizeof(unsigned char));
+    memset(p,0,4);
+    strcpy((char*)p,&quot;abcdabcd&quot;); // **deliberately storing 8bytes**
+    cout &amp;lt;&amp;lt; p;
+    free(p); // Obvi...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/38038/mahesh" target="_blank">mahesh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-malloc-and-free-work-"><a href="../1119134/how-do-malloc---and-free---work-.html">How do malloc() and free() work?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I want to know how malloc and free work.
+
+int main() {
+    unsigned char *p = (unsigned char*)malloc(4*sizeof(unsigned char));
+    memset(p,0,4);
+    strcpy((char*)p,&quot;abcdabcd&quot;); // **deliberately storing 8bytes**
+    cout &amp;lt;&amp;lt; p;
+    free(p); // Obvi...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/38038/mahesh" target="_blank">mahesh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="why-do-i-get-a-warning-every-time-i-use-malloc-"><a href="../1230386/why-do-i-get-a-warning-every-time-i-use-malloc-.html">Why do I get a warning every time I use malloc?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        If I use malloc in my code:
+
+int *x = malloc(sizeof(int));
+
+
+I get this warning from gcc:
+
+new.c:7: warning: implicit declaration of function ‘malloc’  
+new.c:7: warning: incompatible implicit declaration of built-in function ‘malloc’
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="gcc.html">gcc</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="sizeof.html">sizeof</a></span>
+                                <span class="tag-item"><a href="warnings.html">warnings</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/56555/kredns" target="_blank">Kredns</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="do-i-cast-the-result-of-malloc-"><a href="../605845/do-i-cast-the-result-of-malloc-.html">Do I cast the result of malloc?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In this question, someone suggested in a comment that I should not cast the result of malloc, i.e.
+
+int *sieve = malloc(sizeof(int) * length);
+
+
+rather than:
+
+int *sieve = (int *) malloc(sizeof(int) * length);
+
+
+Why would this be the case?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="casting.html">casting</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/61989/patrick-mcdonald" target="_blank">Patrick McDonald</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-really-happens-when-you-don-t-free-after-malloc-"><a href="../654754/what-really-happens-when-you-don-t-free-after-malloc-.html">What REALLY happens when you don&#39;t free after malloc?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        This has been something that has bothered me for ages now.
+
+We are all taught in school (at least, I was) that you MUST free every pointer that is allocated.  I&#39;m a bit curious, though, about the real cost of not freeing memory.  In some obvious cases, li...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/67491/scott" target="_blank">Scott</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-malloc-thread-safe-"><a href="../855763/is-malloc-thread-safe-.html">Is malloc thread-safe?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Is the malloc() function re-entrant?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="thread-safety.html">thread-safety</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/70702/alphaneo" target="_blank">Alphaneo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="setting-variable-to-null-after-free"><a href="../1025589/setting-variable-to-null-after-free.html">Setting variable to NULL after free</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In my company there is a coding rule that says, after freeing any memory, reset the variable to NULL. For example ...
+
+void some_func () 
+{
+    int *nPtr;
+
+    nPtr = malloc (100);
+
+    free (nPtr);
+    nPtr = NULL;
+
+    return;
+}
+
+
+I feel that, in cases ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="coding-style.html">coding-style</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="heap-memory.html">heap-memory</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/70702/alphaneo" target="_blank">Alphaneo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="difference-between-malloc-and-calloc-"><a href="../1538420/difference-between-malloc-and-calloc-.html">Difference between malloc and calloc?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        What is the difference between doing:
+
+ptr = (char **) malloc (MAXELEMS * sizeof(char *));
+
+
+or:
+
+ptr = (char **) calloc (MAXELEMS, sizeof(char*));
+
+
+When is it a good idea to use calloc over malloc or vice versa?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="calloc.html">calloc</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/105033/user105033" target="_blank">user105033</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="why-is-the-use-of-alloca-not-considered-good-practice-"><a href="../1018853/why-is-the-use-of-alloca---not-considered-good-practice-.html">Why is the use of alloca() not considered good practice?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        alloca() allocates memory on the stack rather than on the heap, as in the case of malloc(). So, when I return from the routine the memory is freed. So, actually this solves my problem of freeing up dynamically allocated memory. Freeing of memory allocated...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="alloca.html">alloca</a></span>
+                                <span class="tag-item"><a href="allocation.html">allocation</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="stack.html">stack</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/120636/vaibhav" target="_blank">Vaibhav</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="using-malloc-for-allocation-of-multi-dimensional-arrays-with-different-row-lengths"><a href="../1970698/using-malloc-for-allocation-of-multi-dimensional-arrays-with-different-row-lengths.html">Using malloc for allocation of multi-dimensional arrays with different row lengths</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have the following C code :
+
+int *a;
+size_t size = 2000*sizeof(int);
+a = (int *) malloc(size);
+
+
+which works fine. But if I have the following :
+
+char **b = malloc(2000*sizeof *b);
+
+
+where every element of b has different length.
+
+How is it possible to ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="arrays.html">arrays</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/160849/asel" target="_blank">asel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-s-the-point-in-malloc-0-"><a href="../2022335/what-s-the-point-in-malloc-0--.html">what&#39;s the point in malloc(0)?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Just saw this code:
+
+artist = (char *) malloc(0);
+
+
+and I was wondering why would one do this?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/171461/jldupont" target="_blank">jldupont</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="allocate-matrix-in-c"><a href="../2128728/allocate-matrix-in-c.html">allocate matrix in C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        i want to allocate a matrix.
+
+is this the only option:
+
+int** mat = (int**)malloc(rows * sizeof(int*))
+
+for (int index=0;index&amp;lt;row;++index)
+{
+    mat[index] = (int*)malloc(col * sizeof(int));
+}
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="matrix.html">matrix</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/215769/idan" target="_blank">Idan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="when-to-use-malloc-for-char-pointers"><a href="../1788655/when-to-use-malloc-for-char-pointers.html">When to use malloc for char pointers</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m specifically focused on when to use malloc on char pointers
+
+char *ptr;
+ptr = &quot;something&quot;;
+...code...
+...code...
+ptr = &quot;something else&quot;;
+
+
+Would a malloc be in order for something as trivial as this? If yes, why? If not, then when is it necessary for ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="char.html">char</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/217639/zps" target="_blank">ZPS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-free-and-malloc-work-in-c-"><a href="../1957099/how-do-free-and-malloc-work-in-c-.html">How do free and malloc work in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m trying to figure out what would happened if I try to free a pointer &quot;from the middle&quot;
+for example, look at the following code:
+
+char *ptr = (char*)malloc(10*sizeof(char));
+
+for (char i=0 ; i&amp;lt;10 ; ++i)
+{
+    ptr[i] = i+10;
+}
+++ptr;
+++ptr;
+++ptr;
+++p...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory.html">memory</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/238082/user238082" target="_blank">user238082</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-can-i-declare-and-initialize-an-array-of-pointers-to-a-structure-in-c-"><a href="../2642117/how-can-i-declare-and-initialize-an-array-of-pointers-to-a-structure-in-c-.html">How can I declare and initialize an array of pointers to a structure in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have a small assignment in C. I am trying to create an array of pointers to a structure. My question is how can I initialize each pointer to NULL? Also, after I allocate memory for a member of the array, I can not assign values to the structure to which...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="null.html">null</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                                <span class="tag-item"><a href="structure.html">structure</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/246392/user246392" target="_blank">user246392</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="allocating-memory-for-a-structure-in-c"><a href="../2177391/allocating-memory-for-a-structure-in-c.html">Allocating memory for a Structure in C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m tasked to create a program which dynamically allocates memory for a structure.
+normally we would use
+
+x=malloc(sizeof(int)*y);
+
+
+However, what do I use for a structure variable?
+I don&#39;t think its possible to do
+
+struct st x = malloc(sizeof(struct)); 
+...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="structure.html">structure</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/257906/blackbinary" target="_blank">Blackbinary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="assigning-memory-to-double-pointer-"><a href="../2257735/assigning-memory-to-double-pointer-.html">Assigning memory to double pointer?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I am having trouble understanding how to assign memory
+to a double pointer.
+I want to read an array of strings and store it.
+
+    char **ptr;
+    fp = fopen(&quot;file.txt&quot;,&quot;r&quot;);
+    ptr = (char**)malloc(sizeof(char*)*50);
+    for(int i=0; i&amp;lt;20; i++)
+    {
+...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="double-pointer.html">double-pointer</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                                <span class="tag-item"><a href="string.html">string</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/264335/lazy-hack" target="_blank">lazy_hack</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="why-mallocplusmemset-is-slower-than-calloc-"><a href="../2688466/why-mallocplusmemset-is-slower-than-calloc-.html">Why malloc+memset is slower than calloc?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        It&#39;s known that calloc is different than malloc in that it initializes the memory allocated. With calloc, the memory is set to zero. With malloc, the memory is not cleared.
+
+So in everyday work, I regard calloc as malloc+memset.
+Incidentally, for fun, I w...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/316224/kingkai" target="_blank">kingkai</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    Page 1 of 3
+
+    <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="../searchfa9d.html?q=&amp;page=2">2</a></li><li><a href="../search7d78.html?q=&amp;page=3">3</a></li><li class="PagedList-skipToNext"><a href="../searchfa9d.html?q=&amp;page=2" rel="next">»</a></li></ul></div>
+    </div>
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/malloc by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:40:09 GMT -->
+</html>

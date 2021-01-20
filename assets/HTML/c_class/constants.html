@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/constants.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Constants</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Constants</H1>
+<H2>Character constants</H2>
+<UL>
+<LI>a character constant can take one of four forms:
+<UL>
+<LI>a single character enclosed in a pair of single quotes, like
+<CODE>'a'</CODE> or <CODE>'$'</CODE>
+<LI>a backslash character followed by one to three octal digits (any digit
+from 0 to 7), like
+<CODE>'\7'</CODE> or <CODE>'\007'</CODE>
+<LI>a backslash character followed by an 'x' (but <STRONG>not</STRONG> 'X')
+and one or two hexadecimal digits (any digit from 0 to 9 as well as
+any letter from 'a' to 'f' or from 'A' to 'F'), like
+<CODE>'\xa0'</CODE> or <CODE>'\03F'</CODE>
+<LI>a backslash character followed by one of eleven special characters,
+which are interpreted like:
+<PRE>
+	\a	alert (bell) character
+	\b	backspace
+	\f	formfeed
+	\n	newline
+	\r	carriage return
+	\t	horizontal tab
+	\v	vertical tab
+	\\	backslash
+	\?	question mark
+	\'	single quote
+	\"	double quote
+</PRE>
+</UL>
+<LI>ANSI C also allows <CODE>L<EM>character-constant</EM></CODE> to
+define a <EM>wide character</EM>, using a group of characters and
+escape codes to form a single multibyte character for alphabets
+(Japanese, Chinese, etc) with more than 256 symbols.
+<LI>some implementations may also allow multi-character constants, where
+a constant like <CODE>'PICT'</CODE> is packed into a single 32 bit word
+<UL>
+<LI>the byte order of a packed multi-character constant is machine-dependent
+and thus non-portable
+</UL>
+</UL>
+<H2>Integer constants</H2>
+<UL>
+<LI>Integer constants can be one of the different bases:
+<UL>
+<LI>a number starting with
+a digit from 1 to 9 followed only by digits from 0 to 9
+is a decimal (base 10) constant, like <CODE>1</CODE> or <CODE>54321</CODE>
+<LI>if a number begins with '0x' or '0X' and is followed by digits from
+0 to 9 and letters from a to f or from A to F, it is
+interpreted as a hexadecimal (base 16) constant, like <CODE>0xbeef</CODE> or
+<CODE>0XDEAD</CODE>
+<LI>if a number begins with 0 and is followed by digits from
+0 to 7, it is interpreted as an octal (base 8) constant, like
+<CODE>07</CODE> (which is the same as <CODE>7</CODE>) or
+<CODE>0111</CODE> (which is <STRONG>NOT</STRONG> the same as <CODE>111</CODE>)
+</UL>
+<LI>integer constants in any of the three bases may be followed by an 'l'
+or 'L' to indicate a <CODE>long</CODE> constant, like <CODE>17l</CODE>
+or <CODE>0xFfL</CODE>
+<LI>in ANSI C, an integer constant may be followed by:
+<UL>
+<LI>a 'u' or 'U' to indicate an <CODE>unsigned</CODE> constant, like
+<CODE>33u</CODE>
+<LI>a 'ul' or 'UL' to indicate an <CODE>unsigned long</CODE> constant, like
+<CODE>32767ul</CODE>
+</UL>
+<LI>an integer constant takes on the minimum type necessary to be accurately
+represented, (possibly) starting as <CODE>int</CODE> and increasing from
+<CODE>long</CODE> to <CODE>unsigned long</CODE>
+<UL>
+<LI>octal and hexadecimal constants, and (in ANSI C) constants ending with
+a 'u' or 'U' may also be <CODE>unsigned</CODE> (which can hold larger values
+than <CODE>int</CODE> but may have fewer bytes than <CODE>long</CODE>)
+</UL>
+<LI>in ANSI C, 0 is always <CODE>unsigned</CODE> (perhaps to reduce ambiguity
+on machines with one's complement arithmetic)
+<LI>as an example, if an <CODE>int</CODE> is 16 bits wide and a
+<CODE>long</CODE> is 32 bits wide, the following ranges would apply:
+<PRE>
+Range			Decimal		Octal/Hexadecimal
+0			unsigned	unsigned
+1-32767			int		int
+32768-65535		long		unsigned
+65536-2147483647	long		long
+2147483648-429497295	unsigned long	unsigned long
+429497296-?		???		???
+</PRE>
+</UL>
+<H2>Floating-point constants</H2>
+<UL>
+<LI>a floating-point constant can take one of two forms:
+<UL>
+<LI>a group of digits from 0 to 9 which includes a single period, like
+<CODE>3.141593</CODE>,  <CODE>0.</CODE> or <CODE>.1</CODE>
+<LI>a group of digits from 0 to 9, possibly containing a period,
+followed by 'e' or 'E' and an exponent, like <CODE>1.0e3</CODE>,
+<CODE>2.593e+7</CODE> or <CODE>3141593e-6</CODE>
+</UL>
+<LI>in ANSI C, a floating-point constant may be followed by:
+<UL>
+<LI>an 'f' or 'F' to indicate a <CODE>float</CODE> constant, like
+<CODE>35.79f</CODE>
+<UL>
+<LI>Note that <CODE>123f</CODE> is an error, because <CODE>123</CODE>
+is not a floating-point constant
+</UL>
+<LI>a 'l' or 'L' to indicate a <CODE>long double</CODE> constant, like
+<CODE>35.79l</CODE>
+</UL>
+<LI>in the absence of a 'f' or 'l' qualifier, floating-point
+constants are assumed to be of datatype <CODE>double</CODE>, which should
+be the most efficient floating-point datatype
+</UL>
+<A HREF="promo_conv.html">Previous</A>, 
+<A HREF="functions.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/constants.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

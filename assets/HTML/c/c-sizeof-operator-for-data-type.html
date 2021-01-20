@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-sizeof-operator-for-data-type.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C sizeof Operator for data type</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C sizeof Operator for data type'>C sizeof Operator for data type</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C sizeof Operator for data type</h1>
+<a class ='btn btn-outline-dark' href=c-data-type-value-limitations.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-choosing-the-correct-data-type-for-the-calculation.html>Next</a><p>You can find out how many bytes are occupied by a given type by using the  <i style='color:blue'>sizeof</i> operator. 
+
+</p><p><i style='color:blue'>sizeof</i> is a keyword in C. 
+
+</p><p>The expression <i style='color:blue'>sizeof</i>(int) will result in the number of bytes occupied by a variable of type  int, 
+and the result is an integer of type <i style='color:blue'>size_t</i>. 
+
+</p><p>Type size_t is defined in the standard header file <i style='color:blue'>stddef.h</i>, as well as several other headers, 
+and will correspond to one of the basic integer types.  
+
+</p><p>Because the choice of type that corresponds to type size_t may differ between one C library and another,  
+it's best to use variables of size_t to store the value produced by the sizeof operator, even when you know  
+the basic type to which it corresponds. 
+
+</p><p>Here's how you could store a value that results from applying the  sizeof operator: 
+</p><div class='myCodeDiv'><button id='YNUIU' class='myCopyButton' data-clipboard-target='#TVVNY'>Copy</button><pre  id='TVVNY' style='font-size:18px;' class='code'>size_t size = <span class='r'>sizeof</span>(<span class='r'>long</span> <span class='r'>long</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YNUIU');clipboard.on('success', function(e) {$('#YNUIU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YNUIU').text('error');});</script></div><p>You can also apply the  sizeof operator to an expression, in which case the result is the size of the value
+that results from evaluating the expression. 
+
+</p><p>In this context, the expression would usually be just a variable of some kind. 
+
+</p><h3>Example
+
+</h3><p>This program will output the number of bytes occupied by each numeric type:
+</p><div class='myCodeDiv'><button id='NTAPD' class='myCopyButton' data-clipboard-target='#OMKHR'>Copy</button><pre  id='OMKHR' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  printf(<span class='q'>"char occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>char</span>)); 
+  printf(<span class='q'>"short occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>short</span>)); 
+  printf(<span class='q'>"int occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>int</span>)); 
+  printf(<span class='q'>"long occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>long</span>)); 
+  printf(<span class='q'>"long long occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>long</span> <span class='r'>long</span>)); 
+  printf(<span class='q'>"float occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>float</span>)); 
+  printf(<span class='q'>"double occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>double</span>)); 
+  printf(<span class='q'>"long double occupy %u bytes\n"</span>, <span class='r'>sizeof</span>(<span class='r'>long</span> <span class='r'>double</span>)); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NTAPD');clipboard.on('success', function(e) {$('#NTAPD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NTAPD').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h2>Note
+
+</h2><p>Because the sizeof operator results in an unsigned integer value, you output it using the %u specifier.
+
+</p><p>You can also obtain the number of bytes occupied by a variable, var_name, with the
+expression sizeof var_name. 
+
+</p><p>The space between the sizeof keyword and the variable name in the expression is essential.
+
+</p><p>If you want to apply the sizeof operator to a type, the type name must be between parentheses, like
+this: <i style='color:blue'>sizeof</i>(long double). 
+
+</p><p>When you apply sizeof to an expression, the parentheses are optional.
+</p><a class ='btn btn-outline-dark' href=c-data-type-value-limitations.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-choosing-the-correct-data-type-for-the-calculation.html>Next</a><h2>Related</h2><UL><LI><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point in binary form</a></LI><LI><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal in binary form</a></LI><LI><a href='c-data-type-value-limitations.html'>C Data type value Limitations</a></LI><LI><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Choosing the Correct Data Type for the calculation</a></LI><LI><a href='c-explicit-data-type-conversion.html'>C Explicit Data Type Conversion</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-sizeof-operator-for-data-type.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/charfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Character Processing Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Character Processing Functions</H1>
+<H2>Non-printable/Printable Tests - <CODE>iscntrl</CODE>, <CODE>isprint</CODE>,
+<CODE>isgraph</CODE> and <CODE>isspace</CODE></H2>
+<UL>
+<LI><CODE>int iscntrl(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a <EM>control character</EM>,
+where <EM>control character</EM> may differ from machine to machine, but for the
+standard 128-character ASCII set, is any character with a value between
+0 and 31 or a value equal to 127
+</UL>
+<LI><CODE>int isprint(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a <EM>printing character</EM>,
+and on most implementations is the same as <CODE>(iscntrl(c) ? 0 : 1)</CODE>.
+</UL>
+<LI><CODE>int isgraph(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a <EM>visible character</EM>,
+that is, it returns non-zero for everything that <CODE>isprint</CODE>
+returns non-zero except a space character.
+</UL>
+<LI><CODE>int isspace(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a <EM>whitespace character</EM>.
+In ASCII, whitespace characters are
+space (<CODE>' '</CODE>),
+tab (<CODE>'\t'</CODE>),
+carriage return (<CODE>'\r'</CODE>),
+newline (<CODE>'\n'</CODE>),
+vertical tab (<CODE>'\v'</CODE>) and
+formfeed (<CODE>'\f'</CODE>).
+</UL>
+</UL>
+<H2>Alphabetic
+-
+<CODE>isupper</CODE>,
+<CODE>islower</CODE>,
+<CODE>isalpha</CODE>
+</H2>
+<UL>
+<LI><CODE>int isupper(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is one of a locale-defined set
+of <EM>uppercase</EM> characters, usually <EM>A</EM> through <EM>Z</EM>.
+</UL>
+<LI><CODE>int islower(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is one of a locale-defined set
+of <EM>lowercase</EM> characters, usually <EM>a</EM> through <EM>z</EM>.
+</UL>
+<LI><CODE>int isalpha(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is either an uppercase or
+lowercase character, that is, 
+and is roughly equivalent to <CODE>(islower(c) || isupper(c))</CODE>.
+</UL>
+</UL>
+<H2>Numeric Tests - <CODE>isdigit</CODE> and <CODE>isxdigit</CODE></H2>
+<UL>
+<LI><CODE>int isdigit(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a decimal digit
+(<EM>0</EM> through <EM>9</EM>)
+</UL>
+<LI><CODE>int isxdigit(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a hexadecimal digit
+(<EM>0</EM> through <EM>9</EM>, <EM>A</EM> through <EM>F</EM> or
+<EM>a</EM> through <EM>f</EM>)
+</UL>
+</UL>
+<H2>Alphanumeric Test - <CODE>isalnum</CODE></H2>
+<UL>
+<LI><CODE>int isalnum(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is either a letter or a
+decimal digit
+and is roughly equivalent to <CODE>(isalpha(c) || isdigit(c))</CODE>.
+</UL>
+</UL>
+<H2>Punctuation Test - <CODE>ispunct</CODE></H2>
+<UL>
+<LI><CODE>int ispunct(int c)</CODE>
+<UL>
+<LI>Returns a nonzero value if <CODE>c</CODE> is a <EM>punctuation</EM>
+character, 
+that is, it returns non-zero for everything that is neither a space nor
+a character for which <CODE>isalnum</CODE> returns a nonzero value.
+</UL>
+</UL>
+<H2>Case Conversion - <CODE>toupper</CODE> and <CODE>tolower</CODE></H2>
+<UL>
+<LI><CODE>int toupper(int c)</CODE>
+<UL>
+<LI>If <CODE>c</CODE> is a lowercase letter, the corresponding uppercase
+letter is returned.
+<LI>If <CODE>c</CODE> is not a lowercase letter, <CODE>c</CODE> is returned
+unchanged.
+<LI>Some locales may have lowercase characters with no corresponding
+uppercase letter, in which case the lowercase character is returned unchanged.
+<LI>Pre-ANSI C implementations of <CODE>toupper</CODE> may not work
+correctly if <CODE>c</CODE> is not a lowercase character.
+</UL>
+<LI><CODE>int tolower(int c)</CODE>
+<UL>
+<LI><CODE>tolower</CODE> is nearly identical to <CODE>toupper</CODE> except
+that uppercase characters are converted to lowercase characters.
+<LI>All caveats which apply to <CODE>toupper</CODE> are equally applicable
+to <CODE>tolower</CODE>.
+</UL>
+</UL>
+<A HREF="printf.html">Previous</A>, 
+<A HREF="stdio.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/charfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+</HTML>

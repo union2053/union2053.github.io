@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/vstorage.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Variable Storage Classes</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Variable Storage Classes</H1>
+<H2>Automatic: <CODE>auto</CODE></H2>
+<UL>
+<LI>storage is automatically allocated on function/block entry and
+automatically freed when the function/block is exited
+<LI>may not be used with global variables (which have storage space that
+exists for the life of the program)
+<LI><CODE>auto</CODE> is the default for function/block variables
+<UL>
+<LI><CODE>auto int a</CODE> is the same as <CODE>int a</CODE>
+<LI>because it is the default, it is almost never used
+</UL>
+</UL>
+<H2>Optimization Hint: <CODE>register</CODE></H2>
+<UL>
+<LI><CODE>register</CODE> provides a hint to the compiler that you think
+a variable will be frequently used
+<LI>compiler is free to ignore <CODE>register</CODE> hint
+<LI>if ignored, the variable is equivalent to an <CODE>auto</CODE> variable
+with the exception that you may not take the address of a <CODE>register</CODE>
+(since, if put in a register, the variable will not have an address)
+<LI>rarely used, since any modern compiler will do a better job of optimization
+than most programmers
+</UL>
+<H2>Static Storage: <CODE>static</CODE></H2>
+<UL>
+<LI>if used inside a block or function, the compiler will create space for
+the variable which lasts for the life of the program
+<LI>
+<PRE>
+  int
+  counter(void)
+  {
+	static int cnt = 0;
+
+	return cnt++;
+  }
+</PRE>
+causes the <CODE>counter()</CODE> function
+to return a constantly increasing number
+</UL>
+<H2>External References: <CODE>extern</CODE></H2>
+<UL>
+<LI>If a variable is declared (with global scope) in one file but
+referenced in another, the <CODE>extern</CODE> keyword is used to
+inform the compiler of the variable's existence:
+<UL>
+<LI>In <VAR>declare.c</VAR>:
+<PRE>
+int farvar;
+</PRE>
+<LI>In <VAR>use.c</VAR>:
+<PRE>
+{
+	extern int farvar;
+	int a;
+	a = farvar * 2;
+}
+</PRE>
+</UL>
+<LI>Note that the <CODE>extern</CODE> keyword is for <EM>declarations</EM>,
+not <EM>definitions</EM>
+<UL>
+<LI>An <CODE>extern</CODE> declaration does not create any storage; that
+must be done with a global definition
+</UL>
+</UL>
+<H2>Private Variables: <CODE>static</CODE></H2>
+<UL>
+<LI>another use for the <CODE>static</CODE> keyword is to ensure
+that code outside this file cannot modify variables that are globally
+declared inside this file
+<UL>
+<LI>If <VAR>declare.c</VAR> had declared <VAR>farvar</VAR> as:
+<PRE>
+static int farvar;
+</PRE>
+then the <CODE>extern int farvar</CODE> statement in <VAR>use.c</VAR>
+would cause an error
+<LI>This use of <CODE>static</CODE> is commonly used in situations where
+a group of functions need to share information but do not want to risk
+other functions changing their internal variables
+<PRE>
+static int do_ping = 1;	/* start with `PING' */
+
+void
+ping(void)
+{
+	if (do_ping == 1) {
+		printf("PING ");
+		do_ping = 0;
+	}
+}
+
+void
+pong(void)
+{
+	if (do_ping == 0) {
+		printf("PONG\n");
+		do_ping = 1;
+	}
+}
+</PRE>
+</UL>
+</UL>
+<H2>Variable Initialization</H2>
+<UL>
+<LI><CODE>auto</CODE>, <CODE>register</CODE> and <CODE>static</CODE>
+variables may be initialized at creation:
+<PRE>
+  int
+  main(void)
+  {
+	int a = 0;
+	register int start = 1234;
+	static float pi = 3.141593;
+  }
+</PRE>
+<LI>Any global and <CODE>static</CODE> variables which have
+not been explicitly initialized by the programmer are set to zero
+<LI>If an <CODE>auto</CODE> or <CODE>register</CODE> variable has
+not been explicitly initialized, it contains whatever was previously
+stored in the space that is allocated to it
+<UL>
+<LI>this means that <CODE>auto</CODE> and <CODE>register</CODE>
+variables should <STRONG>always</STRONG> be initialized before being used
+<LI>compiler may provide a switch to warn about uninitialized variables
+</UL>
+</UL>
+<A HREF="scope.html">Previous</A>, 
+<A HREF="control.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/vstorage.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

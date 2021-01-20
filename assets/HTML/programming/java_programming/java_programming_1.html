@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/java_programming/java_programming_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="Java, Programlama, Java Programlama, Eclipse, J2EE, Compiler, Javac">
+	<meta name="robots" content="index,follow">
+	<title>Java Programlama Ders: I</title>	
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>Java</h1>
+	<div align="right" name="toc"><font size="-2">26 Temmuz 2006</font></div>
+	<h2>Java Programlama Dersi - I</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Java nasıl çalışır?</p>
+ 				<p>- JRE nedir; nasıl kurulur?</p>
+	 			<p>- JDK çeşitleri</p>
+	 			<p>- J2EE'yi yüklemek</p>		
+	 			<p>- IDE kavramı</p>
+	 			<p>- Eclipse kurulumu</p>		
+	 			<p>- Eclipse'te J2EE ile çalışma</p>		
+	 			<p>- Eclipse kullanarak ilk Java programının yazılması</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>	
+	<p>Merhaba arkadaşlar;</p>
+	<p>Günümüzde kullanılan programlama dilleri arasında, şahsi fikrime göre Java en iyi dil. 
+	Gerçek anlamda platform bağımsızlığı, zekice hazırlanmış yapısı, hemen 
+	hemen herşeyin desteklendiği kütüphaneleri ve yakında açık kaynak koda dönüşecek
+	olmasıyla bundan daha iyi bir dil olduğuna inanmıyorum. Bu yüzden Java'yı, bu dile yakışır
+	şekilde, olabildiğince sade ve bir o kadar da açıklayıcı anlatmaya çalışacağım. 
+	Kodlamaya girmeden önce, Java'da kod yazabilmek için gerekli herşeyin adım adım nasıl 
+	yapılacağını öğreneceksiniz. Compiler nasıl yüklenir; Java IDE'lerinden 
+	Eclipse nasıl kurulur, nasıl kullanılır sorularına bu yazıda cevap bulacaksınız.
+	</p>
+	<p>Öyleyse başlayalım:</p>	
+	<h3>Java'nın çalışma prensibi...</h3>
+	<p>Java alışılageldik programlar gibi çalışmaz. Yazmış olduğunuz Java kodu derlendikten 
+	sonra, Bytecode'a çevrilir. Bytecode daha sonra JRE (Java Runtime Environment - 
+	Java Çalışma Ortamı) tarafından sunulan JVM (Java Virtual Machine - Java Sanal Makinesi) 
+	ile, hangi bilgisayarda kullanıyorsanız o yapıya uygun hale dönüştürülüp çalıştırılır. 
+	İşte bu sayede Java'nın platform bağımsızlığı sağlanmış olur. Yani temelde yazdığınız 
+	kodlar, direkt olarak makinede değil. Makine üzerinde kurulu olan sanal bir makine 
+	(JVM) tarafından çalıştırılır. 
+	</p>
+	<p>Yeri gelmişken Java'nın fotokopisi C# için de birşeyler söyleyeyim. C# da platform
+	bağımsızdır. Ama kullanmanız gereken platform <i>'de facto'</i> Microsoft Windows'tur. C#'ta 
+	yazıp derlediğiniz kodu, Linux gibi bir platforma taşırsanız bu program çalışmayacaktır.
+	Çünkü Microsoft Linux'a destek vermemektedir ve ürünlerinin hiçbirini de bu platformda 
+	çalıştırmamaktadır. Gerçi Novell'in önderliği ile <a href="http://www.mono-project.com/" target="_blank">Mono</a> ve GNU'nun önderliği ile yürüyen
+	<a href="http://www.dotgnu.org/" target="_blank">DotGNU</a>, C# programlarınızı Linux'ta da çalıştırmanızı sağlamaktadır. Ancak bahsetmiş 
+	olduğum gibi bu Microsoft'un desteklediği birşey değildir. Umarım bu söylediklerimden 
+	sonra, C#'ın Java'dan üstün olduğunu söyleyip, üzerime saldıranlar olmaz. 
+	</p>
+	<p>  
+	C# son derece güzel bir başka dil olmasına rağmen, Java kadar uygun hâle gelebilmesi 
+	için yaygınlaşması gerekiyor. Sitemizin sonraki aşamalarında C# ile programlamaya 
+	da değineceğiz. Ama bu bazı gerçekleri değiştirmiyor. Neyse, devam edelim... 
+	</p>
+	<p>Java'nın çalışma yapısını yukarda anlattım. Java ile yazılmış bir programı çalıştırmanız
+	için Java Çalıştırma Ortamına gereksinim duyarsınız. Bu nedenle herşeyin başında, JRE 
+	(Java Runtime Environment) yüklemenizi öneririm. İkinci aşamada kuracağımız J2EE 
+	içersinde kendi JRE olmasına rağmen, tamamen bağımsız bir JRE kurmanız daha yerinde 
+	olacaktır. Çünkü test aşamalarında, standart bir JRE kullanmanız daha doğru sonuçlara 
+	neden oluyor. En azından kendi yaşadıklarımı düşününce, atladığım bazı noktaları tekrar 
+	yakalamamı sağladığını söyleyebilirim. 
+	</p>
+	<h3>JRE Kurulumu</h3>
+	<p>
+	JRE (Java Runtime Environment) kurmak için 
+	<a href="http://java.com/en/download/manual.jsp" target="_blank">http://java.com/en/download/manual.jsp</a> 
+	adresine girin. Buradan işletim sisteminize uygun, versiyonu seçip indirmeye 
+	başlayabilirsiniz. JRE yüklemek için iki opsiyonunuz vardır. Birisi kullandığınız 
+	tarayıcı üzerinden yüklemeyle olurken, diğeri setup dosyasını indirip kurmanız 
+	şeklinde oluyor. Verdiğim linkteyse setup dosyasını inidirip kuruyorsunuz. Sonraki 
+	kurulumlarda kullanmak açısından, böyle daha iyi olacaktır. JRE'yi yükledikten sonra, 
+	Windows için command prompt'u, Linux için shell'i açarak 'java -version' yazın. Eğer karşınıza versiyon bilgileri gelmişse, JRE'yi sorunsuz yüklediniz demektir. 
+	</p>
+	<h3>JDK Tipleri</h3>
+	<p>Şimdi gelelim Compiler kısmına... Yukarda anlattığım kısım, sadece Java 
+	programlarını çalıştırmak içindi. Yazdığınız kodun derlenmesi içinse, bir compiler'a 
+	(derleyiciye) ihtiyaç vardır. Java desteklediği özelliklere göre SDK'larını 
+	(Software Development Kit) üçe ayırmıştır. Çok kısaca -belki de üstün körü 
+	demek daha doğru olur- bahsedecek olursam: 
+	</p>
+	<p><b>J2ME(Java 2 Micro Edition):</b> Mobil uygulamaları geliştirebileceğiniz bir ortam sunar. Kullanabileceğiniz fonksiyonlar ve özellikleri çalışacağı ortama göre (cep telefonu vb.) sınırlandırılmıştır.</p>
+	<p><b>J2SE(Java 2 Standart Edition):</b> Standart uygulamalar geliştirmek içindir.</p>
+	<p><b>J2EE(Java 2 Enterprise Edition):</b> Aklınıza gelebilecek hemen herşeyi kapsayan, çok katmanlı yapıda proje geliştirmenizi sağlamak için kullanılır. Servlet, JSP vb. birçok şeyi kapsadığı gibi, 
+	J2SE'nin da her özelliğini kapsar. Kısacası en üst düzey bu oluyor.</p>
+	
+	<p>Şimdi gelelim hangisini yükleyeceğimize... Ben yaptığım işlerde Servlet kullandığımdan
+	 dolayı J2EE'yi tercih ediyorum. Ama Servlet kullanmasaydım da onu tercih ederdim. 
+	 Çünkü yarın öbür gün kullanmak isteyebileceğim şeyleri de içermektedir. Belki bu biraz 
+	 bir boy büyük alalım, seneye de giyer mantığından kaynaklanıyor olabilir. Ona karar 
+	 veremiyorum :)</p>
+	 <h3>J2EE'yi Yüklemek</h3>
+	 <p>J2EE'yi yüklemek için: </p>
+	 <p><a href="http://java.sun.com/j2ee/1.4/download.html" target="_blank">http://java.sun.com/j2ee/1.4/download.html</a> 
+	 adresine girin. ( Yazıyı okuduğunuz tarihte daha üst sürümler çıkabilir. Bu nedenle 
+	 verdiğim linkler geçerliliğini yitirmiş olabilir. Böyle bir durumla karşılaşırsanız,
+	 <a href="http://java.sun.com/" target="_blank">http://java.sun.com</a> adresinden, J2EE'nin en güncel 
+	 versiyonunu zorluk çekmeden bulabilirsiniz. ) Vermiş olduğum adreste parça parça 
+	 yükleme imkanı bulunmaktadır. Bence hiç uğraşmayın ve All-In-One Bundle seçeniğini 
+	 yükleyin. 
+	 </p>
+	 <p>Eğer Windows işletim sistemi kullanıyorsanız ve kurulum esnasında bir sıkıntı yaşarsanız 
+	 (örneğin, kurulumun %10'da takılması gibi), panik yapmayın. 
+	 <a href="http://developers.sun.com/prodtech/javatools/jscreator/reference/faqs/installation/win2k_XP.html" target="_blank">Çözüm Linki</a>ne basın. 
+	 Burada yazanları uygularsanız, sorun kalmayacaktır. Genelde bu Windows\System32 
+	 içersindeki productregistry dosyasından kaynaklanan bir hata oluyor. 
+	 Verdiğim çözüm linkine basarsanız, çok daha güzel bir yönlendirmeyle sorununuzu 
+	 çözebilirsiniz. 
+	 </p>
+	 <h3>Eclipse Kurulumu</h3>
+	 <p>
+	 Yükleme bittikten sonra, artık Java programlarını da derleyebilir hale geleceksiniz. 
+	 Ancak metin belgesinde yazıp, programı derlemeyeceğimize göre, bize bir IDE 
+	 (Integrated Development Environment - Geliştirme Ortamı) gerekmektedir. 
+	 Java'da kod geliştirmek için birçok geliştirme ortamı mevcuttur. 
+	 Şu ana kadar ona yakın geliştirme ortamı kullanmış biri olarak, gözü kapalı 
+	 Eclipse'i öneririm. Eclipse IBM firması kanalından çıkmış ve 
+	 tamamen ücretsiz olan gördüğüm en iyi Java geliştirme ortamıdır. Open Source 
+	 dünyasından inanılmaz bir destek görmektedir. Hemen hemen her konuda plugin 
+	 bulabileceğiniz adresler mevcuttur. ( Örneğin, <a href="http://www.eclipseplugincentral.com/" target="_blank">http://www.eclipseplugincentral.com</a> ) 
+	 </p>
+	 <p>
+	 Lafı çok uzatmadan bu güzel geliştirme ortamının nasıl yüklenip kurulacağına gelelim. 
+	 Eclipse kurulmaz :) Eclipse direkt indirilir, sıkıştırılmış olduğu dosyadan açılır 
+	 ve çalışmaya hazırdır. 
+	 </p>
+	 <p>
+	 Önce <a href="http://www.eclipse.org/">http://www.eclipse.org</a> adresine girin. 
+	 Burada yukardaki Download kısmından Eclipse'i indirebilirsiniz. İşletim sisteminize 
+	 uygun versiyonu belirleyin. (Gerçi sistem uygun versiyonu belirleyip, direkt onu 
+	 yüklemenizi önerecektir.) Sonra verilen linke tıklayıp, sıkıştırılmış boyutta olan 
+	 programı indirin. Aşağı yukarı 100 MB olan sıkıştırılmış dosyayı indirip açıktan 
+	 sonra, hemen kullanmaya başlayabilirsiniz. Extract ettiğiniz klasörde Windows için 
+	 eclipse.exe diye bir çalıştırılabilir dosya göreceksiniz. Buna tıklarsanız Eclipse'i 
+	 başlatırsınız. İlk başlatmada, size çalışma ortamınızı sorar. Çalışma ortamı 
+	 (workspace) projelerinizin kaydedileceği ve yürüteleceği temel yerdir. Burayı 
+	 istediğiniz şekilde belirtebilirsiniz. 
+	 </p>
+	 <p>
+	 Bundan sonra karşınıza Eclipse'in karşılama ekranı çıkacaktır: 
+	 </p>
+	 <p>
+	<div class="notcolorful">
+	 <a href="eclipse_screens/eclipse1.jpg" target="_blank">
+	 	<img src="eclipse_screens/sm_eclipse1.jpg" alt="[Eclipse Welcome Screen]" border="0"/>
+	 </a>
+	 </div>
+	 </p>
+	 <br/>
+	 <p>Herşeyden önce Eclipse'te bazı ayarlar yapmamız gerekiyor. Üst menülerde bulunan 
+	 Window'a basın. Açılan menüden en altta bulunan Preferences'a basın. Burada Eclipse'e 
+	 ait hemen hemen bütün yapılandırmaya dair bilgi bulunmaktadır. Bizim yapmamız gereken 
+	 ilk şeyse, Java Çalışma Ortamını tanıtmaktır. Bunun için yandaki ağaç yapısından 
+	 Java'ya tıklayın. Çıkan alt menüden Installed JREs kısmına gelin.</p>
+	 <p>Ekranda gördüğünüz gibi Add kısmına basın.</p>
+	 <p>
+	<div class="notcolorful">
+	 <a href="eclipse_screens/eclipse2.jpg" target="_blank">
+	 	<img src="eclipse_screens/sm_eclipse2.jpg" alt="[Eclipse JDK Add Screen]" border="0"/>
+	 </a>
+	 </div>
+	 </p>
+	 <br/>
+	 <p>
+	 Karşınıza yeni bir ekran gelecektir. Bu ekranda JRE Name kısmına J2EE veya herhangi 
+	 bir isim verebilirsiniz. JRE Home Directory kısmındaysa Browse'a basın. Diyelim ki 
+	 J2EE'yi daha önce C:\Sun klasörü altına kurdunuz. O halde Browse'dan, önce Sun daha 
+	 sonra jdk'yi seçmeniz gerekmektedir. Tamam'a bastığınızda, aşağıda jar paketleri 
+	 oluşur. Başarılı bir ekran görüntüsü aşağıdaki gibi olacaktır: 
+	 </p>
+ 	 <p>
+	<div class="notcolorful">
+		 <a href="eclipse_screens/eclipse3.jpg" target="_blank">
+		 	<img src="eclipse_screens/sm_eclipse3.jpg" alt="[Eclipse JDK Success Screen]" border="0"/>
+		 </a>
+	</div>
+	 </p>
+	 <br/>
+	 <p>Bundan sonra tamam'a basıp bir önceki menüye dönüyoruz. Burada, J2EE adını 
+	 verdiğimiz çalışma ortamının yanında ki tiki işaretliyoruz. OK'e basıp gerekli 
+	 yapılandırmayı tamamlıyoruz. Artık proje geliştirmeye başlayabiliriz. 
+	 </p>
+	 <p>
+	 Şu an en başa, karşılama ekranına döndük. Yeni bir projeye başlayabilmek için üst 
+	 menüden File->New Project yolunu takip ediyoruz. Karşımıza gelen ekranda projemize 
+	 bir isim veriyoruz. İleri dediğimiz anda projemiz oluşmuştur. Eğer direkt olarak 
+	 çalışma alanına yönlendirilmediyseniz, Karşılama ekranını kapatmanız gerekebilir. 
+	 </p>
+	 <p>
+	 Yanda olan proje menüsünde, proje adınızın görünüyor olması gerekir. Bunun üzerine 
+	 sağ fare tuşu ile tıklayarak, New-> Class derseniz, yeni bir sınıf yaratabilirsiniz. 
+	 </p>
+	 <p>
+	 Örnek bir uygulama için şöyle bir yol izleyelim. Projenizi gösteren klasör üzerine 
+	 sağ tuşla tıklayın ve New-> Class kısmına basın. Oluşturacağımız sınıfa HelloWorld 
+	 diyelim. Sonra oluşturduğumuz sınıfa aşağıdaki kodu yazalım: 
+	 </p>
+	 <pre>
+public class HelloWorld {
+   public static void main( String args[ ] )
+   {
+      System.out.println("Hello World!");
+   }
+}
+</pre>
+	<p>
+	Kodu çalıştırmaya gelince... Yukarda play tuşuna benzer bir simge göreceksiniz. 
+	Ona tıklayın. Run As'e gelin. Ve Java Application'i seçin. Aşağıdaki resimde 
+	görebilirsiniz: 
+	</p>
+   <p>
+	<div class="notcolorful">
+		 <a href="eclipse_screens/eclipse4.jpg" target="_blank">
+		 	<img src="eclipse_screens/sm_eclipse4.jpg" alt="[Eclipse Run Application Screen]" border="0"/>
+		 </a>
+	 </div>
+	 </p>
+	 <br/>
+	 <p>Daha basit bir yöntem için önce Alt + Shift + X tuşlarına basın. 
+	 Sonra bunları bırakın ve J'ye basın. (Alt + Shift + X, J) . 
+	 Yukarda yaptığımız işin kısayol tuşlarıya çalıştırılması da kısacası bu şekildedir. 
+	 </p>
+	<div align="right">
+		<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+			&#199;a&#287;atay &#199;EB&#304;
+		</a>
+	</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="../index-2.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="java_programming_2.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/java_programming/java_programming_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:37 GMT -->
+</html>

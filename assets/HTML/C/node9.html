@@ -1,0 +1,428 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Further Data Types</TITLE>
+<META NAME="description" CONTENT="Further Data Types">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html937"
+ HREF="node9.html#SECTION00910000000000000000">
+Structures</A>
+<UL>
+<LI><A NAME="tex2html938"
+ HREF="node9.html#SECTION00911000000000000000">
+Defining New Data Types</A>
+</UL>
+<LI><A NAME="tex2html939"
+ HREF="node9.html#SECTION00920000000000000000">
+Unions</A>
+<LI><A NAME="tex2html940"
+ HREF="node9.html#SECTION00930000000000000000">
+Coercion or Type-Casting</A>
+<LI><A NAME="tex2html941"
+ HREF="node9.html#SECTION00940000000000000000">
+Enumerated Types</A>
+<LI><A NAME="tex2html942"
+ HREF="node9.html#SECTION00950000000000000000">
+Static Variables</A>
+<LI><A NAME="tex2html943"
+ HREF="node9.html#SECTION00960000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00900000000000000000">
+Further Data Types</A>
+</H1>
+<P>
+This Chapter discusses how more advanced data types and structures can be
+created and used in a C program.
+<P><H1><A NAME="SECTION00910000000000000000">
+Structures</A>
+</H1>
+<P>
+Structures in C are similar to records in Pascal. For example:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;struct gun
+				{
+				char name[50];
+				int magazinesize;
+				float calibre;
+				};
+&nbsp;
+		struct gun arnies;
+</TT></PRE>
+</TT>
+<P>
+defines a new structure <TT>gun and makes <TT>arnies</TT> an instance of it.
+<BR>
+<P><B>NOTE:</B> that <TT>gun</TT> is a <EM>tag</EM> for the structure that serves as
+shorthand for future declarations. We now only need to say <TT>struct gun</TT> and
+the body of the structure is implied as we do to make the <TT>arnies</TT> variable.
+The tag is <EM>optional</EM>.
+<BR>
+<P>
+Variables can also be declared between the <TT>}</TT> and <TT>;</TT> of a struct
+declaration, <EM>i.e.</EM>:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;struct gun
+				{
+				char name[50];
+				int magazinesize;
+				float calibre;
+				} arnies;
+</TT></PRE>
+</TT>
+<P><TT>struct's can be pre-initialised at declaration:
+<BR>
+<P><TT>
+&nbsp;&nbsp;struct gun arnies={&quot;Uzi&quot;,30,7};
+<BR>
+<P></TT>
+<P>
+which gives <TT>arnie a 7mm. Uzi with 30 rounds of ammunition.
+<P>
+To access a member (or field) of a <TT>struct</TT>, C provides the <TT>.</TT>
+operator. For example, to give <TT>arnie</TT> more rounds of ammunition:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>arnies.magazineSize=100;</TT>
+<BR>
+<P></TT></TT></TT><H2><A NAME="SECTION00911000000000000000">
+Defining New Data Types</A>
+</H2>
+<P><TT>typedef</TT> can also be used with structures. The following creates
+a new type <TT>agun</TT> which is of type <TT>struct gun</TT> and can be initialised
+as usual:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;typedef struct gun
+				{
+				char name[50];
+				int magazinesize;
+				float calibre;
+				} agun;
+&nbsp;
+		 agun arnies={&quot;Uzi&quot;,30,7};
+</TT></PRE>
+</TT>
+<P>
+Here <TT>gun still acts as a <EM>tag</EM> to the <TT>struct</TT> and is optional.
+Indeed since we have defined a new data type it is not really of much use,
+<BR>
+<P><TT>agun</TT> is the new data type. <TT>arnies</TT> is a variable of type <TT>agun</TT>
+which is a structure.
+<BR>
+<P>
+C also allows arrays of structures:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;typedef struct gun
+				{
+				char name[50];
+				int magazinesize;
+				float calibre;
+				} agun;
+&nbsp;
+		agun arniesguns[1000];
+</TT></PRE>
+</TT>
+<P>
+This gives <TT>arniesguns a 1000 guns. This may be used in the following
+way:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arniesguns[50].calibre=100;
+</TT></PRE>
+</TT>
+<P>
+gives Arnie's gun number 50 a calibre of 100mm, and:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itscalibre=arniesguns[0].calibre;
+</PRE>
+</TT>
+assigns the calibre of Arnie's first gun to <TT>itscalibre.
+<P></TT></TT></TT></TT><H1><A NAME="SECTION00920000000000000000">
+Unions</A>
+</H1>
+<P>
+A union is a variable which may hold (at different times) objects of different
+sizes and types. C uses the <TT>union</TT> statement to create unions, for example:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;union number
+				 {
+				 short shortnumber;
+				 long longnumber;
+				 double floatnumber;
+				 } anumber
+</TT></PRE>
+</TT>
+<P>
+defines a union called <TT>number and an instance of it called <TT>
+anumber</TT>. <TT>number</TT> is a union <EM>tag</EM> and acts in the same way as a tag
+for a structure.
+<P>
+Members can be accessed in the following way:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;%ld<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,anumber.longnumber);
+</TT></PRE>
+</TT>
+<P>
+This clearly displays the value of <TT>longnumber.
+<BR>
+<P>
+When the C compiler is allocating memory for unions it will 
+always reserve enough room for the
+largest member (in the above example this is 8 bytes for the <TT>double</TT>).
+<BR>
+<P>
+In order that the program can keep track of the type of union variable being
+used at a given time it is common to have a structure (with union embedded in
+it) and a variable which flags the union type:
+  <BR>
+<P>
+An example is:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;typedef struct
+				 {&nbsp;int maxpassengers;
+				 } jet;
+&nbsp;
+		typedef struct
+				 {&nbsp;int liftcapacity;
+				 } helicopter;
+&nbsp;
+		typedef struct
+				 {&nbsp;int maxpayload;
+				 } cargoplane;
+&nbsp;
+		 typedef 		 union
+				 {&nbsp;jet jetu;
+						 helicopter helicopteru;
+						 cargoplane cargoplaneu;
+				 } aircraft;
+&nbsp;
+		typedef 		 struct
+				 {&nbsp;aircrafttype kind;
+						 int speed;
+						 aircraft description;
+				 } an_aircraft;
+</TT></PRE>
+</TT>
+<P>
+This example defines a base union <TT>aircraft which may either be <TT>
+jet</TT>, <TT>helicopter</TT>, or <BR><TT>cargoplane</TT>.
+<P>
+In the <TT>an_aircraft</TT> structure
+there is a <TT>kind</TT> member which indicates which structure is being held at
+the time.
+<P></TT></TT></TT><H1><A NAME="SECTION00930000000000000000">
+Coercion or Type-Casting</A>
+</H1>
+<P>
+C is one of the few languages to allow <EM>coercion</EM>, that is forcing one
+variable of one type to be another type. C allows this using the cast operator
+<TT>()</TT>. So:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int integernumber;
+		 float floatnumber=9.87;
+&nbsp;
+				 integernumber=(int)floatnumber;
+</TT></PRE>
+</TT>
+<BR>
+<P>
+assigns 9 (the fractional part is thrown away) to <TT>integernumber.
+<P>
+<BR>
+<P>
+And:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int integernumber=10;
+		 float floatnumber;
+&nbsp;
+				 floatnumber=(float)integernumber;
+</TT></PRE>
+</TT>
+<BR>
+<P>
+assigns 10.0  to <TT>floatnumber.
+<BR>
+<P>
+Coercion can be used with any of the simple data types including <TT>char</TT>, so:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int integernumber;
+		 char letter='A';
+&nbsp;
+				 integernumber=(int)letter;
+</TT></PRE>
+</TT>
+<P>
+assigns 65 (the ASCII code for `A') to
+<TT>integernumber.
+<P>
+Some typecasting is done automatically -- this is mainly with integer
+compatibility.
+<BR>
+<P>
+A good rule to follow is: <B>If in doubt cast</B>.
+<BR>
+<P>
+Another use is the make sure division behaves as requested: If we have two
+integers <TT>internumber</TT> and <TT>anotherint</TT> and we want the answer to be a
+float then :
+<BR>
+<P><PRE><TT>
+e.g.
+&nbsp;<TT>floatnumber =</TT>
+		&nbsp;<TT>(float) internumber / (float) anotherint;</TT>
+</TT></PRE>
+<BR>
+<P>
+ensures floating point division.
+<P></TT></TT></TT><H1><A NAME="SECTION00940000000000000000">
+Enumerated Types</A>
+</H1>
+<P>
+Enumerated types contain a list of constants that can be addressed in integer
+values.
+<BR>
+<P>
+We can declare types and variables as follows.
+<BR>
+<P>&nbsp;&nbsp;<TT>enum days {mon, tues, ..., sun} week;</TT>
+<P>&nbsp;&nbsp;<TT>enum days week1, week2;</TT>
+<BR>
+<P><B>NOTE:</B> As with arrays first enumerated name has index value 0. So <TT>
+mon</TT> has value 0, <TT>tues</TT> 1, and so on.
+<BR>
+<P><TT>week1</TT> and <TT>week2</TT> are variables.
+<P>
+<BR>
+<P>
+We can define other values:
+<BR>
+<PRE><TT>
+&nbsp;&nbsp;<TT>enum escapes</TT> { <TT>bell = `<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">a',</TT>
+		 <TT>backspace = `<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">b',  tab = `<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">t',</TT>
+		 <TT>newline = `\n', vtab = `<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">v',</TT>
+		 <TT>return = `<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">r'};</TT>
+</TT></PRE>
+<P>
+We can also override the 0 start value:
+<BR>
+<P>&nbsp;&nbsp;<TT>enum months {jan = 1, feb, mar, ......, dec};</TT>
+<P>
+<BR>
+<P>
+Here it is implied that feb = 2 <EM>etc.</EM>
+<P><H1><A NAME="SECTION00950000000000000000">
+Static Variables</A>
+</H1>
+<P>
+A <TT><B>static</TT></B> variable is <U>local</U> to particular function.
+However, it is only initialised once (on the first call to function).
+<P>
+Also the value of the variable on leaving the function remains <B>intact</B>. On
+the next call to the function the the <TT>static</TT> variable has the same value
+as on leaving.
+<P>
+To define a <TT>static</TT> variable simply prefix the variable declaration with the
+<TT>static</TT> keyword. For example:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;void stat(); /* prototype fn */ 
+&nbsp;
+		 main()
+		&nbsp;&nbsp;{ int i;
+&nbsp;
+				 for (i=0;i&lt;5;++<I>i</I>)
+						 stat();
+		&nbsp;&nbsp;}
+&nbsp;
+<P>
+stat()
+		&nbsp;&nbsp;{		int auto_var = 0;
+				 static int static_var = 0;
+&nbsp;
+				 printf( "auto = %d, static = %d \n",
+						 auto_var, static_var);
+				 ++auto_var;
+				 ++static_var;
+		&nbsp;&nbsp;}
+</TT></PRE>
+</TT>
+<P>
+Output is:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;auto_var = 0, static_var= 0
+		auto_var = 0, static_var = 1
+		auto_var = 0, static_var = 2
+		auto_var = 0, static_var = 3
+		auto_var = 0, static_var = 4
+</PRE>
+</TT>
+<BR>
+<P>
+Clearly the <TT>auto_var variable is created each time. The <TT>
+static_var</TT> is created once and remembers its value.
+<P></TT></TT><H1><A NAME="SECTION00960000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12386</B></P>
+<P>
+Write program using enumerated types which when given today's date will print
+out tomorrow's date in the for 31st January, for example.</P>
+<P><P>
+<B>Exercise 12387</B></P>
+<P>
+Write a simple database program that will store a persons details such as age,
+date of birth, address <EM>etc.</EM></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:50 GMT -->
+</HTML>

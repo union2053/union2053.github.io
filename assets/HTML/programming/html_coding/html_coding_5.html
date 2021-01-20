@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/html_coding/html_coding_5.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:25:41 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="HTML Kodlama, HTML tag, HTML anlatımı, cagataycebi.com">
+	<meta name="robots" content="index,follow">
+	<title>HTML Kodlama Ders: V</title>
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">07 Nisan 2013</font></div>
+	<h2>HTML Kodlama Dersi - V</h2>
+
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Form elemanları</p>
+ 				<p>- checkbox, dropbox, radiobox kullanımı</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	<h4>HTML Form Elemanları</h4>
+
+ <p>
+	 Bu yazıda HTML form elemanlarını öğreneceğiz. Nedir bunlar ne işe yarar önce bunlardan bahsedelim...
+	 Form elemanlarını, kullanıcı bilgi girişinde kullanır. Form elemanları kullanıcı adı, şifre girişi gibi alanlar 
+	 oluşturmamızı sağlar. Aynı zamanda onay kutuları oluştururken de kullanırız. 
+	 Mesela kullanıcıdan evli veya bekar olduğu, evi arabası olup olmadığı bilgilerini alırken form elemanlarıyla 
+	 oluşturacağımız onay kutularından yararlanırız.
+	<p>
+ <p>
+	 	Form  elemanları &lt;form&gt;..&lt;/form&gt; etiketleri arasına yazılır. input en çok  kullanacağımız form etiketidir. 
+ 		Kapatılmaz. input etiketi içerisinde kullanılan type ifadesiyle girdi türü belirlenir. Bir örnek yapacak olursak:
+ 	</p>
+<pre>
+&lt;html&gt;
+ &lt;body&gt;
+  &lt;form&gt;
+   Ad: &lt;input type=&quot;text&quot;  name=&quot;name&quot;&gt;&lt;br/&gt;
+   Soyad: &lt;input  type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+  &lt;/form&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	
+	<p>Yukarıda yaptığımız örnek tarayıcıda aşağıdaki gibi gözükecektir: </p> 
+<p>	
+	Ad:&nbsp;
+  <input type="text" name="firstname"/>
+  <br />
+  Soyad:&nbsp;
+  <input type="text" name="lastname"/>
+  <br />
+</p>
+ 
+  <p>type="..." ve name="..." ifaderi dinamik web sayfası oluştururken daha iyi anlaşılacaktır. 
+  Henüz detaya girmeyelim. Ancak şunu bilmekte yarar var: text, name ve lastname yerine Türkçe karakter içermeyen 
+  Türkçe ifadeler de kullanabiliriz. (Yani name="kullaniciadi" şeklinde bir ifade de geçerli olurdu.)
+  Şimdi örneğimizi biraz daha geliştirelim. Bir gönderme butonu oluşturalım ve ad soyad  kutucuklarına sayfa 
+  açıldığında görüntülenecek yazılar ekleyelim.</p>
+  
+<pre>
+&lt;html&gt;
+ &lt;body&gt;
+  &lt;form&gt;
+    Ad: &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;adınızı  giriniz&quot;&gt;&lt;br/&gt;
+    Soyad: &lt;input type=&quot;text&quot; name=&quot;lastname&quot;  value=&quot;soyadınızı giriniz&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Gönder&quot;&gt;
+  &lt;/form&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Sayfada göreceğimiz yapı aşağıdaki gibi olacaktır:</p>
+<p>  
+  Ad:&nbsp;
+  <input type="text" name="firstname" value="adınızı giriniz" />
+  <br />
+  Soyad:&nbsp;
+  <input type="text" name="lastname" value="soyadınızı giriniz" />
+  <br />
+  <input type="submit" value="Gönder" />
+</p>
+  
+  <p>Submit ifadesiyle buton oluşturduk. Value ise butonun ve kutucukların içindeki ifadeleri yazmamızda kullanıldı.
+  Onay kutuları oluşturmamızda da işe yarayacağından bahsetmiştik. Bununla ilgili ilk örneğimizi de yapalım.</p>
+  
+<pre>
+&lt;html&gt;
+ &lt;body&gt;
+  &lt;form&gt;
+   &lt;input type=&quot;radio&quot; name=&quot;cinsiyet&quot; value=&quot;bayan&quot;&gt;Bayan&lt;br/&gt;
+   &lt;input type=&quot;radio&quot; name=&quot;cinsiyet&quot; value=&quot;erkek&quot;&gt;Erkek&lt;br/&gt;
+   &lt;input type=&quot;submit&quot; value=&quot;Kaydet&quot;&gt;
+  &lt;/form&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+  
+<p>
+			<form>
+				<input type="radio" name="cinsiyet" value="bayan">Bayan<br/>
+				<input type="radio" name="cinsiyet" value="erkek">Erkek<br/>
+				<input type="submit" value="Kaydet">
+ 			</form>
+</p>
+<p> 
+	Üstteki örnekte görülen "<i>radio</i>" ifadesi tek seçeneği seçmemizi sağlar. Birden fazla seçenek seçmemizi gerektiren 
+	durumlar da ise	checkbox ifadesini kullanırız.
+</p>
+
+<pre>
+&lt;html&gt;
+ &lt;body&gt;
+  &lt;h5&gt;Hangi Tür Müzikleri Seversiniz&lt;/h5&gt;
+   &lt;form&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;music&quot; &gt;Pop&lt;br/&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;music&quot; &gt;Rock&lt;br/&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;music&quot; &gt;Arabesk&lt;br/&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;music&quot; &gt;Türk Sanat Müziği&lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Kaydet&quot;&gt;
+   &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Yazılan kodun sonucunda, birden çok seçimi yapabiliyoruz:</p>
+<p>  
+  <form>
+				<input type="checkbox" name="music" >Pop<br/>
+				<input type="checkbox" name="music" >Rock<br/>
+				<input type="checkbox" name="music" >Arabesk<br/>
+				<input type="checkbox" name="music" >Türk Sanat Müziği<br/>
+				<input type="submit" value="Kaydet">
+ </form>
+</p>
+
+<p>Son olarak açılır liste oluşturmayı da görelim:</p>
+
+<pre>
+&lt;html&gt;
+ &lt;body&gt;
+  &lt;h5&gt;İlk  öğrendiğiniz programlama dilini seçiniz&lt;/h5&gt;
+   &lt;form&gt;
+    &lt;select name=&quot;proglamlama dilleri&quot; &gt;
+     &lt;option value=&quot;C&quot;&gt;C&lt;br/&gt;
+     &lt;option value=&quot;C++&quot;&gt;C++&lt;br/&gt;
+     &lt;option value=&quot;Pascal&quot;&gt;Pascal&lt;br/&gt;
+     &lt;option value=&quot;Java&quot;&gt;Java&lt;br/&gt;
+    &lt;/select&gt;
+  &lt;/form&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>  
+  <h5>İlk  öğrendiğiniz programlama dilini seçiniz</h5>
+  <form>
+  <select  name="proglamlama dilleri" >
+  <option  value="C">C<br/>
+  <option  value="C++">C++<br/>
+  <option  value="Pascal">Pascal<br/>
+  <option  value="Java">Java<br/>
+  </select>
+  </form>
+</p> 
+ 
+<p>
+  	Form elemanları kullanıcıdan bilgi almak için kullanılır demiştik. Bu derste veri almanın, görsel kısımlarını gördük. 
+  Ancak alınan verinin işlenmesi için PHP, JSP veya ASP.NET gibi web programlama dillerini bilmek gerekir. 
+  Şayet verinin işlenmesi dışında, saklanması da gerekiyorsa, genellikle ilişkisel bir veritabanı (RDBMS) kullanılır. 
+	 Bu konular farklı uzmanlıklar gerektiriyor. Konu fazlalılığı gözünüzü korkutmasın; aradaki noktaları zamanla 
+	 birleştireceksiniz.     
+</p>
+
+<div align="right">
+	<a href="mailto:mustafa.gunes1702@gmail.com" style="color: black;font: 16px Times New Roman;">
+		Mustafa GÜNEŞ
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="html_coding_4.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="html_coding_6.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/html_coding/html_coding_5.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:25:41 GMT -->
+</html>

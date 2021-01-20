@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/577554/when-is-assembly-faster-than-c- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:23:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] When is assembly faster than C? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] When is assembly faster than C? | C Language Knowledge Base">
+        <title>[SOLVED] When is assembly faster than C? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="when-is-assembly-faster-than-c-">When is assembly faster than C?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/assembly.html">assembly</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>One of the stated reasons for knowing assembler is that, on occasion, it can be employed to write code that will be more performant than writing that code in a higher-level language, C in particular.  However, I've also heard it stated many times that although that's not entirely false, the cases where assembler can <strong>actually</strong> be used to generate more performant code are both extremely rare and require expert knowledge of and experience with assembly.  </p>
+
+<p>This question doesn't even get into the fact that assembler instructions will be machine-specific and non-portable, or any of the other aspects of assembler.  There are plenty of good reasons for knowing assembly besides this one, of course, but this is meant to be a specific question soliciting examples and data, not an extended discourse on assembler versus higher-level languages.</p>
+
+<p>Can anyone provide some <strong>specific examples</strong> of cases where assembly will be faster than well-written C code using a modern compiler, and can you support that claim with profiling evidence?  I am pretty confident these cases exist, but I really want to know exactly how esoteric these cases are, since it seems to be a point of some contention.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/21632/adam-bellaire" target="_blank"><span itemprop="name">Adam Bellaire</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">452</div>
+                                    <div itemprop="dateCreated">1/3/2018 3:58:37 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Here is a real world example: Fixed point multiplies on old compilers.</p>
+
+<p>These don't only come handy on devices without floating point, they shine when it comes to precision as they give you 32 bits of precision with a predictable error (float only has 23 bit and it's harder to predict precision loss).  i.e. uniform <em>absolute</em> precision over the entire range, instead of close-to-uniform <em>relative</em> precision (<code>float</code>).</p>
+
+<hr>
+
+<p>Modern compilers optimize this fixed-point example nicely, so for more modern examples that still need compiler-specific code, see</p>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/28868367/getting-the-high-part-of-64-bit-integer-multiplication/50958815#50958815">Getting the high part of 64 bit integer multiplication</a>: A portable version using  <code>uint64_t</code> for 32x32 => 64-bit multiplies fails to optimize on a 64-bit CPU, so you need intrinsics or <code>__int128</code> for efficient code on 64-bit systems.</li>
+<li><a href="https://stackoverflow.com/questions/46870373/umul128-on-windows-32-bits">_umul128 on Windows 32 bits</a>: MSVC doesn't always do a good job when multiplying 32-bit integers cast to 64,  so intrinsics helped a lot.</li>
+</ul>
+
+<hr>
+
+<p>C doesn't have a full-multiplication operator (2N-bit result from N-bit inputs).  The usual way to express it in C is to cast the inputs to the wider type and hope the compiler recognizes that the upper bits of the inputs aren't interesting:</p>
+
+<pre><code>// on a 32-bit machine, int can hold 32-bit fixed-point integers.
+int inline FixedPointMul (int a, int b)
+{
+  long long a_long = a; // cast to 64 bit.
+
+  long long product = a_long * b; // perform multiplication
+
+  return (int) (product &gt;&gt; 16);  // shift by the fixed point bias
+}
+</code></pre>
+
+<p>The problem with this code is that we do something that can't be directly expressed in the C-language. We want to multiply two 32 bit numbers and get a 64 bit result of which we return the middle 32 bit. However, in C this multiply does not exist. All you can do is to promote the integers to 64 bit and do a 64*64 = 64 multiply. </p>
+
+<p>x86 (and ARM, MIPS and others) can however do the multiply in a single instruction. Some compilers used to ignore this fact and generate code that calls a runtime library function to do the multiply. The shift by 16 is also often done by a library routine (also the x86 can do such shifts).</p>
+
+<p>So we're left with one or two library calls just for a multiply. This has serious consequences. Not only is the shift slower, registers must be preserved across the function calls and it does not help inlining and code-unrolling either. </p>
+
+<p>If you rewrite the same code in (inline) assembler you can gain a significant speed boost.</p>
+
+<p>In addition to this: using ASM is not the best way to solve the problem. Most compilers allow you to use some assembler instructions in intrinsic form if you can't express them in C. The VS.NET2008 compiler for example exposes the 32*32=64 bit mul as __emul and the 64 bit shift as __ll_rshift.</p>
+
+<p>Using intrinsics you can rewrite the function in a way that the C-compiler has a chance to understand what's going on. This allows the code to be inlined, register allocated, common subexpression elimination and constant propagation can be done as well. You'll get a <em>huge</em> performance improvement over the hand-written assembler code that way.</p>
+
+<p>For reference: The end-result for the fixed-point mul for the VS.NET compiler is:</p>
+
+<pre><code>int inline FixedPointMul (int a, int b)
+{
+    return (int) __ll_rshift(__emul(a,b),16);
+}
+</code></pre>
+
+<p>The performance difference of fixed point divides is even bigger. I had improvements up to factor 10 for division heavy fixed point code by writing a couple of asm-lines.</p>
+
+<hr>
+
+<p>Using Visual C++ 2013 gives the same assembly code for both ways.</p>
+
+<p>gcc4.1 from 2007 also optimizes the pure C version nicely.  (The Godbolt compiler explorer doesn't have any earlier versions of gcc installed, but presumably even older GCC versions could do this without intrinsics.)</p>
+
+<p>See source + asm for x86 (32-bit) and ARM on <a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(j:1,lang:c%2B%2B,source:&#39;//+compiled+with+gcc+-mregparm+so+args+are+in+regs,+like+when+inlining%0A//+Remove+-m32+to+see+x86-64+code-gen%0A%0A//+static+inline%0Aint+FixedPointMul+(int+a,+int+b)+%7B%0A++long+long+a_long+%3D+a%3B+//+cast+to+64+bit.%0A++long+long+product+%3D+a_long+*+b%3B+//+perform+multiplication%0A++return+(int)+(product+%3E%3E+16)%3B++//+shift+by+the+fixed+point+bias%0A%7D%0A%0A//+Modern+compilers+know+that+32-bit+integers+cast+to+64%0A//+still+only+have+32+significant+bits,%0A//+so+one+32-bit+signed+multiply+is+sufficient%0A%0A%23ifdef+_MSC_VER%0A%23include+%3Cintrin.h%3E%0A//+static+inline%0Aint+FixedPointMul_msvc+(int+a,+int+b)+%7B%0A++++return+(int)+__ll_rshift(__emul(a,b),16)%3B%0A%7D%0A%23endif%0A%0A%0A/*+Intrinsics+are+more+useful+for+extended+precision%0A+*+when+there+isn!&#39;t+a+wide-enough+type.%0A+*+e.g.+128-bit+integer+on+compilers+without+__int128%0A+*/%0A&#39;),l:&#39;5&#39;,n:&#39;0&#39;,o:&#39;C%2B%2B+source+%231&#39;,t:&#39;0&#39;)),k:32.75251522372254,l:&#39;4&#39;,n:&#39;0&#39;,o:&#39;&#39;,s:0,t:&#39;0&#39;),(g:!((g:!((h:compiler,i:(compiler:g412,filters:(b:&#39;0&#39;,binary:&#39;1&#39;,commentOnly:&#39;0&#39;,demangle:&#39;0&#39;,directives:&#39;0&#39;,execute:&#39;1&#39;,intel:&#39;1&#39;,trim:&#39;1&#39;),lang:c%2B%2B,libs:!(),options:&#39;-xc+-O3+-m32++-fomit-frame-pointer&#39;,source:1),l:&#39;5&#39;,n:&#39;0&#39;,o:&#39;x86-64+gcc+4.1.2+(Editor+%231,+Compiler+%231)+C%2B%2B&#39;,t:&#39;0&#39;)),k:34.10775747948107,l:&#39;4&#39;,m:50,n:&#39;0&#39;,o:&#39;&#39;,s:0,t:&#39;0&#39;),(g:!((h:compiler,i:(compiler:arm710,filters:(b:&#39;0&#39;,binary:&#39;1&#39;,commentOnly:&#39;0&#39;,demangle:&#39;0&#39;,directives:&#39;0&#39;,execute:&#39;1&#39;,intel:&#39;0&#39;,trim:&#39;1&#39;),lang:c%2B%2B,libs:!(),options:&#39;-xc+-O3+-mthumb+-mcpu%3Dcortex-m4&#39;,source:1),l:&#39;5&#39;,n:&#39;0&#39;,o:&#39;ARM+gcc+7.2.1+(none)+(Editor+%231,+Compiler+%232)+C%2B%2B&#39;,t:&#39;0&#39;)),header:(),l:&#39;4&#39;,m:50,n:&#39;0&#39;,o:&#39;&#39;,s:0,t:&#39;0&#39;)),k:33.91415144294414,l:&#39;3&#39;,n:&#39;0&#39;,o:&#39;&#39;,t:&#39;0&#39;),(g:!((g:!((h:compiler,i:(compiler:clang30,filters:(b:&#39;0&#39;,binary:&#39;1&#39;,commentOnly:&#39;0&#39;,demangle:&#39;0&#39;,directives:&#39;0&#39;,execute:&#39;1&#39;,intel:&#39;0&#39;,trim:&#39;1&#39;),lang:c%2B%2B,libs:!(),options:&#39;-xc+-O3+-m32&#39;,source:1),l:&#39;5&#39;,n:&#39;0&#39;,o:&#39;x86-64+clang+3.0.0+(Editor+%231,+Compiler+%233)+C%2B%2B&#39;,t:&#39;0&#39;)),k:33.33333333333333,l:&#39;4&#39;,m:50,n:&#39;0&#39;,o:&#39;&#39;,s:0,t:&#39;0&#39;),(g:!((h:compiler,i:(compiler:cl19_2015_u3_32,filters:(b:&#39;0&#39;,binary:&#39;1&#39;,commentOnly:&#39;0&#39;,demangle:&#39;0&#39;,directives:&#39;0&#39;,execute:&#39;1&#39;,intel:&#39;0&#39;,trim:&#39;1&#39;),lang:c%2B%2B,libs:!(),options:&#39;-Ox&#39;,source:1),l:&#39;5&#39;,n:&#39;0&#39;,o:&#39;x86+MSVC+19+2015+U3+(Editor+%231,+Compiler+%234)+C%2B%2B&#39;,t:&#39;0&#39;)),header:(),l:&#39;4&#39;,m:50,n:&#39;0&#39;,o:&#39;&#39;,s:0,t:&#39;0&#39;)),k:33.33333333333333,l:&#39;3&#39;,n:&#39;0&#39;,o:&#39;&#39;,t:&#39;0&#39;)),l:&#39;2&#39;,n:&#39;0&#39;,o:&#39;&#39;,t:&#39;0&#39;)),version:4" rel="noreferrer">the Godbolt compiler explorer</a>.  (Unfortunately it doesn't have any compilers old enough to produce bad code from the simple pure C version.)</p>
+
+<hr>
+
+<p><strong>Modern CPUs can do things C doesn't have operators for <em>at all</em>, like <code>popcnt</code> or bit-scan to find the first or last set bit</strong>.  (POSIX has a <code>ffs()</code> function, but its semantics don't match x86 <code>bsf</code> / <code>bsr</code>.  See <a href="https://en.wikipedia.org/wiki/Find_first_set" rel="noreferrer">https://en.wikipedia.org/wiki/Find_first_set</a>).</p>
+
+<p>Some compilers can sometimes recognize a loop that counts the number of set bits in an integer and compile it to a <code>popcnt</code> instruction (if enabled at compile time), but it's much more reliable to use <code>__builtin_popcnt</code> in GNU C, or on x86 if you're only targeting hardware with SSE4.2: <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_popcnt&amp;expand=4090" rel="noreferrer"><code>_mm_popcnt_u32</code> from <code>&lt;immintrin.h&gt;</code></a>.</p>
+
+<p>Or in C++, assign to a <code>std::bitset&lt;32&gt;</code> and use <code>.count()</code>.  (This is a case where the language has found a way to portably expose an optimized implementation of popcount through the standard library, in a way that will always compile to something correct, and can take advantage of whatever the target supports.)  See also <a href="https://en.wikipedia.org/wiki/Hamming_weight#Language_support" rel="noreferrer">https://en.wikipedia.org/wiki/Hamming_weight#Language_support</a>.</p>
+
+<p>Similarly, <code>ntohl</code> can compile to <code>bswap</code> (x86 32-bit byte swap for endian conversion) on some C implementations that have it.</p>
+
+<hr>
+
+<p>Another major area for intrinsics or hand-written asm is manual vectorization with SIMD instructions.  Compilers are not bad with simple loops like <code>dst[i] += src[i] * 10.0;</code>, but often do badly or don't auto-vectorize at all when things get more complicated.  For example, you're unlikely to get anything like <a href="https://stackoverflow.com/questions/35127060/how-to-implement-atoi-using-simd">How to implement atoi using SIMD?</a> generated automatically by the compiler from scalar code.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/15955/nils-pipenbrinck" target="_blank"><span itemprop="name">Nils Pipenbrinck</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/577554/when-is-assembly-faster-than-c-#answer-0</div>
+                                            <div itemprop="upvoteCount">259</div>
+                                            <div itemprop="dateCreated">7/15/2018 3:23:14 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Many years ago I was teaching someone to program in C. The exercise was to rotate a graphic through 90 degrees. He came back with a solution that took several minutes to complete, mainly because he was using multiplies and divides etc.</p>
+
+<p>I showed him how to recast the problem using bit shifts, and the time to process came down to about 30 seconds on the non-optimizing compiler he had.</p>
+
+<p>I had just got an optimizing compiler and the same code rotated the graphic in &lt; 5 seconds. I looked at the assembly code that the compiler was generating, and from what I saw decided there and then that my days of writing assembler were over.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/68371/lilburne" target="_blank">lilburne</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/577554" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/577554/when-is-assembly-faster-than-c- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:23:51 GMT -->
+</html>

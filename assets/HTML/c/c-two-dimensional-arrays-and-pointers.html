@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-two-dimensional-arrays-and-pointers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Two-Dimensional Arrays And Pointers</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Two-Dimensional Arrays And Pointers'>C Two-Dimensional Arrays And Pointers</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Two-Dimensional Arrays And Pointers</h1>
+<a class ='btn btn-outline-dark' href=c-pointers-to-multidimensional-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-pointer-to-access-two-dimensional-array.html>Next</a><p>Let's look at some of the addresses related to the my_array array with this example: 
+
+</p><p>Two-dimensional arrays and pointers 
+</p><div class='myCodeDiv'><button id='IYMGJ' class='myCopyButton' data-clipboard-target='#YYCOW'>Copy</button><pre  id='YYCOW' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>char</span> my_array[3][3] = { 
+                       {<span class='q'>'1'</span>,<span class='q'>'2'</span>,<span class='q'>'3'</span>}, 
+                       {<span class='q'>'4'</span>,<span class='q'>'5'</span>,<span class='q'>'6'</span>}, 
+                       {<span class='q'>'7'</span>,<span class='q'>'8'</span>,<span class='q'>'9'</span>} 
+                     }; 
+
+  printf(<span class='q'>"address of my_array         : %p\n"</span>, my_array); 
+  printf(<span class='q'>"address of my_array[0][0]   : %p\n"</span>, &amp;my_array[0][0]); 
+  printf(<span class='q'>"value of my_array[0]        : %p\n"</span>, my_array[0]); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IYMGJ');clipboard.on('success', function(e) {$('#IYMGJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IYMGJ').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>All three output values are the same.
+
+</p><p>When you declare a one-dimensional array as x[n1], the [n1] after the array name tells the compiler that it's  
+an array with n1 elements. 
+
+</p><p>When you declare a two-dimensional array as y[n1][n2], the compiler conceptually creates a one-dimensional array of size n1, in which each element is an array of size n2. 
+
+</p><p>When you declare a two-dimensional array, you're creating an array of one-dimensional sub arrays. 
+
+</p><p>Ao when you access the two-dimensional array using the array name with a single index value, my_array[0], you're referencing the address of one of the  
+sub arrays. 
+
+</p><p>Using the two-dimensional array name by itself references the address of the beginning of  
+the array of sub arrays, which is also the address of the beginning of the first subarray. 
+
+</p><p>For the following expressions: 
+</p><div class='myCodeDiv'><button id='ZFIBW' class='myCopyButton' data-clipboard-target='#UCPBB'>Copy</button><pre  id='UCPBB' style='font-size:18px;' class='code'>my_array 
+my_array[0] 
+&amp;my_array[0][0]
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZFIBW');clipboard.on('success', function(e) {$('#ZFIBW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZFIBW').text('error');});</script></div><p>They all have the same value, but they aren't the same thing: 
+</p><UL style='font-size:19px;'><LI>my_array is the address of a two-dimensional array of char elements, </LI><LI>my_array[0] is the address of a one-dimensional array of char elements that is a subarray of my_array, </LI><LI>&amp;my_array[0][0] is the address of an array element of type char. </LI></UL><p>The expression my_array[1] results in the same address as the expression &amp;my_array[1][0]. 
+
+</p><p>This is so because the latter expression is the first element of the second subarray, my_array[1]. 
+
+</p><p>When you use pointer notation to get to the values within a two-dimensional array, you can use the  
+ indirection operator. 
+
+</p><div class='myCodeDiv'><button id='DPZSX' class='myCopyButton' data-clipboard-target='#OLXAC'>Copy</button><pre  id='OLXAC' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+     <span class='r'>char</span> my_array[3][3] = { 
+                          {<span class='q'>'1'</span>,<span class='q'>'2'</span>,<span class='q'>'3'</span>}, 
+                          {<span class='q'>'4'</span>,<span class='q'>'5'</span>,<span class='q'>'6'</span>}, 
+                          {<span class='q'>'7'</span>,<span class='q'>'8'</span>,<span class='q'>'9'</span>} 
+                        }; 
+    
+     printf(<span class='q'>"value of my_array[0][0] : %c\n"</span>, my_array[0][0]); 
+     printf(<span class='q'>"value of *my_array[0]    : %c\n"</span>, *my_array[0]); 
+     printf(<span class='q'>"value of **my_array      : %c\n"</span>, **my_array); 
+     <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DPZSX');clipboard.on('success', function(e) {$('#DPZSX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DPZSX').text('error');});</script></div><p>The output from this program is as follows: 
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABeCAIAAAD+NHaGAAAHv0lEQVR42u3dW3LjNhAF0FmE97/GVGUBTL5SikUC3Q3wfU7Nh8qW+AA17GsCIP8sAAA38UcTAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguWT8frt8oP//nWzLektN/e+Qqjmkl3xaACwWXz3P09Wutr8UBjfn5q+DbzlrFAZHFtw5AcBFcrtuY3z+Pv/P4VfjWAdwmuKxeS9+6wB7pXln91dYqCssP7k5jM2r9RJ9/Ov/3qe/Xv5ZZ3qPGB1dXmnpDdoPbG/P44DKlv0lwAZh2xWWrqrV/ki0S2QUWTvSDWxjPLt+vC9V0ZEe+ex9WP9J9Q3aN77ziIrgAXCu41ELD3EoWDE/j8WswuKRez6pY7Ysu3Yw1MSq9M7hMIbi83N9//fXvP+0AhwaXYCdLObiM9ONcJ7gs4RGjkT/xsx00qTfEV1EY9yq4CC58Rpb7BpfP7Ze9uFBw+Tyx1nqO9rjiMl4Y7hhcIk09GFyyqxBcBBdeWPV/bbz4guDy2OCyrA0xuV1wCe6F4CK4EE8At9vmRpRxWDk/uCzNgRGROUGp4rE6F2bwXH/A4Nzjg8seXUXBozkSXJYH3cfF4FzeGVy6l2EcWS4dXJavObGNGbPB2dSNadjlOhEZgjMyHboxEXpioco2dWEfu8diVkKKjCM+fRX7BZfBkVsILpdKLffNYTw2uDDRM+rT+CjgW6wCBBfBBcFFannFXky5GnH6KkBwee3uILi8Pa88oEdAvwbTK9x3qWtPVGnMZzlxIbW97lb6yISdrW0uRIrxKUJbn/q1wOyS41sV34WJ7YbgArwuu2T/dv8sgRdZSLaot+trIydtNeBWzQ7W8mAhLwSX1Y0ZbLQpWWRKuyG4uB7zY8wmL8wu2V9dcyG1ir6VUdoLWb140664qZw0HjLaCWy80WpvnttuCC6A4BKq39dcSKoAN9Ybf3O3Gyu4utTmDQaXwXabsgtT2g3BBZBdikX9OgsZDy7t8TeDIzOyVT9es6c3XSpHZndhSrshuACCS+hv4isvpHZV6bumzmq9cgkvBJf2x7OFP3ulR3ARXADOzC5bk24KfS4HL+SFwWWPyUqCC2cGl3sNMp1yi17frVRTT//t81rpbcFlaxJKtjidspC3BZd4v08qu8TXK7gILvuegq9fJN6wm9dv7WOeNHSXyPLm4PLrt7XMcfBCpgSXYFA4PbgM3sZmsN0EF8FFcJn2FCHTmEda+17PdvYfZ3p2aUz0iN9v/tyFbFXrVE3tzoieG1wK0aQ29iUbXLrzuQq7ILg8NrisVt/gUxLj59+tVRSWHw8Wu8aOrY1ftp+/uLrS8pZ0H7LYPb7tY53a4PbGPD64eHz0eHAplLrTFxL/VGGy7vQCXJ4KHuzHKV+nGW8HweWNV1yCjwX+Ln5z/8IOLj++I/sVwq1r+43IUijYI3v6vYWrH+m+IbvGd15xEVz2q+4XXEhkXlLkkQLBudATC3Dqrm5LbPpx452FW9x2R8lMubee4PKE4FILDXMLVTA8jcev8QoRLPaR13ODVPeCVuoNtaj0zuAyK/0ILrcOLls1eAncCW2kWhd+HhkmPHinmdT1kmA7lHdBcHlvcAl2spSDy2A/zmHBpZBpgvmm8Cd+toMm9Yb4KgpDawWXd+7m0hs2e/2FxEeJti9IdC/VBJNQ5OftZdZSS3taViEWFIb0pq7iDLYblwsun+fNWs/RHldcxs/7jwwukWMxGFyyqxBcBBcAweWxwWXZHiVzo+AS3AvBRXAB2CW4LM1xD5E5QanyszrVZfBUftjg3EsFlz26ioKHeyS4LA+6j4vBuQCXCy7L15TXxoTY4GzqxjTskRvaBm/GOv0uLL8WuPV6SqHKHotCI3QP1qyEFBlH/ODg4s5AAPXgwsHV7g17sVMnIACCC1LL/L2YcjXCFwZAcOGcSv+AHgH9GgAILgAAgst9/PRoIgAEFwAAwQUAQHABAAQXAIB3BJd7jSGdcovewTfAry+kdgBYjr/icosbtB+wEHWIVGTxhQEQXOZvYXeWsmnMPPU/DsAlgku7+jbKdur8u7WKwvLjwaIQOyaWma29W7afv7i6VeVN7T5ksfsFaH8ZUhv87Bjn6dAAxwWXRtRo/6Tx+OV4IS8sP74j2S3Mrqib3iKJ4XuTpjxHutsU31u4+pHuG7JrfOrFEsEF4LjgUgsNc4NLMDyNx6/xCpHa7EbDRl7PTVpbEapRjKdHJQQXgIOCS7CTpRxcBvtxDgsue4SeYL4pXANo9BYN1tHUKlRlwQVgZnD5PG/Weo7Gg8se5/13BpfIwRoMLtlVqMqCC4Dg8tjgsgSG0Vw/uAzuheACILj0T53B2DHeVbQ6k2XwVH7Y4Nx7BZc9uoqC34eXBBeDcwEuF1yWrxmtjfmuwdnU3ZugjJSQRmo56yYrv9a49XpKJcserEIrdY/me+rxrG+sG/8ALJ5VdOtyaC8AEFxQ7+0FAIILMyr9A7oMdHwAILgAAIIL9/HTo4kAEFwAAAQXAADBBQAQXAAABBcAAMEFABBcAAAEFwBAcAEAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcAAAEFwBAcAEAEFwAANL+AWVqDdjcqXnLAAAAAElFTkSuQmCC'><p>You need to apply two indirection operators to get it: <i style='color:blue'>**</i>my_array. 
+
+</p><p>If you use only one *, you will get the address of  
+the first element of the array of arrays, which is the address referenced by my_array[0]. 
+
+</p><p>The relationship between the multidimensional array and its sub arrays is shown 
+in the following.  
+</p><div class='myCodeDiv'><button id='BZBKY' class='myCopyButton' data-clipboard-target='#FNGJN'>Copy</button><pre  id='FNGJN' style='font-size:18px;' class='code'>my_array ----&gt;my_array[0]---&gt;my_array[0][0]   my_array[0][1]   my_array[0][2] 
+              my_array[1]---&gt;my_array[1][0]   my_array[1][1]   my_array[1][2] 
+              my_array[2]---&gt;my_array[2][0]   my_array[2][1]   my_array[2][2]
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BZBKY');clipboard.on('success', function(e) {$('#BZBKY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BZBKY').text('error');});</script></div><p>As the figure shows, my_array refers to the address of the first element in the array of sub arrays,
+and my_array[0], my_array[1], and my_array[2] refer to the addresses of the first element in each of the
+corresponding sub arrays. 
+</p><a class ='btn btn-outline-dark' href=c-pointers-to-multidimensional-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-pointer-to-access-two-dimensional-array.html>Next</a><h2>Related</h2><UL><LI><a href='c-array-and-pointer.html'>C Array and Pointer</a></LI><LI><a href='c-pointers-and-multidimensional-arrays.html'>C Pointers and Multidimensional Arrays</a></LI><LI><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to Multidimensional Arrays</a></LI><LI><a href='c-use-pointer-to-access-two-dimensional-array.html'>C use pointer to access two-dimensional array</a></LI><LI><a href='c-using-pointers-to-as-function-arguments.html'>C Using Pointers to as Function arguments</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-two-dimensional-arrays-and-pointers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

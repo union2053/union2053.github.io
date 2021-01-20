@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12625224/how-is-select---alerted-to-an-fd-becoming--ready-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:07:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] how is select() alerted to an fd becoming &quot;ready&quot;? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] how is select() alerted to an fd becoming &quot;ready&quot;? | C Language Knowledge Base">
+        <title>[SOLVED] how is select() alerted to an fd becoming &quot;ready&quot;? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-is-select-alerted-to-an-fd-becoming-ready-">how is select() alerted to an fd becoming "ready"?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/file-descriptor.html">file-descriptor</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/messaging.html">messaging</a></span>
+                        <span class="tag-item"><a href="../tag/sockets.html">sockets</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I don't know why I'm having a hard time finding this, but I'm looking at some linux code where we're using <code>select()</code> waiting on a file descriptor to report it's ready. From the man page of select:</p>
+
+<pre><code>select() and pselect() allow a program to monitor multiple file descriptors,
+waiting until one or more of the file descriptors become "ready" for some
+class of I/O operation 
+</code></pre>
+
+<p>So, that's great... I call select on some descriptor, give it some time out value and start to wait for the indication to go. How does the file descriptor (or owner of the descriptor) report that it's "ready" such that the <code>select()</code> statement returns?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1348709/mike" target="_blank"><span itemprop="name">Mike</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">22</div>
+                                    <div itemprop="dateCreated">5/20/2019 9:22:10 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>It reports that it's ready <em>by</em> returning.</p>
+
+<p><code>select</code> waits for events that are typically outside your program's control. In essence, by calling <code>select</code>, your program says "I have nothing to do until ..., please suspend my process".</p>
+
+<p>The condition you specify is a set of events, any of which will wake you up.</p>
+
+<p>For example, if you are downloading something, your loop would have to wait on new data to arrive, a timeout to occur if the transfer is stuck, or the user to interrupt, which is precisely what <code>select</code> does.</p>
+
+<p>When you have multiple downloads, data arriving on any of the connections triggers activity in your program (you need to write the data to disk), so you'd give a list of all download connections to <code>select</code> in the list of file descriptors to watch for "read".</p>
+
+<p>When you upload data to somewhere at the same time, you again use <code>select</code> to see whether the connection currently accepts data. If the other side is on dialup, it will acknowledge data only slowly, so your local send buffer is always full, and any attempt to write more data would block until buffer space is available, or fail. By passing the file descriptor we are sending to to <code>select</code> as a "write" descriptor, we get notified as soon as buffer space is available for sending.</p>
+
+<p>The general idea is that your program becomes <em>event-driven</em>, i.e. it reacts to external events from a common message loop rather than performing sequential operations. You tell the kernel "this is the set of events for which I want to do something", and the kernel gives you a set of events that have occured. It is fairly common for two events occuring simultaneously; for example, a TCP acknowledge was included in a data packet, this can make the same fd both readable (data is available) and writeable (acknowledged data has been removed from send buffer), so you should be prepared to handle all of the events before calling <code>select</code> again.</p>
+
+<p>One of the finer points is that <code>select</code> basically gives you a promise that one invocation of <code>read</code> or <code>write</code> will not block, without making any guarantee about the call itself. For example, if one byte of buffer space is available, you can attempt to write 10 bytes, and the kernel will come back and say "I have written 1 byte", so you should be prepared to handle this case as well. A typical approach is to have a buffer "data to be written to this fd", and as long as it is non-empty, the fd is added to the write set, and the "writeable" event is handled by attempting to write all the data currently in the buffer. If the buffer is empty afterwards, fine, if not, just wait on "writeable" again.</p>
+
+<p>The "exceptional" set is seldom used -- it is used for protocols that have out-of-band data where it is possible for the data transfer to block, while other data needs to go through. If your program cannot currently accept data from a "readable" file descriptor (for example, you are downloading, and the disk is full), you do not want to include the descriptor in the "readable" set, because you cannot handle the event and <code>select</code> would immediately return if invoked again. If the receiver includes the fd in the "exceptional" set, and the sender asks its IP stack to send a packet with "urgent" data, the receiver is then woken up, and can decide to discard the unhandled data and resynchronize with the sender. The <code>telnet</code> protocol uses this, for example, for Ctrl-C handling. Unless you are designing a protocol that requires such a feature, you can easily leave this out with no harm.</p>
+
+<p>Obligatory code example:</p>
+
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/select.h&gt;
+
+#include &lt;unistd.h&gt;
+
+#include &lt;stdbool.h&gt;
+
+static inline int max(int lhs, int rhs) {
+    if(lhs &gt; rhs)
+        return lhs;
+    else
+        return rhs;
+}
+
+void copy(int from, int to) {
+    char buffer[10];
+    int readp = 0;
+    int writep = 0;
+    bool eof = false;
+    for(;;) {
+        fd_set readfds, writefds;
+        FD_ZERO(&amp;readfds);
+        FD_ZERO(&amp;writefds);
+
+        int ravail, wavail;
+        if(readp &lt; writep) {
+            ravail = writep - readp - 1;
+            wavail = sizeof buffer - writep;
+        }
+        else {
+            ravail = sizeof buffer - readp;
+            wavail = readp - writep;
+        }
+
+        if(!eof &amp;&amp; ravail)
+            FD_SET(from, &amp;readfds);
+        if(wavail)
+            FD_SET(to, &amp;writefds);
+        else if(eof)
+            break;
+        int rc = select(max(from,to)+1, &amp;readfds, &amp;writefds, NULL, NULL);
+        if(rc == -1)
+            break;
+        if(FD_ISSET(from, &amp;readfds))
+        {
+            ssize_t nread = read(from, &amp;buffer[readp], ravail);
+            if(nread &lt; 1)
+                eof = true;
+            readp = readp + nread;
+        }
+        if(FD_ISSET(to, &amp;writefds))
+        {
+            ssize_t nwritten = write(to, &amp;buffer[writep], wavail);
+            if(nwritten &lt; 1)
+                break;
+            writep = writep + nwritten;
+        }
+        if(readp == sizeof buffer &amp;&amp; writep != 0)
+            readp = 0;
+        if(writep == sizeof buffer)
+            writep = 0;
+    }
+}
+</code></pre>
+
+<p>We attempt to read if we have buffer space available and there was no end-of-file or error on the read side, and we attempt to write if we have data in the buffer; if end-of-file is reached and the buffer is empty, then we are done.</p>
+
+<p>This code will behave clearly suboptimal (it's example code), but you should be able to see that it is acceptable for the kernel to do less than we asked for both on reads and writes, in which case we just go back and say "whenever you're ready", and that we never read or write without asking whether it will block.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/613064/simon-richter" target="_blank"><span itemprop="name">Simon Richter</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12625224/how-is-select---alerted-to-an-fd-becoming--ready--#answer-0</div>
+                                            <div itemprop="upvoteCount">29</div>
+                                            <div itemprop="dateCreated">9/27/2012 9:08:17 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>From the same man page:</p>
+
+<blockquote>
+  <p>On exit, the sets are  modified  in place to indicate which file descriptors actually changed status.</p>
+</blockquote>
+
+<p>So use <code>FD_ISSET()</code> on the sets passed to select to determine which FDs have become ready.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/20862/ignacio-vazquez-abrams" target="_blank">Ignacio Vazquez-Abrams</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12625224" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12625224/how-is-select---alerted-to-an-fd-becoming--ready-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:07:36 GMT -->
+</html>

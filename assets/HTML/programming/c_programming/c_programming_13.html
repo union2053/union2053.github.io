@@ -1,0 +1,856 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_13.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+<head>
+	<title>C Programlama Ders: XIII</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, String, Katar, Katarlar, %s, gets, puts, strcpy, strncpy, strcmp, strncmp, strcat, strncat, strstr, strchr, strrchr, atoi, atof, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">24 Kasım 2006</font></div>
+	<h2>C Programlama Dersi - XIII</h2>
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>	
+		<div id="content_div" style="display:none">
+			<p>- Katarlar (&nbsp;String&nbsp;)</p>
+			<p>- Katarlarda printf(&nbsp;&nbsp;) ve scanf(&nbsp;&nbsp;) kullanımı</p>
+			<p>- gets(&nbsp;&nbsp;) ve puts(&nbsp;&nbsp;) fonksiyonları</p>
+			<p>- Katarlara ilk değer atama</p>
+			<p>- Biçimlendirilmiş (&nbsp;formatlı&nbsp;) gösterim</p>
+			<p>- Standart katar fonksiyonları</p>
+			<p>- main(&nbsp;&nbsp;) fonksiyonuna argüman aktarımı</p>
+			<p>- Konuyla ilgili örnek sorular</p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+
+	<h3>Katarlar (&nbsp;String&nbsp;)</h3>
+	<p>
+		Dizileri ve çok boyutlu dizileri gördük. Katar dediğimiz şey de aslında bir dizidir. 
+		Değişken tipi <i>char</i> yani karakter olan diziler, '<i>katar</i>' ya da İngilizce 
+		adıyla '<i>string</i>' olarak isimlendirilirler. 
+	</p>	
+	<p>
+		Katarları, şimdiye kadar gördüğümüz dizilerden ayıran, onları farklı kılan 
+		özellikleri	yoktur. Örneğin bir tam sayı (&nbsp;<i>int</i>&nbsp;) dizisinde, tam 
+		sayıları saklarken; bir karakter dizisinde -yani katarda- karakterleri 
+		(&nbsp;<i>char</i>&nbsp;) saklarız. Bunun dışında bir fark bulunmaz. Ancak sık 
+		kullanılmalarına paralel olarak, katarlara ayrı bir önem vermek gerekir. Yaptığınız 
+		işlemler bilimsel ve hesaplama ağırlıklı değilse, hangi dili kullanırsanız 
+		kullanın, en çok içli dışlı olacağınız dizi tipi, karakter dizileridir. İsimler, 
+		adresler, kullanıcı adları, telefonlar vs... sözle ifade	edilebilecek her şey için 
+		karakter dizilerini kullanırız. Katarlar işte bu yüzden önemlidir!
+	</p>
+	<p>
+		Karakter dizilerine İngilizce'de <i>String</i> dendiğini belirtmiştik. String; ip, 
+		bağ, kordon gibi anlamlar taşıyor. İlk olarak <i>katar</i> adını kim münasip 
+		gördü bilmiyorum. Muhtemelen bellek hücrelerine peşi sıra dizilen karakterlerin, 
+		vagonlara benzetilmesiyle, String değişken tipi Türkçe'ye katar olarak 
+		çevrildi. (<i>&nbsp;Arapça kökenli Türkçe bir kelime olan katar, 'tren' anlamına 
+		gelmektedir.&nbsp;</i>) Daha uygun bir isim verilebilirdi ya da sadece '<i>karakter dizisi</i>' 
+		de diyebilirdik. Fakat madem genel kabul görmüş bir terim var; yazımız içersinde 
+		biz de buna uyacağız. String, katar ya da karakter dizisi hiç farketmez; hepsi 
+		aynı kapıya çıkıyor: Değişken tipi karakter olan dizi... 
+	</p>
+	<h3>Katarlarda printf(&nbsp;&nbsp;) ve scanf(&nbsp;&nbsp;) Kullanımı</h3>
+	<p>
+		Katarlarla, daha önce gördüğümüz diziler arasında bir farkın olmadığını söylemtiştik. 
+		Bu sözümüz, teorik olarak doğru olsa da, pratikte ufak tefek farkları kapsam dışı 
+		bırakıyor. Hatırlayacaksınız, dizilerde elemanlara değer atama ya da onlardan değer 
+		okuma adım adım yapılan	bir işlemdi. Genellikle bir döngü içersinde, her dizi elemanı 
+		için scanf(&nbsp;&nbsp;) veya printf(&nbsp;&nbsp;) fonksiyonunu çağırmamız 
+		gerekiyordu. Katarlar için böyle bir mecburiyet bulunmuyor. Tek bir kelimeyi, tek 
+		bir scanf(&nbsp;&nbsp;) fonksiyonuyla okutabilir ve elemanlara otomatik	
+		değer atayabilirsiniz. Yani "Merhaba" şeklinde bir girdi-input gelirse, 3.dizi 
+		elemanı 'r' olurken; 6.dizi elemanı 'b' olur. Önceki dizilerde gördüğümüzün aksine, 
+		eleman atamaları kendiliğinden gerçekleşir. Aşağıdaki örneği inceleyelim:     
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{	
+	<b>char isim[30];</b>
+	printf( "İsim giriniz> ");
+	<b>scanf( "%s", isim );</b>
+	printf( "Girdiğiniz isim: %s\n", isim );
+	return 0;
+}
+</pre>
+	<p>
+		Örneğimizde 30 karakterlik bir karakter dizisi tanımlayarak işe başladık. 
+		Bunun anlamı girdileri saklayacağımız '<i>isim</i>' katarının 30 karakter 
+		boyutunda olacağıdır. Ancak bu katara en fazla 29 karakterlik bir kelime  
+		atanabilir. Çünkü katarlarda, kelime bitiminden sonra en az bir hücre boş 
+		bırakılmalıdır. Bu hücre '<i>Boş Karakter</i>' (&nbsp;<i>NULL Character</i>&nbsp;) 
+		tutmak içindir. Boş karakter "<b>\0</b>" şeklinde ifade edilir. C programlama 
+		dilinde,	kelimelerin bittiğini boş karakterlerle anlarız. Herhangi bir katarı  
+		boş karakterle sonlandırmaya, '<i>null-terminated</i>' denmektedir. 
+	</p>
+	<p>
+		Bu arada katarlara değer atarken ya da katarlardan değer okurken, sadece katar 
+		adını yazmamızın yettiğini farketmişsinizdir. Yani scanf(&nbsp;&nbsp;) fonksiyonu 
+		içersine	&amp; işareti koymamız gerekmiyor. Çünkü scanf(&nbsp;&nbsp;), katarın ilk  
+		adresinden başlayarak aşağıya doğru harfleri tek tek ataması gerektiğini biliyor. 
+		(&nbsp;Aslında biliyor demek yerine, fonksiyonun o şekilde yazıldığını söylememiz 
+		daha doğru olur.&nbsp;)   
+	</p>
+	<p>
+		Katarların, esasında bir dizi olduğundan bahsetmiştik. Şimdi bunun uygulamasını 
+		yapalım. Katara değer atamak için yine aynı kodu kullanırken; katardan 
+		değer okumak için kodumuzu biraz değiştirelim:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	char isim[30];
+	int i;
+	printf( "İsim giriniz> ");
+	scanf( "%s", isim );
+
+	printf( "Girdiğiniz isim: ");
+	for( i = 0; <b>isim[i]!='\0'</b>; i++ )
+		<b>printf( "%c", isim[i] );</b>
+	printf("\n");
+
+	return 0;
+}
+</pre>
+	<p>
+		Daha önce tek bir printf(&nbsp;&nbsp;) fonksiyonuyla bütün katarı yazdırabilirken, 
+		bu sefer katar elemanlarını tek tek, karakter karakter yazdırmayı tercih ettik. 
+		Çıkan sonuç aynı olacaktır fakat gidiş yolu biraz farklılaştı. Özellikle <i>for</i> 
+		döngüsü içersinde bulunan "<i>&nbsp;isim[i]!='\0'&nbsp;</i>" koşuluna dikkat 
+		etmek gerekiyor. İsteseydik, "<i>&nbsp;i&nbsp;<&nbsp;30&nbsp;</i>" yazar ve katarın 
+		bütün hücrelerini birer birer yazdırabilirdik. Fakat bu mantıklı değil! 30 
+		karakterlik bir dizi olsa bile, kullanıcı 10 harften oluşan bir isim girebilir. 
+		Dolayısıyla kalan 20 karakteri yazdırmaya gerek yoktur. Kelimenin nerede 
+		sonlandığını belirlemek için "<i>isim[i]!='\0'</i>" koşulunu kullanıyoruz. Bunun 
+		anlamı; <i>isim</i> katarının elemanları, "\0" yani boş karakterere (&nbsp;NULL 
+		Character&nbsp;) eşit olmadığı sürece yazdırmaya devam edilmesidir. Ne zaman ki 
+		kelime biter, sıradaki elemanın değeri "<b>\0</b>" olur; işte o vakit döngüyü 
+		sonlandırmamız gerektiğini biliriz.
+	</p>
+	<p>
+		Yukardaki örneğimize birden çok kelime girdiyseniz, sadece ilk kelimenin alındığını 
+		farketmişsinizidir. Yani "<i>Bugün hava çok güzel.</i>" şeklinde bir cümle 
+		girdiğiniz zaman, katara sadece "<i>Bugün</i>" kelimesi atanır. Eğer aynı anda 
+		birden fazla kelime almak istiyorsanız, ayrı ayrı belirtilmesi gerekir.
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	char <b>isim[25]</b>, <b>soyad[30]</b>;
+	printf( "Ad ve soyad giriniz> ");
+	scanf( "<b>%s%s</b>", isim, soyad );
+	printf( "Sayın <b>%s %s</b>, hoş geldiniz!\n", isim, soyad );
+	return 0;
+}
+</pre>
+
+	<h3>gets(&nbsp;&nbsp;) ve puts(&nbsp;&nbsp;) Fonksiyonları</h3>
+	<p>
+		Gördüğünüz gibi aynı anda iki farklı kelime alıp, ikisini birden yazdırdık. Fakat 
+		scanf(&nbsp;&nbsp;) fonksiyonu "<i>Bugün hava çok güzel.</i>" cümlesini tek bir 
+		katara alıp, atamak için hâlen yetersizdir. Çünkü boşluk gördüğü noktada, veriyi 
+		almayı keser ve sadece "<i>Bugün</i>" kelimesinin atamasını yapar. Boşluk içeren 
+		bu tarz cümleler için puts(&nbsp;&nbsp;) ve gets(&nbsp;&nbsp;) 
+		fonksiyonları kullanılmaktadır. Aşağıdaki örnek program, 40 harfi geçmeyecek her 
+		cümleyi kabul edecektir:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	char cumle[40];
+	printf( "Cümle giriniz> ");
+	<b>gets( cumle );</b>
+	printf( "Girdiğiniz cümle:\n" );
+	<b>puts( cumle );</b>
+	return 0;
+}
+</pre>
+	<p>
+		gets(&nbsp;&nbsp;) isminden anlayacağınız (&nbsp;<i>get string</i>&nbsp;) gibi 
+		katara değer atamak için kullanılır. puts(&nbsp;&nbsp;) 
+		(&nbsp;<i>put string</i>&nbsp;) ise, bir katarın içeriğini ekrana yazdırmaya yarar.
+		gets(&nbsp;&nbsp;) atayacağı değerin ayrımını yapabilmek için '<b>\n</b>' 
+		aramaktadır. Yani klavyeden Enter'a basılana kadar girilen her şeyi, tek bir katara 
+		atayacaktır. puts(&nbsp;&nbsp;) fonksiyonuysa, printf(&nbsp;&nbsp;) ile benzer çalışır. 
+		Boş karakter (&nbsp;NULL Character&nbsp;) yani '<b>\0</b>' ulaşana kadar katarı 
+		yazdırır; printf(&nbsp;&nbsp;) fonksiyonundan farklı olarak sonuna '<b>\n</b>' 
+		koyarak bir alt satıra geçer.	Oldukça açık ve basit kullanımlara sahip 
+		olduklarından, kendiniz de başka örnekler	deneyebilirsiniz. 
+	</p>
+	
+	<h3>Katarlara İlk Değer Atama</h3>
+	<p>
+		Bir katar tanımı yaptığınız anda, katarın bütün elemanları otomatik olarak '\0' 
+		ile doldurulur. Yani katarın bütün elemanlarına boş karakter (NULL Character) 
+		atanır. Dilerseniz, katarı yaratırken içine farklı değerler atayabilirsiniz. 
+		Katarlarda ilk değer ataması iki şekilde yapılır. 
+	</p>
+	<p>
+		Birinci yöntemle değer ataması yapacaksanız, istediğiniz kelimeyi bir bütün 
+		olarak yazarsınız:  
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Her iki katarada ilk deger 
+	// atamasi yapiliyor. Ancak 
+	// isim katarinda, boyut 
+	// belirtilmezken, soyad katarinda 
+	// boyutu ayrica belirtiyoruz.
+	<b>char isim[] = "CAGATAY";</b>
+	<b>char soyad[5] = "CEBI";</b>
+	printf( "%s %s\n", isim, soyad );
+
+	return 0;
+}
+</pre>
+	<p>
+		İkinci yöntemdeyse, kelime bütün olarak yazılmaz. Bunun yerine harf harf 
+		yazılır ve sonlandırmak için en sonuna boş karakter (&nbsp;NULL&nbsp;) eklenir:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	<b>char isim[] = { 'C', 'A', 'G', 'A', 
+			'T', 'A', 'Y', '\0' };</b>
+	<b>char soyad[5] = { 'C', 'E', 'B', 'I', '\0' };</b>
+	printf( "%s %s\n", isim, soyad );
+	return 0;
+}
+</pre>
+	<p>
+		Ben ilk değer ataması yapacağım durumlarda, ilk yolu tercih ediyorum. İkinci 
+		yöntem, daha uzun ve zahmeti...
+	</p>
+	<h3>Biçimlendirilmiş (&nbsp;Formatlı&nbsp;) Gösterim</h3>
+	<p>
+		Daha önce float tipindeki bir sayının, noktadan sonra iki basamağını göstermek 
+		türünden şeyler yapmıştık. Örneğin printf(&nbsp;&nbsp;) fonksiyonu içersinde, 
+		sayıyı %.2f şeklinde ifade ederseniz, sayının virgülden sonra sadece iki basamağı 
+		gösterilir. Yada %5d yazarak tam sayıları gösterdiğiniz bir durumda, sayı tek bir 
+		rakamdan dahi oluşsa, onun için 5 rakamlık gösterim yeri ayrılır. Aynı şekilde 
+		biçimlendirilmiş (&nbsp;formatlı&nbsp;) gösterim, katarlarda da yapılmaktadır.    
+	</p>
+	<p>
+		Katarları biçimlendirilmiş şekilde göstermeyi, örnek üzerinden anlatmak 
+		daha uygun olacaktır:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	char cumle[20] = "Denemeler";
+
+	// Cumleyi aynen yazar:
+	printf( "<b>%s</b>\n", cumle );
+
+	// 20 karakterlik alan ayirir
+	// ve en saga dayali sekilde yazar. 
+	printf( "<b>%20s</b>\n", cumle );
+
+	// 20 karakterlik alan ayirir
+	// ve en saga dayali sekilde, 
+	// katarin ilk bes kelimesini 
+	// yazar 	
+	printf( "<b>%20.5s</b>\n", cumle );
+
+	// 5 karakterlik alan ayirir
+	// ve en saga dayali sekilde yazar.
+	// Eger girilen kelime 5 karakterden 
+	// buyukse, kelimenin hepsi yazilir. 
+	printf( "<b>%5s</b>\n", cumle );	
+
+	// 20 karakterlik alan ayirir
+	// ve sola dayali sekilde yazar. 
+	// Sola dayali yazilmasi icin 
+	// yuzde isaretinden sonra, - 
+	// (eksi) isareti konulur.
+	printf( "<b>%-20s</b>\n", cumle );
+	
+	return 0;
+}
+</pre>
+	<p>
+		Örneğimizde bulunan formatlama biçimlerini gözden geçirirsek:
+	</p>
+	<ul>
+		<li>
+			%20s, ekranda 20 karakter alan ayrılacağı anlamına gelir. Katar, en sağa
+			dayanır ve "<i>Denemeler</i>" yazılır.  
+		</li>
+		<li>
+			%.5s olursa 5 karakterlik boşluk ayrılır. Yüzde işaretinden sonra 
+			nokta olduğu için katarın sadece ilk beş harfi yazdırılır. Yani sonuç 
+			"<i>Denem</i>" olacaktır. %20.5s yazıldığında, 20 karakterlik boşluk ayrılması 
+			istenmiş ancak katarın sadece ilk 5 harfi bu boşluklara yazılmıştır.    
+		</li>
+		<li>
+			%5s kullanırsanız, yine 5 karakterlik boşluk ayrılacaktır. Ancak yüzdeden sonra 
+			nokta olmadığı için, katarın hepsi yazılır. Belirtilen boyutu aşan durumlarda, 
+			eğer noktayla sınır konmamışsa, katar tamamen gösterilir. Dolayısıyla çıktı, 
+			"Denemeler" şeklinde olacaktır. 
+		</li>
+		<li>
+			Anlattıklarımızın hepsi, sağa dayalı şekilde çıktı üretir. Eğer sola dayalı 
+			bir çıktı isterseniz, yüzde işaretinden sonra '-' (eksi) işareti koymanız 
+			gerekir. Örneğin %-20.5s şeklinde bir format belirlerseniz, 20 karakterlik 
+			boşluk ayarlandıktan sonra, sola dayalı olarak katarın ilk 5 harfi 
+			yazdırılacaktır. İmleç (&nbsp;cursor&nbsp;), sağ yönde 20 karakter sonrasına 
+			düşecektir. 
+		</li>
+	</ul>
+	<h3>Standart Katar Fonksiyonları</h3>
+	<p>
+		Katarlarla daha kolay çalışabilmek için, bazı hazır kütüphane fonksiyonlarından 
+		bahsedeceğiz. Bu fonkisyonlar, string kütüphanesinde bulunuyor. Bu yüzden,   
+		programınızın başına, #include&lt;string.h&gt; eklemeniz gerekiyor.  
+	</p>
+	<h4>* strlen(&nbsp;&nbsp;) fonksiyonuyla katar boyutu bulma</h4>
+	<p>
+		Dizi boyutuyla, katar uzunluğunun farklı şeyler olduğundan bahsetmiştik. Dizi  
+		boyutu, 40 karakter olacak şekilde ayarlanmışken, dizi içinde sadece 7 karakterlik 
+		"<i>Merhaba</i>" kelimesi tutulabilir. Bu durumda, dizi boyutu 40 olmasına rağmen, 
+		katar boyutu yalnızca 7'dir. Katarların boyutunu saptamak için, boş karakter 
+		(&nbsp;NULL Character&nbsp;) işaretinin yani "<i>\0</i>" simgesinin konumuna bakılır.  
+		Her seferinde arama yapmanıza gerek kalmasın diye <i>strlen(&nbsp;&nbsp;)</i> 
+		fonksiyonu geliştirilmiştir. <i>strlen(&nbsp;&nbsp;)</i> kendisine argüman olarak 
+		gönderilen bir katarın boyutunu geri döndürür. Aşağıdaki gibi kullanılmaktadır:  
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+<b>#include&lt;string.h&gt;</b>
+int main( void )
+{
+	printf( "Katar Uzunluğu: %d\n", <b>strlen("Merhaba")</b> );
+	return 0;
+}
+</pre>
+	<h4>* strcpy(&nbsp;&nbsp;) ve strncpy(&nbsp;&nbsp;) ile katar kopyalama</h4>
+	<p>
+		Bir katarı, bir başka katara kopyalamak için 
+		<i>strcpy(&nbsp;&nbsp;)</i> fonksiyonunu kullanırız. Katarlar aynı boyutta olmak 
+		zorunda değildir. Ancak kopya olacak katar, kendisine gelecek kelimeyi alacak boyuta 
+		sahip olmalıdır. Fonksiyon prototipi aşağıdaki gibidir, geriye pointer döner.   
+	</p>
+<pre>
+char *strcpy( char[&nbsp;], char[&nbsp;] );
+</pre>
+	<p>
+		<i>strcpy(&nbsp;&nbsp;)</i> fonksiyonunu bir örnekle görelim:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+<b>#include&lt;string.h&gt;</b>
+int main( void )
+{
+	char kaynak[40]="Merhaba Dünya";
+	char kopya[30] = "";
+	<b>strcpy( kopya, kaynak );</b>
+	printf( "%s\n", kopya );
+
+	return 0;
+}
+</pre>
+	<p>
+		strncpy(&nbsp;&nbsp;) fonksiyonu, yine kopyalamak içindir. Fakat emsalinden farklı 
+		olarak, kaç karakterin kopyalanacağı belirtilir. Protopi aşağıda verilmiştir: 
+	</p>
+<pre>
+char *strncpy( char[&nbsp;], char[&nbsp;], int );
+</pre>
+	<p>
+		Yukardaki örneği strncpy(&nbsp;&nbsp;) fonksiyonuyla tekrar edelim:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	char kaynak[40]="Merhaba Dünya";
+	char kopya[30] = "";
+	<b>strncpy( kopya, kaynak, 9 );</b>
+	printf( "%s\n", kopya );
+
+	return 0;
+}
+</pre>
+	<p>
+		Yukardaki programı çalıştırırsanız, kopya isimli katara sadece 9 karakterin 
+		aktarıldığını ve ekrana yazdırılan yazının "<i>Merhaba D</i>" olduğunu 
+		görebilirsiniz.
+	</p>
+	
+	<h4>* strcmp(&nbsp;&nbsp;) ve strncmp(&nbsp;&nbsp;) ile katar karşılaştırma</h4>
+	<p>
+		strcmp(&nbsp;&nbsp;) fonksiyonu, kendisine verilen iki katarı birbiriyle karşılaştırır. 
+		Katarlar birbirine eşitse, geriye 0 döner. Eğer ilk katar alfabetik olarak 
+		ikinciden büyükse, geriye pozitif değer döndürür. Şayet alfabetik sırada ikinci 
+		katar birinciden büyükse, geriye negatif değer dönmektedir. Bu dediklerimizi, 
+		daha iyi anlaşılması için bir tabloya dönüştürelim:
+	</p>
+	<table align="center" border="1" cellspacing="4">
+		<tr bgcolor="#d4cfcb">
+			<td align="center"><b>&nbsp;Dönen Değer&nbsp;</b></td>
+			<td align="center"><b>Açıklama</b></td>
+		</tr>
+		<tr>
+			<td align="center">&lt;&nbsp;0</td>
+			<td>&nbsp;Katar1, Katar2'den küçüktür.&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center">0</td>
+			<td>&nbsp;Katar1 ve Katar2 birbirine eşittir.&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center">&gt;&nbsp;0</td>
+			<td>&nbsp;Katar1, Katar2'den büyüktür.&nbsp;</td>
+		</tr>
+	</table>
+	<br/>
+	<p>
+		strncmp(&nbsp;&nbsp;) için de aynı kurallar geçerlidir. Tek fark, karşılatırılacak 
+		karakter sayısını girmemizdir. <i>strcmp(&nbsp;&nbsp;)</i> fonksiyonunda iki katar, 
+		<i>null</i> karakter işareti çıkana kadar karşılaştırılır. Fakat <i>strncmp(&nbsp;&nbsp;)</i> 
+		fonksiyonunda, başlangıçtan itibaren kaç karakterin karşılaştırılacağına siz 
+		karar verirsiniz. 
+	</p>
+	<p>Her iki fonksiyonu da kapsayan aşağıdaki örneği inceleyelim:</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	int sonuc;
+	char ilk_katar[40]="Maymun";
+	char ikinci_katar[40]="Maytap";
+	<b>sonuc = strcmp( ilk_katar, ikinci_katar );</b>
+	printf( "%d\n", sonuc );
+	<b>sonuc = strncmp( ilk_katar, ikinci_katar, 3 );</b>
+	printf( "%d\n", sonuc );
+
+	return 0;
+}
+</pre>
+	<p>
+		İlk önce çağrılan <i>strcmp(&nbsp;&nbsp;)</i>, null karakterini görene kadar bütün 
+		karakterleri karşılaştıracak ve geriye negatif bir değer döndürecektir. Çünkü 
+		"<i>Maymum</i>" kelimesi alfabede "<i>Maytap</i>" kelimesinden önce gelir; 
+		dolayısıyla küçüktür. Fakat ikinci olarak çağırdığımız <i>strncmp(&nbsp;&nbsp;)</i> 
+		geriye 0 değeri verecektir. Her iki katarın ilk üç harfi aynıdır ve fonksiyonda 
+		sadece ilk üç harfin karşılaştırılmasını istediğimizi belirttik. Dolayısıyla 
+		karşılaştırmanın sonucunda 0 döndürülmesi normaldir. 
+	</p>
+	<h4>* strcat(&nbsp;&nbsp;) ve strncat(&nbsp;&nbsp;) ile katar birleştirme</h4>
+	<p>
+		<i>strcat(&nbsp;&nbsp;)</i> ve <i>strncat(&nbsp;&nbsp;)</i> fonksiyonları, bir 
+		katarı bir başka katarla birleştirmeye yarar. Fonksiyon adlarında bulunan cat, 
+		İngilizce bir kelime olan ve birleştirme anlamına gelen '<i>concatenate</i>'den gelmiştir. 
+		<i>strcat(&nbsp;&nbsp;)</i> kendisine verilen katarları tamamen birleştirirken,  
+		<i>strncat(&nbsp;&nbsp;)</i> belirli bir eleman sayısına kadar birleştirir. 
+		strcat ile ilgili basit bir örnek yapalım. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	char ad[30], soyad[20];
+	char isim_soyad[50];
+	printf( "Ad ve soyadınızı giriniz> " );
+	scanf( "%s%s", ad, soyad );
+	// isim_soyad <-- ad
+	<b>strcat( isim_soyad, ad );</b>
+	// isim_soyad <-- ad + " "
+	<b>strcat( isim_soyad, " " );</b>
+	// isim_soyad <-- ad + " " + soyad
+	<b>strcat( isim_soyad, soyad );</b>
+	printf( "Tam İsim: %s\n", isim_soyad );
+	return 0;
+}
+</pre>
+	<p>
+		Dilerseniz, <i>strncat(&nbsp;&nbsp;)</i> fonksiyonunu da siz deneyebilirsiniz. 
+	</p>
+
+	<h4>* strstr(&nbsp;&nbsp;) fonksiyonuyla katar içi arama yapma</h4>
+	<p>
+		Bir katar içinde, bir başka katarı aradığınız durumlarda, <i>strstr(&nbsp;&nbsp;)</i>
+		fonksiyonu yardımınıza yetişir. <i>strstr(&nbsp;&nbsp;)</i> fonksiyonu, bir katar 
+		içinde aradığınız bir katarı bulduğu takdirde bunun bellekteki adresini geriye 
+		döndürür. Yani dönen değer çeşidi bir pointer'dır. Eğer herhangi bir eşleşme olmazsa 
+		geriye bir sonuç dönmez ve pointer <i>null</i> olarak kalır. Elbette insanlar için 
+		hafıza adreslerinin veya pointer değerlerinin pek bir anlamı olmuyor. Bir katar içinde 
+		arama yapıyorsanız, aradığınız yapının katarın neresinde olduğunu tespit etmek için 
+		aşağıdaki kodu kullanabilirsiniz:   
+	</p>
+<pre>
+/* strstr(&nbsp;&nbsp;) fonksiyon ornegi */
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	char adres[] = "Esentepe Caddesi Mecidiyekoy Istanbul";
+	<b>char *ptr;</b>
+	// 'adres' katari icinde, 'koy' kelimesini 
+	// ariyoruz. Bu amacla strstr(&nbsp;&nbsp;) fonksiyonunu 
+	// kullaniyoruz. Fonksiyon buyuk-kucuk harf
+	// duyarlidir. Eger birden fazla eslesme varsa,
+	// ilk adres degeri doner. Hic eslesme olmazsa, 
+	// pointer degeri NULL olur.
+	<b>ptr = strstr( adres, "koy" );</b>
+	if( ptr != NULL )
+		printf( "Başlangıç notkası: <b>%d</b>\n", <b>ptr - adres</b> );
+	else 
+		printf( "Eşleşme bulunamadı.\n" );
+	return 0;
+}
+</pre>
+
+	<h4>* strchr(&nbsp;&nbsp;) ve strrchr(&nbsp;&nbsp;) fonksiyonları</h4>
+	<p>
+		<i>strchr(&nbsp;&nbsp;)</i> ve <i>strrchr(&nbsp;&nbsp;)</i> fonksiyonları, tıpkı  
+		<i>strstr(&nbsp;&nbsp;)</i> gibi arama için kullanılır. Ancak <i>strstr(&nbsp;&nbsp;)</i> 
+		fonksiyonu katar içinde bir başka katarı arayabilirken, <i>strchr(&nbsp;&nbsp;)</i> 
+		ve <i>strrchr(&nbsp;&nbsp;)</i> fonksiyonları katar içinde tek bir karakter aramak 
+		için kullanılır. <i>strchr(&nbsp;&nbsp;)</i>, karakterin katar içindeki ilk konumunu 
+		gösterirken; <i>strrchr(&nbsp;&nbsp;)</i> fonksiyonu, ilgili karakterin son kez 
+		geçtiği adresi verir.   
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main( void )
+{
+	char adres[] = "Esentepe Caddesi Mecidiyekoy Istanbul";
+	<b>char *ilk_nokta, *son_nokta;</b>
+	<b>ilk_nokta = strchr( adres, 'e' );</b>
+	<b>son_nokta = strrchr( adres, 'e' );</b>
+	if( ilk_nokta != NULL ) {
+		printf( "Ilk gorundugu konum: <b>%d</b>\n", <b>ilk_nokta - adres</b> );
+		printf( "Son gorundugu konum: <b>%d</b>\n", <b>son_nokta - adres</b> );
+	}
+	else 
+		printf( "Eşleşme bulunamadı.\n" );
+	return 0;
+}
+</pre>
+	<h4>* atoi(&nbsp;&nbsp;) ve atof(&nbsp;&nbsp;) ile katar dönüşümü</h4>
+	<p>
+		Verilen katarı, sayıya çevirmek gerekebilir. Eğer elinizdeki metni, bir tam sayıya 
+		(&nbsp;<i>int</i>&nbsp;) çevirecekseniz, <i>atoi(&nbsp;&nbsp;)</i> fonksiyonunu 
+		kullanmanız gerekir.	Şayet dönüşüm sonunda elde etmek istediğiniz değişken tipi, 
+		virgüllü sayı ise	(&nbsp;<i>float</i>&nbsp;), <i>atof(&nbsp;&nbsp;)</i> fonksiyonu 
+		kullanılır. Her iki fonksiyon <i>stdlib.h</i> kütüphanesi içindedir. Bu 
+		fonksiyonları kullanırken, <i>#include&lt;stdlib.h&gt;</i> komutunu program 
+		başlangıcına yazmalısınız. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int main( void )
+{
+	char kok_iki[] = "1.414213";
+	char pi[] = "3.14";
+	char tam_bir_sayi[] = "156";
+	char hayatin_anlami[] = "42 is the answer";
+
+	printf( "%d\n", <b>atoi( tam_bir_sayi )</b> );
+	printf( "%d\n", <b>atoi( hayatin_anlami )</b> );
+	printf( "%f\n", <b>atof( kok_iki )</b> );
+	printf( "%f\n", <b>atof( pi )</b> );
+	return 0;
+}
+</pre>
+	<p>
+		Her iki fonksiyonda rakam harici bir şey görene kadar çalışır. Eğer nümerik
+		ifadeler dışında bir karakter çıkarsa, fonksiyon o noktada çalışmayı keser.
+	</p>
+	<h3>main(&nbsp;&nbsp;) Fonksiyonuna Argüman Aktarımı</h3>
+	<p>
+		İşlediğimiz bütün derslerde <i>main(&nbsp;&nbsp;)</i> fonksiyonu vardı. 
+		<i>main(&nbsp;&nbsp;)</i> fonksiyonuyla ilgili incelememizi de, 
+		fonksiyonlarla ilgili dokuzuncu dersimizde yapmıştık. Ancak main(&nbsp;&nbsp;) 
+		fonksiyonuna hiçbir zaman parametre aktarmadık; aksine parametre almayacağını 
+		garantilemek için sürekli olarak <i>main(&nbsp;void&nbsp;)</i> şeklinde yazmıştık. 
+		Artık main(&nbsp;&nbsp;) fonksiyonuna nasıl parametre verileceğini göreceğiz. 
+		Aşağıdaki kod, parametresi olan bir main(&nbsp;&nbsp;) fonksiyonunu göstermektedir:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( int argc, int *arg[] )
+{
+	int i;
+	for( i = 0; i < argc; i++ ) {
+		printf( "%d. argüman: %s\n", i, arg[i] );
+	}
+	return 0;
+}
+</pre>
+	<p>
+		Bu kodu yazıp, "<i>yeni_komut.c</i>" adıyla kaydedin. Ardından eğer Linux ve gcc	
+		kullanıyrsanız, aşağıdaki komutu kullanarak kodun derlemesini yapın.   
+	</p>
+<pre>
+$ gcc yeni_komut.c -o yeni_komut
+</pre>
+	<p>
+		Yukardaki komut, "<i>yeni_komut</i>" adında çalıştırılabilir bir program dosyası 
+		oluşturacak. Windows ve Dev-C++ kullanıyorsanız böyle bir komuta gerek yok. Kodu 
+		kaydedip, derlediğiniz zaman, çalışma klasörünüzde "<i>yeni_komut.exe</i>" adında 
+		bir dosya zaten oluşacaktır.   
+	</p>
+	<p>
+		İkinci aşamada, programa parametre göndererek çalıştıracağız. Bunun için gerek 
+		Linux gerekse Windows kullanıcılarının yapacağı şey birbirine çok benziyor. 
+		Linux kullanıcıları aşağıdaki gibi bir komut girecekler:
+	</p>
+<pre>
+$ ./yeni_komut Merhaba Dünya Hello World
+</pre>
+	<p>
+		Windows kullanıcılarınınsa, DOS komut istemini açıp, programın kayıtlı olduğu 
+		klasöre gelmeleri gerekiyor. Diyelim ki, "<i>yeni_komut.exe</i>" 
+		"<i>C:\Belgelerim</i>" içinde kayıtlı... O hâlde aşağıdaki komutu giriyoruz: 
+	</p>
+<pre>
+C:\Belgelerim> yeni_komut Merhaba Dünya Hello World
+</pre>
+	<p>
+		Her iki işletim sisteminde elde edeceğiniz sonuç aynı olacaktır:
+	</p>
+<pre>
+0. argüman: ./yeni_komut
+1. argüman: Merhaba
+2. argüman: Dünya
+3. argüman: Hello
+4. argüman: World
+</pre>
+	<p>
+		Dışardan gelen argümanla çalışan bir başka main(&nbsp;&nbsp;) fonksiyonu 
+		oluşturalım. Toplama ve çıkartma işlemini alacağı argümanlara göre yapan bir 
+		programı aşağıda bulabilirsiniz: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;string.h&gt;
+int main( int argc, char *arg[] )
+{
+	// Eger eksik arguman soz konusuysa, 
+	// program calismamalidir.
+	if( argc < 4 ) {
+		printf( "Hata: Eksik argüman!\n");
+		return;
+	}
+
+	float sayi_1, sayi_2;
+	char islem_tipi[2];
+	sayi_1 = atof( <b>arg[1]</b> );
+	strcpy(	islem_tipi, <b>arg[2]</b> );
+	sayi_2 = atof( <b>arg[3]</b> );
+
+	// Verilen sembolun neye esit oldugu asagidaki 
+	// if-else if merdiveniyle saptaniyor.
+	if( !strcmp( islem_tipi, "+" ) )
+		printf( "Toplam: %.2f\n", sayi_1 + sayi_2 );
+	else if( !strcmp( islem_tipi, "-" ) )
+		printf( "Fark: %.2f\n", sayi_1 - sayi_2 );
+	else
+		  printf( "Hatalı işlem!\n" );
+	return 0;
+}
+</pre>
+	<p>
+		Programı çalıştırmak için şu tarz bir komut verdiğimizi düşünelim:
+	</p>
+<pre>
+$ ./hesapla 4 + 12
+</pre>
+	<p>
+		Programı bu şekilde çalıştırdığınız zaman argümanların, parametrelere 
+		atanması aşağıdaki gibi	olur:
+	</p>
+	<table align="center" border="1" cellspacing="4">
+		<tr bgcolor="#d4cfcb" align="center">
+			<td>&nbsp;arg[&nbsp;0&nbsp;]&nbsp;</td>
+			<td>&nbsp;arg[&nbsp;1&nbsp;]&nbsp;</td>
+			<td>&nbsp;arg[&nbsp;2&nbsp;]&nbsp;</td>
+			<td>&nbsp;arg[&nbsp;3&nbsp;]&nbsp;</td>
+		</tr>
+		<tr align="center">
+			<td>&nbsp;./hesapla&nbsp;</td>
+			<td>&nbsp;4&nbsp;</td>
+			<td>&nbsp;+&nbsp;</td>
+			<td>&nbsp;12&nbsp;</td>
+		</tr>
+	</table>
+	<br/>
+	<p>
+		Bütün fonksiyonlara, program içersinden argüman aktarımı yaparken; 
+		main(&nbsp;&nbsp;) fonksiyonuna program dışından değer gönderebiliyoruz. 
+		Unix komutlarının hemen hemen hepsi bu şekildedir. DOS komutlarının birçoğu da 
+		böyle yazılmıştır. main(&nbsp;&nbsp;) fonksiyonun parametre	alıp almaması 
+		gerektiğine, ihtiyacınıza göre sizin karar vermeniz gerekir. 
+	</p>
+
+	<h3>Örnek Sorular</h3>
+	<p><b>Soru 1:</b> Kendisine verilen bir katarın boyutunu bulan fonksiyonu yazınız. 
+	(&nbsp;Çözüm için <i>strlen(&nbsp;&nbsp;)</i> fonksiyonunu kullanmayınız.&nbsp;)
+	</p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int katar_boyutu_bul( char [] );
+int main( void )
+{
+	char test_katari[50];
+	strcpy( test_katari, "ABCDEF" );
+	printf( "Katar boyutu: %d\n", <b>katar_boyutu_bul</b>( test_katari ) );
+	return 0;
+}
+<b>int katar_boyutu_bul( char katar[] )</b>
+{
+	int i;
+	for( i = 0; katar[ i ]!='\0'; i++ );
+
+	return i;
+}
+</pre>
+	</div>
+
+<p><b>Soru 2:</b> Tersinden de aynı şekilde okunabilen kelime, cümle veya mısraya 
+'<i>palindrome</i>' denmektedir. Adı palindrome(&nbsp;&nbsp;) olan ve verilen katarın   
+tersinin kendisine eşit olduğu durumda geriye 1; aksi hâlde 0 döndüren fonksiyonu 
+yazınız.  
+	</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int palindrome( char [] );
+int main( void )
+{
+	char test_katari[50];
+	strcpy( test_katari, "ABBA" );
+	printf( "%d\n", <b>palindrome</b>( test_katari ) );
+	return 0;
+}
+<b>int palindrome( char katar[] )</b>
+{
+	int boyut =0 , i;
+	// Once katar boyutu bulunuyor
+	for( boyut = 0; katar[ boyut ]!='\0'; boyut++ );
+	
+
+	for( i = 0; i < boyut/2; i++ ) {
+		if( katar[i] != katar[ boyut - i - 1 ] )
+			return 0;
+	}
+	return 1;
+}
+</pre>
+	</div>
+	
+<p><b>Soru 3:</b> Aşağıdaki gibi çalışıp, çıktı üretebilecek "<i>ters_cevir</i>" 
+programını oluşturunuz.
+	</p>
+<pre>
+$ ./ters_cevir Merhaba Dunya Nasilsin?
+abahreM aynuD ?nislisaN
+</pre>
+	<p>
+	<a href="#soru3" name="soru3" onMouseDown="change_display_of_object('Cevap3')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap3" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+void ters_cevir( char [] );
+int main( int argc, int arg[] )
+{
+	int i;
+	for( i = 1; i < argc; i++ ) {
+		ters_cevir( <b>arg[i]</b> );
+	}
+	printf("\n");
+	return 0;
+}
+<b>void ters_cevir( char katar[] )</b>
+{
+	int i, boyut;
+	for( boyut = 0; katar[ boyut ]!='\0'; boyut++ );
+	
+	for( i = 0; i < boyut; i++ )
+		printf("%c", katar[ boyut - 1 - i ] );
+	printf(" ");
+}
+</pre>
+	</div>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_12.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_14.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_13.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-conditional-compilation-ifdef-else-and-endif.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C preprocessor Conditional Compilation #ifdef, #else, and #endif</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C preprocessor Conditional Compilation #ifdef, #else, and #endif'>C preprocessor Conditional Compilation #ifdef, #else, and #endif</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor.html'>C Preprocessor
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-manifest-constants-define.html'>C #define
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-arguments-with-define.html'>C #define with arguments 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Macro
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C # Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-glue-the-operator.html'>C ## Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-variadic-macros-and-va-args.html'>C Variadic Macros
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#include
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-file-inclusion-include.html'>C #include
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-uses-for-header-files.html'>C Header Files
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Flag
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-undef-directive.html'>C #undef
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C #ifdef, #else, and #endif
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifndef.html'>C #ifndef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-if-and-elif-directives.html'>C #if #elif
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Predefined
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-predefined-macros.html'>C Predefined Macros
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-line-error.html'>C #line #error
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-pragma.html'>C #pragma
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C preprocessor Conditional Compilation #ifdef, #else, and #endif</h1>
+<a class ='btn btn-outline-dark' href=c-preprocessor-undef-directive.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-conditional-compilation-ifndef.html>Next</a><p>You can use the directives to set up conditional compilations. 
+
+</p><p>You can use them to tell the compiler to accept or ignore blocks of information or 
+code according to conditions at the time of compilation.
+
+</p><p>The #ifdef, #else, and #endif Directives
+
+</p><p>Consider the following:
+</p><div class='myCodeDiv'><button id='UULVT' class='myCopyButton' data-clipboard-target='#HGJBC'>Copy</button><pre  id='HGJBC' style='font-size:18px;' class='code'>#ifdef FLAG
+      <span class='r'>#</span><span class='r'>include</span>   <span class='q'>"horse.h"</span>    <span class='c'>// gets done if FLAG is #defined</span>
+      #define    VALUE       5
+#<span class='r'>else</span>
+      <span class='r'>#</span><span class='r'>include</span>   <span class='q'>"cow.h"</span>      <span class='c'>// gets done if FLAG isn't #defined</span>
+      #define    VALUE     15
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UULVT');clipboard.on('success', function(e) {$('#UULVT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UULVT').text('error');});</script></div><p>Here we've used the indentation allowed by newer implementations and by the ANSI standard.
+
+</p><p>The #ifdef directive says that if the following identifier (FLAG) has been defined by the
+preprocessor, follow all the directives and compile all the C code up to the next #else or
+#endif, whichever comes first. 
+
+</p><p>If there is an #else, everything from the #else to the #endif is done if the identifier isn't defined.
+
+</p><p>The form #ifdef #else is much like that of the C if else. 
+
+</p><p>The preprocessor doesn't recognize the braces ({}) method of marking a block, 
+so it uses the #else (if any) and the #endif to mark blocks of directives. 
+
+</p><p>These conditional structures can be nested. 
+
+</p><p>You can use these directives to mark blocks of C statements, too.
+
+</p><div class='myCodeDiv'><button id='YHNFB' class='myCopyButton' data-clipboard-target='#QQCKT'>Copy</button><pre  id='QQCKT' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define FLAG
+#define LIMIT 4
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> i;
+    <span class='r'>int</span> total = 0;
+
+    <span class='r'>for</span> (i = 1; i &lt;= LIMIT; i++)
+    {
+        total += 2*i*i + 1;
+#ifdef FLAG
+        printf(<span class='q'>"i=%d, running total = %d\n"</span>, i, total);
+#endif
+    }
+    printf(<span class='q'>"Grand total = %d\n"</span>, total);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YHNFB');clipboard.on('success', function(e) {$('#YHNFB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YHNFB').text('error');});</script></div><p>Compiling and running the program as shown produces this output:
+</p><img src='data:image/png;base64,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'><p>If you omit the FLAG definition and recompile the program, only the final 
+line is displayed. 
+
+</p><p>You can use this approach to help in program debugging. 
+
+</p><p>Define FLAG and use a judicious selection of <i style='color:blue'>#ifdefs</i>, and the compiler will include program code for printing 
+intermediate values for debugging. 
+
+</p><p>After everything is working, you can remove the definition and recompile. 
+</p><a class ='btn btn-outline-dark' href=c-preprocessor-undef-directive.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-conditional-compilation-ifndef.html>Next</a><h2>Related</h2><UL><LI><a href='c-preprocessor-file-inclusion-include.html'>C Preprocessor File Inclusion: #include</a></LI><LI><a href='c-uses-for-header-files.html'>C Uses for Header Files</a></LI><LI><a href='c-preprocessor-undef-directive.html'>C preprocessor #undef Directive</a></LI><LI><a href='c-preprocessor-conditional-compilation-ifndef.html'>C preprocessor Conditional Compilation #ifndef</a></LI><LI><a href='c-preprocessor-if-and-elif-directives.html'>C preprocessor #if and #elif Directives</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-conditional-compilation-ifdef-else-and-endif.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

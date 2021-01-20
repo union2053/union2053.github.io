@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node11.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Dynamic Memory Allocation and Dynamic Structures</TITLE>
+<META NAME="description" CONTENT="Dynamic Memory Allocation and Dynamic Structures">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html977"
+ HREF="node11.html#SECTION001110000000000000000">
+Malloc, Sizeof, and Free</A>
+<LI><A NAME="tex2html978"
+ HREF="node11.html#SECTION001120000000000000000">
+Calloc and Realloc</A>
+<LI><A NAME="tex2html979"
+ HREF="node11.html#SECTION001130000000000000000">
+Linked Lists</A>
+<LI><A NAME="tex2html980"
+ HREF="node11.html#SECTION001140000000000000000">
+Full Program: <TT>queue.c</TT></A>
+<LI><A NAME="tex2html981"
+ HREF="node11.html#SECTION001150000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001100000000000000000">
+Dynamic Memory Allocation and Dynamic Structures</A>
+</H1>
+<P>
+Dynamic allocation is a pretty unique feature to C (amongst high level
+languages). It enables us to create data types and structures of any size and
+length to suit our programs need <U>within</U> the program.
+<BR>
+<P>
+We will look at two common applications of this:
+<P><UL>
+<LI> dynamic arrays
+<LI> dynamic data structure <EM>e.g.</EM> linked lists
+</UL><H1><A NAME="SECTION001110000000000000000">
+Malloc, Sizeof, and Free</A>
+</H1>
+<P>
+The Function <TT>malloc</TT> is most commonly used to attempt to ``grab'' a
+continuous portion of memory. It
+is defined by:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>void *malloc(size_t number_of_bytes)</TT>
+<BR>
+<P>
+That is to say it returns a pointer of type <TT>void *</TT> that is the start in
+memory of the reserved portion of size <TT>number_of_bytes</TT>. If memory
+cannot be allocated a <TT>NULL</TT> pointer is returned.
+<P>
+Since a <TT>void  *</TT> is returned the C standard states that this pointer can
+be converted to any type.  The <TT>size_t</TT> argument type is defined in <TT>
+stdlib.h</TT> and is an <EM>unsigned type</EM>.
+<P>
+So:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; char *cp;
+		 cp = malloc(100);
+</TT></PRE>
+</TT>
+<BR>
+<P>
+attempts to get 100 bytes and assigns the start address to <TT>cp.
+<P>
+Also it is
+usual to use the <TT>sizeof()</TT> function to specify the number of bytes:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; int *ip;
+		 ip = (int *) malloc(100*sizeof(int));
+</TT></PRE>
+</TT>
+<P>
+Some C compilers may require to cast the type of conversion.
+The <TT>(int *) means coercion to an integer pointer. Coercion to the correct
+pointer type is very important to ensure pointer arithmetic is performed
+correctly. I personally use it as a means of ensuring that I am totally correct
+in my coding and use cast all the time.
+<P>
+It is good practice to use <TT>sizeof()</TT> even 
+if you know the actual size
+you want -- it makes for device independent (portable) code.
+<P><TT>sizeof</TT> can be used to find the size of 
+any data type, variable or structure. Simply supply one of these as an
+argument to the function.
+<BR>
+<P>
+SO:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int i;
+		 struct COORD {float x,y,z};
+		 typedef struct COORD PT;
+&nbsp;
+		 sizeof(int), sizeof(i),
+		 sizeof(struct COORD) and
+		 sizeof(PT) are all ACCEPTABLE
+</TT></PRE>
+</TT>
+<BR>
+<P>
+In the above we can use the link between pointers and arrays to treat the
+reserved memory like an array. <EM>i.e</EM> we can do things like:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>ip[0] = 100;
+<BR>
+<P>
+or
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>for(i=0;i&lt;100;++i) scanf(&quot;%d&quot;,ip++);</TT>
+<P> <BR>
+<P>
+When you have finished using a portion of memory you should always <TT>free()</TT>
+it. This allows the memory <EM>freed</EM> to be aavailable again, possibly for
+further <TT>malloc()</TT> calls
+<P>
+The function <TT>free()</TT> takes a pointer as an argument and frees the memory to
+which the pointer refers.
+<P></TT></TT></TT><H1><A NAME="SECTION001120000000000000000">
+Calloc and Realloc</A>
+</H1>
+<P>
+There are two additional memory allocation functions, <TT>Calloc()</TT> and
+<TT>Realloc()</TT>. Their prototypes are given below:
+<P><PRE>
+void *calloc(size_t num_elements, size_t element_size};
+
+void *realloc( void *ptr, size_t new_size);
+</PRE>
+<P><TT>Malloc</TT> does not initialise memory (to <EM>zero</EM>) in any way. If you wish
+to initialise memory then use <TT>calloc</TT>. Calloc there is slightly more
+computationally expensive but, occasionally, more convenient than malloc. Also
+note the different syntax between <TT>calloc</TT> and <TT>malloc</TT> in that <TT>
+calloc</TT> takes the number of desired elements, <TT>num_elements</TT>, and
+element_size, <TT>element_size</TT>, as two individual arguments.
+<P>
+Thus to assign 100 integer elements that are all initially zero you would do:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; int *ip;
+		 ip = (int *) calloc(100, sizeof(int));
+</TT></PRE>
+</TT>
+<P><TT>Realloc is a function which attempts to change the size of a previous
+allocated block of memory. The new size can be larger or smaller. If the block
+is made larger then the old contents remain unchanged and memory is added to
+the end of the block. If the size is made smaller then the remaining contents
+are unchanged.
+<P>
+If the original block size cannot be resized then <TT>realloc</TT> will attempt to
+assign a new block of memory and will copy the old block contents. Note a new
+pointer (of different value) will consequently be returned. You <B>must</B> use
+this new value. If  new memory cannot be reallocated then <TT>realloc</TT>
+returns <TT>NULL</TT>.
+<P>
+Thus to change the size of memory allocated to the <TT>*ip</TT> pointer above to
+an array block of  50 integers instead of 100, simply do:
+<P>&nbsp;&nbsp;&nbsp;<TT>ip = (int *) calloc( ip, 50);</TT>
+<P></TT><H1><A NAME="SECTION001130000000000000000">
+Linked Lists</A>
+</H1>
+<A NAME="sec:linklist">&#160;</A>
+Let us now return to our linked list example:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;typedef struct { &nbsp;int value;
+						  ELEMENT *next;
+				 } ELEMENT; 
+</TT></PRE>
+</TT>
+<BR>
+<P>
+We can now try to grow the list dynamically:
+<BR>
+<P>&nbsp;&nbsp;<TT>link = (ELEMENT *) malloc(sizeof(ELEMENT));
+<BR>
+<P>
+This will allocate memory for a new <TT>link</TT>.
+<BR>
+<P>
+If we want to deassign memory from a pointer use the <TT>free()</TT> function:
+<BR>
+<P>&nbsp;&nbsp;<TT>free(link)</TT>
+<BR>
+<P><EM>See Example programs (<TT>queue.c</TT>) below and try
+exercises for further practice.</EM>
+<P></TT><H1><A NAME="SECTION001140000000000000000">
+Full Program: <TT>queue.c</TT></A>
+</H1>
+<P>
+A queue is basically a special case of a linked list where one data element
+joins the list at the left end and leaves in a ordered fashion at the other end.
+<P>
+The full listing for <TT>queue.c</TT> is as follows:
+<P><PRE>
+/*							     */
+/* queue.c 						     */
+/* Demo of dynamic data structures in C                      */
+
+#include &lt;stdio.h&gt;
+
+#define FALSE 0
+#define NULL 0
+
+typedef struct {
+    int     dataitem;
+    struct listelement *link;
+}               listelement;
+
+void Menu (int *choice);
+listelement * AddItem (listelement * listpointer, int data);
+listelement * RemoveItem (listelement * listpointer);
+void PrintQueue (listelement * listpointer);
+void ClearQueue (listelement * listpointer);
+
+main () {
+    listelement listmember, *listpointer;
+    int     data,
+            choice;
+
+    listpointer = NULL;
+    do {
+	Menu (&amp;choice);
+	switch (choice) {
+	    case 1: 
+		printf (&quot;Enter data item value to add  &quot;);
+		scanf (&quot;%d&quot;, &amp;data);
+		listpointer = AddItem (listpointer, data);
+		break;
+	    case 2: 
+		if (listpointer == NULL)
+		    printf (&quot;Queue empty!\n&quot;);
+		else
+		    listpointer = RemoveItem (listpointer);
+		break;
+	    case 3: 
+		PrintQueue (listpointer);
+		break;
+
+	    case 4: 
+		break;
+
+	    default: 
+		printf (&quot;Invalid menu choice - try again\n&quot;);
+		break;
+	}
+    } while (choice != 4);
+    ClearQueue (listpointer);
+}				/* main */
+
+void Menu (int *choice) {
+
+    char    local;
+
+    printf (&quot;\nEnter\t1 to add item,\n\t2 to remove item\n\
+\t3 to print queue\n\t4 to quit\n&quot;);
+    do {
+	local = getchar ();
+	if ((isdigit (local) == FALSE) &amp;&amp; (local != '\n')) {
+	    printf (&quot;\nyou must enter an integer.\n&quot;);
+	    printf (&quot;Enter 1 to add, 2 to remove, 3 to print, 4 to quit\n&quot;);
+	}
+    } while (isdigit ((unsigned char) local) == FALSE);
+    *choice = (int) local - '0';
+}
+
+listelement * AddItem (listelement * listpointer, int data) {
+
+    listelement * lp = listpointer;
+
+    if (listpointer != NULL) {
+	while (listpointer -&gt; link != NULL)
+	    listpointer = listpointer -&gt; link;
+	listpointer -&gt; link = (struct listelement  *) malloc (sizeof (listelement));
+	listpointer = listpointer -&gt; link;
+	listpointer -&gt; link = NULL;
+	listpointer -&gt; dataitem = data;
+	return lp;
+    }
+    else {
+	listpointer = (struct listelement  *) malloc (sizeof (listelement));
+	listpointer -&gt; link = NULL;
+	listpointer -&gt; dataitem = data;
+	return listpointer;
+    }
+}
+
+listelement * RemoveItem (listelement * listpointer) {
+
+    listelement * tempp;
+    printf (&quot;Element removed is %d\n&quot;, listpointer -&gt; dataitem);
+    tempp = listpointer -&gt; link;
+    free (listpointer);
+    return tempp;
+}
+
+void PrintQueue (listelement * listpointer) {
+
+    if (listpointer == NULL)
+	printf (&quot;queue is empty!\n&quot;);
+    else
+	while (listpointer != NULL) {
+	    printf (&quot;%d\t&quot;, listpointer -&gt; dataitem);
+	    listpointer = listpointer -&gt; link;
+	}
+    printf (&quot;\n&quot;);
+}
+
+void ClearQueue (listelement * listpointer) {
+
+    while (listpointer != NULL) {
+	listpointer = RemoveItem (listpointer);
+    }
+}
+</PRE>
+<P><H1><A NAME="SECTION001150000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12456</B></P>
+<P>
+Write a program that reads a number that says how many <U>integer</U>
+numbers are to be stored in an array, creates an array to fit the
+<U>exact</U> size of the data and then reads in that many numbers into the
+array.</P>
+<P><P>
+<B>Exercise 12457</B></P>
+<P>
+Write a program to implement the linked list as described in the notes above.</P>
+<P><P>
+<B>Exercise 12458</B></P>
+<P>
+Write a program to sort a sequence of numbers using a binary tree (Using
+Pointers). A binary tree is a tree structure with only two (possible) branches
+from each node (Fig.&nbsp;<A HREF="node11.html#fig:bintree">10.1</A>). Each branch then represents a false or
+true decision. To sort numbers simply assign the left branch to take numbers less
+than the node number and the right branch any other number (greater than or
+equal to). To obtain a sorted list simply search the tree in  a depth first
+fashion.
+<P><A NAME="fig:bintree">&#160;</A><img src= btree.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node11.html#fig:bintree">10.1</A> Example of a binary tree sort</B>
+Your program should:
+	Create a binary tree structure. Create routines for loading the tree appropriately.
+	Read in integer numbers terminated by a zero.
+	Sort numbers into numeric ascending order.
+	Print out the resulting ordered values, printing ten numbers per line
+	as far as possible.
+<P>
+Typical output should be
+<PRE>
+    The sorted values are:
+     2  4  6  6  7  9 10 11 11 11
+    15 16 17 18 20 20 21 21 23 24
+    27 28 29 30
+</PRE>
+<P></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node11.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:00 GMT -->
+</HTML>

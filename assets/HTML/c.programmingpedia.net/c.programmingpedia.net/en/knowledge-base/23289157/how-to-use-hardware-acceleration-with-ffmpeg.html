@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/23289157/how-to-use-hardware-acceleration-with-ffmpeg by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to use hardware acceleration with ffmpeg | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to use hardware acceleration with ffmpeg | C Language Knowledge Base">
+        <title>[SOLVED] How to use hardware acceleration with ffmpeg | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-use-hardware-acceleration-with-ffmpeg">How to use hardware acceleration with ffmpeg</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/ffmpeg.html">ffmpeg</a></span>
+                        <span class="tag-item"><a href="../tag/hardware-acceleration.html">hardware-acceleration</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I need to have ffmpeg decode my video(e.g. h264) using hardware acceleration. I'm using the usual way of decoding frames: read packet -> decode frame. And I'd like to have ffmpeg speed up decoding. So I've built it with <code>--enable-vaapi</code> and <code>--enable-hwaccel=h264</code>. But I don't really know what should I do next. I've tried to use <code>avcodec_find_decoder_by_name("h264_vaapi")</code> but it returns nullptr. 
+Anyway, I might want to use others API and not just VA API. How one is supposed to speed up ffmpeg decoding?</p>
+
+<p>P.S. I didn't find any examples on Internet which uses ffmpeg with hwaccel. </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/643393/ixsci" target="_blank"><span itemprop="name">ixSci</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">42</div>
+                                    <div itemprop="dateCreated">5/3/2014 9:10:43 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>After some investigation I was able to implement the necessary HW accelerated decoding on OS X (VDA) and Linux (VDPAU). I will update the answer when I get my hands on Windows implementation as well.
+So let's start with the easiest: </p>
+
+<h2 id="mac-os-x">Mac OS X</h2>
+
+<p>To get HW acceleration working on Mac OS you should just use the following:
+<code>avcodec_find_decoder_by_name("h264_vda");</code>
+Note, however that you can accelerate h264 videos only on Mac OS with FFmpeg.</p>
+
+<h2 id="linux-vdpau">Linux VDPAU</h2>
+
+<p>On Linux things are much more complicated(who is surprised?). FFmpeg has 2 HW accelerators on Linux: VDPAU(Nvidia) and VAAPI(Intel) and only one HW decoder: for VDPAU. And it may seems perfectly reasonable to use vdpau decoder like in the Mac OS example above:
+<code>avcodec_find_decoder_by_name("h264_vdpau");</code></p>
+
+<p>You might be surprised to find out that it doesn't change anything and you have no acceleration at all. That's because it is only the beginning, you have to write much more code to get the acceleration working. Happily, you don't have to come up with a solution on your own: there are at least 2 good examples of how to achieve that: <a href="https://www.libavg.de/site/">libavg</a> and FFmpeg itself. libavg has VDPAUDecoder class which is perfectly clear and which I've based my implementation on. You can also consult <a href="https://www.ffmpeg.org/doxygen/trunk/ffmpeg__vdpau_8c_source.html">ffmpeg_vdpau.c</a> to get another implementation to compare. In my opinion the libavg implementation is easier to grasp, though.</p>
+
+<p>The only things both aforementioned examples lack is proper copying of the decoded frame to the main memory. Both examples uses <code>VdpVideoSurfaceGetBitsYCbCr</code> which killed all the performance I gained on my machine. That's why you might want to use the following procedure to extract the data from a GPU:</p>
+
+<pre><code>bool VdpauDecoder::fillFrameWithData(AVCodecContext* context,
+    AVFrame* frame)
+{
+    VdpauDecoder* vdpauDecoder = static_cast&lt;VdpauDecoder*&gt;(context-&gt;opaque);
+    VdpOutputSurface surface;
+    vdp_output_surface_create(m_VdpDevice, VDP_RGBA_FORMAT_B8G8R8A8, frame-&gt;width, frame-&gt;height, &amp;surface);
+    auto renderState = reinterpret_cast&lt;vdpau_render_state*&gt;(frame-&gt;data[0]);
+    VdpVideoSurface videoSurface = renderState-&gt;surface;
+
+    auto status = vdp_video_mixer_render(vdpauDecoder-&gt;m_VdpMixer,
+        VDP_INVALID_HANDLE,
+        nullptr,
+        VDP_VIDEO_MIXER_PICTURE_STRUCTURE_FRAME,
+        0, nullptr,
+        videoSurface,
+        0, nullptr,
+        nullptr,
+        surface,
+        nullptr, nullptr, 0, nullptr);
+    if(status == VDP_STATUS_OK)
+    {
+        auto tmframe = av_frame_alloc();
+        tmframe-&gt;format = AV_PIX_FMT_BGRA;
+        tmframe-&gt;width = frame-&gt;width;
+        tmframe-&gt;height = frame-&gt;height;
+        if(av_frame_get_buffer(tmframe, 32) &gt;= 0)
+        {
+            VdpStatus status = vdp_output_surface_get_bits_native(surface, nullptr,
+                reinterpret_cast&lt;void * const *&gt;(tmframe-&gt;data),
+                reinterpret_cast&lt;const uint32_t *&gt;(tmframe-&gt;linesize));
+            if(status == VDP_STATUS_OK &amp;&amp; av_frame_copy_props(tmframe, frame) == 0)
+            {
+                av_frame_unref(frame);
+                av_frame_move_ref(frame, tmframe);
+                return;
+            }
+        }
+        av_frame_unref(tmframe);
+    }
+    vdp_output_surface_destroy(surface);
+    return 0;
+}
+</code></pre>
+
+<p>While it has some "external" objects used inside you should be able to understand it once you have implemented the "get buffer" part(to which the aforementioned examples are of great help). Also I've used <code>BGRA</code> format which was more suitable for my needs maybe you will choose another.</p>
+
+<p>The problem with all of it is that you can't just get it working from FFmpeg you need to understand at least basics of the VDPAU API. And I hope that my answer will aid someone in implementing the HW acceleration on Linux. I've spent much time on it myself before I realized that there is no simple, one-line way of implementing HW accelerated decoding on Linux. </p>
+
+<h2 id="linux-va-api">Linux VA-API</h2>
+
+<p>Since my original question was regarding VA-API I can't not leave it unanswered.
+First of all there is no decoder for VA-API in FFmpeg so <code>avcodec_find_decoder_by_name("h264_vaapi")</code> doesn't make any sense: it is <code>nullptr</code>.
+I don't know how much harder(or maybe simpler?) is to implement decoding via VA-API since all the examples I've seen were quite intimidating. So I choose not to use VA-API at all and I had to implement the acceleration for an Intel card. Fortunately enough for me, there is a VDPAU library(driver?) which works over VA-API. So you can use VDPAU on Intel cards! </p>
+
+<p>I've used the following <a href="http://ubuntuhandbook.org/index.php/2013/10/enable-hardware-acceleration-on-intel-graphics-cards-in-ubuntu/">link</a> to setup it on my Ubuntu.</p>
+
+<p>Also, you might want to check the comments to the original question where @Timothy_G also mentioned some links regarding VA-API.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/643393/ixsci" target="_blank"><span itemprop="name">ixSci</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/23289157/how-to-use-hardware-acceleration-with-ffmpeg#answer-0</div>
+                                            <div itemprop="upvoteCount">40</div>
+                                            <div itemprop="dateCreated">6/15/2014 10:40:48 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/23289157" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/23289157/how-to-use-hardware-acceleration-with-ffmpeg by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+</html>

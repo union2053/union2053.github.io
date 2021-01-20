@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1345670/stack-smashing-detected by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Stack smashing detected | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Stack smashing detected | C Language Knowledge Base">
+        <title>[SOLVED] Stack smashing detected | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="stack-smashing-detected">Stack smashing detected</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/exception.html">exception</a></span>
+                        <span class="tag-item"><a href="../tag/stack.html">stack</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am executing my a.out file. After execution the program runs for some time then exits with the message:</p>
+
+<pre><code>**** stack smashing detected ***: ./a.out terminated*
+*======= Backtrace: =========*
+*/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x48)Aborted*
+</code></pre>
+
+<p>What could be the possible reasons for this and how do I rectify it?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/130423/biswajyoti-das" target="_blank"><span itemprop="name">Biswajyoti Das</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">208</div>
+                                    <div itemprop="dateCreated">9/18/2012 3:00:22 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Stack Smashing here is actually caused due to a protection mechanism used by gcc to detect buffer overflow errors. For example in the following snippet:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+void func()
+{
+    char array[10];
+    gets(array);
+}
+
+int main(int argc, char **argv)
+{
+    func();
+}
+</code></pre>
+
+<p>The compiler, (in this case gcc) adds protection variables (called canaries) which have known values. An input string of size greater than 10 causes corruption of this variable resulting in SIGABRT to terminate the program.</p>
+
+<p>To get some insight, you can try disabling this protection of gcc using option  <code> -fno-stack-protector </code> while compiling. In that case you will get a different error, most likely a segmentation fault as you are trying to access an illegal memory location.  Note that <code>-fstack-protector</code> should always be turned on for release builds as it is a security feature.</p>
+
+<p>You can get some information about the point of overflow by running the program with a debugger. Valgrind doesn't work well with stack-related errors, but like a debugger, it may help you pin-point the location and reason for the crash.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/91593/sud03r" target="_blank"><span itemprop="name">sud03r</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1345670/stack-smashing-detected#answer-0</div>
+                                            <div itemprop="upvoteCount">303</div>
+                                            <div itemprop="dateCreated">10/25/2015 12:11:37 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><strong>Minimal reproduction example with disassembly analysis</strong></p>
+
+<p>main.c</p>
+
+<pre><code>void myfunc(char *const src, int len) {
+    int i;
+    for (i = 0; i &lt; len; ++i) {
+        src[i] = 42;
+    }
+}
+
+int main(void) {
+    char arr[] = {'a', 'b', 'c', 'd'};
+    int len = sizeof(arr);
+    myfunc(arr, len + 1);
+    return 0;
+}
+</code></pre>
+
+<p>Compile and run:</p>
+
+<pre><code>gcc -fstack-protector -g -O0 -std=c99 main.c
+ulimit -c unlimited &amp;&amp; rm -f core
+./a.out
+</code></pre>
+
+<p>fails as desired:</p>
+
+<pre><code>*** stack smashing detected ***: ./a.out terminated
+Aborted (core dumped)
+</code></pre>
+
+<p>Tested on Ubuntu 16.04, GCC 6.4.0.</p>
+
+<p><strong>Disassembly</strong></p>
+
+<p>Now we look at the disassembly:</p>
+
+<pre><code>objdump -D a.out
+</code></pre>
+
+<p>which contains:</p>
+
+<pre><code>int main (void){
+  400579:       55                      push   %rbp
+  40057a:       48 89 e5                mov    %rsp,%rbp
+
+  # Allocate 0x10 of stack space.
+  40057d:       48 83 ec 10             sub    $0x10,%rsp
+
+  # Put the 8 byte canary from %fs:0x28 to -0x8(%rbp),
+  # which is right at the bottom of the stack.
+  400581:       64 48 8b 04 25 28 00    mov    %fs:0x28,%rax
+  400588:       00 00 
+  40058a:       48 89 45 f8             mov    %rax,-0x8(%rbp)
+
+  40058e:       31 c0                   xor    %eax,%eax
+    char arr[] = {'a', 'b', 'c', 'd'};
+  400590:       c6 45 f4 61             movb   $0x61,-0xc(%rbp)
+  400594:       c6 45 f5 62             movb   $0x62,-0xb(%rbp)
+  400598:       c6 45 f6 63             movb   $0x63,-0xa(%rbp)
+  40059c:       c6 45 f7 64             movb   $0x64,-0x9(%rbp)
+    int len = sizeof(arr);
+  4005a0:       c7 45 f0 04 00 00 00    movl   $0x4,-0x10(%rbp)
+    myfunc(arr, len + 1);
+  4005a7:       8b 45 f0                mov    -0x10(%rbp),%eax
+  4005aa:       8d 50 01                lea    0x1(%rax),%edx
+  4005ad:       48 8d 45 f4             lea    -0xc(%rbp),%rax
+  4005b1:       89 d6                   mov    %edx,%esi
+  4005b3:       48 89 c7                mov    %rax,%rdi
+  4005b6:       e8 8b ff ff ff          callq  400546 &lt;myfunc&gt;
+    return 0;
+  4005bb:       b8 00 00 00 00          mov    $0x0,%eax
+}
+</code></pre>
+
+
+
+<pre><code>  # Check that the canary at -0x8(%rbp) hasn't changed after calling myfunc.
+  # If it has, jump to the failure point __stack_chk_fail.
+  4005c0:       48 8b 4d f8             mov    -0x8(%rbp),%rcx
+  4005c4:       64 48 33 0c 25 28 00    xor    %fs:0x28,%rcx
+  4005cb:       00 00 
+  4005cd:       74 05                   je     4005d4 &lt;main+0x5b&gt;
+  4005cf:       e8 4c fe ff ff          callq  400420 &lt;__stack_chk_fail@plt&gt;
+
+  # Otherwise, exit normally.
+  4005d4:       c9                      leaveq 
+  4005d5:       c3                      retq   
+  4005d6:       66 2e 0f 1f 84 00 00    nopw   %cs:0x0(%rax,%rax,1)
+  4005dd:       00 00 00 
+</code></pre>
+
+<p>Notice the handy comments automatically added by <code>objdump</code>'s <a href="https://en.wikipedia.org/wiki/Joke" rel="noreferrer">artificial intelligence module</a>.</p>
+
+<p>If you run this program multiple times through GDB, you will see that:</p>
+
+<ul>
+<li>the canary gets a different random value every time</li>
+<li>the last loop of <code>myfunc</code> is exactly what modifies the address of the canary</li>
+</ul>
+
+<p>The canary randomized by setting it with <code>%fs:0x28</code>, which contains a random value as explained at:</p>
+
+<ul>
+<li><a href="https://unix.stackexchange.com/questions/453749/what-sets-fs0x28-stack-canary">https://unix.stackexchange.com/questions/453749/what-sets-fs0x28-stack-canary</a></li>
+<li><a href="https://stackoverflow.com/questions/10325713/why-does-this-memory-address-fs0x28-fs0x28-have-a-random-value">Why does this memory address %fs:0x28 ( fs[0x28] ) have a random value?</a></li>
+</ul>
+
+<p><strong>Debug attempts</strong></p>
+
+<p>From now on, we modify the code:</p>
+
+<pre><code>    myfunc(arr, len + 1);
+</code></pre>
+
+<p>to be instead:</p>
+
+<pre><code>    myfunc(arr, len);
+    myfunc(arr, len + 1); /* line 12 */
+    myfunc(arr, len);
+</code></pre>
+
+<p>to be more interesting.</p>
+
+<p>We will then try to see if we can pinpoint the culprit <code>+ 1</code> call with a method more automated than just reading and understanding the entire source code.</p>
+
+<p><strong><code>gcc -fsanitize=address</code></strong></p>
+
+<p>If you recompile with this flag and run the program, it outputs:</p>
+
+<pre><code>#0 0x4008bf in myfunc /home/ciro/test/main.c:4
+#1 0x40099b in main /home/ciro/test/main.c:12
+#2 0x7fcd2e13d82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+#3 0x400798 in _start (/home/ciro/test/a.out+0x40079
+</code></pre>
+
+<p>followed by some more colored output.</p>
+
+<p>This clearly pinpoints the problematic line 12.</p>
+
+<p><a href="https://github.com/google/sanitizers" rel="noreferrer">Thank Google</a>.</p>
+
+<p><strong>Valgrind SGCheck</strong></p>
+
+<p>As <a href="https://stackoverflow.com/a/1345689/895245">mentioned by others</a>, Valgrind is not good at solving this kind of problem.</p>
+
+<p>It does have an experimental tool <a href="http://valgrind.org/docs/manual/sg-manual.html" rel="noreferrer">called SGCheck</a>:</p>
+
+<blockquote>
+  <p>SGCheck is a tool for finding overruns of stack and global arrays. It works by using a heuristic approach derived from an observation about the likely forms of stack and global array accesses.</p>
+</blockquote>
+
+<p>So I was not very surprised when it did not find the error:</p>
+
+<pre><code>valgrind --tool=exp-sgcheck ./a.out
+</code></pre>
+
+<p>The error message should look like this apparently: <a href="https://stackoverflow.com/questions/36997537/valgrind-missing-error/36997685#36997685">Valgrind missing error</a></p>
+
+<p><strong>GDB</strong></p>
+
+<p>An important observation is that if you run the program through GDB, or examine the <code>core</code> file after the fact:</p>
+
+<pre><code>gdb -nh -q a.out core
+</code></pre>
+
+<p>then, as we saw on the assembly, GDB should point you to the end of the function that did the canary check:</p>
+
+<pre><code>(gdb) bt
+#0  0x00007f0f66e20428 in __GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:54
+#1  0x00007f0f66e2202a in __GI_abort () at abort.c:89
+#2  0x00007f0f66e627ea in __libc_message (do_abort=do_abort@entry=1, fmt=fmt@entry=0x7f0f66f7a49f "*** %s ***: %s terminated\n") at ../sysdeps/posix/libc_fatal.c:175
+#3  0x00007f0f66f0415c in __GI___fortify_fail (msg=&lt;optimized out&gt;, msg@entry=0x7f0f66f7a481 "stack smashing detected") at fortify_fail.c:37
+#4  0x00007f0f66f04100 in __stack_chk_fail () at stack_chk_fail.c:28
+#5  0x00000000004005f6 in main () at main.c:15
+(gdb) f 5
+#5  0x00000000004005f6 in main () at main.c:15
+15      }
+(gdb)
+</code></pre>
+
+<p>And therefore the problem is likely in one of the calls that this function made.</p>
+
+<p>Next we try to pinpoint the exact failing call by first single stepping up just after the canary is set:</p>
+
+<pre><code>  400581:       64 48 8b 04 25 28 00    mov    %fs:0x28,%rax
+  400588:       00 00 
+  40058a:       48 89 45 f8             mov    %rax,-0x8(%rbp)
+</code></pre>
+
+<p>and watching the address:</p>
+
+<pre><code>(gdb) p $rbp - 0x8
+$1 = (void *) 0x7fffffffcf18
+(gdb) watch 0x7fffffffcf18
+Hardware watchpoint 2: *0x7fffffffcf18
+(gdb) c
+Continuing.
+
+Hardware watchpoint 2: *0x7fffffffcf18
+
+Old value = 1800814336
+New value = 1800814378
+myfunc (src=0x7fffffffcf14 "*****?Vk\266", &lt;incomplete sequence \355\216&gt;, len=5) at main.c:3
+3           for (i = 0; i &lt; len; ++i) {
+(gdb) p len
+$2 = 5
+(gdb) p i
+$3 = 4
+(gdb) bt
+#0  myfunc (src=0x7fffffffcf14 "*****?Vk\266", &lt;incomplete sequence \355\216&gt;, len=5) at main.c:3
+#1  0x00000000004005cc in main () at main.c:12
+</code></pre>
+
+<p>Now, this does leaves us at the right offending instruction: <code>len = 5</code> and <code>i = 4</code>, and in this particular case, did point us to the culprit line 12.</p>
+
+<p>However, the backtrace is corrupted, and contains some trash. A correct backtrace would look like:</p>
+
+<pre><code>#0  myfunc (src=0x7fffffffcf14 "abcd", len=4) at main.c:3
+#1  0x00000000004005b8 in main () at main.c:11
+</code></pre>
+
+<p>so maybe this could corrupt the stack and prevent you from seeing the trace.</p>
+
+<p>Also, this method requires knowing what is the last call of the canary checking function otherwise you will have false positives, which will not always be feasible, unless you <a href="https://stackoverflow.com/questions/1206872/how-to-go-to-the-previous-line-in-gdb/46996380#46996380">use reverse debugging</a>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank">Ciro Santilli 新疆改造中心996ICU六四事件</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1345670" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1345670/stack-smashing-detected by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:09:41 GMT -->
+</html>

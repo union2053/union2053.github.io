@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2940367/what-is-more-efficient--using-pow-to-square-or-just-multiply-it-with-itself- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:27:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What is more efficient? Using pow to square or just multiply it with itself? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What is more efficient? Using pow to square or just multiply it with itself? | C Language Knowledge Base">
+        <title>[SOLVED] What is more efficient? Using pow to square or just multiply it with itself? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-is-more-efficient-using-pow-to-square-or-just-multiply-it-with-itself-">What is more efficient? Using pow to square or just multiply it with itself?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/optimization.html">optimization</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>What of these two methods is in C more efficient? And how about:</p>
+
+<pre><code>pow(x,3)
+</code></pre>
+
+<p>vs. </p>
+
+<pre><code>x*x*x // etc?
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/0/user163408" target="_blank"><span itemprop="name">user163408</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">111</div>
+                                    <div itemprop="dateCreated">5/1/2013 1:15:02 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I tested the performance difference between <code>x*x*...</code> vs <code>pow(x,i)</code> for small <code>i</code> using this code:</p>
+
+<pre><code>#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;boost/date_time/posix_time/posix_time.hpp&gt;
+
+inline boost::posix_time::ptime now()
+{
+    return boost::posix_time::microsec_clock::local_time();
+}
+
+#define TEST(num, expression) \
+double test##num(double b, long loops) \
+{ \
+    double x = 0.0; \
+\
+    boost::posix_time::ptime startTime = now(); \
+    for (long i=0; i&lt;loops; ++i) \
+    { \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+        x += expression; \
+    } \
+    boost::posix_time::time_duration elapsed = now() - startTime; \
+\
+    std::cout &lt;&lt; elapsed &lt;&lt; " "; \
+\
+    return x; \
+}
+
+TEST(1, b)
+TEST(2, b*b)
+TEST(3, b*b*b)
+TEST(4, b*b*b*b)
+TEST(5, b*b*b*b*b)
+
+template &lt;int exponent&gt;
+double testpow(double base, long loops)
+{
+    double x = 0.0;
+
+    boost::posix_time::ptime startTime = now();
+    for (long i=0; i&lt;loops; ++i)
+    {
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+        x += std::pow(base, exponent);
+    }
+    boost::posix_time::time_duration elapsed = now() - startTime;
+
+    std::cout &lt;&lt; elapsed &lt;&lt; " ";
+
+    return x;
+}
+
+int main()
+{
+    using std::cout;
+    long loops = 100000000l;
+    double x = 0.0;
+    cout &lt;&lt; "1 ";
+    x += testpow&lt;1&gt;(rand(), loops);
+    x += test1(rand(), loops);
+
+    cout &lt;&lt; "\n2 ";
+    x += testpow&lt;2&gt;(rand(), loops);
+    x += test2(rand(), loops);
+
+    cout &lt;&lt; "\n3 ";
+    x += testpow&lt;3&gt;(rand(), loops);
+    x += test3(rand(), loops);
+
+    cout &lt;&lt; "\n4 ";
+    x += testpow&lt;4&gt;(rand(), loops);
+    x += test4(rand(), loops);
+
+    cout &lt;&lt; "\n5 ";
+    x += testpow&lt;5&gt;(rand(), loops);
+    x += test5(rand(), loops);
+    cout &lt;&lt; "\n" &lt;&lt; x &lt;&lt; "\n";
+}
+</code></pre>
+
+<p>Results are:</p>
+
+<pre><code>1 00:00:01.126008 00:00:01.128338 
+2 00:00:01.125832 00:00:01.127227 
+3 00:00:01.125563 00:00:01.126590 
+4 00:00:01.126289 00:00:01.126086 
+5 00:00:01.126570 00:00:01.125930 
+2.45829e+54
+</code></pre>
+
+<p>Note that I accumulate the result of every pow calculation to make sure the compiler doesn't optimize it away.</p>
+
+<p>If I use the <code>std::pow(double, double)</code> version, and <code>loops = 1000000l</code>, I get:</p>
+
+<pre><code>1 00:00:00.011339 00:00:00.011262 
+2 00:00:00.011259 00:00:00.011254 
+3 00:00:00.975658 00:00:00.011254 
+4 00:00:00.976427 00:00:00.011254 
+5 00:00:00.973029 00:00:00.011254 
+2.45829e+52
+</code></pre>
+
+<p>This is on an Intel Core Duo running Ubuntu 9.10 64bit. Compiled using gcc 4.4.1 with -o2 optimization.</p>
+
+<p>So in C, yes <code>x*x*x</code> will be faster than <code>pow(x, 3)</code>, because there is no <code>pow(double, int)</code> overload. In C++, it will be the roughly same. (Assuming the methodology in my testing is correct.)</p>
+
+<hr>
+
+<p>This is in response to the comment made by An Markm:</p>
+
+<p>Even if a <code>using namespace std</code> directive was issued, if the second parameter to <code>pow</code> is an <code>int</code>, then the <code>std::pow(double, int)</code> overload from <code>&lt;cmath&gt;</code> will be called instead of <code>::pow(double, double)</code> from <code>&lt;math.h&gt;</code>.</p>
+
+<p>This test code confirms that behavior:</p>
+
+<pre><code>#include &lt;iostream&gt;
+
+namespace foo
+{
+
+    double bar(double x, int i)
+    {
+        std::cout &lt;&lt; "foo::bar\n";
+        return x*i;
+    }
+
+
+}
+
+double bar(double x, double y)
+{
+    std::cout &lt;&lt; "::bar\n";
+    return x*y;
+}
+
+using namespace foo;
+
+int main()
+{
+    double a = bar(1.2, 3); // Prints "foo::bar"
+    std::cout &lt;&lt; a &lt;&lt; "\n";
+    return 0;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/245265/emile-cormier" target="_blank"><span itemprop="name">Emile Cormier</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2940367/what-is-more-efficient--using-pow-to-square-or-just-multiply-it-with-itself-#answer-0</div>
+                                            <div itemprop="upvoteCount">77</div>
+                                            <div itemprop="dateCreated">3/19/2013 8:25:13 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>That's the wrong kind of question. The right question would be: "Which one is easier to understand for human readers of my code?"</p>
+
+<p>If speed matters (later), don't ask, but measure. (And before that, measure whether optimizing this actually will make any noticeable difference.) Until then, write the code so that it is easiest to read. </p>
+
+<p><strong><em>Edit</em></strong><br>
+Just to make this clear (although it already should have been): Breakthrough speedups usually come from things like <strong><em>using better algorithms</em></strong>, <strong><em>improving locality of data</em></strong>, <strong><em>reducing the use of dynamic memory</em></strong>, <strong><em>pre-computing results</em></strong>, etc. <strong><em>They rarely ever come from micro-optimizing single function calls</em></strong>, and where they do, they do so in <strong><em>very few places</em></strong>, which would only be found by <strong><em>careful</em></strong> (and time-consuming) <strong><em>profiling</em></strong>, more often than never they can be sped up by doing very non-intuitive things (like inserting <code>noop</code> statements), and what's an optimization for one platform is sometimes a pessimization for another (which is why you need to measure, instead of asking, because we don't fully know/have your environment). </p>
+
+<p>Let me underline this again: Even in the few applications where such things matter, they don't matter in most places they're used, and <strong>it is <em>very</em> unlikely that you will find the places where they matter by looking at the code.</strong> You really do need to <strong><em>identify the hot spots first</em></strong>, because otherwise optimizing code is just <strong><em>a waste of time</em></strong>. </p>
+
+<p>Even if a single operation (like computing the square of some value) takes up <strong><em>10% of the application's execution time</em></strong> (which IME is quite rare), and even if optimizing it saves <strong><em>50% of the time</em></strong> necessary for that operation (which IME is even much, much rarer), you still made the application take <strong><em>only 5% less time</em></strong>.<br>
+Your users will need a stopwatch to even notice that. (I guess in most cases anything under 20% speedup goes unnoticed for most users. And <em>that</em> is four such spots you need to find.) </p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/140719/sbi" target="_blank">sbi</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2940367" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2940367/what-is-more-efficient--using-pow-to-square-or-just-multiply-it-with-itself- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:27:44 GMT -->
+</html>

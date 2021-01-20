@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-identifier-variable-block-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Identifier Variable Block Scope</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Identifier Variable Block Scope'>C Identifier Variable Block Scope</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-block-scope-without-braces.html'>C Block Scope Without Braces
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Identifier Variable Block Scope</h1>
+<a class ='btn btn-outline-dark' href=c-identifier-storage-classes.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-block-scope-without-braces.html>Next</a><p>Scope describes the region or regions of a program that can access an identifier.
+
+</p><p>A C variable has one of the following scopes:
+</p><UL style='font-size:19px;'><LI>block scope,</LI><LI>function scope,</LI><LI>function prototype scope, or</LI><LI>file scope.</LI></UL><h3>Block
+
+</h3><p>A block is a region of code contained within an opening brace and the matching closing brace.
+
+</p><p>For instance, the entire body of a function is a block.
+
+</p><p>Any compound statement within a function also is a block.
+
+</p><p>A variable defined inside a block has block scope, and it is visible from the point
+it is defined until the end of the block containing the definition.
+
+</p><p>Also, formal function parameters, even though they occur before the opening brace
+of a function, have block scope and belong to the block containing the function body.
+
+</p><p>Therefore, the variables a  and  b  in the following code both have block
+scope extending to the closing brace:
+</p><div class='myCodeDiv'><button id='DWPAY' class='myCopyButton' data-clipboard-target='#DDVYY'>Copy</button><pre  id='DDVYY' style='font-size:18px;' class='code'><span class='r'>double</span> blocky(<span class='r'>double</span> a)
+{
+    <span class='r'>double</span> b = 0.0;
+    ...
+    <span class='r'>return</span> b;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DWPAY');clipboard.on('success', function(e) {$('#DWPAY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DWPAY').text('error');});</script></div><p>Variables declared in an inner block have scope restricted just to that block:
+</p><div class='myCodeDiv'><button id='ZPOJC' class='myCopyButton' data-clipboard-target='#BWSJK'>Copy</button><pre  id='BWSJK' style='font-size:18px;' class='code'><span class='r'>double</span> blocky(<span class='r'>double</span> a)
+{
+     <span class='r'>double</span> b = 0.0;
+     <span class='r'>int</span> i;
+     <span class='r'>for</span> (i = 0; i &lt; 10; i++)
+     {
+         <span class='r'>double</span> q = a * i; <span class='c'>// start of scope for q</span>
+         ...
+         b *= q;
+     }                        <span class='c'>// end of scope for q</span>
+
+      ...
+     <span class='r'>return</span> b;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZPOJC');clipboard.on('success', function(e) {$('#ZPOJC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZPOJC').text('error');});</script></div><p>In this example, the scope of  q  is limited to the inner block, and only code within 
+that block can access q .
+
+</p><p>Traditionally, variables with block scope had to be declared at the beginning of a block. 
+
+</p><p>C99 relaxed that rule, allowing you to declare variables anywhere in a block. 
+
+</p><p>One new possibility is in the control section of a for  loop. 
+
+</p><p>That is, you now can do this:
+</p><div class='myCodeDiv'><button id='GGFMJ' class='myCopyButton' data-clipboard-target='#GWTWB'>Copy</button><pre  id='GWTWB' style='font-size:18px;' class='code'><span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; 10; i++)
+  printf(<span class='q'>"A C99 feature: i = %d"</span>, i);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GGFMJ');clipboard.on('success', function(e) {$('#GGFMJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GGFMJ').text('error');});</script></div><p>C99 expanded the concept of a block to include the code controlled by a for loop, while loop, 
+do while  loop, or  if  statement, even if no brackets are used. 
+
+</p><p>So in the previous for  loop, the variable  <i style='color:blue'>i</i>  is considered to be part of the  <i style='color:blue'>for</i>  
+loop block. Therefore, its scope is limited to the     <i style='color:blue'>for</i>  loop. 
+
+</p><p>After execution leaves the  for  loop, the program will no longer see that i.
+</p><h3>Example
+</h3><p>This example involves a nested block that happens to be the body of a loop: 
+</p><div class='myCodeDiv'><button id='JDHMN' class='myCopyButton' data-clipboard-target='#BRFHM'>Copy</button><pre  id='BRFHM' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> count1 = 1;                               <span class='c'>// Declared in outer block </span>
+
+  <span class='r'>do</span> 
+  { 
+    <span class='r'>int</span> count2 = 0;                             <span class='c'>// Declared in inner block </span>
+    ++count2; 
+    printf(<span class='q'>"count1 = %d     count2 = %d\n"</span>, count1, count2); 
+  } <span class='r'>while</span>( ++count1 &lt;= 5); 
+
+  <span class='c'>// count2 no longer exists </span>
+
+  printf(<span class='q'>"count1 = %d\n"</span>, count1); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JDHMN');clipboard.on('success', function(e) {$('#JDHMN').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JDHMN').text('error');});</script></div><p>You will get the following output from this program: 
+</p><img src='data:image/png;base64,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'><p>The block that encloses the body of <i style='color:blue'>main</i>() contains an inner block that is the do-while loop. 
+
+</p><p>You declare and define count2 inside the loop block: 
+</p><div class='myCodeDiv'><button id='RNFNQ' class='myCopyButton' data-clipboard-target='#RZYRE'>Copy</button><pre  id='RZYRE' style='font-size:18px;' class='code'><span class='r'>do</span> 
+{ 
+  <span class='r'>int</span> count2 = 0;  <span class='c'>// Declared in inner block </span>
+  ++count2; 
+  printf(<span class='q'>"count1 = %d     count2 = %d\n"</span>, count1, count2); 
+} <span class='r'>while</span>( ++count1 &lt;= 5);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RNFNQ');clipboard.on('success', function(e) {$('#RNFNQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RNFNQ').text('error');});</script></div><p>So count2 is recreated on every loop iteration with the initial value 0, and its value is never more than 1.  
+
+</p><p>During each loop iteration, count2 is created, initialized, incremented, and destroyed. 
+
+</p><p>It only exists from the statement that declares it down to the closing brace for the loop. 
+
+</p><p>The variable count1 exists at the <i style='color:blue'>main</i>() block level. it continues to exist while it is incremented, so the last <i style='color:blue'>printf</i>()  
+produces the value 6. 
+</p><a class ='btn btn-outline-dark' href=c-identifier-storage-classes.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-block-scope-without-braces.html>Next</a><h2>Related</h2><UL><LI><a href='c-preprocessor-review-questions-2.html'>C preprocessor Review Questions 2</a></LI><LI><a href='c-preprocessor-exercise-1.html'>C preprocessor Exercise 1</a></LI><LI><a href='c-identifier-storage-classes.html'>C Identifier Storage Classes</a></LI><LI><a href='c-variable-block-scope-without-braces.html'>C Variable Block Scope Without Braces</a></LI><LI><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C Identifier Variable function Scope and Function prototype scope</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-identifier-variable-block-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

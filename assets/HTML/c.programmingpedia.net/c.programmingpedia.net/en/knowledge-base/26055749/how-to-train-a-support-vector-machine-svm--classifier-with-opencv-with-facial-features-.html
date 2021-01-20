@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/26055749/how-to-train-a-support-vector-machine-svm--classifier-with-opencv-with-facial-features- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to train a Support Vector Machine(svm) classifier with openCV with facial features? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to train a Support Vector Machine(svm) classifier with openCV with facial features? | C Language Knowledge Base">
+        <title>[SOLVED] How to train a Support Vector Machine(svm) classifier with openCV with facial features? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-train-a-support-vector-machine-svm-classifier-with-opencv-with-facial-features-">How to train a Support Vector Machine(svm) classifier with openCV with facial features?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/face-detection.html">face-detection</a></span>
+                        <span class="tag-item"><a href="../tag/feature-detection.html">feature-detection</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                        <span class="tag-item"><a href="../tag/svm.html">svm</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I want to use the svm classifier for facial expression detection. I know opencv has a svm api, but I have no clue what should be the input to train the classifier. I have read many papers till now, all of them says after facial feature detection train the classifier. </p>
+
+<p>so far what I did,</p>
+
+<ol>
+<li>Face detection,</li>
+<li>16 facial points calculation in every frame. below is an output of facial feature detection![enter image description</li>
+<li>A vector which holds the features points pixel address<img src="https://i.stack.imgur.com/GQRYX.png" alt="here"></li>
+</ol>
+
+<p>Note: I know how I can train the SVM only with positive and negative images, I saw this code<a href="https://github.com/MasteringOpenCV/code/blob/master/Chapter5_NumberPlateRecognition/trainSVM.cpp" rel="noreferrer">here</a>, But I don't know how I combine the facial feature information with it.</p>
+
+<p>Can anybody please help me to start the classification with svm.</p>
+
+<p>a. what should be the sample input to train the classifier?</p>
+
+<p>b. How do I train the classifier with this facial feature points?</p>
+
+<p>Regards,</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1284889/mmh" target="_blank"><span itemprop="name">MMH</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">9</div>
+                                    <div itemprop="dateCreated">9/29/2014 6:27:03 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>the machine learning algos in opencv all come with a similar interface. to train it, you pass a  NxM  Mat offeatures (N rows, each feature one row with length M) and a Nx1 Mat with the class-labels. like this:</p>
+
+<pre><code>//traindata      //trainlabels
+
+f e a t u r e    1 
+f e a t u r e    -1
+f e a t u r e    1
+f e a t u r e    1
+f e a t u r e    -1
+</code></pre>
+
+<p>for the prediction, you fill a Mat with 1 row in the same way, and it will return the predicted label</p>
+
+<p>so, let's say, your 16 facial points are stored in a vector, you would do like:</p>
+
+<pre><code>Mat trainData; // start empty
+Mat labels;
+
+for all facial_point_vecs:
+{
+    for( size_t i=0; i&lt;16; i++ )
+    {
+        trainData.push_back(point[i]);
+    }
+    labels.push_back(label); // 1 or -1
+}
+// now here comes the magic:
+// reshape it, so it has N rows, each being a flat float, x,y,x,y,x,y,x,y... 32 element array
+trainData = trainData.reshape(1, 16*2); // numpoints*2 for x,y
+
+// we have to convert to float:
+trainData.convertTo(trainData,CV_32F);
+
+SVM svm; // params omitted for simplicity (but that's where the *real* work starts..)
+svm.train( trainData, labels );
+
+
+//later predict:
+vector&lt;Point&gt; points;
+Mat testData = Mat(points).reshape(1,32); // flattened to 1 row
+testData.convertTo(testData ,CV_32F);
+float p = svm.predict( testData );
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/2056772/berak" target="_blank"><span itemprop="name">berak</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/26055749/how-to-train-a-support-vector-machine-svm--classifier-with-opencv-with-facial-features-#answer-0</div>
+                                            <div itemprop="upvoteCount">16</div>
+                                            <div itemprop="dateCreated">9/29/2014 6:41:47 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Face gesture recognition is a widely researched problem, and the appropriate features you need to use can be found by a very thorough study of the existing literature. Once you have the feature descriptor you believe to be good, you go on to train the SVM with those. Once you have trained the SVM with optimal parameters (found through cross-validation), you start testing the SVM model on unseen data, and you report the accuracy. That, in general, is the pipeline.</p>
+
+<p>Now the part about SVMs:</p>
+
+<p>SVM is a binary classifier- it can differentiate between two classes (though it can be extended to multiple classes as well). OpenCV has an inbuilt module for <a href="http://docs.opencv.org/modules/ml/doc/support_vector_machines.html" rel="nofollow noreferrer">SVM</a> in the ML library. The SVM class has two functions to begin with: <code>train(..)</code> and <code>predict(..)</code>. To train the classifier, you give as in input a very large amount of sample feature descriptors, along with their class labels (usually -1 and +1). Remember the format OpenCV supports: every training sample has to be a row-vector. And each row will have one corresponding class label in the labels vector. So if you have a descriptor of length <code>n</code>, and you have <code>m</code> such sample descriptors, your training matrix would be <code>m x n</code> (<code>m</code> rows, each of length <code>n</code>), and the labels vector would be of length <code>m</code>. There is also a <code>SVMParams</code> object that contains properties like SVM-type and values for parameters like <code>C</code> that you'll have to specify.</p>
+
+<p>Once trained, you extract features from an image, convert it into a single row format, and give to <code>predict()</code> and it'll tell you which class it belongs to (+1 or -1).</p>
+
+<p>There's also a <code>train_auto()</code> with similar arguments with a similar format that gives you the optimum values of the SVM parameters.</p>
+
+<p>Also check this <a href="https://stackoverflow.com/questions/14694810/using-opencv-and-svm-with-images">detailed SO answer</a> to see an example.</p>
+
+<p>EDIT:
+Assuming you have a Feature Descriptor that returns a vector of features, the algorithm would be something like:</p>
+
+<pre><code>Mat trainingMat, labelsMat;
+for each image in training database:
+  feature = extractFeatures( image[i] );
+  Mat feature_row = alignAsRow( feature );
+  trainingMat.push_back( feature_row );
+  labelsMat.push_back( -1 or 1 );  //depending upon class.
+mySvmObject.train( trainingMat, labelsMat, Mat(), Mat(), mySvmParams );
+</code></pre>
+
+<p>I don't presume that <code>extractFeatures()</code> and <code>alignAsRow()</code> are existing functions, you might need to write them yourself.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/3156373/a-jays" target="_blank">a-Jays</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/26055749" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/26055749/how-to-train-a-support-vector-machine-svm--classifier-with-opencv-with-facial-features- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:27 GMT -->
+</html>

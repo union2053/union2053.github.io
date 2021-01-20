@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1301/aliasing-and-effective-type by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Aliasing and effective type | C Language Tutorial">
+        <meta name="description" property="og:description" content="Aliasing and effective type | C Language Tutorial">
+        <title>Aliasing and effective type | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="aliasing-and-effective-type">Aliasing and effective type</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>Violations of aliasing rules and of violating the effective type of an object are two different things and should not be confounded.</p>
+<ul>
+<li>
+<p><em>Aliasing</em> is the property of two pointers <code>a</code> and <code>b</code> that refer to the same object, that is that <code>a == b</code>.</p>
+</li>
+<li>
+<p>The <em>effective type</em> of a data object is used by C to determine which operations can be done on that object. In particular the effective type is used to determine if two pointers can alias each other.</p>
+</li>
+</ul>
+<p>Aliasing can be a problem for optimization, because changing the object through one pointer, <code>a</code> say, can change the object that is visible through the other pointer, <code>b</code>. If your C compiler would have to assume that pointers could always alias each other, regardless of their type and provenance, many optimization opportunities would be lost, and many programs would run slower.</p>
+<p>C's strict aliasing rules refers to cases in the compiler <em>may assume</em> which objects do (or do not) alias each other. There are two rules of thumb that you always should have in mind for data pointers.</p>
+<blockquote>
+<p>Unless said otherwise, two pointers with the same base type may alias.</p>
+</blockquote>
+<blockquote>
+<p>Two pointers with different base type cannot alias, unless at least one of the two types is a character type.</p>
+</blockquote>
+<p>Here <em>base type</em> means that we put aside type qualifications such as <code>const</code>, e.g. If <code>a</code> is <code>double*</code> and <code>b</code> is <code>const double*</code>, the compiler <em>must</em> generally assume that a change of <code>*a</code> may change <code>*b</code>.</p>
+<p>Violating the second rule can have catastrophic results. Here violating the strict aliasing rule means that you present two pointers <code>a</code> and <code>b</code> of different type to the compiler which in reality point to the same object. The compiler then may always assume that the two point to different objects, and will not update its idea of <code>*b</code> if you changed the object through <code>*a</code>.</p>
+<p>If you do so the behavior of your program becomes undefined. Therefore, C puts quite severe restrictions on pointer conversions in order to help you to avoid such situation to occur accidentally.</p>
+<blockquote>
+<p>Unless the source or target type is <code>void</code>, all pointer conversions
+between pointers with different base type must be <em>explicit</em>.</p>
+</blockquote>
+<p>Or in other words, they need a <em>cast</em>, unless you do a conversion that just adds a qualifier such as <code>const</code> to the target type.</p>
+<p>Avoiding pointer conversions in general and casts in particular protects you from aliasing problems. Unless you really need them, and these cases are very special, you should avoid them as you can.</p>
+
+
+            </div>
+
+
+            <h2 id="changing-bytes">Changing bytes</h2>
+            <div>
+                <p>Once an object has an effective type, you should not attempt to modify it through a pointer of another type, unless that other type is a character type, <code>char</code>, <code>signed char</code> or <code>unsigned char</code>.</p>
+<pre><code>#include &lt;inttypes.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(void) {
+  uint32_t a = 57;
+  // conversion from incompatible types needs a cast !
+  unsigned char* ap = (unsigned char*)&amp;a;
+  for (size_t i = 0; i &lt; sizeof a; ++i) {
+    /* set each byte of a to 42 */
+    ap[i] = 42;
+  }
+  printf(&quot;a now has value %&quot; PRIu32 &quot;\n&quot;, a);
+}
+</code></pre>
+<p>This is a valid program that prints</p>
+<blockquote>
+<p>a now has value 707406378</p>
+</blockquote>
+<p>This works because:</p>
+<ul>
+<li>The access is made to the individual bytes seen with type <code>unsigned char</code> so each modification is well defined.</li>
+<li>The two views to the object, through <code>a</code> and through <code>*ap</code>, alias, but since <code>ap</code> is a pointer to a character type, the strict aliasing rule does not apply. Thus the compiler has to assume that the value of <code>a</code> may have been changed in the <code>for</code> loop. The modified value of <code>a</code> must be constructed from the bytes that have been changed.</li>
+<li>The type of <code>a</code>, <code>uint32_t</code> has no padding bits. All its bits of the representation count for the value,  here <code>707406378</code>, and there can be no trap representation.</li>
+</ul>
+
+
+            </div>
+            <h2 id="character-types-cannot-be-accessed-through-non-character-types-">Character types cannot be accessed through non-character types.</h2>
+            <div>
+                <p>If an object is defined with static, thread, or automatic storage duration, and it has a character type, either: <code>char</code>, <code>unsigned char</code>, or <code>signed char</code>, it may not be accessed by a non-character type. In the below example a <code>char</code> array is reinterpreted as the type <code>int</code>, and the behavior is undefined on every dereference of the <code>int</code> pointer <code>b</code>.</p>
+<pre><code>int main( void )
+{
+    char a[100];
+    int* b = ( int* )&amp;a;
+    *b = 1;      
+
+    static char c[100];
+    b = ( int* )&amp;c;
+    *b = 2;
+
+    _Thread_local char d[100];
+    b = ( int* )&amp;d;
+    *b = 3;
+}
+</code></pre>
+<p>This is undefined because it violates the &quot;effective type&quot; rule, no data object that has an effective type may be accessed through another type that is not a character type. Since the other type here is <code>int</code>, this is not allowed.</p>
+<p>Even if alignment and pointer sizes would be known to fit, this would not exempt from this rule, behavior would still be undefined.</p>
+<p>This means in particular that there is no way in standard C to reserve
+a buffer object of character type that can be used through pointers
+with different types, as you would use a buffer that was received by
+<code>malloc</code> or similar function.</p>
+<p>A correct way to achieve the same goal as in the above example would
+be to use a <code>union</code>.</p>
+<pre><code>typedef union bufType bufType;
+union bufType {
+   char c[sizeof(int[25])];
+   int i[25];
+};
+
+int main( void )
+{
+    bufType a = { .c = { 0 } }; // reserve a buffer and initialize
+    int* b = a.i;      // no cast necessary
+    *b = 1;      
+
+    static bufType a = { .c = { 0 } };
+    int* b = a.i;
+    *b = 2;
+
+    _Thread_local bufType a = { .c = { 0 } };
+    int* b = a.i;
+    *b = 3;
+}
+</code></pre>
+<p>Here, the <code>union</code> ensures that the compiler knows from the start that the buffer could be
+accessed through different views. This also has the advantage that now the buffer has a &quot;view&quot; <code>a.i</code> that already is of type <code>int</code> and no pointer conversion is needed.</p>
+
+
+            </div>
+            <h2 id="effective-type">Effective type</h2>
+            <div>
+                <p>The <em>effective type</em> of a data object is the last type information that was associated with it, if any.</p>
+<pre><code>// a normal variable, effective type uint32_t, and this type never changes
+uint32_t a = 0.0;
+
+// effective type of *pa is uint32_t, too, simply
+// because *pa is the object a
+uint32_t* pa = &amp;a;
+
+// the object pointed to by q has no effective type, yet
+void* q = malloc(sizeof uint32_t);
+// the object pointed to by q still has no effective type,
+// because nobody has written to it
+uint32_t* qb = q;
+// *qb now has effective type uint32_t because a uint32_t value was written
+*qb = 37;
+
+// the object pointed to by r has no effective type, yet, although
+// it is initialized
+void* r = calloc(1, sizeof uint32_t);
+// the object pointed to by r still has no effective type,
+// because nobody has written to or read from it
+uint32_t* rc = r;
+// *rc now has effective type uint32_t because a value is read
+// from it with that type. The read operation is valid because we used calloc.
+// Now the object pointed to by r (which is the same as *rc) has
+// gained an effective type, although we didn't change its value.
+uint32_t c = *rc;
+
+// the object pointed to by s has no effective type, yet.
+void* s = malloc(sizeof uint32_t);
+// the object pointed to by s now has effective type uint32_t
+// because an uint32_t value is copied into it.
+memcpy(s, r, sizeof uint32_t);
+</code></pre>
+<p>Observe that for the latter, it was not necessary that we even have an
+<code>uint32_t*</code> pointer to that object. The fact that we have copied another
+<code>uint32_t</code> object is sufficient.</p>
+
+
+            </div>
+            <h2 id="restrict-qualification">restrict qualification</h2>
+            <div>
+                <p>If we have two pointer arguments of the same type, the compiler can't make any assumption and will always have to assume that the change to <code>*e</code> may change <code>*f</code>:</p>
+<pre><code>void fun(float* e, float* f) {
+    float a = *f
+    *e = 22;
+    float b = *f;
+    print(&quot;is %g equal to %g?\n&quot;, a, b);
+}
+
+float fval = 4;
+float eval = 77;
+ fun(&amp;eval, &amp;fval);
+</code></pre>
+<p>all goes well and something like</p>
+<blockquote>
+<p>is 4 equal to 4?</p>
+</blockquote>
+<p>is printed. If we pass the same pointer, the program will still do the right thing and print</p>
+<blockquote>
+<p>is 4 equal to 22?</p>
+</blockquote>
+<p>This can turn out to be inefficient, if we <em>know</em> by some outside information that <code>e</code> and <code>f</code> will never point to the same data object. We can reflect that knowledge by adding <code>restrict</code> qualifiers to the pointer parameters:</p>
+<pre><code>void fan(float*restrict e, float*restrict f) {
+    float a = *f
+    *e = 22;
+    float b = *f;
+    print(&quot;is %g equal to %g?\n&quot;, a, b);
+}
+</code></pre>
+<p>Then the compiler may always suppose that <code>e</code> and <code>f</code> point to different objects.</p>
+
+
+            </div>
+            <h2 id="violating-the-strict-aliasing-rules">Violating the strict aliasing rules</h2>
+            <div>
+                <p>In the following code let us assume for simplicity that <code>float</code> and <code>uint32_t</code> have the same size.</p>
+<pre><code>void fun(uint32_t* u, float* f) {
+    float a = *f
+    *u = 22;
+    float b = *f;
+    print(&quot;%g should equal %g\n&quot;, a, b);
+}
+</code></pre>
+<p><code>u</code> and <code>f</code> have different base type, and thus the compiler can assume that they point to different objects. There is no possibility that <code>*f</code> could have changed between the two initializations of <code>a</code> and <code>b</code>, and so the compiler may optimize the code to something equivalent to</p>
+<pre><code>void fun(uint32_t* u, float* f) {
+    float a = *f
+    *u = 22;
+    print(&quot;%g should equal %g\n&quot;, a, a);
+}
+</code></pre>
+<p>That is, the second load operation of <code>*f</code> can be optimized out completely.</p>
+<p>If we call this function &quot;normally&quot;</p>
+<pre><code> float fval = 4;
+ uint32_t uval = 77;
+ fun(&amp;uval, &amp;fval);
+</code></pre>
+<p>all goes well and something like</p>
+<blockquote>
+<p>4 should equal 4</p>
+</blockquote>
+<p>is printed. But if we cheat and pass the same pointer, after converting it,</p>
+<pre><code> float fval = 4;
+ uint32_t* up = (uint32_t*)&amp;fval;
+ fun(up, &amp;fval);
+</code></pre>
+<p>we violate the strict aliasing rule. Then the behavior becomes undefined. The output could be as above, if the compiler had optimized the second access, or something completely different, and so your program ends up in a completely unreliable state.</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../6846/-ctype-h----character-classification---conversion.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../322/arrays.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-21</div>
+        <div itemprop="datePublished">2016-07-21</div>
+        <div itemprop="dateModified">2016-12-29</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=1301" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_2106254392" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#changing-bytes">
+                    Changing bytes
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#character-types-cannot-be-accessed-through-non-character-types-">
+                    Character types cannot be accessed through non-character types.
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#effective-type">
+                    Effective type
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#restrict-qualification">
+                    restrict qualification
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#violating-the-strict-aliasing-rules">
+                    Violating the strict aliasing rules
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1301/aliasing-and-effective-type by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+</html>

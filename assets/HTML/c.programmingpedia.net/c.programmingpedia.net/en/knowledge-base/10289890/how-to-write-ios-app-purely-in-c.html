@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10289890/how-to-write-ios-app-purely-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to write iOS app purely in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to write iOS app purely in C | C Language Knowledge Base">
+        <title>[SOLVED] How to write iOS app purely in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-write-ios-app-purely-in-c">How to write iOS app purely in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cocoa-touch.html">cocoa-touch</a></span>
+                        <span class="tag-item"><a href="../tag/ios.html">ios</a></span>
+                        <span class="tag-item"><a href="../tag/objective-c.html">objective-c</a></span>
+                        <span class="tag-item"><a href="../tag/objective-c-runtime.html">objective-c-runtime</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I read here <a href="https://stackoverflow.com/questions/180549/learn-c-first-before-learning-objective-c">Learn C Before Objective-C?</a></p>
+
+<blockquote>
+  <p>Usually I then replace some Obj-C code with pure C code (after all you can mix them as much as you like, the content of an Obj-C method can be entirely, pure C code)</p>
+</blockquote>
+
+<p>Is this true? </p>
+
+<p>Is it possible to build an iPhone app purely in the C programming language?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/103264/001" target="_blank"><span itemprop="name">001</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">347</div>
+                                    <div itemprop="dateCreated">5/23/2017 12:26:19 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Damn, it took me a while but I got it:</p>
+
+<p><strong>main.c:</strong></p>
+
+<pre><code>#include &lt;CoreFoundation/CoreFoundation.h&gt;
+
+#include &lt;objc/runtime.h&gt;
+#include &lt;objc/message.h&gt;
+
+// This is a hack. Because we are writing in C, we cannot out and include 
+// &lt;UIKit/UIKit.h&gt;, as that uses Objective-C constructs.
+// however, neither can we give the full function declaration, like this:
+// int UIApplicationMain (int argc, char *argv[], NSString *principalClassName, NSString *delegateClassName);
+// So, we rely on the fact that for both the i386 &amp; ARM architectures, 
+// the registers for parameters passed in remain the same whether or not 
+// you are using VA_ARGS. This is actually the basis of the objective-c 
+// runtime (objc_msgSend), so we are probably fine here,  this would be
+// the last thing I would expect to break.
+extern int UIApplicationMain(int, ...);
+
+// Entry point of the application. If you don't know what this is by now, 
+// then you probably shouldn't be reading the rest of this post.
+int main(int argc, char *argv[])
+{
+    // Create an @autoreleasepool, using the old-stye API. 
+    // Note that while NSAutoreleasePool IS deprecated, it still exists 
+    // in the APIs for a reason, and we leverage that here. In a perfect 
+    // world we wouldn't have to worry about this, but, remember, this is C.
+    id autoreleasePool = objc_msgSend(objc_msgSend(objc_getClass("NSAutoreleasePool"), sel_registerName("alloc")), sel_registerName("init"));
+
+    // Notice the use of CFSTR here. We cannot use an objective-c string 
+    // literal @"someStr", as that would be using objective-c, obviously.
+    UIApplicationMain(argc, argv, nil, CFSTR("AppDelegate"));
+
+    objc_msgSend(autoreleasePool, sel_registerName("drain"));
+}
+</code></pre>
+
+<p><strong>AppDelegate.c:</strong></p>
+
+<pre><code>#import &lt;objc/runtime.h&gt;
+#import &lt;objc/message.h&gt;
+
+// This is equivalent to creating a @class with one public variable named 'window'.
+struct AppDel
+{
+    Class isa;
+
+    id window;
+};
+
+// This is a strong reference to the class of the AppDelegate 
+// (same as [AppDelegate class])
+Class AppDelClass;
+
+// this is the entry point of the application, same as -application:didFinishLaunchingWithOptions:
+// note the fact that we use `void *` for the 'application' and 'options' fields, as we need no reference to them for this to work. A generic id would suffice here as well.
+BOOL AppDel_didFinishLaunching(struct AppDel *self, SEL _cmd, void *application, void *options)
+{
+    // we +alloc and -initWithFrame: our window here, so that we can have it show on screen (eventually).
+    // this entire method is the objc-runtime based version of the standard View-Based application's launch code, so nothing here really should surprise you.
+    // one thing important to note, though is that we use `sel_getUid()` instead of @selector().
+    // this is because @selector is an objc language construct, and the application would not have been created in C if I used @selector.
+    self-&gt;window = objc_msgSend(objc_getClass("UIWindow"), sel_getUid("alloc"));
+    self-&gt;window = objc_msgSend(self-&gt;window, sel_getUid("initWithFrame:"), (struct CGRect) { 0, 0, 320, 480 });
+
+    // here, we are creating our view controller, and our view. note the use of objc_getClass, because we cannot reference UIViewController directly in C.
+    id viewController = objc_msgSend(objc_msgSend(objc_getClass("UIViewController"), sel_getUid("alloc")), sel_getUid("init"));
+
+    // creating our custom view class, there really isn't too much 
+    // to say here other than we are hard-coding the screen's bounds, 
+    // because returning a struct from a `objc_msgSend()` (via 
+    // [[UIScreen mainScreen] bounds]) requires a different function call
+    // and is finicky at best.
+    id view = objc_msgSend(objc_msgSend(objc_getClass("View"), sel_getUid("alloc")), sel_getUid("initWithFrame:"), (struct CGRect) { 0, 0, 320, 480 });
+
+    // here we simply add the view to the view controller, and add the viewController to the window.
+    objc_msgSend(objc_msgSend(viewController, sel_getUid("view")), sel_getUid("addSubview:"), view);
+    objc_msgSend(self-&gt;window, sel_getUid("setRootViewController:"), viewController);
+
+    // finally, we display the window on-screen.
+    objc_msgSend(self-&gt;window, sel_getUid("makeKeyAndVisible"));
+
+    return YES;
+}
+
+// note the use of the gcc attribute extension (constructor). 
+// Basically, this lets us run arbitrary code before program startup,
+// for more information read here: http://stackoverflow.com/questions/2053029
+__attribute__((constructor))
+static void initAppDel()
+{
+    // This is objc-runtime gibberish at best. We are creating a class with the 
+    // name "AppDelegate" that is a subclass of "UIResponder". Note we do not need
+    // to register for the UIApplicationDelegate protocol, that really is simply for 
+    // Xcode's autocomplete, we just need to implement the method and we are golden.
+    AppDelClass = objc_allocateClassPair(objc_getClass("UIResponder"), "AppDelegate", 0);
+
+    // Here, we tell the objc runtime that we have a variable named "window" of type 'id'
+    class_addIvar(AppDelClass, "window", sizeof(id), 0, "@");
+
+    // We tell the objc-runtime that we have an implementation for the method
+    // -application:didFinishLaunchingWithOptions:, and link that to our custom 
+    // function defined above. Notice the final parameter. This tells the runtime
+    // the types of arguments received by the function.
+    class_addMethod(AppDelClass, sel_getUid("application:didFinishLaunchingWithOptions:"), (IMP) AppDel_didFinishLaunching, "i@:@@");
+
+    // Finally we tell the runtime that we have finished describing the class and 
+    // we can let the rest of the application use it.
+    objc_registerClassPair(AppDelClass);
+}
+</code></pre>
+
+<p><strong>View.c</strong></p>
+
+<pre><code>#include &lt;objc/runtime.h&gt;
+
+// This is a strong reference to the class of our custom view,
+// In case we need it in the future.
+Class ViewClass;
+
+// This is a simple -drawRect implementation for our class. We could have 
+// used a UILabel  or something of that sort instead, but I felt that this 
+// stuck with the C-based mentality of the application.
+void View_drawRect(id self, SEL _cmd, struct CGRect rect)
+{
+    // We are simply getting the graphics context of the current view, 
+    // so we can draw to it
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    // Then we set it's fill color to white so that we clear the background.
+    // Note the cast to (CGFloat []). Otherwise, this would give a warning
+    //  saying "invalid cast from type 'int' to 'CGFloat *', or 
+    // 'extra elements in initializer'. Also note the assumption of RGBA.
+    // If this wasn't a demo application, I would strongly recommend against this,
+    // but for the most part you can be pretty sure that this is a safe move 
+    // in an iOS application.
+    CGContextSetFillColor(context, (CGFloat []){ 1, 1, 1, 1 });
+
+    // here, we simply add and draw the rect to the screen
+    CGContextAddRect(context, (struct CGRect) { 0, 0, 320, 480 });
+    CGContextFillPath(context);
+
+    // and we now set the drawing color to red, then add another rectangle
+    // and draw to the screen
+    CGContextSetFillColor(context, (CGFloat []) { 1, 0, 0, 1 });
+    CGContextAddRect(context, (struct CGRect) { 10, 10, 20, 20 });
+    CGContextFillPath(context);
+}
+
+// Once again we use the (constructor) attribute. generally speaking, 
+// having many of these is a very bad idea, but in a small application 
+// like this, it really shouldn't be that big of an issue.
+__attribute__((constructor))
+static void initView()
+{
+    // Once again, just like the app delegate, we tell the runtime to 
+    // create a new class, this time a subclass of 'UIView' and named 'View'.
+    ViewClass = objc_allocateClassPair(objc_getClass("UIView"), "View", 0);
+
+    // and again, we tell the runtime to add a function called -drawRect: 
+    // to our custom view. Note that there is an error in the type-specification
+    // of this method, as I do not know the @encode sequence of 'CGRect' off 
+    // of the top of my head. As a result, there is a chance that the rect 
+    // parameter of the method may not get passed properly.
+    class_addMethod(ViewClass, sel_getUid("drawRect:"), (IMP) View_drawRect, "v@:");
+
+    // And again, we tell the runtime that this class is now valid to be used. 
+    // At this point, the application should run and display the screenshot shown below.
+    objc_registerClassPair(ViewClass);    
+}
+</code></pre>
+
+<p>It's ugly, but it works.</p>
+
+<p>If you would like to download this, <s>you can get it from my dropbox <a href="http://dl.dropbox.com/u/25258177/personal/CBasediOSApp.zip">here</a></s></p>
+
+<p>You can get it from my GitHub repository <a href="https://github.com/richardjrossiii/CBasediOSApp">here</a>:</p>
+
+<p><img src="https://i.stack.imgur.com/edQNS.png" alt="ScreenShot"></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/427309/richard-j--ross-iii" target="_blank"><span itemprop="name">Richard J. Ross III</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/10289890/how-to-write-ios-app-purely-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">762</div>
+                                            <div itemprop="dateCreated">8/17/2015 11:17:56 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Objective-C is a superset of the C-language, so it is theoretically possible to write a program entirely in C, however, unless you are thoroughly versed in <code>OpenGL ES</code>, You'll need to do at least <strong><em>some</em></strong> objC (<strike>Even Rich's sample has a const NSString* in it</strike>), else you'll have to write the views yourself.</p>
+
+<p>OK, the above is completely wrong.  Let me say, I'm astounded Rich achieved this lofty goal, so I ported it over to the mac (source <a href="https://github.com/CodaFi/C-Macs" rel="noreferrer">here</a>).  The files below have no headers, do not link to Cocoa, nor does the project have a nib:</p>
+
+<p><strong>AppDelegate.m</strong></p>
+
+<pre><code>#include &lt;objc/runtime.h&gt;
+#include &lt;objc/message.h&gt;
+
+extern id NSApp;
+
+struct AppDel
+{
+    Class isa;
+
+    //Will be an NSWindow later, for now, it's id, because we cannot use pointers to ObjC classes
+    id window;
+};
+
+
+// This is a strong reference to the class of the AppDelegate
+// (same as [AppDelegate class])
+Class AppDelClass;
+
+BOOL AppDel_didFinishLaunching(struct AppDel *self, SEL _cmd, id notification) {
+    //alloc NSWindow
+    self-&gt;window = objc_msgSend(objc_getClass("NSWindow"),
+                                sel_getUid("alloc"));
+    //init NSWindow
+    //Adjust frame.  Window would be about 50*50 px without this
+    //specify window type.  We want a resizeable window that we can close.
+    //use retained backing because this thing is small anyhow
+    //return no because this is the main window, and should be shown immediately
+    self-&gt;window = objc_msgSend(self-&gt;window,
+                                sel_getUid("initWithContentRect:styleMask:backing:defer:"),(NSRect){0,0,1024,460}, (NSTitledWindowMask|NSClosableWindowMask|NSResizableWindowMask|NSMiniaturizableWindowMask),NSBackingStoreRetained,NO);
+
+    //send alloc and init to our view class.  Love the nested objc_msgSends!
+    id view = objc_msgSend(objc_msgSend(objc_getClass("View"), sel_getUid("alloc")), sel_getUid("initWithFrame:"), (struct CGRect) { 0, 0, 320, 480 });
+
+    // here we simply add the view to the window.
+    objc_msgSend(self-&gt;window, sel_getUid("setContentView:"), view);
+    objc_msgSend(self-&gt;window, sel_getUid("becomeFirstResponder"));
+
+    //makeKeyOrderFront: NSWindow to show in bottom left corner of the screen
+    objc_msgSend(self-&gt;window,
+                 sel_getUid("makeKeyAndOrderFront:"),
+                 self);
+    return YES;
+}
+
+static void initAppDel()
+{
+    //Our appDelegate should be NSObject, but if you want to go the hard route, make this a class pair of NSApplication and try initing those awful delegate methods!
+    AppDelClass = objc_allocateClassPair((Class)
+                                         objc_getClass("NSObject"), "AppDelegate", 0);
+    //Change the implementation of applicationDidFinishLaunching: so we don't have to use ObjC when this is called by the system.
+    class_addMethod(AppDelClass,
+                    sel_getUid("applicationDidFinishLaunching:"),
+                    (IMP) AppDel_didFinishLaunching, "i@:@");
+
+    objc_registerClassPair(AppDelClass);
+}
+
+void init_app(void)
+{
+    objc_msgSend(
+                 objc_getClass("NSApplication"),
+                 sel_getUid("sharedApplication"));
+
+    if (NSApp == NULL)
+    {
+        fprintf(stderr,"Failed to initialized NSApplication...  terminating...\n");
+        return;
+    }
+
+    id appDelObj = objc_msgSend(
+                                objc_getClass("AppDelegate"),
+                                sel_getUid("alloc"));
+    appDelObj = objc_msgSend(appDelObj, sel_getUid("init"));
+
+    objc_msgSend(NSApp, sel_getUid("setDelegate:"), appDelObj);
+    objc_msgSend(NSApp, sel_getUid("run"));
+}
+
+//there doesn't need to be a main.m because of this little beauty here.
+int main(int argc, char** argv)
+{
+    //Initialize a valid app delegate object just like [NSApplication sharedApplication];
+    initAppDel();
+    //Initialize the run loop, just like [NSApp run];  this function NEVER returns until the app closes successfully.
+    init_app();
+    //We should close acceptably.
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p><strong>View.m</strong></p>
+
+<pre><code>#include &lt;objc/runtime.h&gt;
+#include &lt;objc/message.h&gt;
+#include &lt;ApplicationServices/ApplicationServices.h&gt;
+
+// This is a strong reference to the class of our custom view,
+// In case we need it in the future.
+Class ViewClass;
+
+
+// This is a simple -drawRect implementation for our class. We could have
+// used a UILabel  or something of that sort instead, but I felt that this
+// stuck with the C-based mentality of the application.
+void View_drawRect(id self, SEL _cmd, CGRect rect)
+{
+    //make a red NSColor object with its convenience method
+    id red  = objc_msgSend(objc_getClass("NSColor"), sel_getUid("redColor"));
+
+    // fill target rect with red, because this is it!
+    NSRect rect1 = NSMakeRect ( 21,21,210,210 );
+    objc_msgSend(red, sel_getUid("set"));
+    NSRectFill ( rect1 );
+}
+
+// Once again we use the (constructor) attribute. generally speaking,
+// having many of these is a very bad idea, but in a small application
+// like this, it really shouldn't be that big of an issue.
+__attribute__((constructor))
+static void initView()
+{
+
+    // Once again, just like the app delegate, we tell the runtime to
+    // create a new class, this time a subclass of 'UIView' and named 'View'.
+    ViewClass = objc_allocateClassPair((Class) objc_getClass("NSView"), "View", 0);
+
+    // and again, we tell the runtime to add a function called -drawRect:
+    // to our custom view. Note that there is an error in the type-specification
+    // of this method, as I do not know the @encode sequence of 'CGRect' off
+    // of the top of my head. As a result, there is a chance that the rect
+    // parameter of the method may not get passed properly.
+    class_addMethod(ViewClass, sel_getUid("drawRect:"), (IMP) View_drawRect, "v@:");
+
+    // And again, we tell the runtime that this class is now valid to be used.
+    // At this point, the application should run and display the screenshot shown below.
+    objc_registerClassPair(ViewClass);
+}
+</code></pre>
+
+<p><strong>prefix.pch</strong></p>
+
+<pre><code>//
+// Prefix header for all source files of the 'CBasedMacApp' target in the 'CBasedMacApp' project
+//
+
+#ifdef __OBJC__
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;AppKit/AppKit.h&gt;
+#endif
+</code></pre>
+
+<p><img src="https://i.stack.imgur.com/umwxu.png" alt="enter image description here"></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/945847/codafi" target="_blank">CodaFi</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/10289890" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10289890/how-to-write-ios-app-purely-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:17 GMT -->
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node21.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Time Functions</TITLE>
+<META NAME="description" CONTENT="Time Functions">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1148"
+ HREF="node21.html#SECTION002110000000000000000">
+Basic time functions</A>
+<LI><A NAME="tex2html1149"
+ HREF="node21.html#SECTION002120000000000000000">
+Example time applications</A>
+<UL>
+<LI><A NAME="tex2html1150"
+ HREF="node21.html#SECTION002121000000000000000">
+Example 1: Time (in seconds) to perform
+some computation</A>
+<LI><A NAME="tex2html1151"
+ HREF="node21.html#SECTION002122000000000000000">
+Example 2: Set a random number seed</A>
+</UL>
+<LI><A NAME="tex2html1152"
+ HREF="node21.html#SECTION002130000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION002100000000000000000">
+Time Functions</A>
+</H1>
+<A NAME="ch:time">&#160;</A>
+In this chapter we will look at  how we can access the
+clock time with UNIX system calls.
+<BR>
+<P>
+There are many more time functions than we consider here - see <TT>man</TT>
+pages and standard library function listings for full details. In this
+chapter we  concentrate on applications of timing functions in C
+<P>
+Uses of time functions include:
+<UL>
+<LI> telling the time.
+<LI> timing programs and functions.
+<LI> setting  number seeds.
+</UL><H1><A NAME="SECTION002110000000000000000">
+Basic time functions</A>
+</H1>
+<P>
+Some of thge basic time functions are prototypes as follows:
+<P><TT>time_t time(time_t *tloc)</TT> -- returns the time since <TT>00:00:00 GMT, 
+Jan.  1,  1970</TT>, measured in seconds. 
+<BR>
+<P>
+If <TT>tloc</TT> is not NULL, the return value is
+also stored in  the location to which tloc points. 
+<BR>
+<P><TT>time()</TT> returns the value
+of time on success.  
+<BR>
+<P>
+On failure, it returns <TT>(time_t) -1</TT>. <TT>time_t</TT> is
+typedefed to a long (int) in   &lt;sys/types.h&gt; and  
+&lt;sys/time.h&gt; header files.
+ <BR>
+<P> <TT>int ftime(struct timeb *tp)</TT> -- fills in a
+  structure pointed to by <TT>tp</TT>, as defined in
+  &lt;sys/timeb.h&gt;:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;struct timeb
+		 &nbsp;&nbsp; {&nbsp;time_t time;
+						 unsigned short millitm;
+						 short timezone;
+						 short dstflag;
+				 };
+</TT></PRE>
+</TT>
+<BR>
+<P>
+The structure contains the time since the epoch in  seconds, up  to 1000
+milliseconds of more precise interval, the local time  zone  (measured  in 
+minutes  of  time  westward  from Greenwich), and a flag that, if nonzero,
+indicates that Day light Saving time applies  locally  during  the  appropriate
+part of the year. 
+<BR>
+<P>
+On success, <TT>ftime()</tt> returns no useful value.  On failure,
+it returns -1.
+ <BR>
+<P>
+Two other functions defined <EM>etc.</EM> in #include &lt;time.h&gt;
+<BR>
+<P><TT>char *ctime(time_t *clock)</TT>,  <BR>
+<TT>char *asctime(struct tm *tm)</TT> 
+<BR>
+<P><TT>ctime()</TT> converts a long integer, pointed to by <TT>clock</TT>,  to  a
+26-character  string  of the form produced by <TT>asctime()</TT>.  It first breaks
+down clock to a <TT>tm</TT> structure by calling  <TT>localtime()</TT>,  and  then
+calls <TT>asctime()</TT> to convert that tm structure to a string.
+<BR>
+<P><TT>asctime()</TT> converts a time value contained in a tm  structure to a
+26-character string of the form:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>Sun Sep 16 01:03:52 1973</TT>
+<BR>
+<P>
+asctime()  returns  a pointer to the string.
+ <BR>
+<P></TT><H1><A NAME="SECTION002120000000000000000">
+Example time applications</A>
+</H1>
+<P>
+we mentioned above three possible uses of time functions (there are many
+more) but these are very common.
+<P><H2><A NAME="SECTION002121000000000000000">
+Example 1: Time (in seconds) to perform
+some computation</A>
+</H2>
+<BR>
+<P>
+This is a simple program that illustrates that calling the time function
+at distinct moments and noting the different times is a simple method of
+timing fragments of code:
+<P><TT>
+<PRE><TT>
+/* timer.c */
+&nbsp;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;time.h&gt;
+&nbsp;
+main()
+&nbsp;&nbsp;{ &nbsp;int i;
+				 time_t t1,t2;
+&nbsp;
+				 (void) time(&amp;t1);
+				 for (i=1;i&lt;=300;++i)
+				 &nbsp;&nbsp;printf("%d %d %d\n",i, i*i, i*i*i);
+				  (void) time(&amp;t2);
+				  printf("\n Time to do 300 squares and
+				 cubes= %d seconds\n", (int) t2-t1);
+		 }
+</TT></PRE>
+</TT>
+ <BR>
+<P><H2><A NAME="SECTION002122000000000000000">
+Example 2: Set a random number seed</A>
+</H2>
+<P>
+We have seen a similar example previously, this time we use the <TT>
+lrand48()</TT> function to generate of number sequence:
+<P><TT>
+<PRE><TT>
+/* random.c */
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;time.h&gt;
+&nbsp;
+main()
+&nbsp;&nbsp;{&nbsp;int i;
+				 time_t t1;
+&nbsp;
+				 (void) time(&amp;t1);
+				 srand48((long) t1);
+				 /* use time in seconds to set seed */
+				 printf("5 random numbers
+				&nbsp;&nbsp; (Seed = %d):\n"",(int) t1);
+				 for (i=0;i&lt;5;++i)
+				&nbsp;&nbsp; printf("%d ", lrand48());
+				 printf("\n\n"); /* flush print buffer */
+		}
+</TT></PRE>
+</TT>
+ <BR>
+<P><TT>lrand48()</tt> returns non-negative  long  integers uniformly distributed over
+the interval (0, 2**31).
+<P>
+A similar function <TT>drand48()</TT> returns double
+precision numbers in the range [0.0,1.0).
+<P><TT>srand48()</TT> sets the seed for these random number generators. It is
+important to have different seeds when we call the functions otherwise the same
+set of pseudo-random numbers will generated. <TT>time()</TT> always provides a
+unique seed.
+<P></TT><H1><A NAME="SECTION002130000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12708</B></P>
+<P>
+Write a C program that times a fragment of code in milliseconds.</P>
+<P><P>
+<B>Exercise 12709</B></P>
+<P>
+Write a C program to produce a series of floating point random numbers in the
+ranges 
+	(a)  0.0 - 1.0
+	(b) 0.0 - n where n is any floating point value.
+ The seed should be set so that a unique sequence is guaranteed.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node21.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:17 GMT -->
+</HTML>

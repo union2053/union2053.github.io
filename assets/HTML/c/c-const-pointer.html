@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-const-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C const pointer</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C const pointer'>C const pointer</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C const pointer</h1>
+<a class ='btn btn-outline-dark' href=c-dereferencing-an-uninitialized-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-compatibility.html>Next</a><p>We can use const to create symbolic constants: 
+</p><div class='myCodeDiv'><button id='ONJIC' class='myCopyButton' data-clipboard-target='#EKVOX'>Copy</button><pre  id='EKVOX' style='font-size:18px;' class='code'><span class='r'>const</span> <span class='r'>double</span> PI = 3.14159;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ONJIC');clipboard.on('success', function(e) {$('#ONJIC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ONJIC').text('error');});</script></div><p>That was something you could do with the #define directive, too, but <i style='color:blue'>const</i> lets
+you create constant arrays, constant pointers, and pointers to constants.
+
+</p><p>The following code showed how to use the <i style='color:blue'>const</i> keyword to protect an array:
+</p><div class='myCodeDiv'><button id='TAMJJ' class='myCopyButton' data-clipboard-target='#QVKHT'>Copy</button><pre  id='QVKHT' style='font-size:18px;' class='code'>#define MONTHS 12
+...
+<span class='r'>const</span> <span class='r'>int</span> days[MONTHS] = {31,28,31,30,31,30,31,31,30,31,30,31};
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#TAMJJ');clipboard.on('success', function(e) {$('#TAMJJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#TAMJJ').text('error');});</script></div><p>If the program code subsequently tries to alter the array, you'll get a compile-time error
+message:
+</p><div class='myCodeDiv'><button id='BQUZG' class='myCopyButton' data-clipboard-target='#LYORJ'>Copy</button><pre  id='LYORJ' style='font-size:18px;' class='code'>days[9] = 44;         <span class='c'>/* compile error */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BQUZG');clipboard.on('success', function(e) {$('#BQUZG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BQUZG').text('error');});</script></div><h3>Pointer to constant
+
+</h3><p>Pointers to constants can't be used to change values. 
+
+</p><p>Consider the following code:
+</p><div class='myCodeDiv'><button id='RNSMP' class='myCopyButton' data-clipboard-target='#PKYGM'>Copy</button><pre  id='PKYGM' style='font-size:18px;' class='code'><span class='r'>double</span> rates[5] = {8.9, 1.12, 9.5, 3.1, 0.5};
+<span class='r'>const</span> <span class='r'>double</span> * pd = rates;    <span class='c'>// pd points to beginning of the array</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RNSMP');clipboard.on('success', function(e) {$('#RNSMP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RNSMP').text('error');});</script></div><p>The second line of code declares that the type double value to which <i style='color:blue'>pd</i> points is a const.
+
+</p><p>That means you can't use pd to change pointed-to values:
+</p><div class='myCodeDiv'><button id='MMHRB' class='myCopyButton' data-clipboard-target='#ABOTD'>Copy</button><pre  id='ABOTD' style='font-size:18px;' class='code'>*pd = 29.89;      <span class='c'>// not allowed</span>
+pd[2] = 22.22;   <span class='c'>// not allowed</span>
+rates[0] = 9.99; <span class='c'>// allowed because rates is not const</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MMHRB');clipboard.on('success', function(e) {$('#MMHRB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MMHRB').text('error');});</script></div><p>Whether you use pointer notation or array notation, you are not allowed to use <i style='color:blue'>pd</i> to change
+the value of pointed-to data. 
+
+</p><p>Note, however, that because rates was not declared as a constant,
+you can still use rates to change values. 
+
+</p><p>Also, note that you can make <i style='color:blue'>pd</i> point somewhere else:
+</p><div class='myCodeDiv'><button id='IOHPR' class='myCopyButton' data-clipboard-target='#PSPBP'>Copy</button><pre  id='PSPBP' style='font-size:18px;' class='code'>pd++;<span class='c'>/* make pd point to rates[1] -- allowed */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IOHPR');clipboard.on('success', function(e) {$('#IOHPR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IOHPR').text('error');});</script></div><p>A pointer-to-constant is normally used as a function parameter to indicate that the function
+won't use the pointer to change data. 
+
+</p><p>For example, the show_<i style='color:blue'>array</i>() function is prototyped as
+</p><div class='myCodeDiv'><button id='OHBYZ' class='myCopyButton' data-clipboard-target='#QOQBL'>Copy</button><pre  id='QOQBL' style='font-size:18px;' class='code'><span class='r'>void</span> show_array(<span class='r'>const</span> <span class='r'>double</span> *ar, <span class='r'>int</span> n);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OHBYZ');clipboard.on('success', function(e) {$('#OHBYZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OHBYZ').text('error');});</script></div><h3>Rule
+
+</h3><p>First, it's valid to assign the address of either constant data or non-constant data to 
+a pointer-to-constant:
+</p><div class='myCodeDiv'><button id='UBGJI' class='myCopyButton' data-clipboard-target='#DAYPA'>Copy</button><pre  id='DAYPA' style='font-size:18px;' class='code'><span class='r'>double</span> rates[5] = {8.9, 1.12, 9.5, 3.1, 0.5};
+<span class='r'>const</span> <span class='r'>double</span> locked[4] = {0.8, 0.7, 0.5, 0.1};
+<span class='r'>const</span> <span class='r'>double</span> * pc = rates;    <span class='c'>// valid</span>
+pc = locked;                  <span class='c'>// valid</span>
+pc = &amp;rates[3];               <span class='c'>// valid</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UBGJI');clipboard.on('success', function(e) {$('#UBGJI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UBGJI').text('error');});</script></div><p>However, only the addresses of non-constant data can be assigned to regular pointers:
+</p><div class='myCodeDiv'><button id='GKUPY' class='myCopyButton' data-clipboard-target='#GBITV'>Copy</button><pre  id='GBITV' style='font-size:18px;' class='code'><span class='r'>double</span> rates[5] = {8.9, 1.12, 9.5, 3.1, 0.5};
+<span class='r'>const</span> <span class='r'>double</span> locked[4] = {0.8, 0.7, 0.5, 0.1};
+<span class='r'>double</span> * pnc = rates;          <span class='c'>// valid</span>
+pnc = locked;                  <span class='c'>// not valid</span>
+pnc = &amp;rates[3];               <span class='c'>// valid</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GKUPY');clipboard.on('success', function(e) {$('#GKUPY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GKUPY').text('error');});</script></div><p>Otherwise, you could use the pointer to change data that was supposed to be constant.
+
+</p><p>A practical consequence of these rules is that a function such as show_<i style='color:blue'>array</i>() can accept
+the names of regular arrays and of constant arrays as actual arguments, because either can be
+assigned to a pointer-to-constant:
+</p><div class='myCodeDiv'><button id='SSSJF' class='myCopyButton' data-clipboard-target='#JKHGI'>Copy</button><pre  id='JKHGI' style='font-size:18px;' class='code'>show_array(rates, 5);       <span class='c'>// valid</span>
+show_array(locked, 4);      <span class='c'>// valid</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SSSJF');clipboard.on('success', function(e) {$('#SSSJF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SSSJF').text('error');});</script></div><p>Therefore, using <i style='color:blue'>const</i> in a function parameter definition not only protects data, it also allows
+the function to work with arrays that have been declared <i style='color:blue'>const</i>.
+
+</p><p>A function such as mult_<i style='color:blue'>array</i>() which will change the array value, however, 
+shouldn't be passed the name of a constant array as an argument:
+</p><div class='myCodeDiv'><button id='OSCUQ' class='myCopyButton' data-clipboard-target='#BLZQL'>Copy</button><pre  id='BLZQL' style='font-size:18px;' class='code'>mult_array(rates, 5, 1.2);       <span class='c'>// valid</span>
+mult_array(locked, 4, 1.2);      <span class='c'>// bad idea</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OSCUQ');clipboard.on('success', function(e) {$('#OSCUQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OSCUQ').text('error');});</script></div><p>What the C standard says is that an attempt to modify const data, such as locked, using a
+non-const identifier, such as the mult_<i style='color:blue'>array</i>() formal argument <i style='color:blue'>ar</i>, results in undefined behavior.
+
+</p><p>For example, you can declare and initialize a pointer so 
+that it can't be made to point else where. 
+
+</p><p>The trick is the placement of the keyword const:
+</p><div class='myCodeDiv'><button id='IYTXR' class='myCopyButton' data-clipboard-target='#QSYJX'>Copy</button><pre  id='QSYJX' style='font-size:18px;' class='code'><span class='r'>double</span> rates[5] = {8.9, 1.12, 9.5, 3.1, 0.5};
+<span class='r'>double</span> * <span class='r'>const</span> pc = rates;    <span class='c'>// pc points to beginning of the array</span>
+pc = &amp;rates[2];               <span class='c'>// not allowed to point elsewhere</span>
+*pc = 2.99;                  <span class='c'>// ok -- changes rates[0]</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IYTXR');clipboard.on('success', function(e) {$('#IYTXR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IYTXR').text('error');});</script></div><p>Such a pointer can still be used to change values, but it can point only to the location 
+originally assigned to it.
+
+</p><p>Finally, you can use <i style='color:blue'>const</i> twice to create a pointer that can neither change where it's pointing
+nor change the value to which it points:
+</p><div class='myCodeDiv'><button id='XLBGE' class='myCopyButton' data-clipboard-target='#ZHGQE'>Copy</button><pre  id='ZHGQE' style='font-size:18px;' class='code'><span class='r'>double</span> rates[5] = {8.9, 1.12, 9.5, 3.1, 0.5};
+<span class='r'>const</span> <span class='r'>double</span> * <span class='r'>const</span> pc = rates;
+pc = &amp;rates[2];               <span class='c'>// not allowed</span>
+*pc = 92.99;                  <span class='c'>// not allowed</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XLBGE');clipboard.on('success', function(e) {$('#XLBGE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XLBGE').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-dereferencing-an-uninitialized-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-compatibility.html>Next</a><h2>Related</h2><UL><LI><a href='c-testing-for-a-null-pointer.html'>C Testing for a NULL Pointer</a></LI><LI><a href='c-pointer-operations.html'>C Pointer Operations</a></LI><LI><a href='c-dereferencing-an-uninitialized-pointer.html'>C Dereferencing an Uninitialized Pointer</a></LI><LI><a href='c-pointer-compatibility.html'>C Pointer Compatibility</a></LI><LI><a href='c-function-pointers.html'>C Function Pointers</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-const-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

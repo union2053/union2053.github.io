@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-read-character-string-from-keyboard-via-gets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Read Character String from keyboard via gets()</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Read Character String from keyboard via gets()'>C Read Character String from keyboard via gets()</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Read Character String from keyboard via gets()</h1>
+<a class ='btn btn-outline-dark' href=c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-fgets.html>Next</a><p>To read a string into a program, first set aside space to store the string and
+then use an input function to fetch the string.
+
+</p><h3>Creating Space
+
+</h3><p>We need to first set up a place to put the string after it is read. 
+
+</p><p>We need to allocate enough storage to hold whatever strings we expect to read. 
+
+</p><p>For example, suppose you try something like this:
+</p><div class='myCodeDiv'><button id='AWUKO' class='myCopyButton' data-clipboard-target='#PCZSK'>Copy</button><pre  id='PCZSK' style='font-size:18px;' class='code'><span class='r'>char</span> *name;
+scanf(<span class='q'>"%s"</span>, name);<span class='c'>//wrong</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AWUKO');clipboard.on('success', function(e) {$('#AWUKO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AWUKO').text('error');});</script></div><p>That's because <i style='color:blue'>scanf</i>() copies information to the address given by the argument, and in
+this case, the argument is an uninitialized pointer; <i style='color:blue'>name</i> might point anywhere. 
+
+</p><p>The simplest way is to include an explicit array size in the declaration:
+</p><div class='myCodeDiv'><button id='KVDPM' class='myCopyButton' data-clipboard-target='#VCKSM'>Copy</button><pre  id='VCKSM' style='font-size:18px;' class='code'><span class='r'>char</span> name[81];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KVDPM');clipboard.on('success', function(e) {$('#KVDPM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KVDPM').text('error');});</script></div><p>Now <i style='color:blue'>name</i> is the address of an allocated block of 81 bytes. 
+
+</p><p>Another possibility is to use the C library functions that allocate memory.
+
+</p><p>After you have set aside space for the string, you can read the string. 
+
+</p><p>The C library supplies three functions that can read strings: 
+</p><OL style='font-size:19px;'><LI><i style='color:blue'>scanf</i>()</LI><LI><i style='color:blue'>gets</i>()</LI><LI><i style='color:blue'>fgets</i>(). </LI></OL><h3>gets() Function
+
+</h3><p>When reading a string, <i style='color:blue'>scanf</i>() and the %s specifier read just a single word. 
+
+</p><p>Often it's useful if a program can read an entire line of input at a time instead of a 
+single word. 
+
+</p><p>For many years, the <i style='color:blue'>gets</i>() function has served that purpose. 
+
+</p><p>It's a simple function, easy to use. 
+
+</p><p>It reads an entire line up through the newline character, discards the newline character, 
+stores the remaining characters, adding a null character to create a C string. 
+
+</p><p>It's often paired with <i style='color:blue'>puts</i>(), which displays a string, adding a newline. 
+
+</p><p>The following code a example.
+
+</p><div class='myCodeDiv'><button id='TYMKP' class='myCopyButton' data-clipboard-target='#AMHUQ'>Copy</button><pre  id='AMHUQ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define STLEN 81
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> words[STLEN];
+    puts(<span class='q'>"Enter a string, please."</span>);
+    gets(words);
+    printf(<span class='q'>"Your string twice:\n"</span>);
+    printf(<span class='q'>"%s\n"</span>, words);
+    puts(words);
+    puts(<span class='q'>"Done."</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#TYMKP');clipboard.on('success', function(e) {$('#TYMKP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#TYMKP').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>Note that the entire line of input, aside from the newline, is stored in words and that
+<i style='color:blue'>puts</i>(words) has the same effect as <i style='color:blue'>printf</i>("%s\n", words).
+
+</p><h3>Warnings
+
+</h3><p><i style='color:blue'>gets</i>() doesn't check to see if the input line actually fits into the array. 
+
+</p><p>Given that its only argument here is words, <i style='color:blue'>gets</i>() can't check. 
+
+</p><p>The name of an array is converted to the address of the first element. 
+Thus <i style='color:blue'>gets</i>() only knows where the array begins, not how many elements it has.
+
+</p><p>If the input string is too long, you get buffer overflow, meaning the excess characters 
+overflow the designated target. 
+
+</p><p>The extra characters might just go into unused memory or may overwrite other data in your program.
+
+</p><h3>Alternatives to gets()
+
+</h3><p>The traditional alternative to <i style='color:blue'>gets</i>() is <i style='color:blue'>fgets</i>(), which has a slightly more complex 
+interface and which handles input slightly differently. 
+
+</p><p>The C11 standard adds gets_<i style='color:blue'>s</i>() to the mix.
+
+</p><p>It's a bit more like <i style='color:blue'>gets</i>() and is more easily substituted into existing code as a 
+replacement.
+
+</p><p>However, it's part of an optional extension to the stdio.h family of input/output functions, so
+C11 C compilers need not support it.
+</p><a class ='btn btn-outline-dark' href=c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-fgets.html>Next</a><h2>Related</h2><UL><LI><a href='c-null-pointer-vs-null-character.html'>C NULL pointer vs Null character</a></LI><LI><a href='c-arrays-of-strings.html'>C Arrays of Strings</a></LI><LI><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Count strings in a two-dimensional array and the length of each string</a></LI><LI><a href='c-read-character-string-from-keyboard-via-fgets.html'>C Read Character String from keyboard via fgets()</a></LI><LI><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C Read character string from keyboard via gets_s()</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-read-character-string-from-keyboard-via-gets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

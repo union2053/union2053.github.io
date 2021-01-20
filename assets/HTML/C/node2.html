@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>The Common Desktop Environment</TITLE>
+<META NAME="description" CONTENT="The Common Desktop Environment">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html807"
+ HREF="node2.html#SECTION00210000000000000000">
+The front panel</A>
+<LI><A NAME="tex2html808"
+ HREF="node2.html#SECTION00220000000000000000">
+The file manager</A>
+<LI><A NAME="tex2html809"
+ HREF="node2.html#SECTION00230000000000000000">
+The application manager</A>
+<LI><A NAME="tex2html810"
+ HREF="node2.html#SECTION00240000000000000000">
+The session manager</A>
+<LI><A NAME="tex2html811"
+ HREF="node2.html#SECTION00250000000000000000">
+Other CDE desktop tools</A>
+<LI><A NAME="tex2html812"
+ HREF="node2.html#SECTION00260000000000000000">
+Application development tools</A>
+<LI><A NAME="tex2html813"
+ HREF="node2.html#SECTION00270000000000000000">
+Application integration</A>
+<LI><A NAME="tex2html814"
+ HREF="node2.html#SECTION00280000000000000000">
+Windows and the Window Manager</A>
+<LI><A NAME="tex2html815"
+ HREF="node2.html#SECTION00290000000000000000">
+The Root Menu</A>
+<LI><A NAME="tex2html816"
+ HREF="node2.html#SECTION002100000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00200000000000000000">
+The Common Desktop Environment</A>
+</H1>
+<A NAME="sec:CDE_use">&#160;</A><A NAME="29">&#160;</A>
+<P>
+In order to use Solaris and most other Unix Systems you will need to be
+familiar with the Common Desktop Environment (CDE). Before embarking on
+learning C with briefly introduce the main features of the CDE.
+<P>
+Most major Unix vendors now provide the CDE as standard. Consequently, most users of the
+X Window system will now be exposed to the CDE. Indeed, continuing trends in the
+development of Motif and CDE will probably lead to a convergence of these technologies in
+the near future. This section highlights the key features of the CDE from a Users
+perspective.
+<P>
+Upon login, the user is presented with the CDE Desktop (Fig.&nbsp;<A HREF="node2.html#fig:CDE_desktop">1.1</A>).  The
+desktop includes a front panel (Fig.&nbsp;<A HREF="node2.html#fig:CDE_panel">1.2</A>)<A NAME="32">&#160;</A>, multiple virtual workspaces, and window management.  CDE
+supports the running of applications  from a file manager, from an application
+manager and from the front panel.  Each of the subcomponents of the desktop are
+described below.
+<P><A NAME="fig:CDE_desktop">&#160;</A><img src= CDE.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node2.html#fig:CDE_desktop">1.1</A> Sample CDE Desktop</B>
+<H1><A NAME="SECTION00210000000000000000">
+The front panel</A>
+</H1>
+<A NAME="36">&#160;</A>
+<P>
+The front panel (Fig.&nbsp;<A HREF="node2.html#fig:CDE_panel">1.2</A>) contains a set of icons and popup menus (more
+like roll-up menus) that appear at the bottom of the screen, by
+default (Fig.&nbsp;<A HREF="node2.html#fig:CDE_desktop">1.1</A>).  The front panel contains the most regularly used
+applications and tools for managing the workspace.  Users can drag-and-drop
+application icons from the file manager or application manager to the popups for
+addition of the application(s) to the associated menu.  The user can also manipulate the
+default actions and icons for the popups.  The front panel can be locked so that users
+can't change it.  A user can configure several virtual workspaces -- each with different
+backgrounds and colors if desired.  Each workspace can have any number of
+applications running in it.  An application can be set to appear in
+one, more than one, or all workspaces simultaneously.
+<P><A NAME="fig:CDE_panel">&#160;</A> <img src= CDE_panel.gif> <P> <B>Fig.&nbsp;<A HREF="node2.html#fig:CDE_panel">1.2</A> Clients, Servers and Xlib</B>
+<H1><A NAME="SECTION00220000000000000000">
+The file manager</A>
+</H1>
+<A NAME="42">&#160;</A>
+<P>
+CDE includes a standard file manager. The functionality is similar to
+that of the Microsoft Windows, Macintosh, or Sun Open Look file
+manager. Users can directly manipulate icons associated with UNIX
+files, drag-and-drop them, and launch associated applications.
+<P><H1><A NAME="SECTION00230000000000000000">
+The application manager</A>
+</H1>
+<A NAME="44">&#160;</A>
+<P>
+The user interaction with the application manager is similar to the
+file manager except
+that is is intended to be a list of executable modules available to a particular user.
+The user launches the application manager from an icon in the front panel. Users are
+notified when a new application is available on a server by additions
+(or deletions) to the list of icons in the application manager window.
+Programs and icons can be installed and pushed out to other
+workstations as an integral part of the installation process. The
+list of workstations that new software is installed on is
+configurable. The application manager comes preconfigured to include
+several utilities and programs.
+<P><H1><A NAME="SECTION00240000000000000000">
+The session manager</A>
+</H1>
+<A NAME="46">&#160;</A>
+<P>
+The session manager is responsible for the start up and
+shut down of a user session. 
+ In the CDE, applications that are made <EM>CDE aware</EM> are warned
+via an X Event when the X session is closing down. The application
+responds by returning a string that can be used by the session
+manager at the user's next login to restart the application.
+CDE  can remember  two sessions per user. One is the
+<EM>current</EM> session, where a snapshot of the currently running
+applications is saved.  These applications can be automatically
+restarted at the user's next login. The other is the default login,
+which is analogous to starting an X session in the Motif window manager.
+The user can choose  which of the two sessions to use at the next login.
+<P><H1><A NAME="SECTION00250000000000000000">
+Other CDE desktop tools</A>
+</H1>
+<A NAME="50">&#160;</A>
+<P>
+CDE 1.0 includes a set of applications that enable users to become
+productive immediately. Many of these are available directly from the front panel,
+others from the desktop or personal application managers. Common and productive desktop
+tools include:
+<DL>
+<DT><STRONG>Mail Tool</STRONG>
+<DD>--  Used to compose, view, and manage electronic mail through a
+GUI. Allows the inclusion of attachments and communications with other
+     applications through the messaging system.
+<DT><STRONG>Calendar Manager</STRONG>
+<DD>--  Used to manage, schedule, and view
+     appointments, create calendars, and interact with the Mail Tool.
+<DT><STRONG>Editor</STRONG>
+<DD>-- A text editor with common functionality including data transfer
+     with other applications via the clipboard, drag and drop, and primary
+     and quick transfer.
+<DT><STRONG>Terminal Emulator</STRONG>
+<DD>--  An <EM>xterm</EM> terminal emulator.
+<DT><STRONG>Calculator</STRONG>
+<DD>-- A standard calculator with scientific, financial, and
+     logical modes.
+<DT><STRONG>Print Manager</STRONG>
+<DD>-- A graphical print job manager for the scheduling and
+     management of print jobs on any available printer.
+<DT><STRONG>Help System</STRONG>
+<DD>-- A context-sensitive graphical help system based on
+     Standard Generalized Markup Language (SGML).
+<DT><STRONG>Style Manager</STRONG>
+<DD>-- A graphical interface that allows a user to
+     interactively set their preferences, such as colors, backdrops, and
+     fonts, for a session.
+<DT><STRONG>Icon Editor</STRONG>
+<DD>-- This application is a fairly full featured
+graphical icon (pixmap) editor. 
+</DL><H1><A NAME="SECTION00260000000000000000">
+Application development tools</A>
+</H1>
+<A NAME="55">&#160;</A>
+<P>
+CDE
+includes two components for application development. The first is a shell command
+language interpreter that has built-in commands for most X Window system and CDE
+functions. The interpreter is based on ksh93 (The Korn Shell), and should
+provide anyone familiar with shell scripts the ability to develop X, Motif, and CDE
+applications.
+<P>
+To support interactive user interface development, developers can use the
+Motif Application Builder. This is a GUI front end for building Motif
+applications that generates C source code. The source code is then compiled
+and linked with the X  and Motif libraries to produce the executable
+binary.
+<P><H1><A NAME="SECTION00270000000000000000">
+Application integration</A>
+</H1>
+<A NAME="57">&#160;</A>
+<P>
+CDE provides a number of tools to ease integration. The overall model of the
+CDE session is intended to allow a straightforward integration for virtually
+all types of applications. Motif and other X toolkit applications usually require
+little integration.
+<P>
+The task of integrating in-house and third party applications into a
+desktop, often the most difficult aspect of a desktop installation, is
+simplified by CDE. The power and advantage of CDE functionality can be
+realized in most cases without recompiling applications.
+<P>
+For example, Open Look<A NAME="58">&#160;</A> applications can be integrated through the use of
+scripts that perform front-end execution of the application and scripts that
+perform pre- and post-session processing.
+<P>
+After the initial task of integrating applications so that they fit within
+session management, further integration can be done to increase their
+overall common <EM>look-and-feel</EM><A NAME="60">&#160;</A> with the rest of the
+desktop and to take advantage of the full range of CDE functionality. Tools that ease
+this aspect of integration include an <EM>Icon Editor</EM> used to create colour and
+monochrome icons. Images can be copied from the desktop into an icon, or
+they can be drawn freehand.
+<P>
+The <EM>Action Creation Utility</EM> is used to create action entries in the action
+database. Actions allow applications to be launched using desktop icons, and
+they ease administration by removing an application's specific details from
+the user interface.
+<P>
+The <EM>Application Gather</EM> and <EM>Application Integrate</EM> routines are used to
+control and format the application manager. They simplify installations so
+that applications can be accessible from virtually anywhere on the network.
+<P><H1><A NAME="SECTION00280000000000000000">
+Windows and the Window Manager</A>
+</H1>
+<A NAME="sec:window_menu">&#160;</A><A NAME="67">&#160;</A>
+<P>
+From a user's perspective, one of the first distinguishing features of Motif's
+<EM>look and feel</EM><A NAME="69">&#160;</A> is the <EM>window frame</EM><A NAME="71">&#160;</A> (Fig.&nbsp;<A HREF="node2.html#fig:winframe">1.3</A>). Every application window is contained inside such a
+frame. The following items appear in the window frame:
+<P><A NAME="fig:winframe">&#160;</A> <img src= win_frame.gif> <P> <B>Fig.&nbsp;<A HREF="node2.html#fig:winframe">1.3</A> The Motif Window Frame</B>
+<DL>
+<DT><STRONG>Title Bar</STRONG>
+<DD><A NAME="76">&#160;</A> -- This identifies the window by a text string. The
+string is usually the name of the application program. However, an application's resource
+controls the label (Chapter&nbsp;<A HREF="#ch:resources"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A>).
+<DT><STRONG>Window Menu</STRONG>
+<DD><A NAME="78">&#160;</A> -- Every window under the control of <EM>mwm</EM> has
+a window menu. The application has a certain amount of control over items that can be
+placed in the menu. The <EM>Motif Style Guide</EM><A NAME="192">&#160;</A> insists
+that certain commands are always available in this menu and that they can be accessed
+from either mouse or keyboard selection. Keyboard selections are called <EM>mnemonics</EM>
+and allow routine actions (that may involve several mouse actions) to be called
+from the keyboard. The action from the keyboard usually involves
+pressing two keys at the same time: the <EM><TT>Meta</EM></TT> key<A NAME="84">&#160;</A><A NAME="tex2html22"
+ HREF="footnode.html#193"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/foot_motif.gif"></SUP></A> and another key.
+The default window menu items and <EM>mnemonics</EM> are listed below and
+illustrated in Fig.&nbsp;<A HREF="node2.html#fig:win_menu">1.4</A>:
+<P><A NAME="fig:win_menu">&#160;</A> <img src= win_menu.gif> <P> <B>Fig.&nbsp;<A HREF="node2.html#fig:win_menu">1.4</A> The Window Menu</B>
+<UL>
+<LI> <B>Restore (<TT>Meta+F5</TT>)</B><A NAME="98">&#160;</A> -- Restore window to previous size
+after iconification (<EM>see</EM> below).
+<LI> <B>Move (<TT>Meta+F7</TT>)</B> -- Allows the window to be repositioned with a drag
+of the mouse.
+<LI> <B>Size (<TT>Meta+F8</TT>)</B> -- Allows the size of the window to be changed by
+dragging on the corners of the window.
+<LI> <B>Minimize (<TT>Meta+F9</TT>)</B><A NAME="103">&#160;</A> -- Iconify  the
+window.
+<LI> <B>Maximize (<TT>Meta+F10</TT>)</B><A NAME="105">&#160;</A> -- Make the window the size of
+the root window, usually the whole of the display size.
+<LI> <B>Lower (<TT>Meta+F3</TT>)</B><A NAME="107">&#160;</A> -- Move the window to the bottom of
+the window stack. Windows may be <EM>tiled</EM> on top of each other (<EM>see</EM>
+below). The front window being the top of the stack.
+<LI> <B>Close (<TT>Meta+F4</TT>)</B><A NAME="111">&#160;</A> -- Quit the program. Some simple
+applications (Chapter&nbsp;<A HREF="#ch:1stprog"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A>) provide no <EM>internal</EM> means of
+termination. The <TT>Close</TT> option being the only means to achieve this.
+</UL>
+<P><DT><STRONG>Minimize Button</STRONG>
+<DD>-- another way to iconify a window<A NAME="116">&#160;</A>.
+<DT><STRONG>Maximize Button</STRONG>
+<DD>-- another way to make a window the size of the root
+window<A NAME="117">&#160;</A>.
+</DL>
+<P>
+The window manager must also be able to manage multiple windows from multiple client
+applications. There are a few important issues that need to be resolved. When running
+several  applications together, several windows may be displayed on the screen. As a
+result, the display may appear cluttered and hard to navigate. The window manager
+provides two mechanisms to help deal with such problems:
+<P><DL>
+<DT><STRONG>Active Window</STRONG>
+<DD>-- Only one window can receive input at any time. If you
+are selecting a graphical object with a mouse, then it is relatively easy for
+the window manager to detect this and schedule appropriate actions related to the
+chosen object. It is not so easy when you enter data or make selections
+directly from the keyboard. To resolve this only one window at a time is
+allowed <EM>keyboard focus</EM>. This window is called the <EM>active
+window</EM>.  The selection of the active window will depend on the system configuration
+which the user typically has control over. There are two common methods for
+selecting the active window:
+<DL>
+<DT><STRONG>Focus follows pointer</STRONG>
+<DD>-- The active window is the window is the window
+underneath mouse pointer.
+<DT><STRONG>Click-to-type</STRONG>
+<DD>-- The active window is selected, by clicking on an
+area of the window, and remains active until another window is selected no
+matter where the mouse points.
+</DL>
+When a window is made active its 
+appearance will change slightly:
+<P><UL>
+<LI> Its outline frame will become shaded.
+<LI> The cursor will change appearance when placed in the window.
+<LI> The window may jump, or be <EM>raised</EM> to the top of the window stack.
+</UL>
+<P>
+The exact appearance of the above may vary from system to system and may be
+controlled by the user by setting environment settings in the window manager.
+<P><DT><STRONG>Window  tiling</STRONG>
+<DD>-- Windows may be stacked on top of each
+other. The window manager tries to maintain a three-dimensional <EM>look and
+feel</EM><A NAME="128">&#160;</A>. Apart from the fact that buttons, dialog boxes appear to be
+elevated from the screen, windows are shaded and framed in a three-dimensional fashion.
+The top window (or currently active window) will have slightly different appearance for
+instance.
+<P>
+The window menu has a few options for controlling the tiling of a window. Also
+a window can be brought to the top of the stack, or <EM>raised</EM> by clicking a
+part of its frame.
+<P><DT><STRONG>Iconification</STRONG>
+<DD><A NAME="130">&#160;</A><A NAME="131">&#160;</A> -- If a window is currently
+active and not required for input or displaying output then it may be <EM>iconified</EM> or
+<EM>minimised</EM> thus reducing the screen clutter. An icon (Fig.&nbsp;<A HREF="node2.html#fig:icon">1.5</A>) is a
+small graphical symbol that represents the window (or application). It occupies a
+significantly less amount of screen area. Icons are usually arranged around the
+perimeter (typically bottom or left side) of the screen. The application will still be
+running and occupying computer memory. The window related to the icon may be reverted to
+by either double clicking on the icon, or selecting <EM>Restore</EM> or <EM>
+Maximise</EM><A NAME="137">&#160;</A> from the icon's window menu.
+<P>
+<BR>
+<DIV ALIGN="CENTER"><A NAME="fig:icon">&#160;</A><A NAME="140">&#160;</A>
+<TABLE>
+<CAPTION><STRONG>Figure 1.5:</STRONG>
+Sample Icon from Xterm Application</CAPTION>
+<TR><TD><IMG WIDTH="125" HEIGHT="122"
+ SRC="img2.gif"
+ ALT="\begin{figure}
+\centerline{
+\psfig {figure=icon.ps,height=1.056in,width=1.083in}
+}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+<BR></DL><H1><A NAME="SECTION00290000000000000000">
+The Root Menu</A>
+</H1>
+<P>
+The <EM>Root Menu</EM><A NAME="146">&#160;</A><A NAME="147">&#160;</A> is the main menu of
+the window manager. The root menu typically is used to control the whole display, for
+example starting up new windows and quitting the desktop. To display the Root menu:
+<P><UL>
+<LI> Move the mouse pointer to the Root Window.
+<LI> Hold down the left mouse button.
+</UL>
+<P>
+The default Root Menu  has the following
+The root menu can be customised to start up common applications for example. The root
+menu for the <EM>mwm</EM> (Fig.&nbsp;<A HREF="node2.html#fig:mwm_root_menu">1.6</A>)<A NAME="152">&#160;</A> and <EM>
+dtwm</EM> (Fig.&nbsp;<A HREF="node2.html#fig:dtwm_root_menu">1.7</A>) <A NAME="155">&#160;</A> have
+slightly different appearance but have broadly similar actions, which are summarised
+below:
+<P><A NAME="fig:mwm_root_menu">&#160;</A> <img src= mwm_root.gif> <P> <B>Fig.&nbsp;<A HREF="node2.html#fig:mwm_root_menu">1.6</A> The <EM>mwm</EM> Root Menu</B>
+<A NAME="fig:dtwm_root_menu">&#160;</A> <img src= rootmenu.html> <P> <B>Fig.&nbsp;<A HREF="node2.html#fig:dtwm_root_menu">1.7</A> The CDE <EM>dtwm</EM> Root Menu</B>
+<DL>
+<DT><STRONG>Program</STRONG>
+<DD>(<EM>dtwm</EM>) -- A sub-menu is displayed that allows a variety of programs
+to be called from the desktop, for example to create a new window. The list of available
+programs can be customised from the desktop.
+<DT><STRONG>New Window</STRONG>
+<DD>(<EM>mwm</EM>) -- Create a new window which is usually an <EM>Xterm</EM>
+window.
+<DT><STRONG>Shuffle Up</STRONG>
+<DD>-- Move the bottom of the window stack to the top.
+<DT><STRONG>Shuffle Down</STRONG>
+<DD>-- Move the top of the window stack to the bottom.
+<DT><STRONG>Refresh</STRONG>
+<DD>-- Refresh the current screen display.
+<DT><STRONG>Restart</STRONG>
+<DD>-- Restart the Workspace.
+<DT><STRONG>Logout</STRONG>
+<DD><A NAME="166">&#160;</A> (<EM>dtwm</EM>) --  Quit the Window Manager.
+</DL><H1><A NAME="SECTION002100000000000000000">
+Exercises</A>
+</H1>
+<P><P>
+<B>Exercise 12158</B></P>
+<P><A NAME="ex:cde1">&#160;</A>
+<b>Exercise~\ref{ex.cde1}</b> <br>
+<P>
+Add an application to the application manager</P>
+<P><P>
+<B>Exercise 12159</B></P>
+<P>
+Practice opening, closing and moving windows around the screen and to/from the
+background/foreground. Get used to using the mouse and its buttons for such
+tasks.</P>
+<P><P>
+<B>Exercise 12160</B></P>
+<P>
+Figure out the function of each of the three mouse buttons. Pay
+particular attention to the different functions the buttons in different windows
+(applications) and also when the mouse is pointing to the background.
+</P>
+<P>
+<P>
+<B>Exercise 12161</B></P>
+<P>
+Find out how to resize windows etc. and practice  this.
+</P>
+<P><P>
+<B>Exercise 12162</B></P>
+<P>
+Fire up the texteditor of your choice  (You may use <TT>dtpad</TT> (basic but
+functional), <TT>textedit</TT> application (SOLARIS basic editor), emacs/Xemacs, or
+vi) and practice editing text files. Create any files you wish for now. Figure out
+basic options like cut and paste of text around the file, saving and loading files,
+searching for strings in the text and replacing strings.
+<P>
+Particularly pay attention in getting used to using the Key Strokes and / or mouse to perform the above tasks.</P>
+<P><P>
+<B>Exercise 12163</B></P>
+<P>
+Use Unix Commands  to 
+<DL COMPACT>
+<DT>1.
+<DD>Copy a file (created by text editor or other means) to another file called
+spare.
+<DT>2.
+<DD>Rename your original file to b called new.
+	<DT>3.
+<DD>Delete the file spare.
+	<DT>4.
+<DD>Display your original file on the terminal.
+	<DT>5.
+<DD>Print your file out.
+</DL></P>
+<P>
+<P>
+<B>Exercise 12164</B></P>
+<P>
+Familiarise yourself with other  UNIX functions by creating various  files of
+text etc. and trying out the various functions listed in handouts.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:36 GMT -->
+</HTML>

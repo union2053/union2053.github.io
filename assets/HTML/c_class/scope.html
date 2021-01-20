@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Variable Scope</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Variable Scope</H1>
+<UL>
+<LI>refers to where variables can be referenced
+</UL>
+<H2>Global Scope</H2>
+<UL>
+<LI>outside any functions
+<LI>can be used by later blocks of code:
+<PRE>
+  int g;
+  
+  int
+  main(void)
+  {
+    g = 0;
+  }
+</PRE>
+<LI>only one instance of any name can exist at the same level:
+<PRE>
+  int a;
+  int a;
+</PRE>
+is illegal
+</UL>
+<H2>Scope Inside Blocks</H2>
+<UL>
+<LI>blocks inherit all variables from global scope
+<LI>may declare variables with the same name to hide (but not replace)
+global variables
+<UL>
+<LI>if blocks are nested, variables declared in an inner block may
+hide variables declared in an outer block
+</UL>
+<LI>variables declared inside a block have a different scope from
+global variables, and may even be of a different type:
+<PRE>
+int a;
+
+void f(void)
+{
+	float a;	/* different from global `a' */
+	float b;
+
+	a = 0.0;	/* sets `a' declared in this block to 0.0 */
+			/* global `a' is untouched */
+	{
+		int a;	/* new `a' variable */
+
+		a = 2;	/* outer `a' is still set to 0.0 */
+	}
+	b = a;		/* sets `b' to 0.0 */
+}
+
+/* global `a' is untouched by anything done in f() */
+</PRE>
+<LI>This method of hiding variables is a potential source of bugs
+and some compilers will issue a warning if a variable is found to be hidden
+</UL>
+<A HREF="precedence.html">Previous</A>, 
+<A HREF="vstorage.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:09 GMT -->
+<head>
+	<title>C Programlama Ders: III</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C Programlama, Comment, Yorum Koymak, Cast Operator, Conditional Operator, if, else, if-else, Compound Operator, Relational Operator">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">29 Temmuz 2006</font></div>
+	<h2>C Programlama Dersi - III</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Kodlarınıza açıklama (comment) koymak</p>
+				<p>- Cast Operator</p>
+				<p>- Koşullu (Conditional) İfadeler</p>
+				<p>- Koşullu Operatörler (&nbsp;if,&nbsp;else, vs...&nbsp;)</p>
+				<p>- İlişkisel (Relational) Operatörler</p>
+				<p>- Birleşik (Compound) Operatörler</p>
+				<p>- Konuyla ilgili örnek sorular</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+		<br/>
+		<h3>Kodlarınıza açıklama (comment) koymak</h3>		
+		<p>Yazılım mühendislerinin en büyük sıkıntısı kod yazmak değildir. 
+		Yazılmış bir kodu okuyup anlamak -hele ki büyük bir projeden söz ediyorsak- 
+		asıl başınıza bela olacak konudur. Bundan korunmak için kodlarımıza açıklama/yorum
+		koyarız.</p>
+		<p>C programlama dilinde iki şekilde açıklama koymak mümkündür. Bunlardan bir 
+		tanesi, satır bazında yapılır. Diğeriyse, belirli bir bloğu yorumlamaya yarar. 
+		Compiler her iki şekilde de, açıklama olarak belirlemiş yerleri işlemeyecektir.
+		Aşağıdaki örnekte satır ve blok olarak, nasıl kodlarınıza açıklama getirebileceğinizi 
+		görebilirsiniz:</p>
+		<pre>
+/*Çok satırlı bir açıklama.
+Yıldızlar arasında kalan bütün
+alan, yorum olarak değerlendirilir
+ve derleyici (compiler) tarafından
+işlenmez.
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	//Tek satırlık bir açıklama.
+	printf("Hello World\n");
+}
+</pre>
+		
+		<h3>Cast Operator</h3>
+		<p>Cast operator'un Türkçe karşılığı olacak bir kelime aklıma gelmedi. 
+		Ancak cast operatoru şu şekilde açıklayabiliriz. Bir değişken tipini örneğin
+		(Tam sayı-int), bir başka tipe (virgüllü sayı-float) gibi dönüştürmek isterseniz, 
+		o zaman cast operator kullanırız. </p>
+		<p>Aşağıdaki kodu yazıp derleyin.</p>
+		<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int bolunen = 12, bolen = 8;
+	float bolum;
+	bolum = bolunen / bolen;
+	printf("Sonuc: %f\n",bolum);
+	return 0;
+}
+</pre>
+		<p>Program çıktısı; "<i>Sonuc: 1.000000</i>" olacaktır:</p>
+		<p>Normalde 1.5 çıkmasını beklediğiniz sonucun, 0.000000 çıkmasının nedeni 
+		casting kullanmamamızdır. Bir tam sayıyı, bir başka tam sayıya bölerseniz, 
+		sonuç bir başka tam sayı çıkar. Ve C programlama dili, bir virgüllü sayıyı 
+		tam sayıya atamaya kalktığınızda, herhangi bir yuvarlama işlemi yapmadan, 
+		virgülden sonrası atar. </p>
+		<p> Cast Operator şu şekilde kullanılmalıdır:&nbsp;<i>degisken_1 = (&nbsp;tip&nbsp;) degisken_2;</i>
+		</p>
+		<p>Elimizdeki bu bilgiye göre programımızı tekrar yazalım.</p>
+		<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int bolunen = 12, bolen = 8;
+	float bolum;
+	bolum = (float)bolunen / bolen;
+	printf("Sonuc: %f\n",bolum);
+	return 0;
+}
+</pre>
+		<p>Sonuç bu sefer, beklediğimiz gibi 1.5 çıkacaktır. </p>
+		<p>Aşağıdaki örneği inceleyelim: </p>
+		<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Sonuc: %f\n", 2 / 4);
+	return 0;
+}
+</pre>
+		<p>Öğrendiğimiz üzere, bunun da sonucu 0.5 yerine, 0 olarak gözükecektir. Sonucu
+		doğru yazdırmak için (float)2/4 şeklinde yazmanız yeterlidir. Ancak dahi basit bir
+		yöntem olarak 2/4.0 veya 2.0/4 yazarsanız yine aynı sonucu elde edersiniz.Çünkü
+		bu durumda sayılardan bir tanesi float olmaktadır. 
+		</p>
+		<p>Kullanılan değişken tiplerinden hangisi büyükse, sonuç o değişkenin tipinde döner.
+		Yüksek değişken bellekte daha fazla yer kaplamaktadır. Bunun doğal bir sonucu olarakta,
+		domine eden o'dur. Değişkenlerin büyüklüğünü daha önceki dersimizde vermiştik. 
+		Ancak hatırlamak açısından, aşağıya bakabilirsiniz.
+		</p>
+		<pre>
+(<b>DÜŞÜK</b>) char <-> int <-> long <-> float <-> double (<b>YÜKSEK</b>)
+</pre>
+		<p>
+		Çıkan sonucu, daha düşük bir değişken tipine atamaya kalkarsanız, o zaman veri kaybı yaşanır. Ve örneğin float 1.5 olan sonucu int 
+		değişkene 1.0 olarak kaydedilir.</p>
+		<p>Öğrendiklerinizin pekişmesi için bir program yazalım. Bu programda, klavyeden 
+		girilen, bir virgüllü sayının, yuvarlanıp, tam sayı olması gösterilsin: </p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	float girilen_sayi;
+	printf("Lütfen bir sayı giriniz> ");
+	scanf("%f",&girilen_sayi);
+	printf("Sayının yuvarlanmış hali: %d\n", (int)(girilen_sayi+0.5));
+	return 0;
+}
+</pre>
+		
+		<h3>Koşullu (Conditional) İfadeler</h3>
+		<h4>if</h4>
+		<p>Bilgisayarda yapılan bütün mantıksal işlemler kaba bir temele dayanır. Şartlar
+		sağlandığı halde yapılacak işlem belirlenir. Ve şartlar sağlandığında, bu işlemler
+		yapılır. Şartların kontrol edilmesini, C (ve daha birçok) programlama dilinde
+		<i><b>if</b></i> operatörünü kullanarak yaparız. 
+		</p>
+		<p>if operatörünün genel kullanım yapısı şu şekildedir:</p>
+		<pre>
+if( <i>koşul</i> ) {
+	<i>komut(lar)</i>
+}
+</pre>
+		<p>Eğer if'in altında birden çok komut varsa, ayraç işareti (veya küme parantezi) 
+		koymamız gerekir. Şayet if'ten sonra, tek komut bulunuyorsa, ayraç koyup-koymamak
+		size kalmıştır. Zorunluluğu yoktur. </p>
+		<p>Örnek bir program yazalım. Bu programda kullanıcının klavyeden, bir tam sayı 
+		girsin. Ve bizde girilen sayı, 100'den büyükse, ekrana yazdıralım:</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_sayi;
+	printf("Lütfen bir tam sayı giriniz> ");
+	scanf("%d",&girilen_sayi);
+	if( girilen_sayi > 100 )
+		printf("Girilen sayı 100'den büyüktür\n");
+	return 0;
+}
+</pre>
+	<h4>if-else</h4>
+	<p>Bazı durumlarda, bir koşulun doğruluğuna göre sonuç yazdırmak yetmez. 
+	Aksi durumda da ne yapacağımızı belirtmek isteriz. Bunun için if-else yapısını 
+	kullanırız.</p>
+	
+		<p>if-else yapısı şu şekildedir:</p>
+		<pre>
+if( <i>koşul</i> ) {
+	<i>komut(lar)</i>
+}
+else {
+	<i>komut(lar)</i>
+}
+</pre>	
+	
+	<p>
+	Önceki yazdığımız programı	düşünelim; 100'den büyük olduğunda, ekrana çıktı alıyorduk. Bu programa bir özellik 
+	daha ekleyelim ve 100'den küçükse, bunu da söyleyen bir yapıyı oluşturalım:</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_sayi;
+	printf("Lütfen bir tam sayı giriniz> ");
+	scanf("%d",&girilen_sayi);
+	if( girilen_sayi > 100 )
+		printf("Girilen sayı 100'den büyüktür\n");
+	else
+		printf("Girilen sayı 100'den küçüktür\n");
+	return 0;
+}
+</pre>
+	<p>Örnekte gördüğünüz gibi, bir koşulun doğruluğunu program kontrol ediyor ve
+	buna doğru olursa, bazı işlemler yapıyor. Şayet verilen koşul yanlışsa, o zaman 
+	daha başka bir işlem	yapıyor. Ancak ikisini de yapması gibi bir durum söz konusu
+ 	değil.Aşağıdaki akış diyagramlarında (flowchart) her iki durumu da görebilirsiniz.</p>
+
+	<div align="center">
+ 	<table border="0" cellspacing="1" cellpadding="7">
+		<tr>
+			<td align="center">
+				<b><i>if Yapısı: </i></b>
+			</td>
+			<td align="center">
+				<b><i>if-else Yapısı: </i></b></td>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+			<div class="notcolorful">
+			<a href="c_operands/if.png" target="_blank">
+		 		<img src="c_operands/sm_if.png" alt="[if structure]" border="0"/>			
+		 	</a>			
+		 	</div>
+			</td>						
+			<td align="center">
+			<div class="notcolorful">
+			<a href="c_operands/if_else.png" target="_blank">
+		 		<img src="c_operands/sm_if_else.png" alt="[if structure]" border="0"/>			
+		 	</a>
+		 	</div>
+		 	</td>
+		</tr>
+	</table> 	 
+	</div>
+	<br/>
+	<h3>İlişkisel (Relational) Operatörler</h3>
+	<p>Koşullu operatörlerde, koşulun doğruluğunu kontrol ederken kullandığımız 
+	ilişkisel operatörler, aşağıda verilmiştir:</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr>
+			<td>&lt;</td>
+			<td>Küçüktür</td>
+		</tr>
+		<tr>
+			<td>&gt;</td>
+			<td>Büyüktür</td>
+		</tr>
+		<tr>
+			<td>==</td>
+			<td>Eşittir</td>
+		</tr>
+		<tr>
+			<td>&lt;=</td>
+			<td>Küçük eşittir</td>
+		</tr>
+		<tr>
+			<td>&gt;=</td>
+			<td>Büyük eşittir</td>
+		</tr>
+		<tr>
+			<td>!=</td>
+			<td>Eşit değildir</td>
+		</tr>
+	</table>	
+	</div>
+	<br/>
+	<h3>Birleşik (Compound) Operatörler</h3>
+	<p>Bazı durumlarda, kontrol edeceğimiz koşul, tek bir parametreye bağlı değildir. 
+	Örneğin, bir kişinin yaşının 65'den küçük olup olmadığına bakabiliriz. Ama 
+	65'den küçük ve 18 yaşından büyük olup olmadığına karar vermek istersek, o zaman
+	Birleşik/Birleştirici Operatörler'i kullanmamız uygun olacaktır.</p>
+	<p>Compound operator'ler aşağıdaki gibidir:</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+			<tr>
+				<td><b>&&</b></td>
+				<td>and</td>
+				<td>ve</td>
+			</tr>
+			<tr>
+				<td><b>||</b></td>
+				<td>or</td>
+				<td>veya</td>
+			</tr>
+			<tr>
+				<td><b>!</b></td>
+				<td>not</td>
+				<td>tersi</td>
+			</tr>
+		</table>	
+	</div>
+	<br/>
+	<p>Bu operatörlerin mantıksal (logical) doğruluk tablosu da şu	şekildedir:</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+		<tr align="right">
+			<td><b>p</b></td>
+			<td><b>q</b></td>
+			<td><b>p&&q</b></td>
+			<td><b>p||q</b></td>
+			<td><b>!p</b></td>
+		</tr>
+		<tr align="right">
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>1</td>
+		</tr>
+		<tr align="right">
+			<td>0</td>
+			<td>1</td>
+			<td>0</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr align="right">
+			<td>1</td>
+			<td>0</td>
+			<td>0</td>
+			<td>1</td>
+			<td>0</td>
+		</tr>
+		<tr align="right">
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>0</td>
+		</tr>
+	</table>
+	</div>
+	<br/>
+	<h3>Örnek Sorular</h3>
+	<p><b>Soru 1:</b> Klavyeden alınacak bir değerin, 18 ile 65 arasında olup olmadığını kontrol eden
+	bir program yazınız:</p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+	<pre>
+/*
+Girilen yaşın, 18 ile 65 arasında
+olup olmadığını belirler. 
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_yas;
+	printf("Lütfen yaşınızı giriniz> ");
+	scanf("%d",&girilen_yas);
+	if( girilen_yas >= 18 && girilen_yas <= 65 ) 
+		printf("Girilen yaş, 18 ile 65 arasındadır.\n");
+	//Girilen yaş 18 ile 65 arasında değilse, aşağıdaki else 
+	//bloğu çalışır.
+	else {
+		//Girilen yaş 18'den küçükse
+		if( girilen_yas < 18 )
+			printf("Girilen yaş, 18'den küçüktür.\n");
+		//Girilen yaş 65'ten büyükse
+		else
+			printf("Girilen yaş, 65'ten büyüktür.\n");
+	}
+}
+</pre>
+	</div>
+	<p><b>Soru 2:</b> Kendisine verilen iki tam sayıyı, bölecek ve sonucu virgüllü sayı olarak
+	gösterecek bir bölme işlemini programı hazırlayınız. (Şayet bölen 0 olarak verilirse, 
+	bölme işlemi yapılmamalıdır.)
+	</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+	<pre>
+/*
+Kendisine verilen iki tam sayıyla 
+bölme işlemi yapan program.
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int bolunen, bolen;
+	float sonuc;
+	printf("Bölünecek sayıyı giriniz> ");
+	scanf("%d",&bolunen);
+	printf("Bölen sayıyı giriniz> ");
+	scanf("%d",&bolen);
+	//Bolen, 0 ise, bir sayı sıfıra bölünemeyeceğinden, 
+	//program sorun çıkartacaktır. Bu yüzden,
+	//bolenin 0 olmaması kontrol ediliyor.
+	if( bolen != 0 ) {
+		sonuc = (float)bolunen / bolen;
+		//.2f, virgülden sonra 2 basamak gösterilmesi 
+		//içindir. 
+		printf("Sonuc: %.2f\n",sonuc);
+	}
+	else
+		printf("Hata: Sayı 0'a bölünemez!\n");
+
+}
+</pre>
+	</div>
+	<p><b>Not:</b> Yukarda verilmiş çözümler, daha efektif olabilirdi. Ancak verdiğim 
+	cevapların herkes tarafından anlaşılmasını istediğimden, işi biraz uzatmış 
+	olabilirim. Sizin vereceğiniz cevapların gidiş yolları elbette ki farklı olabilir.</p>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_2.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_4.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:17 GMT -->
+</html>

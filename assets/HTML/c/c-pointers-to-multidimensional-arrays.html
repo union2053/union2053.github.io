@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-to-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointers to Multidimensional Arrays</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointers to Multidimensional Arrays'>C Pointers to Multidimensional Arrays</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointers to Multidimensional Arrays</h1>
+<a class ='btn btn-outline-dark' href=c-pointers-and-multidimensional-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-two-dimensional-arrays-and-pointers.html>Next</a><p>To declare a pointer variable <i style='color:blue'>pz</i> that can point to a two-dimensional array such as my_array[][].
+
+</p><p><i style='color:blue'>pz</i> must point to an array of two ints, not to a single int. 
+
+</p><p>Here is what you can do:
+</p><div class='myCodeDiv'><button id='LQLHQ' class='myCopyButton' data-clipboard-target='#PDHLA'>Copy</button><pre  id='PDHLA' style='font-size:18px;' class='code'><span class='r'>int</span> (* pz)[2];     <span class='c'>// pz points to an array of 2 ints</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LQLHQ');clipboard.on('success', function(e) {$('#LQLHQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LQLHQ').text('error');});</script></div><p>This statement says that <i style='color:blue'>pz</i> is a pointer to an array of two ints. 
+
+</p><p>[] has a higher precedence than *. 
+
+</p><p>Therefore, with a declaration such as
+</p><div class='myCodeDiv'><button id='GLSRW' class='myCopyButton' data-clipboard-target='#SFQBH'>Copy</button><pre  id='SFQBH' style='font-size:18px;' class='code'><span class='r'>int</span> * px[2];     <span class='c'>// px is an array of two pointers-to-int</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GLSRW');clipboard.on('success', function(e) {$('#GLSRW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GLSRW').text('error');});</script></div><p>you apply the brackets first, making px an array of two something. 
+
+</p><p>Next, you apply the *, making px an array of two pointers. 
+
+</p><p>Finally, use the int, making px an array of two pointers to int. 
+
+</p><p>This declaration creates two pointers to single ints, but the original version uses 
+parentheses to apply the * first, creating one pointer to an array of two ints. 
+
+</p><p>The following code shows how you can use such a pointer just like the original array.
+
+</p><div class='myCodeDiv'><button id='ZFRTU' class='myCopyButton' data-clipboard-target='#HICWF'>Copy</button><pre  id='HICWF' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> my_array[4][2] = { {2,1}, {6,3}, {1,9}, {5, 7} };
+    <span class='r'>int</span> (*pz)[2];
+    pz = my_array;
+
+    printf(<span class='q'>"      pz = %p,      pz + 1 = %p\n"</span>,
+          pz,          pz + 1);
+
+    printf(<span class='q'>"pz[0] = %p, pz[0] + 1 = %p\n"</span>,
+             pz[0],       pz[0] + 1);
+    printf(<span class='q'>" *pz = %p,      *pz + 1 = %p\n"</span>,
+               *pz,         *pz + 1);
+    printf(<span class='q'>"pz[0][0] = %d\n"</span>, pz[0][0]);
+    printf(<span class='q'>" *pz[0] = %d\n"</span>, *pz[0]);
+    printf(<span class='q'>"     **pz = %d\n"</span>, **pz);
+    printf(<span class='q'>"        pz[2][1] = %d\n"</span>, pz[2][1]);
+    printf(<span class='q'>"*(*(pz+2) + 1) = %d\n"</span>, *(*(pz+2) + 1));
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZFRTU');clipboard.on('success', function(e) {$('#ZFRTU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZFRTU').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>You can use notation such as <i style='color:blue'>pz[2][1]</i>, even though <i style='color:blue'>pz</i> is a pointer, not an array name. 
+
+</p><p>More generally, you can represent individual elements by using array notation or pointer notation
+with either an array name or a pointer:
+</p><div class='myCodeDiv'><button id='XEGIL' class='myCopyButton' data-clipboard-target='#ICFGX'>Copy</button><pre  id='ICFGX' style='font-size:18px;' class='code'>my_array[m][n] == *(*(my_array + m) + n)
+pz[m][n] == *(*(pz + m) + n)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XEGIL');clipboard.on('success', function(e) {$('#XEGIL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XEGIL').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-pointers-and-multidimensional-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-two-dimensional-arrays-and-pointers.html>Next</a><h2>Related</h2><UL><LI><a href='c-arrays-and-pointers.html'>C Arrays and Pointers</a></LI><LI><a href='c-array-and-pointer.html'>C Array and Pointer</a></LI><LI><a href='c-pointers-and-multidimensional-arrays.html'>C Pointers and Multidimensional Arrays</a></LI><LI><a href='c-two-dimensional-arrays-and-pointers.html'>C Two-Dimensional Arrays And Pointers</a></LI><LI><a href='c-use-pointer-to-access-two-dimensional-array.html'>C use pointer to access two-dimensional array</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-to-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

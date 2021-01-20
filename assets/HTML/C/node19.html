@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node19.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>String Handling: &lt;string.h&gt;</TITLE>
+<META NAME="description" CONTENT="String Handling: &lt;string.h&gt;">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1112"
+ HREF="node19.html#SECTION001910000000000000000">
+Basic String Handling Functions</A>
+<UL>
+<LI><A NAME="tex2html1113"
+ HREF="node19.html#SECTION001911000000000000000">
+String Searching</A>
+</UL>
+<LI><A NAME="tex2html1114"
+ HREF="node19.html#SECTION001920000000000000000">
+Character conversions and testing: <TT>ctype.h</TT></A>
+<LI><A NAME="tex2html1115"
+ HREF="node19.html#SECTION001930000000000000000">
+Memory Operations: <TT>&lt;memory.h&gt;</TT></A>
+<LI><A NAME="tex2html1116"
+ HREF="node19.html#SECTION001940000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001900000000000000000">
+String Handling: <TT>&lt;string.h&gt;</TT></A>
+</H1>
+<A NAME="ch:string">&#160;</A>
+Recall from our discussion of arrays (Chapter&nbsp;<A HREF="node7.html#ch:array">6</A>) that
+strings are defined as an array of characters or a pointer to a portion of
+memory containing ASCII characters. A <TT>string</TT> in C is a sequence of
+zero or more characters followed by a <TT>NULL</TT> \0">)character:
+<P><img src= string.gif>
+<P>
+<P>
+It is important to preserve the <TT>NULL</TT> terminating character as it is
+how C defines and manages variable length strings. <B>All</B> the C
+standard library functions require this for successful operation.
+<P>
+In general, apart from some <EM>length-restricted functions</EM> (<TT>
+strncat(), strncmp,()</TT> and <TT>strncpy()</TT>), unless you create strings by
+hand you should not encounter any such problems, . You should use the many
+useful string handling functions and not really need to <EM>get your
+hands dirty</EM> dismantling and assembling strings.
+<P><H1><A NAME="SECTION001910000000000000000">
+Basic String Handling Functions</A>
+</H1>
+<P>
+All the string handling functions are prototyped in:
+<P><code>#include &lt;string.h&gt;</code>
+<P>
+The common functions are described below:
+<P> <code>char *stpcpy (char *dest,const char  *src)</code> -- Copy one
+string into another.
+<BR><code>int strcmp(char *string1,const char *string2)</code> -
+Compare string1 and string2 to determine alphabetic order.
+<BR><code>char *strcpy(char *string1,const  char  *string2)</code>
+-- Copy string2 to stringl.
+<BR><code>char *strerror(int errnum)</code> -- Get error message corresponding
+to specified error  number.
+<BR><code>size_t strlen(const char *string)</code> -- Determine the length of
+a string.
+<BR><code>char *strncat(char *string1,  char  *string2, size_t n)</code> --
+Append n characters from string2 to stringl.
+<BR><code>int strncmp(char *string1,   char *string2, size_t n)</code> --
+Compare first n characters of two strings.
+<BR><code>char *strncpy(char *string1,const  char  *string2, size_t n)</code>
+-- Copy first n characters of string2 to stringl . 
+<BR><code>int strcasecmp(const char *s1, const char *s2)</code> -- case
+insensitive version of <TT>strcmp()</TT>.
+<BR><code>int strncasecmp(const char *s1, const char *s2, int n)</code> -- case
+insensitive version of <TT>strncmp()</TT>.
+<P>
+The use of most of the functions is straightforward, for example:
+<P><PRE>
+char *str1 = &quot;HELLO&quot;;
+char str2[10];
+int length;
+
+length = strlen(&quot;HELLO&quot;); /* length = 5 */
+(void) strcpy(str2,str1);
+</PRE>
+<P>
+Note that both <TT>strcat()</TT> and <TT>strcpy()</TT> both return a pointer to the first char
+in the destination array. Note the order of
+the arguments is <EM>destination array</EM> followed by <EM>source
+array</EM> which is sometimes easy to get the wrong around when programming.
+<P>
+The <TT>strcmp()</TT> function <EM>lexically</EM>
+compares the two input strings and returns:
+<P><DL>
+<DT><STRONG>Less than zero</STRONG>
+<DD>-- if <TT>string1</TT> is lexically  less than <TT>
+string2</TT>
+<DT><STRONG>Zero</STRONG>
+<DD>-- if <TT>string1</TT> and <TT>
+string2</TT> are lexically   equal 
+<DT><STRONG>Greater than zero</STRONG>
+<DD>-- if <TT>string1</TT> is lexically greater  than
+<TT>string2</TT>
+</DL>
+<P>
+This can also confuse beginners and experience programmers forget this
+too.
+<P>
+The <TT>strncat(), strncmp,()</TT> and <TT>strncpy()</TT> copy functions are
+string restricted version of their more general 
+counterparts. They perform a similar task but only up to the first <TT>
+n</TT> characters. Note the the <TT>NULL</TT> terminated requirement may get
+violated when using these functions, for example:
+<P><PRE>
+char *str1 = &quot;HELLO&quot;;
+char str2[10];
+int length = 2;
+
+
+(void) strncpy(str2,str1, length); /* str2 = &quot;HE&quot; */
+</PRE>
+<P>In general, with this form of <TT>strncpy()</TT>, <B><TT>str2</TT> may NOT be NULL TERMINATED!! -- BEWARE</B>. Also if the length of the <TT>str1</TT> is longer that <TT>str2</TT> what will happen?
+	
+<P><H2><A NAME="SECTION001911000000000000000">
+String Searching</A>
+</H2>
+<P>
+The library also provides several string searching functions:
+<P> <code>char *strchr(const char *string, int c)</code> -- Find first
+occurrence of character <TT>c </TT>in string.
+<BR><code>char *strrchr(const char *string, int c)</code> -- Find last
+occurrence of character <TT>c</TT> in string.
+<BR><code>char *strstr(const char *s1, const char *s2)</code> -- locates
+ the  first  occurrence  of  the  string <TT>s2</TT>
+      in string <TT>s1</TT>.
+<BR><code>char *strpbrk(const char *s1, const char *s2)</code> -- returns a  pointer  to  the  first  occurrence  in
+     string s1 of any character from string <TT>s2</TT>, or a null pointer
+     if no character from <TT>s2</TT> exists in <TT>s1</TT>
+<BR><code>size_t strspn(const char *s1, const char *s2)</code> --
+returns the number of characters at the begining of <TT>s1</TT> that match
+<TT>s2</TT>.
+<BR><code>size_t strcspn(const char *s1, const char *s2)</code> --
+returns the number of characters at the begining of <TT>s1</TT> that <EM>do
+not</EM> match <TT>s2</TT>.
+<BR><code>char *strtok(char *s1, const char *s2)</code> -- break the
+string pointed  to  by  <TT>s1</TT>
+     into a sequence of tokens, each of which is delimited by one
+     or more  characters  from  the  string  pointed  to  by  <TT>s2</TT>.
+<BR><code>char *strtok_r(char *s1, const char *s2, char **lasts)</code>
+-- has the same  functionality  as  strtok()  except
+     that  a  pointer  to a string placeholder lasts must be supplied by the caller.
+<P><TT>strchr()</TT> and <TT>strrchr()</TT> are the simplest to use, for example:
+<P><PRE>
+char *str1 = &quot;Hello&quot;;
+char *ans;
+
+ans = strchr(str1,'l');
+</PRE>
+<P>
+After this execution, <TT>ans</TT> points to the location <TT>str1 + 2</TT>
+<P><TT>strpbrk()</TT> is a more general function that searches for the first
+occurrence of any of a group of characters, for example:
+<P><PRE>
+char *str1 = &quot;Hello&quot;;
+char *ans;
+
+ans = strpbrk(str1,'aeiou');
+</PRE>
+<P>
+Here, <TT>ans</TT> points to the location <TT>str1 + 1</TT>, the location of the
+first <TT>e</TT>.
+<P>
+strstr() returns a pointer to the specified search string or a  null
+     pointer  if  the  string  is  not  found.  If s2 points to a
+     string with zero length (that is, the string &quot;&quot;), the  function returns s1.
+For example,
+<P><PRE>
+char *str1 = &quot;Hello&quot;;
+char *ans;
+
+ans = strstr(str1,'lo');
+</PRE>
+<P>
+will yield <TT>ans</TT> = <TT>str + 3</TT>.
+<P><TT>strtok()</TT> is a little more complicated in operation. If the first
+argument is not NULL then the function finds the position of any of the
+second argument characters. However, the position is remembered and any
+subsequent calls to <TT>strtok()</TT> will start from this position if on
+these subsequent calls the first argument is <TT>NULL</TT>. For example, If
+we wish to break up the string <TT>str1</TT> at each space and print each
+token on a new line we could do:
+<P><PRE>
+char *str1 = &quot;Hello Big Boy&quot;;
+char *t1;
+
+
+for ( t1 = strtok(str1,&quot; &quot;);
+      t1 != NULL;
+      t1 = strtok(NULL, &quot; &quot;) )
+
+printf(&quot;%s\n&quot;,t1);
+</PRE>
+<P>
+Here  we use the for loop in a non-standard counting fashion:
+<P><UL>
+<LI> The initialisation calls <TT>strtok()</TT> loads the function with the
+string <TT>str1</TT>
+<LI> We terminate when t1 is <TT>NULL</TT>
+<LI> We keep assigning tokens of <TT>str1</TT> to <TT>t1</TT> until
+termination by calling <TT>strtok()</TT> with a <TT>NULL</TT> first argument.
+</UL><H1><A NAME="SECTION001920000000000000000">
+Character conversions and testing: <TT>ctype.h</TT></A>
+</H1>
+<P>
+We conclude this chapter with a related library <code>#include &lt;ctype.h&gt;</code>
+which contains many useful functions to convert and test <EM>single</EM>
+characters. The common functions are prototypes as follows:
+<P><B>Character testing</B>:
+<P><code>int isalnum(int c)</code> -- True if c is alphanumeric.  
+<BR><code>int isalpha(int c)</code>  -- True if c is a letter.  
+<BR><code>int isascii(int c)</code>  -- True if c is ASCII . 
+<BR><code>int iscntrl(int c)</code> -- True if c is a control character.  
+<BR><code>int isdigit(int c)</code> -- True if c is a decimal digit
+<BR><code>int isgraph(int c)</code> -- True if c is a graphical character.
+<BR><code>int islower(int c)</code> -- True if c is a lowercase letter
+<BR><code>int isprint(int c)</code> -- True if c is a printable character
+<BR><code>int ispunct (int c)</code>  -- True if c is a punctuation
+character.  
+<BR><code>int isspace(int c)</code> -- True if c is a space character.
+<BR><code>int isupper(int c)</code> -- True if c is an uppercase letter.  
+<BR><code>int isxdigit(int c)</code> -- True if c is a hexadecimal digit
+<P><B>Character Conversion</B>:
+<P><code>int toascii(int c)</code> -- Convert <TT>c</TT> to ASCII .  
+<BR><code>tolower(int c)</code>  -- Convert c to lowercase.
+<BR><code>int toupper(int c)</code> -- Convert c to uppercase.
+<P>
+The use of these functions is straightforward and we do not give examples
+here.
+<P><H1><A NAME="SECTION001930000000000000000">
+Memory Operations: <TT>&lt;memory.h&gt;</TT></A>
+</H1>
+<P>
+Finally we briefly overview some basic memory operations.
+Although not strictly string functions the functions are prototyped in 
+<code>#include &lt;string.h&gt;</code>:
+<P><code>void *memchr (void *s, int c, size_t n)</code> -- Search for a character in
+a buffer .
+<BR><code>int memcmp (void *s1,  void  *s2, size_t n)</code>  -- Compare two
+buffers.  
+<BR><code>void *memcpy (void *dest,  void  *src, size_t n)</code> -- Copy one
+buffer into another .
+ <BR><code>void *memmove (void *dest,  void  *src, size_t n)</code> -- Move a
+number of bytes from one buffer lo  another.
+  <BR><code>void *memset (void *s, int c, size_t n)</code> -- Set all bytes of
+a buffer to a given character.
+<P>
+Their use is fairly straightforward and not dissimilar to comparable
+string operations (except the exact length (<TT>n</TT>) of the operations
+must be specified as there is no natural termination here).
+<P>
+Note that in all case to <B>bytes</B> of memory are copied. The <TT>
+sizeof()</TT> function comes in handy again here, for example:
+<P><PRE>
+char src[SIZE],dest[SIZE];
+int  isrc[SIZE],idest[SIZE];
+
+memcpy(dest,src, SIZE); /* Copy chars (bytes) ok */
+
+memcpy(idest,isrc, SIZE*sizeof(int)); /* Copy arrays of ints */
+</PRE>
+<P><TT>memmove()</TT> behaves in exactly the same way as <TT>memcpy()</TT> except
+that the source and destination locations may overlap.
+<P><TT>memcmp()</TT> is similar to <TT>strcmp()</TT> except here <EM>
+unsigned bytes</EM> are compared and returns less than zero if <TT>s1</TT> is
+less than <TT>s2</TT> <EM>etc.</EM>
+<P><H1><A NAME="SECTION001940000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12584</B></P>
+<P>
+Write a function similar to strlen that can handle unterminated
+strings. Hint: you will need to know and pass in the length of the string.</P>
+<P><P>
+<B>Exercise 12585</B></P>
+<P>
+Write a function that returns true if an input string is a palindrome
+of each other.
+A palindrome is a word that reads the same backwards as it does forwards
+<EM>e.g</EM> ABBA.</P>
+<P><P>
+<B>Exercise 12586</B></P>
+<P>
+Suggest a possible implementation of the <TT>strtok()</TT> function:
+<P><DL COMPACT>
+<DT>1.
+<DD>using other string handling functions.
+<DT>2.
+<DD>from first pointer principles
+</DL>
+<P>
+How is the storage of the tokenised string achieved?</P>
+<P><P>
+<B>Exercise 12587</B></P>
+<P>
+Write a function that converts all characters of an input string to
+upper case characters.</P>
+<P><P>
+<B>Exercise 12591</B></P>
+<P>
+Write a program that will reverse the contents stored in memory in bytes.
+That is to say if we have <I>n</I> bytes in memory byte <I>n</I> becomes byte 0,
+byte <I>n</I>-1 becomes byte 1 <EM>etc.</EM></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node19.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:17 GMT -->
+</HTML>

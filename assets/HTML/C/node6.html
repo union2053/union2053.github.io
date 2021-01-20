@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Looping and Iteration</TITLE>
+<META NAME="description" CONTENT="Looping and Iteration">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html892"
+ HREF="node6.html#SECTION00610000000000000000">
+The <TT>for</TT> statement</A>
+<LI><A NAME="tex2html893"
+ HREF="node6.html#SECTION00620000000000000000">
+The <TT>while</TT> statement</A>
+<LI><A NAME="tex2html894"
+ HREF="node6.html#SECTION00630000000000000000">
+The <TT>do-while</TT> statement</A>
+<LI><A NAME="tex2html895"
+ HREF="node6.html#SECTION00640000000000000000">
+<TT>break</TT> and <TT>continue</TT></A>
+<LI><A NAME="tex2html896"
+ HREF="node6.html#SECTION00650000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00600000000000000000">
+Looping and Iteration</A>
+</H1>
+<P>
+This chapter will look at C's mechanisms for controlling looping and iteration.
+Even though some of these mechanisms may look familiar and indeed will operate
+in standard fashion most of the time. <B>NOTE:</B> some non-standard features
+are available.
+<P><H1><A NAME="SECTION00610000000000000000">
+The <TT>for</TT> statement</A>
+</H1>
+<P>
+The C <TT>for</TT> statement has the
+following form:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>for </TT> <TT>(</TT><I>expression<SUB>1</SUB></I>; <SUB>2</SUB>; <I>expression<SUB>3</SUB></I><TT>)</TT>
+				 <I>statement</I>;
+				 or <I>{block of statements}</I>
+</TT></PRE>
+<P><I>expression<SUB>1</SUB></I> initialises; <I>expression<SUB>2</SUB></I> is the terminate test;
+<I>expression<SUB>3</SUB></I> is the modifier (which may be more than just
+simple increment);
+<BR>
+<P><B>NOTE</B>: C basically treats <TT>for</TT> statements as <TT>while</TT> type loops
+  <BR>
+<P>
+For example:
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;int x;
+&nbsp;
+main()
+	{
+	  for (x=3;x&gt;0;x--)
+		{
+		printf(&quot;x=%d<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0" SRC="img10.gif" ALT="$\setminus$">n&quot;,x);
+		}
+	}
+</TT></PRE>
+</TT>
+<P>...outputs:
+<P>
+<PRE><TT>
+&nbsp;&nbsp;x=3
+x=2
+x=1
+</PRE>
+</TT>
+<P>...to the screen 
+  <BR>
+<P>
+All the following are legal <TT>for statements in C. The practical application
+of such statements is not important here, we are just trying to illustrate
+peculiar features of C <TT>for</TT> that may be useful:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;for (x=0;((x&gt;3) &amp;&amp; (x&lt;9)); x++)
+&nbsp;
+		 for (x=0,y=4;((x&gt;3) &amp;&amp; (y&lt;9)); x++,y+=2)
+&nbsp;
+		 for (x=0,y=4,z=4000;z; z/=10)
+</TT></PRE>
+</TT>
+<P>
+The second example shows that multiple expressions can be separated a
+<TT>,. 
+<BR>
+<P>
+In the third example the loop will continue to iterate until <TT>z</TT>
+becomes 0;
+<P></TT></TT></TT><H1><A NAME="SECTION00620000000000000000">
+The <TT>while</TT> statement</A>
+</H1>
+<P>
+The <TT>while</TT> statement is similar to those used in other languages although
+more can be done with the <TT>expression</TT> statement -- a standard feature of
+C.
+<P>
+The <TT>while</TT> has the form:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>while</TT> <TT>(</TT><I>expression</I><TT>)</TT>
+				 <I>statement</I>
+</TT></PRE>
+<P>
+For example:
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;int x=3;
+&nbsp;
+		 main()
+				 { while (x&gt;0)
+						 { printf(&quot;x=%d<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,x);
+								 x-;
+						 }
+				 }
+</TT></PRE>
+</TT>
+<P>...outputs:
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;x=3
+		x=2
+		x=1
+</PRE>
+</TT>
+...to the screen.
+<P> <BR>
+<P>
+Because the <TT>while loop can accept expressions, not just
+conditions, the following are all legal:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;while (x-);
+		while (x=x+1);
+		while (x+=5);
+</TT></PRE>
+</TT>
+<P>
+Using this type of expression, only when the result of <TT>x-, <TT>
+x=x+1</TT>, or <TT>x+=5</TT>, evaluates to 0 will the <TT>while</TT> condition fail
+and the loop be exited.
+<BR>
+<P>
+We can go further still and perform complete operations within the <TT>while</TT>
+<EM>expression</EM>:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;while (i++ &lt; 10);
+&nbsp;
+		while ( (ch = getchar()) != `q')
+		&nbsp;&nbsp;putchar(ch);
+</TT></PRE>
+</TT>
+<P>
+The first example counts <TT>i up to 10.
+<BR>
+<P>
+The second example uses C standard library functions (See
+Chapter&nbsp;<A HREF="node19.html#ch:string">18</A>) <TT>getchar()</TT> - reads a character from the
+keyboard - and <TT>putchar()</TT> - writes a given char to screen. The <TT>
+while</TT> loop will proceed to read from the keyboard and echo characters to
+the screen until a 'q' character is read. <B>NOTE:</B> This type of operation is
+used a lot in C and not just with character reading!! (See Exercises).
+<P></TT></TT></TT></TT><H1><A NAME="SECTION00630000000000000000">
+The <TT>do-while</TT> statement</A>
+</H1>
+<P>
+C's <TT>do-while</TT> statement
+has the form:
+<P><PRE><TT>
+&nbsp;&nbsp;<TT>do </TT>
+				 <I>statement</I>;
+				 <TT>while</TT> <TT>(</TT><I>expression</I><TT>);</TT>
+</TT></PRE>
+<P>
+It is similar to PASCAL's <TT>repeat</TT> ... <TT>until</TT> <U>except</U> <TT>do
+while</TT> <EM>expression</EM> is true.
+<BR>
+<P>
+For example:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int x=3;
+&nbsp;
+		 main()
+				 { do {
+						 printf(&quot;x=%d<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,x-);
+						 }
+				 while (x&gt;0);
+				 }
+</TT></PRE>
+</TT>
+<P>..outputs:-
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;x=3
+		 x=2
+		 x=1
+</PRE>
+</TT>
+<P><B>NOTE:</B> The postfix <TT>x- operator which uses the current value of
+<TT>x</TT>  while printing and <EM>then</EM> decrements <TT>x</TT>.
+<P></TT></TT><H1><A NAME="SECTION00640000000000000000">
+<TT>break</TT> and <TT>continue</TT></A>
+</H1>
+<P>
+C provides two commands to control how we loop:
+<UL>
+<LI> <TT>break</TT> -- exit form loop or switch.
+<LI> <TT>continue</TT> -- skip 1 iteration of loop.
+</UL>
+<P>
+Consider the following example where we read in integer values and process
+them according to the following conditions. If the value we have read is
+negative, we wish to print an error message and abandon the loop.  If the value
+read is great than 100, we  wish  to ignore  it  and continue to the next value
+in the data.  If the value is zero, we wish to terminate the loop.
+<P><PRE><TT>
+&nbsp;&nbsp; while (scanf( "%d", &amp;value ) == 1 &amp;&amp; value != 0) { 
+&nbsp;
+	if (value &lt; 0) {
+		printf("Illegal value<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">n");
+		break;
+		/* Abandon the loop */
+	}
+&nbsp;
+	if (value &gt; 100) {
+		printf("Invalid value<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">n");
+		continue;
+		/* Skip to start loop again */
+	}
+&nbsp;
+   /* Process the value read */
+   /* guaranteed between 1 and 100 */
+   ....;
+&nbsp;
+} /* end while value != 0 */
+</TT></PRE><H1><A NAME="SECTION00650000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12327</B></P>
+<P>
+Write a program to read in 10 numbers and compute the average, maximum and
+minimum values.</P>
+<P><P>
+<B>Exercise 12328</B></P>
+<P>
+Write a program to read in numbers until the number -999 is encountered. The
+sum of all number read until this point should be printed out.</P>
+<P><P>
+<B>Exercise 12329</B></P>
+<P>
+Write a program which will read an integer value for a base,
+then read a positive integer written to that base and print its value.
+<P>
+Read the second integer a character at a time; skip over any leading
+non-valid (i.e. not a digit between zero and ``base-1'') characters,
+then read valid characters until an invalid one is encountered.
+<PRE>
+           Input       Output
+        ==========     ======
+        10    1234      1234
+         8      77        63   (the value of 77 in base 8, octal)
+         2    1111        15   (the value of 1111 in base 2, binary)
+</PRE>
+The base will be less than or equal to 10.
+</P>
+<P><P>
+<B>Exercise 12330</B></P>
+<P>
+Read in three values representing respectively
+<P>
+a capital sum (integer number of pence),
+<P>
+a rate of interest in percent (float),
+<P>
+and a number of years (integer).
+<P>
+Compute the values of the capital sum with compound interest added over
+the given period of years. Each year's interest is calculated as
+<P>
+interest = capital * interest_rate / 100;
+<P>
+and is added to the capital sum by
+<P>
+capital += interest;
+<P>
+Print out money values as pounds (pence / 100.0) accurate to two
+decimal places.
+<P>
+Print out a floating value for the value with compound interest
+for each year up to the end of the period.
+<P>
+Print output year by year in a form such as:
+<PRE>
+Original sum 30000.00 at  12.5 percent for 20 years
+
+Year Interest  Sum
+----+-------+--------
+  1  3750.00 33750.00
+  2  4218.75 37968.75
+  3  4746.09 42714.84
+  4  5339.35 48054.19
+  5  6006.77 54060.96
+  6  6757.62 60818.58
+  7  7602.32 68420.90
+  8  8552.61 76973.51
+  9  9621.68 86595.19
+ 10 10824.39 97419.58
+</PRE></P>
+<P><P>
+<B>Exercise 12331</B></P>
+<P>
+Read a positive integer value, and compute the following sequence:
+If the number is even, halve it; if it's odd, multiply by 3 and add 1.
+Repeat this process until the value is 1, printing out each value.
+Finally print out how many of these operations you performed.
+<P>
+Typical output might be:
+<PRE>
+ Inital value is 9
+ Next value is  28
+ Next value is  14
+ Next value is   7
+ Next value is  22
+ Next value is  11
+ Next value is  34
+ Next value is  17
+ Next value is  52
+ Next value is  26
+ Next value is  13
+ Next value is  40
+ Next value is  20
+ Next value is  10
+ Next value is   5
+ Next value is  16
+ Next value is   8
+ Next value is   4
+ Next value is   2
+ Final value 1, number of steps 19
+</PRE>
+If the input value is less than 1, print a message containing the word
+ <PRE>
+       Error
+</PRE>
+and perform an
+<PRE>
+        exit( 0 );
+</PRE></P>
+<P><P>
+<B>Exercise 12332</B></P>
+<P>
+Write a program to count the vowels and letters in free text given as
+standard input.
+Read text a character at a time until you encounter end-of-data.
+<P>
+Then print out the number of occurrences of each of the
+vowels a, e, i, o and u in the text,
+the total number of letters,
+and each of the vowels as an integer percentage of the letter total.
+<P>
+Suggested output format is:
+<PRE>
+        Numbers of characters:
+        a   3 ; e   2 ; i   0 ; o   1 ; u   0 ; rest  17
+        Percentages of total:
+        a  13%; e   8%; i   0%; o   4%; u   0%; rest  73%
+</PRE>
+Read characters to end of data using a construct such as
+<PRE>
+        char ch;
+        while(
+            ( ch = getchar() ) &gt;= 0
+        ) {
+            /* ch is the next character */    ....
+        }
+</PRE>
+to read characters one at a time using <TT>getchar()</TT> until a negative value
+is returned.
+</P>
+<P><P>
+<B>Exercise 12333</B></P>
+<P>
+Read a file of English text, and print it out one word per line, all
+punctuation and non-alpha characters being omitted.
+<P>
+For end-of-data, the program loop should
+read until &quot;getchar&quot; delivers a value &lt;= 0. When typing input,
+end the data by typing the end-of-file character, usually control-D. When
+reading from a file, &quot;getchar&quot; will deliver a negative value
+when it encounters the end of the file.
+<P>
+Typical output might be
+<PRE>
+Read
+a
+file
+of
+English
+text
+and
+print
+it
+out
+one
+</PRE>
+etc.
+</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:47 GMT -->
+</HTML>

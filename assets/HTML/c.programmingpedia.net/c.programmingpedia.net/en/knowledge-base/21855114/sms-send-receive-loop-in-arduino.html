@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/21855114/sms-send-receive-loop-in-arduino by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] SMS send/receive loop in Arduino | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] SMS send/receive loop in Arduino | C Language Knowledge Base">
+        <title>[SOLVED] SMS send/receive loop in Arduino | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="sms-send-receive-loop-in-arduino">SMS send/receive loop in Arduino</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/gsm.html">gsm</a></span>
+                        <span class="tag-item"><a href="../tag/sms.html">sms</a></span>
+                        <span class="tag-item"><a href="../tag/testing.html">testing</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Using Arduino + <a href="https://www.sparkfun.com/products/9607" rel="nofollow">Sparkfun SM5100B + Cellular Shield</a>.</p>
+
+<p>I need the following code to loop trough a set of mobile numbers with about a minute delay for each. If the Arduino receives a positive/'yes' message I need this to break the loop and end it. If it receives a 'no' or a negative message I need it to continue its loop. </p>
+
+<p>Right now, I have it successfully compiling, but while it delays correctly in the loop and prints the correct messages in the serial monitor, it actually only sends a test message to the first number along with the AT commands to send to the next number (in the text message received by the first number) in this code I have included the receive message code yet, as I would like to get the loop working first before I try to break it. </p>
+
+<pre><code>    //THis code is sending both messages to first number
+#include &lt;GSM.h&gt;
+
+#define PINNUMBER ""
+const int buttonPin = 4;
+const int ledPin1 = 13;  
+const int ledPin2 = 12;
+int buttonState = 0;
+
+// initialize the library instance
+GSM gsmAccess; // include a 'true' parameter for debug enabled
+GSM_SMS sms;
+
+// char array of the telephone number to send SMS
+const char* number1 = "xxxxxxxxxxxxx"; // enter any two mobile numbers here in international format
+const char* number2 = "xxxxxxxxxxxxx";
+
+// char array of the message
+char txtMsg[200]="test";
+
+// connection state
+boolean notConnected = true;
+
+void setup()
+{
+  pinMode(ledPin1, OUTPUT); 
+  pinMode(ledPin2, OUTPUT);
+  pinMode(buttonPin, INPUT); 
+  // initialize serial communications
+  Serial.begin(9600);
+
+  Serial.println("SMS Messages Sender");
+
+  // Start GSM shield
+  // If your SIM has PIN, pass it as a parameter of begin() in quotes
+  while(notConnected)
+  {
+    if(gsmAccess.begin(PINNUMBER)==GSM_READY)
+      notConnected = false;
+    else
+    {
+      Serial.println("Not connected");
+      delay(1000);
+    }
+  }
+  Serial.println("GSM initialized");
+  }
+
+void loop()
+{
+buttonState = digitalRead(buttonPin);
+ {
+    sendSMS(); 
+ }
+}
+
+
+void sendSMS()
+{
+digitalWrite(ledPin1, HIGH);
+digitalWrite(ledPin2, LOW);
+if(buttonState == HIGH) {
+  buttonState = 1;
+};
+if (buttonState == 1) {
+
+  digitalWrite(ledPin2, HIGH);
+  delay(1000);
+
+  Serial.print("Message to mobile number: ");
+  Serial.println(number1);
+
+  // sms text
+  Serial.println("SENDING");
+  Serial.println();
+  Serial.println("Message:");
+  Serial.println(txtMsg);
+
+  // send the message
+  sms.beginSMS(number1);
+  sms.print(txtMsg);
+  Serial.println("\nFirst Message Sent\n");
+  digitalWrite(ledPin2, LOW);
+
+  delay (60000);
+
+    digitalWrite(ledPin2, HIGH);
+  delay(1000);
+
+  Serial.print("Message to mobile number: ");
+  Serial.println(number2);
+
+  // sms text
+  Serial.println("SENDING");
+  Serial.println();
+  Serial.println("Message:");
+  Serial.println(txtMsg);
+
+  // send the message
+  sms.beginSMS(number2);
+  sms.print(txtMsg);
+  sms.endSMS();
+  Serial.println("\nSecond Message Sent\n");
+  digitalWrite(ledPin2, LOW);
+}
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2897675/lulaz" target="_blank"><span itemprop="name">lulaz</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">1</div>
+                                    <div itemprop="dateCreated">6/26/2014 8:40:05 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Change GSM_sms; <br/></p>
+
+<p>to <br/></p>
+
+<p>GSM_smsone;  <br/>
+GSM_smstwo;<br/></p>
+
+<p>use<br/></p>
+
+<p>smsone.beginSMS(number1);<br/>
+smsone.print(txtMsg);<br/>
+smsone.endSMS();</p>
+
+<p>smstwo.beginSMS(number2);<br/>
+smstwo.print(txtMsg);<br/>
+smstwo.endSMS();<br/></p>
+
+<p>for sending the sms.</p>
+
+<pre><code>#include &lt;GSM.h&gt;
+
+#define PINNUMBER ""
+const int buttonPin = 4;
+const int ledPin1 = 13;
+const int ledPin2 = 12;
+int buttonState = 0;
+
+// initialize the library instance
+GSM gsmAccess; // include a 'true' parameter for debug enabled
+GSM_SMS smsone;
+GSM_SMS smstwo;
+
+// char array of the telephone number to send SMS
+const char* number1 = "xxxxxxxxxxxxx"; // enter any two mobile numbers here in international format
+const char* number2 = "xxxxxxxxxxxxx";
+
+// char array of the message
+char txtMsg[200] = "test";
+
+// connection state
+boolean notConnected = true;
+
+void setup()
+{
+pinMode(ledPin1, OUTPUT);
+pinMode(ledPin2, OUTPUT);
+pinMode(buttonPin, INPUT);
+// initialize serial communications
+Serial.begin(9600);
+
+Serial.println("SMS Messages Sender");
+
+// Start GSM shield
+// If your SIM has PIN, pass it as a parameter of begin() in quotes
+while (notConnected)
+{
+if (gsmAccess.begin(PINNUMBER) == GSM_READY)
+  notConnected = false;
+else
+{
+  Serial.println("Not connected");
+  delay(1000);
+}
+}
+Serial.println("GSM initialized");
+}
+
+void loop(){
+
+buttonState = digitalRead(buttonPin);
+{
+   sendSMS();
+}
+}
+
+void sendSMS()
+{
+  digitalWrite(ledPin1, HIGH);
+  digitalWrite(ledPin2, LOW);
+  if (buttonState == HIGH) {
+    buttonState = 1;
+  };
+
+  if (buttonState == 1) {
+    digitalWrite(ledPin2, HIGH);
+    delay(1000);
+    Serial.print("Message to mobile number: ");
+    Serial.println(number1);
+    // sms text
+    Serial.println("SENDING");
+    Serial.println();
+    Serial.println("Message:");
+    Serial.println(txtMsg);
+    // send the first message
+    smsone.beginSMS(number1);
+    smsone.print(txtMsg);
+    smsone.endSMS();
+    Serial.println("\nFirst Message Sent\n");
+    digitalWrite(ledPin2, LOW);
+
+    delay (60000);
+
+    digitalWrite(ledPin2, HIGH);
+    delay(1000);
+    Serial.print("Message to mobile number: ");
+    Serial.println(number2);
+    // sms text
+    Serial.println("SENDING");
+    Serial.println();
+    Serial.println("Message:");
+    Serial.println(txtMsg);
+    // send the second message
+    smstwo.beginSMS(number2);
+    smstwo.print(txtMsg);
+    smstwo.endSMS();
+    Serial.println("\nSecond Message Sent\n");
+    digitalWrite(ledPin2, LOW);
+  }
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/3920778/blue-colour" target="_blank"><span itemprop="name">Blue Colour</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/21855114/sms-send-receive-loop-in-arduino#answer-0</div>
+                                            <div itemprop="upvoteCount">1</div>
+                                            <div itemprop="dateCreated">8/8/2014 4:43:36 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/21855114" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/21855114/sms-send-receive-loop-in-arduino by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:30:54 GMT -->
+</html>

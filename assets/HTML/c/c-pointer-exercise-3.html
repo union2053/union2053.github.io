@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-exercise-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointer Exercise 3</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointer Exercise 3'>C Pointer Exercise 3</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointer Exercise 3</h1>
+<a class ='btn btn-outline-dark' href=c-pointer-exercise-2.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-exercise-4.html>Next</a><h3>Question 1
+</h3><p>Write a function that sets each element in an array to the sum of the corresponding
+elements in two other arrays. 
+
+</p><p>That is, if array 1 has the values 2, 4, 5, and 8 and array 2 has the values 1, 0, 4, 
+and 6, the function assigns array 3 the values 3, 4, 9, and 14. 
+
+</p><p>The function should take three array names and an array size as arguments. 
+
+</p><p>Test the function in a simple program.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='EZJ' href='#EZJ'>Click to view the answer</button></p><pre style='font-size:120%' id='EZJ' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define SIZE 5
+<span class='r'>void</span> sum_arrays(
+  <span class='r'>int</span> size,
+  <span class='r'>const</span> <span class='r'>int</span> source1[size],
+  <span class='r'>const</span> <span class='r'>int</span> source2[size],
+  <span class='r'>int</span> result[size]);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>int</span> arr1[SIZE] = {0, 2, 4, 6, 8};
+  <span class='r'>const</span> <span class='r'>int</span> arr2[SIZE] = {1, 3, 5, 7, 9};
+  <span class='r'>int</span> sum[SIZE];
+  sum_arrays(SIZE, arr1, arr2, sum);
+  putchar(<span class='q'>'{'</span>);
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; SIZE; ++i) {
+    printf(<span class='q'>"%d, "</span>, sum[i]);
+  }
+  printf(<span class='q'>"\b\b  \b\b}\n"</span>);
+  <span class='r'>return</span> 0;
+}
+
+<span class='r'>void</span> sum_arrays(
+  <span class='r'>int</span> size,
+  <span class='r'>const</span> <span class='r'>int</span> source1[size]
+  ,<span class='r'>const</span> <span class='r'>int</span> source2[size],
+  <span class='r'>int</span> result[size])
+<span class='c'>// vector sum</span>
+{
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; size; ++i) {
+    result[i] = source1[i] + source2[i];
+  }
+}
+
+
+</pre><h3>Question 2
+</h3><p>Write a program that declares a 3 by 5 array of int and initializes it to some values of
+your choice. 
+
+</p><p>Have the program print the values, double all the values, and then display the new values. 
+
+</p><p>Write a function to do the displaying and a second function to do the doubling. 
+
+</p><p>Have the functions take the array name and the number of rows as arguments.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='NKB' href='#NKB'>Click to view the answer</button></p><pre style='font-size:120%' id='NKB' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define ROWS 3
+#define COLS 5
+
+<span class='r'>void</span> <span class='r'>double</span>_2D(<span class='r'>int</span> rows, <span class='r'>int</span> cols, <span class='r'>int</span> [rows][cols]);
+<span class='r'>void</span> print_2D(<span class='r'>int</span> rows, <span class='r'>int</span> cols, <span class='r'>const</span> <span class='r'>int</span> [rows][cols]);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>int</span> arr[ROWS][COLS] = {
+    {1, 2, 3, 4, 5},
+    {0, 1, 2, 3, 4},
+    {4, 3, 2, 1, 0},
+  };
+  printf(<span class='q'>"Array before:\n"</span>);
+  print_2D(ROWS, COLS, arr);
+  <span class='r'>double</span>_2D(ROWS, COLS, arr);
+  printf(<span class='q'>"Array after doubling:\n"</span>);
+  print_2D(ROWS, COLS, arr);
+}
+
+<span class='r'>void</span> <span class='r'>double</span>_2D(<span class='r'>int</span> rows, <span class='r'>int</span> cols, <span class='r'>int</span> arr[rows][cols])
+<span class='c'>// double the content of the 2D array</span>
+{
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; rows; ++i) {
+    <span class='r'>for</span> (<span class='r'>int</span> j = 0; j &lt; cols; ++j)
+      arr[i][j] *= 2;
+  }
+}
+
+<span class='r'>void</span> print_2D(<span class='r'>int</span> rows, <span class='r'>int</span> cols, <span class='r'>const</span> <span class='r'>int</span> arr[rows][cols])
+<span class='c'>// print the 2D array (literal representation)</span>
+{
+  printf(<span class='q'>"{\n"</span>);
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; rows; ++i) {
+    printf(<span class='q'>"\t{"</span>);
+    <span class='r'>for</span> (<span class='r'>int</span> j = 0; j &lt; cols; ++j)
+      printf(<span class='q'>"%d, "</span>, arr[i][j]);
+    printf(<span class='q'>"\b\b  \b\b},\n"</span>);
+  }
+  printf(<span class='q'>"\b\b  \b\b\n}\n"</span>);
+}
+
+</pre><h3>Question 3
+</h3><p>Write a program that prompts the user to enter three sets of five double numbers each.
+
+</p><p>The program should accomplish all of the following:
+</p><div class='myCodeDiv'><button id='AQUDO' class='myCopyButton' data-clipboard-target='#UUZPS'>Copy</button><pre  id='UUZPS' style='font-size:18px;' class='code'>a. Store the information in a 3 by 5 array.
+
+b. Compute the average of each set of five values.
+
+c. Compute the average of all the values.
+
+d. Determine the largest value of the 15 values.
+
+e. Report the results.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AQUDO');clipboard.on('success', function(e) {$('#AQUDO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AQUDO').text('error');});</script></div><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='UOO' href='#UOO'>Click to view the answer</button></p><pre style='font-size:120%' id='UOO' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define ROWS 3
+#define COLS 5
+
+<span class='r'>void</span> prompt_data(<span class='r'>double</span> [ROWS][COLS]);           <span class='c'>// a.</span>
+<span class='r'>double</span> average_row(<span class='r'>const</span> <span class='r'>double</span> [COLS]);         <span class='c'>// b.</span>
+<span class='r'>double</span> average_2D(<span class='r'>const</span> <span class='r'>double</span> [ROWS][COLS]);    <span class='c'>// c.</span>
+<span class='r'>double</span> largest_2D(<span class='r'>const</span> <span class='r'>double</span> [ROWS][COLS]);    <span class='c'>// d.</span>
+<span class='r'>void</span> report_result(<span class='r'>const</span> <span class='r'>double</span> [ROWS][COLS]);   <span class='c'>// e.</span>
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>double</span> arr[ROWS][COLS];
+  prompt_data(arr);
+  report_result(arr);
+}
+
+<span class='r'>void</span> prompt_data(<span class='r'>double</span> arr[ROWS][COLS])
+<span class='c'>// prompt user for 3 sets of 5 numbers and fill the array</span>
+{
+  printf(<span class='q'>"Enter 3 sets of 5 numbers:\n"</span>);
+  <span class='r'>for</span> (<span class='r'>int</span> row = 0; row &lt; ROWS; ++row) {
+    <span class='r'>for</span> (<span class='r'>int</span> col = 0; col &lt; COLS; ++col)
+      scanf(<span class='q'>"%lf"</span>, &amp;arr[row][col]);
+  }
+}
+
+<span class='r'>double</span> average_row(<span class='r'>const</span> <span class='r'>double</span> arr[COLS])
+<span class='c'>// return the average of a row</span>
+{
+  <span class='r'>double</span> sum = 0;
+  <span class='r'>for</span> (<span class='r'>int</span> col = 0; col &lt; COLS; ++col)
+    sum += arr[col];
+  <span class='r'>return</span> sum / COLS;
+}
+
+<span class='r'>double</span> average_2D(<span class='r'>const</span> <span class='r'>double</span> arr[ROWS][COLS])
+<span class='c'>// return the average of a 2D array</span>
+{
+  <span class='r'>double</span> sum = 0;
+  <span class='r'>for</span> (<span class='r'>int</span> row = 0; row &lt; ROWS; ++row)
+    sum += average_row(arr[row]);
+  <span class='r'>return</span> sum / ROWS;
+}
+
+<span class='r'>double</span> largest_2D(<span class='r'>const</span> <span class='r'>double</span> arr[ROWS][COLS])
+<span class='c'>// return the largest element of a 2D array</span>
+{
+  <span class='r'>double</span> max = arr[0][0];
+  <span class='r'>for</span> (<span class='r'>int</span> row = 0; row &lt; ROWS; ++row) {
+    <span class='r'>for</span> (<span class='r'>int</span> col = 0; col &lt; COLS; ++col) {
+      <span class='r'>if</span> (arr[row][col] &gt; max)
+        max = arr[row][col];
+    }
+  }
+  <span class='r'>return</span> max;
+}
+
+<span class='r'>void</span> report_result(<span class='r'>const</span> <span class='r'>double</span> arr[ROWS][COLS])
+{
+  <span class='r'>for</span> (<span class='r'>int</span> row = 0; row &lt; ROWS; ++row) {
+    printf(<span class='q'>"The average of the set number %d is %f.\n"</span>,
+           row + 1, average_row(arr[row]));
+  }
+  printf(<span class='q'>"The total average is %f.\n"</span>, average_2D(arr));
+  printf(<span class='q'>"The largest element is %f.\n"</span>, largest_2D(arr));
+}
+</pre><a class ='btn btn-outline-dark' href=c-pointer-exercise-2.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-exercise-4.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointer-review-question-3.html'>C pointer review question 3</a></LI><LI><a href='c-pointer-exercise-1.html'>C Pointer Exercise 1</a></LI><LI><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2</a></LI><LI><a href='c-pointer-exercise-4.html'>C pointer exercise 4</a></LI><LI><a href='c-char-string-introduction.html'>C Char String Introduction</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-exercise-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

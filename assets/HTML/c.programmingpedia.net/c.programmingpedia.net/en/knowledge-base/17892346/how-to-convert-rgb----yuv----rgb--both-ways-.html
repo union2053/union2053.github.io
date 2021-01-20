@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/17892346/how-to-convert-rgb----yuv----rgb--both-ways- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to convert RGB -&gt; YUV -&gt; RGB (both ways) | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to convert RGB -&gt; YUV -&gt; RGB (both ways) | C Language Knowledge Base">
+        <title>[SOLVED] How to convert RGB -&gt; YUV -&gt; RGB (both ways) | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-convert-rgb-yuv-rgb-both-ways-">How to convert RGB -> YUV -> RGB (both ways)</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/bidirectional.html">bidirectional</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/rgb.html">rgb</a></span>
+                        <span class="tag-item"><a href="../tag/yuv.html">yuv</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I want a pair of conversion algorithms, one from RGB to YUV, the other from YUV to RGB, that are inverses of each other.  That is, a round-trip conversion should leave the value unchanged.  (If you like, replace YUV with Y'UV, YUV, YCbCr, YPbPr.)</p>
+
+<p>Does such a thing exist?  If so, what is it?</p>
+
+<p>Posted solutions (<a href="https://stackoverflow.com/questions/1737726/how-to-perform-rgb-yuv-conversion-in-c-c/1737741#1737741">How to perform RGB-&gt;YUV conversion in C/C++?</a>, <a href="http://www.fourcc.org/fccyvrgb.php" rel="nofollow noreferrer">http://www.fourcc.org/fccyvrgb.php</a>, <a href="http://en.wikipedia.org/wiki/YUV" rel="nofollow noreferrer">http://en.wikipedia.org/wiki/YUV</a>) are only inverses (the two 3x3 matrices are inverses), when omitting the clamping to [0,255].  But omitting that clamping allows things like negative luminance, which plays merry havoc with image processing in YUV space.  Retaining the clamping makes the conversion nonlinear, which makes it tricky to define an inverse.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2097284/camille-goudeseune" target="_blank"><span itemprop="name">Camille Goudeseune</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">14</div>
+                                    <div itemprop="dateCreated">5/23/2017 12:03:09 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Yes, invertible transformations exist.</p>
+
+<p><a href="http://www.equasys.de/colorconversion.html" rel="nofollow noreferrer">equasys GmbH</a> posts invertible transformations from RGB to YUV, YCbCr, and YPbPr, along with explanations of which situation each is appropriate for, what this clamping is really about, and links to references.  (Like a good SO answer.)</p>
+
+<p>For my own application (jpg images, not analog voltages) YCbCr was appropriate, so I wrote code for those two transformations.  Indeed, there-and-back-again values differed by less than 1 part in 256, for many images;  and the before-and-after images were visually indistinguishable.</p>
+
+<p><a href="https://stackoverflow.com/questions/7041172/pils-colour-space-conversion-ycbcr-rgb?rq=1">PIL&#39;s colour space conversion YCbCr -&gt; RGB</a> gets credit for mentioning equasys's web page.</p>
+
+<p>Other answers, that could doubtfully improve on equasys's precision and concision:</p>
+
+<ul>
+<li><p><a href="https://code.google.com/p/imagestack/" rel="nofollow noreferrer">https://code.google.com/p/imagestack/</a> includes rgb_to_x and x_to_rgb
+functions, but I didn't try to compile and test them.</p></li>
+<li><p>Cory Nelson's answer links to code with similar functions, but it says that
+inversion's not possible in general, contradicting equasys.</p></li>
+<li><p>The source code of FFmpeg, OpenCV, VLFeat, or ImageMagick.</p></li>
+</ul>
+
+<p><strong>2019 Edit:</strong>  Here's the C code from github, mentioned in my comment.</p>
+
+<pre><code>void YUVfromRGB(double&amp; Y, double&amp; U, double&amp; V, const double R, const double G, const double B)
+{
+  Y =  0.257 * R + 0.504 * G + 0.098 * B +  16;
+  U = -0.148 * R - 0.291 * G + 0.439 * B + 128;
+  V =  0.439 * R - 0.368 * G - 0.071 * B + 128;
+}
+void RGBfromYUV(double&amp; R, double&amp; G, double&amp; B, double Y, double U, double V)
+{
+  Y -= 16;
+  U -= 128;
+  V -= 128;
+  R = 1.164 * Y             + 1.596 * V;
+  G = 1.164 * Y - 0.392 * U - 0.813 * V;
+  B = 1.164 * Y + 2.017 * U;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/2097284/camille-goudeseune" target="_blank"><span itemprop="name">Camille Goudeseune</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/17892346/how-to-convert-rgb----yuv----rgb--both-ways-#answer-0</div>
+                                            <div itemprop="upvoteCount">5</div>
+                                            <div itemprop="dateCreated">5/21/2019 8:02:40 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <h2 id="rgb-to-yuv-and-back-again">RGB to YUV and back again</h2>
+
+<p>There is a nice diagram over on Wikipedia on the topic of <a href="https://en.wikipedia.org/wiki/YUV#Y.E2.80.B2UV420p_.28and_Y.E2.80.B2V12_or_YV12.29_to_RGB888_conversion" rel="noreferrer">YUV</a> which depicts the layout of YUV420p. However, if you're like me you want NV21, sometimes called YUV420sp, which interleaves the V and U components in a single plane so in this case that diagram is wrong, but it gives you the intuition on how it works.</p>
+
+<blockquote>
+  <p>This format (NV21) is the standard picture format on Android camera
+  preview. YUV 4:2:0 planar image, with 8 bit Y samples, followed by
+  interleaved V/U plane with 8bit 2x2 subsampled chroma samples.</p>
+</blockquote>
+
+<p>So a lot of code I've seen just starts coding literally to this specification without taking into account <a href="https://en.wikipedia.org/wiki/Endianness" rel="noreferrer">Endianess</a>. Furthermore, they tend to only support YUV to RGB and only one or two formats. I however, wanted something a little more trustworthy and it turns out C++ code taken from the Android source code repository does the trick. It is pretty much straight C++ and should be easily used in any project.</p>
+
+<h3 id="jni-cplusplus-code-that-takes-an-rgb565-image-and-converts-it-to-nv21">JNI/C++ code that takes an RGB565 image and converts it to NV21</h3>
+
+<p>From Java in this case, but easily C or C++ you pass in an array of bytes containing the RGB565 image and output an NV21 byte array.</p>
+
+<pre><code>#include &lt;jni.h&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdint&gt;
+
+#include "Converters.h"
+
+
+
+#define JNI(X) JNIEXPORT Java_algorithm_ImageConverter_##X
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void JNI(RGB565ToNV21)(JNIEnv *env, jclass *, jbyteArray aRGB565in, jbyteArray aYUVout, jint width, jint height) {
+    //get jbyte array into C space from JVN
+    jbyte *rgb565Pixels = env-&gt;GetByteArrayElements(aRGB565in, NULL);
+    jbyte *yuv420sp = env-&gt;GetByteArrayElements(aYUVout, NULL);
+
+    size_t pixelCount = width * height;
+
+    uint16_t *rgb = (uint16_t *) rgb565Pixels;
+
+    // This format (NV21) is the standard picture format on Android camera preview. YUV 4:2:0 planar
+    // image, with 8 bit Y samples, followed by interleaved V/U plane with 8bit 2x2 subsampled
+    // chroma samples.
+
+    int uvIndex = pixelCount;
+    for (int row = 0; row &lt; height; row++) {
+        for (int column = 0; column &lt; width; column++) {
+            int pixelIndex = row * width + column;
+            uint8_t y = 0;
+            uint8_t u = 0;
+            uint8_t v = 0;
+
+            chroma::RGB565ToYUV(rgb[pixelIndex], &amp;y, &amp;u, &amp;v);
+            yuv420sp[pixelIndex] = y;
+            if (row % 2 == 0 &amp;&amp; pixelIndex % 2 == 0) {
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+                yuv420sp[uvIndex++] = u;
+                yuv420sp[uvIndex++] = v;
+#else
+                yuv420sp[uvIndex++] = v;
+                yuv420sp[uvIndex++] = u;
+#endif
+            }
+        }
+    }
+
+    //release temp reference of jbyte array
+    env-&gt;ReleaseByteArrayElements(aYUVout, yuv420sp, 0);
+    env-&gt;ReleaseByteArrayElements(aRGB565in, rgb565Pixels, 0);
+}
+
+#ifdef __cplusplus
+}
+#endif
+</code></pre>
+
+<h3 id="converters-h">Converters.h</h3>
+
+<p>As you will see in the header there are many different conversion options available to/from any number of formats.</p>
+
+<pre><code>/*
+ * Copyright (C) 2011 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+#ifndef HW_EMULATOR_CAMERA_CONVERTERS_H
+#define HW_EMULATOR_CAMERA_CONVERTERS_H
+#include &lt;endian.h&gt;
+#ifndef __BYTE_ORDER
+#error "could not determine byte order"
+#endif
+/*
+ * Contains declaration of framebuffer conversion routines.
+ *
+ * NOTE: RGB and big/little endian considerations. Wherever in this code RGB
+ * pixels are represented as WORD, or DWORD, the color order inside the
+ * WORD / DWORD matches the one that would occur if that WORD / DWORD would have
+ * been read from the typecasted framebuffer:
+ *
+ *      const uint32_t rgb = *reinterpret_cast&lt;const uint32_t*&gt;(framebuffer);
+ *
+ * So, if this code runs on the little endian CPU, red color in 'rgb' would be
+ * masked as 0x000000ff, and blue color would be masked as 0x00ff0000, while if
+ * the code runs on a big endian CPU, the red color in 'rgb' would be masked as
+ * 0xff000000, and blue color would be masked as 0x0000ff00,
+ */
+namespace chroma {
+/*
+ * RGB565 color masks
+ */
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+static const uint16_t kRed5     = 0x001f;
+static const uint16_t kGreen6   = 0x07e0;
+static const uint16_t kBlue5    = 0xf800;
+#else   // __BYTE_ORDER
+static const uint16_t kRed5     = 0xf800;
+static const uint16_t kGreen6   = 0x07e0;
+static const uint16_t kBlue5    = 0x001f;
+#endif  // __BYTE_ORDER
+static const uint32_t kBlack16  = 0x0000;
+static const uint32_t kWhite16  = kRed5 | kGreen6 | kBlue5;
+/*
+ * RGB32 color masks
+ */
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+static const uint32_t kRed8     = 0x000000ff;
+static const uint32_t kGreen8   = 0x0000ff00;
+static const uint32_t kBlue8    = 0x00ff0000;
+#else   // __BYTE_ORDER
+static const uint32_t kRed8     = 0x00ff0000;
+static const uint32_t kGreen8   = 0x0000ff00;
+static const uint32_t kBlue8    = 0x000000ff;
+#endif  // __BYTE_ORDER
+static const uint32_t kBlack32  = 0x00000000;
+static const uint32_t kWhite32  = kRed8 | kGreen8 | kBlue8;
+/*
+ * Extracting, and saving color bytes from / to WORD / DWORD RGB.
+ */
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+/* Extract red, green, and blue bytes from RGB565 word. */
+#define R16(rgb)    static_cast&lt;uint8_t&gt;((rgb) &amp; kRed5)
+#define G16(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kGreen6) &gt;&gt; 5)
+#define B16(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kBlue5) &gt;&gt; 11)
+/* Make 8 bits red, green, and blue, extracted from RGB565 word. */
+#define R16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kRed5) &lt;&lt; 3) | (((rgb) &amp; kRed5) &gt;&gt; 2))
+#define G16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kGreen6) &gt;&gt; 3) | (((rgb) &amp; kGreen6) &gt;&gt; 9))
+#define B16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kBlue5) &gt;&gt; 8) | (((rgb) &amp; kBlue5) &gt;&gt; 14))
+/* Extract red, green, and blue bytes from RGB32 dword. */
+#define R32(rgb)    static_cast&lt;uint8_t&gt;((rgb) &amp; kRed8)
+#define G32(rgb)    static_cast&lt;uint8_t&gt;((((rgb) &amp; kGreen8) &gt;&gt; 8) &amp; 0xff)
+#define B32(rgb)    static_cast&lt;uint8_t&gt;((((rgb) &amp; kBlue8) &gt;&gt; 16) &amp; 0xff)
+/* Build RGB565 word from red, green, and blue bytes. */
+#define RGB565(r, g, b) static_cast&lt;uint16_t&gt;((((static_cast&lt;uint16_t&gt;(b) &lt;&lt; 6) | (g)) &lt;&lt; 5) | (r))
+/* Build RGB32 dword from red, green, and blue bytes. */
+#define RGB32(r, g, b) static_cast&lt;uint32_t&gt;((((static_cast&lt;uint32_t&gt;(b) &lt;&lt; 8) | (g)) &lt;&lt; 8) | (r))
+#else   // __BYTE_ORDER
+/* Extract red, green, and blue bytes from RGB565 word. */
+#define R16(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kRed5) &gt;&gt; 11)
+#define G16(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kGreen6) &gt;&gt; 5)
+#define B16(rgb)    static_cast&lt;uint8_t&gt;((rgb) &amp; kBlue5)
+/* Make 8 bits red, green, and blue, extracted from RGB565 word. */
+#define R16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kRed5) &gt;&gt; 8) | (((rgb) &amp; kRed5) &gt;&gt; 14))
+#define G16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kGreen6) &gt;&gt; 3) | (((rgb) &amp; kGreen6) &gt;&gt; 9))
+#define B16_32(rgb) static_cast&lt;uint8_t&gt;((((rgb) &amp; kBlue5) &lt;&lt; 3) | (((rgb) &amp; kBlue5) &gt;&gt; 2))
+/* Extract red, green, and blue bytes from RGB32 dword. */
+#define R32(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kRed8) &gt;&gt; 16)
+#define G32(rgb)    static_cast&lt;uint8_t&gt;(((rgb) &amp; kGreen8) &gt;&gt; 8)
+#define B32(rgb)    static_cast&lt;uint8_t&gt;((rgb) &amp; kBlue8)
+/* Build RGB565 word from red, green, and blue bytes. */
+#define RGB565(r, g, b) static_cast&lt;uint16_t&gt;((((static_cast&lt;uint16_t&gt;(r) &lt;&lt; 6) | g) &lt;&lt; 5) | b)
+/* Build RGB32 dword from red, green, and blue bytes. */
+#define RGB32(r, g, b) static_cast&lt;uint32_t&gt;((((static_cast&lt;uint32_t&gt;(r) &lt;&lt; 8) | g) &lt;&lt; 8) | b)
+#endif  // __BYTE_ORDER
+/* An union that simplifies breaking 32 bit RGB into separate R, G, and B colors.
+ */
+typedef union RGB32_t {
+    uint32_t    color;
+    struct {
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+        uint8_t r; uint8_t g; uint8_t b; uint8_t a;
+#else   // __BYTE_ORDER
+        uint8_t a; uint8_t b; uint8_t g; uint8_t r;
+#endif  // __BYTE_ORDER
+    };
+} RGB32_t;
+/* Clips a value to the unsigned 0-255 range, treating negative values as zero.
+ */
+static __inline__ int
+clamp(int x)
+{
+    if (x &gt; 255) return 255;
+    if (x &lt; 0)   return 0;
+    return x;
+}
+/********************************************************************************
+ * Basics of RGB -&gt; YUV conversion
+ *******************************************************************************/
+/*
+ * RGB -&gt; YUV conversion macros
+ */
+#define RGB2Y(r, g, b) (uint8_t)(((66 * (r) + 129 * (g) +  25 * (b) + 128) &gt;&gt; 8) +  16)
+#define RGB2U(r, g, b) (uint8_t)(((-38 * (r) - 74 * (g) + 112 * (b) + 128) &gt;&gt; 8) + 128)
+#define RGB2V(r, g, b) (uint8_t)(((112 * (r) - 94 * (g) -  18 * (b) + 128) &gt;&gt; 8) + 128)
+/* Converts R8 G8 B8 color to YUV. */
+static __inline__ void
+R8G8B8ToYUV(uint8_t r, uint8_t g, uint8_t b, uint8_t* y, uint8_t* u, uint8_t* v)
+{
+    *y = RGB2Y((int)r, (int)g, (int)b);
+    *u = RGB2U((int)r, (int)g, (int)b);
+    *v = RGB2V((int)r, (int)g, (int)b);
+}
+/* Converts RGB565 color to YUV. */
+static __inline__ void
+RGB565ToYUV(uint16_t rgb, uint8_t* y, uint8_t* u, uint8_t* v)
+{
+    R8G8B8ToYUV(R16_32(rgb), G16_32(rgb), B16_32(rgb), y, u, v);
+}
+/* Converts RGB32 color to YUV. */
+static __inline__ void
+RGB32ToYUV(uint32_t rgb, uint8_t* y, uint8_t* u, uint8_t* v)
+{
+    RGB32_t rgb_c;
+    rgb_c.color = rgb;
+    R8G8B8ToYUV(rgb_c.r, rgb_c.g, rgb_c.b, y, u, v);
+}
+/********************************************************************************
+ * Basics of YUV -&gt; RGB conversion.
+ * Note that due to the fact that guest uses RGB only on preview window, and the
+ * RGB format that is used is RGB565, we can limit YUV -&gt; RGB conversions to
+ * RGB565 only.
+ *******************************************************************************/
+/*
+ * YUV -&gt; RGB conversion macros
+ */
+/* "Optimized" macros that take specialy prepared Y, U, and V values:
+ *  C = Y - 16
+ *  D = U - 128
+ *  E = V - 128
+ */
+#define YUV2RO(C, D, E) clamp((298 * (C) + 409 * (E) + 128) &gt;&gt; 8)
+#define YUV2GO(C, D, E) clamp((298 * (C) - 100 * (D) - 208 * (E) + 128) &gt;&gt; 8)
+#define YUV2BO(C, D, E) clamp((298 * (C) + 516 * (D) + 128) &gt;&gt; 8)
+/*
+ *  Main macros that take the original Y, U, and V values
+ */
+#define YUV2R(y, u, v) clamp((298 * ((y)-16) + 409 * ((v)-128) + 128) &gt;&gt; 8)
+#define YUV2G(y, u, v) clamp((298 * ((y)-16) - 100 * ((u)-128) - 208 * ((v)-128) + 128) &gt;&gt; 8)
+#define YUV2B(y, u, v) clamp((298 * ((y)-16) + 516 * ((u)-128) + 128) &gt;&gt; 8)
+/* Converts YUV color to RGB565. */
+static __inline__ uint16_t
+YUVToRGB565(int y, int u, int v)
+{
+    /* Calculate C, D, and E values for the optimized macro. */
+    y -= 16; u -= 128; v -= 128;
+    const uint16_t r = (YUV2RO(y,u,v) &gt;&gt; 3) &amp; 0x1f;
+    const uint16_t g = (YUV2GO(y,u,v) &gt;&gt; 2) &amp; 0x3f;
+    const uint16_t b = (YUV2BO(y,u,v) &gt;&gt; 3) &amp; 0x1f;
+    return RGB565(r, g, b);
+}
+/* Converts YUV color to RGB32. */
+static __inline__ uint32_t
+YUVToRGB32(int y, int u, int v)
+{
+    /* Calculate C, D, and E values for the optimized macro. */
+    y -= 16; u -= 128; v -= 128;
+    RGB32_t rgb;
+    rgb.r = YUV2RO(y,u,v) &amp; 0xff;
+    rgb.g = YUV2GO(y,u,v) &amp; 0xff;
+    rgb.b = YUV2BO(y,u,v) &amp; 0xff;
+    return rgb.color;
+}
+/* YUV pixel descriptor. */
+struct YUVPixel {
+    uint8_t     Y;
+    uint8_t     U;
+    uint8_t     V;
+    inline YUVPixel()
+        : Y(0), U(0), V(0)
+    {
+    }
+    inline explicit YUVPixel(uint16_t rgb565)
+    {
+        RGB565ToYUV(rgb565, &amp;Y, &amp;U, &amp;V);
+    }
+    inline explicit YUVPixel(uint32_t rgb32)
+    {
+        RGB32ToYUV(rgb32, &amp;Y, &amp;U, &amp;V);
+    }
+    inline void get(uint8_t* pY, uint8_t* pU, uint8_t* pV) const
+    {
+        *pY = Y; *pU = U; *pV = V;
+    }
+};
+/* Converts an YV12 framebuffer to RGB565 framebuffer.
+ * Param:
+ *  yv12 - YV12 framebuffer.
+ *  rgb - RGB565 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void YV12ToRGB565(const void* yv12, void* rgb, int width, int height);
+/* Converts an YV12 framebuffer to RGB32 framebuffer.
+ * Param:
+ *  yv12 - YV12 framebuffer.
+ *  rgb - RGB32 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void YV12ToRGB32(const void* yv12, void* rgb, int width, int height);
+/* Converts an YU12 framebuffer to RGB32 framebuffer.
+ * Param:
+ *  yu12 - YU12 framebuffer.
+ *  rgb - RGB32 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void YU12ToRGB32(const void* yu12, void* rgb, int width, int height);
+/* Converts an NV12 framebuffer to RGB565 framebuffer.
+ * Param:
+ *  nv12 - NV12 framebuffer.
+ *  rgb - RGB565 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void NV12ToRGB565(const void* nv12, void* rgb, int width, int height);
+/* Converts an NV12 framebuffer to RGB32 framebuffer.
+ * Param:
+ *  nv12 - NV12 framebuffer.
+ *  rgb - RGB32 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void NV12ToRGB32(const void* nv12, void* rgb, int width, int height);
+/* Converts an NV21 framebuffer to RGB565 framebuffer.
+ * Param:
+ *  nv21 - NV21 framebuffer.
+ *  rgb - RGB565 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void NV21ToRGB565(const void* nv21, void* rgb, int width, int height);
+/* Converts an NV21 framebuffer to RGB32 framebuffer.
+ * Param:
+ *  nv21 - NV21 framebuffer.
+ *  rgb - RGB32 framebuffer.
+ *  width, height - Dimensions for both framebuffers.
+ */
+void NV21ToRGB32(const void* nv21, void* rgb, int width, int height);
+}; /* namespace chroma */
+#endif  /* HW_EMULATOR_CAMERA_CONVERTERS_H */
+</code></pre>
+
+<h3 id="converters-cpp">Converters.cpp</h3>
+
+<pre><code>/*
+ * Copyright (C) 2011 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*
+ * Contains implemenation of framebuffer conversion routines.
+ */
+#define LOG_NDEBUG 0
+#define LOG_TAG "EmulatedCamera_Converter"
+#include "Converters.h"
+namespace chroma {
+    static void _YUV420SToRGB565(const uint8_t* Y,
+                                 const uint8_t* U,
+                                 const uint8_t* V,
+                                 int dUV,
+                                 uint16_t* rgb,
+                                 int width,
+                                 int height)
+    {
+        const uint8_t* U_pos = U;
+        const uint8_t* V_pos = V;
+        for (int y = 0; y &lt; height; y++) {
+            for (int x = 0; x &lt; width; x += 2, U += dUV, V += dUV) {
+                const uint8_t nU = *U;
+                const uint8_t nV = *V;
+                *rgb = YUVToRGB565(*Y, nU, nV);
+                Y++; rgb++;
+                *rgb = YUVToRGB565(*Y, nU, nV);
+                Y++; rgb++;
+            }
+            if (y &amp; 0x1) {
+                U_pos = U;
+                V_pos = V;
+            } else {
+                U = U_pos;
+                V = V_pos;
+            }
+        }
+    }
+    static void _YUV420SToRGB32(const uint8_t* Y,
+                                const uint8_t* U,
+                                const uint8_t* V,
+                                int dUV,
+                                uint32_t* rgb,
+                                int width,
+                                int height)
+    {
+        const uint8_t* U_pos = U;
+        const uint8_t* V_pos = V;
+        for (int y = 0; y &lt; height; y++) {
+            for (int x = 0; x &lt; width; x += 2, U += dUV, V += dUV) {
+                const uint8_t nU = *U;
+                const uint8_t nV = *V;
+                *rgb = YUVToRGB32(*Y, nU, nV);
+                Y++; rgb++;
+                *rgb = YUVToRGB32(*Y, nU, nV);
+                Y++; rgb++;
+            }
+            if (y &amp; 0x1) {
+                U_pos = U;
+                V_pos = V;
+            } else {
+                U = U_pos;
+                V = V_pos;
+            }
+        }
+    }
+    void YV12ToRGB565(const void* yv12, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* Y = reinterpret_cast&lt;const uint8_t*&gt;(yv12);
+        const uint8_t* U = Y + pix_total;
+        const uint8_t* V = U + pix_total / 4;
+        _YUV420SToRGB565(Y, U, V, 1, reinterpret_cast&lt;uint16_t*&gt;(rgb), width, height);
+    }
+    void YV12ToRGB32(const void* yv12, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* Y = reinterpret_cast&lt;const uint8_t*&gt;(yv12);
+        const uint8_t* V = Y + pix_total;
+        const uint8_t* U = V + pix_total / 4;
+        _YUV420SToRGB32(Y, U, V, 1, reinterpret_cast&lt;uint32_t*&gt;(rgb), width, height);
+    }
+    void YU12ToRGB32(const void* yu12, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* Y = reinterpret_cast&lt;const uint8_t*&gt;(yu12);
+        const uint8_t* U = Y + pix_total;
+        const uint8_t* V = U + pix_total / 4;
+        _YUV420SToRGB32(Y, U, V, 1, reinterpret_cast&lt;uint32_t*&gt;(rgb), width, height);
+    }
+/* Common converter for YUV 4:2:0 interleaved to RGB565.
+ * y, u, and v point to Y,U, and V panes, where U and V values are interleaved.
+ */
+    static void _NVXXToRGB565(const uint8_t* Y,
+                              const uint8_t* U,
+                              const uint8_t* V,
+                              uint16_t* rgb,
+                              int width,
+                              int height)
+    {
+        _YUV420SToRGB565(Y, U, V, 2, rgb, width, height);
+    }
+/* Common converter for YUV 4:2:0 interleaved to RGB32.
+ * y, u, and v point to Y,U, and V panes, where U and V values are interleaved.
+ */
+    static void _NVXXToRGB32(const uint8_t* Y,
+                             const uint8_t* U,
+                             const uint8_t* V,
+                             uint32_t* rgb,
+                             int width,
+                             int height)
+    {
+        _YUV420SToRGB32(Y, U, V, 2, rgb, width, height);
+    }
+    void NV12ToRGB565(const void* nv12, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* y = reinterpret_cast&lt;const uint8_t*&gt;(nv12);
+        _NVXXToRGB565(y, y + pix_total, y + pix_total + 1,
+                      reinterpret_cast&lt;uint16_t*&gt;(rgb), width, height);
+    }
+    void NV12ToRGB32(const void* nv12, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* y = reinterpret_cast&lt;const uint8_t*&gt;(nv12);
+        _NVXXToRGB32(y, y + pix_total, y + pix_total + 1,
+                     reinterpret_cast&lt;uint32_t*&gt;(rgb), width, height);
+    }
+    void NV21ToRGB565(const void* nv21, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* y = reinterpret_cast&lt;const uint8_t*&gt;(nv21);
+        _NVXXToRGB565(y, y + pix_total + 1, y + pix_total,
+                      reinterpret_cast&lt;uint16_t*&gt;(rgb), width, height);
+    }
+    void NV21ToRGB32(const void* nv21, void* rgb, int width, int height)
+    {
+        const int pix_total = width * height;
+        const uint8_t* y = reinterpret_cast&lt;const uint8_t*&gt;(nv21);
+        _NVXXToRGB32(y, y + pix_total + 1, y + pix_total,
+                     reinterpret_cast&lt;uint32_t*&gt;(rgb), width, height);
+    }
+}; /* namespace chroma */
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/410867/cameron-lowell-palmer" target="_blank">Cameron Lowell Palmer</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/17892346" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/17892346/how-to-convert-rgb----yuv----rgb--both-ways- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:39 GMT -->
+</html>

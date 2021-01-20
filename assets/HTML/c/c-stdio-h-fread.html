@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-stdio-h-fread.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C stdio.h fread</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C stdio.h fread'>C stdio.h fread</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-header-file-introduction.html'>C stdio.h introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function and Macro List
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-bufsiz.html'>C BUFSIZ
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fclose.html'>C stdio.h fclose
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fflush.html'>C stdio.h fflush
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fgetc.html'>C stdio.h fgetc
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fgets.html'>C stdio.h fgets
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-filename-max.html'>C stdio.h FILENAME_MAX
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fopen-max.html'>C stdio.h FOPEN_MAX
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fpos-t.html'>C stdio.h fpos_t
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fprintf.html'>C stdio.h fprintf
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fputc.html'>C stdio.h fputc
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fputs.html'>C stdio.h fputs
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C stdio.h fread
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fscanf.html'>C stdio.h fscanf
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C stdio.h fread</h1>
+<a class ='btn btn-outline-dark' href=c-stdio-h-fputs.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-stdio-h-fscanf.html>Next</a><h3>Example
+</h3><p>The following code uses <i style='color:blue'>fread</i>() to read the entire file.
+into a dynamically allocated memory buffer, 
+which can be used to manipulate the content of a file as an array.
+
+</p><div class='myCodeDiv'><button id='CIXSE' class='myCopyButton' data-clipboard-target='#LHGYL'>Copy</button><pre  id='LHGYL' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdlib.h&gt;
+
+<span class='r'>int</span> main () {
+  FILE * pFile;
+  <span class='r'>long</span> lSize;
+  <span class='r'>char</span> * buffer;
+  size_t result;
+
+    <span class='c'>// prepare a file holding 4 values of type double</span>
+    <span class='r'>enum</span> {SIZE = 4};
+    FILE* fp = fopen(<span class='q'>"myfile.bin"</span>, <span class='q'>"wb"</span>);
+    <span class='r'>int</span> rc = fwrite((<span class='r'>double</span>[SIZE]){1.1, 2.2, 3.3, 4.4}, 
+              <span class='r'>sizeof</span>(<span class='r'>double</span>), SIZE, fp);
+    fclose(fp);
+
+  pFile = fopen ( <span class='q'>"myfile.bin"</span> , <span class='q'>"rb"</span> );
+  <span class='r'>if</span> (pFile==NULL) {fputs (<span class='q'>"File error"</span>,stderr); exit (1);}
+
+  <span class='c'>// obtain file size:</span>
+  fseek (pFile , 0 , SEEK_END);
+  lSize = ftell (pFile);
+  rewind (pFile);
+
+  <span class='c'>// allocate memory to contain the whole file:</span>
+  buffer = (<span class='r'>char</span>*) malloc (<span class='r'>sizeof</span>(<span class='r'>char</span>)*lSize);
+  <span class='r'>if</span> (buffer == NULL) {
+    fputs (<span class='q'>"Memory error"</span>,stderr); 
+    exit (2);
+   }
+
+  <span class='c'>// copy the file into the buffer:</span>
+  result = fread (buffer,1,lSize,pFile);
+  <span class='r'>if</span> (result != lSize) {
+     fputs (<span class='q'>"Reading error"</span>,stderr); 
+     exit (3);
+  }
+
+  printf(<span class='q'>"the whole file is now loaded in the memory buffer."</span>);
+
+  <span class='c'>// terminate</span>
+  fclose (pFile);
+  free (buffer);
+  <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CIXSE');clipboard.on('success', function(e) {$('#CIXSE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CIXSE').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAE/ElEQVR42u2dDY7jKhAG5xC5/yFnDuAdaSQL8dN8NA3B2So9rfSyNjSNA2WMs18XAAAAwEP4IgUAAACAuAAAAAAgLgAAAIC4AAAAACAuAAAAAIgLAAAAIC4AADDEz/f373/kAQBxAQB4gLI8SFzSgJEtQFwAAP5ffXmctaAvgLgAACAujwkScQHEBQAAcTk0QiNy3AUQFwAAxOUB4nKxsxgQFwAAxIXgARAXAHjqpJg9jzA2h7Z2j+48d7Rd9txvl9wKo1WIHtKkuJSp83W6+5jAzADiAgDgcRf9Rr9Ujc3n6tO8MQHbU29VfYZka3SON1pkFOjwOUWJjGgDMwOICwCA311Egai++bL/XL0hV/uFHfEwe+nINhI9JLFFehV669wJnMkMIC4AAJHiYszuJ5w7tCRTnXeVxadR7RArGrKNpckp2+v2pxBRA8QFVvF6vYgBPqk39RWIc87Vp0Z9t02suCj7SHyqEbJRZuiYcKUDxMUaEN8+JobE8ErYE7BRXSuGzUF+9kS+LZNRV+lMCe/qzTtm/VmAfju++txJcYldi/rLZJS42EPQ71ndMQpxgdPFxb5wP2x5YHVzQspnOeSJfhai14/LoSEul/Yo4V3nHiUuf5kMEZe7R5Quc29wQVwAcUFcEBfE5cHichXvqhgf2tPSznM/VVzs8NIOFd0FcYGDxOXVoLzKu88+fCvzrbOyzwNjMP528vmCkkmx/D1BiscMVZSe5egs8XoImXQdqRhNVLeKmVSL4YV8PUfHh2yK6gbQ8oysCdmH6bllFenndgndZKblVEensu12k21xuU9MD2t9WdxDUFZLVlE1yXYeEBc4a8WlOlSJ/+uuPf08MAalupl7X+VEt7hEBTlUhW+2c3eWGFh4M0ePUWYRu4r5VCvNnL9mxPHhnlrKGu/HN63S0l/1qBpDagPlSk9mS2U8VWXJRph0/s6CvOfsrPCshEy8yhWUrrhk/VW6S5mcqmNVa7TPavVduTBj5EH/ER3EBZaLi60Uk3NMqzS7FncM+sGxM+W8uAQGGe4HgReMfg24m+nLpLsVi744vt5cIS7lTXn2t9ms05o4jXUII4HlmoGiF1kJrem5tdhQBlwuNTnEpbppt9r8smmGGmYLWq0D7GuylQefdiAu8GZx6a5P6gFUb4b2iMt8KzaIS1SQl/wMJWSeG+2s7vWwR1yMVCteYnfW54lLSxTEi1bZsdHSjlYV9rpI9epKp+fs112zvSPlW9BlqFHiUnWpbuStF6yqDVE6q1q+z1EQFzhuxcU3MpZ/vnfFJVwIVqy4LI3TV2+UuBjXwwZxCVw32tDFJ4vLNbe1U19xaZU5JC5VTWktSJTiUgqH+Ev2LSHIAm6tXZX+ZIuLsWh09Z74GAlXltBGf+Of3/5HXBAXxAVxQVxWicuK8UF/0BNbgi91M5er46Kaf+jpuDZ45xFOFBfHpsKQqc4tLteCzbnXeXtcAoNcWsV8Z60Wlyti5+zoAdf49t4zxWXz+BC7B04swa2Vk+IyuR98cngRO0vMwwk/XgqfLC7XyOupylt2gfdVvhjsBnbfuQ18I3oohg1BOmLwlT/TWfN37aOZVL4U3VY4vhfdEmaaKfbFyeND9cXj6rQtJkEsYfSrHXLD4/gdAcf3d3KEEfOAuMAOcQEAgHmYrQEQFwAArAUAcQEAgCBf2f/vegIgLgAAAADv5B/xD08xnIL9ogAAAABJRU5ErkJggg=='><h3>Prototype
+
+</h3><div class='myCodeDiv'><button id='AORFY' class='myCopyButton' data-clipboard-target='#EKJKZ'>Copy</button><pre  id='EKJKZ' style='font-size:18px;' class='code'>size_t fread ( <span class='r'>void</span> * ptr, size_t size, size_t count, FILE * stream );
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AORFY');clipboard.on('success', function(e) {$('#AORFY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AORFY').text('error');});</script></div><p>size_t is an unsigned integral type.
+
+</p><h3>Description
+
+</h3><p>The <i style='color:blue'>fread</i>() function can read block of data from a file stream.
+
+</p><p>The block of data is saved to the block of memory specified by <i style='color:blue'>ptr</i>. 
+
+</p><p>The file position is advanced by the total amount of bytes read. 
+
+</p><p>The total amount of bytes read if successful is size * count.
+
+</p><h3>Parameters
+</h3><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>ptr<br/>   <br/>   <br/></td><td>   Pointer to a block of memory           <br/>   Its size is at least size * count bytes<br/>   It is converted to a void*.            <br/></td></tr><tr><td>size<br/></td><td>   Size, in bytes, of each element to be read.<br/></td></tr><tr><td>count<br/></td><td>   Number of elements, each one with a size of size bytes.<br/></td></tr><tr><td>stream<br/></td><td>   Pointer to a FILE object<br/></td></tr></tbody></table><h3>Return Value
+
+</h3><p>The total number of elements successfully read is returned. 
+
+</p><p>If this number differs from the count parameter, 
+either a reading error occurred or the end-of-file was reached while reading. 
+
+</p><p>You can check the error with <i style='color:blue'>ferror</i>() or check using <i style='color:blue'>feof</i>(). 
+
+
+</p><a class ='btn btn-outline-dark' href=c-stdio-h-fputs.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-stdio-h-fscanf.html>Next</a><h2>Related</h2><UL><LI><a href='c-stdio-h-fprintf.html'>C stdio.h fprintf</a></LI><LI><a href='c-stdio-h-fputc.html'>C stdio.h fputc</a></LI><LI><a href='c-stdio-h-fputs.html'>C stdio.h fputs</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-stdio-h-fread.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

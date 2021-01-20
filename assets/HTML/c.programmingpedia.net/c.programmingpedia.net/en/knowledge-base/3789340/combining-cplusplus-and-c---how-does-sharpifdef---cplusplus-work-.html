@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3789340/combining-cplusplus-and-c---how-does-sharpifdef---cplusplus-work- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Combining C++ and C - how does #ifdef __cplusplus work? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Combining C++ and C - how does #ifdef __cplusplus work? | C Language Knowledge Base">
+        <title>[SOLVED] Combining C++ and C - how does #ifdef __cplusplus work? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="combining-cplusplus-and-c-how-does-sharpifdef-cplusplus-work-">Combining C++ and C - how does #ifdef __cplusplus work?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/c-preprocessor.html">c-preprocessor</a></span>
+                        <span class="tag-item"><a href="../tag/extern-c.html">extern-c</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm working on a project that has a lot of legacy <strong>C</strong> code.  We've started writing in C++, with the intent to eventually convert the legacy code, as well.  I'm a little confused about how the <strong>C</strong> and C++ interact.  I understand that by wrapping the <strong>C</strong> code with <code>extern "C"</code> the C++ compiler will not mangle the <strong>C</strong> code's names, but I'm not entirely sure how to implement this.</p>
+
+<p>So, at the top of each <strong>C</strong> header file (after the include guards), we have</p>
+
+<pre><code>#ifdef __cplusplus
+extern "C" {
+#endif
+</code></pre>
+
+<p>and at the bottom, we write</p>
+
+<pre><code>#ifdef __cplusplus
+}
+#endif
+</code></pre>
+
+<p>In between the two, we have all of our includes, typedefs, and function prototypes.  I have a few questions, to see if I'm understanding this correctly:</p>
+
+<ol>
+<li><p>If I have a C++ file A.hh which
+includes a <strong>C</strong> header file B.h,
+includes another <strong>C</strong> header file C.h,
+how does this work?  I think that
+when the compiler steps into B.h,
+<code>__cplusplus</code> will be defined, so it
+will wrap the code with <code>extern "C"</code>
+(and <code>__cplusplus</code> will not be
+defined inside this block).  So,
+when it steps into C.h,
+<code>__cplusplus</code> will not be defined
+and the code will not be wrapped in
+<code>extern "C"</code>.  Is this correct?</p></li>
+<li><p>Is there anything wrong with
+wrapping a piece of code with
+<code>extern "C" { extern "C" { .. } }</code>? 
+What will the second <code>extern "C"</code>
+do?</p></li>
+<li><p>We don't put this wrapper around the .c files, just the .h files.  So, what happens if a function doesn't have a prototype? Does the compiler think that it's a C++ function?</p></li>
+<li><p>We are also using some third-party
+code which is written in <strong>C</strong>, and does
+not have this sort of wrapper around
+it.  Any time I include a header
+from that library, I've been putting
+an <code>extern "C"</code> around the #include.
+Is this the right way to deal with
+that?</p></li>
+<li><p>Finally, is this set up a good idea?
+Is there anything else we should do?
+We're going to be mixing <strong>C</strong> and C++
+for the foreseeable future, and I
+want to make sure we're covering all
+our bases.</p></li>
+</ol>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/157984/dublev" target="_blank"><span itemprop="name">dublev</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">286</div>
+                                    <div itemprop="dateCreated">5/30/2016 6:08:07 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><code>extern "C"</code> doesn't really change the way that the compiler reads the code.  If your code is in a .c file, it will be compiled as C, if it is in a .cpp file, it will be compiled as C++ (unless you do something strange to your configuration).</p>
+
+<p>What <code>extern "C"</code> does is affect linkage.  C++ functions, when compiled, have their names mangled -- this is what makes overloading possible.  The function name gets modified based on the types and number of parameters, so that two functions with the same name will have different symbol names.</p>
+
+<p>Code inside an <code>extern "C"</code> is still C++ code.  There are limitations on what you can do in an extern "C" block, but they're all about linkage.  You can't define any new symbols that can't be built with C linkage.  That means no classes or templates, for example.</p>
+
+<p><code>extern "C"</code> blocks nest nicely.  There's also <code>extern "C++"</code> if you find yourself hopelessly trapped inside of <code>extern "C"</code> regions, but it isn't such a good idea from a cleanliness perspective.</p>
+
+<p>Now, specifically regarding your numbered questions:</p>
+
+<p>Regarding #1: __cplusplus will stay defined inside of <code>extern "C"</code> blocks.  This doesn't matter, though, since the blocks should nest neatly.</p>
+
+<p>Regarding #2: __cplusplus will be defined for any compilation unit that is being run through the C++ compiler.  Generally, that means .cpp files and any files being included by that .cpp file.  The same .h (or .hh or .hpp or what-have-you) could be interpreted as C or C++ at different times, if different compilation units include them.  If you want the prototypes in the .h file to refer to C symbol names, then they must have <code>extern "C"</code> when being interpreted as C++, and they should not have <code>extern "C"</code> when being interpreted as C -- hence the <code>#ifdef __cplusplus</code> checking.</p>
+
+<p>To answer your question #3:  functions without prototypes will have C++ linkage if they are in .cpp files and not inside of an <code>extern "C"</code> block.  This is fine, though, because if it has no prototype, it can only be called by other functions in the same file, and then you don't generally care what the linkage looks like, because you aren't planning on having that function be called by anything outside the same compilation unit anyway.</p>
+
+<p>For #4, you've got it exactly.  If you are including a header for code that has C linkage (such as code that was compiled by a C compiler), then you must <code>extern "C"</code> the header -- that way you will be able to link with the library.  (Otherwise, your linker would be looking for functions with names like <code>_Z1hic</code> when you were looking for <code>void h(int, char)</code></p>
+
+<p>5:  This sort of mixing is a common reason to use <code>extern "C"</code>, and I don't see anything wrong with doing it this way -- just make sure you understand what you are doing.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/397155/andrew-shelansky" target="_blank"><span itemprop="name">Andrew Shelansky</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/3789340/combining-cplusplus-and-c---how-does-sharpifdef---cplusplus-work-#answer-0</div>
+                                            <div itemprop="upvoteCount">258</div>
+                                            <div itemprop="dateCreated">4/11/2019 8:19:58 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <ol>
+<li><p><code>extern "C"</code> doesn't change the presence or absence of the <code>__cplusplus</code> macro. It just changes the linkage and name-mangling of the wrapped declarations.</p></li>
+<li><p>You can nest <code>extern "C"</code> blocks quite happily.</p></li>
+<li><p>If you compile your <code>.c</code> files as C++ then anything not in an <code>extern "C"</code> block, and without an <code>extern "C"</code> prototype will be treated as a C++ function. If you compile them as C then of course everything will be a C function.</p></li>
+<li><p>Yes</p></li>
+<li><p>You can safely mix C and C++ in this way.</p></li>
+</ol>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5597/anthony-williams" target="_blank">Anthony Williams</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/3789340" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3789340/combining-cplusplus-and-c---how-does-sharpifdef---cplusplus-work- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+</html>

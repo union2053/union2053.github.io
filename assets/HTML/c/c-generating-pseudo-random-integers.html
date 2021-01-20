@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-generating-pseudo-random-integers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Generating Pseudo-random Integers</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Generating Pseudo-random Integers'>C Generating Pseudo-random Integers</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Generating Pseudo-random Integers</h1>
+<a class ='btn btn-outline-dark' href=c-unsigned-integer-types.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-type-char.html>Next</a><p>The <i style='color:blue'>rand</i>() function declared in the <i style='color:blue'>stdlib.h</i> header file can generate random number. 
+</p><div class='myCodeDiv'><button id='NJTGA' class='myCopyButton' data-clipboard-target='#GWXJZ'>Copy</button><pre  id='GWXJZ' style='font-size:18px;' class='code'><span class='r'>int</span> chosen = 0; 
+chosen = rand();  <span class='c'>// Set to a random integer</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NJTGA');clipboard.on('success', function(e) {$('#NJTGA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NJTGA').text('error');});</script></div><p>Each time you call the <i style='color:blue'>rand</i>() function, it will return a random integer. 
+
+</p><p>The value will be from zero to a maximum of RAND_MAX, the value of which is defined in <i style='color:blue'>stdlib.h</i>. 
+
+</p><p>The integers generated by the <i style='color:blue'>rand</i>() function are described as pseudo-random numbers because 
+truly random numbers can arise only in natural processes and can't be generated algorithmically. 
+
+</p><p>The sequence of numbers that's generated by the <i style='color:blue'>rand</i>() function uses a starting seed number, and  
+for a given seed, the sequence will always be the same. 
+
+</p><p>If you use the function with the default seed value, you'll always get exactly the same sequence.
+</p><h3>srand()
+</h3><p><i style='color:blue'>stdlib.h</i> provides another standard function, <i style='color:blue'>srand</i>(), which you can call to initialize the sequence with a particular seed that you pass as an  
+argument to the function. 
+
+</p><p>The <i style='color:blue'>time</i>() function from the <i style='color:blue'>time.h</i> header file returns the number of seconds that have elapsed 
+since January 1, 1970, as an integer. 
+
+</p><p>To get a different sequence of pseudo-random numbers each time a program is run, you can use  
+the following statements: 
+</p><div class='myCodeDiv'><button id='WFYDN' class='myCopyButton' data-clipboard-target='#TNRLY'>Copy</button><pre  id='TNRLY' style='font-size:18px;' class='code'>srand(time(NULL));      <span class='c'>// Use clock value as starting seed </span>
+<span class='r'>int</span> chosen = 0; 
+chosen = rand();        <span class='c'>// Set to a random integer 0 to RAND_MAX</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WFYDN');clipboard.on('success', function(e) {$('#WFYDN').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WFYDN').text('error');});</script></div><p>You only need to call  <i style='color:blue'>srand</i>() once in a program to initialize the sequence. 
+
+</p><p>Each time you call <i style='color:blue'>rand</i>() subsequently, you'll get another pseudo-random number. 
+
+</p><p>The value of the upper limit, RAND_MAX, is likely to be quite large-often the maximum value 
+that can be stored as type int. 
+</p><h3>Range
+</h3><p>When you need a more limited range of values, you can scale the value returned by <i style='color:blue'>rand</i>() to provide values within the range you want.  
+
+</p><p>Suppose you want to obtain values in a range from zero up to, but not including, limit. 
+
+</p><p>The simplest  approach to obtaining values in this range is like this: 
+</p><div class='myCodeDiv'><button id='PTRWI' class='myCopyButton' data-clipboard-target='#NLREO'>Copy</button><pre  id='NLREO' style='font-size:18px;' class='code'>srand(time(NULL));  <span class='c'>//  Use clock value as starting seed - time can be casted  </span>
+                    <span class='c'>// to (unsigned int) to avoid possible overflow </span>
+<span class='r'>int</span> limit = 20;     <span class='c'>//  Upper limit for pseudo-random values </span>
+<span class='r'>int</span> chosen = 0; 
+chosen = rand() % limit;<span class='c'>// 0 to limit-1 inclusive</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PTRWI');clipboard.on('success', function(e) {$('#PTRWI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PTRWI').text('error');});</script></div><p>Of course, if you want numbers from 1 to limit, you can write this: 
+</p><div class='myCodeDiv'><button id='JKOHH' class='myCopyButton' data-clipboard-target='#LXRHY'>Copy</button><pre  id='LXRHY' style='font-size:18px;' class='code'>chosen = 1 + rand() % limit;      <span class='c'>// 1 to limit   inclusive</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JKOHH');clipboard.on('success', function(e) {$('#JKOHH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JKOHH').text('error');});</script></div><p>The following code puts all the talk to code.
+
+</p><div class='myCodeDiv'><button id='JWNAX' class='myCopyButton' data-clipboard-target='#IPPGU'>Copy</button><pre  id='IPPGU' style='font-size:18px;' class='code'>#define _CRT_SECURE_NO_WARNINGS 
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+<span class='r'>#</span><span class='r'>include</span> &lt;stdlib.h&gt;               <span class='c'>// For rand() and srand() </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;time.h&gt;                 <span class='c'>// For time() function </span>
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> chosen = 0;                 <span class='c'>// The lucky number </span>
+  <span class='r'>int</span> limit = 20;                 <span class='c'>// Upper limit for pseudo-random values </span>
+
+  srand((<span class='r'>unsigned</span> <span class='r'>int</span>)time(NULL));          <span class='c'>// Use clock value as starting seed </span>
+  chosen = 1 + rand() % limit;    <span class='c'>// Random int 1 to limit </span>
+
+  printf(<span class='q'>"The number was %d\n"</span>,  chosen); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JWNAX');clipboard.on('success', function(e) {$('#JWNAX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JWNAX').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAD7ElEQVR42u3d0W7bMAxA0X5E//8n1/cMWIGhcGyFpKRUts/FHtrGpkWuCG8l2fl4AAAW4Ovrz/e/i2UUSflKWWM2H0oAAMRlUkY3zBrEBQCIi6wB4gLgLQ1pdzmg/Wr7sGUD9tQn2MJfjmdzZHCo8bBHxZknLs9XqV1udo5TCw7iAuAX9KXc9Y98Ys2AhVYdaWONUyKdvl/RIoMv/4ZkVaDzEpFS9/ySDCw4iAuAX3OX8h/cpwtY6NOR1hg5ZXcip3FWZ0fvVIqXBUmJTjx+LZHdl6YWHMQFwLri0jjgdAF7JhiOhpcaW880UtafeuZdUtMtBXGJT0p15jip4CAuAE426VKbBVkhYLZPTxKXgckWVpFmiEuq5tk0yznOKDiICwDicj5xebmb+M3iEvlfDtakrEGp+AVxKeRIXIgLgGuKy247bDfLkwYs9KfaHMDwTlkeRuGenWC0ztuIBh5PXIgLgLtPujS0INhClg14N3HJHpby3eFF6Bw8cSEuAO4oLru3j/Z4xlIBiUvjsEIuk0SEuBAXAIi+4+/exxtvb+sHJC6d1nKkL8SFuADAWuJS+5ib1QIOFJeUDcwTl9pyW6e1ZIdRK11PjsSFuAC4srjsPolr8w5e6EwLBkz10bIxvKGPlj9noGwt/W0+W7qeHIkLcQFw/UmXIVqwfsD+BjbvkXq1YRSyK2x8GdLms6XzHBfiAgCJRtKzAXPZgIXgjbOCjx6ZKi7Dn3WbemxMWVwil+jMkbgQFwAXn3QZ8ia+YMCs+sQfKJf9zOqxCRaaeu0Beo/kc/DKnwc+JEfiQlwAXF9caq+eJWD8w482a0+FBjy8UxY+uSk+V1QQl9SF4gWPrAdFLk1cTikun/84eyGukcXYaqgJ5rlL+dVTBEy1xs3m0GDklN8MebV9lexUR+T0YMqP/ENvBz7+7j0FR05cPo/5ecw1urVfiOc6KAsA4GTikvqauFyvCCoDALiguLTXF3pWH/6fdRSk/ZPN6Y1TNkPNZvEcP57s0fGNfIOD7NcO4gIAuJq4tNcX+lcfspdojHDzdUMRClk8u0LKXSI/z37bqR2sBQBwJnEpdNZI5862w/YlUmNILXjtKk77ouVOX1uJm7olhbUAAO4oLu29vWcRl0gWo6Y3GsIUGcOQ24JYCwDgpuIy40//FWZchjf7nytNuztUCqo0ZGEOAADiQlxWFBfKAgC4tbjU2m3nJRrbbEdtMR6SV6e4vBxzdkhuhwYAXEFcGtsmdm/Gad/BW7CW7CUeezdRPzf7xsEv7zQu7D7JqkPwbuf2jqJaqUdtlAEA4NdmXAAAAIgLAAAAcQEAAMQFAADg/fwFm+ft5J0yaewAAAAASUVORK5CYII='><a class ='btn btn-outline-dark' href=c-unsigned-integer-types.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-type-char.html>Next</a><h2>Related</h2><UL><LI><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print via printf for short, long, unsigned int</a></LI><LI><a href='c-signed-integer-types.html'>C Signed Integer Types</a></LI><LI><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types</a></LI><LI><a href='c-character-type-char.html'>C Character Type char</a></LI><LI><a href='c-char-escape-sequence.html'>C char escape sequence</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-generating-pseudo-random-integers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

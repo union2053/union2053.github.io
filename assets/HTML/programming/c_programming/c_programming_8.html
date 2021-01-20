@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_8.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+<head>
+	<title>C Programlama Ders: VIII</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C Programlama, #define, #undef, #ifdef, #ifndef, #if, #else, #endif, #elif, #include, önişlemci, preprocessor">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">29 Ağustos 2006</font></div>
+	<h2>C Programlama Dersi - VIII</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Kısa Devre Değerlendirme</p>
+				<p>- Önişlemci Komutları</p>
+				<p>- #define Önişlemci Komutu</p>
+				<p>- #undef Önişlemci Komutu</p>				
+				<p>- #ifdef ve #ifndef Önişlemci Komutları</p>				
+				<p>- #if, #else, #endif, #elif Önişlemci Komutları</p>				
+				<p>- #include Önişlemci Komutu</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+		<br/>
+		<h3>Kısa Devre Değerlendirme</h3>
+		<p>
+		Kısa devre değerlendirme, ne yazık ki pek iyi bir çeviri olmadı ve bu yüzden 
+		hiçbir anlam ifade etmeyebilir. İngilizce'de, Short Circuit Evaluation olarak
+		geçen	bu konu, mantıksal ifadelerle ilgilidir. 
+		</p>
+		<p>
+		Hatırlarsanız, daha önce ki derslerimizde iki farklı AND ve OR operatörü görmüştük. 
+		Bu yapılardan biri AND için &amp;&amp; işaretini kullanıyorken, diğeri sadece tek 
+		&amp; simgesini kullanıyordu. Keza, OR ifadesi bir yerde, || şeklinde 
+		gösteriliyorken, diğer yerde, tek bir | simgesiyle ifade edilmekteydi. Bu işaretler, 
+		aynı sonucu	üretiyor gibi görünseler de, farklı şekilde çalışırlar.
+		</p>
+		<p>
+		Çift şekilde yazılan operatörler, (&nbsp;yani &amp;&amp; ve ||&nbsp;) kısa devre 
+		operatörleridir. İngilizce, Short Circuit Operator olarak isimlendirilirler. 
+		Tek sembolle yazılan operatörlerden farkı, işlemleri kısaltmalarıdır. 
+		</p>
+		<p>Bir koşul içersinde AND (&nbsp;&amp;&amp;&nbsp;) operatörü kullandığınızda, 
+		koşulun sol tarafı yanlışsa, sağ tarafı kontrol edilmez. Çünkü artık sağ tarafın 
+		doğru veya yanlış olmasının önemi yoktur; sonuç her şekilde yanlış olacaktır. 
+		</p>
+		<p>Benzer bir mantık OR (&nbsp;||&nbsp;) operatörü içinde geçerlidir. Eğer 
+		sol taraf doğruysa, sağ tarafın kontrol edilmesine gerek yoktur. Çünkü OR 
+		operatöründe taraflardan birinin doğru olması durumunda, diğerinin önemi kalmaz 
+		ve sonuç doğru döner. 
+		</p>
+		<p>
+		Aşağıdaki örnekleri inceleyelim:
+		</p>
+<table align="center" cellspacing="12" border="0">
+<tr>
+<td align="center"><b>&amp;&amp; Operatörü</b></td>
+<td align="center"><b>&amp; Operatörü</b></td>
+</tr>
+<tr>
+<td>
+	<pre style="width: 320px;margin-left: 0px;">
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i, j;
+	i = 0;
+	j = 5;
+	if( i == 1 <b>&&</b> j++ ) {
+		printf( "if içersine girdi\n" );
+	}
+	else {
+		printf( "if içersine girmedi\n" );
+		printf( "i: %d, j: %d\n", i, j );
+	}
+	return 0;
+}
+</pre>
+	</td>
+	<td>
+	<pre style="width: 320px;margin-left: 0px;">
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i, j;
+	i = 0;
+	j = 5;
+	if( i == 1 & j++ ) {
+		printf( "if içersine girdi\n" );
+	}
+	else {
+		printf( "if içersine girmedi\n" );
+		printf( "i: %d, j: %d\n", i, j );
+	}
+	return 0;
+}
+</pre>
+	</td>
+</tr>
+<tr>
+	<td>
+	<pre style="width: 320px;margin-left: 0px;">
+if içersine girmedi
+i: 0, j: 5
+</pre>
+	</td>
+	<td>
+	<pre style="width: 320px;margin-left: 0px;">
+if içersine girmedi
+i: 0, j: 6
+</pre>
+	</td>
+</tr>		
+	</table>
+	<p>
+	Gördüğünüz gibi, program çıktıları birbirinden farklıdır. Bunun sebebi, ilk örnekte, 
+	<i>i == 1</i> koşulu yanlış olduğu için, &amp;&amp; operatörünün ifadenin sağ tarafına 
+	bakmamasıdır. İkinci örnekteyse, &amp; operatörü, koşulun her iki tarafına da 
+	bakar. Bu yüzden, j değişkenine ait değer değişir. Benzer bir uygulamayı, OR için 
+	|| ve | kullanarak yapabilirsiniz.
+	</p>
+	<p><b>ÖNEMLİ NOT: </b>Özetle işlemlerinizi hızlandırmak istiyorsanız; AND kullanacağınız 
+	zaman, &amp;&amp; operatörüyle çalışın ve yanlış olması muhtemel olan koşulu sol tarafa 
+	koyun. Eğer OR operatörü kullanacaksanız, doğru olma ihtimali fazla olan koşulu, 
+	ifadenin soluna koyun ve operatör olarak || ile çalışın. Bu şekillde yazılan bir 
+	program, kısa devre operatörleri sayesinde, gereksiz kontrolden kaçınarak 
+	işlemlerinizi hızlandıracaktır. 
+	</p>
+	<p>Elbette &amp; veya | operatörlerinin kullanılması gereken durumlarda olabilir. 
+	Her n'olursa olsun, koşulun iki tarafınında çalışmasını istiyorsanız, o zaman 
+	&amp; ve | operatörlerini kullanmanız gerekmektedir.</p>
+	
+	<h3>Önişlemci Komutları</h3>	
+	<p>
+	Bir program yazdığınızı düşünün... Bu programda, PI değerini birçok yerde kullanmanız 
+	gerekiyor. Siz de PI değeri olması gereken her yere, 3.14 yazıyorsunuz. Oldukça 
+	sıkıcı bir iş. İleride PI'yi, 3.141592653 olarak değiştirmek isterseniz daha da 
+	sıkıcı h&acirc;le dönüşebilir. Veya canınız istedi, printf(&nbsp;&nbsp;) fonksiyonu 
+	yerine ekrana_yazdir(&nbsp;&nbsp;) kullanmaya niyetlendiniz... İşte bu gibi 
+	durumlarda, Önişlemci Komutlarını (&nbsp;Preprocessor&nbsp;) kullanırız. Önişlemci 
+	komutlarının amacı, bir şeyi başka bir şekilde ifade etmektir.
+	</p>
+	<p>
+	Konuya devam etmeden önce ufak bir uyarı da bulunmakta yarar var. Önişlemci komutlarını, 
+	değişkenler veya fonksiyonlarla karıştırmamak gerekiyor. Değişkenlerin ve 
+	fonksiyonların daha dinamik ve esnek bir yapıları varken, önişlemci komutları  
+	statiktir. Programınıza direkt bir kod yazdığınızı düşünün. Bu kod herhangi 
+	bir şey (sembol, program parçası, sayı, karakter vs...) olabilir. Örneğin, her yerde 
+	PI'nin karşılığı olarak 3.14 girmek yerine, PI diye bir sembol tanımlarız ve bunun 
+	görüldüğü her yere 3.14'ü koyulmasını isteriz. Önişlemci komutları bu gibi işlerde, 
+	biçilmiş kaftandır.
+	</p>
+	
+	<h3>#define Önişlemci Komutu</h3>
+	<p>
+	#define komutu, adından da anlaşılabileceği gibi tanımlama işlemleri için kullanılır.
+	Tanımlama komutunun kullanım mantığı çok basittir. Bütün yapmamız gereken, neyin yerine 
+	neyi yazacağımıza karar vermektir. Bunun için #define yazıp bir boşluk bıraktıkan 
+	sonra, önce kullanacağımız bir isim verilir, ardından da yerine geçeceği değer. 
+	</p>
+	<p>Altta ki program, PI sembolü olan her yere 3.14 koyacak ve işlemleri buna göre 
+	yapacaktır:</p>
+	<pre>
+/* Çember alanını hesaplar */
+
+#include&lt;stdio.h&gt;
+<b>#define PI 3.14</b>
+int main( void )
+{
+	int yaricap;
+	float alan;
+	printf( "Çemberin yarı çapını giriniz> " );
+	scanf( "%d", &yaricap );
+	alan = PI * yaricap * yaricap;
+	printf( "Çember alanı: %.2f\n", alan );
+	return 0;
+}
+</pre>
+	<p> 
+	Gördüğünüz gibi, PI bir değişken olarak tanımlanmamıştır. Ancak #define komutu 
+	sayesinde, PI'nin aslında 3.14 olduğu derleyici (compiler) tarafından kabul edilmiştir. Sadece 
+	#define komutunu kullanarak başka şeylerde yapmak mümkündür. Örneğin, daha önce 
+	dediğimizi yapalım ve printf yerine, ekrana_yazdir; scanf yerine de, deger_al 
+	isimlerini kullanalım:
+	</p>
+	<pre>
+/* Yarıçapa göre daire alanı hesaplar */
+
+#include&lt;stdio.h&gt;
+<b>#define PI 		3.14
+#define ekrana_yazdir 	printf
+#define deger_al 	scanf</b>
+int main( void )
+{
+	int yaricap;
+	float alan;
+	<b>ekrana_yazdir</b>( "Çemberin yarı çapını giriniz> " );
+	<b>deger_al</b>( "%d", &yaricap );
+	alan = PI * yaricap * yaricap;
+	<b>ekrana_yazdir</b>( "Çember alanı: %.2f\n", alan );
+	return 0;
+}
+</pre>
+	
+	<p>
+		#define komutunun başka marifetleri de vardır. İlerki konularımızda göreceğimiz 
+		fonksiyon yapısına benzer şekilde kullanımı mümkündür. Elbette ki, fonksiyonlar 
+		çok daha gelişmiştir ve sağladıkları esnekliği, #define tutamaz. Bu yüzden #define 
+		ile yapılacakların sınırını çok zorlamamak en iyisi. Ancak yine de bilginiz olması 
+		açısından aşağıda ki örneğe göz atabilirsiniz:
+	</p>
+	<pre>
+/* Istenen sayida, "Merhaba" yazar */
+
+#include&lt;stdio.h&gt;
+#define merhaba_yazdir( x ) int i; for ( i = 0; i < (x); i++ ) printf( "Merhaba\n" );
+int main( void )
+{	
+	int yazdirma_adedi;
+	printf( "Kaç defa yazdırılsın> " );
+	scanf( "%d", &yazdirma_adedi );
+	merhaba_yazdir( yazdirma_adedi );
+	return 0;
+}	
+</pre>
+	<h3>#undef Önişlemci Komutu</h3>
+	<p>
+	Bazı durumlarda, #define komutuyla tanımladığımız şeyleri, iptal etmek isteriz. 
+	Tanımlamayı iptal etmek için, #undef komutu kullanılır. Örneğin #undef PI yazdığınız da, 
+	o noktadan itibaren PI tanımsız olacaktır. #define ile oluşturduğunuz sembolleri 
+	belirli noktalardan sonra geçerliliğini iptal etmek veya yeniden tanımlamak için #undef 
+	komutunu kullanabilirsiniz.
+	</p>
+	<h3>#ifdef ve #ifndef Önişlemci Komutları</h3>
+	<p>
+	Önişlemci komutlarında bir sembol veya simgenin daha önce tanıtılıp tanıtılmadığını 
+	kontrol etmek isteyebiliriz. Tanıtılmışsa, şöyle yapılsın; yok tanıtılmadıysa, böyle 
+	olsun gibi farklı durumlarda ne olacağını belirten yapılar gerekebilir. Bu açığı 
+	kapatmak için #ifdef (<i>if defined - şayet tanımlandıysa</i>) veya #ifndef 
+	(<i>if not defined - şayet tanımlanmadıysa</i>) operatörleri kullanılır. 
+	</p>
+	
+	<pre>
+#include&lt;stdio.h&gt;
+#define PI 3.14
+int main( void )
+{
+	// Tanımlı PI değeri, tanımsız hâle getiriliyor.
+	<b>#undef PI</b>
+
+	int yaricap;
+	float alan;
+	printf( "Çemberin yarı çapını giriniz> " );
+	scanf( "%d", &yaricap );
+
+	// PI değerinin tanımlı olup olmadığı kontrol ediliyor.
+	<b>#ifdef PI</b>
+		//PI tanımlıysa, daire alanı hesaplanıyor.
+		alan = PI * yaricap * yaricap;
+		printf( "Çember alanı: %.2f\n", alan );
+	<b>#else</b>
+		//PI değeri tanımsızsa, HATA mesajı veriliyor.
+		printf("HATA: Alan değeri tanımlı değildir.\n");
+	<b>#endif</b>
+	
+	return 0;
+}
+</pre>
+	<p>
+	Yukardaki örneğe bakacak olursak, önce PI değeri tanımlanıyor ve sonrasında 
+	tanım kaldırılıyor. Biz de sürprizlerle karşılaşmak istemediğimizden, PI değerinin 
+	tanım durumunu kontrol ediyoruz. Tek başına çalışan biri için gereksiz bir ayrıntı gibi 
+	gözükse de, ekip çalışmalarında, bazı şeylerin kontrol edilmesi ve istenmeyen 
+	durumlarda, ne yapılacağı belirlenmelidir. Yukarda ki programı şöyle de yazabilirdik:
+	</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int yaricap;
+	float alan;
+	printf( "Çemberin yarı çapını giriniz> " );
+	scanf( "%d", &yaricap );
+
+	// Şu noktaya kadar tanımlı bir PI değeri bulunmuyor.
+	// #ifndef opertörü bu durumu kontrol ediyor.
+	// Eğer tanımsızsa, PI'nin tanımlanması sağlanıyor.
+	<b>#ifndef PI</b>		
+		#define PI 3.14
+	<b>#endif</b>
+
+	alan = PI * yaricap * yaricap;
+	printf( "Çember alanı: %.2f\n", alan );
+
+	return 0;
+}
+</pre>
+	<h3>#if, #else, #endif, #elif Önişlemci Komutları</h3>
+	<p>
+	Bazen bir değerin tanımlanıp, tanımlanmadığını bilmek yetmez. Bazı değerler, 
+	bayrak (flag) olarak kullanılır. Yani eğer doğruysa, böyle yapılması l&acirc;zım, 
+	aksi h&acirc;lde böyle olacak gibi... Bazı programlar, önişlemci komutlarından 
+	yararlanır. Değişken yerine, önişlemcileri kullanarak tanımlanan simgeler, bu 
+	programlarda flag görevi görür.
+	</p>
+	<p>
+	Konumuza dönersek, #if, #else, #endif yapısı daha önce işlemiş olduğumuz 
+	if-else yapısıyla hemen hemen aynıdır. if-elif yapısı da if-else if yapısına benzer. 
+	Her ikisinin de genel yazım kuralı aşağıda verilmiştir:
+	</p>
+
+<table border="0" cellspacing="1" cellpadding="7" align="center">
+	<tr valign="top">
+		<td align="center">
+			<b><i>#if&nbsp;-&nbsp;#else Yapısı: </i></b>
+		</td>	
+		<td align="center">
+			<b><i>#if&nbsp;-&nbsp;#elif Yapısı: </i></b>
+		</td>	
+	</tr>
+	<tr valign="top">
+	<td align="left">
+	<pre style="width: 320px;margin-left: 0px;">
+#if <i>koşul</i>
+	<i>komut(lar)</i>
+#else 
+	<i>komut(lar)</i>
+#endif
+</pre>		
+		</td>
+	<td align="left">
+	<pre style="width: 320px;margin-left: 0px;">
+#if <i>koşul 1</i>
+	<i>komut(lar) 1</i>
+#elif <i>koşul 2</i>
+	<i>komut(lar) 2</i>
+.
+.
+.
+#elif <i>koşul n-1</i>
+	<i>komut(lar) n-1</i>
+#else 
+	<i>komut(lar) n</i>
+#endif
+</pre>		
+		</td>
+	</tr>
+</table>	
+
+<p> 
+	Bir program tasarlayalım. Bu programda, pi sayısınının virgülden sonra 
+	kaç basamağının hesaba katılacağına karar veren bir mekanizma olsun. Soruyu,
+	şu ana kadar gördüğümüz, if&nbsp;-&nbsp;else gibi yapılarla rahatça yapabiliriz. 
+	Önişlemci komutuyla ise, aşağıdakine benzer bir sistem oluşturulabilir:
+</p>
+
+<pre>
+/* Daire alanını hesaplar */
+
+#include&lt;stdio.h&gt;
+#define HASSASLIK_DERECESI 2
+int main( void )
+{
+	int yaricap;
+	float alan;
+	printf( "Çemberin yarı çapını giriniz> " );
+	scanf( "%d", &yaricap );
+
+	// Hassaslık derecesi, pi sayısının virgülden kaç 
+	// basamak sonrasının hesaba katılacağını belirtir.
+	// Eğer hassaslık derecesi bunlara uymuyorsa, alan 
+	// değeri -1 yapılır.
+	
+	#if ( HASSASLIK_DERECESI == 0 )
+		alan = 3 * yaricap * yaricap;
+	#elif ( HASSASLIK_DERECESI == 1 )
+		alan = 3.1 * yaricap * yaricap;
+	#elif ( HASSASLIK_DERECESI == 2 )
+		alan = 3.14 * yaricap * yaricap;
+	#else
+		alan = -1;
+	#endif
+
+	printf( "Çember alanı: %.2f\n", alan );
+	return 0;
+}
+</pre>
+<h3>#include Önişlemci Komutu</h3>
+<p>
+	#include oldukça tanıdık bir operatördür. Her programımızda, #include önişlemci 
+	komutunu kullanırız. Şayet kullanmasak, printf(&nbsp;&nbsp;) veya scanf(&nbsp;&nbsp;) 
+	gibi fonksiyonları tekrar tekrar yazmamız gerekirdi. #include komutu, programımıza 
+	bir başlık dosyasının (header file) d&acirc;hil edileceğini belirtir. Bu başlık 
+	dosyası, standart giriş çıkış işlemlerini içeren bir kütüphane olabileceği gibi, 
+	kendimize ait fonksiyonların bulunduğu bir dosya da olabilir.
+</p>
+<p>
+	Eğer sistem kütüphanelerine ait bir başlık dosyasını programınıza d&acirc;hil edeceksek,
+	küçüktür (&nbsp;&lt;&nbsp;) ve büyüktür (&nbsp;&gt;&nbsp;) işaretlerini kullanırız. 
+	Örneğin stdio.h sisteme ait bir kütüphane dosyasıdır ve Linux'ta /usr/include/stdio.h 
+	adresinde bulunur. Dolayısıyla stdio.h kütüphanesini programımıza eklerken, 
+	#include&lt;stdio.h&gt; şeklinde yazarız. Kendi oluşturduğumuz başlık dosyaları 
+	içinse, durum biraz daha farklıdır.
+</p>
+<p>
+	Çalışma ortamımızla aynı klasörde olan bir başlık dosyasını, programımıza eklemek 
+	için #include&nbsp;"benim.h" şeklinde yazarız. İlerki derslerimizde, 
+	kendi başlık dosyalarımızı oluşturmayı göreceğiz. Ancak şimdilik burada keselim...
+</p>
+<h3>Önemli Noktalar...</h3>
+<p>
+	Konuyu noktalarken, söylemek istediğim bazı şeyler bulunuyor. Olabildiğince, önişlemci 
+	komutlarından <b>-</b>&nbsp;<i>#include komutu hariç</i>&nbsp;<b>-</b> uzak durun. 
+	Çünkü bu komutlar, esnek bir yapıya sahip değiller ve bu durum, bir noktadan sonra başınızı ağrıtacaktır. 
+	Önişlemci komutlarıyla yazılmış kodları takip etmek oldukça zordur ve debug edilemezler. 
+	Java gibi gelişmiş dillerde, #define komutu bulunmaz. Modern dillerde, bu yapıdan 
+	uzaklaşılmaya başlanmıştır. 
+</p>
+<p>
+	Yukarda saydıklarıma rağmen, bazı durumlarda, önişlemci komutlarını kullanmak 
+	uygun olabilir. Kaldı ki bu komutların kullanıldığı birçok yer bulunuyor ve 
+	biz kullanmasak bile, bilmeye mecbur durumdayız. Sözün özü; bu konuyu es 
+	geçmek uygun değil. Ancak üzerine düşmek oldukça gereksiz.
+</p>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_7.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_9.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_8.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-array-designated-initializers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Array Designated Initializers</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Array Designated Initializers'>C Array Designated Initializers</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Array Designated Initializers</h1>
+<a class ='btn btn-outline-dark' href=c-partially-initialized-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-array-compound-literals.html>Next</a><p>C99 added array designated initializers. 
+
+</p><p>This feature allows you to pick and choose which elements are initialized. 
+
+</p><p>Suppose, for example, that you just want to initialize the last element in an array. 
+
+</p><p>With traditional C initialization syntax, you also have to initialize every 
+element preceding the last one:
+</p><div class='myCodeDiv'><button id='XERDG' class='myCopyButton' data-clipboard-target='#CTZPW'>Copy</button><pre  id='CTZPW' style='font-size:18px;' class='code'><span class='r'>int</span> arr[6] = {0,0,0,0,0,212};          <span class='c'>// traditional syntax</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XERDG');clipboard.on('success', function(e) {$('#XERDG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XERDG').text('error');});</script></div><p>With C99, you can use an index in brackets in the initialization list to 
+specify a particular element:
+</p><div class='myCodeDiv'><button id='ESNQL' class='myCopyButton' data-clipboard-target='#WNPGQ'>Copy</button><pre  id='WNPGQ' style='font-size:18px;' class='code'><span class='r'>int</span> arr[6] = {[5] = 212}; <span class='c'>// initialize arr[5] to 212</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ESNQL');clipboard.on('success', function(e) {$('#ESNQL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ESNQL').text('error');});</script></div><p>As with regular initialization, after you initialize at least one element, 
+the uninitialized elements are set to 0. 
+
+</p><div class='myCodeDiv'><button id='BWAKM' class='myCopyButton' data-clipboard-target='#XLPQU'>Copy</button><pre  id='XLPQU' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define MONTHS 12
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> days[MONTHS] = {31,28, [4] = 31,30,31, [1] = 29};
+    <span class='r'>int</span> i;
+
+     <span class='r'>for</span> (i = 0; i &lt; MONTHS; i++)
+         printf(<span class='q'>"%2d %d\n"</span>, i + 1, days[i]);
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BWAKM');clipboard.on('success', function(e) {$('#BWAKM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BWAKM').text('error');});</script></div><p>Here's the output if the compiler supports this C99 feature:
+</p><img src='data:image/png;base64,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'><p>First, if the code follows a designated initializer with further values, 
+as in the sequence [4] = 31,30,31, these further values are used to initialize the 
+subsequent elements. 
+
+</p><p>That is, after initializing days[4] to 31, the code initializes days[5] 
+and days[6] to 30 and 31, respectively. 
+
+</p><p>Second, if the code initializes a particular element to a value more than once, 
+the last initialization is the one that takes effect. 
+
+</p><p>For example, the start of the initialization list initializes days[1] to
+28, but that is overridden by the [1] = 29 designated initialization later.
+
+</p><p>Suppose you don't specify the array size?
+</p><div class='myCodeDiv'><button id='DIBUU' class='myCopyButton' data-clipboard-target='#UVMRD'>Copy</button><pre  id='UVMRD' style='font-size:18px;' class='code'><span class='r'>int</span> stuff[] = {1, [6] = 23};       <span class='c'>// what happens?</span>
+<span class='r'>int</span> staff[] = {1, [6] = 4, 9, 10}; <span class='c'>// what happens?</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DIBUU');clipboard.on('success', function(e) {$('#DIBUU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DIBUU').text('error');});</script></div><p>The compiler will make the array big enough to accommodate the initialization values. 
+
+</p><p>So stuff will have seven elements, numbered 0-6, and staff will have two more elements, or 9.
+</p><a class ='btn btn-outline-dark' href=c-partially-initialized-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-array-compound-literals.html>Next</a><h2>Related</h2><UL><LI><a href='c-arrays-introduction.html'>C Arrays Introduction</a></LI><LI><a href='c-array-initialization.html'>C Array Initialization</a></LI><LI><a href='c-partially-initialized-array.html'>C Partially initialized array</a></LI><LI><a href='c-array-compound-literals.html'>C Array Compound Literals</a></LI><LI><a href='c-assigning-array-element-values.html'>C Assigning Array Element Values</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-array-designated-initializers.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

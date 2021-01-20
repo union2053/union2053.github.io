@@ -1,0 +1,824 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+<head>
+	<title>C Programlama Ders: IX</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, fonksiyon, fonksiyonlar, function, functions, C Function, C fonksiyonları, main, local variables, yerel değişkenler, Global, global variables, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">09 Ekim 2006</font></div>
+	<h2>C Programlama Dersi - IX</h2>
+
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>	
+		<div id="content_div" style="display:none">
+			<p>- Fonksiyonlar</p>
+			<p>- main(&nbsp;&nbsp;) fonksiyonu</p>
+			<p>- Fonksiyon oluşturma</p>
+			<p>- Argüman aktarımı</p>
+			<p>- Yerel (&nbsp;local&nbsp;) ve global değişkenler</p>
+			<p>- return ifadesi</p>
+			<p>- Konuyla ilgili örnek sorular </p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	
+		<h3>Fonksiyonlar</h3>
+		<p>
+			C gibi prosedürel dillerin önemli konularından birisi fonksiyonlardır. 
+			Java veya C# gibi dillerde metot (method) ismini alırlar. Adı n'olursa olsun, 
+			görevi aynıdır. Bir işlemi birden çok yaptığınızı düşünün. Her seferinde aynı 
+			işlemi yapan kodu yazmak oldukça zahmetli olurdu. Fonksiyonlar, bu soruna yönelik  
+			yaratılmıştır. Sadece bir kereye mahsus yapılacak işlem tanımlanır. Ardından 
+			dilediğiniz kadar, bu fonksiyonu çağırırsınız. Üstelik fonksiyonların yararı 
+			bununla da sınırlı değildir.  			    
+		</p>
+		<p>
+			Fonksiyonlar, modülerlik sağlar. Sayının asallığını test eden bir fonksiyon yazıp,
+			bunun yanlış olduğunu farkederseniz, bütün programı değiştirmeniz gerekmez. 
+			Yanlış fonksiyonu düzeltirsiniz ve artık programınız doğru çalışacaktır. Üstelik 
+			yazdığınız fonksiyonlara ait kodu, başka programlara taşımanız oldukça basittir.
+		</p>
+		<p>
+			Fonksiyonlar, çalışmayı kolaylaştırır. Diskten veri okuyup, işleyen; ardından 
+			kullanıcıya gösterilmek üzere sonuçları grafik hâline dönüştüren; ve işlem 
+			sonucunu diske yazan bir programı baştan aşağı yazarsanız, okuması 
+			çok güç olur. Yorum koyarak kodun anlaşılabilirliğini, artırabilirsiniz. Ancak 
+			yine de yeterli değildir. İzlenecek en iyi yöntem, programı fonksiyon 
+			parçalarına bölmektir. Örneğin, diskten okuma işlemini <i>disten_oku(&nbsp;&nbsp;)</i> 
+			isimli bir fonksiyon yaparken; grafik çizdirme işini <i>grafik_ciz(&nbsp;&nbsp;)</i> 
+			fonksiyonu ve diske yazdırma görevini de <i>diske_yaz(&nbsp;&nbsp;)</i> fonksiyonu 
+			yapabilir. Yarın öbür gün, yazdığınız kodu birileri incelediğinde, sadece ilgilendiği 
+			yapıya göz atarak, aradığını çok daha rahat bulabilir. Binlerce satır içinde 
+			çalışmaktansa,	parçalara ayrılmış bir yapı herkesin işine gelecektir.  
+		</p>
+		<p>
+			Bu yazımızda, fonksiyonları açıklayacağız.   
+		</p>
+		
+		<h3>main(&nbsp;&nbsp;) Fonksiyonu</h3>
+		<p>
+			Şimdiye kadar yazdığımız bütün kodlarda, main(&nbsp;&nbsp;) şeklinde bir notasyon 
+			kullandık. Bu kullandığımız ifade, aslında main(&nbsp;&nbsp;) fonksiyonudur. 
+			C programlama dilinde, bir kodun çalışması main(&nbsp;&nbsp;) fonksiyonun 
+			içersinde olup olmamasına bağlıdır. Bir nevi başlangıç noktası olarak 
+			düşünebiliriz. Her programda sadece bir tane main(&nbsp;&nbsp;) fonksiyonu 
+			bulunur. Başka fonksiyonların, kütüphanelerin, kod parçalarının çalıştırılması 
+			main(&nbsp;&nbsp;) içersinde direkt veya dolaylı refere edilmesiyle alakalıdır. 
+		</p>
+		<p>
+			main(&nbsp;&nbsp;) fonksiyonuna dair bilgimizi pekiştirmek için bir program 
+			yazalım. Aşağıdaki çizimi inceleyip, C programlama diliyle bunu çizen 
+			programı oluşturalım.
+		</p>
+<pre>
+    /\
+   /  \
+  /    \
+ /      \
+----------
+|        |
+|        |
+|        |
+----------
+</pre>
+		<p>
+			Ev veya kule benzeri bu şekli aşağıdaki, kod yardımıyla gösterebiliriz: 
+		</p>
+<pre>
+/* Ev sekli cizen program */
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf( "    /\\   \n" );
+	printf( "   /  \\  \n" );
+	printf( "  /    \\ \n" );
+	printf( " /      \\\n" );
+	printf( "----------\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "----------\n" );
+	
+	return 0;
+}
+</pre>
+		<p>
+			Programın özel bir yanı yok. '\' simgesi özel olduğu için bundan iki tane 
+			yazmamız gerekti.	Bunu önceki derslerimizde işlemiştik. Bunun dışında kodun  	
+			herhangi bir zorluğu olmadığı için açıklamaya girmiyorum. Dikkat etmeniz 
+			gereken tek şey, kodun main(&nbsp;&nbsp;) fonksiyonuyla çalışması.   
+		</p>
+		<p>
+			Bilgilerimizi özetleyecek olursak; main(&nbsp;&nbsp;) fonksiyonu özel bir 
+			yapıdır. Hazırladığımız program, main(&nbsp;&nbsp;) fonksiyonuyla çalışmaya 
+			başlar. main(&nbsp;&nbsp;) fonksiyonu içersinde yer almayan kodlar çalışmaz. 
+		</p>
+		
+		<h3>Fonksiyon Oluşturma</h3>
+		<p>
+			Kendinize ait fonksiyonlar oluşturabilirsiniz. Oluşturacağınız fonksiyonlar, 
+			vereceğiniz işlemi yapmakla görevlidir ve çağrıldıkça tekrar tekrar çalışır. 
+		</p>
+		<p>
+			Yukardaki ev örneğine geri dönelim. Her şeyi main(&nbsp;&nbsp;) içinde, 
+			tek bir yerde yazacağımıza, çatıyı çizen ayrı, katı çizen ayrı birer fonksiyon 
+			yazsaydık daha rahat olmaz	mıydı? Ya da birden çok kat çizmemiz gerekirse, 
+			tek tek kat çizmekle uğraşmaktansa, fonksiyon adını çağırmak daha akıllıca 
+			değil mi? Bu soruların yanıtı, bizi fonksiyon kullanmaya götürüyor. 
+			Şimdi yukarda yazdığımız kodu, iki adet fonksiyon kullanarak yapalım:     
+		</p>
+<pre>
+/* Ev sekli cizen program */
+#include&lt;stdio.h&gt;
+// Evin catisini cizen fonksiyon. 
+void catiyi_ciz( void )
+{
+	printf( "    /\\   \n" );
+	printf( "   /  \\  \n" );
+	printf( "  /    \\ \n" );
+	printf( " /      \\\n" );
+	printf( "----------\n" );
+}
+
+// Evin katini cizen fonksiyon. 
+void kat_ciz( void ) 
+{
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "----------\n" );
+}
+
+// Programin calismasini saglayan 
+// ana fonksiyon. 
+int main( void )
+{
+	catiyi_ciz( );
+	kat_ciz( );
+	
+	return 0;
+}
+</pre>
+		<p>
+			Yazdığımız bu kod, ilk başta elde ettiğimiz çıktının aynısını verir. Ama önemli 
+			bir fark içerir:. Bu programla birlikte ilk defa fonksiyon kullanmış olduk! 
+		</p>
+		<p>   
+			Fonksiyon kullanmanın, aynı şeyleri baştan yazma zahmetinden kurtaracağından 
+			bahsetmiştik. Diyelim ki bize birden çok kat gerekiyor. O zaman 
+			<i>kat_ciz(&nbsp;&nbsp;)</i>	fonksiyonunu gereken sayıda çağırmamız yeterlidir.   
+		</p>
+<pre>
+/* Ev sekli cizen program */
+#include&lt;stdio.h&gt;
+// Evin catisini cizen fonksiyon. 
+void catiyi_ciz( void )
+{
+	printf( "    /\\   \n" );
+	printf( "   /  \\  \n" );
+	printf( "  /    \\ \n" );
+	printf( " /      \\\n" );
+	printf( "----------\n" );
+}
+
+// Evin katini cizen fonksiyon. 
+void kat_ciz( void ) 
+{
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "----------\n" );
+}
+
+// Programin calismasini saglayan 
+// ana fonksiyon. 
+int main( void )
+{
+	catiyi_ciz( );
+	// 3 adet kat ciziliyor. 
+	kat_ciz( );
+	kat_ciz( );
+	kat_ciz( );
+	
+	return 0;
+}
+</pre>
+		<p>
+			Yukarda yazılı kod, bir üstekinden pek farklı durmasa bile, bu sefer üç katlı 
+			bir evin çıktısını elde etmiş olacaksınız.  
+		</p>
+		<p>
+			Yaptığımız örneklerde, kullanılan <i>void</i> ifadesi dikkatinizi çekmiş 
+			olabilir. İngilizce bir kelime olan void, boş/geçersiz anlamındadır. 
+			C programlama dilinde de buna benzer bir anlam taşır. <i>kat_ciz( );</i> 
+			fonksiyonuna bakalım. Yapacağı iş için herhangi bir değer alması gerekmiyor. 
+			Örneğin verilen sayının asallığını test eden bir fonksiyon yazsaydık, 
+			bir değişken almamız gerekirdi. Ancak bu örnekte gördüğümüz <i>kat_ciz( );</i> 
+			fonksiyonu, dışardan bir değere gerek duymaz. Eğer bir fonksiyon,	çalışmak için 
+			dışardan gelecek bir değere ihtiyaç duymuyorsa, fonksiyon adını yazdıktan 
+			sonra parantez içini boş bırakabiliriz. Ya da <i>void</i> yazarak, fonksiyonun 
+			bir değer almayacağını belirtiriz. (&nbsp;Sürekli olarak <i>main(&nbsp;&nbsp;)</i> 
+			fonksiyonuna <i>void</i> koymamızın sebebi de bundandır; fonksiyon argüman  
+			almaz.&nbsp;) İkinci yöntem daha uygun olmakla birlikte, birinci yöntemi 
+			kullanmanın bir mahsuru yok. Aşağıda bulunan iki fonksiyon aynı şekilde çalışır:
+		</p>
+		<table align="center" cellspacing="12" border="0">
+		<tr>
+			<td>
+				<pre style="width: 320px;margin-left: 0px;">
+// Evin katini cizen fonksiyon. 
+// <b>void var</b>
+
+void kat_ciz( <b>void</b> ) 
+{
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "----------\n" );
+}			
+				</pre>
+			</td>
+			<td>
+				<pre style="width: 320px;margin-left: 0px;">
+// Evin katini cizen fonksiyon.
+// <b>void yok</b> 
+
+void kat_ciz( ) 
+{
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "|        |\n" );
+	printf( "----------\n" );
+}
+				</pre>
+			</td>
+		</tr>		
+	</table>
+	
+		<p>
+			void ifadesinin, değer alınmayacağını göstermek için kullanıldığını gördünüz. 
+			Bir de fonksiyonun değer döndürme durumu vardır. Yazdığınız fonksiyon 
+			yapacağı işlemler sonucunda, çağrıldığı noktaya bir değer gönderebilir.
+			Değer döndürme konusunu, daha sonra işleyeceğiz. Şimdilik değer döndürmeme 
+			durumuna bakalım. 
+		</p>		
+		<p>
+			Yukarda kullanılan fonksiyonlar, geriye bir değer döndürmemektedir. Bir 
+			fonksiyonun geriye değer döndürmeyeceğini belirtmek için, <i>void</i> ifadesini  
+			fonksiyon adından önce yazarız. Böyleyece geriye bir değer dönmeyeceği 
+			belirtilir.  
+		</p>
+
+		<h3>Argüman Aktarımı</h3>		
+		<p>
+			Daha önce ki örneklerimiz de, fonksiyonlar dışardan değer almıyordu. Bu yüzden 
+			parantez içlerini boş bırakmayı ya da void ifadesini kullanmayı görmüştük. Her 
+			zaman böyle olması gerekmez; fonksiyonlar dışardan değer alabilirler. 
+		</p>
+		<p>
+			Fonksiyonu tanımlarken,	fonksiyona nasıl bir değerin gönderileceğini belirtiriz. 
+			Gönderilecek değerin hangi değişken tipinde olduğunu ve değişken adını 
+			yazarız. Fonksiyonu tanımlarken, yazdığımız bu değişkenlere 'parametre' 
+			(parameter)	denir. Argüman (argument) ise, parametrelere değer atamasında 
+			kullandığımız değerlerdir. Biraz karmaşık mı geldi? O zaman bir örnekle 
+			açıklayalım.     
+		</p>
+		<p>
+			Daha önce çizdiğimiz ev örneğini biraz geliştirelim. Bu sefer, evin duvarları 
+			düz çizgi olmasın; kullanıcı istediği karakterlerle, evin duvarlarını 
+			çizdirsin.
+		</p>
+<pre>
+/* Ev sekli cizen program */
+#include&lt;stdio.h&gt;
+// Evin catisini cizen fonksiyon. 
+void catiyi_ciz( void )
+{
+	printf( "    /\\   \n" );
+	printf( "   /  \\  \n" );
+	printf( "  /    \\ \n" );
+	printf( " /      \\\n" );
+	printf( "----------\n" );
+}
+
+// Evin katini cizen fonksiyon. 
+// sol ve sag degiskenleri fonksiyon 
+// parametreleridir.
+void kat_ciz( <b>char sol</b>, <b>char sag</b> ) 
+{
+	printf( "%c        %c\n", sol, sag );
+	printf( "%c        %c\n", sol, sag );
+	printf( "%c        %c\n", sol, sag );
+	printf( "----------\n" );
+}
+
+// Programin calismasini saglayan 
+// ana fonksiyon. 
+int main( void )
+{
+	char sol_duvar, sag_duvar;
+	printf( "Kullanılacak karakterler> " );
+	scanf( "%c%c",&sol_duvar, &sag_duvar );
+	catiyi_ciz( );
+	
+	// sol_duvar ve sag_duvar, fonksiyona 
+	// giden argumanlardir. 
+	kat_ciz( <b>sol_duvar</b>, <b>sag_duvar</b> );
+	kat_ciz( <b>sol_duvar</b>, <b>sag_duvar</b> );
+	kat_ciz( <b>sol_duvar</b>, <b>sag_duvar</b> );
+
+	return 0;
+}
+</pre>
+
+		<p>
+			Argümanların değer olduğunu unutmamak gerekiyor. Yukardaki örneğimizden,   
+			değişken olması gerektiği yanılgısına düşebilirsiniz. Ancak bir fonksiyona 
+			değer aktarırken, direkt olarak değeri de yazabilirsiniz. Programı değiştirip, 
+			<i>sol_duvar</i> ve <i>sag_duvar</i> değişkenleri yerine, '*' simgesini koyun. 
+			Şeklin duvarları, yıldız işaretinden oluşacaktır.     
+		</p>
+		<p>
+			Yazdığımız <i>kat_ciz(&nbsp;&nbsp;)</i> fonksiyonunu incelemek için, aşağıda 
+			bulunan grafiğe göz atabilirsiniz:
+		</p>
+		<div class="notcolorful" align="center">
+			<a href="c_operands/void_function_structure.png" target="_blank">
+		 		<img src="c_operands/sm_void_function_structure.png" alt="[Void Function Structure]" border="0"/>
+		 	</a>			
+		</div>
+		<p>
+			Şimdi de başka bir örnek yapalım ve verilen herhangi bir sayının tek mi yoksa çift 
+			mi olduğuna	karar veren bir fonksiyon oluşturalım:
+		</p>
+<pre>
+/* Sayının tek veya çift olmasını  
+   kontrol eder. */
+#include&lt;stdio.h&gt;
+void tek_mi_cift_mi( int sayi )
+{
+	if( sayi%2 == 0 )
+		printf( "%d, çift bir sayıdır.\n", sayi );
+	else
+		printf( "%d, tek bir sayıdır.\n", sayi );
+}
+int main( void )
+{
+	int girilen_sayi;
+	printf( "Lütfen bir sayı giriniz> " );
+	scanf( "%d",&girilen_sayi );
+	tek_mi_cift_mi( girilen_sayi );
+
+	return 0;
+}
+</pre>
+		<h3>Yerel (&nbsp;Local&nbsp;) ve Global Değişkenler</h3>
+		<p>
+			Kendi oluşturacağınız fonksiyon içersinde, main(&nbsp;&nbsp;) fonksiyonunda ki 
+			her şeyi yapabilirsiniz. Değişken tanımlayabilir, fonksiyon içinden başka 
+			fonksiyonları çağırabilir veya dilediğiniz operatörü kullanabilirsiniz. 
+			Ancak değişken tanımlamalarıyla ilgili göz ardı etmememiz gereken bir konu 
+			bulunuyor. Bir fonksiyon içersinde tanımladığınız değişkenler, sadece 
+			o fonksiyon içersinde tanımlıdır. main(&nbsp;&nbsp;) veya kendinize ait 
+			fonksiyonlardan bu değişkenlere ulaşmamız mümkün değildir. main(&nbsp;&nbsp;) 
+			içinde tanımladığınız a isimli değişkenle, kendinize özgü tanımladığınız 
+			<i>kup_hesapla(&nbsp;&nbsp;)</i>  içersinde tanımlanmış a isimli değişken, 
+			bellekte farklı adresleri işaret eder. Dolayısıyla değişkenlerin arasında hiçbir 
+			ilişki yoktur. <i>kup_hesapla(&nbsp;&nbsp;)</i> içersinde geçen a değişkeninde 
+			yapacağınız değişiklik, main(&nbsp;&nbsp;) fonksiyonundakini etkilemez. Keza, 
+			tersi de geçerlidir. Şu ana kadar yaptığımız bütün örneklerde,	değişkenleri 
+			yerel olarak tanımladığımızı belirtelim. 
+		</p>
+		<p>
+			Yerel değişken dışında, bir de global değişken tipi bulunur. Programın 
+			herhangi bir noktasından erişebileceğiniz ve nerede olursa olsun aynı 
+			bellek adresini işaret eden değişkenler, global değişkenlerdir. Hep aynı bellek 
+			adresi söz konusu olduğun için, programın herhangi bir noktasında yapacağınız 
+			değişiklik, global değişkenin geçtiği bütün yerleri etkiler. Aşağıdaki örneği 
+			inceleyelim: 
+		</p>
+<pre>
+#include&lt;stdio.h&gt;
+// Verilen sayinin karesini hesaplar
+void kare_hesapla( int sayi )
+{
+	// kare_hesapla fonksiyonunda 
+	// a degiskeni tanimliyoruz. 
+	int a;
+	a = sayi * sayi;
+	printf( "Sayının karesi\t: %d\n", a );
+}
+
+// Verilen sayinin kupunu hesaplar
+void kup_hesapla( int sayi )
+{
+	// kup_hesapla fonksiyonunda 
+	// a degiskeni tanimliyoruz. 
+	int a;
+	a = sayi * sayi * sayi;
+	printf( "Sayının küpü\t: %d\n", a );
+}
+
+int main( void )
+{
+	// main( ) fonksiyonunda 
+	// a degiskeni tanimliyoruz. 
+	int a;
+	printf( "Sayı giriniz> ");
+	scanf( "%d",&a );
+	printf( "Girdiğiniz sayı\t: %d\n", a );
+	kare_hesapla( a );
+	// Eger a degiskeni lokal olmasaydi, 
+	// kare_hesapla fonksiyonundan sonra, 
+	// a'nin degeri bozulur ve kup yanlis 
+	// hesaplanirdi.  
+	kup_hesapla( a );
+	return 0;
+}
+</pre>
+	<p>
+		Kod arasına konulan yorumlarda görebileceğiniz gibi, değişkenler lokal olarak 
+		tanımlanmasa, a'nin değeri farklı olurdu. Sayının karesini bulduktan sonra, 
+		küpünü yanlış hesaplardık. Değişkenler lokal olduğu için, her aşamada farklı 
+		bir değişken tanımlandı ve sorun çıkartacak bir durum olmadı. Benzer bir programı  
+		global değişkenler için inceleyelim:     
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int sonuc = 0;
+
+// Verilen sayinin karesini hesaplayip,
+// global 'sonuc' degiskenine yazar.
+void kare_hesapla( int sayi )
+{
+	sonuc = sayi * sayi;
+}
+
+int main( void )
+{
+	// main( ) fonksiyonunda 
+	// a degiskeni tanimliyoruz. 
+	int a;
+	printf( "Sayı giriniz> ");
+	scanf( "%d",&a );
+	printf( "Girdiğiniz sayı\t: %d\n", a );
+	kare_hesapla( a );
+	printf("Sayının karesi\t: %d\n", sonuc );
+	return 0;
+}
+</pre>
+	<p>
+		Gördüğünüz gibi, <i>sonuc</i> isimli değişken her iki fonksiyonun dışında bir 
+		alanda, programın en başında tanımlanıyor. Bu sayede, fonksiyon bağımsız bir 
+		değişken elde ediyoruz.
+	</p>
+	<p>
+		Global değişkenlerle ilgili dikkat etmemiz gereken bir iki ufak nokta bulunuyor:   		
+		Global bir değişkeni fonksiyonların dışında bir alanda tanımlarız. Tanımladığımız 
+		noktanın altında kalan bütün fonksiyonlar, bu değişkeni tanır. Fakat tanımlanma 
+		noktasının üstünde kalan fonksiyonlar, değişkeni görmez. Bu yüzden, bütün programda 
+		geçerli olacak gerçek anlamda global bir değişken istiyorsanız, #include 
+		ifadelerinin ardından tanımlamayı yapmanız gerekir. Aynı ismi taşıyan yerel ve 
+		global değişkenleri aynı anda kullanıyorsak, iş birazcık farklılaşır.                
+	</p>
+	<p>
+		Bir fonksiyon içersinde, Global değişkenle aynı isimde, yerel bir değişken  
+		bulunduruyorsanız, bu durumda lokal değişkenle işlem yapılır. Açıkcası, sınırsız 
+		sayıda değişken ismi vermek mümkünken, global değişkenle aynı adı vermenin uygun 
+		olduğunu düşünmüyorum. Program akışını takip etmeyi zorlaştıracağından, ortak 
+		isimlerden kaçınmak daha akıllıca. 		        
+	</p>
+<p>
+		Lokal ve global değişkenlere dair son bir not; lokal değişkenlerin sadece 
+		fonksiyona özgü olması gerekmez. Bir fonksiyon içersinde 'daha lokal' değişkenleri 
+		tanımlayabilirsiniz.	Internet'te bulduğum aşağıdaki programı incelerseniz, 
+		konuyu anlamanız açısından yardımcı olacaktır.   	
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i = 4;
+	int j = 10;
+       
+	i++;
+      
+	if( j > 0 ){
+          printf("i : %d\n",i);		/* 'main' icinde tanımlanmis 'i' degiskeni */
+	}
+     
+	if (j > 0){
+		int i=100;		/* 'i' sadece bu if blogunda gecerli 
+					   olmak uzere tanimlaniyor. */ 
+		printf("i : %d\n",i);
+	}                              	/* if blogunda tanimlanan ve 100 degerini 
+					tasiyan 'i' degiskeni burada sonlaniyor. */
+     
+	printf("i : %d\n",i);        	/* En basta tanimlanan ve 5 degerini tasiyan 
+					'i' degiskenine donuyoruz */
+}
+</pre>	
+	<h3>return İfadesi</h3>
+	<p>
+		Yazımızın üst kısımlarında fonksiyonların geriye değer döndürebileceğinden 
+		bahsetmiştik. Bir fonksiyonun geriye değer döndürüp döndürmemesi, o fonksiyonu 
+		genel yapı içersinde nasıl kullanacağınıza bağlıdır. Eğer hazırlayacağınız 
+		fonksiyonun, çalışıp, üreteceği sonuçları başka yerlerde kullanmayacaksanız, 
+		fonksiyondan geriye değer dönmesi gerekmez. Ancak fonksiyonun 
+		ürettiği sonuçları, bir değişkene atayıp kullanacaksanız, o zaman fonksiyonun 
+		geriye değer döndürmesi gerekir. Bunun için 'return' ifadesini kullanırız.     		
+	</p>
+	<p>
+		Daha önce gördüğümüz geriye değer döndürmeyen fonksiyonları tanımlarken, başına 
+		<i>void</i> koyuyorduk. Geriye değer döndüren fonksiyonlar içinse, hangi 
+		tipte değer dönecekse, onu fonksiyon adının başına koyuyoruz. Diyelim ki 
+		fonksiyonumuz bir tamsayı döndürecekse, <i>int</i>; bir karakter döndürecekse 
+		<i>char</i> diye belirtiyoruz. Fonksiyon içersinden neyin döneceğine gelince, 
+		burada da <i>return</i> ifadesi devreye giriyor.     
+	</p>
+	<p>	
+		Fonksiyonun neresinde olduğu farketmez, return sonuç döndürmek üzere kullanılır. 
+		Döndüreceği sonuç, elle girilmiş veya değişkene ait bir değer olabilir. Önemli 
+		olan döndürülecek değişken tipiyle, döndürülmesi vaad edilen değişken tipinin 
+		birbirinden farklı olmamasıdır. Yani <i>int&nbsp;kup_hesapla(&nbsp;&nbsp;)</i> 
+		şeklinde bir tanımlama yaptıysanız, double tipinde bir sonucu döndüremezsiniz. 
+		Daha doğrusu döndürebilirsiniz ama program yanlış çalışır. Tip uyuşmazlığı   
+		genel	hatalardan biri olduğu için, titiz davranmanızı öğütlerim. 
+	</p> 
+	<p>
+		Şimdi return ifadesini kullanabileceğimiz, bir program yapalım. Kullanıcıdan bir 
+		sayı girilmesi istensin; girilen sayı asal değilse, tekrar ve tekrar sayı girmesi 
+		gereksin:   
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+
+// Verilen sayinin asal olup olmadigina 
+// bakar. Sayi asalsa, geriye 1 aksi hâlde
+// 0 degeri doner. 
+int sayi_asal_mi( int sayi )
+{
+	int i;
+	for( i = 2; i <= sayi/2; i++ ) {
+	// Sayi asal degilse, i'ye tam olarak 
+	// bolunur.
+		if( sayi%i == 0 ) return 0;
+	}
+	// Verilen sayi simdiye kadar hicbir 
+	// sayiya bolunmediyse, asaldir ve 
+	// geriye 1 doner.
+	return 1;
+}
+
+// main fonksiyonu
+int main( void )
+{
+	int girilen_sayi;
+	int test_sonucu;
+	do{
+		printf( "Lütfen bir sayı giriniz> " );
+		scanf( "%d",&girilen_sayi );
+		test_sonucu = sayi_asal_mi( girilen_sayi );
+		if( !test_sonucu ) 
+			printf("Girilen sayı asal değildir!\n");
+	} while( !test_sonucu );
+	printf( "Girilen sayı asaldır!\n" );
+	
+	return 0;
+}
+</pre>
+	<p>
+		Dikkat edilmesi gereken bir diğer konu; return koyduğunuz yerde, fonksiyonun derhâl
+		sonlanmasıdır. Fonksiyonun kalan kısmı çalışmaz. Geriye değer döndürmeye 
+		fonksiyonlar için de aynı durum geçerlidir, onlarda da return ifadesini 
+		kullanabilirsiniz. Değer döndürsün, döndürmesin yazdığınız fonksiyonda herhangi 
+		bir yere	'<i>return;</i>' yazın. Fonksiyonun bu noktadan itibaren çalışmayı 
+		kestiğini farkedeceksiniz. Bu fonksiyonu çalıştırmanın uygun olmadığı şartlarda, 
+		kullanabileceğiniz bir yöntemdir. Bir kontrol ekranında, kullanıcı adı ve/veya 
+		şifresini yanlış girildiğinde, programın çalışmasını anında kesmek isteyebilirsiniz.
+		Böyle bir durumda '<i>return;</i>' kullanılabilir.   
+	</p>
+	<p>
+		Dersimizi burada tamamlayıp örnek sorulara geçmeden önce, fonksiyonlara ait  
+		genel yapıyı incelemenizi öneririm.  
+	</p>
+<pre>
+<i>donus_tipi</i> <b>fonksiyon_adi</b>( <i>alacagi_arguman[lar]</i> )
+{
+	.
+	.
+	<i>FONKSİYON İÇERİĞİ 
+	(&nbsp;YAPILACAK İŞLEMLER&nbsp;)</i>
+	.
+	.
+	[<b><i>return</i></b> <i>deger</i>]
+}
+</pre>	
+	<p>
+		<b>NOT: </b>Köşeli parantez gördüğünüz yerler opsiyoneldir. Her fonksiyonda yazılması gerekmez. 
+		Ancak oluşturacağınız fonksiyon yapısına bağlı olarak yazılması şartta olabilir. 
+		Mesela dönüş tipi olarak void dışında bir değişken tipi belirlediyseniz, return 
+		koymanız gerekir.  
+	</p>
+	<h3>Örnek Sorular</h3>
+	<p><b>Soru 1:</b> Kendisine argüman olarak verilen bir tamsayıyı tersine çevirip, 
+	sonucu ekrana yazacak bir fonksiyon yazınız.
+	</p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+<pre>
+// Verilen sayının tersini ekrana yazar.
+void sayi_tersini_bul( int sayi )
+{
+	while( sayi>0 ) {
+		printf( "%d", sayi%10 );
+		sayi /= 10;
+	}
+	printf("\n");
+}
+</pre>
+</div>
+
+	<p><b>Soru 2:</b> Kendisine argüman olarak verilen bir tamsayıyı tersine çevirip, 
+	sonucu döndürecek bir fonksiyon yazınız.
+	</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+	<pre>
+// Verilen sayının tersini geriye dondurur.
+int sayi_tersini_bul( int sayi )
+{
+	int en_sag_rakam;
+	int sonuc = 0;
+	while( sayi>0 ) {
+		en_sag_rakam = sayi%10;
+		sonuc = sonuc * 10 + en_sag_rakam;
+		sayi /= 10;
+	}
+	return sonuc;
+}	
+</pre>
+</div>
+
+	<p><b>Soru 3:</b> En ve boy parametrelerine göre, '*' simgeleriyle 
+	dikdörtgen çizen bir fonksiyon yazınız.  
+	</p>
+	<p>
+	<a href="#soru3" name="soru3" onMouseDown="change_display_of_object('Cevap3')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap3" style="display:none;">
+	<pre>
+// Verilen olculere gore, dortgen cizer
+void dortgen_ciz( int en, int boy )
+{
+	int i, j;
+	for( i = 0; i < boy; i++) {
+		for( j = 0; j < en; j++ ) {
+			printf("*");
+		}
+		printf("\n");
+	}
+}			
+</pre>
+</div>
+
+	<p><b>Soru 4:</b> Kendisine verilen iki sayının OBEB (Ortak Bölenlerin En Büyüğü) 
+	değerini hesaplayıp, geriye döndüren fonksiyonu yazınız.   
+	</p>
+	<p>
+	<a href="#soru4" name="soru4" onMouseDown="change_display_of_object('Cevap4')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap4" style="display:none;">
+	<pre>
+// Verilen iki sayının OBEB'ini bulan fonksiyon
+int obeb_bul( int sayi_1, int sayi_2 )
+{
+	int obeb = 1;
+	int bolen = 2;
+	while( sayi_1 > 1 || sayi_2 > 1 ) {
+		// Sayilardan her ikiside, bolen 
+		// degiskenine bolundugu takdirde, 
+		// obeb hesabina katilir.
+		if( sayi_1 % bolen == 0 &&
+		    sayi_2 % bolen == 0 ) {
+			obeb *= bolen;
+			sayi_1 /= bolen;
+			sayi_2 /= bolen;
+		}
+		else if( sayi_1 % bolen == 0 ) {
+			sayi_1 /= bolen;
+		}
+		else if( sayi_2 % bolen == 0 ) {
+			sayi_2 /= bolen;
+		}
+		else {
+			bolen++;
+		}
+	}
+	return obeb;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 5:</b> Kendisine verilen iki sayının OKEK (Ortak Katların En Küçüğü) 
+	değerini hesaplayıp, geriye döndüren fonksiyonu yazınız.   
+	</p>
+	<p>
+	<a href="#soru5" name="soru5" onMouseDown="change_display_of_object('Cevap5')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap5" style="display:none;">
+	<pre>
+// Verilen iki sayının okekini bulan fonksiyon
+int okek_bul( int sayi_1, int sayi_2 )
+{
+	int okek = 1;
+	int bolen = 2;
+	while( sayi_1 > 1 || sayi_2 > 1 ) {
+		// Sayilardan her ikiside, bolen 
+		// degiskenine bolunuyorsa 
+		if( sayi_1 % bolen == 0 &&
+		    sayi_2 % bolen == 0 ) {
+			okek *= bolen;
+			sayi_1 /= bolen;
+			sayi_2 /= bolen;
+		}
+		// Sayilardan ilki, bolen 
+		// degiskenine bolunuyorsa 
+		else if( sayi_1 % bolen == 0 ) {
+			okek *= bolen;
+			sayi_1 /= bolen;
+		}
+		// Sayilardan ikincisi, bolen 
+		// degiskenine bolunuyorsa 
+		else if( sayi_2 % bolen == 0 ) {
+			okek *= bolen;
+			sayi_2 /= bolen;
+		}
+		else {
+			bolen++;
+		}
+	}
+	return okek;
+}	
+</pre>
+	</div>
+	
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_8.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_10.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:45 GMT -->
+</html>

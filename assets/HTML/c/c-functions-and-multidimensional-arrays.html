@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-functions-and-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Functions and Multidimensional Arrays</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Functions and Multidimensional Arrays'>C Functions and Multidimensional Arrays</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-syntax.html'>C function syntax
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-finds-the-lesser-of-two-values.html'>C function intro demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-prototype-declaration.html'>C prototype declaration
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-block-variable-shadow-example.html'>C Variable shadow example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-keeping-track-within-a-function.html'>C function Static Variables 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sharing-variables-between-functions-using-global-variables.html'>C function global variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-name.html'>C function name
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-the-return-value-type-for-function.html'>C function return
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Parameter
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameters.html'>C Function Parameters 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-value-mechanism.html'>C Parameter Pass by Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-address-mechanism.html'>C Parameter Pass by Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-protecting-array-contents-with-const.html'>C Parameter Protecting
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-const-parameters.html'>C Parameter const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-declaring-array-parameters.html'>C Parameter Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-using-pointer-parameters.html'>C Parameter Pointer 
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Parameter Array 2D
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-with-a-variable-number-of-arguments.html'>C function variable argument length
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Recursion
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion.html'>C function recursion
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-to-calculate-factorials.html'>C function recursion factorial
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-prints-the-binary-equivalent-of-an-integer.html'>C function recursion binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursive-to-calculate-power.html'>C function recursion power
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-a-pointer-to-a-function.html'>C function pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-pointers-to-functions.html'>C Pointer Function Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-functions-as-arguments.html'>C Function Pointer Argument
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-function-as-parameter.html'>C function as parameter
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-to-raise-a-number-to-an-integer-power.html'>C Raise to Power
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-an-average-using-functions.html'>C function calculate average
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-converts-an-integer-to-a-string.html'>C convert int to string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-split-string-into-a-list-of-words.html'>C split string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-main-function.html'>C function  main() 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-3.html'>C exercise 3
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Functions and Multidimensional Arrays</h1>
+<a class ='btn btn-outline-dark' href=c-function-using-pointer-parameters.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-functions-with-a-variable-number-of-arguments.html>Next</a><p>The following code shows how to pass multi dimensional array to a function:
+</p><div class='myCodeDiv'><button id='CDZHX' class='myCopyButton' data-clipboard-target='#RWNCG'>Copy</button><pre  id='RWNCG' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define ROWS 3<span style='color:#b9aaa9'>/</span><span style='color:#999b9a'>/</span><span style='color:#9ba9bb'>f</span><span style='color:#a9ba9a'>r</span><span style='color:#baabaa'>o</span><span style='color:#9aa999'>m</span><span style='color:#a9aaba'> </span><span style='color:#bb9b9a'>w</span><span style='color:#99bbaa'> </span><span style='color:#bab9ab'>w</span><span style='color:#aa999a'> </span><span style='color:#aa9bba'>w</span><span style='color:#9aa9a9'> </span><span style='color:#aabbb9'>.</span><span style='color:#9ba9ba'>d</span><span style='color:#aab99a'>e</span><span style='color:#9b9a9b'>m</span><span style='color:#ab9a9b'> </span><span style='color:#bbaaaa'>o</span><span style='color:#aba99a'>2</span><span style='color:#99b99a'>s</span><span style='color:#baa9aa'> </span><span style='color:#babaab'>.</span><span style='color:#bbba9a'> </span><span style='color:#999a9b'>c</span><span style='color:#ab9a9a'> </span><span style='color:#bba9aa'>o</span><span style='color:#abaa9a'>m</span>
+#define COLS 4
+<span class='r'>void</span> sum_rows(<span class='r'>int</span> ar[][COLS], <span class='r'>int</span> rows);
+<span class='r'>void</span> sum_cols(<span class='r'>int</span> [][COLS], <span class='r'>int</span> );    <span class='c'>// ok to omit names</span>
+<span class='r'>int</span> sum2d(<span class='r'>int</span> (*ar)[COLS], <span class='r'>int</span> rows); <span class='c'>// another syntax</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+     <span class='r'>int</span> my_array[ROWS][COLS] = {
+            {2,4,6,8},
+            {3,5,7,9},
+            {12,10,8,6}
+     };
+
+     sum_rows(my_array, ROWS);
+     sum_cols(my_array, ROWS);
+     printf(<span class='q'>"Sum of all elements = %d\n"</span>, sum2d(my_array, ROWS));
+
+     <span class='r'>return</span> 0;
+
+}
+
+<span class='r'>void</span> sum_rows(<span class='r'>int</span> ar[][COLS], <span class='r'>int</span> rows)
+{
+    <span class='r'>int</span> r;
+    <span class='r'>int</span> c;
+    <span class='r'>int</span> tot;
+
+    <span class='r'>for</span> (r = 0; r &lt; rows; r++)
+    {
+        tot = 0;
+        <span class='r'>for</span> (c = 0; c &lt; COLS; c++)
+            tot += ar[r][c];
+        printf(<span class='q'>"row %d: sum = %d\n"</span>, r, tot);
+    }
+}
+
+<span class='r'>void</span> sum_cols(<span class='r'>int</span> ar[][COLS], <span class='r'>int</span> rows)
+{
+    <span class='r'>int</span> r;
+    <span class='r'>int</span> c;
+    <span class='r'>int</span> tot;
+
+    <span class='r'>for</span> (c = 0; c &lt; COLS; c++)
+    {
+        tot = 0;
+        <span class='r'>for</span> (r = 0; r &lt; rows; r++)
+            tot += ar[r][c];
+        printf(<span class='q'>"col %d: sum = %d\n"</span>, c, tot);
+    }
+}
+
+<span class='r'>int</span> sum2d(<span class='r'>int</span> ar[][COLS], <span class='r'>int</span> rows)
+{
+    <span class='r'>int</span> r;
+    <span class='r'>int</span> c;
+    <span class='r'>int</span> tot = 0;
+
+    <span class='r'>for</span> (r = 0; r &lt; rows; r++)
+        <span class='r'>for</span> (c = 0; c &lt; COLS; c++)
+            tot += ar[r][c];
+
+    <span class='r'>return</span> tot;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CDZHX');clipboard.on('success', function(e) {$('#CDZHX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CDZHX').text('error');});</script></div><p>Here is the output:
+</p><img src='data:image/png;base64,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'><p>The program passes as arguments the name my_array, which is a pointer to the first element, 
+a subarray, and the symbolic constant ROWS, representing 3, the number of rows.
+
+</p><p>Each function then treats <i style='color:blue'>ar</i> as an array of arrays of four ints. 
+
+</p><p>The number of columns is built in to the function, but the number of rows is left open. 
+
+</p><p>The same function will work with, say, a 12 by 4 array if 12 is passed as the number of rows. 
+
+</p><p>That's because rows is the number of elements; however, because each element is an array, or row, 
+<i style='color:blue'>rows</i> becomes the number of rows.
+
+</p><p><i style='color:blue'>ar</i> is used in the same fashion as my_array is used in <i style='color:blue'>main</i>(). This is possible because <i style='color:blue'>ar</i>
+and my_array are the same type: pointer-to-array-of-four-ints.
+
+</p><p>Be aware that the following declaration will not work properly:
+</p><div class='myCodeDiv'><button id='BXCLD' class='myCopyButton' data-clipboard-target='#XTKIQ'>Copy</button><pre  id='XTKIQ' style='font-size:18px;' class='code'><span class='r'>int</span> sum2(<span class='r'>int</span> ar[][], <span class='r'>int</span> rows); <span class='c'>// faulty declaration</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BXCLD');clipboard.on('success', function(e) {$('#BXCLD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BXCLD').text('error');});</script></div><p>For the compiler to evaluate this, it needs to know the size object to which <i style='color:blue'>ar</i> points. 
+
+</p><p>The declaration
+</p><div class='myCodeDiv'><button id='ZPFHO' class='myCopyButton' data-clipboard-target='#XVGWF'>Copy</button><pre  id='XVGWF' style='font-size:18px;' class='code'><span class='r'>int</span> sum2(<span class='r'>int</span> ar[][4], <span class='r'>int</span> rows); <span class='c'>// valid declaration</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZPFHO');clipboard.on('success', function(e) {$('#ZPFHO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZPFHO').text('error');});</script></div><p>says that <i style='color:blue'>ar</i> points to an array of four ints,
+so ar+1 means "add 16 bytes to the address." 
+
+</p><p>With the empty-bracket version, the compiler would not know what to do.
+
+</p><p>You can also include a size in the other bracket pair, as shown here, but the compiler ignores it:
+</p><div class='myCodeDiv'><button id='VSVCC' class='myCopyButton' data-clipboard-target='#XHMLC'>Copy</button><pre  id='XHMLC' style='font-size:18px;' class='code'><span class='r'>int</span> sum2(<span class='r'>int</span> ar[3][4], <span class='r'>int</span> rows); <span class='c'>// valid declaration, 3 ignored</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VSVCC');clipboard.on('success', function(e) {$('#VSVCC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VSVCC').text('error');});</script></div><p>In general, to declare a pointer corresponding to an N-dimensional array, you must supply
+values for all but the leftmost set of brackets:
+</p><div class='myCodeDiv'><button id='QJUEA' class='myCopyButton' data-clipboard-target='#OEODS'>Copy</button><pre  id='OEODS' style='font-size:18px;' class='code'><span class='r'>int</span> sum4d(<span class='r'>int</span> ar[][12][20][30], <span class='r'>int</span> rows);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QJUEA');clipboard.on('success', function(e) {$('#QJUEA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QJUEA').text('error');});</script></div><p>That's because the first set of brackets indicates a pointer, whereas the rest of the 
+brackets describe the type of data object being pointed to, as the following equivalent prototype
+illustrates:
+</p><div class='myCodeDiv'><button id='KTUDZ' class='myCopyButton' data-clipboard-target='#MMXIY'>Copy</button><pre  id='MMXIY' style='font-size:18px;' class='code'><span class='r'>int</span> sum4d(<span class='r'>int</span> (*ar)[12][20][30], <span class='r'>int</span> rows);         <span class='c'>// ar a pointer</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KTUDZ');clipboard.on('success', function(e) {$('#KTUDZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KTUDZ').text('error');});</script></div><p>Here, <i style='color:blue'>ar</i> points to a 12 by 20 by 30 array of ints.
+</p><a class ='btn btn-outline-dark' href=c-function-using-pointer-parameters.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-functions-with-a-variable-number-of-arguments.html>Next</a><h2>Related</h2><UL><LI><a href='c-function-const-parameters.html'>C function const Parameters</a></LI><LI><a href='c-function-declaring-array-parameters.html'>C function Declaring Array Parameters</a></LI><LI><a href='c-function-using-pointer-parameters.html'>C function Using Pointer Parameters</a></LI><LI><a href='c-functions-with-a-variable-number-of-arguments.html'>C Functions with a Variable Number of Arguments</a></LI><LI><a href='c-function-recursion.html'>C function recursion</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-functions-and-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

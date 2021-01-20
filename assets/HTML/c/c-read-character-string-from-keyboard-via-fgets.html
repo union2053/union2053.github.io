@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-read-character-string-from-keyboard-via-fgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Read Character String from keyboard via fgets()</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Read Character String from keyboard via fgets()'>C Read Character String from keyboard via fgets()</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Read Character String from keyboard via fgets()</h1>
+<a class ='btn btn-outline-dark' href=c-read-character-string-from-keyboard-via-gets.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-gets-s.html>Next</a><p>The <i style='color:blue'>fgets</i>() function fixes the possible overflow problem by taking a second argument
+that limits the number of characters to be read. 
+
+</p><p>This function is designed for file input, which
+makes it a little more awkward to use. 
+
+</p><p>
+
+</p><p>It takes a second argument indicating the maximum number of characters to read. 
+If this argument has the value n, <i style='color:blue'>fgets</i>() reads up to n-1 characters or through the newline
+character, whichever comes first.
+
+</p><p>If <i style='color:blue'>fgets</i>() reads the newline, it stores it in the string, unlike <i style='color:blue'>gets</i>(), which discards it.
+
+</p><p>It takes a third argument indicating which file to read. 
+To read from the keyboard, use stdin (for standard input) as the argument; this identifier is defined in stdio.h.
+
+</p><p>Because the <i style='color:blue'>fgets</i>() function includes the newline as part of the string, 
+it's often paired with <i style='color:blue'>fputs</i>(), which works like <i style='color:blue'>puts</i>(), except that it doesn't automatically append a newline. 
+
+</p><p>It takes a second argument to indicate which file to write to. 
+
+</p><p>For the computer monitor we can use stdout (for standard output) as an argument. 
+</p><h3>Example
+</h3><p>The following code illustrates how <i style='color:blue'>fgets</i>() and <i style='color:blue'>fputs</i>() behave.
+
+</p><div class='myCodeDiv'><button id='EQMQX' class='myCopyButton' data-clipboard-target='#LQBDG'>Copy</button><pre  id='LQBDG' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define STLEN 14
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> words[STLEN];
+
+    puts(<span class='q'>"Enter a string, please."</span>);
+    fgets(words, STLEN, stdin);
+    printf(<span class='q'>"Your string twice (puts(), then fputs()):\n"</span>);
+    puts(words);
+    fputs(words, stdout);
+    puts(<span class='q'>"Enter another string, please."</span>);
+    fgets(words, STLEN, stdin);
+    printf(<span class='q'>"Your string twice (puts(), then fputs()):\n"</span>);
+    puts(words);
+    fputs(words, stdout);
+    puts(<span class='q'>"Done."</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EQMQX');clipboard.on('success', function(e) {$('#EQMQX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EQMQX').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>The <i style='color:blue'>fgets</i>() function returns a pointer to char. 
+
+</p><p>If all goes well, it just returns the same address that was passed to it as the first argument. 
+
+</p><p>If the function encounters end-of-file, however, it returns a special pointer called the null pointer. 
+
+</p><p>This is a pointer guaranteed not to point to valid data so it can be used to indicate a special case. 
+
+</p><p>In code it can be represented by the digit 0 or, more commonly in C, by the macro NULL. 
+
+</p><p>The function also returns NULL if there is some sort of read error.
+
+</p><p>The following code shows a simple loop that reads and echoes text until <i style='color:blue'>fgets</i>()
+encounters end-of-file or until it reads a blank line, indicated by the first character being a
+newline character.
+
+</p><div class='myCodeDiv'><button id='SRWBJ' class='myCopyButton' data-clipboard-target='#EHUIN'>Copy</button><pre  id='EHUIN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define STLEN 10
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> words[STLEN];
+
+    puts(<span class='q'>"Enter strings (empty line to quit):"</span>);
+    <span class='r'>while</span> (fgets(words, STLEN, stdin) != NULL &amp;&amp; words[0] != <span class='q'>'\n'</span>)
+        fputs(words, stdout);
+    puts(<span class='q'>"Done."</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SRWBJ');clipboard.on('success', function(e) {$('#SRWBJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SRWBJ').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>New Line Character
+
+</h3><p><i style='color:blue'>fgets</i>() stores the newline from the input. 
+
+</p><p>To get rid of a newline, search the stored string for a newline and to replace it with a null character:
+</p><div class='myCodeDiv'><button id='JXYOC' class='myCopyButton' data-clipboard-target='#DNNRF'>Copy</button><pre  id='DNNRF' style='font-size:18px;' class='code'><span class='r'>while</span> (words[i] != <span class='q'>'\n'</span>) <span class='c'>// assuming \n in words</span>
+    i++;
+words[i] = <span class='q'>'\0'</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JXYOC');clipboard.on('success', function(e) {$('#JXYOC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JXYOC').text('error');});</script></div><p>Or discard the part that doesn't fit:
+</p><div class='myCodeDiv'><button id='PQBYV' class='myCopyButton' data-clipboard-target='#EJLDP'>Copy</button><pre  id='EJLDP' style='font-size:18px;' class='code'><span class='r'>while</span> (getchar() != <span class='q'>'\n'</span>)      <span class='c'>// read but don't store</span>
+    <span class='r'>continue</span>;                  <span class='c'>// input including \n</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PQBYV');clipboard.on('success', function(e) {$('#PQBYV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PQBYV').text('error');});</script></div><p>The following code adds testing to these basic ideas to read lines of
+inputs, removes the stored newlines, if any, and discards the part of a line that doesn't fit.
+
+</p><div class='myCodeDiv'><button id='ZEETX' class='myCopyButton' data-clipboard-target='#MJFZW'>Copy</button><pre  id='MJFZW' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define STLEN 10
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> words[STLEN];
+    <span class='r'>int</span> i;
+
+    puts(<span class='q'>"Enter strings (empty line to quit):"</span>);
+    <span class='r'>while</span> (fgets(words, STLEN, stdin) != NULL
+                           &amp;&amp; words[0] != <span class='q'>'\n'</span>)
+    {
+        i = 0;
+        <span class='r'>while</span> (words[i] != <span class='q'>'\n'</span> &amp;&amp; words[i] != <span class='q'>'\0'</span>)
+            i++;
+        <span class='r'>if</span> (words[i] == <span class='q'>'\n'</span>)
+            words[i] = <span class='q'>'\0'</span>;
+        <span class='r'>else</span> <span class='c'>// must have words[i] == '\0'</span>
+            <span class='r'>while</span> (getchar() != <span class='q'>'\n'</span>)
+                 <span class='r'>continue</span>;
+        puts(words);
+    }
+    puts(<span class='q'>"done"</span>);
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZEETX');clipboard.on('success', function(e) {$('#ZEETX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZEETX').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>The loop
+</p><div class='myCodeDiv'><button id='MYIDH' class='myCopyButton' data-clipboard-target='#TGGBT'>Copy</button><pre  id='TGGBT' style='font-size:18px;' class='code'><span class='r'>while</span> (words[i] != <span class='q'>'\n'</span> &amp;&amp; words[i] != <span class='q'>'\0'</span>)
+    i++;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MYIDH');clipboard.on('success', function(e) {$('#MYIDH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MYIDH').text('error');});</script></div><p>goes through the string until reaching a newline or null character, whichever comes first.
+
+</p><p>If that character is a newline, the following if statement replaces it with a null character.
+
+</p><p>Otherwise, the else part disposes of the rest of the input line. 
+</p><a class ='btn btn-outline-dark' href=c-read-character-string-from-keyboard-via-gets.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-gets-s.html>Next</a><h2>Related</h2><UL><LI><a href='c-arrays-of-strings.html'>C Arrays of Strings</a></LI><LI><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Count strings in a two-dimensional array and the length of each string</a></LI><LI><a href='c-read-character-string-from-keyboard-via-gets.html'>C Read Character String from keyboard via gets()</a></LI><LI><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C Read character string from keyboard via gets_s()</a></LI><LI><a href='c-create-your-own-string-reading-function.html'>C Create your own string reading function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-read-character-string-from-keyboard-via-fgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

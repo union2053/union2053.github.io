@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12392278/measure-time-in-linux---time-vs-clock-vs-getrusage-vs-clock-gettime-vs-gettimeofday-vs-timespec-get- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Measure time in Linux - time vs clock vs getrusage vs clock_gettime vs gettimeofday vs timespec_get? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Measure time in Linux - time vs clock vs getrusage vs clock_gettime vs gettimeofday vs timespec_get? | C Language Knowledge Base">
+        <title>[SOLVED] Measure time in Linux - time vs clock vs getrusage vs clock_gettime vs gettimeofday vs timespec_get? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="measure-time-in-linux-time-vs-clock-vs-getrusage-vs-clock-gettime-vs-gettimeofday-vs-timespec-get-">Measure time in Linux - time vs clock vs getrusage vs clock_gettime vs gettimeofday vs timespec_get?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/linux-kernel.html">linux-kernel</a></span>
+                        <span class="tag-item"><a href="../tag/time.html">time</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Among the timing functions, <code>time</code>, <code>clock</code> <code>getrusage</code>, <code>clock_gettime</code>, <code>gettimeofday</code> and <code>timespec_get</code>, I want to understand clearly how they are implemented and what are their return values in order to know in which situation I have to use them.</p>
+
+<p>First we need to classify functions returning <strong>wall-clock values</strong> compare to functions returning <strong>process or threads values</strong>. <code>gettimeofday</code> returns wall-clock value, <code>clock_gettime</code> returns wall-clock value <strong>or</strong> process or threads values depending on the <code>Clock</code> parameter passed to it. <code>getrusage</code> and <code>clock</code> return process values.</p>
+
+<p>Then the second question regards the implementation of these functions and as a consequence, their accuracy. Which hardware or software mechanism does these functions use. </p>
+
+<p>It seems that <code>getrusage</code> uses only the kernel tick (usually 1ms long) and as a consequence can't be more accurate than the ms. Is it right? 
+Then the <code>getimeofday</code> function seems to use the most accurate underlying hardware available. As a consequence its accuracy is usually the microsecond (can't be more because of the API) on recent hardware. 
+What about <code>clock</code>, the man page speak about "approximation", what does it mean? 
+What about <code>clock_gettime</code>, the API is in nanosecond, does it means that it's able to be so accurate if underlying hardware allows it? What about monotonicity?</p>
+
+<p>Are there any other functions?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/116388/manuel-selva" target="_blank"><span itemprop="name">Manuel Selva</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">137</div>
+                                    <div itemprop="dateCreated">4/23/2016 2:08:19 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The problem is that there are several different time functions available in C and C++, and some of them vary in behavior between implementations.  There are also a lot of half-answers floating around.  Compiling a list of clock functions together with their properties would answer the question properly.  For starts let's ask what the relevant properties are that we're looking for. Looking at your post, I suggest:</p>
+
+<ul>
+<li>What time is measured by the clock? (real, user, system, or, hopefully not, wall-clock?)</li>
+<li>What is the precision of the clock? (s, ms, µs, or faster?)</li>
+<li>After how much time does the clock wrap around? Or is there some mechanism to avoid this?</li>
+<li>Is the clock monotonic, or will it change with changes in the system time (via NTP, time zone, daylight savings time, by the user, etc.)?</li>
+<li>How do the above vary between implementations?</li>
+<li>Is the specific function obsolete, non standard, etc.?</li>
+</ul>
+
+<p>Before starting the list, I'd like to point out that wall-clock time is rarely the right time to use, whereas it changes with time zone changes, daylight savings time changes, or if the wall clock is synchronized by NTP.  None of these things are good if you're using the time to schedule events or to benchmark performance. It's only really good for what the name says, a clock on the wall (or desktop).</p>
+
+<p>Here's what I've found so far for clocks in Linux and OS X:</p>
+
+<ul>
+<li><a href="http://linux.die.net/man/2/time" rel="noreferrer"><code>time()</code></a> returns the wall-clock time from the OS, with precision in seconds.</li>
+<li><a href="http://linux.die.net/man/3/clock" rel="noreferrer"><code>clock()</code></a> seems to return the sum of user and system time. It is present in C89 and later. At one time this was supposed to be the CPU time in cycles, but modern standards <a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/time.h.html" rel="noreferrer">like POSIX</a> require CLOCKS_PER_SEC to be 1000000, giving a maximum possible precision of 1 µs. The precision on my system is indeed 1 µs.  This clock wraps around once it tops out (this typically happens after ~2^32 ticks, which is not very long for a 1 MHz clock). <code>man clock</code> says that since glibc 2.18 it is implemented with <code>clock_gettime(CLOCK_PROCESS_CPUTIME_ID, ...)</code> in Linux. </li>
+<li><a href="http://linux.die.net/man/3/clock_gettime" rel="noreferrer"><code>clock_gettime(CLOCK_MONOTONIC, ...)</code></a> provides nanosecond resolution, is monotonic. I believe the 'seconds' and 'nanoseconds' are stored separately, each in 32-bit counters.  Thus, any wrap-around would occur after many dozen years of uptime. This looks like a very good clock, but unfortunately it isn't yet available on OS X. POSIX 7 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_getres.html" rel="noreferrer">describes <code>CLOCK_MONOTONIC</code> as an optional extension</a>.</li>
+<li><a href="http://linux.die.net/man/2/getrusage" rel="noreferrer"><code>getrusage()</code></a> turned out to be the best choice for my situation. It reports the user and system times separately and does not wrap around. The precision on my system is 1 µs, but I also tested it on a Linux system (Red Hat 4.1.2-48 with GCC 4.1.2) and there the precision was only 1 ms.</li>
+<li><a href="http://linux.die.net/man/2/gettimeofday" rel="noreferrer"><code>gettimeofday()</code></a> returns the wall-clock time with (nominally) µs precision. On my system this clock does seem to have µs precision, but this is not guaranteed, because <a href="http://linux.die.net/man/2/gettimeofday" rel="noreferrer">"the resolution of the system clock is hardware dependent"</a>. POSIX.1-2008 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html" rel="noreferrer">says that</a>. "Applications should use the <code>clock_gettime()</code> function instead of the obsolescent <code>gettimeofday()</code> function", so you should stay away from it. Linux x86 and implements it <a href="https://github.com/torvalds/linux/blob/v4.4/arch/x86/entry/syscalls/syscall_64.tbl#L105" rel="noreferrer">as a system call</a>.</li>
+<li><a href="https://developer.apple.com/library/mac/#qa/qa1398/_index.html" rel="noreferrer"><code>mach_absolute_time()</code></a> is an option for very high resolution (ns) timing on OS X. On my system, this does indeed give ns resolution. In principle this clock wraps around, however it is storing ns using a 64-bit unsigned integer, so the wrapping around shouldn't be an issue in practice. Portability is questionable.</li>
+<li><a href="https://stackoverflow.com/questions/21665641/ns-precision-monotonic-clock-in-c-on-linux-and-os-x/21665642#21665642">I wrote a hybrid function</a> based on <a href="https://gist.github.com/jbenet/1087739" rel="noreferrer">this snippet</a> that uses clock_gettime when compiled on Linux, or a Mach timer when compiled on OS X, in order to get ns precision on both Linux and OS X.</li>
+</ul>
+
+<p>All of the above exist in both Linux and OS X except where otherwise specified.  "My system" in the above is an Apple running OS X 10.8.3 with GCC 4.7.2 from MacPorts.</p>
+
+<p>Finally, here is a list of references that I found helpful in addition to the links above:</p>
+
+<ul>
+<li><a href="http://blog.habets.pp.se/2010/09/gettimeofday-should-never-be-used-to-measure-time" rel="noreferrer">http://blog.habets.pp.se/2010/09/gettimeofday-should-never-be-used-to-measure-time</a></li>
+<li><a href="https://stackoverflow.com/questions/7215764/how-to-measure-the-actual-execution-time-of-a-c-program-under-linux">How to measure the ACTUAL execution time of a C program under Linux?</a></li>
+<li><a href="http://digitalsandwich.com/archives/27-benchmarking-misconceptions-microtime-vs-getrusage.html" rel="noreferrer">http://digitalsandwich.com/archives/27-benchmarking-misconceptions-microtime-vs-getrusage.html</a></li>
+<li><a href="http://www.unix.com/hp-ux/38937-getrusage.html" rel="noreferrer">http://www.unix.com/hp-ux/38937-getrusage.html</a></li>
+</ul>
+
+<hr>
+
+<p><strong>Update</strong>: for OS X, <code>clock_gettime</code> has been implemented as of 10.12 (Sierra). Also, both POSIX and BSD based platforms (like OS X) share the <code>rusage.ru_utime</code> struct field.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1655144/douglas-b--staple" target="_blank"><span itemprop="name">Douglas B. Staple</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12392278/measure-time-in-linux---time-vs-clock-vs-getrusage-vs-clock-gettime-vs-gettimeofday-vs-timespec-get-#answer-0</div>
+                                            <div itemprop="upvoteCount">183</div>
+                                            <div itemprop="dateCreated">5/23/2017 12:18:09 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><strong>C11 <code>timespec_get</code></strong></p>
+
+<p>Usage example at: <a href="https://stackoverflow.com/a/36095407/895245">https://stackoverflow.com/a/36095407/895245</a></p>
+
+<p>The maximum possible precision returned is nanoseconds, but the actual precision is implementation defined and could be smaller.</p>
+
+<p>It returns wall time, not CPU usage.</p>
+
+<p>glibc 2.21 implements it under <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/posix/timespec_get.c;h=2609b2e72998aacc4ea537430c2278ebbf51b83a;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff" rel="noreferrer"><code>sysdeps/posix/timespec_get.c</code></a> and it forwards directly to:</p>
+
+<pre><code>clock_gettime (CLOCK_REALTIME, ts) &lt; 0)
+</code></pre>
+
+<p><code>clock_gettime</code> and <code>CLOCK_REALTIME</code> are POSIX <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_getres.html" rel="noreferrer">http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_getres.html</a>, and <code>man clock_gettime</code> says that this measure may have discontinuities if you change some system time setting while your program runs.</p>
+
+<p><strong>C++11 chrono</strong></p>
+
+<p>Since we're at it, let's cover them as well: <a href="http://en.cppreference.com/w/cpp/chrono" rel="noreferrer">http://en.cppreference.com/w/cpp/chrono</a></p>
+
+<p>GCC 5.3.0 (C++ stdlib is inside GCC source):</p>
+
+<ul>
+<li><a href="https://github.com/gcc-mirror/gcc/blob/2bc376d60753a58b10cb179f8edb7d72bee7a88b/libstdc++-v3/include/std/chrono#L776" rel="noreferrer"><code>high_resolution_clock</code></a> is an alias for <code>system_clock</code></li>
+<li><a href="https://github.com/gcc-mirror/gcc/blob/2bc376d60753a58b10cb179f8edb7d72bee7a88b/libstdc++-v3/src/c++11/chrono.cc#L54" rel="noreferrer"><code>system_clock</code></a> forwards to the first of the following that is available:
+
+<ul>
+<li><code>clock_gettime(CLOCK_REALTIME, ...)</code></li>
+<li><code>gettimeofday</code></li>
+<li><code>time</code></li>
+</ul></li>
+<li><a href="https://github.com/gcc-mirror/gcc/blob/2bc376d60753a58b10cb179f8edb7d72bee7a88b/libstdc++-v3/src/c++11/chrono.cc#L82" rel="noreferrer"><code>steady_clock</code></a> forwards to the first of the following that is available:
+
+<ul>
+<li><code>clock_gettime(CLOCK_MONOTONIC, ...)</code></li>
+<li><code>system_clock</code></li>
+</ul></li>
+</ul>
+
+<p>Asked at: <a href="https://stackoverflow.com/questions/13263277/difference-between-stdsystem-clock-and-stdsteady-clock">Difference between std::system_clock and std::steady_clock?</a></p>
+
+<p><code>CLOCK_REALTIME</code> vs <code>CLOCK_MONOTONIC</code>: <a href="https://stackoverflow.com/questions/3523442/difference-between-clock-realtime-and-clock-monotonic">Difference between CLOCK_REALTIME and CLOCK_MONOTONIC?</a></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank">Ciro Santilli 新疆改造中心996ICU六四事件</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12392278" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12392278/measure-time-in-linux---time-vs-clock-vs-getrusage-vs-clock-gettime-vs-gettimeofday-vs-timespec-get- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:06:01 GMT -->
+</html>

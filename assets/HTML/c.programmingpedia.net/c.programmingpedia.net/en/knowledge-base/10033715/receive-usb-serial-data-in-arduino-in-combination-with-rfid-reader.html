@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10033715/receive-usb-serial-data-in-arduino-in-combination-with-rfid-reader by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:00:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Receive USB serial data in arduino in combination with RFID reader | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Receive USB serial data in arduino in combination with RFID reader | C Language Knowledge Base">
+        <title>[SOLVED] Receive USB serial data in arduino in combination with RFID reader | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="receive-usb-serial-data-in-arduino-in-combination-with-rfid-reader">Receive USB serial data in arduino in combination with RFID reader</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/csharp.html">c#</a></span>
+                        <span class="tag-item"><a href="../tag/serial-port.html">serial-port</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm working on an Arduino project. The Arduino board saves a timestamp and RFID code to the ROM when an RFID tag is scanned. The RFID data is received by <code>Serial.read()</code> but now I need to get the stored data from my Arduino ROM to my computer.</p>
+
+<p>To do that I have to read the serial data (in this case using C#) and that works fine. But because my Arduino board needs to know when to write data to the serial I first need to send a command to the Arduino board.</p>
+
+<p>Using Arduino IDE's 'Serial Monitor', I tried sending some data but it doesn't get received by the Arduino. When I place an RFID tag in front of the RFID, the Arduino board does receive data. So it seems to me like the serial port input is somehow reserved by the RFID reader? Is that even possible?</p>
+
+<p>Does someone know an solution for my problem? Note that this is my first Arduino project and C is new to me.</p>
+
+<p>Some info:</p>
+
+<ul>
+<li>Arduino UNO</li>
+<li>RFID Reader: Innovations ID12</li>
+<li>RTC Clock module</li>
+<li>C</li>
+<li>C#</li>
+<li>.NET</li>
+</ul>
+
+<p>The code below is the whole Arduino project.</p>
+
+<pre><code>#include "Wire.h"
+#include &lt;EEPROM.h&gt;
+#include "EEPROMAnything.h"
+
+#define DS1307_ADDRESS 0x68
+byte   zero = 0; //workaround for issue #527
+int    buttonState = 0;
+byte   value;
+int    byteaddress = 0;
+int    bytesize = 0;
+int    lastTag = 0;
+byte   incomingByte;
+
+struct config_t
+{
+    int seconds;
+    int hours;
+    int minutes;
+} timestamp;
+
+int  RFIDResetPin = 13;
+
+//Register your RFID tags here
+char tag1[13] = "03000DEB55B0";
+char tag2[13] = "03000DB88137";
+char tag3[13] = "03000DC8E026";
+char tag4[13] = "03000623FBDD";
+char tag5[13] = "03000DB8B701";
+
+void setup()
+{
+  pinMode(7, INPUT);
+  Wire.begin();
+
+  Serial.begin(9600);
+
+  pinMode(RFIDResetPin, OUTPUT);
+  digitalWrite(RFIDResetPin, HIGH);
+
+  EEPROM_readAnything(0, timestamp);
+  setDateTime(); //MUST CONFIGURE IN FUNCTION
+
+  pinMode(11, OUTPUT);
+}
+
+void loop()
+{
+  buttonState = digitalRead(7);
+
+  char tagString[13];
+  int index = 0;
+  boolean reading = false;
+
+  if (buttonState == HIGH) {   
+    // turn LED on:    
+    printDate(); 
+    delay(200);
+  }
+
+  while(Serial.available()){
+
+    buttonState = digitalRead(7);
+
+    int readByte = Serial.read(); //read next available byte
+
+    if(readByte == 2) reading = true; //begining of tag
+    if(readByte == 3) reading = false; //end of tag
+
+    if(reading &amp;&amp; readByte != 2 &amp;&amp; readByte != 10 &amp;&amp; readByte != 13){
+      //store the tag
+      tagString[index] = readByte;
+      index ++;
+    }
+
+    incomingByte = Serial.read();
+    Serial.println(incomingByte);
+  }
+
+  checkTag(tagString); //Check if it is a match
+  clearTag(tagString); //Clear the char of all value
+  resetReader(); //eset the RFID reader
+}
+
+void checkTag(char tag[]){
+///////////////////////////////////
+//Check the read tag against known tags
+///////////////////////////////////
+
+  int currentTag = 0;
+
+  if(strlen(tag) == 0 || strlen(tag) &lt; 12)
+     return; //empty, no need to continue
+
+  if(compareTag(tag, tag1) &amp;&amp; lastTag != 1){ // if matched tag1, do   this
+    Serial.println("Scanned tag 1");
+    lastTag = 1;
+    currentTag = 1;
+    printDate();
+    bleepSucces(11);
+  }
+  else
+  if(compareTag(tag, tag2) &amp;&amp; lastTag != 2){ //if matched tag2, do this
+    Serial.println("Scanned tag 2");
+    lastTag = 2;
+    currentTag = 2;
+    printDate();
+    bleepSucces(11);
+  }
+  else
+  if(compareTag(tag, tag3) &amp;&amp; lastTag != 3){
+    Serial.println("Scanned tag 3");
+    lastTag = 3;
+    currentTag = 3;
+    printDate();
+    bleepSucces(11);
+  }
+  else
+  if(compareTag(tag, tag4) &amp;&amp; lastTag != 4){
+    Serial.println("Scanned tag 4");
+    lastTag = 4;
+    currentTag = 4;
+    printDate();
+    bleepSucces(11);
+  }
+  else
+  if(compareTag(tag, tag5) &amp;&amp; lastTag != 5){
+    Serial.println("Scanned tag 5");
+    lastTag = 5;
+    currentTag = 5;
+    printDate();
+    bleepSucces(11);
+  }
+  else
+  {
+    if(currentTag == 0 &amp;&amp; lastTag == 0){
+      Serial.println("Unknown Tag, see below:");
+      Serial.println(tag); //read out any unknown tag
+      //resetReader();
+      lastTag = 0;
+      bleepFail(11);
+    }
+    return;
+  }
+}
+
+void bleepSucces(int pin)
+{
+  digitalWrite(pin, HIGH);
+  delay(300);
+  digitalWrite(pin, LOW);
+  delay(20);
+  digitalWrite(pin, HIGH);
+  delay(150);
+  digitalWrite(pin, LOW);
+}
+
+void bleepFail(int pin)
+{
+  digitalWrite(pin, HIGH);
+  delay(1200);
+  digitalWrite(pin, LOW);
+}
+
+void resetReader()
+{    //Reset the RFID reader to read again.
+  digitalWrite(RFIDResetPin, LOW);
+  digitalWrite(RFIDResetPin, HIGH);
+  delay(150);
+}
+
+void clearTag(char one[])
+{
+//clear the char array by filling with null - ASCII 0
+//Will think same tag has been read otherwise
+  for(int i = 0; i &lt; strlen(one); i++)
+    one[i] = 0;
+}
+
+boolean compareTag(char one[], char two[])
+{ //compare two tags to see if same,
+  //strcmp not working 100% so we do this
+
+  if (strlen(one) == 0)
+     return false; //empty
+
+  for(int i = 0; i &lt; 12; i++){
+    if(one[i] != two[i])
+      return false;
+  }
+  return true; //no mismatches
+}
+
+void setDateTime()
+{
+  byte second =      20; //0-59
+  byte minute =      37; //0-59
+  byte hour =        20; //0-23
+  byte weekDay =     2; //1-7
+  byte monthDay =    3; //1-31
+  byte month =       4; //1-12
+  byte year  =       12; //0-99
+
+  Wire.beginTransmission(DS1307_ADDRESS);
+  Wire.write(zero); //stop Oscillator
+
+  Wire.write(decToBcd(second));
+  Wire.write(decToBcd(minute));
+  Wire.write(decToBcd(hour));
+  Wire.write(decToBcd(weekDay));
+  Wire.write(decToBcd(monthDay));
+  Wire.write(decToBcd(month));
+  Wire.write(decToBcd(year));
+
+  Wire.write(zero); //start 
+
+  Wire.endTransmission();
+}
+
+byte decToBcd(byte val)
+{  // Convert normal decimal numbers to binary coded decimal
+  return val / 10 * 16  +  val % 10;
+}
+
+byte bcdToDec(byte val)
+{  // Convert binary coded decimal to normal decimal numbers
+  return val / 16 * 10  +  val % 16;
+}
+
+void printDate()
+{
+  // Reset the register pointer
+  Wire.beginTransmission(DS1307_ADDRESS);
+  Wire.write(zero);
+  Wire.endTransmission();
+
+  Wire.requestFrom(DS1307_ADDRESS, 7);
+
+  int second = bcdToDec(Wire.read());
+  int minute = bcdToDec(Wire.read());
+  int hour = bcdToDec(Wire.read() &amp; 0b111111); //24 hour time
+  int weekDay = bcdToDec(Wire.read()); //0-6 -&gt; sunday - Saturday
+  int monthDay = bcdToDec(Wire.read());
+  int month = bcdToDec(Wire.read());
+  int year = bcdToDec(Wire.read());
+
+  //Set variables in our struct
+  timestamp.hours = hour;
+  timestamp.minutes = minute;
+  timestamp.seconds = second;
+
+  //Save the timestamp to EEPROM
+  bytesize = EEPROM_writeAnything(byteaddress, timestamp);
+  byteaddress = byteaddress + bytesize;
+
+  //if (Serial.available() &gt; 0) {
+    writeSerial();
+  //}
+}
+
+void writeSerial()
+{  
+  Serial.print("{");
+  // read a byte from the current address of the EEPROM
+  for (int i=0; i &lt;= byteaddress + 4; i = i + 2){
+      value = EEPROM.read(i);
+      Serial.print(value, DEC);
+
+      if (i &lt; byteaddress+4)
+         Serial.print(((i-1)%3 == 0) ? ", " : " ");
+  }
+  Serial.println("}");     
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/535410/boyd" target="_blank"><span itemprop="name">Boyd</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">0</div>
+                                    <div itemprop="dateCreated">3/20/2016 6:09:18 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The arduino UNO only has 1 serial port, pin 0 and 1 are actualy connected to the usb port.</p>
+
+<p>You will need to use <a href="http://arduino.cc/hu/Reference/SoftwareSerial" rel="nofollow">softwareserial</a> to create a serial port in the software to talk to your RFID Reader and connect the RFID reader to other pins then 0 and 1</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/616100/sibster" target="_blank"><span itemprop="name">Sibster</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/10033715/receive-usb-serial-data-in-arduino-in-combination-with-rfid-reader#answer-0</div>
+                                            <div itemprop="upvoteCount">1</div>
+                                            <div itemprop="dateCreated">4/5/2012 8:03:13 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>When you read from the arduino ide,<br>
+if you enter a <code>'2'</code> that will actually equal <code>50</code> as <code>('0'==48)</code>.</p>
+
+<p>Try changing the <code>if</code> statement to <code>readByte != '2'</code>  </p>
+
+<p>Unless you are entering some kind of control character actually equal to <code>2</code>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/1487273/paul" target="_blank">Paul</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/10033715" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10033715/receive-usb-serial-data-in-arduino-in-combination-with-rfid-reader by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:00:11 GMT -->
+</html>

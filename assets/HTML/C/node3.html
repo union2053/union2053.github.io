@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C/C++ Program Compilation</TITLE>
+<META NAME="description" CONTENT="C/C++ Program Compilation">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html828"
+ HREF="node3.html#SECTION00310000000000000000">
+Creating, Compiling and
+Running Your Program</A>
+<UL>
+<LI><A NAME="tex2html829"
+ HREF="node3.html#SECTION00311000000000000000">
+Creating the program</A>
+<LI><A NAME="tex2html830"
+ HREF="node3.html#SECTION00312000000000000000">
+Compilation</A>
+<LI><A NAME="tex2html831"
+ HREF="node3.html#SECTION00313000000000000000">
+Running the program</A>
+</UL>
+<LI><A NAME="tex2html832"
+ HREF="node3.html#SECTION00320000000000000000">
+The C Compilation Model</A>
+<UL>
+<LI><A NAME="tex2html833"
+ HREF="node3.html#SECTION00321000000000000000">
+The Preprocessor</A>
+<LI><A NAME="tex2html834"
+ HREF="node3.html#SECTION00322000000000000000">
+C Compiler</A>
+<LI><A NAME="tex2html835"
+ HREF="node3.html#SECTION00323000000000000000">
+Assembler</A>
+<LI><A NAME="tex2html836"
+ HREF="node3.html#SECTION00324000000000000000">
+Link Editor</A>
+<LI><A NAME="tex2html837"
+ HREF="node3.html#SECTION00325000000000000000">
+Some Useful Compiler Options</A>
+<LI><A NAME="tex2html838"
+ HREF="node3.html#SECTION00326000000000000000">
+Using Libraries</A>
+<LI><A NAME="tex2html839"
+ HREF="node3.html#SECTION00327000000000000000">
+UNIX Library Functions</A>
+<LI><A NAME="tex2html840"
+ HREF="node3.html#SECTION00328000000000000000">
+Finding Information about Library Functions</A>
+</UL>
+<LI><A NAME="tex2html841"
+ HREF="node3.html#SECTION00330000000000000000">
+Lint  -- A C program verifier</A>
+<LI><A NAME="tex2html842"
+ HREF="node3.html#SECTION00340000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00300000000000000000">
+C/C++ Program Compilation</A>
+</H1>
+<P>
+In this chapter we begin by outlining the basic processes you need to go
+through in order to compile your C (or C++) programs. We then proceed to
+formally describe the C compilation model and also how C supports
+additional libraries.
+<P><H1><A NAME="SECTION00310000000000000000">
+Creating, Compiling and
+Running Your Program</A>
+</H1>
+<P>
+The stages of developing your C program are as follows. (See
+Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> and exercises for more
+info.)
+<P><H2><A NAME="SECTION00311000000000000000">
+Creating the program</A>
+</H2>
+<P>
+Create a file  containing  the  complete  program,  such  as  the  above
+example.  You can use any ordinary editor with which you are familiar to
+create the file. One such editor is  <EM>textedit</EM>  available on most UNIX systems.
+<P>
+The filename must by convention end ``.c'' (full stop, lower case c), <EM>e.g.
+myprog.c</EM>  or <EM>progtest.c</EM>.  The contents must obey C syntax. For example,
+they might be as in the above example, starting with the line <TT>/* Sample
+....</TT> (or a blank line preceding it) and ending with the line <TT>} /* end of
+program */</TT> (or a blank line following it).
+<P><H2><A NAME="SECTION00312000000000000000">
+Compilation</A>
+</H2>
+<P>
+There are many C compilers around. The <TT>cc</TT> being the default Sun compiler. The GNU C
+compiler <TT>gcc</TT> is popular and available for many platforms. PC users may also be familiar
+with the Borland <TT>bcc</TT> compiler.
+<P>
+There are also equivalent C++ compilers which are usually denoted by <TT>CC</TT> (<EM>note</EM>
+upper case CC. For example Sun provides CC and GNU <TT>GCC</TT>. The GNU compiler is also
+denoted by <TT>g++</TT>
+<P>
+Other (less common) C/C++ compilers exist. All the above compilers operate in essentially the
+same manner and share many common command line options. Below and in
+Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> we list and give example uses many of the common compiler options.
+However, the <B>best</B> source of each compiler is through the online manual pages of your
+system: <EM>e.g.</EM> <TT>man cc</TT>.
+<P>
+For the sake of compactness in the basic discussions of compiler operation we will simply refer
+to the <TT>cc</TT> compiler -- other compilers can simply be substituted in place of <TT>cc</TT>
+unless otherwise stated.
+<P>
+To Compile your program simply invoke the command <TT>
+cc</TT>. The command must
+be followed by the name of the  (C) program you wish to compile. A number of compiler options
+can be specified also. We will not concern ourselves with many of these options yet, some
+useful and often essential options are introduced below -- See Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> or
+online manual help for further details.
+<P>
+Thus, the basic compilation command is:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc program.c</TT>
+<P>
+where <EM>program.c</EM> is the name of the file.
+<P>
+If there are obvious errors in your program (such as mistypings, misspelling one
+of the key  words  or  omitting  a  semi-colon),  the compiler  will  detect 
+and report them.
+<P>
+There may, of course, still be logical errors that the  compiler  cannot
+detect.  You may be telling the computer to do the wrong operations.
+<P>
+When the compiler has successfully digested your program,  the  compiled
+version,  or  executable,  is  left  in a file called <EM>a.out</EM> or if the
+compiler option <EM>-o</EM> is used : the file listed after the <EM>-o</EM>.
+<P>
+It is <U>more</U> convenient to use a <EM>-o</EM> and filename in the 
+compilation as in
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc -o program program.c</TT>
+<P>
+which puts the compiled program into the file program (or any  file  you name 
+following  the  &quot;-o&quot;  argument)  <B>instead</B> of putting it in the file a.out .
+<P><H2><A NAME="SECTION00313000000000000000">
+Running the program</A>
+</H2>
+<P>
+The next stage is to actually run your executable program.   To  run  an
+executable  in UNIX, you simply type the name of the file containing it, in this
+case <EM>program</EM> (or <EM>a.out</EM>)
+<P>
+This executes your program, printing any results to the screen.  At this stage 
+there may be run-time errors, such as division by zero, or it may become evident
+that the program has produced incorrect output.
+<P>
+If  so, you  must  return to
+edit your program source, and recompile it, and run it again.
+<P><H1><A NAME="SECTION00320000000000000000">
+The C Compilation Model</A>
+</H1>
+<P>
+We will briefly highlight key features of the C Compilation model
+(Fig.&nbsp;<A HREF="node3.html#fig:comp">2.1</A>) here.
+<P><A NAME="fig:comp">&#160;</A><img src= cmodel.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node3.html#fig:comp">2.1</A> The C Compilation Model</B>
+<P><H2><A NAME="SECTION00321000000000000000">
+The Preprocessor</A>
+</H2>
+<P>
+We will study this part of the compilation process in greater detail later
+(Chapter&nbsp;<A HREF="node14.html#ch:preprocess">13</A>. However we need some basic information for some C
+programs.
+<P>
+The Preprocessor accepts source code as input and is responsible for
+<UL>
+<LI> removing comments
+<LI> interpreting special <EM>preprocessor directives</EM> denoted by <TT>#</TT>.
+</UL>
+<P>
+For example
+<UL>
+<LI> <TT>#include</TT>  -- includes contents of a named file. Files
+usually called <EM>header</EM> files. <EM>e.g</EM>
+<UL>
+<LI> <TT>#include &lt;math.h&gt;</TT> -- standard library maths file.
+<LI> <TT>#include &lt;stdio.h&gt;</TT> -- standard library I/O file
+</UL>
+<LI> <TT>#define</TT>  -- defines a symbolic name or constant. Macro
+substitution.
+<UL>
+<LI> <TT>#define MAX_ARRAY_SIZE 100</TT>
+</UL></UL><H2><A NAME="SECTION00322000000000000000">
+C Compiler</A>
+</H2>
+<P>
+The C compiler translates source to assembly code. The source code
+is received from the preprocessor.
+<P><H2><A NAME="SECTION00323000000000000000">
+Assembler</A>
+</H2>
+<P>
+The assembler creates object code. On a UNIX system you may see files with a
+<TT>.o</TT> suffix (<TT>.OBJ</TT> on MSDOS) to indicate object code files.
+<P><H2><A NAME="SECTION00324000000000000000">
+Link Editor</A>
+</H2>
+<P>
+If a source file references library functions or
+functions defined in other source files the <EM>link editor</EM> combines these
+functions (with <TT>main()</TT>) to create an executable file. External Variable
+references resolved here also. <EM>More on this later</EM>
+(Chapter&nbsp;<A HREF="node35.html#ch:prog">34</A>).
+<P><H2><A NAME="SECTION00325000000000000000">
+Some Useful Compiler Options</A>
+</H2>
+<P>
+Now that we have a basic understanding of the compilation model we can now introduce some
+useful and sometimes essential common compiler options. Again see the online <TT>man</TT> pages
+and Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> for further information and additional options.
+<P><DL>
+<DT><STRONG><TT>-c</TT></STRONG>
+<DD>Suppress the linking process and produce a <TT>.o</TT>  file
+for each source file listed.  Several can be subsequently linked by the <TT>cc</TT>
+command, for example:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc  file1.o file2.o ...... -o executable</TT>
+<P><DT><STRONG><TT>-llibrary</TT></STRONG>
+<DD>Link with  object libraries. This option must follow the source file
+arguments. The object libraries are archived and can be standard, third party or user created
+libraries (We discuss this topic briefly below and also in detail later
+(Chapter&nbsp;<A HREF="node35.html#ch:prog">34</A>). Probably the most commonly used library is the math library (<TT>
+math.h</TT>). You must link in this library explicitly if you wish to use the maths functions
+(<B>note</B> do note forget to <TT>#include &lt;math.h&gt;</TT> header file), for example:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc  calc.c -o calc -lm</TT>
+<P>
+Many other libraries are linked in this fashion (see below)
+<P><DT><STRONG><TT>-Ldirectory</TT></STRONG>
+<DD>Add directory to the list of directories  containing  object-library 
+routines. The linker always looks for standard and other system libraries in <TT>/lib</TT> and
+<TT>/usr/lib</TT>. If you want to link in libraries that you have created or installed yourself
+(unless you have certain privileges and get the libraries installed in <TT>/usr/lib</TT>) you
+<B>will</B> have to specify where you files are stored, for example:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc  prog.c -L/home/myname/mylibs  mylib.a</TT>
+<P><DT><STRONG><TT>-Ipathname</TT></STRONG>
+<DD>Add pathname to the list of directories  in  which
+               to   search   for  #include  files  with  relative
+               filenames  (not  beginning  with  slash  /).
+<P>
+BY default, The preprocessor  first searches for #include files in
+               the  directory  containing  source file,  then   in
+               directories  named  with  -I options (if any), and
+               finally, in /usr/include. So to include header files stored in <TT>
+/home/myname/myheaders</TT> you would do:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>cc  prog.c -I/home/myname/myheaders</TT>
+<P><B>Note:</B> System library header files are stored in a special place (<TT>/usr/include</TT>) and
+are not affected by the <TT>-I option</TT>. System header files and user header files are
+included in a slightly different manner (see Chapters&nbsp;<A HREF="node14.html#ch:preprocess">13</A> and&nbsp;<A HREF="node35.html#ch:prog">34</A>)
+<P><DT><STRONG><TT>-g</TT></STRONG>
+<DD>invoke debugging option. This instructs the compiler to produce additional
+symbol table information that is used by a variety of debugging utilities.
+<DT><STRONG><TT>-D</TT></STRONG>
+<DD>define symbols either as identifiers (<TT>-D</TT><EM>identifer</EM>) or as values
+(<TT>-D</TT><EM>symbol=value</EM>) in a similar fashion as the <TT>#define</TT> preprocessor
+command. For more details on the use of this argument see Chapter&nbsp;<A HREF="node14.html#ch:preprocess">13</A>.
+</DL>
+<P>
+For further information on general compiler options and the GNU compiler refer to
+Appendix&nbsp;<A HREF="#app:compiler"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A>.
+<P><H2><A NAME="SECTION00326000000000000000">
+Using Libraries</A>
+</H2>
+<P>
+C is an extremely small language. Many of the functions of other languages are
+not included in C. <EM>e.g.</EM> No built in I/O, string handling or 
+maths functions.
+<P><EM>What use is C then?</EM>
+<P>
+C provides functionality through a rich set function libraries.
+<P>
+As a result most C implementations include <EM>standard</EM> libraries of
+functions for many facilities ( I/O <EM>etc.</EM>). For many practical purposes
+these may be regarded as being part of C. But they may vary from machine to
+machine. (<EM>cf</EM> Borland C for a PC to UNIX C).
+<P>
+A programmer can also develop his or her own function libraries and also
+include special purpose third party libraries (<EM>e.g.</EM> NAG, PHIGS).
+<P>
+All libraries (except standard I/O) need to be explicitly linked in with the <TT>-l</TT> and,
+possibly, <TT>-L</TT> compiler options described above.
+<P><H2><A NAME="SECTION00327000000000000000">
+UNIX Library Functions</A>
+</H2>
+<P>
+The UNIX system provides a large number of C functions as libraries. 
+Some of these implement frequently used operations, while
+others are very specialised in their application.
+<P><B>Do Not Reinvent Wheels</B>: It is wise for  programmers to check whether a library function
+is available to perform a task before writing their own version. This will reduce program
+development time. The library functions have been tested, so they are more likely to be
+correct than any function which the programmer might write. This will save time when debugging
+the program.
+<P>
+Later chapters deal with all important standard
+library issues and other common system libraries.
+<P><H2><A NAME="SECTION00328000000000000000">
+Finding Information about Library Functions</A>
+</H2>
+<P>
+The UNIX manual has an entry for all available functions. 
+Function documentation is stored in <EM>section 3</EM> of the manual, and there are
+many other useful system calls in <EM>section 2</EM>. If you already know the name of the function
+you want, you can read the page by typing (to find about <TT>sqrt</TT>):
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>man 3 sqrt</TT>
+<P>
+If you don't know the name of the function, a full list is included in the introductory page for section 3 of the manual. To read this,
+type
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>man 3 intro</TT>
+<P>
+There are approximately 700 functions described here. 
+This number tends to increase with each upgrade of the system.
+<P>
+On any manual page, the SYNOPSIS section will include information on the use of the function. 
+For example:
+<P><PRE>
+  #include &lt;time.h&gt;
+
+  char *ctime(time_t *clock)
+</PRE>
+<P>
+This means that you must have
+<P><PRE>
+  #include &lt;time.h&gt;
+</PRE>
+<P>
+in your file before you call <TT>ctime</TT>. And that function ctime takes a pointer to type
+<TT>time_t</TT> as an argument, and returns a <TT>string (char *)</TT>. <TT>time_t</TT> will probably
+be defined in the same manual page.
+<P>
+The DESCRIPTION section will then give a short description of what the function does. 
+For example:
+<P><PRE>
+  ctime() converts a long integer, pointed to by clock,  to  a
+  26-character  string  of the form produced by asctime().
+</PRE>
+<P><H1><A NAME="SECTION00330000000000000000">
+Lint  -- A C program verifier</A>
+</H1>
+<P>
+You will soon discover (if you have not already) that the C compiler is pretty vague in many
+aspects of checking program correctness, particularly in type checking. Careful use of
+prototyping of functions can assist modern C compilers in this task. However, There is still
+no guarantee that once you have successfully compiled your program that it will run correctly.
+<P>
+The UNIX utility <TT>lint</TT> can assist in checking for a multitude of programming errors.
+Check out the online manual pages  (<TT>man lint</TT>) for complete details of lint. It is well
+worth the effort as it can help save many hours debugging your C code.
+<P>
+To run lint simply enter the command:
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>lint myprog.c</TT>.
+<P>
+Lint is particularly good at checking type checking of variable and function assignments,
+efficiency, unused variables and function identifiers, unreachable code and possibly memory
+leaks. There are many useful options to help control lint (see <TT>man lint</TT>).
+<P><H1><A NAME="SECTION00340000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12171</B></P>
+<P>
+Enter, compile and run the following program:
+<P><PRE>
+	main()
+
+	{ int i;
+
+	   printf(&quot;\t Number \t\t Square of Number\n\n&quot;);
+
+	   for (i=0; i&lt;=25;++i)
+            printf(&quot;\t %d \t\t\t %d \n&quot;,i,i*i);
+
+	}
+</PRE></P>
+<P><P>
+<B>Exercise 12172</B></P>
+<P>
+The following program uses the math library. Enter compile and run it correctly.
+<P><PRE>
+#include &lt;math.h&gt;
+
+	main()
+
+	{ int i;
+
+	   printf(&quot;\t Number \t\t Square Root of Number\n\n&quot;);
+
+	   for (i=0; i&lt;=360; ++i)
+            printf(&quot;\t %d \t\t\t %d \n&quot;,i, sqrt((double) i));
+
+	}
+</PRE></P>
+<P><P>
+<B>Exercise 12173</B></P>
+<P>
+Look in <TT>/lib</TT> and <TT>/usr/lib</TT> and see what libraries are available.
+<UL>
+<LI> Use the <TT>man</TT> command to get details of library functions
+<LI> Explore the libraries to see what each contains by running the command
+<TT>ar t libfile</TT>.
+</UL></P>
+<P>
+<P>
+<B>Exercise 12174</B></P>
+<P>
+Look in  <TT>/usr/include</TT> and see what header files are available.
+<UL>
+<LI> Use the <TT>more</TT> or <TT>cat</TT> commands to view these text files
+<LI> Explore the header files to see what each contains, note the include, define, type
+definitions and function prototypes declared in them
+</UL></P>
+<P><P>
+<B>Exercise 12175</B></P>
+<P>
+Suppose you have a C program whose main function is in <TT>main.c</TT> and has other functions in
+the files <TT>input.c</TT> and <TT>output.c</TT>:
+<UL>
+<LI> What command(s) would you use on your system to compile and link this program?
+<LI> How would you modify the above commands to link a library called <TT>process1</TT> stored
+in the standard system library directory?
+<LI> How would you modify the above commands to link a library called <TT>process2</TT> stored
+in your home directory?
+<LI> Some header files need to be read and have been found to located in a <TT>header</TT>
+subdirectory of your home directory and also in the current working directory. How would you
+modify the compiler commands to account for this?
+</UL></P>
+<P><P>
+<B>Exercise 12176</B></P>
+<P>
+Suppose you have a C program composed of several separate files, and they include one another
+as shown below:
+<P><P>
+<DIV ALIGN="CENTER">
+<A NAME="140"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Figure 1.5:</STRONG>
+Sample Icon from Xterm Application</CAPTION>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>Include Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><TT>main.c</TT></TD>
+<TD ALIGN="CENTER" NOWRAP><TT>stdio.h, process1.h</TT></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><TT>input.c</TT></TD>
+<TD ALIGN="CENTER" NOWRAP><TT>stdio.h, list.h</TT></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><TT>output.c</TT></TD>
+<TD ALIGN="CENTER" NOWRAP><TT>stdio.h</TT></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><TT>process1.c</TT></TD>
+<TD ALIGN="CENTER" NOWRAP><TT>stdio.h, process1.h</TT></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><TT>process2.c</TT></TD>
+<TD ALIGN="CENTER" NOWRAP><TT>stdio.h, list.h</TT></TD>
+</TR>
+</TABLE></DIV>
+<P>
+<UL>
+<LI> Which files have to recompiled after you make changes to <TT>process1.c</TT>?
+<LI> Which files have to recompiled after you make changes to <TT>process1.h</TT>?
+<LI> Which files have to recompiled after you make changes to <TT>list.h</TT>?
+</UL></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:37 GMT -->
+</HTML>

@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node8.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Functions</TITLE>
+<META NAME="description" CONTENT="Functions">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html922"
+ HREF="node8.html#SECTION00810000000000000000">
+<TT>void</TT> functions</A>
+<LI><A NAME="tex2html923"
+ HREF="node8.html#SECTION00820000000000000000">
+Functions and Arrays</A>
+<LI><A NAME="tex2html924"
+ HREF="node8.html#SECTION00830000000000000000">
+Function Prototyping</A>
+<LI><A NAME="tex2html925"
+ HREF="node8.html#SECTION00840000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION00800000000000000000">
+Functions</A>
+</H1>
+<P>
+C provides functions which are again similar most languages. One difference is
+that C regards <TT>main()</TT> as function. Also unlike some languages, such as
+Pascal, C does not have <EM>procedures</EM> -- it uses functions to service both
+requirements.
+<P>
+Let us remind ourselves of the form of a function:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;<I>returntype</I> <TT>fn_name</TT><TT>(</TT><SUB>1</SUB><TT>,</TT> <I>parameterdef<SUB>2</SUB></I><TT>,</TT><IMG WIDTH="25" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.gif"
+ ALT="$\cdots$"><TT>)</TT>
+&nbsp;
+				<I></I>
+&nbsp;
+				{
+&nbsp;
+				 <I>localvariables</I>
+&nbsp;
+				 <I>functioncode</I>
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P>
+Let us look at an example to find the average of two integers:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;float findaverage(float a, float b)
+				{ float average;
+&nbsp;
+>				 average=(a+b)/2;
+						 return(average);
+				}
+&nbsp;
+We would <EM>call</EM> the function as follows:
+&nbsp;
+		 main()
+				{ 		 float a=5,b=15,result;
+&nbsp;
+						 result=findaverage(a,b);
+						 printf(&quot;average=%f<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,result);
+				}
+&nbsp;
+</PRE>
+</TT>
+<P><B>Note:</B> The <TT>return statement passes the result back to the main
+program.
+<P></TT></TT><H1><A NAME="SECTION00810000000000000000">
+<TT>void</TT> functions</A>
+</H1>
+<P>
+The <TT>void</TT> function provide a way of emulating PASCAL type procedures.
+<P>
+If you
+do not want to return a value you must use the return type <TT>void</TT> and miss
+out the <TT>return</TT> statement:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;void squares()
+				{ int loop;
+&nbsp;
+						 for (loop=1;loop&lt;10;loop++);
+								 printf(&quot;%d<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,loop*loop);
+				}
+&nbsp;
+		 main() 
+&nbsp;
+				{ 		 squares();
+				}
+</TT></PRE>
+</TT>
+<P><B>NOTE:</B> We must have () even for no parameters unlike some languages.
+<P><H1><A NAME="SECTION00820000000000000000">
+Functions and Arrays</A>
+</H1>
+<P>
+Single dimensional arrays can be passed to functions as follows:-
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;float findaverage(int size,float list[])
+&nbsp;
+				{ int i;
+						 float sum=0.0;
+&nbsp;
+						 for (i=0;i&lt;size;i++)
+								 sum+=list[i];
+						 return(sum/size);
+				}
+</TT></PRE>
+</TT>
+<P>
+Here the declaration <TT>&nbsp;float list[] tells C that <TT>list</TT> is an array of
+<TT>float</TT>. <B>Note</B> we do not specify the dimension of the array when it is
+a <EM>parameter</EM> of a function.
+<P>
+Multi-dimensional arrays can be passed to <BR>
+functions as follows:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;void printtable(int xsize,int ysize,
+				&nbsp;&nbsp;&nbsp;float table[][5])
+&nbsp;
+				{&nbsp;int x,y;
+&nbsp;
+						 for (x=0;x&lt;xsize;x++)
+								 {&nbsp;for (y=0;y&lt;ysize;y++)
+										 printf(&quot;<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">t%f&quot;,table[x][y]);
+								 printf(&quot;<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;);
+						}
+				}
+</TT></PRE>
+</TT>
+<P>
+Here <TT>float table[][5] tells C that <TT>table</TT> is an array of dimension
+N<IMG WIDTH="17" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img12.gif"
+ ALT="$\times$">5 of <TT>float</TT>. <B>Note</B> we must specify the second (and
+subsequent) dimension of the array <U>BUT</U> not the first dimension.
+<P></TT></TT><H1><A NAME="SECTION00830000000000000000">
+Function Prototyping</A>
+</H1>
+<P>
+Before you use a function C must have <EM>knowledge</EM> about the type it returns
+and the parameter types the function expects.
+<P>
+The ANSI standard of C introduced a new (better) way of doing this than
+previous versions of C. (Note: All new versions of C now adhere to the ANSI
+standard.)
+<P>
+The importance of prototyping is twofold.
+<UL>
+<LI> It makes for more structured and therefore easier to read code.
+<LI> It allows the C compiler to check the <EM>syntax</EM> of function calls.
+</UL>
+<P>
+How this is done depends on the scope of the function (See
+Chapter&nbsp;<A HREF="node35.html#ch:prog">34</A>). Basically if a functions has been <U>defined</U>
+before it is used (called) then you are ok to merely use the function.
+<P><B>If NOT</B> then you must <EM>declare</EM> the function. The declaration simply
+states the type the function returns and the type of parameters used by the
+function.
+<P>
+It is usual (and therefore <B>good</B>) practice to prototype all functions at
+the start of the program, although this is not strictly necessary.
+<P>
+To <EM>declare</EM> a function prototype simply state the type the function
+returns, the function name and in brackets list the type of parameters in the
+order they appear in the function definition.
+<BR>
+<P><EM>e.g.</EM>
+<PRE>
+   int strlen(char []);
+</PRE>
+<BR>
+<P>
+This states that a function called <TT>strlen</TT> returns an integer value and
+accepts a single string as a parameter.
+<P><B>NOTE:</B> Functions can be prototyped and variables defined on the same line
+of code. This used to be more popular in pre-ANSI C days since functions are
+usually prototyped separately at the start of the program. This is still
+perfectly legal though:
+order they appear in the function definition.
+<BR>
+<P><EM>e.g.</EM>
+<PRE>
+   int length, strlen(char []);
+</PRE>
+<BR>
+<P>
+Here <TT>length</TT> is a variable, <TT>strlen</TT> the function as before.
+<P><H1><A NAME="SECTION00840000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12346</B></P>
+<P>
+Write a function ``replace'' which takes a pointer to a string as a parameter,
+which replaces all spaces in that string by minus signs,
+and delivers the number of spaces it replaced.
+<P>
+Thus
+<PRE>
+        char *cat = &quot;The cat sat&quot;;
+        n = replace( cat );
+</PRE>
+should set
+<P><PRE>
+        cat to &quot;The-cat-sat&quot;
+</PRE>
+and
+<PRE>
+        n to 2.
+</PRE>
+</P>
+<P><P>
+<B>Exercise 12347</B></P>
+<P>
+Write a program which will read in the source of a C program from its
+standard input, and print out all the starred items in the following
+statistics for the program (all as integers). (Note the comment on
+tab characters at the end of this specification.)
+<P>
+Print out the following values:
+<PRE>
+  Lines:
+  *  The total number of lines
+  *  The total number of blank lines
+        (Any lines consisting entirely of white space should be
+        considered as blank lines.)
+     The percentage of blank lines (100 * blank_lines / lines)
+
+  Characters:
+  *  The total number of characters after tab expansion
+  *  The total number of spaces after tab expansion
+  *  The total number of leading spaces after tab expansion
+      (These are the spaces at the start of a line, before any visible
+        character; ignore them if there are no visible characters.)
+    The average number of
+      characters per line
+      characters per line ignoring leading spaces
+      leading spaces per line
+      spaces per line ignoring leading spaces
+
+  Comments:
+  *  The total number of comments in the program
+  *  The total number of characters in the comments in the program
+       excluding the &quot;/*&quot; and &quot;*/&quot; thenselves
+    The percentage of number of comments to total lines
+    The percentage of characters in comments to characters
+
+  Identifiers:
+    We are concerned with all the occurrences of &quot;identifiers&quot; in the
+      program where each part of the text starting with a letter,
+      and continuing with letter, digits and underscores is considered
+      to be an identifier, provided that it is not
+          in a comment,
+          or in a string,
+          or within primes.
+        Note that
+            &quot;abc\"def&quot;
+        the internal escaped quote does not close the string.
+        Also, the representation of the escape character is
+            '\\'
+ and of prime is
+            '\''
+      Do not attempt to exclude the fixed words of the language,
+      treat them as identifiers. Print
+  *  The total number of identifier occurrences.
+  *  The total number of characters in them.
+    The average identifier length.
+
+  Indenting:
+  *  The total number of times either of the following occurs:
+      a line containing a &quot;}&quot; is more indented than the preceding line
+      a line is preceded by a line containing a &quot;{&quot; and is less
+        indented than it.
+      The &quot;{&quot; and &quot;}&quot; must be ignored if in a comment or string or
+        primes, or if the other line involved is entirely comment.
+    A single count of the sum of both types of error is required.
+</PRE>
+NOTE:
+All tab characters ('') on input should be interpreted as multiple
+spaces using the rule:
+<PRE>
+  &quot;move to the next modulo 8 column&quot;
+  where the first column is numbered column 0.
+ col before tab | col after tab
+        ---------------+--------------
+                0      |      8
+                1      |      8
+                7      |      8
+                8      |     16
+                9      |     16
+               15      |     16
+               16      |     24
+</PRE>
+To read input a character at a time the skeleton has code incorporated to read a
+line at a time for you using
+<PRE>
+        char ch;
+        ch = getchar();
+</PRE>
+Which will deliver each character exactly as read.
+The &quot;getline&quot; function then puts the line just read in the global
+array of characters &quot;linec&quot;, null terminated, and delivers
+the length of the line, or a negative value if end of data
+has been encountered.
+<P>
+You can then look at the characters just read with (for example)
+<PRE>
+        switch( linec[0] ) {
+        case ' ': /* space ..... */
+                break;
+        case '\t': /* tab character .... */
+                break;
+        case '\n': /* newline ... */
+                break;
+        ....
+        } /* end switch */
+</PRE>
+End of data is indicated by scanf NOT delivering the value 1.
+<P>
+<BR>
+<P>
+Your output should be in the following style:
+<PRE>
+        Total lines                     126
+        Total blank lines               3
+        Total characters                3897
+        Total spaces                    1844
+        Total leading spaces            1180
+        Total comments                  7
+        Total chars in comments         234
+        Total number of identifiers     132
+        Total length of identifiers     606
+        Total indenting errors          2
+</PRE>
+You may gather that the above program (together with the unstarred
+items) forms the basis of part of your marking system!
+Do the easy bits first, and leave it at that if some aspects worry you.
+Come back to me if you think my solution (or the specification) is wrong!
+That is quite possible!
+</P>
+<P><P>
+<B>Exercise 12348</B></P>
+<P>
+It's rates of pay again!
+<P>
+Loop performing the following operation in your program:
+<BR>
+<BR>
+<P>
+Read two integers, representing a rate of pay (pence per hour) and a
+number of hours.
+Print out the total pay, with hours up to 40 being paid at basic rate,
+from 40 to 60 at rate-and-a-half, above 60 at double-rate.
+Print the pay as pounds to two decimal places.
+<BR>
+<BR>
+<P>
+Terminate the loop when a zero rate is encountered.
+At the end of the loop, print out the total pay.
+<P>
+The code for computing the pay from the rate and hours is to be written
+as a function.
+<P>
+The recommended output format is something like:
+<PRE>
+        Pay at 200 pence/hr for 38 hours is 76.00 pounds
+        Pay at 220 pence/hr for 48 hours is 114.40 pounds
+        Pay at 240 pence/hr for 68 hours is 206.40 pounds
+        Pay at 260 pence/hr for 48 hours is 135.20 pounds
+        Pay at 280 pence/hr for 68 hours is 240.80 pounds
+        Pay at 300 pence/hr for 48 hours is 156.00 pounds
+        Total pay is 928.80 pounds
+</PRE>
+The ``program features'' checks that explicit values such as 40 and 60
+appear only once, as a <code>#define</code> or initialised variable value.
+This represents good programming practice.
+</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node8.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:50 GMT -->
+</HTML>

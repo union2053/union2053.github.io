@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-type-conversions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Type Conversions</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Type Conversions'>C Type Conversions</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-introduction.html'>C Operator Introduction
+   
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-assignment-operator.html'>C Assignment =
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compound-assignment-operators.html'>C Compound Assignment
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-addition-operator.html'>C Addition +
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-subtraction-operator.html'>C Subtraction -
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sign-operators.html'>C Sign - +
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multiplication-operator.html'>C Multiplication *
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-operator.html'>C Division /
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-precedence.html'>C Operator Precedence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-and-the-size-t-type.html'>C sizeof Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modulus-operator.html'>C Modulus %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-increment-and-decrement-operators-and.html'>C Increment Decrement ++ --
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-relational-operators.html'>C Relational Operators
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-truth-value.html'>C Truth value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-misuse-of-will-cause-infinite-loop.html'>C  misuse =
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-precedence-of-relational-operators.html'>C Relational Operators Precedence 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-comma-operator.html'>C Comma ,
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Logic
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-logical-operators.html'>C Logical operators
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-and-operator.html'>C Logic AND &amp;&amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-or-operator.html'>C Logic OR || 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-not-operator.html'>C Logic NOT ! 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-operator-example-to-check-uppercase-letter.html'>C Logic check letter case
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-logical-operators-to-count-characters-words-lines.html'>C Logical count char word line
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Expression
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-expression-value.html'>C Expression Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-expressions-and-statements.html'>C Expressions and Statements
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Type Conversions
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-cast-operator.html'>C Cast Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conditional-operator.html'>C Conditional Operator ?:
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-conditional-operator-to-calculate-multiple-discount-levels.html'>C Conditional Operator Demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-conditional-operator-to-format-message.html'>C Conditional Operator Demo 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-exercises-1.html'>C Exercises 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-question-exponential-growth.html'>C Exponential Growth
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-convert-fahrenheit-to-celsius.html'>C Fahrenheit to Celsius
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Type Conversions</h1>
+<a class ='btn btn-outline-dark' href=c-expressions-and-statements.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-data-type-cast-operator.html>Next</a><p>C has rules for Type Conversions:
+
+</p><h3>Rule 1
+
+</h3><p>When appearing in an expression, char and short, both signed and unsigned, are
+automatically converted to int or, if necessary, to unsigned int. 
+
+</p><p>In some compiler, float is automatically converted to double. 
+Because they are conversions to larger types.
+
+</p><p>This rule is called promotions.
+
+</p><h3>Rule 2
+</h3><p>In any operation involving two types, both values are converted to 
+the higher ranking of the two types.
+
+The ranking of types, from highest to lowest, is 
+</p><UL style='font-size:19px;'><LI>long double, </LI><LI>double, </LI><LI>float, </LI><LI>unsigned long long, </LI><LI>long long, </LI><LI>unsigned long, </LI><LI>long, </LI><LI>unsigned int, and </LI><LI>int. </LI></UL><p>One possible exception is when long and int are the same size, 
+in which case unsigned int outranks long. 
+
+</p><p>The short and char types don't appear in this list because they would
+have been already promoted to int or perhaps unsigned int.
+
+</p><h3>Rule 3
+
+</h3><p>In an assignment statement, the final result of the calculations is converted 
+to the type of the variable being assigned a value. 
+
+</p><p>This process can result in promotion or demotion, 
+in which a value is converted to a lower-ranking type.
+
+</p><h3>Rule 4
+
+</h3><p>When passed as function arguments, char and short are converted to int, 
+and float is converted to double. 
+
+</p><p>This automatic promotion is overridden by function prototyping.
+
+</p><h3>Note
+
+</h3><p>Promotion is usually a smooth, uneventful process, but demotion can lead 
+to real trouble. 
+
+</p><p>The reason is simple: 
+The lower-ranking type may not be big enough to hold the complete number.
+
+</p><p>For instance, an 8-bit char variable can hold the integer 101 but not the integer 22334.
+
+</p><p>What happens when the converted value won't fit into the destination? 
+The answer depends on the types involved. Here are the rules for when the assigned value doesn't fit into the 
+destination type:
+
+</p><OL style='font-size:19px;'><LI>When the destination is some form of unsigned integer and the assigned value is an integer, the extra bits that make the value too big are ignored. </LI><LI>If the destination type is a signed integer and the assigned value is an integer, the result is implementation-dependent.</LI><LI>If the destination type is an integer and the assigned value is floating point, the behavior is undefined.</LI></OL><p>When floating types are demoted to integer types, they are truncated, or rounded toward zero. 
+
+</p><p>That means 23.12 and 23.99 both are truncated to 23 and that -23.5 is truncated to -23.
+
+</p><h3>Example
+
+</h3><p>automatic type conversions
+</p><div class='myCodeDiv'><button id='QBYEV' class='myCopyButton' data-clipboard-target='#WJJLE'>Copy</button><pre  id='WJJLE' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> ch;
+    <span class='r'>int</span> i;
+    <span class='r'>float</span> fl;
+
+     fl = i = ch = <span class='q'>'C'</span>;                                  <span class='c'>/* line 9 */</span>
+     printf(<span class='q'>"ch = %c, i = %d, fl = %2.2f\n"</span>, ch, i, fl); <span class='c'>/* line 10 */</span>
+     ch = ch + 1;                                        <span class='c'>/* line 11 */</span>
+     i = fl + 2 * ch;                                    <span class='c'>/* line 12 */</span>
+     fl = 2.0 * ch + i;                                  <span class='c'>/* line 13 */</span>
+     printf(<span class='q'>"ch = %c, i = %d, fl = %2.2f\n"</span>, ch, i, fl); <span class='c'>/* line 14 */</span>
+     ch = 1234;                                          <span class='c'>/* line 15 */</span>
+     printf(<span class='q'>"Now ch = %c\n"</span>, ch);                        <span class='c'>/* line 16 */</span>
+     ch = 8.89;                                         <span class='c'>/* line 17 */</span>
+     printf(<span class='q'>"Now ch = %c\n"</span>, ch);                        <span class='c'>/* line 18 */</span>
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QBYEV');clipboard.on('success', function(e) {$('#QBYEV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QBYEV').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-expressions-and-statements.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-data-type-cast-operator.html>Next</a><h2>Related</h2><UL><LI><a href='c-use-logical-operators-to-count-characters-words-lines.html'>C Use Logical operators to count characters, words, lines</a></LI><LI><a href='c-expression-value.html'>C Expression Value</a></LI><LI><a href='c-expressions-and-statements.html'>C Expressions and Statements</a></LI><LI><a href='c-data-type-cast-operator.html'>C Data Type Cast Operator</a></LI><LI><a href='c-conditional-operator.html'>C Conditional Operator: ?:</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-type-conversions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

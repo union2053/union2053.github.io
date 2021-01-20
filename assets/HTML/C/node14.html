@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node14.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>The C Preprocessor</TITLE>
+<META NAME="description" CONTENT="The C Preprocessor">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1024"
+ HREF="node14.html#SECTION001410000000000000000">
+#define</A>
+<LI><A NAME="tex2html1025"
+ HREF="node14.html#SECTION001420000000000000000">
+#undef</A>
+<LI><A NAME="tex2html1026"
+ HREF="node14.html#SECTION001430000000000000000">
+#include</A>
+<LI><A NAME="tex2html1027"
+ HREF="node14.html#SECTION001440000000000000000">
+#if -- Conditional inclusion</A>
+<LI><A NAME="tex2html1028"
+ HREF="node14.html#SECTION001450000000000000000">
+Preprocessor Compiler Control</A>
+<LI><A NAME="tex2html1029"
+ HREF="node14.html#SECTION001460000000000000000">
+Other Preprocessor Commands</A>
+<LI><A NAME="tex2html1030"
+ HREF="node14.html#SECTION001470000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001400000000000000000">
+The C Preprocessor</A>
+</H1>
+<A NAME="ch:preprocess">&#160;</A>
+Recall that preprocessing is the first step in the C program compilation
+stage -- this feature is unique to C compilers.
+<P>
+The preprocessor more or less provides its own language which can be a very
+powerful tool to the programmer. Recall that all preprocessor directives or
+commands begin with a #.
+<P>
+Use of the preprocessor is advantageous since it makes:
+<P><UL>
+<LI> programs easier to develop,
+<LI> easier to read,
+<LI> easier to modify
+<LI> C code more transportable between different machine architectures.
+</UL>
+<P>
+The preprocessor also lets us customise the language. For example to replace {
+... } block statements delimiters by PASCAL like <TT>begin ... end</TT> we can do:
+<BR>
+<P><TT>
+<PRE><TT>
+#define begin {
+#define end  }
+</TT></PRE>
+</TT>
+<BR>
+<P>
+During compilation all occurrences of <TT>begin and <TT>end</TT> get replaced by
+corresponding { or } and so the subsequent C compilation stage does not know
+any difference!!!. 
+<BR>
+<P>
+Lets look at <TT>#define</TT> in more detail
+<P></TT><H1><A NAME="SECTION001410000000000000000">
+#define</A>
+</H1>
+<P>
+Use this to define constants or any macro substitution. Use as follows:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; #define  &lt;macro&gt; &lt;replacement name&gt;
+&nbsp;
+<EM>For Example</EM>
+&nbsp;
+		 #define FALSE  0
+		 #define TRUE  !FALSE 
+</TT></PRE>
+</TT>
+<BR>
+<P>
+We can also define small "functions" using <TT>#define. For example max. of
+two variables:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>#define max(A,B)	( (A) &gt; (B) ? (A):(B))</TT>
+<BR>
+<P>? is the ternary operator in C. 
+<BR>
+<P>
+Note: that this does <U>not</U> define a proper function <TT>max</TT>. 
+ <BR>
+<P>
+All it
+means that wherever we place <TT>max(C<IMG WIDTH="11" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.gif"
+ ALT="$\dagger$">,D<IMG WIDTH="11" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.gif"
+ ALT="$\dagger$">)</TT> the text gets replaced by the appropriate
+definition.  [<IMG WIDTH="11" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.gif"
+ ALT="$\dagger$"> = any variable names - not necessarily C and D]
+<BR>
+<P>
+So if in our C code we typed something like:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>x = max(q+r,s+t);</TT>
+<P>
+after preprocessing, if we were able to look at the code it would appear like
+this:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>x = ( (q+r) &gt; (r+s) ? (q+r) : (s+t));</TT>
+ <BR>
+<P>
+Other examples of <TT>#define</TT> could be:
+<BR>
+<P><TT>
+<PRE><TT>
+#define Deg_to_Rad(X) (X*M_PI/180.0) 
+/* converts degrees to radians, <TT>M_PI</TT> is the value  
+of pi and is defined in math.h library */
+&nbsp;
+#define LEFT_SHIFT_8 &lt;&lt;8
+</TT></PRE>
+</TT>
+<BR>
+<P>
+NOTE: The last macro <TT>LEFT_SHIFT_8 is only <BR>
+valid so long as
+replacement context is valid <EM>i.e.</EM> <BR><TT>x = y LEFT_SHIFT_8</TT>.
+<P></TT></TT><H1><A NAME="SECTION001420000000000000000">
+#undef</A>
+</H1>
+<P>
+This commands <U>undefined</U> a macro. A macro <B>must</B> be undefined
+before being redefined to a different value.
+<P><H1><A NAME="SECTION001430000000000000000">
+#include</A>
+</H1>
+<P>
+This directive includes a file into code.
+<BR>
+<P>
+It has two possible forms:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;#include &lt;file&gt;
+&nbsp;
+or
+&nbsp;
+		 #include "file"
+</TT></PRE>
+</TT>
+<BR>
+<P><TT>&lt;file&gt; tells the compiler to look where system include files are
+held.  Usually UNIX systems store files in <TT>
+<EM><IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">usr<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">include<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$"></TT></EM> directory.
+<BR>
+<P><TT>"file"</TT> looks for a file in the current directory (where program was
+run from) 
+<BR>
+<P><EM><TT>Include</TT>d</EM> files usually contain C prototypes and  declarations from
+header files and <U>not</U> (algorithmic) C code (SEE next Chapter for
+reasons)
+<P></TT><H1><A NAME="SECTION001440000000000000000">
+#if -- Conditional inclusion</A>
+</H1>
+<P><TT>#if</TT> evaluates a constant integer expression. You <U>always</U>  need
+a <TT>#endif</TT>  to delimit end of statement.
+<BR>
+<P>
+We can have <EM>else etc.</EM> as well by using <TT>#else</TT> and <TT>#elif</TT> --
+else if.
+<BR>
+<P>
+Another common use of <TT>#if</TT> is with:
+<DL>
+<DT><STRONG><TT>#ifdef</TT></STRONG>
+<DD>-- if defined and 
+<DT><STRONG><TT>#ifndef</TT></STRONG>
+<DD>-- if not defined
+</DL>
+<P>
+These are useful for checking if macros are set -- perhaps from different
+program modules and header files.
+ <BR>
+<P>
+For example, to set integer size for a portable C program between TurboC (on
+MSDOS) and Unix (or other) Operating systems. Recall that TurboC uses 16
+bits/integer and UNIX 32 bits/integer.
+<BR>
+<P>
+Assume that if TurboC is running a macro <TT>TURBOC</TT> will be defined. So we
+just need to check for this:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;#ifdef TURBOC
+		 &nbsp; #define INT_SIZE 16
+		 #else
+				  #define INT_SIZE  32
+		 #endif
+</TT></PRE>
+</TT>
+ <BR>
+<P>
+As another example if running program on MSDOS machine we want to include file
+msdos.h otherwise a default.h file. A macro <TT>SYSTEM is set (by OS) to type
+of system so check for this:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;#if SYSTEM == MSDOS
+		 &nbsp; #include &lt;msdos.h&gt;
+		 #else
+				  #include "default.h"
+		#endif
+</TT></PRE>
+</TT>
+<P></TT><H1><A NAME="SECTION001450000000000000000">
+Preprocessor Compiler Control</A>
+</H1>
+<P>
+You can use the <TT>cc</TT> compiler to control what values are set or defined
+from the command line. This gives some flexibility in setting customised values
+and has some other useful functions. The <TT>-D</TT> compiler option is used. For
+example:
+<P>&nbsp;&nbsp;&nbsp;<TT>cc -DLINELENGTH=80 prog.c -o prog</TT>
+<P>
+has the same effect as:
+<P>&nbsp;&nbsp;&nbsp;<code>#define LINELENGTH 80</code>
+<P>
+Note that any <code>#define</code> or <code>#undef</code> <B>within</B> the program
+(<TT>prog.c</TT> above) <B>override</B> command line settings.
+<P>
+You can also set a symbol without a value, for example:
+<P>&nbsp;&nbsp;&nbsp;<TT>cc -DDEBUG prog.c -o prog</TT>
+<P>
+Here the value is assumed to be 1.
+<P>
+The setting of such flags is useful, especially for debugging. You can put
+commands like:
+<P><PRE>
+#ifdef DEBUG
+     print(&quot;Debugging: Program Version 1\");
+#else
+     print(&quot;Program Version 1 (Production)\");
+#endif
+</PRE>
+<P>
+Also since preprocessor command can be written anywhere in a C program you can
+filter out variables etc for printing <EM>etc.</EM>  when debugging:
+<P><PRE>
+x = y *3;
+
+#ifdef DEBUG
+     print(&quot;Debugging: Variables (x,y) = \",x,y);
+#endif
+</PRE>
+<P>
+The <TT>-E</TT> command line is worth mentioning just for academic reasons. It is
+not that practical a command. The <TT>-E command</TT> will force the compiler to
+stop after the preprocessing stage and output the current state of your
+program. Apart from being debugging aid for preprocessor commands and also as a
+useful initial learning tool (try this option out with some of the examples
+above) it is not that commonly used.
+<P><H1><A NAME="SECTION001460000000000000000">
+Other Preprocessor Commands</A>
+</H1>
+<P>
+There are few other preprocessor directives available:
+<P><DL>
+<DT><STRONG><TT>#error</TT></STRONG>
+<DD><TT>text of error message</TT> -- generates an appropriate
+compiler error message. <EM>e.g</EM>
+<TT>
+<PRE><TT>
+&nbsp;&nbsp;#ifdef OS_MSDOS
+		 &nbsp; #include &lt;msdos.h&gt;
+		 #elifdef OS_UNIX
+				  #include "default.h"
+		#else
+				 #error Wrong OS!!
+		#endif
+</TT></PRE>
+</TT>
+<P><DT><STRONG># line</STRONG>
+<DD><TT>number &quot;string&quot; -- informs the preprocessor that the 
+<TT>number</TT> is the next number of line of input. <TT>&quot;string&quot;</TT> is optional
+and names the next line of input. This is most often used with programs that
+translate other languages to C. For example, error messages produced by the C
+compiler can reference the file name and line numbers of the original source
+files instead of the intermediate C (translated) source files.
+</DL></TT><H1><A NAME="SECTION001470000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12529</B></P>
+<P>
+Define a preprocessor macro <TT>swap(t, x, y)</TT> that will swap two arguments
+<TT>x</TT> and <TT>y</TT> of a given type <TT>t</TT>.</P>
+<P>
+<P>
+<B>Exercise 12531</B></P>
+<P>
+Define a preprocessor macro to select:
+<UL>
+<LI> the least significant bit from an <TT>unsigned char</TT>
+<LI> the
+<I>n</I>th (assuming least significant is 0) bit from an <TT>unsigned char</TT>.
+</UL></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node14.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+</HTML>

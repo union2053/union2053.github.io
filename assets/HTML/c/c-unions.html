@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-unions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Unions</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Unions'>C Unions</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Unions</h1>
+<a class ='btn btn-outline-dark' href=c-data-type-automatic-conversions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-typedef-introduction.html>Next</a><p>A <i style='color:blue'>union</i> is a type that enables you to store different data types in the same memory space 
+not at the same time.
+
+</p><p>By using an array of unions, you can create an
+array of equal-sized units, each of which can hold a variety of data types.
+
+</p><p>Unions are set up in much the same way as structures.
+
+</p><p>There is a union template and a union variable.
+
+</p><p>They can be defined in one step or, by using a <i style='color:blue'>union</i> tag, in two.
+
+</p><p>Here is an example of a union template with a tag:
+</p><div class='myCodeDiv'><button id='VBAZE' class='myCopyButton' data-clipboard-target='#WKQTH'>Copy</button><pre  id='WKQTH' style='font-size:18px;' class='code'><span class='r'>union</span> my_Union {
+    <span class='r'>int</span> digit;
+    <span class='r'>double</span> my_variable;
+    <span class='r'>char</span> letter;
+};
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VBAZE');clipboard.on('success', function(e) {$('#VBAZE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VBAZE').text('error');});</script></div><p>This union above can hold an <i style='color:blue'>int</i> value or a <i style='color:blue'>double</i> value or a <i style='color:blue'>char</i> value.
+
+</p><p>Here is an example of defining three union variables of the my_Union type:
+</p><div class='myCodeDiv'><button id='MZAEE' class='myCopyButton' data-clipboard-target='#UFHDB'>Copy</button><pre  id='UFHDB' style='font-size:18px;' class='code'><span class='r'>union</span> my_Union fit;      <span class='c'>// union variable of hold type</span>
+<span class='r'>union</span> my_Union save[10]; <span class='c'>// array of 10 union variables</span>
+<span class='r'>union</span> my_Union * pu;     <span class='c'>// pointer to a variable of hold type</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MZAEE');clipboard.on('success', function(e) {$('#MZAEE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MZAEE').text('error');});</script></div><p>The first declaration creates a single variable, fit.
+
+</p><p>The compiler allots enough space so that it can hold the largest of the described possibilities.
+
+</p><p>In this case, the biggest possibility listed is double, which requires 64 bits, or 8 bytes, on our system.
+
+</p><p>The second declaration creates an array called save with 10 elements, each 8 bytes in size.
+
+</p><p>The third declaration creates a pointer that can hold the address of a my_Union <i style='color:blue'>union</i>.
+</p><h3>Initialize a union
+
+</h3><p>You have three choices: 
+</p><OL style='font-size:19px;'><LI>You can initialize a union to another union of the same type, </LI><LI>You can initialize the first element of a union, or, </LI><LI>with C99, you can use a designated initializer:</LI></OL><div class='myCodeDiv'><button id='WEWTY' class='myCopyButton' data-clipboard-target='#PGDKQ'>Copy</button><pre  id='PGDKQ' style='font-size:18px;' class='code'><span class='r'>union</span> my_Union valA;
+valA.letter = <span class='q'>'R'</span>;
+<span class='r'>union</span> my_Union valB = valA; <span class='c'>// initialize one union to another</span>
+<span class='r'>union</span> my_Union valC = {88}; <span class='c'>// initialize digit member of union</span>
+<span class='r'>union</span> my_Union valD = {.bigfl = 118.2}; <span class='c'>// designated initializer</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WEWTY');clipboard.on('success', function(e) {$('#WEWTY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WEWTY').text('error');});</script></div><p>Using Unions
+Here is how you can use a union:
+</p><div class='myCodeDiv'><button id='PYYDH' class='myCopyButton' data-clipboard-target='#XFFUF'>Copy</button><pre  id='XFFUF' style='font-size:18px;' class='code'>fit.digit = 23;   <span class='c'>// 23 is stored in fit; 2 bytes used</span>
+fit.my_variable = 2.0; <span class='c'>// 23 cleared, 2.0 stored; 8 bytes used</span>
+fit.letter = <span class='q'>'h'</span>; <span class='c'>// 2.0 cleared, h stored; 1 byte used</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PYYDH');clipboard.on('success', function(e) {$('#PYYDH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PYYDH').text('error');});</script></div><p>The dot operator shows which data type is being used.
+
+</p><p>Only one value is stored at a time.
+
+</p><p>You can't store a char and an int at the same time, even though there is enough space to do so.
+
+</p><p>We have to write the program so that it keeps track of the data type currently being stored in a union.
+
+</p><p>You can use the -> operator with pointers to unions in the same fashion that you use the 
+operator with pointers to structures:
+</p><div class='myCodeDiv'><button id='AWKNV' class='myCopyButton' data-clipboard-target='#CSCIO'>Copy</button><pre  id='CSCIO' style='font-size:18px;' class='code'>pu = &amp;fit;
+x = pu-&gt;digit;    <span class='c'>// same as x = fit.digit</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AWKNV');clipboard.on('success', function(e) {$('#AWKNV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AWKNV').text('error');});</script></div><p>The next sequence shows what not to do:
+</p><div class='myCodeDiv'><button id='AEPVM' class='myCopyButton' data-clipboard-target='#CCQVK'>Copy</button><pre  id='CCQVK' style='font-size:18px;' class='code'>fit.letter = <span class='q'>'A'</span>;
+<span class='r'>double</span> d = 3.02 * fit.my_variable;<span class='c'>// ERROR</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AEPVM');clipboard.on('success', function(e) {$('#AEPVM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AEPVM').text('error');});</script></div><p>This code is wrong because a char type is stored, but the next line assumes that the
+content of <i style='color:blue'>fit</i> is a double type.
+
+</p><p>However, sometimes it can be useful to use one member to place values into a union and to
+then use a different member for viewing the contents.
+
+</p><h3>Anonymous Unions
+
+</h3><p>Anonymous unions work much the same as anonymous structures.
+
+</p><p>An anonymous union is an unnamed member union of a structure or union.
+
+</p><p>For instance, we can define the structure using an anonymous union:
+</p><div class='myCodeDiv'><button id='AOTZL' class='myCopyButton' data-clipboard-target='#QQYNE'>Copy</button><pre  id='QQYNE' style='font-size:18px;' class='code'><span class='r'>struct</span> owner {
+     <span class='r'>char</span> id[12];
+     ...
+};
+
+<span class='r'>struct</span> location {
+     <span class='r'>char</span> name[40];
+     <span class='r'>char</span> address[40];
+     ...
+};
+
+<span class='r'>struct</span> car_data {
+     <span class='r'>char</span> make[15];
+     <span class='r'>int</span> status; <span class='c'>/* 0 = owned, 1 = leased */</span>
+     <span class='r'>union</span> {
+         <span class='r'>struct</span> owner owncar;
+         <span class='r'>struct</span> location leasecar;
+     };
+...
+};
+
+Now, <span class='r'>if</span> my_car is a car_data structure, we can use *my_car.owncar.id* instead of
+*my_car.ownerinfo.owncar.id*.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AOTZL');clipboard.on('success', function(e) {$('#AOTZL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AOTZL').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-data-type-automatic-conversions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-typedef-introduction.html>Next</a><h2>Related</h2><UL><LI><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Choosing the Correct Data Type for the calculation</a></LI><LI><a href='c-explicit-data-type-conversion.html'>C Explicit Data Type Conversion</a></LI><LI><a href='c-data-type-automatic-conversions.html'>C Data Type Automatic Conversions</a></LI><LI><a href='c-typedef-introduction.html'>C typedef introduction</a></LI><LI><a href='c-data-type-sizes.html'>C Data Type Sizes</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-unions.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

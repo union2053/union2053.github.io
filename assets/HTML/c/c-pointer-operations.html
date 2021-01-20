@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-operations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointer Operations</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointer Operations'>C Pointer Operations</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointer Operations</h1>
+<a class ='btn btn-outline-dark' href=c-testing-for-a-null-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-dereferencing-an-uninitialized-pointer.html>Next</a><p>C offers several basic operations you can perform on pointers.
+
+</p><p>To show the results of each operation, the program prints the value of the pointer 
+which is the address to which it points, the value stored in the pointed-to address, and 
+the address of the pointer itself. 
+
+</p><p>The following code shows eight basic operations that can be performed with pointer variables. 
+
+</p><p>In addition to these operations, you can use the relational operators to compare pointers.
+
+</p><div class='myCodeDiv'><button id='LZCOY' class='myCopyButton' data-clipboard-target='#EPDDM'>Copy</button><pre  id='EPDDM' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> urn[5] = {100,200,300,400,500};
+    <span class='r'>int</span> * ptr1, * ptr2, *ptr3;
+
+    ptr1 = urn;         <span class='c'>// assign an address to a pointer</span>
+    ptr2 = &amp;urn[2];     <span class='c'>// ditto</span>
+                        <span class='c'>// dereference a pointer and take</span>
+                        <span class='c'>// the address of a pointer</span>
+    printf(<span class='q'>"pointer value, dereferenced pointer, pointer address:\n"</span>);
+    printf(<span class='q'>"ptr1 = %p, *ptr1 =%d, &amp;ptr1 = %p\n"</span>,
+           ptr1, *ptr1, &amp;ptr1);
+
+    <span class='c'>// pointer addition</span>
+    ptr3 = ptr1 + 4;
+    printf(<span class='q'>"\nadding an int to a pointer:\n"</span>);
+    printf(<span class='q'>"ptr1 + 4 = %p, *(ptr4 + 3) = %d\n"</span>,
+             ptr1 + 4, *(ptr1 + 3));
+    ptr1++;             <span class='c'>// increment a pointer</span>
+    printf(<span class='q'>"\nvalues after ptr1++:\n"</span>);
+    printf(<span class='q'>"ptr1 = %p, *ptr1 =%d, &amp;ptr1 = %p\n"</span>,
+            ptr1, *ptr1, &amp;ptr1);
+    ptr2--;             <span class='c'>// decrement a pointer</span>
+    printf(<span class='q'>"\nvalues after --ptr2:\n"</span>);
+    printf(<span class='q'>"ptr2 = %p, *ptr2 = %d, &amp;ptr2 = %p\n"</span>,
+            ptr2, *ptr2, &amp;ptr2);
+    --ptr1;             <span class='c'>// restore to original value</span>
+    ++ptr2;             <span class='c'>// restore to original value</span>
+    printf(<span class='q'>"\nPointers reset to original values:\n"</span>);
+    printf(<span class='q'>"ptr1 = %p, ptr2 = %p\n"</span>, ptr1, ptr2);
+                         <span class='c'>// subtract one pointer from another</span>
+    printf(<span class='q'>"\nsubtracting one pointer from another:\n"</span>);
+    printf(<span class='q'>"ptr2 = %p, ptr1 = %p, ptr2 - ptr1 = %td\n"</span>,
+             ptr2, ptr1, ptr2 - ptr1);
+                        <span class='c'>// subtract an integer from a pointer</span>
+    printf(<span class='q'>"\nsubtracting an int from a pointer:\n"</span>);
+    printf(<span class='q'>"ptr3 = %p, ptr3 - 2 = %p\n"</span>,
+         ptr3,   ptr3 - 2);
+
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LZCOY');clipboard.on('success', function(e) {$('#LZCOY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LZCOY').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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eheMnk3/TLSo8tdkjVqHuF+z3+Tj0LrePl2vf+0TNlpxSX9R4/FtPbnpzxcPoMEvaQ3edd9aFa0vSFTj52cyq5+6HH5AE+WMH6who+oTmv3w23t1vRt0vaYdMYmydXCBa7noR2wAEFx4aHA58c8BOCe4WBLkgcFFswe4anABABBcAAAEFwBAcAEAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcAAAEFwBAcAEAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEABBcAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQBAcAEABBcAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQBAcAEABBcAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQAQXFQBACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgDAo/0P7jqTK5QExI8AAAAASUVORK5CYII='><h3>Assignment
+
+</h3><p>You can assign an address to a pointer. 
+
+</p><p>The assigned value can be, for example, an array name, a variable preceded by address operator (&amp;), 
+or another second pointer. 
+
+</p><p>In the example, <i style='color:blue'>ptr1</i> is assigned the address of the beginning of the array <i style='color:blue'>urn</i>.
+
+</p><p>The variable <i style='color:blue'>ptr2</i> gets the address of the third and last element, urn[2]. 
+
+</p><p>Note that the address should be compatible with the pointer type. 
+
+</p><p>That is, you can't assign the address of a double to a pointer-to-int, at least not without making an ill-advised type cast. 
+
+</p><p>C99/C11 enforces this rule.
+
+</p><h3>Value finding (dereferencing)
+
+</h3><p>The * operator gives the value stored in the pointed-to location. 
+
+</p><p>Therefore, *ptr1 is initially 100.
+
+</p><h3>Taking a pointer address
+
+</h3><p>Like all variables, a pointer variable has an address and a value. 
+
+</p><p>The &amp; operator tells you where the pointer itself is stored. 
+
+</p><p>&amp;pt1 is a pointer to pt1, which, in turn, is a pointer to urn[0].
+
+</p><h3>Adding an integer to a pointer
+
+</h3><p>You can use the + operator to add an integer to a pointer or a pointer to an integer. 
+
+</p><p>In either case, the integer is multiplied by the number of bytes in the pointed-to type, and 
+the result is added to the original address. 
+
+</p><p>This makes <i style='color:blue'>ptr1</i> + 4 the same as <i style='color:blue'>&amp;urn[4]</i>. 
+
+</p><h3>Incrementing a pointer
+
+</h3><p>Incrementing a pointer to an array element makes it move to the next element of the array. 
+
+</p><p>Therefore, <i style='color:blue'>ptr1++</i> increases the numerical value of <i style='color:blue'>ptr1</i> by 4 (4 bytes per int on our system) 
+and makes <i style='color:blue'>ptr1</i> point to <i style='color:blue'>urn[1]</i>. 
+
+</p><p>Now ptr1 has the next array address, and *ptr1 has the value 200 (the value of urn[1]). 
+
+</p><h3>Subtracting an integer from a pointer
+
+</h3><p>You can use the - operator to subtract an integer from a pointer; the pointer has to be the 
+first operand and the integer value the second operand. 
+
+</p><p>The integer is multiplied by the number of bytes in the pointed-to type, and the result is 
+subtracted from the original address. 
+
+</p><p>This makes <i style='color:blue'>ptr3</i> - 2 the same as <i style='color:blue'>&amp;urn[2]</i> because ptr3 points to &amp;urn[4]. 
+
+</p><h3>Decrementing a pointer
+
+</h3><p>You can also decrement a pointer. 
+
+</p><p>In this example, decrementing <i style='color:blue'>ptr2</i> makes it point to the second array element instead 
+of the third. 
+
+</p><p>Note that you can use both the prefix and postfix forms of the increment and decrement
+    operators. 
+    
+</p><p>Both <i style='color:blue'>ptr1</i> and <i style='color:blue'>ptr2</i> wind up pointing to the same element, urn[1], before they get reset.
+
+</p><h3>Differencing
+
+</h3><p>You can find the difference between two pointers. 
+
+</p><p>Normally, you do this for two pointers to elements that are in the same array to find out 
+how far apart the elements are. 
+
+</p><p>The result is in the same units as the type size. 
+
+</p><p>For example, <i style='color:blue'>ptr2</i> - <i style='color:blue'>ptr1</i> has the value 2, meaning that these pointers point to objects 
+separated by two ints, not by 2 bytes. 
+
+</p><p>Subtraction is guaranteed to be a valid operation as long as both pointers point into the 
+same array. 
+
+</p><p>Applying the operation to pointers to two different arrays might produce a value or could lead to a runtime error.
+
+</p><h3>Comparisons
+
+</h3><p>You can use the relational operators to compare the values of two pointers, 
+provided the pointers are of the same type.
+
+</p><h3>Note 2
+
+</h3><p>Note that there are two forms of subtraction. You can subtract one pointer from another to get
+an integer, and you can subtract an integer from a pointer and get a pointer.
+</p><a class ='btn btn-outline-dark' href=c-testing-for-a-null-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-dereferencing-an-uninitialized-pointer.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and the value it is pointing to</a></LI><LI><a href='c-update-variable-via-its-pointer.html'>C Update variable via its pointer</a></LI><LI><a href='c-testing-for-a-null-pointer.html'>C Testing for a NULL Pointer</a></LI><LI><a href='c-dereferencing-an-uninitialized-pointer.html'>C Dereferencing an Uninitialized Pointer</a></LI><LI><a href='c-const-pointer.html'>C const pointer</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-operations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

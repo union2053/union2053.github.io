@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/840501/how-do-function-pointers-in-c-work- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How do function pointers in C work? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How do function pointers in C work? | C Language Knowledge Base">
+        <title>[SOLVED] How do function pointers in C work? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-do-function-pointers-in-c-work-">How do function pointers in C work?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/function-pointers.html">function-pointers</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I had some experience lately with function pointers in C.</p>
+
+<p>So going on with the tradition of answering your own questions, I decided to make a small summary of the very basics, for those who need a quick dive-in to the subject.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/24545/yuval-adam" target="_blank"><span itemprop="name">Yuval Adam</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">1141</div>
+                                    <div itemprop="dateCreated">5/8/2009 3:49:17 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <h1 id="function-pointers-in-c">Function pointers in C</h1>
+
+<p>Let's start with a basic function which we will be <em>pointing to</em>:</p>
+
+<pre><code>int addInt(int n, int m) {
+    return n+m;
+}
+</code></pre>
+
+<p>First thing, let's define a pointer to a function which receives 2 <code>int</code>s and returns an <code>int</code>:</p>
+
+<pre><code>int (*functionPtr)(int,int);
+</code></pre>
+
+<p>Now we can safely point to our function:</p>
+
+<pre><code>functionPtr = &amp;addInt;
+</code></pre>
+
+<p>Now that we have a pointer to the function, let's use it:</p>
+
+<pre><code>int sum = (*functionPtr)(2, 3); // sum == 5
+</code></pre>
+
+<p>Passing the pointer to another function is basically the same:</p>
+
+<pre><code>int add2to3(int (*functionPtr)(int, int)) {
+    return (*functionPtr)(2, 3);
+}
+</code></pre>
+
+<p>We can use function pointers in return values as well (try to keep up, it gets messy):</p>
+
+<pre><code>// this is a function called functionFactory which receives parameter n
+// and returns a pointer to another function which receives two ints
+// and it returns another int
+int (*functionFactory(int n))(int, int) {
+    printf("Got parameter %d", n);
+    int (*functionPtr)(int,int) = &amp;addInt;
+    return functionPtr;
+}
+</code></pre>
+
+<p>But it's much nicer to use a <code>typedef</code>:</p>
+
+<pre><code>typedef int (*myFuncDef)(int, int);
+// note that the typedef name is indeed myFuncDef
+
+myFuncDef functionFactory(int n) {
+    printf("Got parameter %d", n);
+    myFuncDef functionPtr = &amp;addInt;
+    return functionPtr;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/24545/yuval-adam" target="_blank"><span itemprop="name">Yuval Adam</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/840501/how-do-function-pointers-in-c-work-#answer-0</div>
+                                            <div itemprop="upvoteCount">1380</div>
+                                            <div itemprop="dateCreated">12/29/2016 10:23:52 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><strong>Function pointers in C can be used to perform object-oriented programming in C.</strong></p>
+
+<p>For example, the following lines is written in C:</p>
+
+<pre><code>String s1 = newString();
+s1-&gt;set(s1, "hello");
+</code></pre>
+
+<p>Yes, the <code>-&gt;</code> and the lack of a <code>new</code> operator is a dead give away, but it sure seems to imply that we're setting the text of some <code>String</code> class to be <code>"hello"</code>.</p>
+
+<p>By using function pointers, <strong>it is possible to emulate methods in C</strong>.</p>
+
+<p>How is this accomplished?</p>
+
+<p>The <code>String</code> class is actually a <code>struct</code> with a bunch of function pointers which act as a way to simulate methods. The following is a partial declaration of the <code>String</code> class:</p>
+
+<pre><code>typedef struct String_Struct* String;
+
+struct String_Struct
+{
+    char* (*get)(const void* self);
+    void (*set)(const void* self, char* value);
+    int (*length)(const void* self);
+};
+
+char* getString(const void* self);
+void setString(const void* self, char* value);
+int lengthString(const void* self);
+
+String newString();
+</code></pre>
+
+<p>As can be seen, the methods of the <code>String</code> class are actually function pointers to the declared function. In preparing the instance of the <code>String</code>, the <code>newString</code> function is called in order to set up the function pointers to their respective functions:</p>
+
+<pre><code>String newString()
+{
+    String self = (String)malloc(sizeof(struct String_Struct));
+
+    self-&gt;get = &amp;getString;
+    self-&gt;set = &amp;setString;
+    self-&gt;length = &amp;lengthString;
+
+    self-&gt;set(self, "");
+
+    return self;
+}
+</code></pre>
+
+<p>For example, the <code>getString</code> function that is called by invoking the <code>get</code> method is defined as the following:</p>
+
+<pre><code>char* getString(const void* self_obj)
+{
+    return ((String)self_obj)-&gt;internal-&gt;value;
+}
+</code></pre>
+
+<p>One thing that can be noticed is that there is no concept of an instance of an object and having methods that are actually a part of an object, so a "self object" must be passed in on each invocation. (And the <code>internal</code> is just a hidden <code>struct</code> which was omitted from the code listing earlier -- it is a way of performing information hiding, but that is not relevant to function pointers.)</p>
+
+<p>So, rather than being able to do <code>s1-&gt;set("hello");</code>, one must pass in the object to perform the action on <code>s1-&gt;set(s1, "hello")</code>. </p>
+
+<p>With that minor explanation having to pass in a reference to yourself out of the way, we'll move to the next part, which is <strong>inheritance in C</strong>.</p>
+
+<p>Let's say we want to make a subclass of <code>String</code>, say an <code>ImmutableString</code>. In order to make the string immutable, the <code>set</code> method will not be accessible, while maintaining access to <code>get</code> and <code>length</code>, and force the "constructor" to accept a <code>char*</code>:</p>
+
+<pre><code>typedef struct ImmutableString_Struct* ImmutableString;
+
+struct ImmutableString_Struct
+{
+    String base;
+
+    char* (*get)(const void* self);
+    int (*length)(const void* self);
+};
+
+ImmutableString newImmutableString(const char* value);
+</code></pre>
+
+<p>Basically, for all subclasses, the available methods are once again function pointers. This time, the declaration for the <code>set</code> method is not present, therefore, it cannot be called in a <code>ImmutableString</code>.</p>
+
+<p>As for the implementation of the <code>ImmutableString</code>, the only relevant code is the "constructor" function, the <code>newImmutableString</code>:</p>
+
+<pre><code>ImmutableString newImmutableString(const char* value)
+{
+    ImmutableString self = (ImmutableString)malloc(sizeof(struct ImmutableString_Struct));
+
+    self-&gt;base = newString();
+
+    self-&gt;get = self-&gt;base-&gt;get;
+    self-&gt;length = self-&gt;base-&gt;length;
+
+    self-&gt;base-&gt;set(self-&gt;base, (char*)value);
+
+    return self;
+}
+</code></pre>
+
+<p>In instantiating the <code>ImmutableString</code>, the function pointers to the <code>get</code> and <code>length</code> methods actually refer to the <code>String.get</code> and <code>String.length</code> method, by going through the <code>base</code> variable which is an internally stored <code>String</code> object.</p>
+
+<p>The use of a function pointer can achieve inheritance of a method from a superclass.</p>
+
+<p>We can further continue to <strong>polymorphism in C</strong>.</p>
+
+<p>If for example we wanted to change the behavior of the <code>length</code> method to return <code>0</code> all the time in the <code>ImmutableString</code> class for some reason, all that would have to be done is to:</p>
+
+<ol>
+<li>Add a function that is going to serve as the overriding <code>length</code> method.</li>
+<li>Go to the "constructor" and set the function pointer to the overriding <code>length</code> method.</li>
+</ol>
+
+<p>Adding an overriding <code>length</code> method in <code>ImmutableString</code> may be performed by adding an <code>lengthOverrideMethod</code>:</p>
+
+<pre><code>int lengthOverrideMethod(const void* self)
+{
+    return 0;
+}
+</code></pre>
+
+<p>Then, the function pointer for the <code>length</code> method in the constructor is hooked up to the <code>lengthOverrideMethod</code>:</p>
+
+<pre><code>ImmutableString newImmutableString(const char* value)
+{
+    ImmutableString self = (ImmutableString)malloc(sizeof(struct ImmutableString_Struct));
+
+    self-&gt;base = newString();
+
+    self-&gt;get = self-&gt;base-&gt;get;
+    self-&gt;length = &amp;lengthOverrideMethod;
+
+    self-&gt;base-&gt;set(self-&gt;base, (char*)value);
+
+    return self;
+}
+</code></pre>
+
+<p>Now, rather than having an identical behavior for the <code>length</code> method in <code>ImmutableString</code> class as the <code>String</code> class, now the <code>length</code> method will refer to the behavior defined in the <code>lengthOverrideMethod</code> function.</p>
+
+<p>I must add a disclaimer that I am still learning how to write with an object-oriented programming style in C, so there probably are points that I didn't explain well, or may just be off mark in terms of how best to implement OOP in C. But my purpose was to try to illustrate one of many uses of function pointers.</p>
+
+<p>For more information on how to perform object-oriented programming in C, please refer to the following questions:</p>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/415452/object-orientation-in-c">Object-Orientation in C?</a></li>
+<li><a href="https://stackoverflow.com/questions/351733/can-you-write-object-oriented-code-in-c">Can you write object oriented code in C?</a></li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/17172/coobird" target="_blank">coobird</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/840501" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/840501/how-do-function-pointers-in-c-work- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:32 GMT -->
+</html>

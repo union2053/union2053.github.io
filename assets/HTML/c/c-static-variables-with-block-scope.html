@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-static-variables-with-block-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Static Variables with Block Scope</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Static Variables with Block Scope'>C Static Variables with Block Scope</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-block-scope.html'>C Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-block-scope-without-braces.html'>C Block Scope Without Braces
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Static Variables with Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Static Variables with Block Scope</h1>
+<a class ='btn btn-outline-dark' href=c-register-variables.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-static-variables-with-external-linkage.html>Next</a><p>static means that the variable stays put in memory, not necessarily in value.
+
+</p><p>Variables with file scope automatically have static storage duration.
+
+</p><p>You also can create local variables having block scope but static duration.
+
+</p><p>These variables have the same scope as automatic variables, but they don't vanish 
+when the containing function ends its job.
+
+</p><p>Such variables have block scope, no linkage, but static storage duration.
+
+</p><p>The computer remembers their values from one function call to the next.
+
+</p><p>Such variables are created by declaring them in a block, which provides the block scope and 
+lack of linkage, with
+the storage-class specifier <i style='color:blue'>static</i>, which provides the static storage duration. 
+
+</p><h3>Example
+
+</h3><p>The example in illustrates this technique.
+</p><div class='myCodeDiv'><button id='OAXEK' class='myCopyButton' data-clipboard-target='#YGPDN'>Copy</button><pre  id='YGPDN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>void</span> f(<span class='r'>void</span>);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> count;
+
+    <span class='r'>for</span> (count = 1; count &lt;= 3; count++)
+    {
+        printf(<span class='q'>"count %d:\n"</span>, count);
+        f();
+    }
+
+    <span class='r'>return</span> 0;
+}
+
+<span class='r'>void</span> f(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> fade = 1;
+    <span class='r'>static</span> <span class='r'>int</span> stay = 1;
+
+    printf(<span class='q'>"fade = %d and stay = %d\n"</span>, fade++, stay++);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OAXEK');clipboard.on('success', function(e) {$('#OAXEK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OAXEK').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAC4CAIAAAA+KY4ZAAAIwElEQVR42u3dW46bShRA0Qyi5z/GSBmAE+Wj1YLyqVMPTAFr6f5cN415dFTbPMyvFwDARfyyCQAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AAMIFABAuAADCBQBAuAAAwuW6vv6z4wFAuBzeHFOSRbgAgHBZPVymzwcAWDRcvn4ojv2bCfY/Cl75OdviTL7eOCJcBmcOAJwcLnF2FCeotkLrPF+fOuIiXADgwuFSHMI3x0syrTM4wcupIgAQLuPDvHABAISLcAEAhItwAYC7hktHdhx0KW71V6aEi4tzAeDa4fLa3ZAcT1Cdw6Zd9r8Y31ndFxbJG6qFCwBcPlwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADCBQB4VLhUv3a2aT5rbpGlls13+No+AHSGy9wRYsHx5ufjCJZaqkvM084CQLjcpxWEyxN2FgBLhEvr4wkzP537AMWlxsJ3K7J5wGT3hmpdgOLTK/v2Zv5F4QLAaeGSGSH2g3T8v03T96VV91A6ePnOxBXvWIXMHKrzbN07TQu5zs4C4LnhEkz87gN9foLrfohvGvKnbIfM9OMxdMudBcCDwiX49JwJl1mfv08fC+O1+EC4vBI3f2WOuMQzqS62cAFg3XAZHI/Hx55Fzj5UD0V8Jlxal6pj+pHd51QRAE8Pl0U+xD8nXL5fvPqV1AAIl9QlqLe8bGJ8NadfnNv3ppllEC4ArBsumYseNrfgFse/5ARn3Vg7fvIiWM3gRuKmDTW4p4rv0ro3V4jLdS6KAmDFIy7gaAcAwgXVAgDChWN6xdkZAIQLAIBwAQCECwCAcAEAEC4AgHABABAu87mPFwCEy+eyY+KvaxcAEC6Lhstqj9oBAA4Ml/1T9+IJ9j8KXtk8zK/6/MVZp3vi5wv64wCAS4ZLnB2vxFmY6ivVeb5mHyCpPjbZHwcAXC9cqidZMmdhMuHS2jpHVAsAcMNwaSqb1cJFtQCAcLlAuDgHBADC5RrhIlkA4P7h0pEdB12KO/JFLPnboV2cCwDXDpfX7obkeILqHDbtsv/F+M7qjrDI31AtXADg8uECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgDAo8Kl+rWzTfNZc4sstWy+wzf512hrAAiXwjgxd9RZNlmWWrYjFuYGI/3Ig6sAEC63GjuFy7WqRbsACJftkND0eMLMTyc+QHG1cf3dimweMNm9oVoXoPj0yr69mX/x4bkJwJnhkhkY4kP374bw5PR9adU9lA5evjNxxfueg12dQ3WerXunaSHn7izVAiBcJowNm0/kgxNc97N705A/ZTtkph+PoaW6QbUACJfm4SH49JwJl7mfv08cCOO1+EC4vBI3f2WOuMQzqS62auFafv/58+8/2wGeEi6D4/H42LPIqaLqoYjPhEvrUnVMP7L7Zu0sN0Izt1pODJfvBRBP8JRwWeRD/HPC5fvFs/adZOGIdDi9WrQLnBMumUtQV75sYla4dKzm9Itz+940swwnhovboblNuGzeV7vAtHDJXPSwuQW3OP4lJzhrOBw/0xSsZnAjcdOGGtxTxXdp3ZvntsJqF0UhXEbed5ElgRsecQEHOeiogZ8jcfzKQRNXF6+YC8VzN/H8g3fMH0oJlqQYOtVlri5D90qBcEG1cP8jGcVXjp44XrBMoOyzKQ6m5BtVt9i7WWXWKLMMfSsFwoUr9YqzM9wjXJKj/r5dmlawOn11wTJrFK97dQlbVwqEC/CUdtl/lP/MxPmBuXhCqi9cqqdm4mrJF0M8z8zpIeGCcAEojJHFVz4w8WBt9I3xs8Ileb2OcEG4ABwYLtUBdeLE64dL/KZxuwgXhAvA5HbpvgFn1sQrh8sR54OEC8IF4CnhUrzWte/i3OoFtsErTRfn5m9HcnEuwgWgMxQ+MHH+atz9K4MHJ5JzSL5jfj5B1rirCOFyJe7jhbPapfrKcRMHNZP/Arq+V+LjQHG1bI70VL/TJXMdzJTVBOGSbY7xZJk1NwBAuBwYLh+YIQCwRLjsn7oXT7D/UfDK5mF+1ecvzjrdEz9f0B8HAFwyXOLsKE5QTYTWeb5mHyCpPjbZHwcAXC9c3h2WyE+QDJfW1hlJFl0CAA8Kl6ayWS1cjpgbACBcjk0N7QIAwkW4AAAnhUtHdhx0KW71V5rWwsW5AHDPcHntbkiOJ6jOYdMu+1+M76zuDovMrwsXALh8uAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAIQLAPCocKl+f27TfNbcIkstm+/wTf5B2hQAwqUwSMwdcpZNlqWW7YiFucFIv39GhH/MAMLlWeGy5rIJlyevFAA94fJVEk9W/en0ByiuMwS+W5HNAya7N1TrAhSfXtm3N/MvChcATguXzMCwH6Tj/22avi+tRh4iPWv4HFzxjlXIzKE6z9a907SQc3eWagEQLhPGhur1B00TXPeze9OQP2U7ZKYfj6GldpZqARAuzaNd8Ok5Ey5zP3+fGC7xWnwgXF6Jm78yR1zimax2Yax2ARAuDWPD4Hg8PuoscqqoeijiM+HSulQd04/sviNOFWkXAOFypXBZ5OP7c8Ll+8WlvvPGv2cA4dITLplLUBe/bGLKL3as5vSLc/veNLMM54bL4NXcANw8XDIXPWxuwS2Of8kJThmHppy8CFYzuJG4aUMN7qniu7TuzRVyYZ375wFY8YgLLBUuAAgXUC0ACBdu1CvO0QAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AAMIFABAuAADCBQBAuAAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXACA2/sLHyKtdJtC7UkAAAAASUVORK5CYII='><p>The <i style='color:blue'>static</i> variable stay remembers that its value was increased by 1, but the <i style='color:blue'>fade</i> variable
+starts a new value each time. 
+
+</p><p><i style='color:blue'>fade</i> is initialized each time <i style='color:blue'>f</i>() is called, but <i style='color:blue'>stay</i> is initialized just once, 
+when <i style='color:blue'>f</i>() is compiled. 
+
+</p><p>Static variables are initialized to zero if you don't explicitly initialize them to some other value.
+
+</p><p>The two declarations look similar:
+</p><div class='myCodeDiv'><button id='IQLKI' class='myCopyButton' data-clipboard-target='#KJGCJ'>Copy</button><pre  id='KJGCJ' style='font-size:18px;' class='code'><span class='r'>int</span> fade = 1;
+<span class='r'>static</span> <span class='r'>int</span> stay = 1;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IQLKI');clipboard.on('success', function(e) {$('#IQLKI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IQLKI').text('error');});</script></div><p>The first statement is really part of the <i style='color:blue'>f</i>() function and is executed each time the function is 
+called. It is a runtime action. 
+
+</p><p>The second statement isn't actually part of the <i style='color:blue'>f</i>() function. 
+</p><p>static variables and external variables are already in place after a program is loaded into memory. 
+
+</p><p>Placing the statement in the <i style='color:blue'>f</i>() function tells the compiler that only the <i style='color:blue'>f</i>() function is allowed to see the
+variable; it's not a statement that's executed during runtime.
+
+</p><p>You can't use static for function parameters:
+</p><div class='myCodeDiv'><button id='FMNFH' class='myCopyButton' data-clipboard-target='#OHKUB'>Copy</button><pre  id='OHKUB' style='font-size:18px;' class='code'><span class='r'>int</span> wontwork(<span class='r'>static</span> <span class='r'>int</span> flu);        <span class='c'>// not allowed</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FMNFH');clipboard.on('success', function(e) {$('#FMNFH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FMNFH').text('error');});</script></div><p>Another term for a static variable with block scope is a "local static variable." 
+</p><a class ='btn btn-outline-dark' href=c-register-variables.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-static-variables-with-external-linkage.html>Next</a><h2>Related</h2><UL><LI><a href='c-automatic-variables.html'>C Automatic Variables</a></LI><LI><a href='c-initialization-of-automatic-variables.html'>C Initialization of Automatic Variables</a></LI><LI><a href='c-register-variables.html'>C Register Variables</a></LI><LI><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage</a></LI><LI><a href='c-external-variable-example.html'>C External Variable Example</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-static-variables-with-block-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

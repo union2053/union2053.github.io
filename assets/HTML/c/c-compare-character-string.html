@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-compare-character-string.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Compare character string</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Compare character string'>C Compare character string</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Compare character string</h1>
+<a class ='btn btn-outline-dark' href=c-join-two-string-with-strcat-function.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-string-copy.html>Next</a><p>We can compare someone's response to a stored string.
+
+</p><p>We need to compare string contents, not string addresses. 
+
+</p><p><i style='color:blue'>strcmp</i>() (string comparison) does for strings what relational operators do for numbers. 
+
+</p><p>In particular, it returns 0 if its two string arguments are the same and nonzero otherwise. 
+
+</p><div class='myCodeDiv'><button id='IAWXM' class='myCopyButton' data-clipboard-target='#UXIRU'>Copy</button><pre  id='UXIRU' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;   <span class='c'>// declares strcmp()</span>
+
+#define ANSWER <span class='q'>"Grant"</span>
+#define SIZE 40
+<span class='r'>char</span> * s_gets(<span class='r'>char</span> * st, <span class='r'>int</span> n);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> <span class='r'>try</span>[SIZE]=<span class='q'>"test test"</span>;
+
+    <span class='r'>if</span>(strcmp(<span class='r'>try</span>,ANSWER) != 0)
+    {
+        puts(<span class='q'>"No, that's wrong. Try again."</span>);
+    }
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IAWXM');clipboard.on('success', function(e) {$('#IAWXM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IAWXM').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAExElEQVR42u2dYW7bMAxGe4jc/5C7gAsUWNDGEUV+pGQpfu/H0K22LFGe+cJY9tcBAAA78O8H4gA354sQAACs7ytP7jZeXA0QFwAAsvg240VfAHEBANg4o9/TWnAXQFwAABCX1QeIuADiAgCAuCw6wO7YcRdAXAAAEJelrQVxAcQFAABx2Ulcjnvc4gOICwAA4sLwAXEBAEgknlbZ37mKJLTwZJ02M+EKZe7QShx7dPkRFS4L8g/nHLeqM3bEXqOnAHEBACjTF22Dczbapc1QiIR05U+BrQRvJN3o4mTjoJkzpyT9C4crH/KEKUBcAACK3SWzwaZtyunZKVKhys3vf7ezflRB5FFkxEUr0gidzw95whQgLgAAF4iLkSQ2bVPOzbK4GAPxf9UVmsSk7ZWUW5w7VlmXPORBU4C4AAAMERc5vUVz8DptDipEaYLl/C5Mk6HMSAvFRZuFwjBmwpX5LeICAHBN0cWfh3ZpU8u+dxaXZIPlhoS4IC4AgLg0E+3ba/3WbcpJyLnSRFgeVZU1hXVPteIyYeGStstMd0RcAABmu8vzbsSoEOzS5iBxGaSP14pLaLOSlUSIC+ICABBLw3Zq/IA2by4u0XwvjChzC/AIcdEihrggLgCX8Xg8CEJUCN5uk5SMRdpEXPziIg9qqIUgLohLTWKYlhse/yH3AOJS6y72ZV1LD2u2+dniUvLioZK7VYS7gAftgrhMFZdznr4qc9tHLOmPpxHEpcr8zhAcxMXICrWScW2bI8QlWsBYWVxKUnLmaf3OSCIu61ZczknlkhyziLjwAbowyK2f4VbiYuR7WTIWb1NImcn312y0HFr4viZjhFFxkd8GwHLo2eLSzTFDPzd7PqA/O2l3w9jdXwMwxviyrz8arSO+/Pv559Bc/O6YMcaXIdTOqUdcjGG+7bl8+uXj0I22vePo/zsbFV2qHhK/S5taOpePPidrljy1TygdlYiLFskS6URcLhCXOfWYbsWl243oBtGevJWh/ABbiuapWxju4tllRDYN9dxfnhH6mY+D88y3NfrOxbx8ntu3zdAhom+39tjAoKyZKagILzI8pNcdeGahKpJH7v1HiEtKXN7+0LrUDqq7hH7b7UNJ8hu0u53RQwkypGvlMZEjZjvTiH7m4yCIy8xor190qbpAL9um9kS70NPkPBvPEZfoQ361x+gd8WcKh2YhFEl5yIgL4tIpNti1/XwnM5V/O9SeZP9J4pLxDGGyhDgkv1tEXOQP2Zu2GXpx4/nemmjdxb9xbQXoMO9FTVqL//upZE3IGcmqIZdPAeLyekHfUVycZjOzz63tz38iLuXiko+DP1aISz7ff0abmQetVj1DtpuVM78N9aTEWo7GGp98rUJYUx3twOgpQFwQF8RlLXExQoS4AAAgLn/+qt2cm7zTM3rQ7vaC62Ry4QRxKdE15825JQth1hEX+6x2ni2DxIXn3AAABMSltfS0tVkyFTk701rMbF/rz2uVa9d1lzxRzb/sPLNA1xmorobKc9q92cgZyaQK2+dDNw52C/YCe/+jHREXAIBYxaUErrybsviszXzVAycDAMC9xIVw72gtK0/c5BdUcT4AACAusKisrJyq57zhiJcoAQDcWlwAAAAAknwDcjuty3qc36YAAAAASUVORK5CYII='><p><i style='color:blue'>strcmp</i>() compares strings, not arrays. 
+
+</p><p>Although the array try occupies 40 memory cells and "Grant" only six (one for the null character), 
+the comparison looks only at the part of try up to its first null character. 
+
+</p><p>Therefore, <i style='color:blue'>strcmp</i>() can be used to compare strings stored in arrays of different sizes.
+
+</p><h3>strcmp() Return Value
+
+</h3><p>The following code checks the value <i style='color:blue'>strcmp</i>() returns if the strings are not the same? 
+</p><div class='myCodeDiv'><button id='ATNCZ' class='myCopyButton' data-clipboard-target='#UYSOQ'>Copy</button><pre  id='UYSOQ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+
+     printf(<span class='q'>"strcmp(\"A\", \"A\") is "</span>);
+     printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"A"</span>, <span class='q'>"A"</span>));
+
+     printf(<span class='q'>"strcmp(\"A\", \"B\") is "</span>);
+     printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"A"</span>, <span class='q'>"B"</span>));
+
+    printf(<span class='q'>"strcmp(\"B\", \"A\") is "</span>);
+    printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"B"</span>, <span class='q'>"A"</span>));
+
+    printf(<span class='q'>"strcmp(\"C\", \"A\") is "</span>);
+    printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"C"</span>, <span class='q'>"A"</span>));
+
+    printf(<span class='q'>"strcmp(\"Z\", \"a\") is "</span>);
+    printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"Z"</span>, <span class='q'>"a"</span>));
+
+    printf(<span class='q'>"strcmp(\"apples\", \"apple\") is "</span>);
+    printf(<span class='q'>"%d\n"</span>, strcmp(<span class='q'>"apples"</span>, <span class='q'>"apple"</span>));
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ATNCZ');clipboard.on('success', function(e) {$('#ATNCZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ATNCZ').text('error');});</script></div><p>Here is the output on one system:
+</p><img src='data:image/png;base64,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'><p>Comparing "A" to itself returns 0. 
+</p><p>Comparing "A" to "B" returns -1, and reversing the comparison returns 1. 
+
+</p><p><i style='color:blue'>strcmp</i>() returns a negative number if the first string precedes the second alphabetically 
+and that it returns a positive number if the order is the other way. 
+
+</p><p>Therefore, comparing "C" to "A" gives a 1. 
+
+</p><h3>Note
+
+</h3><p>The <i style='color:blue'>strcmp</i>() function is for comparing strings, not characters. 
+
+</p><p>So you can use arguments such as "apples" and "A", but you cannot use character arguments, 
+such as 'A'. 
+
+</p><p>The char type is an integer type, so you can use the relational operators for 
+character comparisons. 
+
+</p><p>Suppose word is a string stored in an array of char and that ch is a char
+variable. Then the following statements are valid:
+</p><div class='myCodeDiv'><button id='JFCCW' class='myCopyButton' data-clipboard-target='#MRGMI'>Copy</button><pre  id='MRGMI' style='font-size:18px;' class='code'><span class='r'>if</span> (strcmp(word, <span class='q'>"quit"</span>) == 0)       <span class='c'>// use strcmp() for strings</span>
+    puts(<span class='q'>"Bye!"</span>);
+<span class='r'>if</span> (ch == <span class='q'>'q'</span>)                       <span class='c'>// use == for chars</span>
+    puts(<span class='q'>"Bye!"</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JFCCW');clipboard.on('success', function(e) {$('#JFCCW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JFCCW').text('error');});</script></div><p>However, don't use ch or 'q' as arguments for <i style='color:blue'>strcmp</i>().
+
+</p><h3>strncmp() Variation
+
+</h3><p>The <i style='color:blue'>strcmp</i>() function compares strings until it finds corresponding characters that differ,
+which could take the search to the end of one of the strings. 
+
+</p><p>The <i style='color:blue'>strncmp</i>() function compares the strings until they differ or until it has compared a number of characters specified
+by a third argument. 
+
+</p><p>For example, if you wanted to search for strings that begin with "demo2",
+you could limit the search to the first five characters. 
+</p><div class='myCodeDiv'><button id='GDVTP' class='myCopyButton' data-clipboard-target='#GTUNT'>Copy</button><pre  id='GTUNT' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+#define LISTSIZE 6
+<span class='r'>int</span> main()
+{
+    <span class='r'>const</span> <span class='r'>char</span> * list[LISTSIZE] =
+    {
+        <span class='q'>"demo2d"</span>, <span class='q'>"demo2s"</span>,
+         <span class='q'>"demo2d"</span>, <span class='q'>"demo2s"</span>,
+          <span class='q'>"demo2d"</span>, <span class='q'>"demo2s"</span>
+    };
+    <span class='r'>int</span> count = 0;
+    <span class='r'>int</span> i;
+
+    <span class='r'>for</span> (i = 0; i &lt; LISTSIZE; i++){
+        <span class='r'>if</span> (strncmp(list[i],<span class='q'>"demo2"</span>, 5) == 0)
+        {
+            printf(<span class='q'>"Found: %s\n"</span>, list[i]);
+            count++;
+        }
+    }
+    printf(<span class='q'>"The list contained %d words beginning"</span>
+           <span class='q'>" with demo2.\n"</span>, count);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GDVTP');clipboard.on('success', function(e) {$('#GDVTP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GDVTP').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-join-two-string-with-strcat-function.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-string-copy.html>Next</a><h2>Related</h2><UL><LI><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C Finding Out The Length Of A String excluding the null character</a></LI><LI><a href='c-shorten-character-string.html'>C shorten character string</a></LI><LI><a href='c-join-two-string-with-strcat-function.html'>C Join two string with strcat() Function</a></LI><LI><a href='c-character-string-copy.html'>C Character String copy</a></LI><LI><a href='c-character-string-format-with-sprintf-function.html'>C Character String format with sprintf() Function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-compare-character-string.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

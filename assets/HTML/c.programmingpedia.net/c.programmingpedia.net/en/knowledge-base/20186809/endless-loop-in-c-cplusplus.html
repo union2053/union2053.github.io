@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/20186809/endless-loop-in-c-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Endless loop in C/C++ | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Endless loop in C/C++ | C Language Knowledge Base">
+        <title>[SOLVED] Endless loop in C/C++ | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="endless-loop-in-c-cplusplus">Endless loop in C/C++</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/infinite-loop.html">infinite-loop</a></span>
+                        <span class="tag-item"><a href="../tag/loops.html">loops</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>There are several possibilities to do an endless loop, here are a few I would choose:</p>
+
+<ul>
+<li><code>for(;;) {}</code></li>
+<li><code>while(1) {}</code> / <code>while(true) {}</code></li>
+<li><code>do {} while(1)</code> / <code>do {} while(true)</code></li>
+</ul>
+
+<p>Is there a certain form which one should choose? And do modern compilers make a difference between the middle and the last statement or does it realize that it is an endless loop and skips the checking part entirely?</p>
+
+<p>Edit: as it has been mentioned I forgot <code>goto</code>, but this was done out of the reason that I don't like it as a command at all.</p>
+
+<p>Edit2: I made some grep on the latest versions taken from kernel.org. I does seems as nothing much changed over time (within the Kernel at least)
+<a href="https://i.stack.imgur.com/GBCZI.png" rel="noreferrer"><img src="https://i.stack.imgur.com/GBCZI.png" alt="enter image description here"></a></p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2173891/magu-" target="_blank"><span itemprop="name">magu_</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">56</div>
+                                    <div itemprop="dateCreated">6/14/2017 4:28:29 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The problem with asking this question is that you'll get so many subjective answers that simply state "I prefer this...".  Instead of making such pointless statements, I'll try to answer this question with facts and references, rather than personal opinions.</p>
+
+<p>Through experience, we can probably start by excluding the do-while alternatives (and the goto), as they are not commonly used. I can't recall ever seeing them in live production code, written by professionals.</p>
+
+<p>The <code>while(1)</code>, <code>while(true)</code> and <code>for(;;)</code> are the 3 different versions commonly existing in real code. They are of course completely equivalent and results in the same machine code.</p>
+
+<hr>
+
+<p><strong><code>for(;;)</code></strong></p>
+
+<ul>
+<li><p>This is the original, canonical example of an eternal loop. In the ancient C bible <em>The C Programming Language</em> by Kernighan and Ritchie, we can read that:</p>
+
+<p>K&amp;R 2nd ed 3.5:</p>
+
+<pre><code>for (;;) {
+...
+}
+</code></pre>
+
+<blockquote>
+  <p>is an "infinite" loop, presumably to be broken by other means, such
+  as a break or return. Whether to use while or for is largely a matter
+  of personal preference.</p>
+</blockquote>
+
+<p>For a long while (but not forever), this book was regarded as canon and the very definition of the C language. Since K&amp;R decided to show an example of <code>for(;;)</code>, this would have been regarded as the most correct form at least up until the C standardization in 1990.</p>
+
+<p>However, K&amp;R themselves already stated that it was a matter of preference.</p>
+
+<p>And today, K&amp;R is a very questionable source to use as a canonical C reference. Not only is it outdated several times over (not addressing C99 nor C11), it also preaches programming practices that are often regarded as bad or blatantly dangerous in modern C programming. </p>
+
+<p>But despite K&amp;R being a questionable source, this historical aspect seems to be the strongest argument in favour of the <code>for(;;)</code>.</p></li>
+<li><p>The argument against the <code>for(;;)</code> loop is that it is somewhat obscure and unreadable. To understand what the code does, you must know the following rule from the standard:</p>
+
+<p>ISO 9899:2011 6.8.5.3:</p>
+
+<pre><code>for ( clause-1 ; expression-2 ; expression-3 ) statement
+</code></pre>
+
+<p>/--/</p>
+
+<blockquote>
+  <p>Both clause-1 and expression-3 can be omitted. An omitted expression-2
+  is replaced by a nonzero constant.</p>
+</blockquote>
+
+<p>Based on this text from the standard, I think most will agree that it is not only obscure, it is subtle as well, since the 1st and 3rd part of the for loop are treated differently than the 2nd, when omitted.</p></li>
+</ul>
+
+<hr>
+
+<p><strong><code>while(1)</code></strong></p>
+
+<ul>
+<li><p>This is supposedly a more readable form than <code>for(;;)</code>. However, it relies on another  obscure, although well-known rule, namely that C treats all non-zero expressions as boolean logical true. Every C programmer is aware of that, so it is not likely a big issue.</p></li>
+<li><p>There is one big, practical problem with this form, namely that compilers tend to give a warning for it: "condition is always true" or similar. That is a good warning, of a kind which you really don't want to disable, because it is useful for finding various bugs. For example a bug such as <code>while(i = 1)</code>, when the programmer intended to write <code>while(i == 1)</code>. </p>
+
+<p>Also, external static code analysers are likely to whine about "condition is always true".</p></li>
+</ul>
+
+<hr>
+
+<p><strong><code>while(true)</code></strong></p>
+
+<ul>
+<li><p>To make <code>while(1)</code> even more readable, some use <code>while(true)</code> instead. The consensus among programmers seem to be that this is the most readable form.</p></li>
+<li><p>However, this form has the same problem as <code>while(1)</code>, as described above: "condition is always true" warnings.</p></li>
+<li><p>When it comes to C, this form has another disadvantage, namely that it uses the macro <code>true</code> from stdbool.h. So in order to make this compile, we need to include a header file, which may or may not be inconvenient. In C++ this isn't an issue, since <code>bool</code> exists as a primitive data type and <code>true</code> is a language keyword.</p></li>
+<li><p>Yet another disadvantage of this form is that it uses the C99 bool type, which is only available on modern compilers and not backwards compatible. Again, this is only an issue in C and not in C++.</p></li>
+</ul>
+
+<hr>
+
+<p>So which form to use? Neither seems perfect. It is, as K&amp;R already said back in the dark ages, a matter of personal preference.</p>
+
+<p>Personally, I always use <code>for(;;)</code> just to avoid the compiler/analyser warnings frequently generated by the other forms. But perhaps more importantly because of this:</p>
+
+<p><strong>If even a C beginner <em>knows</em> that <code>for(;;)</code> means an eternal loop, then who are you trying to make the code more readable for?</strong></p>
+
+<p>I guess that's what it all really boils down to. If you find yourself trying to make your source code readable for non-programmers, who don't even know the fundamental parts of the programming language, then you are only wasting time. They should not be reading your code.</p>
+
+<p>And since everyone who <em>should</em>  be reading your code already knows what <code>for(;;)</code> means, there is no point in making it further readable -  it is already as readable as it gets.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/584518/lundin" target="_blank"><span itemprop="name">Lundin</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/20186809/endless-loop-in-c-cplusplus#answer-0</div>
+                                            <div itemprop="upvoteCount">84</div>
+                                            <div itemprop="dateCreated">4/23/2018 1:26:25 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>It is very subjective. I write this:</p>
+
+<pre><code>while(true) {} //in C++
+</code></pre>
+
+<p>Because <em>its intent is very much clear</em> and it is also readable: you look at it and you <em>know</em>  infinite loop is intended. </p>
+
+<p>One might say <code>for(;;)</code> is also clear. But I would argue that because of its <em>convoluted syntax</em>, this option <em>requires</em> extra knowledge to reach the conclusion that it is an infinite loop, hence it is <em>relatively less</em> clear. I would even say there are <em>more</em> number of programmers who don't know what <code>for(;;)</code> does (even if they know usual <code>for</code> loop), but <em>almost</em> all programmers who knows <code>while</code> loop would immediately figure out what <code>while(true)</code> does.</p>
+
+<p>To me, writing <code>for(;;)</code> to mean infinite loop, is like writing <code>while()</code> to mean infinite loop &mdash; while the former works, the latter does NOT. In the former case, <em>empty</em> condition turns out to be <code>true</code> implicitly, but in the latter case, it is an error! I <em>personally</em> didn't like it.</p>
+
+<p>Now <code>while(1)</code> is also there in the competition. I would ask: why <code>while(1)</code>? Why not <code>while(2)</code>, <code>while(3)</code> or <code>while(0.1)</code>? Well, whatever you write, <em>you actually mean</em> <code>while(true)</code> &mdash; if so, then why not write it instead?</p>
+
+<p>In C (if I ever write), I would probably write this:</p>
+
+<pre><code>while(1) {} //in C
+</code></pre>
+
+<p>While <code>while(2)</code>, <code>while(3)</code> and <code>while(0.1)</code> would equally make sense. But just to be conformant with other C programmers, I would write <code>while(1)</code>, because lots of C programmers write this and I find no reason to deviate from the norm.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/415784/nawaz" target="_blank">Nawaz</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/20186809" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/20186809/endless-loop-in-c-cplusplus by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:11 GMT -->
+</html>

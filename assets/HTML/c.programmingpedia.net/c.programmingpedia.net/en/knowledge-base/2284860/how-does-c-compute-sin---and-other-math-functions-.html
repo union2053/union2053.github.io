@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2284860/how-does-c-compute-sin---and-other-math-functions- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How does C compute sin() and other math functions? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How does C compute sin() and other math functions? | C Language Knowledge Base">
+        <title>[SOLVED] How does C compute sin() and other math functions? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-does-c-compute-sin-and-other-math-functions-">How does C compute sin() and other math functions?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/math.html">math</a></span>
+                        <span class="tag-item"><a href="../tag/trigonometry.html">trigonometry</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I've been poring through .NET disassemblies and the GCC source code, but can't seem to find anywhere the actual implementation of <code>sin()</code> and other math functions... they always seem to be referencing something else.</p>
+
+<p>Can anyone help me find them?  I feel like it's unlikely that ALL hardware that C will run on supports trig functions in hardware, so there must be a software algorithm <em>somewhere</em>, right? </p>
+
+<hr>
+
+<p>I'm aware of several ways that functions <em>can</em> be calculated, and have written my own routines to compute functions using taylor series for fun.  I'm curious about how real, production languages do it, since all of my implementations are always several orders of magnitude slower, even though I think my algorithms are pretty clever (obviously they're not).</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/172387/hank" target="_blank"><span itemprop="name">Hank</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">229</div>
+                                    <div itemprop="dateCreated">3/17/2017 9:21:02 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>In GNU libm, the implementation of <code>sin</code> is system-dependent. Therefore you can find the implementation, for each platform, somewhere in the appropriate subdirectory of <a href="http://sourceware.org/git/?p=glibc.git;a=tree;f=sysdeps;hb=HEAD" rel="noreferrer">sysdeps</a>.</p>
+
+<p>One directory includes an implementation in C, contributed by IBM. Since October 2011, this is the code that actually runs when you call <code>sin()</code> on a typical x86-64 Linux system. It is apparently faster than the <code>fsin</code> assembly instruction. Source code: <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/ieee754/dbl-64/s_sin.c;hb=HEAD#l281" rel="noreferrer">sysdeps/ieee754/dbl-64/s_sin.c</a>, look for <code>__sin (double x)</code>.</p>
+
+<p>This code is very complex. No one software algorithm is as fast as possible and also accurate over the whole range of <em>x</em> values, so the library implements many different algorithms and its first job is to look at <em>x</em> and decide which algorithm to use. In some regions it uses what looks like the familiar Taylor series. Several of the algorithms first compute a quick result, then if that's not accurate enough, discard it and fall back on a slower algorithm.</p>
+
+<p>Older 32-bit versions of GCC/glibc used the <code>fsin</code> instruction, which is surprisingly inaccurate for some inputs. There's a <a href="http://randomascii.wordpress.com/2014/10/09/intel-underestimates-error-bounds-by-1-3-quintillion/" rel="noreferrer">fascinating blog post illustrating this with just 2 lines of code</a>.</p>
+
+<p>fdlibm's implementation of <code>sin</code> in pure C is much simpler than glibc's and is nicely commented. Source code: <a href="http://www.netlib.org/fdlibm/s_sin.c" rel="noreferrer">fdlibm/s_sin.c</a> and <a href="http://www.netlib.org/fdlibm/k_sin.c" rel="noreferrer">fdlibm/k_sin.c</a></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/94977/jason-orendorff" target="_blank"><span itemprop="name">Jason Orendorff</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2284860/how-does-c-compute-sin---and-other-math-functions-#answer-0</div>
+                                            <div itemprop="upvoteCount">195</div>
+                                            <div itemprop="dateCreated">10/10/2014 3:26:04 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>OK kiddies, time for the pros....
+This is one of my biggest complaints with inexperienced software engineers. They come in calculating transcendental functions from scratch (using Taylor's series) as if nobody had ever done these calculations before in their lives. Not true. This is a well defined problem and has been approached thousands of times by very clever software and hardware engineers and has a well defined solution.
+Basically, most of the transcendental functions use Chebyshev Polynomials to calculate them. As to which polynomials are used depends on the circumstances. First, the bible on this matter is a book called "Computer Approximations" by Hart and Cheney. In that book, you can decide if you have a hardware adder, multiplier, divider, etc, and decide which operations are fastest. e.g. If you had a really fast divider, the fastest way to calculate sine might be P1(x)/P2(x) where P1, P2 are Chebyshev polynomials. Without the fast divider, it might be just P(x), where P has much more terms than P1 or P2....so it'd be slower. So, first step is to determine your hardware and what it can do. Then you choose the appropriate combination of Chebyshev polynomials (is usually of the form cos(ax) = aP(x) for cosine for example, again where P is a Chebyshev polynomial). Then you decide what decimal precision you want. e.g. if you want 7 digits precision, you look that up in the appropriate table in the book I mentioned, and it will give you (for precision = 7.33) a number N = 4 and a polynomial number 3502. N is the order of the polynomial (so it's p4.x^4 + p3.x^3 + p2.x^2 + p1.x + p0), because N=4. Then you look up the actual value of the p4,p3,p2,p1,p0 values in the back of the book under 3502 (they'll be in floating point). Then you implement your algorithm in software in the form:
+(((p4.x + p3).x + p2).x + p1).x + p0
+....and this is how you'd calculate cosine to 7 decimal places on that hardware.</p>
+
+<p>Note that most hardware implementations of transcendental operations in an FPU usually involve some microcode and operations like this (depends on the hardware).
+Chebyshev polynomials are used for most transcendentals but not all. e.g. Square root is faster to use a double iteration of Newton raphson method using a lookup table first.
+Again, that book "Computer Approximations" will tell you that.</p>
+
+<p>If you plan on implmementing these functions, I'd recommend to anyone that they get a copy of that book. It really is the bible for these kinds of algorithms.
+Note that there are bunches of alternative means for calculating these values like cordics, etc, but these tend to be best for specific algorithms where you only need low precision. To guarantee the precision every time, the chebyshev polynomials are the way to go. Like I said, well defined problem. Has been solved for 50 years now.....and thats how it's done.</p>
+
+<p>Now, that being said, there are techniques whereby the Chebyshev polynomials can be used to get a single precision result with a low degree polynomial (like the example for cosine above). Then, there are other techniques to interpolate between values to increase the accuracy without having to go to a much larger polynomial, such as "Gal's Accurate Tables Method". This latter technique is what the post referring to the ACM literature is referring to. But ultimately, the Chebyshev Polynomials are what are used to get 90% of the way there.</p>
+
+<p>Enjoy.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/2071037/donald-murray" target="_blank">Donald Murray</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2284860" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2284860/how-does-c-compute-sin---and-other-math-functions- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:55 GMT -->
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-reusing-the-numbers-stored-in-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Reusing the numbers stored in array</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Reusing the numbers stored in array'>C Reusing the numbers stored in array</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Reusing the numbers stored in array</h1>
+<a class ='btn btn-outline-dark' href=c-calculate-averages-with-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html>Next</a><p>The program displays all the values that were typed in. 
+
+</p><p>Having the values stored in an array means that you can  
+access those values whenever you want and process them in many different ways: 
+</p><div class='myCodeDiv'><button id='MKKTP' class='myCopyButton' data-clipboard-target='#INDTF'>Copy</button><pre  id='INDTF' style='font-size:18px;' class='code'>#define _CRT_SECURE_NO_WARNINGS 
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> grades[10];                          <span class='c'>// Array storing 10 values </span>
+  <span class='r'>unsigned</span> <span class='r'>int</span> count = 10;                 <span class='c'>// Number of values to be read </span>
+  <span class='r'>long</span> sum = 0L;                           <span class='c'>// Sum of the numbers </span>
+  <span class='r'>float</span> average = 0.0f;                    <span class='c'>// Average of the numbers </span>
+
+  printf(<span class='q'>"\nEnter the 10 grades:\n"</span>);      <span class='c'>// Prompt for the input </span>
+
+  <span class='c'>// Read the ten numbers to be averaged </span>
+  <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; count ; ++i) 
+  { 
+    printf(<span class='q'>"%2u&gt; "</span>,i + 1); 
+    scanf(<span class='q'>"%d"</span>, &amp;grades[i]);               <span class='c'>// Read a grade </span>
+    sum += grades[i];                      <span class='c'>// Add it to sum </span>
+  } 
+  average = (<span class='r'>float</span>)sum/count;              <span class='c'>// Calculate the average </span>
+
+  <span class='c'>// List the grades </span>
+  <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; count ; ++i) 
+    printf(<span class='q'>"\nGrade Number %2u is %3d"</span>, i + 1, grades[i]); 
+
+  printf(<span class='q'>"\nAverage of the ten grades entered is: %.2f\n"</span>, average); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MKKTP');clipboard.on('success', function(e) {$('#MKKTP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MKKTP').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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wgUAEC4AAMIFAEC4AADCBQBAuAAAwgUA4MvC5fW3eQ8AABAuAMDDwgUAQLgAAAgXAEC4AAAIFwAA4QIACBcAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAhAsAgHABABAuAIBwAQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAIQLACBcAACECwCAcAEAhAsAgHABABAuAIBwAQAQLgCAcPEWAADCBQBAuAAAwgUAQLgAAAgXAEC4AAAIFwAA4QIACBcAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AAMIFABAuAADCBQBAuAAAwgUAQLgAAAgXAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAIQLACBcAACECwCAcAEAhAsAgHABABAuAIBwAQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIACBcAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AAMIFABAuAADCBQBAuAAAwgUA4EP+Axb+/wua4sslAAAAAElFTkSuQmCC'><h3>Note
+
+</h3><p>The following code is the part where you reuse the array elements in a loop: 
+</p><div class='myCodeDiv'><button id='ZWLTJ' class='myCopyButton' data-clipboard-target='#GOTAV'>Copy</button><pre  id='GOTAV' style='font-size:18px;' class='code'><span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; count ; ++i) 
+    printf(<span class='q'>"\nGrade Number %2u is %3d"</span>, i + 1, grades[i]);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZWLTJ');clipboard.on('success', function(e) {$('#ZWLTJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZWLTJ').text('error');});</script></div><p>This for loop steps through the elements in the array and outputs each value. 
+</p><a class ='btn btn-outline-dark' href=c-calculate-averages-with-arrays.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html>Next</a><h2>Related</h2><UL><LI><a href='c-multi-dimensional-array-sum.html'>C Multi dimensional array sum</a></LI><LI><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C game tic tac toe, noughts and crosses via multidimensional array</a></LI><LI><a href='c-calculate-averages-with-arrays.html'>C Calculate Averages With Arrays</a></LI><LI><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Use Address of Operator to get address in memory of its operand</a></LI><LI><a href='c-memory-address-of-array-element.html'>C Memory Address of Array Element</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-reusing-the-numbers-stored-in-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

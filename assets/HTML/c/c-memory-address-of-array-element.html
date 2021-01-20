@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-memory-address-of-array-element.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Memory Address of Array Element</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Memory Address of Array Element'>C Memory Address of Array Element</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Memory Address of Array Element</h1>
+<a class ='btn btn-outline-dark' href=c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html>Next</a><p>Here's a declaration for an array with four elements: 
+</p><div class='myCodeDiv'><button id='IETXM' class='myCopyButton' data-clipboard-target='#ZNVXS'>Copy</button><pre  id='ZNVXS' style='font-size:18px;' class='code'><span class='r'>long</span> number[4];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IETXM');clipboard.on('success', function(e) {$('#IETXM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IETXM').text('error');});</script></div><p>The array name, <i style='color:blue'>number</i>, identifies the address in memory where the array elements are stored. 
+
+</p><p>The location of an element is found by combining the address corresponding to 
+the array name with the index value. 
+
+</p><p>When you declare an array, you give the compiler all the information it needs to allocate the memory  
+for it. 
+
+</p><p>You can obtain the address of an array element in the same way as for an ordinary variable. 
+
+</p><p>For a variable with the name value, you would use the following statement to print its address: 
+</p><div class='myCodeDiv'><button id='SCSIW' class='myCopyButton' data-clipboard-target='#GAOJF'>Copy</button><pre  id='GAOJF' style='font-size:18px;' class='code'>printf(<span class='q'>"\n%p"</span>, &amp;value);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SCSIW');clipboard.on('success', function(e) {$('#SCSIW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SCSIW').text('error');});</script></div><p>To output the address of the third element of an array with the name number, you could write the  
+following: 
+</p><div class='myCodeDiv'><button id='OCIEE' class='myCopyButton' data-clipboard-target='#KPVGK'>Copy</button><pre  id='KPVGK' style='font-size:18px;' class='code'>printf(<span class='q'>"\n%p"</span>, &amp;number[2]);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OCIEE');clipboard.on('success', function(e) {$('#OCIEE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OCIEE').text('error');});</script></div><p>The following fragment sets a value for each element in an array and outputs the address and contents  
+of each element: 
+</p><div class='myCodeDiv'><button id='ZMYDW' class='myCopyButton' data-clipboard-target='#MIZSU'>Copy</button><pre  id='MIZSU' style='font-size:18px;' class='code'><span class='r'>int</span> data[5]; 
+<span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; 5 ; ++i) 
+{ 
+  data[i] = 12*(i + 1); 
+  printf(<span class='q'>"data[%d] Address: %p  Contents: %d\n"</span>, i, &amp;data[i], data[i]); 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZMYDW');clipboard.on('success', function(e) {$('#ZMYDW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZMYDW').text('error');});</script></div><p>The for loop variable  i iterates over all the legal index values for the data array. 
+
+</p><p>Within the loop, the value of the element at index position  i is set to 12*(i + 1). 
+
+</p><p>The output statement displays the current element with its index value, the address of the current array element determined by the current value of i,  
+and the value stored within the element. 
+</p><div class='myCodeDiv'><button id='AJSNS' class='myCopyButton' data-clipboard-target='#HNFPR'>Copy</button><pre  id='HNFPR' style='font-size:18px;' class='code'>#<span class='r'>include</span>&lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+    <span class='r'>long</span> number[4]; 
+    <span class='r'>int</span> data[5]; 
+    <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; 5 ; ++i) 
+    { 
+      data[i] = 12*(i + 1); 
+      printf(<span class='q'>"data[%d] Address: %p  Contents: %d\n"</span>, i, &amp;data[i], data[i]); 
+    } 
+    <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AJSNS');clipboard.on('success', function(e) {$('#AJSNS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AJSNS').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>The value of i is displayed between the square brackets following the array name. You can see that the  
+address of each element is 4 greater than the previous element, so each element occupies 4 bytes. 
+</p><a class ='btn btn-outline-dark' href=c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html>Next</a><h2>Related</h2><UL><LI><a href='c-calculate-averages-with-arrays.html'>C Calculate Averages With Arrays</a></LI><LI><a href='c-reusing-the-numbers-stored-in-array.html'>C Reusing the numbers stored in array</a></LI><LI><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Use Address of Operator to get address in memory of its operand</a></LI><LI><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C calculates reciprocal of array element and store in separate array</a></LI><LI><a href='c-array-exercise-1.html'>C Array Exercise 1</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-memory-address-of-array-element.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

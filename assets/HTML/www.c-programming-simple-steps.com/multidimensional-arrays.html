@@ -1,0 +1,456 @@
+<!DOCTYPE HTML>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<!-- Mirrored from www.c-programming-simple-steps.com/multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:33:08 GMT -->
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Multidimensional Arrays</title><meta name="description" content="Multidimensional arrays in programming – example algorithms, explained with flow charts."><meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link href="sd/support-files/A.style.css.pagespeed.cf.J7qGLGG26B.css" rel="stylesheet" type="text/css">
+<!-- start: tool_blocks.sbi_html_head -->
+<link rel="canonical" href="multidimensional-arrays.html"/>
+<meta property="og:site_name" content="C Programming Simple Steps"/>
+<meta property="og:title" content="Multidimensional Arrays"/>
+<meta property="og:description" content="Multidimensional arrays in programming – example algorithms, explained with flow charts."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="multidimensional-arrays.html"/>
+<meta property="og:image" content="images/initialize-two-dimension-array.png"/>
+<meta property="og:image" content="images/count-string-in-two-dimension-array.png"/>
+<meta property="og:image" content="images/iterrate-main-diagonal-2d-array.png"/>
+<meta property="og:image" content="images/elements-under-main-diagonal.png"/>
+<meta property="og:image" content="c-programming-fb.png"/>
+<meta property="og:image" content="images/chessBoard.png"/>
+<meta property="og:image" content="images/chess-board-algorithm.png"/>
+<meta property="og:image" content="images/chess-diagonals-flow-chart.png"/>
+<script type="text/javascript" language="JavaScript">var https_page=0</script>
+
+
+    <script src="sd/support-files/eucookie.js.pagespeed.jm.ksMg6Nudeq.js" async defer type="text/javascript"></script><!-- end: tool_blocks.sbi_html_head -->
+<!-- start: shared_blocks.2087538#end-of-head -->
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');ga('create','UA-70996381-1','auto');ga('send','pageview');</script>
+
+<!-- end: shared_blocks.2087538#end-of-head -->
+    
+    <script type="text/javascript">var FIX=FIX||{};</script>
+    
+</head>
+<body class="responsive">
+
+    <div id="PageWrapper" class="modern">
+
+      <div id="HeaderWrapper">
+        <div id="Header">
+          <div class="Liner">
+            <div class="WebsiteName">
+              <a href="index.html"> </a>
+            </div><div class="Tagline"> </div>
+<!-- start: shared_blocks.2087525#top-of-header -->
+
+<!-- start: tool_blocks.navbar.horizontal.left --><div class="ResponsiveNavWrapper"> 
+ 		        <div class="ResponsiveNavButton"><span>Menu</span></div><div class="HorizontalNavBarLeft HorizontalNavBar HorizontalNavBarCSS ResponsiveNav"> 
+ 	
+                <ul class="root"><li class="li1"><a href="index.html">Home</a></li><li class="li1"><a href="online-computer-programming-courses.html">Courses</a></li><li class="li1 submenu">
+                            <span class="navheader">Tutorials</span><ul><li class="li2"><a href="programming-for-beginners.html">Beginners</a></li><li class="li2"><a href="c-programming-tutorial.html">C Tutorial</a></li><li class="li2"><a href="number-systems.html">Number Systems</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">C</span><ul><li class="li2"><a href="c-language-programming.html">C Language</a></li><li class="li2"><a href="c-keywords.html">C Keywords</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">Algorithms</span><ul><li class="li2"><a href="algorithms.html">Algorithms</a></li><li class="li2"><a href="sorting-algorithms.html">Sorting algorithms</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">General</span><ul><li class="li2"><a href="computer-programming.html">Computer Programming</a></li><li class="li2"><a href="c-programming-examples.html">Examples Download</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">About</span><ul><li class="li2"><a href="contact-me.html">Contact me</a></li><li class="li2"><a href="privacy-policy.html">Privacy Policy</a></li></ul></li></ul>
+            </div></div><!-- end: tool_blocks.navbar.horizontal.left -->
+<div id="google_custom_search">
+<script>(function(){var cx='004800009253881390622:5z6xrveedtw';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src='https://cse.google.com/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script>
+<gcse:search></gcse:search>
+</div>
+
+<!-- end: shared_blocks.2087525#top-of-header -->
+<!-- start: shared_blocks.2087491#bottom-of-header -->
+
+
+<!-- end: shared_blocks.2087491#bottom-of-header -->
+</div><!-- end Liner -->
+        </div><!-- end Header -->
+      </div><!-- end HeaderWrapper -->
+
+      <div id="ContentWrapper">
+        <div id="ContentColumn">
+          <div class="Liner">
+<!-- start: shared_blocks.2087484#above-h1 -->
+
+
+<!-- end: shared_blocks.2087484#above-h1 -->
+<h1 style="text-align: center">Multidimensional arrays</h1>
+<!-- start: shared_blocks.2087549#below-h1 -->
+
+
+<!-- end: shared_blocks.2087549#below-h1 -->
+<h2>2D</h2>
+<p>&#xa0; &#xa0; The arrays that we have just learned had
+only one dimension. We represented them as a single row of values,
+accessed by index. An array with two dimensions can be represented as
+a table. Elements are accessed with two indices. The first – for
+the rows and the second for the columns.</p>
+<!-- start: shared_blocks.2087535#below-paragraph-1 -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087535#below-paragraph-1 -->
+<p>They are:<br/>&#xa0;- independent by size – you can have as many as you need.<br/>&#xa0;- start from 0 and reach the number of items -1.</p><p>Depending on the programming language they are:<br/>&#xa0;- separated by a comma: [first, second]; This is what we will use in the tutorial.<br/>&#xa0;- ..or in separate brackets: [first][second].</p><p>&#xa0; &#xa0; Here is one example: numbers[3, 4] is a 2D array, named “numbers”. It has 3 rows and 4 columns.</p>
+<table border="1" cell_width="15">
+	<caption><b>numbers[3, 4]</b></caption>
+	<tr>
+		<td style="width:20px" border="1">1</td>
+		<td style="width:20px" border="1">4</td>
+		<td style="width:20px" border="1">-3</td>
+		<td style="width:20px" border="1">0</td>
+	</tr>
+	<tr>
+		<td style="width:20px" border="1">6</td>
+		<td style="width:20px" border="1">7</td>
+		<td style="width:20px" border="1">-18</td>
+		<td style="width:20px" border="1">-10</td>
+	</tr>
+	<tr>
+		<td style="width:20px" border="1">0</td>
+		<td style="width:20px" border="1">1</td>
+		<td style="width:20px" border="1">-2</td>
+		<td style="width:20px" border="1">-1</td>
+	</tr>
+</table>
+<p>&#xa0;&#xa0;&#xa0; To access the value on the second row and third column we need to
+write numbers[1,2]. In the example below it has value 18.</p>
+<p>Iterating through all elements is done with two nested loops.</p><p>
+<p>Example: Initialize all elements of numbers[3. 4] with 0.</p>
+</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/initialize-two-dimension-array.png" width="546" alt="Initialize two dimension array" title="Initialize two dimension array" data-pin-media="images/initialize-two-dimension-array.png"></div>
+<p>&#xa0; &#xa0;  In this case “i” indexes the rows and
+“j” - the columns. Start with the first row (i = 0). Check if the
+current row is within the table (i &lt; 3). Then do the same for “j”. At this moment (i = 0, j = 0) numbers[0, 0]
+takes the value 0. Then increment the column and set the second item
+of the first row to 0. When the entire row is set to 0 (j &lt; 4
+returns false), i++ goes to the next row. This will repeat until all
+values are set to 0.</p>
+
+<p>&#xa0; &#xa0; The next example goes through a 2D string
+array and counts the occurrences of the string “programming”.</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/count-string-in-two-dimension-array.png" width="539" alt="Count string occurrence in two dimensional array" title="Count string occurrence in two dimensional array" data-pin-media="images/count-string-in-two-dimension-array.png"></div>
+<p>&#xa0; &#xa0;  Sometimes you need to work only with a
+given row or column. Then you fix the corresponding index to constant
+value.</p>
+<p>For example: people[100, 4] keeps data about 100 people. The
+columns keep the following information: name, gender, hairColor,
+eyeColor. Find how many people have blue eyes.</p><p>
+<p>No nested loops are necessary for this task. Instead the column
+index is fixed to the last column.</p></p>
+<h2><b>Square matrices</b><br/></h2>
+<p>&#xa0; &#xa0; &#xa0;When the dimensions of a 2D array are equal(N = M), we call it a square matrix. It is an interesting case and it is often used in calculations. It also has some additional characteristics that we will look into: main diagonal, secondary diagonal, elements above the diagonal and elements under the diagonal.<br/></p><p>&#xa0; &#xa0; Let's start with a 4x4 matrix. All elements in a square matrix that have equal indices (i = j) form the&#xa0;<b>main diagonal</b>&#xa0;(see the table below – note that in this example inside the table are written the indices, not the values).</p>
+<table border="1" cell_width="15">
+	<caption><b>matrix[4, 4]</b></caption>
+	<tr>
+		<td style="width:30px" border="1">0, 0</td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+	</tr>
+	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">1, 1</td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+	</tr>
+
+	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">2, 2</td>
+		<td style="width:30px" border="1"></td>
+	</tr>	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">3, 3</td>
+	</tr>
+</table>
+<p>&#xa0; &#xa0;  All elements with index sum equal to N –
+1 (i + j = N – 1) form the <b>secondary diagonal</b>.</p>
+<table border="1" cell_width="15">
+	<caption><b>matrix[4, 4]</b></caption>
+	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">0, 3</td>
+	</tr>
+	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">1, 2</td>
+		<td style="width:30px" border="1"></td>
+	</tr>
+
+	<tr>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1">2, 1</td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+	</tr>	<tr>
+		<td style="width:30px" border="1">3, 0</td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+	</tr>
+</table>
+<p>&#xa0; &#xa0;  Example: Output the values of all elements
+of the main diagonal in a square matrix ( matrix[N, N]).</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/iterrate-main-diagonal-2d-array.png" width="306" alt="Main diagonal in a matrix - output values" title="Main diagonal in a matrix - output values" data-pin-media="images/iterrate-main-diagonal-2d-array.png"></div>
+<p>&#xa0; &#xa0;  Did you noticed how we use the same
+variable for both rows and columns? This is the easiest and most
+effective way to work if you manipulate only the main diagonal items.</p>
+
+<p>&#xa0; &#xa0;  Try to find out on your own what is common
+for all elements under the main diagonal before you continue to read
+under the table.</p><p>
+</p>
+<table border="1" cell_width="15">
+	<caption><b>matrix[4, 4]</b></caption>
+	<tr>
+		<td style="width:30px" border="1">...</td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+		<td style="width:30px" border="1"></td>
+	</tr>
+	<tr>
+		<td style="width:20px" border="1">1, 0</td>
+		<td style="width:20px" border="1"></td>
+		<td style="width:20px" border="1"></td>
+		<td style="width:20px" border="1"></td>
+	</tr>
+
+	<tr>
+		<td style="width:20px" border="1">2, 0</td>
+		<td style="width:20px" border="1">2, 1</td>
+		<td style="width:20px" border="1"></td>
+		<td style="width:20px" border="1"></td>
+	</tr>	<tr>
+		<td style="width:20px" border="1">3, 0</td>
+		<td style="width:20px" border="1">3, 1</td>
+		<td style="width:20px" border="1">3, 2</td>
+		<td style="width:20px" border="1"></td>
+	</tr>
+</table>
+<p>&#xa0; &#xa0;  Did you figure it out? Under the main
+diagonal the row index is always greater than the column. 
+</p>
+
+<p>Example: find the biggest number under the main diagonal in
+matrix[5, 5] 
+</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/elements-under-main-diagonal.png" width="525" alt="Elements under the main diagonal in a matrix - find the biggest element" title="Elements under the main diagonal in a matrix - find the biggest element" data-pin-media="images/elements-under-main-diagonal.png"></div>
+<p>&#xa0; &#xa0;  In order to find the biggest value in array
+we need to compare the items. But what to compare the first value to?
+Compare with 0? Suppose that all numbers are negative. Then we will
+end  up having 0 as the greatest value and this is not correct. For
+such cases most of the programming languages provide some constant
+values, such as minValue, maxValue and others.</p>
+
+<p>&#xa0;&#xa0;&#xa0; MinValue is the smallest value for a give data type. You should
+already know how to follow the rest of the algorithm.</p>
+<h2><b>Matrices and chess tasks</b><br/></h2>
+<p>&#xa0; &#xa0; A chess board is made of 64 squares (8x8). Its board is easily represented by a two dimensional array. If we have the coordinates of two pieces we can find if they attack each other. For such tasks the input data are integer variables, containing the position of those pieces.<br/></p><p>&#xa0; &#xa0; Example: Check if a white rook can take a black bishop. The coordinates are in the variables Rr, Rc, Br, Bc(RookRow, RookColumn, BishopRow, BishopColumn).</p><p>&#xa0;&#xa0;&#xa0; Chess rules state that the rook can attack by straight line – either horizontal or vertical. If it attacks the bishop, then they are on the same row or column. Let's make one example to see how it looks like on the chess board:</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/chessBoard.png" width="395" alt="Matrices and chess tasks - A rook and a bishop" title="Matrices and chess tasks - A rook and a bishop" data-pin-media="images/chessBoard.png"></div>
+<div class="ImageBlock ImageBlockCenter"><img src="images/chess-board-algorithm.png" width="370" alt="Matrices and chess tasks - Rook attacks" title="Matrices and chess tasks - Rook attacks" data-pin-media="images/chess-board-algorithm.png"></div>
+<p>&#xa0; &#xa0; So it is that easy :-). In the example tha
+answer in “No”.</p>
+<p>&#xa0;&#xa0;&#xa0; Now, let's see how to check if the bishop
+attacks the rook. The bishop can move by diagonal. How can we
+determine if the rook is on the same diagonal? We need to find
+something that is common for all elements in the diagonals. First,
+the diagonals are two types – in the direction of the main and in
+the direction of the secondary. Take a paper, draft a 8x8 two
+dimension array and fill the indices for one or two diagonals in the
+direction of the main. Try to find the mathematical
+relationship before you read the next rows.</p>
+
+<p>&#xa0; &#xa0; <b>Diagonals with the direction of the main
+diagonal.</b><br/>The difference between the row and column indices is
+constant for a given diagonal in that direction. For instance, the
+main has a constant difference of 0 (0-0 = 0, 1-1=0...(N-1)-(N-1)=0).<br/>&#xa0;- Subtract the indices of the rook<br/>&#xa0;- Subtract the indices of the bishop<br/>&#xa0;- Compare the two results. If they are equal, then the two
+	pieces are on the same diagonal and the bishop attacks the rook.
+</p>
+
+<p>&#xa0; &#xa0; Now, find the common between the elements,
+located in a diagonal in the direction of the secondary before you
+continue...</p>
+
+<p>&#xa0; &#xa0; The sum of the row and column index is
+constant for any <b>diagonal in the direction of the secondary.</b><br/>&#xa0;- Sum the indices of the rook.<br/>&#xa0;- Sum the indices of the bishop<br/>&#xa0;- Compare the two results. If they are equal, then the two
+	pieces are on the same diagonal and the bishop attacks the rook.
+</p>
+<p>Combining the above, let's see if the
+bishop attacks the rook:</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/chess-diagonals-flow-chart.png" width="455" alt="bishop attacks rook flow chart" title="bishop attacks rook flow chart" data-pin-media="images/chess-diagonals-flow-chart.png"></div>
+<p>&#xa0; &#xa0; Again – the algorithm is simpler than the
+explanation. In the example above the bishop attacks the rook. Their
+indices satisfy the first condition.</p>
+<h2>Homework</h2>
+<p>For a given two dimension array:</p><ol><li>Output the values of all elements</li><li>Find the sum of all values in the third column</li><li>Find the smallest number above the main diagonal in square matrix(NxN).</li><li>Given are the coordinates of a white queen and a black queen. Check if they can attack each other.<br/>Helper: the queen can move and attack both by straight line(like a rook) and by diagonal(like a bishop).</li></ol>
+<div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<p><b>Previous:&#xa0;</b><a href="arrays.html" onclick="return FIX.track(this);"><b>Arrays</b></a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<p style="text-align: right;"><b>Next:&#xa0;</b><a href="programming-questions.html" onclick="return FIX.track(this);"><b>Programming questions</b></a><br/></p>
+</td></tr></table>
+</div>
+<!-- start: shared_blocks.2087532#above-socialize-it -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087532#above-socialize-it -->
+<br>
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="index.html" itemprop="url">
+<span itemprop="title">C Programming</span></a>
+
+</span>
+
+ ›
+
+<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="programming-for-beginners.html" itemprop="url">
+<span itemprop="title">Beginners' tutorial</span></a>
+</span>
+
+ › 2D arrays
+<br>
+<!-- start: shared_blocks.152387847#Computer Programming Tutorial Contents -->
+<p><b>Tutorial Contents</b>:<br/></p><p><a href="learn-computer-programming.html" onclick="return FIX.track(this);">1)Learn
+Computer Programming</a><br/><a href="software-development-process.html" onclick="return FIX.track(this);">2)Software D</a><a href="software-development-process.html" onclick="return FIX.track(this);">evelopment Process</a><br/><a href="flow-chart.html" onclick="return FIX.track(this);">3)Flow
+Chart</a><br/><a href="flow-chart-symbols.html" onclick="return FIX.track(this);">4)Flow
+Chart Symbols</a><br/><a href="data-type.html" onclick="return FIX.track(this);">5)Data
+Type</a><br/><a href="what-is-a-variable.html" onclick="return FIX.track(this);">6)What is a variable</a><br/><a href="math-operators.html" onclick="return FIX.track(this);">7)Math
+Operators</a><br/><a href="logical-operators.html" onclick="return FIX.track(this);">8)Logical
+Operat﻿ors</a><a href="loops.html" onclick="return FIX.track(this);"><br/>9)Loops</a><br/><a href="nested-loops.html" onclick="return FIX.track(this);">10)Nested Loops</a><br/><a href="arrays.html" onclick="return FIX.track(this);">11)Arrays</a><br/><a href="multidimensional-arrays.html" onclick="return FIX.track(this);">12)Multidimensional arrays</a><br/><a href="programming-questions.html" onclick="return FIX.track(this);">13)Programming Questions</a><br/></p>
+<!-- end: shared_blocks.152387847#Computer Programming Tutorial Contents -->
+<!-- start: shared_blocks.2087488#socialize-it -->
+
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 100%; box-sizing: border-box">
+<div class="desktopOnly"><div class="" style="width: 50%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 53%;vertical-align:top;">
+<p>Did this help? Support me with your vote ;-)</p>
+</td><td class="column_1" style="width: 22.42%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/multidimensional-arrays.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 24.29%;vertical-align:top;">
+
+<div class="" style="margin-left: auto; margin-right: auto; padding-top: 13px; float: none; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/multidimensional-arrays.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div></div>
+
+<div class="mobileOnly"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 39.991%;vertical-align:top;">
+<p>Did this help?<br/></p>
+</td><td class="column_1" style="width: 29.989%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/multidimensional-arrays.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 30%;vertical-align:top;">
+
+<div class="" style="padding-top: 13px; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/multidimensional-arrays.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div>
+</div>
+
+<!-- end: shared_blocks.2087488#socialize-it -->
+<!-- start: shared_blocks.2087520#below-socialize-it -->
+
+<div id="disqus_thread"></div>
+<script>(function(){var d=document,s=d.createElement('script');s.src='http://c-programming-simple-steps.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<!-- end: shared_blocks.2087520#below-socialize-it -->
+</div><!-- end Liner -->
+        </div><!-- end ContentColumn -->
+      </div><!-- end ContentWrapper -->
+
+      <div id="FooterWrapper">
+        <div id="Footer">
+          <div class="Liner">
+<!-- start: shared_blocks.2087493#above-bottom-nav -->
+
+<!-- Share Desktop -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+<!-- Share Mobile -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+
+<!-- end: shared_blocks.2087493#above-bottom-nav -->
+<!-- start: shared_blocks.2087504#bottom-navigation -->
+
+
+<!-- end: shared_blocks.2087504#bottom-navigation -->
+<!-- start: shared_blocks.2087486#below-bottom-nav -->
+
+
+<!-- end: shared_blocks.2087486#below-bottom-nav -->
+<!-- start: shared_blocks.2087501#footer -->
+
+<p><a href="index.html">© Copyright 2008-2016 c-programming-simple-steps.com</a><br/></p>
+
+<!-- end: shared_blocks.2087501#footer -->
+</div><!-- end Liner -->
+        </div><!-- end Footer -->
+      </div><!-- end FooterWrapper -->
+
+    </div><!-- end PageWrapper -->
+
+    
+    <script type="text/javascript" src="sd/support-files/fix.js.pagespeed.jm.3phKUrh9Pj.js"></script>
+    
+    <script type="text/javascript">FIX.doEndOfBody();</script>
+    <script type="text/javascript" src="sd/support-files/design.js.pagespeed.jm.IGpaLo39T1.js"></script>
+<!-- start: tool_blocks.sbi_html_body_end -->
+    <script>var SS_PARAMS={pinterest_enabled:false,googleplus1_on_page:true,socializeit_onpage:false};</script>            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&autoLogAppEvents=1"></script><style>.g-recaptcha{display:inline-block}.recaptcha_wrapper{text-align:center}</style>
+	    <script>if(typeof recaptcha_callbackings!=="undefined"){SS_PARAMS.recaptcha_callbackings=recaptcha_callbackings||[]};</script>
+	    
+  <script>(function(d,id){if(d.getElementById(id)){return;}var s=d.createElement('script');s.async=true;s.defer=true;s.src="ssjs/ldr.js";s.id=id;d.getElementsByTagName('head')[0].appendChild(s);})(document,'_ss_ldr_script');</script><!-- end: tool_blocks.sbi_html_body_end -->
+  
+<!-- Generated at 13:14:28 07-Nov-2019 -->
+
+</body>
+
+<!-- Mirrored from www.c-programming-simple-steps.com/multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:33:15 GMT -->
+</html>

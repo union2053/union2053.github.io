@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Count strings in a two-dimensional array and the length of each string</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Count strings in a two-dimensional array and the length of each string'>C Count strings in a two-dimensional array and the length of each string</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Count strings in a two-dimensional array and the length of each string</h1>
+<a class ='btn btn-outline-dark' href=c-arrays-of-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-gets.html>Next</a><p>The following code finds the number of strings in a two-dimensional array and  
+the length of each string: 
+
+</p><div class='myCodeDiv'><button id='FSKKM' class='myCopyButton' data-clipboard-target='#PQDIO'>Copy</button><pre  id='PQDIO' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>char</span> str[][70] =  { 
+                        <span class='q'>"This is a test."</span>, 
+                        <span class='q'>"This is another test."</span>, 
+                        <span class='q'>"Test case from demo2s.com."</span> 
+                    }; 
+  <span class='r'>unsigned</span> <span class='r'>int</span> count = 0;                              <span class='c'>// Length of a string </span>
+  <span class='r'>unsigned</span> <span class='r'>int</span> strCount = <span class='r'>sizeof</span>(str)/<span class='r'>sizeof</span>(str[0]);  <span class='c'>// Number of strings </span>
+  printf(<span class='q'>"There are %u strings.\n"</span>, strCount); 
+
+  <span class='c'>// find the lengths of the strings </span>
+  <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; strCount ; ++i) 
+  { 
+    count = 0; 
+    <span class='r'>while</span> (str[i][count]) 
+      ++count; 
+
+    printf(<span class='q'>"The string:\n\"%s\"\n contains %u characters.\n"</span>, str[i], count); 
+  } 
+
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FSKKM');clipboard.on('success', function(e) {$('#FSKKM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FSKKM').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-arrays-of-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-read-character-string-from-keyboard-via-gets.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointers-and-strings.html'>C Pointers and Strings</a></LI><LI><a href='c-null-pointer-vs-null-character.html'>C NULL pointer vs Null character</a></LI><LI><a href='c-arrays-of-strings.html'>C Arrays of Strings</a></LI><LI><a href='c-read-character-string-from-keyboard-via-gets.html'>C Read Character String from keyboard via gets()</a></LI><LI><a href='c-read-character-string-from-keyboard-via-fgets.html'>C Read Character String from keyboard via fgets()</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

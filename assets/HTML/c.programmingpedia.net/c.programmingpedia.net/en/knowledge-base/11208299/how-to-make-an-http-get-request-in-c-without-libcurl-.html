@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/11208299/how-to-make-an-http-get-request-in-c-without-libcurl- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to make an HTTP get request in C without libcurl? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to make an HTTP get request in C without libcurl? | C Language Knowledge Base">
+        <title>[SOLVED] How to make an HTTP get request in C without libcurl? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-make-an-http-get-request-in-c-without-libcurl-">How to make an HTTP get request in C without libcurl?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/http.html">http</a></span>
+                        <span class="tag-item"><a href="../tag/http-headers.html">http-headers</a></span>
+                        <span class="tag-item"><a href="../tag/networking.html">networking</a></span>
+                        <span class="tag-item"><a href="../tag/sockets.html">sockets</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I want to write a C program to generate a Get Request without using any external libraries. Is this possible using only C libraries, using sockets ? I'm thinking of crafting a http packet(using proper formatting) and sending it to the server. Is this the only possible way or is there a better way ? </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1068609/asudhak" target="_blank"><span itemprop="name">asudhak</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">30</div>
+                                    <div itemprop="dateCreated">9/12/2018 11:29:49 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Using BSD sockets or, if you're somewhat limited, say you have some RTOS, some simpler TCP stack, like lwIP, you can form the GET/POST request.</p>
+
+<p>There are a number of open-source implementations. See the "happyhttp" as a sample ( <a href="http://scumways.com/happyhttp/happyhttp.html" rel="noreferrer">http://scumways.com/happyhttp/happyhttp.html</a> ). I know, it is C++, not C, but the only thing that is "C++-dependant" there is a string/array management, so it is easily ported to pure C.</p>
+
+<p>Beware, there are no "packets", since HTTP is usually transfered over the TCP connection, so technically there is only a stream of symbols in RFC format. Since http requests are usually done in a connect-send-disconnect manner, one might actually call this a "packet".</p>
+
+<p>Basically, once you have an open socket (sockfd) "all" you have to do is something like</p>
+
+<pre><code>char sendline[MAXLINE + 1], recvline[MAXLINE + 1];
+char* ptr;
+
+size_t n;
+
+/// Form request
+snprintf(sendline, MAXSUB, 
+     "GET %s HTTP/1.0\r\n"  // POST or GET, both tested and works. Both HTTP 1.0 HTTP 1.1 works, but sometimes 
+     "Host: %s\r\n"     // but sometimes HTTP 1.0 works better in localhost type
+     "Content-type: application/x-www-form-urlencoded\r\n"
+     "Content-length: %d\r\n\r\n"
+     "%s\r\n", page, host, (unsigned int)strlen(poststr), poststr);
+
+/// Write the request
+if (write(sockfd, sendline, strlen(sendline))&gt;= 0) 
+{
+    /// Read the response
+    while ((n = read(sockfd, recvline, MAXLINE)) &gt; 0) 
+    {
+        recvline[n] = '\0';
+
+        if(fputs(recvline,stdout) == EOF) { cout &lt;&lt; ("fputs erros"); }
+        /// Remove the trailing chars
+        ptr = strstr(recvline, "\r\n\r\n");
+
+        // check len for OutResponse here ?
+        snprintf(OutResponse, MAXRESPONSE,"%s", ptr);
+    }          
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1182653/viktor-latypov" target="_blank"><span itemprop="name">Viktor Latypov</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/11208299/how-to-make-an-http-get-request-in-c-without-libcurl-#answer-0</div>
+                                            <div itemprop="upvoteCount">27</div>
+                                            <div itemprop="dateCreated">6/26/2012 1:50:46 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><strong>POSIX 7 minimal runnable example</strong></p>
+
+<p>Let's fetch <a href="http://example.com/" rel="nofollow noreferrer">http://example.com</a>.</p>
+
+<p>wget.c</p>
+
+<pre><code>#define _XOPEN_SOURCE 700
+#include &lt;arpa/inet.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;netdb.h&gt; /* getprotobyname */
+#include &lt;netinet/in.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc, char** argv) {
+    char buffer[BUFSIZ];
+    enum CONSTEXPR { MAX_REQUEST_LEN = 1024};
+    char request[MAX_REQUEST_LEN];
+    char request_template[] = "GET / HTTP/1.1\r\nHost: %s\r\n\r\n";
+    struct protoent *protoent;
+    char *hostname = "example.com";
+    in_addr_t in_addr;
+    int request_len;
+    int socket_file_descriptor;
+    ssize_t nbytes_total, nbytes_last;
+    struct hostent *hostent;
+    struct sockaddr_in sockaddr_in;
+    unsigned short server_port = 80;
+
+    if (argc &gt; 1)
+        hostname = argv[1];
+    if (argc &gt; 2)
+        server_port = strtoul(argv[2], NULL, 10);
+
+    request_len = snprintf(request, MAX_REQUEST_LEN, request_template, hostname);
+    if (request_len &gt;= MAX_REQUEST_LEN) {
+        fprintf(stderr, "request length large: %d\n", request_len);
+        exit(EXIT_FAILURE);
+    }
+
+    /* Build the socket. */
+    protoent = getprotobyname("tcp");
+    if (protoent == NULL) {
+        perror("getprotobyname");
+        exit(EXIT_FAILURE);
+    }
+    socket_file_descriptor = socket(AF_INET, SOCK_STREAM, protoent-&gt;p_proto);
+    if (socket_file_descriptor == -1) {
+        perror("socket");
+        exit(EXIT_FAILURE);
+    }
+
+    /* Build the address. */
+    hostent = gethostbyname(hostname);
+    if (hostent == NULL) {
+        fprintf(stderr, "error: gethostbyname(\"%s\")\n", hostname);
+        exit(EXIT_FAILURE);
+    }
+    in_addr = inet_addr(inet_ntoa(*(struct in_addr*)*(hostent-&gt;h_addr_list)));
+    if (in_addr == (in_addr_t)-1) {
+        fprintf(stderr, "error: inet_addr(\"%s\")\n", *(hostent-&gt;h_addr_list));
+        exit(EXIT_FAILURE);
+    }
+    sockaddr_in.sin_addr.s_addr = in_addr;
+    sockaddr_in.sin_family = AF_INET;
+    sockaddr_in.sin_port = htons(server_port);
+
+    /* Actually connect. */
+    if (connect(socket_file_descriptor, (struct sockaddr*)&amp;sockaddr_in, sizeof(sockaddr_in)) == -1) {
+        perror("connect");
+        exit(EXIT_FAILURE);
+    }
+
+    /* Send HTTP request. */
+    nbytes_total = 0;
+    while (nbytes_total &lt; request_len) {
+        nbytes_last = write(socket_file_descriptor, request + nbytes_total, request_len - nbytes_total);
+        if (nbytes_last == -1) {
+            perror("write");
+            exit(EXIT_FAILURE);
+        }
+        nbytes_total += nbytes_last;
+    }
+
+    /* Read the response. */
+    fprintf(stderr, "debug: before first read\n");
+    while ((nbytes_total = read(socket_file_descriptor, buffer, BUFSIZ)) &gt; 0) {
+        fprintf(stderr, "debug: after a read\n");
+        write(STDOUT_FILENO, buffer, nbytes_total);
+    }
+    fprintf(stderr, "debug: after last read\n");
+    if (nbytes_total == -1) {
+        perror("read");
+        exit(EXIT_FAILURE);
+    }
+
+    close(socket_file_descriptor);
+    exit(EXIT_SUCCESS);
+}
+</code></pre>
+
+<p><a href="https://github.com/cirosantilli/cpp-cheat/blob/3230269d07171fecb704a20aef94b25d25307712/posix/socket/wget.c" rel="nofollow noreferrer">GitHub upstream</a>.</p>
+
+<p>Compile:</p>
+
+<pre><code>gcc -ggdb3 -std=c99 -Wall -Wextra -o wget wget.c
+</code></pre>
+
+<p>Get <a href="http://example.com/" rel="nofollow noreferrer">http://example.com</a> and output to stdout:</p>
+
+<pre><code>./wget example.com
+</code></pre>
+
+<p>This command hangs for most servers until timeout, and that is expected:</p>
+
+<ul>
+<li>either server or client must close the connection</li>
+<li>we (client) are not doing it</li>
+<li>most HTTP servers leave the connection open until a timeout expecting further requests, e.g. JavaScript, CSS and images following an HTML page</li>
+<li>we could parse the response, and close when Content-Length bytes are read, but we didn't for simplicity. <a href="https://stackoverflow.com/questions/4726515/what-http-response-headers-are-required/25586633#25586633">What HTTP response headers are required</a> says that if <code>Content-Length</code>
+is not sent, the server can just close to determine length.</li>
+</ul>
+
+<p>The connection part also works with the IP:</p>
+
+<pre><code>host example.com
+</code></pre>
+
+<p>gives:</p>
+
+<pre><code>example.com has address 93.184.216.34
+example.com has IPv6 address 2606:2800:220:1:248:1893:25c8:1946
+</code></pre>
+
+<p>and so we do:</p>
+
+<pre><code>./wget 93.184.216.34
+</code></pre>
+
+<p>however, the reply is an error, because we are not setting the <code>Host:</code> properly in our program, and that is <a href="https://stackoverflow.com/questions/6686261/what-at-the-bare-minimum-is-required-for-an-http-request">required in HTTP 1.1</a>.</p>
+
+<p>Tested on Ubuntu 18.04.</p>
+
+<p><strong>Server examples</strong></p>
+
+<ul>
+<li>minimal POSIX C example: <a href="https://stackoverflow.com/questions/2014033/send-and-receive-a-file-in-socket-programming-in-linux-with-c-c-gcc-g/35902226#35902226">Send and Receive a file in socket programming in Linux with C/C++ (GCC/G++)</a></li>
+<li>minimal Android Java example: <a href="https://stackoverflow.com/questions/7384678/how-to-create-socket-connection-in-android/35745834#35745834">how to create Socket connection in Android?</a></li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank">Ciro Santilli 新疆改造中心996ICU六四事件</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/11208299" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/11208299/how-to-make-an-http-get-request-in-c-without-libcurl- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:36 GMT -->
+</html>

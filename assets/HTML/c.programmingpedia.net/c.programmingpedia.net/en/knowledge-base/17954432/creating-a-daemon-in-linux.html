@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/17954432/creating-a-daemon-in-linux by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Creating a daemon in Linux | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Creating a daemon in Linux | C Language Knowledge Base">
+        <title>[SOLVED] Creating a daemon in Linux | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="creating-a-daemon-in-linux">Creating a daemon in Linux</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/daemon.html">daemon</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>In Linux I want to add a daemon that cannot be stopped and which monitors filesystem changes.
+If any changes are detected, it should write the path to the console where it was started plus a newline.</p>
+
+<p>I already have the filesystem changing code almost ready but I cannot figure out how to create a daemon.</p>
+
+<p>My code is from here: <a href="http://www.yolinux.com/TUTORIALS/ForkExecProcesses.html">http://www.yolinux.com/TUTORIALS/ForkExecProcesses.html</a></p>
+
+<p>What to do after the fork?</p>
+
+<pre><code>int main (int argc, char **argv) {
+
+  pid_t pID = fork();
+  if (pID == 0)  {              // child
+          // Code only executed by child process    
+      sIdentifier = "Child Process: ";
+    }
+    else if (pID &lt; 0) {
+        cerr &lt;&lt; "Failed to fork" &lt;&lt; endl;
+        exit(1);
+       // Throw exception
+    }
+    else                                   // parent
+    {
+      // Code only executed by parent process
+
+      sIdentifier = "Parent Process:";
+    }       
+
+    return 0;
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2635241/chrisme" target="_blank"><span itemprop="name">chrisMe</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">92</div>
+                                    <div itemprop="dateCreated">9/15/2015 7:39:34 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <blockquote>
+  <p>In Linux i want to add a daemon that cannot be stopped and which monitors filesystem changes. If any changes would be detected it should write the path to the console where it was started + a newline.</p>
+</blockquote>
+
+<p>Daemons work in the background and (usually...) don't belong to a TTY that's why you can't use stdout/stderr in the way you probably want.
+Usually a syslog daemon (<em>syslogd</em>) is used for logging messages to files (debug, error,...).</p>
+
+<p>Besides that, there are a few <em>required steps</em> to daemonize a process.</p>
+
+<hr>
+
+<p>If I remember correctly these steps are:</p>
+
+<ul>
+<li><strong>fork</strong> off the parent process &amp; let it terminate if forking was successful. -> Because the parent process has terminated, the child process now runs in the background.</li>
+<li><strong>setsid</strong> - Create a new session. The calling process becomes the leader of the new session and the process group leader of the new process group. The process is now detached from its controlling terminal (CTTY).</li>
+<li><strong>Catch signals</strong> - Ignore and/or handle signals.</li>
+<li><strong>fork again</strong> &amp; let the parent process terminate to ensure that you get rid of the session leading process. (Only session leaders may get a TTY again.)</li>
+<li><strong>chdir</strong> - Change the working directory of the daemon.</li>
+<li><strong>umask</strong> - Change the file mode mask according to the needs of the daemon.</li>
+<li><strong>close</strong> - Close all open file descriptors that may be inherited from the parent process.</li>
+</ul>
+
+<hr>
+
+<p>To give you a starting point: Look at this skeleton code that shows the basic steps. This code can now also be forked on GitHub: <a href="https://github.com/pasce/daemon-skeleton-linux-c" rel="nofollow noreferrer">Basic skeleton of a linux daemon</a></p>
+
+<pre class="lang-c prettyprint-override"><code>/*
+ * daemonize.c
+ * This example daemonizes a process, writes a few log messages,
+ * sleeps 20 seconds and terminates afterwards.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;syslog.h&gt;
+
+static void skeleton_daemon()
+{
+    pid_t pid;
+
+    /* Fork off the parent process */
+    pid = fork();
+
+    /* An error occurred */
+    if (pid &lt; 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid &gt; 0)
+        exit(EXIT_SUCCESS);
+
+    /* On success: The child process becomes session leader */
+    if (setsid() &lt; 0)
+        exit(EXIT_FAILURE);
+
+    /* Catch, ignore and handle signals */
+    //TODO: Implement a working signal handler */
+    signal(SIGCHLD, SIG_IGN);
+    signal(SIGHUP, SIG_IGN);
+
+    /* Fork off for the second time*/
+    pid = fork();
+
+    /* An error occurred */
+    if (pid &lt; 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid &gt; 0)
+        exit(EXIT_SUCCESS);
+
+    /* Set new file permissions */
+    umask(0);
+
+    /* Change the working directory to the root directory */
+    /* or another appropriated directory */
+    chdir("/");
+
+    /* Close all open file descriptors */
+    int x;
+    for (x = sysconf(_SC_OPEN_MAX); x&gt;=0; x--)
+    {
+        close (x);
+    }
+
+    /* Open the log file */
+    openlog ("firstdaemon", LOG_PID, LOG_DAEMON);
+}
+</code></pre>
+
+ <pre class="lang-c prettyprint-override"><code>int main()
+{
+    skeleton_daemon();
+
+    while (1)
+    {
+        //TODO: Insert daemon code here.
+        syslog (LOG_NOTICE, "First daemon started.");
+        sleep (20);
+        break;
+    }
+
+    syslog (LOG_NOTICE, "First daemon terminated.");
+    closelog();
+
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p><br></p>
+
+<ul>
+<li>Compile the code: <code>gcc -o firstdaemon daemonize.c</code></li>
+<li>Start the daemon: <code>./firstdaemon</code></li>
+<li><p>Check if everything is working properly: <code>ps -xj | grep firstdaemon</code></p></li>
+<li><p>The output should be similar to this one:</p></li>
+</ul>
+
+<pre>
++------+------+------+------+-----+-------+------+------+------+-----+
+| PPID | PID  | PGID | SID  | TTY | TPGID | STAT | UID  | TIME | CMD |
++------+------+------+------+-----+-------+------+------+------+-----+
+|    1 | 3387 | 3386 | 3386 | ?   |    -1 | S    | 1000 | 0:00 | ./  |
++------+------+------+------+-----+-------+------+------+------+-----+
+</pre>
+
+<p><strong>What you should see here is:</strong></p>
+
+<ul>
+<li>The daemon has no controlling terminal (<strong>TTY = ?</strong>)</li>
+<li>The parent process ID (<strong>PPID</strong>) is <strong>1</strong> (The init process)</li>
+<li>The <strong>PID != SID</strong> which means that our process is NOT the session leader<br>
+(because of the second fork())</li>
+<li>Because PID != SID our process <strong>can't take control of a TTY again</strong></li>
+</ul>
+
+<p><strong>Reading the syslog:</strong></p>
+
+<ul>
+<li>Locate your syslog file. Mine is here: <code>/var/log/syslog</code></li>
+<li><p>Do a: <code>grep firstdaemon /var/log/syslog</code></p></li>
+<li><p>The output should be similar to this one:</p></li>
+</ul>
+
+<pre>
+  firstdaemon[3387]: First daemon started.
+  firstdaemon[3387]: First daemon terminated.
+</pre>
+
+<p><br>
+<strong>A note:</strong>
+In reality you would also want to implement a signal handler and set up the logging properly (Files, log levels...).</p>
+
+<p><strong>Further reading:</strong></p>
+
+<ul>
+<li><a href="http://openbook.galileocomputing.de/linux_unix_programmierung/Kap07-000.htm#Xxx999234" rel="nofollow noreferrer">Linux-UNIX-Programmierung - German</a></li>
+<li><a href="http://www.enderunix.org/docs/eng/daemon.php" rel="nofollow noreferrer">Unix Daemon Server Programming</a></li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/2632894/pascal-werkl" target="_blank"><span itemprop="name">Pascal Werkl</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/17954432/creating-a-daemon-in-linux#answer-0</div>
+                                            <div itemprop="upvoteCount">188</div>
+                                            <div itemprop="dateCreated">7/31/2019 9:51:19 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><a href="https://www.freedesktop.org/software/systemd/man/daemon.html"><code>man 7 daemon</code></a> describes how to create daemon in great detail. My answer is just excerpt from this manual.</p>
+
+<p>There are at least two types of daemons:</p>
+
+<ol>
+<li>traditional <a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a> daemons (<a href="https://wiki.archlinux.org/index.php/init">old-style</a>),</li>
+<li><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a> daemons (<a href="http://www.tecmint.com/systemd-replaces-init-in-linux/">new-style</a>).</li>
+</ol>
+
+<hr>
+
+<h2 id="sysv-daemons">SysV Daemons</h2>
+
+<p>If you are interested in traditional <a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a> daemon, you should implement the <a href="https://www.freedesktop.org/software/systemd/man/daemon.html#SysV%20Daemons">following steps</a>:</p>
+
+<blockquote>
+  <ol>
+  <li>Close all open file descriptors except standard <em>input</em>, <em>output</em>, and <em>error</em> (i.e. the first three file descriptors 0, 1, 2). This ensures that no accidentally passed file descriptor stays around in the daemon process. On Linux, this is best implemented by iterating through <code>/proc/self/fd</code>, with a fallback of iterating from file descriptor 3 to the value returned by <a href="http://man7.org/linux/man-pages/man2/setrlimit.2.html"><code>getrlimit()</code></a> for <code>RLIMIT_NOFILE</code>.</li>
+  <li><a href="http://man7.org/linux/man-pages/man2/sigaction.2.html">Reset</a> all signal handlers to their default. This is best done by iterating through the available signals up to the limit of <code>_NSIG</code> and resetting them to <code>SIG_DFL</code>.</li>
+  <li>Reset the signal mask using <a href="http://man7.org/linux/man-pages/man2/sigprocmask.2.html"><code>sigprocmask()</code></a>.</li>
+  <li>Sanitize the environment block, removing or resetting environment variables that might negatively impact daemon runtime.</li>
+  <li>Call <a href="http://man7.org/linux/man-pages/man2/fork.2.html"><code>fork()</code></a>, to create a background process.</li>
+  <li>In the child, call <a href="http://man7.org/linux/man-pages/man2/setsid.2.html"><code>setsid()</code></a> to detach from any terminal and create an independent <a href="https://www.win.tue.nl/~aeb/linux/lk/lk-10.html#ss10.3">session</a>.</li>
+  <li>In the child, call <a href="http://man7.org/linux/man-pages/man2/fork.2.html"><code>fork()</code></a> again, to ensure that the daemon can never re-acquire a terminal again.</li>
+  <li>Call <a href="http://man7.org/linux/man-pages/man3/exit.3.html"><code>exit()</code></a> in the first child, so that only the second child (the actual daemon process) stays around. This ensures that the daemon process is re-parented to init/PID 1, as all daemons should be.</li>
+  <li>In the daemon process, connect <a href="http://man7.org/linux/man-pages/man4/null.4.html"><code>/dev/null</code></a> to standard <em>input</em>, <em>output</em>, and <em>error</em>.</li>
+  <li>In the daemon process, reset the <a href="http://man7.org/linux/man-pages/man3/umask.3p.html"><code>umask</code></a> to 0, so that the file modes passed to <a href="http://man7.org/linux/man-pages/man2/open.2.html"><code>open()</code></a>, <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html"><code>mkdir()</code></a> and suchlike directly control the access mode of the created files and directories.</li>
+  <li>In the daemon process, <a href="http://man7.org/linux/man-pages/man3/chdir.3p.html">change</a> the current directory to the root directory (<code>/</code>), in order to avoid that the daemon involuntarily blocks mount points from being unmounted.</li>
+  <li>In the daemon process, write the daemon <a href="https://en.wikipedia.org/wiki/Process_identifier">PID</a> (as returned by <a href="http://man7.org/linux/man-pages/man2/getpid.2.html"><code>getpid()</code></a>) to a PID file, for example <code>/run/foobar.pid</code> (for a hypothetical daemon "foobar") to ensure that the daemon cannot be started more than once. This must be implemented in race-free fashion so that the PID file is only updated when it is verified at the same time that the PID previously stored in the PID file no longer exists or belongs to a foreign process.</li>
+  <li>In the daemon process, drop privileges, if possible and applicable.</li>
+  <li>From the daemon process, notify the original process started that initialization is complete. This can be implemented via an unnamed pipe or similar communication channel that is created before the first <a href="http://man7.org/linux/man-pages/man2/fork.2.html"><code>fork()</code></a> and hence available in both the original and the daemon process.</li>
+  <li>Call <a href="http://man7.org/linux/man-pages/man3/exit.3.html"><code>exit()</code></a> in the original process. The process that invoked the daemon must be able to rely on that this <a href="http://man7.org/linux/man-pages/man3/exit.3.html"><code>exit()</code></a> happens <strong>after</strong> initialization is complete and all external communication channels are established and accessible.</li>
+  </ol>
+</blockquote>
+
+<p>Note this warning:</p>
+
+<blockquote>
+  <p>The BSD <a href="http://man7.org/linux/man-pages/man3/daemon.3.html"><code>daemon()</code></a> function <strong>should not</strong> be used, as it implements only a <em>subset</em> of these steps.</p>
+  
+  <p>A daemon that needs to provide <em>compatibility</em> with SysV systems should implement the scheme pointed out above. However, it is recommended to make this behavior optional and configurable via a command line argument to ease debugging as well as to simplify integration into systems using systemd.</p>
+</blockquote>
+
+<p>Note that <a href="http://man7.org/linux/man-pages/man3/daemon.3.html"><code>daemon()</code></a> is not <a href="https://en.wikipedia.org/wiki/POSIX">POSIX</a> compliant.</p>
+
+<hr>
+
+<h2 id="new-style-daemons">New-Style Daemons</h2>
+
+<p>For new-style daemons the <a href="https://www.freedesktop.org/software/systemd/man/daemon.html#New-Style%20Daemons">following steps</a> are recommended:</p>
+
+<blockquote>
+  <ol>
+  <li>If <code>SIGTERM</code> is received, shut down the daemon and exit cleanly.</li>
+  <li>If <code>SIGHUP</code> is received, reload the configuration files, if this applies.</li>
+  <li>Provide a correct exit code from the main daemon process, as this is used by the init system to detect service errors and problems. It is recommended to follow the exit code scheme as defined in the <a href="http://refspecs.linuxbase.org/LSB_3.1.1/LSB-Core-generic/LSB-Core-generic/iniscrptact.html">LSB recommendations for SysV init scripts</a>.</li>
+  <li>If possible and applicable, expose the daemon's control interface via the <a href="https://en.wikipedia.org/wiki/D-Bus">D-Bus IPC</a> system and grab a bus name as last step of initialization.</li>
+  <li>For integration in systemd, provide a <a href="https://wiki.archlinux.org/index.php/systemd#Service_types">.service</a> <a href="https://wiki.archlinux.org/index.php/systemd#Using_units">unit</a> file that carries information about starting, stopping and otherwise maintaining the daemon. See <a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html#"><code>systemd.service(5)</code></a> for details.</li>
+  <li>As much as possible, rely on the init system's functionality to limit the access of the daemon to files, services and other resources, i.e. in the case of systemd, rely on systemd's <a href="https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html">resource limit control</a> instead of implementing your own, rely on systemd's <a href="http://0pointer.de/blog/projects/security.html">privilege dropping</a> code instead of implementing it in the daemon, and similar. See <a href="https://www.freedesktop.org/software/systemd/man/systemd.exec.html#"><code>systemd.exec(5)</code></a> for the available controls.</li>
+  <li>If <a href="https://www.freedesktop.org/wiki/IntroductionToDBus/">D-Bus</a> is used, make your daemon bus-activatable by supplying a D-Bus service activation <a href="https://dbus.freedesktop.org/doc/dbus-daemon.1.html#configuration_file">configuration file</a>. This has multiple advantages: your daemon may be started lazily on-demand; it may be started in parallel to other daemons requiring it — which maximizes parallelization and <a href="https://wiki.archlinux.org/index.php/improve_boot_performance">boot-up speed</a>; your daemon can be restarted on failure without losing any bus requests, as the bus queues requests for activatable services. See <a href="https://www.freedesktop.org/software/systemd/man/daemon.html#Activation">below</a> for details.</li>
+  <li>If your daemon provides services to other local processes or remote clients via a socket, it should be made <a href="http://0pointer.de/blog/projects/socket-activation.html">socket-activatable</a> following the scheme pointed out <a href="https://www.freedesktop.org/software/systemd/man/daemon.html#Activation">below</a>. Like D-Bus activation, this enables on-demand starting of services as well as it allows improved parallelization of service start-up. Also, for state-less protocols (such as syslog, DNS), a daemon implementing socket-based activation can be restarted without losing a single request. See <a href="https://www.freedesktop.org/software/systemd/man/daemon.html#Activation">below</a> for details.</li>
+  <li>If applicable, a daemon should notify the init system about startup completion or status updates via the <a href="https://www.freedesktop.org/software/systemd/man/sd_notify.html#"><code>sd_notify(3)</code></a> interface.</li>
+  <li>Instead of using the <a href="http://man7.org/linux/man-pages/man3/syslog.3.html"><code>syslog()</code></a> call to log directly to the system syslog service, a new-style daemon may choose to simply log to standard error via <a href="http://man7.org/linux/man-pages/man3/printf.3.html"><code>fprintf()</code></a>, which is then forwarded to syslog by the init system. If log levels are necessary, these can be encoded by prefixing individual log lines with strings like "&lt;4>" (for log level 4 "WARNING" in the syslog priority scheme), following a similar style as the Linux kernel's <a href="http://www.makelinux.net/books/lkd2/ch18lev1sec3"><code>printk()</code></a> level system. For details, see <a href="https://www.freedesktop.org/software/systemd/man/sd-daemon.html#"><code>sd-daemon(3)</code></a> and <a href="https://www.freedesktop.org/software/systemd/man/systemd.exec.html#"><code>systemd.exec(5)</code></a>.</li>
+  </ol>
+</blockquote>
+
+<hr>
+
+<p>To learn more read whole <a href="https://www.freedesktop.org/software/systemd/man/daemon.html"><code>man 7 daemon</code></a>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/1321680/patryk-beza" target="_blank">patryk.beza</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/17954432" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/17954432/creating-a-daemon-in-linux by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+</html>

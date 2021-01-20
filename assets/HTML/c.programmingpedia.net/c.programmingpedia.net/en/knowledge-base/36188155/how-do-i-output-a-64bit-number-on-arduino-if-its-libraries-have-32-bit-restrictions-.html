@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/36188155/how-do-i-output-a-64bit-number-on-arduino-if-its-libraries-have-32-bit-restrictions- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How do I output a 64bit number on Arduino if its libraries have 32 bit restrictions? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How do I output a 64bit number on Arduino if its libraries have 32 bit restrictions? | C Language Knowledge Base">
+        <title>[SOLVED] How do I output a 64bit number on Arduino if its libraries have 32 bit restrictions? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-do-i-output-a-64bit-number-on-arduino-if-its-libraries-have-32-bit-restrictions-">How do I output a 64bit number on Arduino if its libraries have 32 bit restrictions?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/bit-manipulation.html">bit-manipulation</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/serialization.html">serialization</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>The compiler provided for Arduino seems to generate code that can work with 64 bit numbers, but the I/O classes, for instance <code>Serial.Print()</code>, seem to not work beyond 32 bit numbers.</p>
+
+<p>How can I overcome these limitations and print all possible 64 bit unsigned integers as decimal numbers?</p>
+
+<p>A bit of background:</p>
+
+<p>For an Arduino project I need to send a number on Serial that fits on a uint64_t variable type, but for some reason the Arduino Serial port can't handle a type bigger than 32 bit (but the device supports a 6-bit type).</p>
+
+<p>Thus, I need to print that (64-bit) number as Decimal on Serial port only. To do this I was thinking of dividing the number in two blocks of 32 bit each with a bitwise operation. Then send each number in sequence on the Serial port, but obviously the resulting number is different from the original 64-bit number.</p>
+
+<p>For example, I use an unsigned 8-bit number as follows:</p>
+
+<pre><code>11100010 &lt;- 226 in Decimal
+</code></pre>
+
+<p>And I need to send it to my serial port, but it can only handle 4-bit numbers at max.</p>
+
+<p>Thus I try to split the number in two parts with a bitwise mask:</p>
+
+<pre><code>1110 &lt;- MSBs (14 in Decimal)
+0010 &lt;- LSBs (2 in Decimal)
+</code></pre>
+
+<p>So when I send it in sequence on the Serial I see a 142, but instead what I would is 226.</p>
+
+<p>So, is there an algorithm that given a number as input, the returned result are two numbers that are the breakdown of the previous binary number in MSBs and LSBs?</p>
+
+<p>Appendix:</p>
+
+<p>I'm using streaming.h for serial communication.</p>
+
+<hr>
+
+<p>As properly guessed by @Infixed I'm trying to:</p>
+
+<blockquote>
+  <p>How do I print a 64 bit number in decimal given 32 bit integer
+  limitations on formatted decimal output?</p>
+</blockquote>
+
+<p>And up to now I found:</p>
+
+<pre><code>uint64_t val;
+uint32_t MSBval, LSBval;
+MSBval = (uint32_t)(val / 10000000000LL);
+LSBval = (uint32_t)(val % 10000000000LL);
+Serial &lt;&lt; F("[") &lt;&lt; MSBval &lt;&lt; LSBval &lt;&lt; F("]") &lt;&lt; endl;
+</code></pre>
+
+<p>As you can see I have not yet found the right solution. For higher numbers the formula should not work correctly, but for some reason (I'm still trying to figure out why) when I send the result on the Serial it returns the right number even with the highest number (255 255 255 255 255 255 255 255 [18446744073709551615]).</p>
+
+<hr>
+
+<p>Check the accepted answer for more solutions that do not relies on Streaming.h library.</p>
+
+<hr>
+
+<p><strong>THE SOLUTION</strong></p>
+
+<p>This solution is not very elegant, but at least works well for my purpose.
+If desired, it can be generalized to be used with all types of integers (depends on your Arduino board microcontroller type).</p>
+
+<p>For now is tested only with <code>uint64_t</code> on Arduino Uno R3 (ATmega328P).</p>
+
+<p>Since it seems to be the only complete solution to solve this kind of problem that I was able to find on the web then, if anyone finds any bugs or like to improve it, feel free to reply to (or edit) this post.</p>
+
+<p>Here's the code:</p>
+
+<pre><code>uint8_t MLSBval;
+uint64_t val;
+char buffer[11];
+
+//val = 18440000009000100000LL; // Test 64bit split
+val = 18440000009099999999LL;   // Test 64bit split
+
+sprintf(buffer, "%010lu", MLSBval); // Formatting zeros
+Serial &lt;&lt; F("[") &lt;&lt; (uint32_t)(val / 10000000000LL); // Output MSBval
+
+val = val % 10000000000LL;                         // Calculate LSBval
+if (val != 0){
+    MLSBval = (uint8_t)(val / 100000000LL);
+    val = (val % 100000000LL);
+    sprintf(buffer, "%02u", MLSBval); // Formatting zeros
+    Serial &lt;&lt; buffer;
+}
+sprintf(buffer, "%08lu", (uint32_t)(val));    // Formatting zeros
+Serial &lt;&lt; (buffer) &lt;&lt; F("]") &lt;&lt; endl;         // Data to Serial Monitor;
+</code></pre>
+
+<p>Then a little explanation:</p>
+
+<p>The biggest problem lies in the length of the decimal number. If the length of the number (e.g. 99 length is 2; 1294 length is 4; etc.) is odd we need to put the <code>if statement</code> code with the <code>MSBval</code> result and then use it in the serial.</p>
+
+<p>Conversely (as showed in the code), if the number is even we need to put the <code>if statement</code> code with the <code>LSBval</code> and then use the result.</p>
+
+<p>This applies to all types of integers.</p>
+
+<p>If you use another <code>int</code> type (32 bit, 16 bit, etc.) as a <code>val</code> type you need to change (reduce) the divider and module number in relation to the above example.</p>
+
+<p>In this case the numbers of zeros of the divider and module before the <code>if statement</code> corresponds to the half the length of the largest number that fit the uint64 type (in Decimal, then ten zeroes). Instead those contained inside the <code>if statement</code> have two zeros in less (eight zeroes).</p>
+
+<p>Obviously I have not tested the code with all the numbers involved, but I hope this work with all!</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/0/user2073384" target="_blank"><span itemprop="name">user2073384</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">2</div>
+                                    <div itemprop="dateCreated">4/23/2017 11:58:57 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The answer to the question really depends on what is receiving the data being sent by the Serial class.</p>
+
+<p>If it's human eyes reading, then you apparently are looking to actually print a decimal number.</p>
+
+<p>If you are trying to pass it to another program who will reassemble two or more messages into a 64bit number, that's a different problem.</p>
+
+<p>But if it's for a human to read, from the arduino forums comes this example sketch on how to print a <code>long long</code></p>
+
+<pre><code>long long x = 999999999999LL;  // note the double LL
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println("I am Arduino");
+  char buffer[100];
+  sprintf(buffer, "%0ld", x/1000000L);
+  Serial.print(buffer); 
+  sprintf(buffer, "%0ld", x%1000000L);
+  Serial.println(buffer); 
+}
+
+void loop() {}
+</code></pre>
+
+<p><a href="http://forum.arduino.cc/index.php?topic=58697.msg422207#msg422207" rel="nofollow noreferrer">http://forum.arduino.cc/index.php?topic=58697.msg422207#msg422207</a></p>
+
+<p>EDIT
+The observation in the comments that the modulus of 1,000,000,000 (a billion) can be used instead of 1,000,000 (a million) to allow a larger range is correct. But since an unsigned 64 bit number can represent up to 18446744073709551615, that is still more than 18 times a billion squared.   So even a modulus of a billion isn't perfect, After dividing by a billion, the result will not fit into a 32 bit integer.  A billion billion can fit into a 60 bit number</p>
+
+<p>[ACADEMIC ANNEX because the question does not seem to be coming off hold ]</p>
+
+<p>Three ways it can be done, geared more to look how, rather than optimized
+The third one is probably good enough to be a real answer</p>
+
+<pre><code>// Here is the totally unoptimized version to help you understand
+// the low level of what needs to be done.   Lots of leading zeros
+// because its easier that way.
+// no one would do it this way except to learn the basic idea
+void PrintNumberV1(unsigned long long num)
+{
+    Serial.print((unsigned)((num / 10000000000000000000LL) % 10));
+    Serial.print((unsigned)((num /  1000000000000000000LL) % 10));
+    Serial.print((unsigned)((num /   100000000000000000LL) % 10));
+    Serial.print((unsigned)((num /    10000000000000000LL) % 10));
+    Serial.print((unsigned)((num /     1000000000000000LL) % 10));
+    Serial.print((unsigned)((num /      100000000000000LL) % 10));
+    Serial.print((unsigned)((num /       10000000000000LL) % 10));
+    Serial.print((unsigned)((num /        1000000000000LL) % 10));
+    Serial.print((unsigned)((num /         100000000000LL) % 10));
+    Serial.print((unsigned)((num /          10000000000LL) % 10));
+    Serial.print((unsigned)((num /           1000000000LL) % 10));
+    Serial.print((unsigned)((num /            100000000LL) % 10));
+    Serial.print((unsigned)((num /             10000000LL) % 10));
+    Serial.print((unsigned)((num /              1000000LL) % 10));
+    Serial.print((unsigned)((num /               100000LL) % 10));
+    Serial.print((unsigned)((num /                10000LL) % 10));
+    Serial.print((unsigned)((num /                 1000LL) % 10));
+    Serial.print((unsigned)((num /                  100LL) % 10));
+    Serial.print((unsigned)((num /                   10LL) % 10));
+    Serial.print((unsigned)((num /                    1LL) % 10));
+}
+
+// This is the way they'll show you in CompSci 101 when they want to
+// to teach you about recursion, neglecting to mention how much stack
+// and time it takes.  No leading zeros, because it's easier that way
+void PrintNumberV2(unsigned long long num)
+{
+    int digit = num % 10;
+
+    // do any more significant digits
+    if (num &gt; 9) PrintNumberV2(num / 10);
+
+    // Print the digit this level of recursion has decided on
+    Serial.print(digit);
+}
+
+// The way a C programmer might do it if he didn't have printf right there
+// For extra fun you can use any base between 2 and 16
+// No leading zeros because its easier
+void PrintNumberV3(int base, unsigned long long num )
+{
+    const static char toAscii[] = "0123456789ABCDEF";
+
+    if ((base &lt; 2) || (base&gt;16))
+    {
+        Serial.print("[DON'T USE THAT BASE!!!]");
+        return;
+    }
+
+    char buffer[65];            //because you might be doing binary
+    char* p = &amp;buffer[64];      //this pointer writes into the buffer, starting at the END
+
+    // zero to terminate a C type string
+    *p = 0;
+
+    // do digits until the number reaches zero
+    do
+    {
+        // working on the least significant digit
+        //put an ASCII digit at the front of the string
+        *(--p) = toAscii[(int)(num % base)];
+
+        //knock the least significant digit off the number
+        num = num / base;
+    } while (num != 0);
+
+    //print the whole string
+    Serial.print(s);
+}
+</code></pre>
+
+<p>Warning:  None of these have been tried on an actual Arduino</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/6047952/infixed" target="_blank"><span itemprop="name">infixed</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/36188155/how-do-i-output-a-64bit-number-on-arduino-if-its-libraries-have-32-bit-restrictions-#answer-0</div>
+                                            <div itemprop="upvoteCount">3</div>
+                                            <div itemprop="dateCreated">4/24/2017 3:07:40 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/36188155" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/36188155/how-do-i-output-a-64bit-number-on-arduino-if-its-libraries-have-32-bit-restrictions- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+</html>

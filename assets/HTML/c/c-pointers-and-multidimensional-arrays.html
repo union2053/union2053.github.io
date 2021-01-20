@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-and-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointers and Multidimensional Arrays</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointers and Multidimensional Arrays'>C Pointers and Multidimensional Arrays</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointers and Multidimensional Arrays</h1>
+<a class ='btn btn-outline-dark' href=c-array-and-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-to-multidimensional-arrays.html>Next</a><p>Suppose you have this declaration:
+</p><div class='myCodeDiv'><button id='PYXTF' class='myCopyButton' data-clipboard-target='#RMIUF'>Copy</button><pre  id='RMIUF' style='font-size:18px;' class='code'><span class='r'>int</span> my_array[4][2];      <span class='c'>/* an array of arrays of ints */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PYXTF');clipboard.on('success', function(e) {$('#PYXTF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PYXTF').text('error');});</script></div><h3>Rule 1
+
+</h3><p>Then my_array, being the name of an array, is the address of the first element of the array. 
+
+</p><p>In this case, the first element of my_array is itself an array of two ints, so my_array is the address 
+of an array of two ints. 
+
+</p><p>Because my_array is the address of the array's first element, my_array has the same value as &amp;my_array[0]. 
+
+</p><p>Next, my_array[0] is itself an array of two integers, so my_array[0] has the same value as &amp;my_array[0][0], 
+the address of its first element, an int. 
+
+</p><p>In short, my_array[0] is the address of an int-sized object, and my_array is the address of a 
+two-int-sized object.
+
+</p><p>Because both the integer and the array of two integers begin at the same location, 
+both my_array and my_array[0] have the same numeric value.
+
+</p><h3>Rule 2
+</h3><p>Adding 1 to a pointer or address yields a value larger by the size of the referred-to object.
+
+</p><p>In this respect, my_array and my_array[0] differ, because my_array refers to an object two ints
+in size, and my_array[0] refers to an object one int in size. 
+
+</p><p>Therefore, my_array + 1 has a different value from my_array[0] + 1.
+
+</p><h3>Rule 3
+</h3><p>Dereferencing a pointer or an address (applying the * operator or else the [] operator
+    with an index) yields the value represented by the referred-to object. 
+    
+</p><p>Because my_array[0] is the address of its first element, (my_array[0][0]), *(my_array[0]) represents 
+the value stored in my_array[0][0], an int value. 
+
+</p><p>Similarly, *my_array represents the value of its first element, my_array[0], but my_array[0] itself is 
+the address of an int. 
+
+</p><p>It's the address &amp;my_array[0][0], so *my_array is &amp;my_array[0][0]. 
+
+</p><p>Applying the dereferencing operator to both expressions implies that <i style='color:blue'>**</i>my_array equals *&amp;my_array[0][0], 
+which reduces to my_array[0][0], an int.
+
+</p><p>In short, my_array is the address of an address and must be dereferenced twice to get an
+ordinary value. 
+
+</p><p>An address of an address or a pointer of a pointer is an example of double indirection.
+
+</p><p>The following code illustrates the ideas talked above.
+
+</p><div class='myCodeDiv'><button id='HZUUI' class='myCopyButton' data-clipboard-target='#GHDLN'>Copy</button><pre  id='GHDLN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> my_array[4][2] = { {2,4}, {6,8}, {1,3}, {5, 7} };
+
+    printf(<span class='q'>"    my_array = %p,    my_array + 1 = %p\n"</span>,
+                my_array,         my_array + 1);
+    printf(<span class='q'>"my_array[0] = %p, my_array[0] + 1 = %p\n"</span>,
+             my_array[0],      my_array[0] + 1);
+    printf(<span class='q'>" *my_array = %p,     *my_array + 1 = %p\n"</span>,
+               *my_array,        *my_array + 1);
+    printf(<span class='q'>"my_array[0][0] = %d\n"</span>, my_array[0][0]);
+    printf(<span class='q'>" *my_array[0] = %d\n"</span>, *my_array[0]);
+    printf(<span class='q'>"     **my_array = %d\n"</span>, **my_array);
+    printf(<span class='q'>"       my_array[2][1] = %d\n"</span>, my_array[2][1]);
+    printf(<span class='q'>"*(*(my_array+2) + 1) = %d\n"</span>, *(*(my_array+2) + 1));
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HZUUI');clipboard.on('success', function(e) {$('#HZUUI').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HZUUI').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>The output shows that the address of the two-dimensional array, my_array, and the address of the 
+one-dimensional array, my_array[0], are the same. 
+
+</p><p>Each is the address of the corresponding array's first element, and this is the same numerically as
+&amp;my_array[0][0].
+
+</p><p>The program shows that my_array[0] and *my_array are identical, and they should be. 
+
+</p><p>Next, it shows that the name of a two-dimensional array has to be dereferenced twice to get a value
+stored in the array. 
+
+</p><p>This can be done by using the indirection operator (*) twice or by using the
+bracket operator ([ ]) twice. 
+
+</p><p>In particular, note that the pointer notation equivalent of my_array[2][1] is <i style='color:blue'>(</i>(my_array+2) +
+1). 
+
+</p><p>You probably should make the effort at least once in your life to break this down. 
+
+</p><p>Let's build up the expression in steps:
+</p><div class='myCodeDiv'><button id='NLWTP' class='myCopyButton' data-clipboard-target='#GMDHY'>Copy</button><pre  id='GMDHY' style='font-size:18px;' class='code'>my_array      <span class='c'>//the address of the first two-int element</span>
+my_array+2    <span class='c'>//the address of the third two-int element</span>
+*(my_array+2) <span class='c'>//the third element, a two-int array, hence the address </span>
+              <span class='c'>// of its first element, an int</span>
+*(my_array+2) + 1     <span class='c'>//the address of the second element of the </span>
+                      <span class='c'>// two-int array, also an int</span>
+*(*(my_array+2) + 1)  <span class='c'>//the value of the second int in the third </span>
+                      <span class='c'>//row (my_array[2][1])</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NLWTP');clipboard.on('success', function(e) {$('#NLWTP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NLWTP').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-array-and-pointer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-to-multidimensional-arrays.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointers-to-constants.html'>C Pointers to Constants</a></LI><LI><a href='c-arrays-and-pointers.html'>C Arrays and Pointers</a></LI><LI><a href='c-array-and-pointer.html'>C Array and Pointer</a></LI><LI><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to Multidimensional Arrays</a></LI><LI><a href='c-two-dimensional-arrays-and-pointers.html'>C Two-Dimensional Arrays And Pointers</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-and-multidimensional-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

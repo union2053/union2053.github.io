@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/printf.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Formatted Printing Function</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Formatted Printing Function</H1>
+<H2>Header file</H2>
+<UL>
+<LI><CODE>stdio.h</CODE> contains the function prototype and any
+other definitions that are needed for the <CODE>printf</CODE> function
+</UL>
+<H2><CODE>int printf(const char *format, ...)</CODE></H2>
+<UL>
+<LI>formats and prints its arguments
+as specified by the <CODE>format</CODE> string.
+<LI>Plain characters in <CODE>format</CODE> are simply copied
+<LI>Format specifications are made up of a the percent sign (<CODE>%</CODE>)
+followed by one of the following conversion operators, which determine
+what <CODE>printf</CODE> does with its arguments:
+<UL>
+<LI><STRONG>%</STRONG> - print a single <CODE>%</CODE> character
+<LI><STRONG>c</STRONG> - convert an <CODE>int</CODE> to an
+<CODE>unsigned character</CODE> and print the resulting character
+<LI><STRONG>d</STRONG> or <STRONG>i</STRONG> - print an <CODE>int</CODE> as a
+signed decimal number
+<LI><STRONG>u</STRONG> - print an <CODE>unsigned</CODE> as an
+unsigned decimal number
+<LI><STRONG>o</STRONG> - print an <CODE>unsigned</CODE> as an
+unsigned octal number
+<LI><STRONG>x</STRONG> or <STRONG>X</STRONG> - print an
+<CODE>unsigned</CODE> as an
+unsigned hexadecimal number (where the letters <CODE>abcdef</CODE> are used
+with <CODE>x</CODE> and <CODE>ABCDEF</CODE> are used with <CODE>X</CODE>
+<LI><STRONG>e</STRONG> or <STRONG>E</STRONG> - print a <CODE>double</CODE>
+using an exponential format like:<BR>
+<CODE>[-]<VAR>d</VAR>.<VAR>ddd</VAR>e[+-]<VAR>dd</VAR></CODE><BR>
+(where the <CODE>e</CODE> is replaced by <CODE>E</CODE> if the uppercase
+<CODE>E</CODE> is specified)
+<LI><STRONG>f</STRONG> - print a <CODE>double</CODE>
+using a decimal format like
+<CODE>[-]<VAR>ddd</VAR>.<VAR>ddd</VAR></CODE>
+<LI><STRONG>g</STRONG> or <STRONG>G</STRONG> - print a <CODE>double</CODE>
+using the same decimal format used by the <CODE>f</CODE> specification unless
+the exponent is less than -4 or greater than or equal to the specified
+precision (as described below), in which case the <CODE>e</CODE>
+format is used (replacing the <CODE>e</CODE> with an <CODE>E</CODE>
+if the <CODE>G</CODE> format specification is used.)
+Trailing zeros are removed from the right side of the decimal point.
+If there would be no digits to the right of the decimal
+point, the decimal point is also omitted.
+<LI><STRONG>s</STRONG> - print the string pointed to by a <CODE>char *</CODE>
+<LI><STRONG>p</STRONG> - print a <CODE>void *</CODE> argument in hexadecimal
+<EM>(ANSI C only)</EM>
+<LI><STRONG>n</STRONG> - store the number of characters printed at this point
+in the interger pointed to by the <CODE>int *</CODE> argument.
+Nothing is printed.  <EM>(ANSI C only)</EM>
+</UL>
+<LI>The conversion operator may be preceeded by zero or more of the
+following flag characters:
+<UL>
+<LI><STRONG>#</STRONG> specifies that the value should be converted to an
+alternate form:
+<UL>
+<LI>For <STRONG>o</STRONG>, the precision (described below) is increased so
+that the first digit printed is a <CODE>0</CODE>
+<LI>For <STRONG>x</STRONG> or <STRONG>X</STRONG>, a non-zero value has
+a <CODE>0x</CODE> prepended (or <CODE>0X</CODE> for the <CODE>X</CODE>
+specification)
+<LI>For <STRONG>e</STRONG>, <STRONG>E</STRONG>, <STRONG>f</STRONG>,
+<STRONG>g</STRONG> or <STRONG>G</STRONG>, the result will always
+contain a decimal point, even if no digits follow it.  Additionally,
+trailing zeros are not removed from numbers formatted with
+<STRONG>g</STRONG> or <STRONG>G</STRONG>
+</UL>
+<LI><STRONG>0</STRONG> specifies that the value printed should be padded
+on the left with zeros to the maximum width specified
+<LI><STRONG>-</STRONG> specifies that the value should be left
+justified (and padded with spaces to the right).
+If both <STRONG>0</STRONG>
+and <STRONG>-</STRONG> flags are specified, the <STRONG>0</STRONG> flag
+is ignored.
+<LI>A space character specifies that a blank should be left before a
+positive number in a <STRONG>d</STRONG>, <STRONG>e</STRONG>,
+<STRONG>E</STRONG>, <STRONG>f</STRONG>, <STRONG>g</STRONG>,
+<STRONG>G</STRONG> or <STRONG>i</STRONG> conversion
+<LI><STRONG>+</STRONG> specifies that a plus sign should placed before a
+positive number in a <STRONG>d</STRONG>, <STRONG>e</STRONG>,
+<STRONG>E</STRONG>, <STRONG>f</STRONG>, <STRONG>g</STRONG>,
+<STRONG>G</STRONG> or <STRONG>i</STRONG> conversion.
+If both <STRONG>+</STRONG>
+and space character flags are specified, the space character flag
+is ignored.
+</UL>
+<LI>The flag(s) (if any) may be followed by an optional minimum field
+width specification, written as a decimal integer.
+If the value to be printed is shorter than the
+field width, it is padded with spaces (or <CODE>0</CODE>s if the
+<CODE>0</CODE> flag was specified) to the left (or, if the
+<CODE>-</CODE> flag was specified, to the right with spaces)
+<LI>Alternatively, the minimum field width specification may be a
+<CODE>*</CODE>,
+in which case the value to be printed is assumed to be preceeded by
+an <CODE>int</CODE> argument which is used to specify the minimum width.
+<LI>The flags(s) and/or field width may be followed by a precision
+specification, written as a period followed by a decimal integer,
+which specifies:
+<UL>
+<LI>the minimum number of digits to be printed for <STRONG>d</STRONG>,
+<STRONG>i</STRONG>, <STRONG>o</STRONG>, <STRONG>u</STRONG>,
+<STRONG>x</STRONG>, and <STRONG>X</STRONG> conversions
+<LI>the number of digits to the right of the decimal-point for
+<STRONG>e</STRONG>, <STRONG>E</STRONG>, and <STRONG>f</STRONG> conversions
+<LI>the number of significant digits for <STRONG>g</STRONG> and
+<STRONG>G</STRONG> conversions
+<LI>the maximum number of characters to be printed from a string for
+<STRONG>s</STRONG> conversions
+</UL>
+<LI>Alternatively, the precision specification may be a <CODE>*</CODE>,
+in which case the value to be printed is assumed to be preceeded by
+an <CODE>int</CODE> argument (following the <CODE>int</CODE> for the
+minimum field width, if <CODE>*</CODE> is specified for it as well)
+which is used to specify the precision.
+<LI>Some conversion operators may also be preceeded by a size specification:
+<UL>
+<LI><STRONG>h</STRONG> indicates that the argument associated with a
+<STRONG>d</STRONG>, <STRONG>i</STRONG>,
+<STRONG>o</STRONG>, <STRONG>u</STRONG>, <STRONG>x</STRONG> or
+<STRONG>X</STRONG> operator is a <CODE>short</CODE> or
+<CODE>unsigned short</CODE>, or that the argument to an
+<STRONG>n</STRONG> is a <CODE>short *</CODE> <EM>(ANSI C only)</EM>
+<LI><STRONG>l</STRONG> indicates that the argument associated with a
+<STRONG>d</STRONG>, <STRONG>i</STRONG>,
+<STRONG>o</STRONG>, <STRONG>u</STRONG>, <STRONG>x</STRONG> or
+<STRONG>X</STRONG> operator is a <CODE>long</CODE> or
+<CODE>unsigned long</CODE>, or that the argument to an
+<STRONG>n</STRONG> is a <CODE>long *</CODE>
+<LI><STRONG>L</STRONG> indicates that the argument associated with a
+<STRONG>e</STRONG>, <STRONG>E</STRONG>, <STRONG>f</STRONG>,
+<STRONG>g</STRONG> or
+<STRONG>G</STRONG> operator is a <CODE>long double</CODE> <EM>(ANSI C only)</EM>
+</UL>
+</UL>
+Here is a demonstration <A HREF="pf-program.html">program</A>
+and the <A HREF="pf-output.html">output</A> it produces.<BR><BR>
+<A HREF="strmemfunc.html">Previous</A>, 
+<A HREF="charfunc.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/printf.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+</HTML>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-function-example-calculate-average-using-pointer-and-realloc.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C function example calculate average using pointer and realloc()</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C function example calculate average using pointer and realloc()'>C function example calculate average using pointer and realloc()</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C function example calculate average using pointer and realloc()</h1>
+<a class ='btn btn-outline-dark' href=c-using-pointers-to-as-function-arguments.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-review-question-1.html>Next</a><p>The following code defines a function that will calculate the average of an arbitrary number of  
+floating-point values that are passed to the function in an array. 
+
+</p><p>The program that will accept an arbitrary number of values entered  
+from the keyboard and output the average. 
+
+</p><p>A function to calculate an average
+</p><div class='myCodeDiv'><button id='WBAVA' class='myCopyButton' data-clipboard-target='#XDQPP'>Copy</button><pre  id='XDQPP' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdlib.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;ctype.h&gt;
+
+#define CAPACITY_INCREMENT 6 <span class='c'>// Increment in the capacity for data values</span>
+
+<span class='r'>double</span> average(<span class='r'>double</span> data[], <span class='r'>int</span> count)
+{
+  <span class='r'>double</span> sum = 0.0;
+  <span class='r'>for</span>(<span class='r'>int</span> i = 0 ; i &lt; count ; sum += data[i++])
+    ;
+  <span class='r'>return</span> sum/count;
+}
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+   <span class='r'>double</span> *data = NULL;      <span class='c'>// Pointer to array of data values</span>
+   <span class='r'>double</span> *temp = NULL;      <span class='c'>// Pointer to new array of data values</span>
+   <span class='r'>int</span> count = 0;            <span class='c'>// Number of data values</span>
+   <span class='r'>int</span> capacity = 0;         <span class='c'>// Number of data values that can be stored</span>
+   <span class='r'>char</span> answer = <span class='q'>'n'</span>;
+
+   <span class='r'>do</span>
+   {
+     <span class='r'>if</span>(count == capacity)
+     {
+       capacity += CAPACITY_INCREMENT;
+       <span class='c'>// Create new array of pointers</span>
+       <span class='r'>if</span>(!(temp = (<span class='r'>double</span>*)realloc(data, capacity*<span class='r'>sizeof</span>(<span class='r'>double</span>))))
+       {
+         printf(<span class='q'>"Error allocating memory for data values.\n"</span>);
+         exit(1);
+       }
+       data = temp;
+     }
+
+     printf(<span class='q'>"Enter a data value: "</span>);
+     scanf(<span class='q'>" %lf"</span>, data + count++);
+     printf(<span class='q'>"Do you want to enter another (y or n)? "</span>);
+     scanf(<span class='q'>" %c"</span>, &amp;answer);
+   } <span class='r'>while</span>(tolower(answer) != <span class='q'>'n'</span>);
+
+   printf(<span class='q'>"\nThe  average of the values you entered is %10.2lf\n"</span>,
+                average(data, count));
+   free(data);
+   <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WBAVA');clipboard.on('success', function(e) {$('#WBAVA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WBAVA').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-using-pointers-to-as-function-arguments.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-review-question-1.html>Next</a><h2>Related</h2><UL><LI><a href='c-two-dimensional-arrays-and-pointers.html'>C Two-Dimensional Arrays And Pointers</a></LI><LI><a href='c-use-pointer-to-access-two-dimensional-array.html'>C use pointer to access two-dimensional array</a></LI><LI><a href='c-using-pointers-to-as-function-arguments.html'>C Using Pointers to as Function arguments</a></LI><LI><a href='c-pointer-review-question-1.html'>C Pointer Review Question 1</a></LI><LI><a href='c-pointer-review-question-2.html'>C Pointer Review Question 2</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-function-example-calculate-average-using-pointer-and-realloc.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

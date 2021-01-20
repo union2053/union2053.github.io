@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/13583419/arduino-interrupt-alternatives by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Arduino interrupt alternatives | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Arduino interrupt alternatives | C Language Knowledge Base">
+        <title>[SOLVED] Arduino interrupt alternatives | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="arduino-interrupt-alternatives">Arduino interrupt alternatives</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/embedded.html">embedded</a></span>
+                        <span class="tag-item"><a href="../tag/interrupt.html">interrupt</a></span>
+                        <span class="tag-item"><a href="../tag/microcontroller.html">microcontroller</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>From what I've read, the solution to my problem is to use an interrupt, but if I understand them correctly, I can't use a delay in the routine that gets called by the interrupt. I've got a large pushbutton <a href="http://en.wikipedia.org/wiki/Light-emitting_diode" rel="nofollow">LED</a> switch. I want it to have a heartbeat while sitting idle, but once it's pushed, stay green and execute code.</p>
+
+<p>I can break the <code>heartbeat()</code> if I push the button enough times (I assume getting the state change at just the right time as it finishes a loop of the <code>heartbeat</code>), but I'm stuck on how to make it work on the first click. Is there an alternative way to do what I'm attempting?</p>
+
+<pre><code>void loop(){
+
+heartbeat();                                    //Make LED beat.
+buttonVal = digitalRead(buttonPin);             //Check the button.
+    if (buttonVal != buttonState) {               //If the button state changed.
+        if (buttonVal == HIGH){                   //Check if the button is pressed.
+            analogWrite(greenPin, 255);         //Button stays green once pushed.
+            functionA                           //Has some delays in it.
+            functionB                           //Has some other delays.
+        }
+    }
+}
+
+void heartbeat(){
+    for(i = 0; i &lt; pmw; i++) {
+        analogWrite(greenPin,i);
+        delay(((60000/rate)*.1)/pmw);
+    }
+
+    for (i = pmw; i &gt; 0; i--){
+        analogWrite(greenPin,i);
+        delay(((60000/rate)*.2)/pmw);
+    }
+
+    for(i = 0; i &lt; pmw; i++) {
+        analogWrite(greenPin,i);
+        delay(((60000/rate)*.1)/pmw);
+    }
+
+    for (i = pmw; i &gt; 0; i--){
+        analogWrite(greenPin,i);
+        delay(((60000/rate)*.6)/pmw);
+    }
+ }
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1853881/josh-wisotzkey" target="_blank"><span itemprop="name">Josh Wisotzkey</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">0</div>
+                                    <div itemprop="dateCreated">11/28/2012 5:39:04 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>You are correct in most of your assumptions. The proper way to handle this is using an interrupt and it is not a good idea to have delays in your interrupt service routines (ISR). So what you want to do is set a flag in your ISR and check that flag in your main loop.</p>
+
+<pre><code>// Flag needs to be volatile if used in an ISR
+volatile int buttonFlag = 0; 
+
+void loop()
+{
+    if (buttonFlag == 0)
+    {
+        heartbeat();                        //make led beat
+    }
+    else
+    {
+        analogWrite(greenPin, 255);         //button stays green once pushed
+        functionA                           //has some delays in it
+        functionB                           //has some other delays
+        buttonFlag = 0;                     //clear flag after executing code
+    }
+
+}
+
+// Interrupt Service Routine attached to INT0 vector
+ISR(EXT_INT0_vect)
+{
+    buttonFlag = digitalRead(buttonPin);    //set flag to value of button
+}
+</code></pre>
+
+<p>Since the interrupt will only trigger on a change in the state of the button, you don't need to check for that.</p>
+
+<p>Make sure that your flag variable is global and is declared <a href="http://tigcc.ticalc.org/doc/keywords.html#volatile" rel="nofollow noreferrer"><code>volatile</code></a> for use in the ISR. And make sure you are using the correct interrupt vector for use with the pin you are using.</p>
+
+<p>Here is a <a href="http://www.engblaze.com/we-interrupt-this-program-to-bring-you-a-tutorial-on-arduino-interrupts/" rel="nofollow noreferrer">good tutorial</a> on Arduino interrupts. And here is another <a href="http://gonium.net/md/2006/12/20/handling-external-interrupts-with-arduino/" rel="nofollow noreferrer">good example</a> of what you're trying to do.</p>
+
+<p>You may also want to look into <a href="https://electronics.stackexchange.com/questions/41674/switch-debouncing-would-toggle-switch-still-bounce/41690#41690">debouncing your switch</a> presses depending on what type of switch you're using. If instead of missing the first press, you're getting too many presses, you will need to implement some type of debouncing.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1418091/embedded-kyle" target="_blank"><span itemprop="name">embedded.kyle</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/13583419/arduino-interrupt-alternatives#answer-0</div>
+                                            <div itemprop="upvoteCount">5</div>
+                                            <div itemprop="dateCreated">4/13/2017 12:32:45 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>I'm a professional programmer, but I'm new to Arduino world. I noted that many Arduino owners don't know the fundamentals of programming, and cannot achieve good results in using this amazing piece of technology.</p>
+
+<p>In particular, I want to suggest to not use Arduino interrupts if it's not necessary, because there are only two of them, and even if you can write a "beautiful" code for a single sensor, or actuator, when you have to implement a more complex project, you cannot use them. Surely you've been correct in using the interrupt to deal with a single button, but what if you have four buttons to manage? </p>
+
+<p>For this reason I rewrote the "heartbeat" sketch using the technique of "time slice" or "single step". Using this technique, each time the loop function is executed, you run only a "single step" of your control functions, so you can insert as many as you need, and be equally quick and responsive to all the sensors you're using.
+To do so, I use global counters for each control function I have to implement, and each time the loop function is executed, I execute a single step of each function.
+This is the new sketch:</p>
+
+<pre><code>// Interrupt.ino - this sketch demonstrates how to implement a "virtual" interrupt using
+// the technique of "single step" to avoid heavy duty cycles within the loop function.
+
+int maxPwm = 128;   // max pwm amount
+int myPwm = 0;      // current pwm value
+int phase = 1;      // current beat phase
+int greenPin = 11;  // output led pin
+int buttonPin = 9;  // input button pin
+int buttonFlag = 1; // button flag for debounce
+
+int myDir[] = {0,1,-1,1,-1}; // direction of heartbeat loop
+int myDelay[] = {0,500,1000,500,3000}; // delay in microseconds of a single step
+
+void setup()
+{
+   pinMode(buttonPin, INPUT); // enable button pin for input
+   // it's not necessary to enable the analog output
+}
+
+void loop()
+{
+   if(phase&gt;0) heartbeat(); // if phase 1 to 4 beat, else steady
+   buttonRead(); // test if button has been pressed
+}
+
+// heartbeat function - each time is executed, it advances only one step
+// phase 1: the led is given more and more voltage till myPwm equals to maxPwm
+// phase 2: the led is given less and less voltage till myPwm equals to zero
+// phase 3: the led is given more and more voltage till myPwm equals to maxPwm
+// phase 4: the led is given less and less voltage till myPwm equals to zero
+void heartbeat() 
+{
+   myPwm += myDir[phase];
+   analogWrite(greenPin, myPwm);
+   delayMicroseconds(myDelay[phase]);
+   if(myPwm==maxPwm||myPwm==0) phase = (phase%4)+1;
+}
+
+// buttonRead function - tests if the button is pressed; 
+// if so, forces phase 0 (no beat) and enlightens the led to the maximum pwm
+// and remains in "inoperative" state till the button is released
+void buttonRead()
+{
+   if(digitalRead(buttonPin)!=buttonFlag)   // if button status changes (pressed os released)
+   {
+      buttonFlag = 1 - buttonFlag; // toggle button flag value
+      if(buttonFlag) // if pressed, toggle between "beat" status and "steady" status
+      {
+         if(phase) myPwm = maxPwm; else myPwm = 0;
+         phase = phase==0;
+         analogWrite(greenPin, myPwm);
+      }
+   }
+}
+</code></pre>
+
+<p>As you can see, the code is very compact and fast to execute. I divided the heartbeat loop into four "phases", regulated by the myDelay array, and whose direction of counting is regulated by the myDir array. If nothing happens, the voltage of the pwm led pin is incremented at each step until it reaches the maxPwm value, then the loop enters phase 2, in which the voltage is decremented until zero, and so on, implementing the original heartbeat.</p>
+
+<p>If the button is pressed, the loop enters in phase zero (no heartbeat), and the led is alimented with maxPwm voltage. From now on, the loop maintains a steady led, until the button is released (this implements the "debounce" algorithm). If the button is pressed again, the buttonRead function restarts the heartbeat function, making it enter the phase 1 again, so the heartbeat is restored.</p>
+
+<p>If you press the button again, the heartbeat stops, and so on. All without any exhitation or bouncing at all.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5296733/sergio-internicola" target="_blank">Sergio Internicola</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/13583419" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/13583419/arduino-interrupt-alternatives by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:13 GMT -->
+</html>

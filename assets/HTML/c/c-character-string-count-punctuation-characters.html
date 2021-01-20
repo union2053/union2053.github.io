@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-count-punctuation-characters.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Character String count punctuation characters</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Character String count punctuation characters'>C Character String count punctuation characters</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Character String count punctuation characters</h1>
+<a class ='btn btn-outline-dark' href=c-character-string-convert-to-upper-case.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-command-line-arguments.html>Next</a><p>The following code count punctuation characters in a String.
+
+</p><div class='myCodeDiv'><button id='ZJMAN' class='myCopyButton' data-clipboard-target='#TFBKX'>Copy</button><pre  id='TFBKX' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;ctype.h&gt;
+#define LIMIT 81
+<span class='r'>int</span> PunctCount(<span class='r'>const</span> <span class='r'>char</span> *);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> line[LIMIT];
+    <span class='r'>char</span> * find;
+
+    puts(<span class='q'>"Please enter a line:"</span>);
+    fgets(line, LIMIT, stdin);
+    find = strchr(line, <span class='q'>'\n'</span>);    <span class='c'>// look for newline</span>
+    <span class='r'>if</span> (find)                     <span class='c'>// if the address is not NULL,</span>
+        *find = <span class='q'>'\0'</span>;             <span class='c'>// place a null character there</span>
+    printf(<span class='q'>"That line has %d punctuation characters.\n"</span>,
+           PunctCount(line));
+
+    <span class='r'>return</span> 0;
+}
+
+
+<span class='r'>int</span> PunctCount(<span class='r'>const</span> <span class='r'>char</span> * str)
+{
+    <span class='r'>int</span> ct = 0;
+    <span class='r'>while</span> (*str)
+    {
+        <span class='r'>if</span> (ispunct(*str))
+            ct++;
+        str++;
+    }
+
+    <span class='r'>return</span> ct;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZJMAN');clipboard.on('success', function(e) {$('#ZJMAN').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZJMAN').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABeCAIAAAD+NHaGAAAIdklEQVR42u3dXXKjOBQG0F6E97/GqZkFMPM0lYptcX8kDPic6oeuxAEkiO8XWaA/GwDARfzRBQCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4sNLj8dAJAFwvuDx+0Kc3iCPBs+l0A3DG4PJ4opJ9Qw84mwBcMrg817B3JU2pE1wA4HTB5V1VGw/GRAZsBq/59d2Xh9T8xGqwhZ/7ffmaxxuFNv565dyG9INLsAmpsznekV9UePbPX3//908/ILgsCS6RAZvxa16mhOwuUm0cZJdstxT64ee3sm3pd0XwB8fJpnxyBReIRJZ7B5efbRTRmBBcBn9Gd75Yrr61XTSzVDa4BA9yeqn+SHAZfKV/skBquXE5f44ssgvF4FKenFv4DCXygsIu4g18t5dmcAn2Qz+plPvhmODSPFnAXWv5ILXILrRGXKaPfBTqd+fDlHUH2b/lqtmWiUnoyBEXQHB51yjZBcFFcBFcQHA5Y6N22yu7cERwiVTT7NzbrTQBpVnyC8Fl7odNhVac8KOiLTPX26dI8CXBZbc5gguJ4LI7F6EwhWW8keeKG5kS0Z8zEZlGs1tWOwc5ZebHuCeznRCcUZTtqEgzBRf4quDyha1m4YgLAIKLViO4AGzj+0eCd5fEb0g5wwY7/RMs4fF5Ic8vGPxgdrrJxDuDdrfwvJfa7la3cWmHCy4AH4gv5ar/Lk+cc4OFUh0pY4MfiVT6fkSLHHz5CslGgeYuIl3duUgmdrjgAvCx7FL+g/tyGyzU6UhpjPzIy4GcwU81K3ozUux2SCroxLdfa8jLby3tcMEF4LzBZfCCy22wM8Dw7vBSx9YZRsrmp864S2q4pRBc4oNSzTYu6nDBBeBigy61UZAzbDBbpxcFl4mNLXyKtCK4pPo828xyG1d0uOACILhcL7jsziY+OLhEznKwT8oxKLX9QnAptFFwEVyAewaXl+VwXCwvusFCfaqNAUyvlOXDKNyzE9xa8zaiia8XXD4fXCKPC/v1n8FryjyODL520GUQC4Il5LQb/Lbgkn1ZKu9O74TmwQsunwkuu49s3w0u8Ufrrg4uq9ddAlYEl5e3j3Zyxqk2KLgMXlZoy6IgIrhcJrikVtgZpJZgEtodsJm+DGHqNZ2lf7LP+99d92D3afrPfTt+Hn//BZH2phYNeH5Nf1UErphdXt7HGy9v59+g4NJMLe/ii+AiuBSDS3wXkaX7CqvbRBZUWhpctvaai9n/b2uWq8wuDFnozNQIH4JLbZmbs21wYnBJpYF1waX2cVsztWQPo9Z1nTYKLkcHl/gwwNzgMnFd5U+NuBwQXApd11/yenVwia9BzS2Dy8sncf16By9UphNuMFVHy4nhgDpaXmegnFr6ZT7bdZ02Ci6HBpdBgdydmRvJLs2R/3giKRfaZsmMJ4DdCBIPLtl+OFVwWTrRmwsNukyJBeffYL+ArXukXu0wCq0rTHyZUuazXec5LvcPLtvwvqTU5zjlSJGaSbM6uOx+nlU4hlnBJTt+tii4NPMlNxt0KfyJfLkNFjY++Kngo0eWBpfpz7pNPTamHFwiu2i2UXC5RnAJVqxOaplSzJYGl/4t5fEhmfHu4mNjqeCSijXjy8CIC9PfxE+4wWz0iT9QLrtm9dwGFop67QF6W/I5eOX1wKe0UXA5Orhs1TkutbpbSxuFz01ONeLSOchmQDlVcOkfJ7cJLrXvXmWD8cWPfn32VCjA0ytlYeWm+FhRIbikdhTv8MjnQZFdCy6fCS7x3FCoMVOCS3/o5QxzXASXQrsEl7tml/J3L7HBVGn8NTk0uOVUvpny3fFeskMdkR8PNnnLP/R24uPvjulwwWVacImMxzSDS3+spVNra5vN3n41cRyis4V4UqnNU6ndRCa4AAguuULVH6voz3H5f27EokGX/gSXQd4KPmNmd/JK+QWF58sVzmPqAXS7HeVhdACCS64UTQwuJ2FOKABcO7isDgSXyC5SCwB8UXABABBcAADBhZjHHl0EAIILACC4AAAILgAAgkuCGSe45AC+N7icZPJpc33Hw47wPKV092H8phXfPrg4xcANg0vkTpkp732z3kDP/EZ8noS3hZ8OfN3CdsCR36Dq3+Bh1oDgEqphgsvVj62/TKNSJ7g4TuDCwSWy+PN4Yb8pzz7J7v15HCK4PGH52Mod9fK7KzqqUzN2e3L3K7Vz8XKZxvE6juOj6l+02SUza9dk8Iy8u2D61+TL9S8nXtXB94fgL/gWWDe0+ZsFXCO4vHw3HHxl3Z/15Tkuu63YbUK8qJc7KlhuPzviku3JSLsK/bA7iSf7lXLPBLt6nAnK5yKVGjv9MBiFPfhsDhYaCw4bm/0DFw4ui0rdOYNLMLTNqiKFo534Zro0uMQTcCEiBM9FP7jM6pn4xTM33y/aRSRg1f4cqh1VfAtWfQfBJffH6+5I78mDS//zrFkdNWUxgZsFl+yVcORFe6rg8pF+6E/tD37cNvEglQf46uBSGJa/xIhL/9hW/PkruEwJLhMv2ksHl34/rD6bU64HYzAguAgugovgIrgILsAtgktkIHd6PT4mfs0tEoWJk1M6qpnY+lNrV1TT5jF0LtrO5NyDL7ntkJmzq8/mtmzOkw+S4DLBJXLP5/h3+/lWw+wNjakjDN6/2mlF7V6bZkf1bxoPztRZfdf3oJkTz0X5GKZctM2beIP98PFf3tTlFOnq/tnsTx3bPQbFA64x4gJTBr0AQHBBcAFAcIFkajGWDoDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAwDv/AsmrUECy5GGWAAAAAElFTkSuQmCC'><p>The while (*str) loop processes each character in the string pointed to by str until 
+the null character is reached. 
+
+</p><p>At that point, the value of *str becomes 0 (the code for the null character), or false, 
+and the loop terminates. 
+</p><a class ='btn btn-outline-dark' href=c-character-string-convert-to-upper-case.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-command-line-arguments.html>Next</a><h2>Related</h2><UL><LI><a href='c-character-string-format-with-sprintf-function.html'>C Character String format with sprintf() Function</a></LI><LI><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Character String sort using selection sort algorithm</a></LI><LI><a href='c-character-string-convert-to-upper-case.html'>C Character String Convert to upper case</a></LI><LI><a href='c-command-line-arguments.html'>C Command-Line Arguments</a></LI><LI><a href='c-string-to-number-conversions.html'>C String-to-Number Conversions</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-count-punctuation-characters.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

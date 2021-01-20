@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-variadic-macros-and-va-args.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C preprocessor Variadic Macros: ... and __VA_ARGS__</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C preprocessor Variadic Macros: ... and __VA_ARGS__'>C preprocessor Variadic Macros: ... and __VA_ARGS__</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor.html'>C Preprocessor
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-manifest-constants-define.html'>C #define
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-arguments-with-define.html'>C #define with arguments 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Macro
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C # Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-glue-the-operator.html'>C ## Operator
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Variadic Macros
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#include
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-file-inclusion-include.html'>C #include
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-uses-for-header-files.html'>C Header Files
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Flag
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-undef-directive.html'>C #undef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifdef-else-and-endif.html'>C #ifdef, #else, and #endif
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifndef.html'>C #ifndef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-if-and-elif-directives.html'>C #if #elif
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Predefined
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-predefined-macros.html'>C Predefined Macros
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-line-error.html'>C #line #error
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-pragma.html'>C #pragma
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C preprocessor Variadic Macros: ... and __VA_ARGS__</h1>
+<a class ='btn btn-outline-dark' href=c-preprocessor-glue-the-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-file-inclusion-include.html>Next</a><p>Some functions, such as <i style='color:blue'>printf</i>(), accept a variable number of arguments. 
+
+</p><p>The <i style='color:blue'>stdvar.h</i> provides tools for creating user-defined functions with a variable number 
+of arguments. 
+
+</p><p>And C99/C11 does the same thing for macros. 
+
+</p><p>The final argument in an argument list for a macro definition can be ellipses (...). 
+
+</p><p>If so, the predefined macro __VA_ARGS__ can be used in the substitution part to indicate 
+what will be substituted for the ellipses. 
+
+</p><p>For example, consider this definition:
+</p><div class='myCodeDiv'><button id='UEMCB' class='myCopyButton' data-clipboard-target='#KGRAQ'>Copy</button><pre  id='KGRAQ' style='font-size:18px;' class='code'>#define PR(...) printf(__VA_ARGS__)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UEMCB');clipboard.on('success', function(e) {$('#UEMCB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UEMCB').text('error');});</script></div><p>Suppose you later invoke the macro like this:
+</p><div class='myCodeDiv'><button id='DVCKB' class='myCopyButton' data-clipboard-target='#HUUXS'>Copy</button><pre  id='HUUXS' style='font-size:18px;' class='code'>PR(<span class='q'>"Howdy"</span>);
+PR(<span class='q'>"weight = %d, shipping = $%.2f\n"</span>, wt, sp);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DVCKB');clipboard.on('success', function(e) {$('#DVCKB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DVCKB').text('error');});</script></div><p>For the first invocation, __VA_ARGS__ expands to one argument:
+</p><div class='myCodeDiv'><button id='CAHVC' class='myCopyButton' data-clipboard-target='#GSLIF'>Copy</button><pre  id='GSLIF' style='font-size:18px;' class='code'><span class='q'>"Howdy"</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CAHVC');clipboard.on('success', function(e) {$('#CAHVC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CAHVC').text('error');});</script></div><p>For the second invocation, it expands to three arguments:
+</p><div class='myCodeDiv'><button id='CYZST' class='myCopyButton' data-clipboard-target='#YGADI'>Copy</button><pre  id='YGADI' style='font-size:18px;' class='code'><span class='q'>"weight = %d, shipping = $%.2f\n"</span>, wt, sp
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CYZST');clipboard.on('success', function(e) {$('#CYZST').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CYZST').text('error');});</script></div><p>Thus, the resulting code is this:
+</p><div class='myCodeDiv'><button id='KUAMK' class='myCopyButton' data-clipboard-target='#YJGNJ'>Copy</button><pre  id='YJGNJ' style='font-size:18px;' class='code'>printf(<span class='q'>"Howdy"</span>);
+printf(<span class='q'>"weight = %d, shipping = $%.2f\n"</span>, wt, sp);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KUAMK');clipboard.on('success', function(e) {$('#KUAMK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KUAMK').text('error');});</script></div><p>The following code shows an example that uses string concatenation and the # operator:
+</p><div class='myCodeDiv'><button id='ZLUAJ' class='myCopyButton' data-clipboard-target='#OOFRH'>Copy</button><pre  id='OOFRH' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;math.h&gt;
+#define PR(X, ...) printf(<span class='q'>"Message "</span> #X <span class='q'>": "</span> __VA_ARGS__)
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>double</span> x = 48;
+    <span class='r'>double</span> y;
+
+    y = sqrt(x);
+    PR(1, <span class='q'>"x = %g\n"</span>, x);
+    PR(2, <span class='q'>"x = %.2f, y = %.4f\n"</span>, x, y);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZLUAJ');clipboard.on('success', function(e) {$('#ZLUAJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZLUAJ').text('error');});</script></div><p>Here's the output:
+</p><img src='data:image/png;base64,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'><p>In the first macro call, X has the value 1, so #X becomes "1". 
+
+</p><p>That makes the expansion look like this:
+</p><div class='myCodeDiv'><button id='NMAJN' class='myCopyButton' data-clipboard-target='#MRABT'>Copy</button><pre  id='MRABT' style='font-size:18px;' class='code'>print(<span class='q'>"Message "</span> <span class='q'>"1"</span> <span class='q'>": "</span> <span class='q'>"x = %g\n"</span>, x);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NMAJN');clipboard.on('success', function(e) {$('#NMAJN').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NMAJN').text('error');});</script></div><p>Then the four strings are concatenated, reducing the call to this:
+</p><div class='myCodeDiv'><button id='CODBB' class='myCopyButton' data-clipboard-target='#YZXLW'>Copy</button><pre  id='YZXLW' style='font-size:18px;' class='code'>print(<span class='q'>"Message 1: x = %g\n"</span>, x);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CODBB');clipboard.on('success', function(e) {$('#CODBB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CODBB').text('error');});</script></div><p>Don't forget, the ellipses have to be the last macro argument:
+</p><div class='myCodeDiv'><button id='MDABS' class='myCopyButton' data-clipboard-target='#ICXOW'>Copy</button><pre  id='ICXOW' style='font-size:18px;' class='code'>#define WRONG(X, ..., Y)      #X #__VA_ARGS__ #y    <span class='c'>// won't work</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MDABS');clipboard.on('success', function(e) {$('#MDABS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MDABS').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-preprocessor-glue-the-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-file-inclusion-include.html>Next</a><h2>Related</h2><UL><LI><a href='c-using-arguments-with-define.html'>C Using Arguments with #define</a></LI><LI><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C Creating Strings from Macro Arguments: The # Operator</a></LI><LI><a href='c-preprocessor-glue-the-operator.html'>C Preprocessor Glue: The ## Operator</a></LI><LI><a href='c-preprocessor-file-inclusion-include.html'>C Preprocessor File Inclusion: #include</a></LI><LI><a href='c-uses-for-header-files.html'>C Uses for Header Files</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-variadic-macros-and-va-args.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

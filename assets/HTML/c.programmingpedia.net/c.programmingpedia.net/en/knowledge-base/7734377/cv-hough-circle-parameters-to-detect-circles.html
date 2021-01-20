@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7734377/cv-hough-circle-parameters-to-detect-circles by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] CV Hough Circle Parameters to detect Circles | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] CV Hough Circle Parameters to detect Circles | C Language Knowledge Base">
+        <title>[SOLVED] CV Hough Circle Parameters to detect Circles | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="cv-hough-circle-parameters-to-detect-circles">CV Hough Circle Parameters to detect Circles</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/geometry.html">geometry</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am trying to detect 22 balls on the snooker table. I have an image to test on but programme os detecting 2 balls, and random circles elsewhere. My code is below with the circle detection algorithm. Does anyone know which parameters should be adjusted to get the detection i would need? thanks </p>
+
+<pre><code>#include &lt;cv.h&gt;
+#include &lt;highgui.h&gt;
+#include &lt;math.h&gt;
+
+int main(int argc, char** argv)
+{   int edge_thresh = 1;
+    IplImage* img = cvLoadImage("C:\\Users\\Nathan\\Desktop\\SnookerPic.png", 1);;
+    IplImage* gray = cvCreateImage(cvGetSize(img), 8, 1);
+     IplImage *edge = cvCreateImage( cvSize(img-&gt;width,img-&gt;height), 8, 1);
+    CvMemStorage* storage = cvCreateMemStorage(0);
+    cvCvtColor(img, gray, CV_BGR2GRAY);
+    cvThreshold(gray,gray, CV_GAUSSIAN, 9, 9);
+    cvSmooth(gray, gray, CV_GAUSSIAN, 11, 11); 
+    cvCanny(gray, edge, (float)edge_thresh, (float)edge_thresh*3, 5);
+    CvSeq* circles = cvHoughCircles(edge, storage, 
+        CV_HOUGH_GRADIENT, 2, 20, 200, 50);
+    int i;
+
+    for (i = 0; i &lt; circles-&gt;total; i++) 
+    {
+         float* p = (float*)cvGetSeqElem( circles, i );
+         cvCircle( img, cvPoint(cvRound(p[0]),cvRound(p[1])), 
+             3, CV_RGB(0,255,0), -1, 8, 0 );
+         cvCircle( img, cvPoint(cvRound(p[0]),cvRound(p[1])), 
+             cvRound(p[2]), CV_RGB(255,0,0), 3, 8, 0 );
+    }
+    cvNamedWindow( "circles", 1 );
+    cvShowImage( "circles", img );
+
+
+    return 0;
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/966890/user966890" target="_blank"><span itemprop="name">user966890</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">1</div>
+                                    <div itemprop="dateCreated">3/23/2015 12:05:25 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I suspect you are having trouble with the parameters being either too restrictive or loose. You need to play with the parameters until you get the number of circles you want. Also, the Gaussian 11x11 blur may be a bit aggressive depending on the image. For my image, it was doing more harm than good, but my image is kind of idealized...</p>
+
+<p>I modified the OpenCV example you are using to include the track bars allowing you to play with the Canny parameters. This should really help you get a feel for how it works. Also, pay attention to the minDist parameter. For my image, the circle centers were about 32 pixels away. You'll need to adjust this to your circle sizes. So, here is the sample:</p>
+
+<pre><code>#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+
+using namespace cv;
+
+int hi = 1, lo = 1;
+
+int main(int argc, char* argv[]) {
+    Mat orig = imread("Snooker_balls_triangled.png");
+    int key = 0;
+
+    namedWindow("circles", 1);
+    createTrackbar("hi", "circles", &amp;hi, 255);
+    createTrackbar("lo", "circles", &amp;lo, 255);
+
+    do
+    {
+        // update display and snooker, so we can play with them
+        Mat display = orig.clone();
+
+        Mat snooker;
+        cvtColor(orig, snooker, CV_RGB2GRAY);
+
+        vector&lt;Vec3f&gt; circles;
+
+        // also preventing crash with hi, lo threshold here...
+        HoughCircles(snooker, circles, CV_HOUGH_GRADIENT, 2, 32.0, hi &gt; 0 ? hi : 1, lo &gt; 0 ? lo : 1 );
+        for( size_t i = 0; i &lt; circles.size(); i++ )
+        {
+             Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+             int radius = cvRound(circles[i][2]);
+
+             // draw the green circle center
+             circle( display, center, 3, Scalar(0,255,0), -1, 8, 0 );
+
+             // draw the blue circle outline
+             circle( display, center, radius, Scalar(255,0,0), 3, 8, 0 );
+        }
+
+        imshow( "circles", display );
+        imshow("snooker", snooker);
+        key = waitKey(33);
+    } while((char)key != 27);
+    return 0;
+}
+</code></pre>
+
+<p>I used this <a href="http://i.stack.imgur.com/SCotH.png" rel="nofollow">snooker image</a>, and <a href="http://i.stack.imgur.com/5pun3.png" rel="nofollow">this</a> is the output I get.</p>
+
+<p>(P.S. consider using the C++ interface it's far superior to the C interface IMHO :)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/951860/mevatron" target="_blank"><span itemprop="name">mevatron</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7734377/cv-hough-circle-parameters-to-detect-circles#answer-0</div>
+                                            <div itemprop="upvoteCount">2</div>
+                                            <div itemprop="dateCreated">10/12/2011 3:07:42 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>If you are using iOS you need to include the ios.h, or simply write your own class methods to handle the img proc from cvMat to UIImage and vice versa.</p>
+
+<p>Please excuse the comments, I included them only for those that maybe have uncover some of the same 'gibberish' research as me.  Every image will require totally different settings.  Do not give up. houghcircles is about the best detection algorithm out there.
+I am about to combine some gaming code with detection to make it better, simpler, faster.</p>
+
+<pre><code>    #import "JmBViewController.h"
+
+@interface JmBViewController ()
+
+@end
+
+@implementation JmBViewController
+
+- (void)viewDidLoad {
+[super viewDidLoad];
+_imgtest = [UIImage imageNamed:@"IMG_0424.PNG"];
+
+cv::Mat cvImage;
+UIImageToMat(_imgtest, cvImage);
+if (!cvImage.empty()) {
+    cv::Mat gray;
+  //  cv::Mat filteredMat;
+    cv::cvtColor(cvImage, gray, CV_BGRA2GRAY);
+   // cv::GaussianBlur(gray, gray, cv::Size(5, 5), 1.2, 1.2);
+    cv::vector&lt;cv::Vec3f&gt; circles;
+    //cv::HoughCircles(gray, circles, CV_HOUGH_GRADIENT, 1, 50);
+    /*
+    for(size_t i = 0; i &lt; circles.size(); i++)
+    {
+        cv::Point center((cvRound(circles[i][0]), cvRound(circles[i][1])));
+        int radius = cvRound(circles[i][2]);
+        cv::circle(gray, center, 3, cv::Scalar(0,255,0));
+        cv::circle(gray, center, radius, cv::Scalar(0,0,255));
+    }
+   */
+
+ //  for ( int i = 1; i &lt; 15; i = i + 2 )
+
+        cv::GaussianBlur(gray, gray, cv::Size(9, 9), 1.5, 1.5);
+
+        cv::Mat edges;
+        cv::Canny(gray, edges, 0, 50);
+        //gray.setTo(cv::Scalar::all(0));
+        //gray.setTo(cv::Scalar::all(255), edges);
+        cv::HoughCircles(gray, circles, CV_HOUGH_GRADIENT, 1, gray.rows/30, 100, 50, 10, 30 );
+        for(size_t i = 0; i &lt; circles.size(); i++)
+        {
+            cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+            int radius = cvRound(circles[i][2]);
+            cv::circle(cvImage, center, 5, cv::Scalar::all(200), -1, 8, 0 );//center
+            cv::circle(cvImage, center, radius, cv::Scalar::all(255), 3, 8, 0 );//diamter
+        NSLog(@"Circles: %ld", i+1);
+
+       // cv::imshow(&amp;"circles i " [ i], gray);
+    }
+
+
+    _imgView.image = MatToUIImage(cvImage);
+    }
+    /*
+cv::Mat cvImage;
+cv::Mat grey;
+cv::Mat filteredMat;
+cv::vector&lt;cv::Vec3f&gt; circles;
+// cv::cvtColor(_imgtest, cvImage, CV_BGR2GRAY);
+cv::threshold(grey, filteredMat, 100, 255, CV_THRESH_BINARY);
+[UIImageCVMatConverter cvMatGrayFromUIImage:_imgtest];
+//  cv::cvtColor(cvImage, grey, CV_RGBA2GRAY);
+// UIImageToMat(_imgtest, cvImage);
+cv::HoughCircles(cvImage, circles, CV_HOUGH_GRADIENT, 1, 50);
+//  MatToUIImage(cvImage);
+_imgView.image = [UIImageCVMatConverter UIImageFromCVMat:cvImage];
+_imgView.image = MatToUIImage(cvImage);
+*/
+
+// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+[super didReceiveMemoryWarning];
+// Dispose of any resources that can be recreated.
+}
+/*
+
+UIImage* MatToUIImage(const cv::Mat&amp; image) {
+NSData *data = [NSData dataWithBytes:image.data length:image.elemSize()*image.total()];
+CGColorSpaceRef colorSpace;
+if (image.elemSize() == 1) {
+    colorSpace = CGColorSpaceCreateDeviceGray();
+}else { colorSpace = CGColorSpaceCreateDeviceRGB();
+ }
+CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+
+CGImageRef imageRef = CGImageCreate(image.cols, image.rows, 8, 8*image.elemSize(), image.step.p[0], colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault, provider, NULL, FALSE, kCGRenderingIntentDefault);
+UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
+
+return finalImage;
+ }
+ */
+
+
+@end
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/0/user2882399" target="_blank">user2882399</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7734377" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7734377/cv-hough-circle-parameters-to-detect-circles by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:21 GMT -->
+</html>

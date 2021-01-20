@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-review-question-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointer Review Question 2</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointer Review Question 2'>C Pointer Review Question 2</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointer Review Question 2</h1>
+<a class ='btn btn-outline-dark' href=c-pointer-review-question-1.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-review-question-3.html>Next</a><h3>Question 1
+</h3><p>Suppose you have the following declaration:
+</p><div class='myCodeDiv'><button id='RTIMM' class='myCopyButton' data-clipboard-target='#BVOOM'>Copy</button><pre  id='BVOOM' style='font-size:18px;' class='code'><span class='r'>int</span> my_array[30][100];.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RTIMM');clipboard.on('success', function(e) {$('#RTIMM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RTIMM').text('error');});</script></div><p>(a) Express the address of my_array[22][56] one way.
+
+</p><p>(b) Express the address of my_array[22][0] two ways.
+
+</p><p>(c) Express the address of my_array[0][0] three ways.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='HKP' href='#HKP'>Click to view the answer</button></p><pre style='font-size:120%' id='HKP' class='collapse code'>
+a.&amp;my_array[22][56]
+  &amp;my_array[22][0] <span class='r'>or</span> my_array[22]
+
+b. &amp;my_array[22][0] <span class='r'>or</span> my_array[22]
+
+The latter is the name of a one-dimensional array of 100 elements, 
+hence the address of its first element, which is the element my_array[22][0].
+
+c.&amp;my_array[0][0] <span class='r'>or</span> my_array[0] <span class='r'>or</span> (<span class='r'>int</span> *) my_array
+
+Here,  my_array[0]  is the address of the  <span class='r'>int</span>  element  my_array[0][0] , 
+<span class='r'>and</span>  my_array  is the address of the 100-element array my_array[0]. 
+
+The two addresses have the same numeric value but
+different types; the typecast makes the types the same.
+
+</pre><h3>Question 2
+</h3><p>Create an appropriate declaration for each of the following variables:
+</p><div class='myCodeDiv'><button id='LJHOT' class='myCopyButton' data-clipboard-target='#IWZRB'>Copy</button><pre  id='IWZRB' style='font-size:18px;' class='code'>a. digits is an array of 10 ints.
+
+b. rates is an array of six floats.
+
+c. mat is an array of three arrays of five integers.
+
+d. psa is an array of 20 pointers to <span class='r'>char</span>.
+
+e. pstr is a pointer to an array of 20 chars.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LJHOT');clipboard.on('success', function(e) {$('#LJHOT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LJHOT').text('error');});</script></div><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='POH' href='#POH'>Click to view the answer</button></p><pre style='font-size:120%' id='POH' class='collapse code'>
+a. <span class='r'>int</span> digits[10];
+
+b. <span class='r'>float</span> rates[6];
+
+c. <span class='r'>int</span> mat[3][5];
+
+d. <span class='r'>char</span> * psa[20] ;
+
+Note that [] has higher precedence than *, so in the absence of parentheses, 
+the array descriptor is applied first, <span class='r'>and</span> then the pointer descriptor. 
+
+Hence, <span class='r'>this</span> declaration is the same as <span class='r'>char</span> *(psa[20]); .
+                     
+e. <span class='r'>char</span> (*pstr)[20];
+
+</pre><h3>Question 3
+</h3><p>Suppose you have these declarations:
+</p><div class='myCodeDiv'><button id='DJDWF' class='myCopyButton' data-clipboard-target='#GLRDI'>Copy</button><pre  id='GLRDI' style='font-size:18px;' class='code'><span class='r'>float</span> my_array[10], things[10][5], *pf, value = 2.2;
+<span class='r'>int</span> i = 3;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DJDWF');clipboard.on('success', function(e) {$('#DJDWF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DJDWF').text('error');});</script></div><p>Identify each of the following statements as valid or invalid:
+</p><div class='myCodeDiv'><button id='OAQXJ' class='myCopyButton' data-clipboard-target='#WYUYL'>Copy</button><pre  id='WYUYL' style='font-size:18px;' class='code'>a. my_array[2] = value;
+
+b. scanf(<span class='q'>"%f"</span>, &amp;my_array );
+
+c. my_array = value;
+
+d. printf(<span class='q'>"%f"</span>, my_array);
+
+e. things[4][4] = my_array[3];
+
+f. things[5] = my_array;
+
+g. pf = value;
+
+h. pf = my_array;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OAQXJ');clipboard.on('success', function(e) {$('#OAQXJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OAQXJ').text('error');});</script></div><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='AWM' href='#AWM'>Click to view the answer</button></p><pre style='font-size:120%' id='AWM' class='collapse code'>
+a. my_array[2] = value;
+Valid.
+
+b. scanf(<span class='q'>"%f"</span>, &amp;my_array );
+Invalid;  my_array  is <span class='r'>not</span> a  <span class='r'>float</span> .
+
+c. my_array = value;
+Invalid;
+my_array  is <span class='r'>not</span> a  <span class='r'>float</span> .
+
+d. printf(<span class='q'>"%f"</span>, my_array);
+Invalid;  my_array  is <span class='r'>not</span> a  <span class='r'>float</span> .
+
+e. things[4][4] = my_array[3];
+Valid.
+
+f. things[5] = my_array;
+Invalid; can't assign arrays.
+
+g. pf = value;
+Invalid;  value  is <span class='r'>not</span> an address.
+
+h. pf = my_array;
+Valid.
+
+</pre><h3>Question 4
+</h3><p>Declare an 800 by 600 array of int.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='VUA' href='#VUA'>Click to view the answer</button></p><pre style='font-size:120%' id='VUA' class='collapse code'>
+<span class='r'>int</span> screen[800][600] ;
+
+</pre><h3>Question 5
+</h3><p>Here are two function prototypes:
+</p><div class='myCodeDiv'><button id='GKPIO' class='myCopyButton' data-clipboard-target='#IRJJN'>Copy</button><pre  id='IRJJN' style='font-size:18px;' class='code'><span class='r'>void</span> show(<span class='r'>const</span> <span class='r'>double</span> ar[], <span class='r'>int</span> n);   <span class='c'>// n is number of elements</span>
+<span class='r'>void</span> show2(<span class='r'>const</span> <span class='r'>double</span> ar2[][3], <span class='r'>int</span> n); <span class='c'>// n is number of rows</span>
+
+a. Show a function call that passes a compound literal containing 
+   the values 8, 3, 9, <span class='r'>and</span> 2 to the show() function.
+b. Show a function call that passes a compound literal containing 
+   the values 8, 3, <span class='r'>and</span> 9 as the first row <span class='r'>and</span> the values 5, 4, 
+   <span class='r'>and</span> 1 as the second row to the show2() function.
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GKPIO');clipboard.on('success', function(e) {$('#GKPIO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GKPIO').text('error');});</script></div><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='AYQ' href='#AYQ'>Click to view the answer</button></p><pre style='font-size:120%' id='AYQ' class='collapse code'>
+a. show( (<span class='r'>int</span> [4]) {8,3,9,2}, 4);
+b. show2( (<span class='r'>int</span> [][3]){{8,3,9}, {5,4,1}}, 2);
+</pre><a class ='btn btn-outline-dark' href=c-pointer-review-question-1.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-review-question-3.html>Next</a><h2>Related</h2><UL><LI><a href='c-using-pointers-to-as-function-arguments.html'>C Using Pointers to as Function arguments</a></LI><LI><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C function example calculate average using pointer and realloc()</a></LI><LI><a href='c-pointer-review-question-1.html'>C Pointer Review Question 1</a></LI><LI><a href='c-pointer-review-question-3.html'>C pointer review question 3</a></LI><LI><a href='c-pointer-exercise-1.html'>C Pointer Exercise 1</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-review-question-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

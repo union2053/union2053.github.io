@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/250/function-pointers by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Function Pointers | C Language Tutorial">
+        <meta name="description" property="og:description" content="Function Pointers | C Language Tutorial">
+        <title>Function Pointers | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="function-pointers">Function Pointers</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>Function pointers are pointers that point to functions instead of data types. They can be used to allow variability in the function that is to be called, at run-time.</p>
+
+
+            </div>
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>
+<p>returnType (*name)(parameters)</p>
+</li>
+<li>
+<p>typedef returnType (*name)(parameters)</p>
+</li>
+<li>
+<p>typedef returnType Name(parameters);<br />
+Name *name;</p>
+</li>
+<li>
+<p>typedef returnType Name(parameters);<br />
+typedef Name *NamePtr;</p>
+</li>
+</ul>
+
+
+            </div>
+
+
+
+
+            <h2 id="assigning-a-function-pointer">Assigning a Function Pointer</h2>
+            <div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+/* increment: take number, increment it by one, and return it */
+int increment(int i)
+{
+    printf(&quot;increment %d by 1\n&quot;, i);
+    return i + 1;
+}
+
+/* decrement: take number, decrement it by one, and return it */
+int decrement(int i)
+{
+    printf(&quot;decrement %d by 1\n&quot;, i);
+    return i - 1;
+}
+
+int main(void)
+{
+    int num = 0;          /* declare number to increment */
+    int (*fp)(int);       /* declare a function pointer */
+
+    fp = &amp;increment;      /* set function pointer to increment function */
+    num = (*fp)(num);     /* increment num */
+    num = (*fp)(num);     /* increment num a second time */
+
+    fp = &amp;decrement;      /* set function pointer to decrement function */
+    num = (*fp)(num);     /* decrement num */
+    printf(&quot;num is now: %d\n&quot;, num);
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="basics">Basics</h2>
+            <div>
+                <p>Just like you can have a pointer to an <strong>int</strong>, <strong>char</strong>, <strong>float</strong>, <strong>array/string</strong>, <strong>struct</strong>, etc. - you can have a pointer to a function.</p>
+<p><strong>Declaring the pointer</strong> takes the <em>return value of the function</em>, the <em>name of the function</em>, and the <em>type of arguments/parameters it receives</em>.</p>
+<p>Say you have the following function declared and initialized:</p>
+<pre><code>int addInt(int n, int m){
+    return n+m;
+}
+</code></pre>
+<p>You can declare and initialize a pointer to this function:</p>
+<pre><code>int (*functionPtrAdd)(int, int) = addInt; // or &amp;addInt - the &amp; is optional
+</code></pre>
+<p>If you have a void function it could look like this:</p>
+<pre><code>void Print(void){
+    printf(&quot;look ma' - no hands, only pointers!\n&quot;);
+}
+</code></pre>
+<p>Then declaring the pointer to it would be:</p>
+<pre><code>void (*functionPtrPrint)(void) = Print;
+</code></pre>
+<p><strong>Accessing</strong> the function itself would require dereferencing the pointer:</p>
+<pre><code>sum = (*functionPtrAdd)(2, 3); //will assign 5 to sum
+(*functionPtrPrint)(); //will print the text in Print function
+</code></pre>
+<p>As seen in more advanced examples in this document, declaring a pointer to a function could get messy if the function is passed more than a few parameters. If you have a few pointers to functions that have identical &quot;structure&quot; (same type of return value, and same type of parameters) it's best to use the <strong>typedef</strong> command to save you some typing, and to make the code more clear:</p>
+<pre><code>typedef int (*ptrInt)(int, int);
+
+int Add(int i, int j){
+    return i+j;
+}
+
+int Multiply(int i, int j){
+    return i*j;
+}
+
+int main()
+{
+    ptrInt ptr1 = Add;
+    ptrInt ptr2 = Multiply;
+
+    printf(&quot;%d\n&quot;, (*ptr1)(2,3)); //will print 5
+    printf(&quot;%d\n&quot;, (*ptr2)(2,3)); //will print 6
+    return 0;
+}
+</code></pre>
+<p>You can also create an <strong>Array of function-pointers</strong>. If all the pointers are of the same &quot;structure&quot;:</p>
+<pre><code>int (*array[2]) (int x, int y); // can hold 2 function pointers
+array[0] = Add;
+array[1] = Multiply;
+</code></pre>
+<p>You can learn more <a href="http://stackoverflow.com/a/252750/6296435">here</a> and <a href="http://stackoverflow.com/a/5488718/6296435">here</a>.</p>
+<p>It is also possible to define an array of function-pointers of different types, though that would require casting when-ever you want to access the specific function. You can learn more <a href="http://stackoverflow.com/q/39435158/6296435">here</a>.</p>
+
+
+            </div>
+            <h2 id="best-practices">Best Practices</h2>
+            <div>
+                <h3 id="using-typedef">Using typedef</h3>
+<p>It might be handy to use a <code>typedef</code> instead of declaring the function pointer each time by hand.</p>
+<p>The syntax for declaring a <code>typedef</code> for a function pointer is:</p>
+<pre><code>typedef returnType (*name)(parameters);
+</code></pre>
+<h4 id="example-">Example:</h4>
+<p>Posit that we have a function, <code>sort</code>, that expects a function pointer to a function <code>compare</code> such that:</p>
+<blockquote>
+<p>compare -  A compare function for two elements which is to
+be supplied to a sort function.</p>
+<p>&quot;compare&quot; is expected to return 0 if the two elements are deemed
+equal, a positive value if the first element passed is &quot;larger&quot; in some
+sense than the latter element and otherwise the function returns a
+negative value (meaning that the first element is &quot;lesser&quot; than the latter).</p>
+</blockquote>
+<p>Without a <code>typedef</code> we would pass a function pointer as an argument to a function in the following manner:</p>
+<pre><code>void sort(int (*compare)(const void *elem1, const void *elem2)) { 
+    /* inside of this block, the function is named &quot;compare&quot; */
+}
+</code></pre>
+<p>With a <code>typedef</code>, we'd write:</p>
+<pre><code>typedef int (*compare_func)(const void *, const void *);
+</code></pre>
+<p>and then we could change the function signature of <code>sort</code> to:</p>
+<pre><code>void sort(compare_func func) { 
+    /* In this block the function is named &quot;func&quot; */
+}
+</code></pre>
+<p>both definitions of <code>sort</code> would accept any function of the form</p>
+<pre><code>int compare(const void *arg1, const void *arg2) {
+    /* Note that the variable names do not have to be &quot;elem1&quot; and &quot;elem2&quot; */
+}
+</code></pre>
+<hr />
+<p>Function pointers are the only place where you should include the pointer property of the type, e.g. do not try to define types like <code>typedef struct something_struct *something_type</code>. This applies even for a structure with members which are not supposed to accessed directly by API callers, for example the stdio.h <code>FILE</code> type (which as you now will notice is not a pointer).</p>
+<h3 id="taking-context-pointers-">Taking context pointers.</h3>
+<p>A function pointer should almost always take a user-supplied void * as a context pointer.</p>
+<h4 id="example">Example</h4>
+<pre><code>/* function minimiser, details unimportant */
+double findminimum( double (*fptr)(double x, double y, void *ctx), void *ctx)
+{
+    ...
+    /* repeatedly make calls like this */
+    temp = (*fptr)(testx, testy, ctx);
+}
+
+/* the function we are minimising, sums two cubics */
+double *cubics(double x, double y, void *ctx)
+{
+    double *coeffsx = ctx;
+    double *coeffsy = coeffx + 4;
+
+    return coeffsx[0] * x * x * x + coeffsx[1] * x * x + coeffsx[2] * x + coeffsx[3] +
+           coeffsy[0] * y * y * y + coeffsy[1] * y * y + coeffsy[2] * y + coeffsy[3];
+
+} 
+
+void caller()
+{
+    /* context, the coefficients of the cubics */
+    double coeffs[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    double min;
+
+    min = findminimum(cubics, coeffs);       
+}
+</code></pre>
+<p>Using the context pointer means that the extra parameters do not need to be hard-coded into the function pointed to, or require the use globals.</p>
+<p>The library function <code>qsort()</code> does not follow this rule, and one can often get away without context for trivial comparison functions. But for anything more complicated, the context pointer becomes essential.</p>
+<hr />
+<h4 id="see-also">See also</h4>
+<p><a class='doc-link' href="http://www.riptutorial.com/c/example/7796/function-pointers">Functions pointers</a></p>
+
+
+            </div>
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>Just like <code>char</code> and <code>int</code>, a function is a fundamental feature of C. As such, you can declare a pointer to one: which means that you can pass <em>which function to call</em> to another function to help it do its job. For example, if you had a <code>graph()</code> function that displayed a graph, you could pass <em>which function to graph</em> into <code>graph()</code>.</p>
+<pre><code>// A couple of external definitions to make the example clearer
+extern unsigned int screenWidth;
+extern void plotXY(double x, double y);
+
+// The graph() function.
+// Pass in the bounds: the minimum and maximum X and Y that should be plotted.
+// Also pass in the actual function to plot.
+void graph(double minX, double minY,
+           double maxX, double maxY,
+           ???? *fn) {            // See below for syntax
+
+    double stepX = (maxX - minX) / screenWidth;
+    for (double x=minX; x&lt;maxX; x+=stepX) {
+
+        double y = fn(x);         // Get y for this x by calling passed-in fn()
+
+        if (minY&lt;=y &amp;&amp; y&lt;maxY) {
+            plotXY(x, y);         // Plot calculated point
+        } // if
+    } for
+} // graph(minX, minY, maxX, maxY, fn)
+</code></pre>
+<h3 id="usage">Usage</h3>
+<p>So the above code will graph whatever function you passed into it - as long as that function meets certain criteria: namely, that you pass a <code>double</code> in and get a <code>double</code> out. There are many functions like that - <code>sin()</code>, <code>cos()</code>, <code>tan()</code>, <code>exp()</code> etc. - but there are many that aren't, such as <code>graph()</code> itself!</p>
+<h3 id="syntax">Syntax</h3>
+<p>So how do you specify which functions you can pass into <code>graph()</code> and which ones you can't? The conventional way is by using a syntax that may not be easy to read or understand:</p>
+<pre><code>double (*fn)(double); // fn is a pointer-to-function that takes a double and returns one
+</code></pre>
+<p>The problem above is that there are two things trying to be defined at the same time: the structure of the function, and the fact that it's a pointer. So, split the two definitions! But by using <code>typedef</code>, a better syntax (easier to read &amp; understand) can be achieved.</p>
+
+
+            </div>
+            <h2 id="mnemonic-for-writing-function-pointers">Mnemonic for writing function pointers</h2>
+            <div>
+                <p>All C functions are in actuality pointers to a spot in the program memory where some code exists. The main use of a function pointer is to provide a &quot;callback&quot; to other functions (or to simulate classes and objects).</p>
+<p>The syntax of a function, as defined further down on this page is:</p>
+<p>returnType (*name)(parameters)</p>
+<p>A mnemonic for writing a function pointer definition is the following procedure:</p>
+<ol>
+<li>Begin by writing a normal function declaration: <code>returnType name(parameters)</code></li>
+<li>Wrap the function name with pointer syntax: <code>returnType (*name)(parameters)</code></li>
+</ol>
+
+
+            </div>
+            <h2 id="returning-function-pointers-from-a-function">Returning Function Pointers from a Function</h2>
+            <div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+enum Op
+{
+  ADD = '+',
+  SUB = '-',
+};
+
+
+/* add: add a and b, return result */    
+int add(int a, int b)
+{
+    return a + b;
+}
+
+/* sub: subtract b from a, return result */
+int sub(int a, int b)
+{
+    return a - b;
+}
+
+/* getmath: return the appropriate math function */
+int (*getmath(enum Op op))(int,int)
+{
+    switch (op)
+    {
+        case ADD:
+            return &amp;add;
+        case SUB:
+            return &amp;sub;
+        default:
+            return NULL;
+    }
+}
+
+int main(void)
+{
+    int a, b, c;
+    int (*fp)(int,int);
+
+    fp = getmath(ADD);
+
+    a = 1, b = 2;
+    c = (*fp)(a, b);
+    printf(&quot;%d + %d = %d\n&quot;, a, b, c);
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../1006/function-parameters.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../571/generic-selection.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-03-25</div>
+        <div itemprop="datePublished">2016-03-25</div>
+        <div itemprop="dateModified">2017-04-14</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=250" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_2037614578" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#assigning-a-function-pointer">
+                    Assigning a Function Pointer
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#basics">
+                    Basics
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#best-practices">
+                    Best Practices
+                </a>
+            
+
+
+<ul id="accordion_-994794239" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-typedef">
+                    Using typedef
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#taking-context-pointers-">
+                    Taking context pointers.
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+
+
+<ul id="accordion_1884879993" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#usage">
+                    Usage
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#mnemonic-for-writing-function-pointers">
+                    Mnemonic for writing function pointers
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#returning-function-pointers-from-a-function">
+                    Returning Function Pointers from a Function
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/250/function-pointers by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

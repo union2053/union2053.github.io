@@ -1,0 +1,600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_7.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+<head>
+	<title>C Programlama Ders: VII</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C Programlama, Bitwise Operators, Bit bazında operatörler, and, or, xor, not, kaydırma, Shift Right, Shift Left, Sayı Tabanları, Binary, Hexadecimal, İkilik, Onaltılık, Decimal">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">27 Ağustos 2006</font></div>
+	<h2>C Programlama Dersi - VII</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Bu bölümde, şimdiye kadar işlenmiş konulara dair örnek sorular 
+				bulunmaktadır.</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+		<br/>
+
+		<p>
+			Şimdiye kadar işlemiş olduğumuz dersleri pekiştirmek için, bu yazıda örnek 
+			sorular çözeceğiz. Soruların hazırlanmasında, arkadaşım Sunay SÖNMEZ'in 
+			büyük emeği geçmiştir. Kendisine teşekkür ederim.
+		</p>
+
+
+	<h3>Örnek Sorular</h3>
+
+<table align="center" cellspacing="14" border="0">
+
+<tr valign="top">			
+<td style="width: 300px;">
+	<b>Soru 1.a:</b> Aşağıdaki programın çıktısı nedir?
+</td>
+<td style="width: 300px;">
+	<b>Soru 1.b:</b> Aşağıdaki programı doğru olarak yazınız.
+</td>
+</tr>
+
+<tr>
+<td>
+	<pre style="width: 300px;margin-left: 0px;">
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i = 0;
+	for( ; i < 12; i++ ) {
+		if( ( i++ + 1 ) == 5 ) 	
+			printf( "%d\n",i );
+		else 
+			if( i % 2 == 0 ) break;
+			else if( i % 3 == 0)
+				continue;
+			else 
+				printf("%d\n", i );
+	}
+	return 0;
+}
+</pre>
+</td>
+
+<td>
+	<pre style="width: 300px;margin-left: 0px;">
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sum;
+	float average;
+	int weight_1, weight_2;
+	printf( "1.agirlik> " );
+	scanf( "%d", &weight_1 );
+	sum += weight_1;
+	printf( "2.agirlik> " );
+	scanf( "%d", weight_2 );
+	sum += weight_2;
+	average = sum / 2;
+	printf( "Ortalama: %.2f\n", average );
+	return 0;	
+}
+</pre>
+</td>
+</tr>
+
+<tr valign="top">			
+<td valign="top">
+	<p><a href="#soru1.a" name="soru1.a" onMouseDown="change_display_of_object('Cevap1.a')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1.a" style="display:none;">
+	<pre style="width: 300px;margin-left: 0px;">
+1
+5
+7
+11	
+</pre>
+	</div>
+</td>	
+
+<td valign="top">
+	<p>
+	<a href="#soru1.b" name="soru1.b" onMouseDown="change_display_of_object('Cevap1.b')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1.b" style="display:none;">
+	<pre style="width: 300px;margin-left: 0px;">
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int <b>sum = 0</b>;
+	float average;
+	int weight_1, weight_2;
+	printf( "1.agirlik> " );
+	scanf( "%d", &weight_1 );
+	sum += weight_1;
+	printf( "2.agirlik> " );
+	scanf( "%d",<b>&weight_2</b> );
+	sum += weight_2;
+	average = sum / <b>2.0</b>;
+	printf( "Ortalama: %.2f\n", average );
+	return 0;
+}
+</pre>
+	</div>
+</td>	
+</tr>
+</table>
+
+	<p><b>Soru 2:</b> Bir üçgende, iki kenarın toplam uzunluğu, üçüncü kenardan az 
+	olamaz. Ayrıca iki kenarın birbirinden farkının mutlak değeri, üçüncü kenardan 
+	büyük olmamalıdır. Bu bilgileri kullanarak, verilen üç kenar uzunluğuna göre bir üçgen 
+	çizilip çizilmeyeceğini gösteren programı yazınız. Girilecek kenar uzunlukları 
+	tam sayı olacaktır. </p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+	<pre>	
+/* Girilen 3 tamsayinin bir ucgenin kenari olup olmadigi kontrol edilir */
+
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	int a, b, c;
+	int temp;
+	
+	printf("Birinci kenar uzunlugu> ");
+	scanf("%d", &a);
+	printf("Ikinci kenar uzunlugu> ");
+	scanf("%d", &b);
+	printf("Ucuncu kenar uzunlugu> ");
+	scanf("%d", &c);
+	
+	/* a ile b den buyuk olan a ya kucuk olan b ye atanir */
+	if(a < b) {
+		temp = a;
+		a = b;
+		b = temp;
+	}
+	
+	if( ((a + b) < c) || ((a - b) > c) )
+		printf("Bu kenar uzunluklarina sahip bir ucgen olamaz.\n");
+	else
+		printf("Bu kenar uzunluklarina sahip bir ucgen cizilebilir.\n");
+	
+	return 0;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 3:</b> Klavyeden girilecek bir sayının asal sayı olup olmadığını ekrana 
+	basan bir program yazınız.</p>
+	<p>
+	<a href="#soru3" name="soru3" onMouseDown="change_display_of_object('Cevap3')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap3" style="display:none;">
+	<pre>	
+/*
+Bir sayının asal olup olmadığını bulmak için çeşitli metodlar 
+vardır. Aşağıda bu metodlardan basit bir tanesi yazılmıştır. 
+Eğer sayının yarısına kadar kontrol etmek yerine, kareköküne 
+kadar olan sayıları test ederseniz, yine aynı sonuç çıkacaktır. 
+Ancak anlaşılma konusunda sorun olmaması için soru bu şekilde 
+çözülmüştür.
+*/
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	int sayi, i;
+	//Sayıyı ilk başta asal kabul ediyoruz.
+	//asal_mi değişkeni 1 ise, sayi asaldir. 
+	int asal_mi = 1;
+	
+	//Klavyeden, test edilmek üzere bir sayı alınıyor.
+	printf( "Bir sayı giriniz> " );
+	scanf("%d",&sayi);
+	
+	//Girilen sayının, başka sayılara göre sırayla modunu
+	//alıyoruz. Bir sayının modunu aldığınızda, kalan 0 ise
+	//bu sayının bölünebildiğine ve dolayısıyla 
+	//asal olmadığına dair bilgi verir. Bu işlemi yapabilmek 
+	//için 2'den başlayarak, sayının yarısına kadar olan 
+	//bütün değerler deneniyor. 
+	for( i = 2; i <= sayi/2; i++ ) {
+		if( sayi%i == 0 ) {
+		//Sayı i değişkenine kalansız bölünmektedir.
+		//Dolayısıyla, sayı asal değildir ve döngüyü 
+		//sürdürmeye gerek yoktur.
+			asal_mi = 0;
+			break;
+		}
+	}
+	//Sayının asal olup olmama durumuna göre, çıktı yazdırılıyor.
+	if( asal_mi == 1 ) 
+		printf( "%d sayısı asaldır.\n", sayi );
+	else
+		printf( "%d sayısı asal değildir.\n", sayi );
+		
+	return 0;
+}
+</pre>
+	</div>	
+
+	<p><b>Soru 4:</b> Klavyeden girilecek 0 ile 999 arasında bir tam sayının, yazıyla 
+	ifade eden (&nbsp;örneğin 49, 'kırkdokuz' gibi&nbsp;) bir program oluşturunuz.</p>
+	<p>
+	<a href="#soru4" name="soru4" onMouseDown="change_display_of_object('Cevap4')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap4" style="display:none;">
+	<pre>	
+/*
+Girilen sayının, nasıl okunduğunu ekrana yazdıran programdır. 
+Fonksiyon kullanımıyla daha efektif olarak yazılabilir.
+Ancak henüz işlenmeyen bir konu olduğundan, basit bir şekilde 
+yazılmıştır.
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi;
+
+	//Klavyeden girilecek sayinin 0 ile 999 sınırlarında 
+	//olup olmadığı kontrol ediliyor. Eğer değilse, 
+	//uyarı verilip, yeni bir sayı isteniyor. Bu işlem 
+	//doğru bir değer girilene kadar devam ediyor.
+	do {
+		printf( "Sayıyı giriniz> " );
+		scanf("%d",&sayi);
+		if( sayi>999 || sayi<0 )
+			printf("Girdiğiniz sayı uygun değildir.\n"
+				"0 ile 999 arasında olmalıdır.\n");
+		else
+			break;
+	}while( 1 );
+
+	printf( "%d sayısı, '",sayi );
+
+	//Verilen sayıyı, yazıyla ifade edebilmemiz için, 
+	//yüzler, onlar ve birler basamaklarına ayırmamız
+	//gerekmektedir. 
+
+	//Sayının yüzler basamağı ayrıştırılıyor.
+	//Bunun için sayıyı, 100'e bölmek yeterli.
+
+	//YÜZLER BASAMAĞI:
+	switch( sayi/100 ) {
+		case 9: printf( "dokuzyüz" ); 	break;
+		case 8: printf( "sekizyüz" ); 	break;
+		case 7:	printf( "yediyüz" ); 	break;
+		case 6: printf( "altıyüz" ); 	break;
+		case 5: printf( "beşyüz" ); 	break;
+		case 4:	printf( "dörtyüz" ); 	break;
+		case 3: printf( "üçyüz" ); 	break;
+		case 2: printf( "ikiyüz" ); 	break;
+		case 1: printf( "yüz" ); 	break;
+	}
+
+	//Onlar basamağını bulmak için, sayının 
+	//yüze bölümünden kalan değeri, 10'a 
+	//bölüyoruz. Yüzler basamağını bir önceki 
+	//adımda ele aldığımız için, bu adımda, 
+	//sayının yüze bölümünü değil, bölümünden 
+	//kalanı kullandık.
+
+	//ONLAR BASAMAĞI:
+	switch ( (sayi%100)/10 ) {	
+		case 9: printf( "doksan" ); 	break;
+		case 8: printf( "seksen" ); 	break;
+		case 7: printf( "yetmiş" ); 	break;
+		case 6: printf( "altmış" ); 	break;
+		case 5: printf( "elli" ); 	break;
+		case 4: printf( "kırk" ); 	break;
+		case 3: printf( "otuz" ); 	break;
+		case 2: printf( "yirmi" ); 	break;
+		case 1: printf( "on" ); 	break;
+	}
+
+	//Birler basamağını bulabilmek için, sayının
+	//10'a bölümünden kalana bakıyoruz.
+
+	//BİRLER BASAMAĞI:
+	switch ( (sayi%10) ) {	
+		case 9: printf( "dokuz" ); 	break;
+		case 8: printf( "sekiz" ); 	break;
+		case 7: printf( "yedi" ); 	break;
+		case 6: printf( "altı" ); 	break;
+		case 5: printf( "beş" );	break;
+		case 4: printf( "dört" ); 	break;
+		case 3: printf( "üç" ); 	break;
+		case 2: printf( "iki" );	break;
+		case 1: printf( "bir" );	break;
+	}
+
+	//Eğer sayı 0 ise, yukarda ki düzeneğe 
+	//uymayacağından, onu ayrıca ele alıyoruz.
+	if( sayi == 0 )
+		printf( "sıfır" );
+
+	printf( "' şeklinde okunur.\n" );
+	
+	return 0;
+	
+}
+</pre>
+</div>
+
+	<p><b>Soru 5:</b> Dört basamaklı bir sayının rakamları ters yazılıp, 4 ile çarpılırsa,
+	çıkan sonuç, kendisiyle aynıdır. Dört basamaklı bu sayıyı bulunuz.</p>
+	<p>
+	<a href="#soru5" name="soru5" onMouseDown="change_display_of_object('Cevap5')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap5" style="display:none;">
+	<pre>	
+/*
+Dört basamaklı bir sayının rakamları, ters yazılıp, 4 ile 
+çarpılırsa, sayının kendisine eşit olmaktadır. Bu program, 
+bahsedilen dört basamaklı bu sayıyı bulmaktadır. 
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	//Dört basamaklı bir sayının tersinin dört katına
+	//eşit olmasını hesaplamamız gerektiğinden, her 
+	//basamağı ayrı ayrı düşünmemiz gerekmektedir. 
+	//Bilinmeyen bu sayıyı, abcd olarak düşünebiliriz.
+	int a,b,c,d;
+	int sayi, sayinin_tersi;
+	for( a = 0; a < 10; a++ )
+		for( b = 0; b < 10; b++ )
+			for( c = 0; c < 10; c++ )
+				for( d = 0; d < 10; d++ ) {
+					//Burada sayinin degeri bulunmaktadir.
+					sayi = a * 1000 + b * 100 + c * 10 + d;
+					
+					//Burada da sayinin tersi hesaplanmaktadir.
+					sayinin_tersi = d * 1000 + c * 100 + b * 10 + a;
+					
+					//Sayinin tersinin 4 katinin ilk sayiya 
+					//esit olup olmadigi kontrol ediliyor. 
+					//Ayrica sayinin 0 olmamasi gerekmektedir.
+					//Bu kontrol de yapilmaktadir.
+					if( sayi == 4 * sayinin_tersi && sayi != 0 ) { 
+					
+						//Sayi ve uygun olan tersi gosterilir:
+						printf( "Sayı: %d, tersi: %d\n", sayi, sayinin_tersi );
+						
+						//return ifadesi programin daha fazla devam
+						//etmemesi icin burada kullanilmistir. 
+						//Program donguye devam etmez ve burada kesilir.
+						//return, main fonksiyonunu sonlandirir.
+						return 0;
+					}
+				}
+	//Uygun bir sayi bulunamazsa, program burada sonlanacaktir.
+	return 0;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 6:</b> Fibonacci serisinin ilk iki elemanı 0 ve 1'dir. Bundan sonra 
+	gelen sayılar, kendisinden önceki iki sayının toplamıyla bulunur. Yani seri elemanları 
+	0 1 1 2 3 5 8 13 21 ... şeklinde gitmektedir. Verilecek adım sayısına göre, Fibonnaci 
+	serisinin elemanlarını gösterecek bir program yazınız.
+	</p>
+	<p>
+	<a href="#soru6" name="soru6" onMouseDown="change_display_of_object('Cevap6')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap6" style="display:none;">
+	<pre>	
+/* Fibonacci sayilarini ekrana yazar */
+
+#include&lt;stdio.h&gt;int main( void ) 
+{
+	int a = 0; /* a[n]   */
+	int b = 1; /* a[n+1] */
+	int c;     /* a[n+2] */
+	int n;
+	int i;
+	
+	printf("Fibonacci serisi kacinci elemana kadar yazilsin> ");
+	scanf("%d", &n);
+	
+	for( i = 1; i <= n ; i++ ) {
+		printf( "%4d. Eleman: %d\n", i, a );
+		c = a + b;
+		a = b;
+		b = c;
+	}
+	
+	return 0;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 7:</b> Verilecek kenar uzunluğuna göre, yıldız (*) işareti kullanarak
+	kare çizen, bir program yazınız.
+	</p>
+	<p>
+	<a href="#soru7" name="soru7" onMouseDown="change_display_of_object('Cevap7')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap7" style="display:none;">
+	<pre>	
+/* '*'ler kullanarak kenar uzunlugu verilen kareyi cizer */
+
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	int kenar;
+	int i;
+	int j;
+	
+	printf("Karenin kenar uzunlugu: ");
+	scanf("%d", &kenar);
+	
+	/* Gecerli bir deger mi */
+	while((kenar < 0) || (kenar > 20)) {
+	
+		printf("Lutfen 0 ile 20 arasinda bi deger giriniz.");
+		printf("Karenin kenar uzunlugu");
+		scanf("%d", &kenar);
+	}
+	
+	/* karenin cizilmesi */
+	for(i = 1; i <= kenar; i++) {
+	
+		if(kenar == 0)
+			break;
+		
+		/* alt ve üst kenarlarin cizimi */
+		if((i == 1) || (i == kenar)) {
+		
+			for(j = 1; j <= kenar; j++)
+				printf("*");
+			printf("\n");
+			continue;
+		} /* if sonu */
+		
+		/* sag ve sol kenarlarin cizimi */
+		for(j = 1; j <= kenar; j++)
+			if((j == 1) || (j == kenar))
+				printf("*");
+			else
+				printf(" ");
+		
+		printf("\n");
+	} /* for sonu */
+	
+	return 0;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 8:</b> Aşağıdaki eşkenar dörtgen çıktısını üretecek bir program 
+	yazınız:</p>
+	<pre>
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+</pre>
+	<p>
+	<a href="#soru8" name="soru8" onMouseDown="change_display_of_object('Cevap8')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap8" style="display:none;">
+	<pre>	
+/* '*'ler yardimiyla eskenar dortgen cizer */
+
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	int i, j;
+	
+	for(i = 1; i <= 5; i++) {
+		for(j = 1; j <= 9; j++)
+			if((j <= (9 - (2*i - 1))/2) || (j > (i + 4)))
+				printf(" ");
+			else 
+				printf("*");
+		
+		printf("\n");
+	}
+	for(i = 4; i >= 1; i--){
+		for(j = 1; j <= 9; j++)
+			if((j <= (9 - (2*i - 1))/2) || (j > (i + 4)))
+				printf(" ");
+			else 
+				printf("*");
+		
+		printf("\n");
+	}
+	
+	return 0;
+}
+</pre>
+	</div>
+
+	<p><b>Soru 9:</b> Hipotenus'u 500 birime kadar olan dik üçgenlerin, kenar uzunluklarını
+	gösteren bir program yazınız. Kenar uzunlukları, sadece tam sayı olacaktır.</p>
+	<p>
+	<a href="#soru9" name="soru9" onMouseDown="change_display_of_object('Cevap9')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap9" style="display:none;">
+	<pre>	
+/* Hipotenusu 500'e kadar olan pisagor uclulerini ekrana yazar. */
+
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	int a; /* birinci dik kenar */
+	int b; /* ikinci dik kenar */
+	int hipotenus;
+
+	for(a = 1; a < 500; a++)
+		for(b = a; b < 500; b++)
+			for(hipotenus = b+1; hipotenus <= 500; hipotenus++)
+				if( (a*a + b*b) == hipotenus*hipotenus )
+					printf("%5d%5d%5d\n", a, b, hipotenus);
+	return 0;
+}	
+</pre>
+	</div>
+
+	
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_6.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_8.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<br/>
+<!-- ILERI ve GERI LINKLERI -->
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_7.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:43 GMT -->
+</html>

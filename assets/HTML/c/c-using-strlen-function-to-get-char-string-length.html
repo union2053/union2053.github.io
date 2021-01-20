@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-strlen-function-to-get-char-string-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Using strlen() Function to get char string length</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Using strlen() Function to get char string length'>C Using strlen() Function to get char string length</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-typedef-introduction.html'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Using strlen() Function to get char string length</h1>
+<a class ='btn btn-outline-dark' href=c-character-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bool-type.html>Next</a><p>sizeof operator gives the size of things in bytes.
+
+</p><p>The <i style='color:blue'>strlen</i>() function gives the length of a string in characters.
+
+</p><p>Because it takes one byte to hold one character, you might suppose that both would
+give the same result when applied to a string, but they don't.
+
+</p><div class='myCodeDiv'><button id='MMHUT' class='myCopyButton' data-clipboard-target='#DUDVU'>Copy</button><pre  id='DUDVU' style='font-size:18px;' class='code'><span class='c'>/* praise2.c */</span>
+<span class='c'>// try the %u or %lu specifiers if your implementation</span>
+<span class='c'>// does not recognize the %zd specifier</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;      <span class='c'>/* provides strlen() prototype */</span>
+#define PRAISE <span class='q'>"Hi."</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> name[40];
+
+    printf(<span class='q'>"What's your name? "</span>);
+    scanf(<span class='q'>"%s"</span>, name);
+    printf(<span class='q'>"Hello, %s. %s\n"</span>, name, PRAISE);
+    printf(<span class='q'>"Your name of %zd letters occupies %zd memory cells.\n"</span>,
+           strlen(name), <span class='r'>sizeof</span> name);
+    printf(<span class='q'>"The phrase of praise has %zd letters "</span>,
+           strlen(PRAISE));
+    printf(<span class='q'>"and occupies %zd memory cells.\n"</span>, <span class='r'>sizeof</span> PRAISE);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MMHUT');clipboard.on('success', function(e) {$('#MMHUT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MMHUT').text('error');});</script></div><p>The <i style='color:blue'>string.h</i> file contains function prototypes for several string-related functions, including
+<i style='color:blue'>strlen</i>().
+
+</p><p>Notice that the code above uses two methods to handle long <i style='color:blue'>printf</i>() statements.
+
+</p><p>The first method spreads one <i style='color:blue'>printf</i>() statement over two lines.
+
+</p><p>Output:
+</p><img src='data:image/png;base64,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'><p>The array name has 40 memory cells, and that is what the sizeof operator reports.
+
+</p><p>Only the first 11 cells are needed to hold <b>Christofery</b>, however, and that is what
+<i style='color:blue'>strlen</i>() reports.
+
+</p><p>The twelfth cell in the array name contains the null character, and its
+presence tells <i style='color:blue'>strlen</i>() when to stop counting.
+
+</p><center><img alt='c-char-string-length.png' src='data:image/png;base64,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'/></center><br/><p>When you get to PRAISE, you find that <i style='color:blue'>strlen</i>() again gives you the exact number of
+characters including spaces and punctuation in the string.
+
+</p><p>The sizeof operator gives you a number one larger because it also counts the invisible null character used to end the string.
+
+</p><p>C99 and C11 standards use a %zd specifier for the type used by the sizeof operator.
+
+</p><p>This also applies for type returned by <i style='color:blue'>strlen</i>().
+
+</p><p>The preceding chapter used <i style='color:blue'>sizeof</i> with parentheses, but this example doesn't.
+
+</p><p> Whether you use parentheses depends on whether you want the size of a type or the
+size of a particular quantity.
+
+</p><p>Parentheses are required for types but are optional for particular
+quantities.
+
+</p><p>That is, you would use <i style='color:blue'>sizeof</i>(char) or <i style='color:blue'>sizeof</i>(float) but can use sizeof name
+or sizeof 6.28. However, it is all right to use parentheses in these cases, too, as in sizeof
+(6.28).
+</p><a class ='btn btn-outline-dark' href=c-character-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bool-type.html>Next</a><h2>Related</h2><UL><LI><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C output the printable characters for character code values from 0 to 127</a></LI><LI><a href='c-use-arithmetic-operations-on-type-char.html'>C Use arithmetic operations on type char</a></LI><LI><a href='c-character-strings.html'>C Character Strings</a></LI><LI><a href='c-bool-type.html'>C _Bool Type</a></LI><LI><a href='c-float-double-and-long-double.html'>C float, double, and long double</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-strlen-function-to-get-char-string-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

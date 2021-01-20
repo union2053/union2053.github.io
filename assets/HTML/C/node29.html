@@ -1,0 +1,1602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node29.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Threads: Basic Theory and Libraries</TITLE>
+<META NAME="description" CONTENT="Threads: Basic Theory and Libraries">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1304"
+ HREF="node29.html#SECTION002910000000000000000">
+Processes and Threads</A>
+<UL>
+<LI><A NAME="tex2html1305"
+ HREF="node29.html#SECTION002911000000000000000">
+Benefits of Threads vs Processes</A>
+<LI><A NAME="tex2html1306"
+ HREF="node29.html#SECTION002912000000000000000">
+Multithreading vs. Single threading</A>
+<LI><A NAME="tex2html1307"
+ HREF="node29.html#SECTION002913000000000000000">
+Some example applications of threads</A>
+</UL>
+<LI><A NAME="tex2html1308"
+ HREF="node29.html#SECTION002920000000000000000">
+Thread Levels</A>
+<UL>
+<LI><A NAME="tex2html1309"
+ HREF="node29.html#SECTION002921000000000000000">
+User-Level Threads (ULT)</A>
+<LI><A NAME="tex2html1310"
+ HREF="node29.html#SECTION002922000000000000000">
+Kernel-Level Threads (KLT)</A>
+<LI><A NAME="tex2html1311"
+ HREF="node29.html#SECTION002923000000000000000">
+Combined ULT/KLT Approaches</A>
+</UL>
+<LI><A NAME="tex2html1312"
+ HREF="node29.html#SECTION002930000000000000000">
+Threads libraries</A>
+<LI><A NAME="tex2html1313"
+ HREF="node29.html#SECTION002940000000000000000">
+The POSIX Threads Library:<TT>libpthread</TT>, &lt;pthread.h&gt;</A>
+<UL>
+<LI><A NAME="tex2html1314"
+ HREF="node29.html#SECTION002941000000000000000">
+Creating a (Default) Thread</A>
+<LI><A NAME="tex2html1315"
+ HREF="node29.html#SECTION002942000000000000000">
+Wait for Thread Termination</A>
+<LI><A NAME="tex2html1316"
+ HREF="node29.html#SECTION002943000000000000000">
+A Simple Threads Example</A>
+<LI><A NAME="tex2html1317"
+ HREF="node29.html#SECTION002944000000000000000">
+Detaching a Thread</A>
+<LI><A NAME="tex2html1318"
+ HREF="node29.html#SECTION002945000000000000000">
+Create a Key for Thread-Specific Data</A>
+<LI><A NAME="tex2html1319"
+ HREF="node29.html#SECTION002946000000000000000">
+Delete the Thread-Specific Data Key</A>
+<LI><A NAME="tex2html1320"
+ HREF="node29.html#SECTION002947000000000000000">
+Set the Thread-Specific Data Key</A>
+<LI><A NAME="tex2html1321"
+ HREF="node29.html#SECTION002948000000000000000">
+Get the Thread-Specific Data Key</A>
+<LI><A NAME="tex2html1322"
+ HREF="node29.html#SECTION002949000000000000000">
+Global and Private Thread-Specific Data Example</A>
+<LI><A NAME="tex2html1323"
+ HREF="node29.html#SECTION0029410000000000000000">
+Getting the Thread Identifiers</A>
+<LI><A NAME="tex2html1324"
+ HREF="node29.html#SECTION0029411000000000000000">
+Comparing Thread IDs</A>
+<LI><A NAME="tex2html1325"
+ HREF="node29.html#SECTION0029412000000000000000">
+Initializing Threads</A>
+<LI><A NAME="tex2html1326"
+ HREF="node29.html#SECTION0029413000000000000000">
+Yield Thread Execution</A>
+<LI><A NAME="tex2html1327"
+ HREF="node29.html#SECTION0029414000000000000000">
+Set the Thread Priority</A>
+<LI><A NAME="tex2html1328"
+ HREF="node29.html#SECTION0029415000000000000000">
+Get the Thread Priority</A>
+<LI><A NAME="tex2html1329"
+ HREF="node29.html#SECTION0029416000000000000000">
+Send a Signal to a Thread</A>
+<LI><A NAME="tex2html1330"
+ HREF="node29.html#SECTION0029417000000000000000">
+Access the Signal Mask of the Calling Thread</A>
+<LI><A NAME="tex2html1331"
+ HREF="node29.html#SECTION0029418000000000000000">
+Terminate a Thread</A>
+</UL>
+<LI><A NAME="tex2html1332"
+ HREF="node29.html#SECTION002950000000000000000">
+Solaris Threads: &lt;<TT>thread.h</TT>&gt;</A>
+<UL>
+<LI><A NAME="tex2html1333"
+ HREF="node29.html#SECTION002951000000000000000">
+Unique Solaris Threads Functions</A>
+<UL>
+<LI><A NAME="tex2html1334"
+ HREF="node29.html#SECTION002951100000000000000">
+Suspend Thread Execution</A>
+<LI><A NAME="tex2html1335"
+ HREF="node29.html#SECTION002951200000000000000">
+Continue a Suspended Thread</A>
+<LI><A NAME="tex2html1336"
+ HREF="node29.html#SECTION002951300000000000000">
+Set Thread Concurrency Level</A>
+<LI><A NAME="tex2html1337"
+ HREF="node29.html#SECTION002951400000000000000">
+Readers/Writer
+Locks</A>
+<LI><A NAME="tex2html1338"
+ HREF="node29.html#SECTION002951500000000000000">
+Readers/Writer Lock Example</A>
+</UL>
+<LI><A NAME="tex2html1339"
+ HREF="node29.html#SECTION002952000000000000000">
+Similar Solaris Threads Functions</A>
+<UL>
+<LI><A NAME="tex2html1340"
+ HREF="node29.html#SECTION002952100000000000000">
+Create a Thread</A>
+<LI><A NAME="tex2html1341"
+ HREF="node29.html#SECTION002952200000000000000">
+Get the Thread Identifier</A>
+<LI><A NAME="tex2html1342"
+ HREF="node29.html#SECTION002952300000000000000">
+Yield Thread Execution</A>
+<LI><A NAME="tex2html1343"
+ HREF="node29.html#SECTION002952400000000000000">
+Signals and Solaris Threads</A>
+<LI><A NAME="tex2html1344"
+ HREF="node29.html#SECTION002952500000000000000">
+Terminating a Thread</A>
+<LI><A NAME="tex2html1345"
+ HREF="node29.html#SECTION002952600000000000000">
+<TT>Creating a Thread-Specific Data Key</TT></A>
+<LI><A NAME="tex2html1346"
+ HREF="node29.html#SECTION002952700000000000000">
+Example Use of Thread Specific Data:Rethinking Global Variables</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html1347"
+ HREF="node29.html#SECTION002960000000000000000">
+Compiling a Multithreaded Application</A>
+<UL>
+<LI><A NAME="tex2html1348"
+ HREF="node29.html#SECTION002961000000000000000">
+Preparing for Compilation</A>
+<LI><A NAME="tex2html1349"
+ HREF="node29.html#SECTION002962000000000000000">
+Debugging a Multithreaded Program</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION002900000000000000000">
+Threads: Basic Theory and Libraries</A>
+</H1>
+<P>
+This chapter examines aspects of threads and multiprocessing (and multithreading).
+We will firts study a little theory of threads and also look at how threading can be effectively used to
+make programs more efficient. The C thread libraries will then be introduced. The following chapters will look at further
+thead issues sucj a synchronisation and practical examples.
+<P> <H1><A NAME="SECTION002910000000000000000">
+Processes and Threads</A>
+</H1>
+<P>
+We can think of a <B>thread</B>  as basically a <EM>lightweight</EM> process. In order to understand this let us consider the two main 
+ characteristics of a process:
+<P><DL>
+<DT><STRONG>Unit of resource ownership</STRONG>
+<DD>-- A process is allocated:
+<UL>
+<LI> a virtual address space to hold the process image
+<LI> control of some resources (files, I/O devices...)
+</UL>
+<DT><STRONG>Unit of dispatching</STRONG>
+<DD>- A process is an execution path through one or more programs:
+<UL>
+<LI> execution may be interleaved with other processes
+<LI> the process has an execution state and a dispatching priority
+</UL></DL>
+<P>
+If we treat these two characteristics as being independent (as does modern OS theory):
+<P><UL>
+<LI> The unit of resource ownership is usually referred to as a <B>process</B> or task. This Processes have:
+<UL>
+<LI> a virtual address space which holds the process image.
+<LI> protected access to processors, other processes, files, and I/O resources.
+</UL>
+<LI> The unit of dispatching is usually referred to a <B>thread</B> or a lightweight process. Thus a thread:
+<UL>
+<LI> Has an execution state (running, ready, etc.)
+<LI> Saves thread context when not running
+<LI> Has an execution stack and some per-thread static storage for local variables
+<LI> Has access to the memory address space and resources of its process
+</UL>
+<LI> all threads of a process share this
+when one thread alters a (non-private) memory item, all other threads (of the process) sees that
+a file open with one thread, is available to others
+<P></UL><H2><A NAME="SECTION002911000000000000000">
+Benefits of Threads vs Processes</A>
+</H2>
+<P>
+If implemented correctly then threads have some advantages of (multi) processes, They take:
+<P><UL>
+<LI> Less time to create a new thread than a process, because the newly
+created thread uses the current process address space.
+<LI> Less time to terminate a thread than a process.
+<LI> Less time to switch between two threads within the same process, partly because the newly
+created thread uses the current process address space.
+<LI> Less communication overheads -- communicating between the threads of one process is simple because the threads share everything: 
+address space, in particular. So, data produced by one thread is immediately available to all the other
+threads.
+</UL><H2><A NAME="SECTION002912000000000000000">
+Multithreading vs. Single threading</A>
+</H2>
+<P>
+Just a we can multiple processes running on some systems we can have multiple threads running:
+<DL>
+<DT><STRONG>Single threading</STRONG>
+<DD>-- when the OS does not recognize the concept of thread
+<DT><STRONG>Multithreading</STRONG>
+<DD>-- when the OS supports multiple threads of execution within a single process 
+</DL>
+<P>
+Figure&nbsp;<A HREF="node29.html#fig:mthread">28.1</A> shows a variety of models for threads and processes.
+<P><A NAME="fig:mthread">&#160;</A><img src= mthread.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node29.html#fig:mthread">28.1</A> Threads and Processes</B>
+Some example popular OSs and their thread support is:
+<DL>
+<DT><STRONG>MS-DOS</STRONG>
+<DD>-- support a single user process and a single thread
+<DT><STRONG>UNIX</STRONG>
+<DD>-- supports multiple user processes but only supports one thread per process
+<DT><STRONG>Solaris</STRONG>
+<DD>--  supports multiple threads
+</DL>
+<P>
+Multithreading your code can have many benefits:
+<UL>
+<LI> Improve application responsiveness -- Any program in which many activities are not dependent upon each other can be redesigned so that each
+activity is defined as a thread. For example, the user of a multithreaded GUI does not have to wait for one
+activity to complete before starting another.
+<LI> Use multiprocessors more efficiently -- Typically, applications that express concurrency requirements with threads need not take into account the
+number of available processors. The performance of the application improves transparently with additional
+processors.
+Numerical algorithms and applications with a high degree of parallelism, such as matrix multiplications,
+can run much faster when implemented with threads on a multiprocessor.
+<LI> Improve program structure -- Many programs are more efficiently structured as multiple independent or semi-independent units of
+execution instead of as a single, monolithic thread. Multithreaded programs can be more adaptive to
+variations in user demands than single threaded programs.
+<LI> Use fewer system resources -- Programs that use two or more processes that access common data through shared memory are applying
+more than one thread of control.
+However, each process has a full address space and operating systems state. The cost of creating and
+maintaining this large amount of state information makes each process much more expensive than a thread
+in both time and space.
+In addition, the inherent separation between processes can require a major effort by the programmer to
+communicate between the threads in different processes, or to synchronize their actions.
+</UL>
+<P>
+Figure&nbsp;<A HREF="node29.html#fig:sing_thr">28.2</A> illustrates different process models and thread control in a single thread and multithreaded application.
+<P><A NAME="fig:sing_thr">&#160;</A><img src= thread_stack.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node29.html#fig:sing_thr">28.2</A> Single and Multi- Thread Applicatiions</B>
+<H2><A NAME="SECTION002913000000000000000">
+Some Example applications of threads</A>
+</H2>
+
+<P><B>Example : A file server on a LAN</B>
+<P><UL>
+<LI> It needs to handle several file requests over a short period
+<LI> Hence more efficient to create (and destroy) a single thread for each request
+<LI> Multiple threads can possibly be executing simultaneously on different processors
+</UL>
+<P><B>Example 2: Matrix Multiplication</B>
+<P>
+Matrix Multilication essentially involves taking the rows of one matrix and multiplying and adding corresponding columns in a second
+matrix <EM>i.e</EM>:
+<P><A NAME="fig:matrix">&#160;</A><img src= matrix.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node29.html#fig:matrix">28.3</A> Matrix Multiplication (3x3 example)</B>
+Note that each <EM>element</EM> of the resultant matrix can be computed independently, that is to say by a different thread.
+<P>
+We will develop a C++ example program for matrix multiplication later (see Chapter&nbsp;<A HREF="#ch:matrix"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A>).
+<P><H1><A NAME="SECTION002920000000000000000">
+Thread Levels</A>
+</H1>
+<P>
+There are two broad categories of thread implementation:
+<UL>
+<LI> User-Level Threads -- Thread Libraries.
+<LI> Kernel-level Threads -- System Calls. 
+</UL>
+There are  merits to both, in fact some OSs allow access to both levels (<EM>e.g.</EM> Solaris).
+<P><H2><A NAME="SECTION002921000000000000000">
+User-Level Threads (ULT)</A>
+</H2>
+<P>
+In this level, the kernel is not aware of the existence of threads -- All thread management is done by the application by using a
+thread library. Thread switching does not require kernel mode privileges (no mode switch) and scheduling is application specific
+<P>
+Kernel activity for ULTs:
+<P><UL>
+<LI> The kernel is not aware of thread activity but it is still managing process activity
+<LI> When a thread makes a system call, the whole process will be blocked 
+but for the thread library that thread is still in the running state
+<LI> So thread states are independent of process states
+</UL>
+<P><B>Advantages and inconveniences of ULT</B>
+<P><EM>Advantages:</EM>
+<P><UL>
+<LI> Thread switching does not involve the kernel -- no mode switching
+<LI> Scheduling can be application specific -- choose the best algorithm.
+<LI> ULTs can run on any OS --  Only needs a thread library
+</UL>
+<P><EM>Disadvantages:</EM>
+<P><UL>
+<LI> Most system calls are blocking and the kernel blocks processes -- So all threads within the process will be blocked
+<LI> The kernel can only assign processes to processors -- Two threads within the same process cannot run simultaneously on two
+processors
+</UL><H2><A NAME="SECTION002922000000000000000">
+Kernel-Level Threads (KLT)</A>
+</H2>
+In this level, All thread management is done by kernel
+No thread library but an API (system calls) to the kernel thread facility exists.
+The kernel maintains context information for the process and the threads, switching between threads requires the kernel
+Scheduling is performed on a thread basis.
+<P><B>Advantages and inconveniences of KLT</B>
+<P><EM>Advantages</EM>
+<P><UL>
+<LI> the kernel can simultaneously schedule many threads of the same process on many processors
+blocking is done on a thread level
+<LI> kernel routines can be multithreaded
+</UL>
+<P><EM>Disadvantages:</EM>
+<P><UL>
+<LI> thread switching within the same process involves the kernel, <EM>e.g</EM> if we have 2 mode switches per thread switch
+this results in a significant slow down.
+</UL><H2><A NAME="SECTION002923000000000000000">
+Combined ULT/KLT Approaches</A>
+</H2>
+<P>
+Idea is to  combine the best of both approaches
+<P>
+Solaris is an example of an OS that combines both ULT and KLT (Figure&nbsp;<A HREF="node29.html#fig:sol_thread">28.4</A>:
+<UL>
+<LI> Thread creation done in the user space
+<LI> Bulk of scheduling and synchronization of threads done in the user space
+<LI> The programmer may adjust the number of KLTs
+<LI> Process includes the user's address space, stack, and process control block
+<LI> User-level threads (threads library)
+invisible to the OS
+are the interface for application parallelism
+<LI> Kernel threads
+the unit that can be dispatched on a processor
+<LI> Lightweight processes (LWP)
+each LWP supports one or more ULTs and maps to exactly one KLT
+</UL>
+<P><A NAME="fig:sol_thread">&#160;</A><img src= solaris_thr.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node29.html#fig:sol_thread">28.4</A> Solaris Thread Implementation</B>
+<H1><A NAME="SECTION002930000000000000000">
+Threads libraries</A>
+</H1>
+<P>
+The interface to multithreading support is through a subroutine library, libpthread for POSIX threads, and
+libthread for Solaris threads. They both contain code for:
+<UL>
+<LI> creating and destroying threads
+<LI> passing messages and data between threads
+<LI> scheduling thread execution
+<LI> saving and restoring thread contexts
+</UL><H1><A NAME="SECTION002940000000000000000">
+The POSIX Threads Library:<TT>libpthread</TT>, &lt;pthread.h&gt;</A>
+</H1>
+<P><H2><A NAME="SECTION002941000000000000000">
+Creating a (Default) Thread</A>
+</H2>
+<P>
+Use the function <TT>pthread_create()</TT> to add a new thread of control to the current process.
+It is prototyped by:
+<P><PRE>
+int pthread_create(pthread\_t *tid, const pthread\_attr\_t *tattr,
+void*(*start_routine)(void *), void *arg);
+</PRE>
+<P>
+When an attribute object is not specified, it is NULL, and the <EM>default</EM> thread is created with the following
+attributes:
+<UL>
+<LI> It is unbounded
+<LI> It is nondetached
+<LI> It has a a default stack and stack size
+<LI> It inhetits the parent's priority
+</UL>
+<P>
+You can also create a default attribute object with <TT>pthread_attr_init()</TT> function, and then use this attribute object to
+create a default thread. See the Section&nbsp;<A HREF="node30.html#sec:init_attr">29.2</A>.
+<P>
+An example call of default thread creation  is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_attr_t tattr;
+pthread_t tid;
+extern void *start_routine(void *arg);
+void *arg;
+int ret;
+/* default behavior*/
+ret = pthread_create(&amp;tid, NULL, start_routine, arg);
+
+/* initialized with default attributes */
+ret = pthread_attr_init(&amp;tattr);
+/* default behavior specified*/
+ret = pthread_create(&amp;tid, &amp;tattr, start_routine, arg);
+</PRE>
+<P>
+The <TT>pthread_create()</TT> function is called with <TT>attr</TT> having the necessary state behavior. <TT>start_routine</TT> is the
+function with which the new thread begins execution. When <TT>start_routin</TT>e returns, the thread exits with the
+exit status set to the value returned by <TT>start_routine</TT>.
+<P>
+When <TT>pthread_create</TT> is successful, the ID of the thread created is stored in the location referred to as <TT>tid</TT>.
+<P>
+Creating a thread using a NULL attribute argument has the same effect as using a default attribute; both
+create a default thread. When tattr is initialized, it acquires the default behavior.
+<P><TT>pthread_create()</TT> returns a zero and exits when it completes successfully. Any other returned value indicates
+that an error occurred.
+<P><H2><A NAME="SECTION002942000000000000000">
+Wait for Thread Termination</A>
+</H2>
+<P>
+Use the <TT>pthread_join</TT> function to wait for a thread to terminate.
+It is prototyped by:
+<P><PRE>
+int pthread_join(thread_t tid, void **status);
+</PRE>
+<P>
+An example use of this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid;
+int ret;
+int status;
+/* waiting to join thread &quot;tid&quot; with status */
+ret = pthread_join(tid, &amp;status);
+/* waiting to join thread &quot;tid&quot; without status */
+ret = pthread_join(tid, NULL);
+</PRE>
+<P>
+The <TT>pthread_join()</TT> function blocks the calling thread until the specified thread terminates.
+The specified thread must be in the current process and must not be detached.
+When <TT>status</TT> is not <TT>NULL</TT>, it points to a location that is set to the exit status of the terminated thread when
+<TT>pthread_join()</TT> returns successfully.
+Multiple threads cannot wait for the same thread to terminate. If they try to, one thread returns successfully
+and the others fail with an error of <TT>ESRCH</TT>.
+After <TT>pthread_join()</TT> returns, any stack storage associated with the thread can be reclaimed by the
+application.
+<P>
+The <TT>pthread_join()</TT> routine takes two arguments, giving you some flexibility in its use. When you want the
+caller to wait until a specific thread terminates, supply that thread's ID as the first argument.
+If you are interested in the exit code of the defunct thread, supply the address of an area to receive it.
+Remember that <TT>pthread_join()</TT> works only for target threads that are nondetached. When there is no reason
+to synchronize with the termination of a particular thread, then that thread should be detached.
+Think of a detached thread as being the thread you use in most instances and reserve nondetached threads
+for only those situations that require them.
+<P><H2><A NAME="SECTION002943000000000000000">
+A Simple Threads Example</A>
+</H2>
+In this Simple Threads fragment below, one thread executes the procedure at the top, creating a helper
+thread that executes the procedure fetch, which involves a complicated database lookup and might take
+some time.
+<P>
+The main thread wants the results of the lookup but has other work to do in the meantime. So it does those
+other things and then waits for its helper to complete its job by executing <TT>pthread_join()</TT>.
+An argument, <TT>pbe</TT>, to the new thread is passed as a stack parameter. This can be done here because the
+main thread waits for the spun-off thread to terminate. In general, though, it is better to <TT>malloc()</TT>
+storage from the heap instead of passing an address to thread stack storage, which can disappear or be
+reassigned if the thread terminated.
+<P>
+The source for <TT>thread.c</TT> is as follows:
+<PRE>
+void mainline (...)
+{
+struct phonebookentry *pbe;
+pthread_attr_t tattr;
+pthread_t helper;
+int status;
+pthread_create(&amp;helper, NULL, fetch, &amp;pbe);
+/* do something else for a while */
+pthread_join(helper, &amp;status);
+/* it's now safe to use result */
+}
+void fetch(struct phonebookentry *arg)
+{
+struct phonebookentry *npbe;
+/* fetch value from a database */
+npbe = search (prog_name)
+if (npbe != NULL)
+*arg = *npbe;
+pthread_exit(0);
+}
+struct phonebookentry {
+char name[64];
+char phonenumber[32];
+char flags[16];
+}
+</PRE>
+<P><H2><A NAME="SECTION002944000000000000000">
+Detaching a Thread</A>
+</H2>
+<P>
+The function <TT>pthread_detach()</TT> is an alternative to <TT>pthread_join()</TT> to reclaim storage for a thread that is created with
+a detachstate attribute set to <TT>PTHREAD_CREATE_JOINABLE</TT>.
+It is prototyped by:
+<PRE>
+int pthread\_detach(thread\_t tid);
+</PRE>
+<P>
+A simple example of calling this fucntion to detatch a thread is given by:
+<PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid;
+int ret;
+/* detach thread tid */
+ret = pthread_detach(tid);
+</PRE>
+<P>
+The <TT>pthread_detach()</TT> function is used to indicate to the implementation that storage for the thread <TT>tid</TT> can be
+reclaimed when the thread terminates. If tid has not terminated, <TT>pthread_detach()</TT> does not cause it to
+terminate. The effect of multiple <TT>pthread_detach()</TT> calls on the same target thread is unspecified.
+<P><TT>pthread_detach()</TT> returns a zero when it completes successfully. Any other returned value indicates that an
+error occurred. When any of the following conditions are detected, <TT>pthread_detach()</TT> fails and returns the
+an error value.
+<P><H2><A NAME="SECTION002945000000000000000">
+Create a Key for Thread-Specific Data</A>
+</H2>
+<P>
+Single-threaded C programs have two basic classes of data: local data and global data. For
+multithreaded C programs a third class is added:<EM>thread-specific data (TSD)</EM>. This is very much like
+global data, except that it is private to a thread.
+<P>
+Thread-specific data is maintained on a per-thread basis. TSD is the only way to define and refer to data
+that is private to a thread. Each thread-specific data item is associated with a key that is global to all
+threads in the process. Using the key, a thread can access a pointer <TT>(void *)</TT>
+that is maintained per-thread.
+<P>
+The function <TT>pthread_keycreate()</TT> is used to allocate a key that is used to identify thread-specific data in a process. The key is
+global to all threads in the process, and all threads initially have the value <TT>NULL</TT> associated with the key
+when it is created.
+<P><TT>pthread_keycreate()</TT> is called once for each key before the key is used. There is no implicit synchronization.
+Once a key has been created, each thread can bind a value to the key. The values are specific to the thread
+and are maintained for each thread independently. The per-thread binding is deallocated when a thread
+terminates if the key was created with a destructor function.
+<TT>pthread_keycreate()</TT>  is prototyped by:
+<P><PRE>
+int pthread_key_create(pthread_key_t *key, void (*destructor) (void *));
+</PRE>
+<P>
+A simple example use of  this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_key_t key;
+int ret;
+/* key create without destructor */
+ret = pthread_key_create(&amp;key, NULL);
+/* key create with destructor */
+ret = pthread_key_create(&amp;key, destructor);
+</PRE>
+<P>
+When <TT>pthread_keycreate()</TT> returns successfully, the allocated <TT>key</TT> is stored in the location pointed to by <TT>key</TT>.
+The caller must ensure that the storage and access to this key are properly synchronized.
+An optional destructor function, destructor, can be used to free stale storage. When a key has a non-NULL
+destructor function and the thread has a non-<TT>NULL</TT> value associated with that key, the destructor function
+is called with the current associated value when the thread exits. The order in which the destructor
+functions are called is unspecified.
+<P><TT>pthread_keycreate()</TT> returns zero after completing successfully. Any other returned value indicates that an error occurred.
+When any of the following conditions occur, <TT>pthread_keycreate()</TT> fails and returns an error value.
+<P><H2><A NAME="SECTION002946000000000000000">
+Delete the Thread-Specific Data Key</A>
+</H2>
+<P>
+The function <TT>pthread_keydelete()</TT> is used to destroy an existing thread-specific data key. Any memory associated with the
+key can be freed because the key has been invalidated and will return an error if ever referenced. (There is
+no comparable function in Solaris threads.)
+<P><TT>pthread_keydelete()</TT> is prototyped by:
+<PRE>
+int pthread_key_delete(pthread_key_t key);
+</PRE>
+<P>
+A simple example use of  this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_key_t key;
+int ret;
+/* key previously created */
+ret = pthread_key_delete(key);
+</PRE>
+<P>
+Once a <TT>key</TT> has been deleted, any reference to it with the <TT>pthread_setspecific()</TT> or <TT>pthread_getspecific()</TT> call
+results in the <TT>EINVAL</TT> error.
+<P>
+It is the responsibility of the programmer to free any thread-specific resources before calling the delete
+function. This function does not invoke any of the destructors.
+<P><TT>pthread_keydelete()</TT> returns zero after completing successfully. Any other returned value indicates that an error occurred.
+When the following condition occurs, <TT>pthread_keycreate()</TT> fails and returns the corresponding value.
+<P><H2><A NAME="SECTION002947000000000000000">
+Set the Thread-Specific Data Key</A>
+</H2>
+<P>
+The function <TT>pthread_setspecific()</TT> is used to set the thread-specific binding to the specified thread-specific
+data key. It is prototyped by :
+<P><PRE>
+int pthread_setspecific(pthread_key_t key, const void *value);
+</PRE>
+<P>
+A simple example use of  this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_key_t key;
+void *value;
+int ret;
+
+/* key previously created */
+ret = pthread_setspecific(key, value);
+</PRE>
+<P><TT>pthread_setspecific()</TT> returns zero after completing successfully. Any other returned value indicates that an
+error occurred. When any of the following conditions occur, <TT>pthread_setspecific()</TT> fails and returns an error value.
+<P><B>Note:</B> <TT>pthread_setspecific()</TT> does <EM>not</EM> free its storage. If a new binding is set, the existing binding must be
+freed; otherwise, a <EM>memory leak can occur</EM>.
+<P><H2><A NAME="SECTION002948000000000000000">
+Get the Thread-Specific Data Key</A>
+</H2>
+<P>
+Use <TT>pthread_getspecific()</TT> to get the calling thread's binding for key, and store it in the location pointed to by
+value. This function is prototyped by:
+<P><PRE>
+int pthread_getspecific(pthread_key_t key);
+</PRE>
+<P>
+A simple example use of  this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_key_t key;
+void *value;
+/* key previously created */
+value = pthread_getspecific(key);
+</PRE>
+<P><H2><A NAME="SECTION002949000000000000000">
+Global and Private Thread-Specific Data Example</A>
+</H2>
+<P><B>Thread-Specific Data Global but Private</B>
+<P>
+Consider the following code:
+<P><PRE>
+ 
+body() {
+...
+while (write(fd, buffer, size) == -1) {
+if (errno != EINTR) {
+fprintf(mywindow, &quot;%s\n&quot;, strerror(errno));
+exit(1);
+}
+}
+...
+}
+</PRE>
+<P>
+This
+code may be executed by any number of threads, but it has references to two global variables, errno and
+mywindow, that really should be references to items private to each thread.
+<P>
+References to errno should get the system error code from the routine called by this thread, not by some
+other thread. So, references to errno by one thread refer to a different storage location than references to
+errno by other threads.
+The mywindow variable is intended to refer to a stdio stream connected to a window that is private to the
+referring thread. So, as with <TT>errno</TT>, references to mywindow by one thread should refer to a different
+storage location (and, ultimately, a different window) than references to mywindow by other threads. The
+only difference here is that the threads library takes care of errno, but the programmer must somehow
+make this work for mywindow.
+The next example shows how the references to mywindow work. The preprocessor converts references to
+mywindow into invocations of the <TT>mywindow</TT> procedure.
+This routine in turn invokes <TT>pthread_getspecific()</TT>, passing it the <TT>mywindow_key</TT> global variable (it really is a
+global variable) and an output parameter, <TT>win</TT>, that receives the identity of this thread's window.
+<P><B>Turning Global References Into Private References</B>
+Now consider this code fragment:
+<P><PRE>
+thread_key_t mywin_key;
+FILE *_mywindow(void) {
+FILE *win;
+pthread_getspecific(mywin_key, &amp;win);
+return(win);
+}
+#define mywindow _mywindow()
+ 
+void routine_uses_win( FILE *win) {
+...
+}
+void thread_start(...) {
+...
+make_mywin();
+...
+routine_uses_win( mywindow )
+...
+}
+</PRE>
+<P>
+The <TT>mywin_key</TT> variable identifies a class of variables for which each thread has its own private copy; that
+is, these variables are thread-specific data. Each thread calls <TT>make_mywin</TT> to initialize its window and to
+arrange for its instance of mywindow to refer to it.
+Once this routine is called, the thread can safely refer to <TT>mywindow</TT> and, after <TT>mywindow</TT>, the thread gets
+the reference to its private window. So, references to mywindow behave as if they were direct references to
+data private to the thread.
+<P>
+We can now   set  up our initial Thread-Specific Data:
+<P><PRE>
+void make_mywindow(void) {
+FILE **win;
+static pthread_once_t mykeycreated = PTHREAD_ONCE_INIT;
+pthread_once(&amp;mykeycreated, mykeycreate);
+win = malloc(sizeof(*win));
+create_window(win, ...);
+pthread_setspecific(mywindow_key, win);
+}
+void mykeycreate(void) {
+pthread_keycreate(&amp;mywindow_key, free_key);
+}
+void free_key(void *win) {
+free(win);
+}
+</PRE>
+<P>
+First, get a unique value for the key, <TT>mywin_key</TT>. This key is used to identify the thread-specific class of
+data. So, the first thread to call <TT>make_mywin</TT> eventually calls <TT>pthread_keycreate()</TT>, which assigns to its first
+argument a unique key. The second argument is a destructor function that is used to deallocate a thread's
+instance of this thread-specific data item once the thread terminates.
+<P>
+The next step is to allocate the storage for the caller's instance of this thread-specific data item. Having
+allocated the storage, a call is made to the <TT>create_window</TT> routine, which sets up a window for the thread
+and sets the storage pointed to by win to refer to it. Finally, a call is made to <TT>pthread_setspecific()</TT>, which
+associates the value contained in win (that is, the location of the storage containing the reference to the
+window) with the key.
+After this, whenever this thread calls <TT>pthread_getspecific()</TT>, passing the global key, it gets the value that was
+associated with this key by this thread when it called <TT>pthread_setspecific()</TT>.
+When a thread terminates, calls are made to the destructor functions that were set up in
+<TT>pthread_key_create()</TT>. Each destructor function is called only if the terminating thread established a value for
+the key by calling <TT>pthread_setspecific()</TT>.
+<P><H2><A NAME="SECTION0029410000000000000000">
+Getting the Thread Identifiers</A>
+</H2>
+<P>
+The function <TT>pthread_self()</TT> can be called to return the ID of the calling thread. It is prototyped by:
+<P><PRE>
+pthread_t pthread_self(void);
+</PRE>
+<P>
+It is use is very straightforward:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid;
+tid = pthread_self();
+</PRE>
+<P><H2><A NAME="SECTION0029411000000000000000">
+Comparing Thread IDs</A>
+</H2>
+<P>
+The function <TT>pthread_equal()</TT> can be called to compare the thread identification numbers of two threads. It is prototyped by:
+<PRE>
+int pthread_equal(pthread_t tid1, pthread_t tid2);
+</PRE>
+<P>
+It is use is  straightforward to use, also:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid1, tid2;
+int ret;
+ret = pthread_equal(tid1, tid2);
+</PRE>
+<P>
+As with other comparison functions, <TT>pthread_equal()</TT> returns a non-zero value when <TT>tid1</TT> and <TT>tid2</TT> are equal;
+otherwise, zero is returned. When either <TT>tid1</TT> or <TT>tid2</TT> is an invalid thread identification number, the result is
+unpredictable.
+<P><H2><A NAME="SECTION0029412000000000000000">
+Initializing Threads</A>
+</H2>
+<P>
+Use <TT>pthread_once()</TT> to call an initialization routine the first time <TT>pthread_once()</TT> is called -- Subsequent
+calls to  have no effect.
+The prototype of this function is:
+<PRE>
+int pthread_once(pthread_once_t *once_control,
+void (*init_routine)(void));
+</PRE>
+<P><H2><A NAME="SECTION0029413000000000000000">
+Yield Thread Execution</A>
+</H2>
+<P>
+The function <TT>sched_yield()</TT> to cause the current thread to yield its execution in favor of another thread with the same
+or greater priority.
+It is prototyped by:
+<P><PRE>
+int sched_yield(void);
+</PRE>
+<P>
+It is clearly a simple function to call:
+<PRE>
+#include &lt;sched.h&gt;
+int ret;
+ret = sched_yield();
+</PRE>
+<P><TT>sched_yield()</TT>  returns zero after completing successfully. Otherwise -1 is returned and errno is set to indicate the error
+condition.
+<P><H2><A NAME="SECTION0029414000000000000000">
+Set the Thread Priority</A>
+</H2>
+<P>
+Use <TT>pthread_setschedparam()</TT> to modify the priority of an existing thread. This function has no effect on
+scheduling policy. It is prototyped as follows:
+<P><PRE>
+int pthread_setschedparam(pthread_t tid, int policy,
+const struct sched_param *param);
+</PRE>
+<P>
+and used as follows:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid;
+int ret;
+struct sched_param param;
+int priority;
+/* sched_priority will be the priority of the thread */
+sched_param.sched_priority = priority;
+/* only supported policy, others will result in ENOTSUP */
+
+policy = SCHED_OTHER;
+/* scheduling parameters of target thread */
+ret = pthread_setschedparam(tid, policy, &amp;param);
+</PRE>
+<P><TT>pthread_setschedparam()</TT> returns zero after completing successfully. Any other returned value indicates that
+an error occurred. When either of the following conditions occurs, the <TT>pthread_setschedparam()</TT> function
+fails and returns an error value.
+<P><H2><A NAME="SECTION0029415000000000000000">
+Get the Thread Priority</A>
+</H2>
+<P><TT>int pthread_getschedparam(pthread_t tid, int policy, struct schedparam *param)</TT> gets the priority of the existing thread.
+<P>
+An example call of this function is:
+<P><PRE>
+#include &lt;pthread.h&gt;
+pthread_t tid;
+sched_param param;
+int priority;
+int policy;
+int ret;
+/* scheduling parameters of target thread */
+ret = pthread_getschedparam (tid, &amp;policy, &amp;param);
+/* sched_priority contains the priority of the thread */
+priority = param.sched_priority;
+</PRE>
+<P><TT>pthread_getschedparam()</TT> returns zero after completing successfully. Any other returned value indicates that
+an error occurred. When the following condition occurs, the function fails and returns the error value set.
+<P><H2><A NAME="SECTION0029416000000000000000">
+Send a Signal to a Thread</A>
+</H2>
+<P>
+Signal may be sent to threads is a similar fashion to those for process as follows:
+<P><PRE>
+#include &lt;pthread.h&gt;
+#include &lt;signal.h&gt;
+int sig;
+pthread_t tid;
+int ret;
+ret = pthread_kill(tid, sig);
+</PRE>
+<P><TT>pthread_kill()</TT> sends the signal <TT>sig</TT> to the thread specified by <TT>tid</TT>. <TT>tid</TT> must be a thread within the same
+process as the calling thread. The <TT>sig </TT> argument must be a valid signal of the same type defined for <TT>signal()</TT> in &lt;<TT>
+signal.h</TT>&gt; (See Chapter&nbsp;<A HREF="node24.html#ch:signal">23</A>)
+<P>
+When <TT>sig</TT> is zero, error checking is performed but no signal is actually sent. This can be used to check the
+validity of tid.
+<P>
+This function returns  zero after completing successfully. Any other returned value indicates that an error occurred.
+When either of the following conditions occurs, <TT>pthread_kill()</TT> fails and returns an error value.
+<P><H2><A NAME="SECTION0029417000000000000000">
+Access the Signal Mask of the Calling Thread</A>
+</H2>
+<P>
+The function <TT>pthread_sigmask()</TT> may be used to change or examine the signal mask of the calling thread.
+It is prototyped as follows:
+<PRE>
+int pthread_sigmask(int how, const sigset_t *new, sigset_t *old);
+</PRE>
+<P>
+Example uses of this function include:
+<PRE>
+#include &lt;pthread.h&gt;
+#include &lt;signal.h&gt;
+int ret;
+sigset_t old, new;
+ret = pthread_sigmask(SIG_SETMASK, &amp;new, &amp;old); /* set new mask */
+ret = pthread_sigmask(SIG_BLOCK, &amp;new, &amp;old); /* blocking mask */
+ret = pthread_sigmask(SIG_UNBLOCK, &amp;new, &amp;old); /* unblocking */
+</PRE>
+<P>
+how determines how the signal set is changed. It can have one of the following values:
+<P><DL>
+<DT><STRONG><TT>SIG_SETMASK</TT></STRONG>
+<DD>--  Replace the current signal mask with new, where new indicates the new signal
+mask.
+<DT><STRONG><TT>SIG_BLOCK</TT></STRONG>
+<DD>-- Add new to the current signal mask, where new indicates the set of signals to block.
+<DT><STRONG><TT>SIG_UNBLOCK</TT></STRONG>
+<DD>--  Delete new from the current signal mask, where new indicates the set of signals
+to unblock.
+</DL>
+<P>
+When the value of <TT>new</TT> is <TT>NULL</TT>, the value of how is not significant and the signal mask of the thread is
+unchanged. So, to inquire about currently blocked signals, assign a <TT>NULL</TT> value to the new argument.
+The old variable points to the space where the previous signal mask is stored, unless it is <TT>NULL</TT>.
+<P><TT>pthread_sigmask()</TT> returns a zero when it completes successfully. Any other returned value indicates that an error occurred.
+When the following condition occurs, <TT>pthread_sigmask()</TT> fails and returns an errro value.
+<P><H2><A NAME="SECTION0029418000000000000000">
+Terminate a Thread</A>
+</H2>
+<P>
+A thread can terminate its execution in the following ways:
+<UL>
+<LI> By returning from its first (outermost) procedure, the threads start routine; see <TT>pthread_create()</TT>
+<LI> By calling <TT>pthread_exit()</TT>, supplying an exit status
+<LI> By termination with POSIX cancel functions; see <TT>pthread_cancel()</TT>
+</UL>
+<P>
+The <TT>void pthread_exit(void *status)</TT> is used terminate a thread in a similar fashion the <TT>exit()</TT> for a process:
+<P><PRE>
+#include &lt;pthread.h&gt;
+int status;
+pthread_exit(&amp;status); /* exit with status */
+</PRE>
+<P>
+The <TT>pthread_exit()</TT> function terminates the calling thread. All thread-specific data bindings are released. If
+the calling thread is not detached, then the thread's ID and the exit status specified by status are retained
+until the thread is waited for (blocked). Otherwise, status is ignored and the thread's ID can be reclaimed
+immediately.
+<P>
+The <TT>pthread_cancel()</TT> function to cancel a thread is prototyped:
+<PRE>
+int pthread_cancel(pthread_t thread);
+</PRE>
+<P>
+and called:
+<PRE>
+#include &lt;pthread.h&gt;
+pthread_t thread;
+int ret;
+ret = pthread_cancel(thread);
+</PRE>
+<P>
+How the cancellation request is treated depends on the state of the target thread. Two functions,
+<P><TT>pthread_setcancelstate()</TT> and <TT>pthread_setcanceltype()</TT> (see <TT>man</TT> pages for further information on these functions),
+determine that state.
+<P><TT>pthread_cancel()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred. When the following condition occurs, the function fails and returns an error value.
+<P><H1><A NAME="SECTION002950000000000000000">
+Solaris Threads: &lt;<TT>thread.h</TT>&gt;</A>
+</H1>
+<P>
+Solaris have many similarities to POSIX threads,In this sectionfocus on
+ the Solaris features that are not found in POSIX threads. Where functionality is virtually the same for both Solaris threads and for pthreads, (even though the
+function names or arguments might differ), only a brief example consisting of the correct include file and
+the function prototype is presented. Where return values are not given for the Solaris threads functions, see
+the appropriate <TT>man</TT> pages.
+<P>
+The Solaris threads API and the pthreads API are two solutions to the same problem: building parallelism
+into application software. Although each API is complete in itself, you can safely mix Solaris threads
+functions and pthread functions in the same program.
+<P>
+The two APIs do not match exactly, however. Solaris threads supports functions that are not found in
+pthreads, and pthreads includes functions that are not supported in the Solaris interface. For those
+functions that do match, the associated arguments might not, although the information content is
+effectively the same.
+<P>
+By combining the two APIs, you can use features not found in one to enhance the other. Similarly, you can
+run applications using Solaris threads, exclusively, with applications using pthreads, exclusively, on the
+same system.
+<P>
+To use the Solaris threads functions described in this chapter, you must link with the Solaris threads library
+<TT>-lthread</TT> and include the &lt;<TT>thread.h</TT>&gt; in all programs.
+<P><H2><A NAME="SECTION002951000000000000000">
+Unique Solaris Threads Functions</A>
+</H2>
+<P>
+Let us begin by looking at some functions that are unique to Solaris threads:
+<UL>
+<LI> Suspend Thread Execution
+<LI> Continue a Suspended Thread
+<LI> Set Thread Concurrency Level
+<LI> Get Thread Concurrency 
+</UL><H3><A NAME="SECTION002951100000000000000">
+Suspend Thread Execution</A>
+</H3>
+<P>
+The function <TT>thr_suspend()</TT> immediately suspends the execution of the thread specified by a target thread, (<TT>tid</TT> below).
+It is prototyped by:
+<P><PRE>
+int thr_suspend(thread_t tid);
+</PRE>
+<P>
+On successful
+return from <TT>thr_suspend()</TT>, the suspended thread is no longer executing.
+Once a thread is suspended, subsequent calls to <TT>thr_suspend()</TT> have no effect. Signals cannot awaken the
+suspended thread; they remain pending until the thread resumes execution.
+<P>
+A simple example call is as follows:
+<P><PRE>
+#include &lt;thread.h&gt;
+
+thread_t tid; /* tid from thr_create() */
+/* pthreads equivalent of Solaris tid from thread created */
+/* with pthread_create() */
+pthread_t ptid;
+int ret;
+ret = thr_suspend(tid);
+/* using pthreads ID variable with a cast */
+ret = thr_suspend((thread_t) ptid);
+</PRE>
+<P><B>Note:</B> <TT>pthread_t tid</TT> as defined in pthreads is the same as <TT>thread_t</TT> tid in Solaris threads. <TT>tid</TT> values can be
+used interchangeably either by assignment or through the use of casts.
+<P><H3><A NAME="SECTION002951200000000000000">
+Continue a Suspended Thread</A>
+</H3>
+<P>
+The function <TT>thr_continue()</TT> resumes the execution of a suspended thread. It is prototypes as follows:
+<P><PRE>
+int thr_continue(thread_t tid);
+</PRE>
+<P>
+Once a suspended thread is
+continued, subsequent calls to <TT>thr_continue()</TT> have no effect.
+<P>
+A suspended thread will <EM>not</EM> be awakened by a signal. The signal stays pending until the execution of the
+thread is resumed by <TT>thr_continue()</TT>.
+<P><TT>thr_continue()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred. When the following condition occurs, <TT>thr_continue()</TT>
+The following code fragment illustrates the use of the function:
+<P><PRE>
+thread_t tid; /* tid from thr_create()*/
+/* pthreads equivalent of Solaris tid from thread created */
+/* with pthread_create()*/
+pthread_t ptid;
+int ret;
+ret = thr_continue(tid);
+/* using pthreads ID variable with a cast */
+ret = thr_continue((thread_t) ptid)
+</PRE>
+<P><H3><A NAME="SECTION002951300000000000000">
+Set Thread Concurrency Level</A>
+</H3>
+<P>
+By default, Solaris threads attempt to adjust the system execution resources (LWPs) used to run unbound
+threads to match the real number of active threads. While the Solaris threads package cannot make perfect
+decisions, it at least ensures that the process continues to make progress.
+When you have some idea of the number of unbound threads that should be simultaneously active
+(executing code or system calls), tell the library through <TT>thr_setconcurrency(int new_level)</TT>. To get the number of threads
+being used, use the function <TT>thr_getconcurrencyint(void)</TT>:
+<P><TT>thr_setconcurrency()</TT> provides a hint to the system about the required level of concurrency in the application.
+The system ensures that a sufficient number of threads are active so that the process continues to make
+progress, for example:
+<P><PRE>
+#include &lt;thread.h&gt;
+int new_level;
+int ret;
+
+ret = thr_setconcurrency(new_level);
+</PRE>
+<P>
+Unbound threads in a process might or might not be required to be simultaneously active. To conserve
+system resources, the threads system ensures by default that enough threads are active for the process to
+make progress, and that the process will not deadlock through a lack of concurrency.
+Because this might not produce the most effective level of concurrency, <TT>thr_setconcurrency()</TT> permits the
+application to give the threads system a hint, specified by <TT>new_level</TT>, for the desired level of concurrency.
+The actual number of simultaneously active threads can be larger or smaller than <TT>new_level</TT>.
+Note that an application with multiple compute-bound threads can fail to schedule all the runnable threads
+if <TT>thr_setconcurrency()</TT> has not been called to adjust the level of execution resources.
+You can also affect the value for the desired concurrency level by setting the <TT>THR_NEW_LW</TT> flag in
+<TT>thr_create()</TT>. This effectively increments the current level by one.
+<P><TT>thr_setconcurrency()</TT> a zero when it completes successfully. Any other returned value indicates that an error occurred.
+When any of the following conditions are detected, <TT>thr_setconcurrency()</TT> fails and returns the corresponding
+value to errno.
+<P><H3><A NAME="SECTION002951400000000000000">
+Readers/Writer
+Locks</A>
+</H3>
+<P>
+Readers/Writer locks are another unique feature of Solaris threads. They allow simultaneous read access by many threads while
+restricting write access to only one thread at a time.
+<P>
+When any thread holds the lock for reading, other threads can also acquire the lock for reading but must
+wait to acquire the lock for writing. If one thread holds the lock for writing, or is waiting to acquire the
+lock for writing, other threads must wait to acquire the lock for either reading or writing.
+Readers/writer locks are slower than mutexes, but can improve performance when they protect data that
+are not frequently written but that are read by many concurrent threads.
+Use readers/writer locks to synchronize threads in this process and other processes by allocating them in
+memory that is writable and shared among the cooperating processes (see mmap(2)) and by initializing
+them for this behavior.
+By default, the acquisition order is not defined when multiple threads are waiting for a readers/writer lock.
+However, to avoid writer starvation, the Solaris threads package tends to favor writers over readers.
+Readers/writer locks must be initialized before use.
+<P><B>Initialize a Readers/Writer Lock</B>
+<P>
+The function <TT>rwlock_init()</TT>  initialises the readers/writer lock. it is prototypes in  &lt;<TT>synch.h</TT>&gt; or &lt;<TT>thread.h</TT>&gt;
+as follows:
+<P><PRE>
+int rwlock_init(rwlock_t *rwlp, int type, void * arg);
+</PRE>
+<P>
+The readers/writer lock pointed to by <TT>rwlp</TT> and to set the lock state to
+unlocked.
+<TT>type</TT> can be one of the following 
+<DL>
+<DT><STRONG><TT>USYNC_PROCESS</TT></STRONG>
+<DD>-- The readers/writer lock can be used to synchronize threads in this process and
+other processes. 
+<DT><STRONG><TT>USYNC_THREAD</TT></STRONG>
+<DD>-- The readers/writer lock can be used to synchronize threads in this process, only.
+</DL>
+<P><B>Note:</B> that <TT>arg</TT>
+ is currently ignored.
+<P><TT>rwlock_init()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred. When any of the following conditions occur, the function fails and returns the corresponding
+value to <TT>errno</TT>.
+<P>
+Multiple threads must not initialize the same readers/writer lock simultaneously. Readers/writer locks can
+also be initialized by allocation in zeroed memory, in which case a type of <TT>USYNC_THREAD</TT> is assumed.
+A readers/writer lock must not be reinitialized while other threads might be using it.
+<P>
+An example code fragment that initialises Readers/Writer Locks with Intraprocess Scope is as follows:
+<P><PRE>
+#include &lt;thread.h&gt;
+
+rwlock_t rwlp;
+int ret;
+/* to be used within this process only */
+ret = rwlock_init(&amp;rwlp, USYNC_THREAD, 0);
+Initializing Readers/Writer Locks with Interprocess Scope
+#include &lt;thread.h&gt;
+rwlock_t rwlp;
+int ret;
+/* to be used among all processes */
+ret = rwlock_init(&amp;rwlp, USYNC_PROCESS, 0);
+</PRE>
+<P><B>Acquire a Read Lock</B>
+<P>
+To acquire a read lock on the readers/writer lock use the <TT>rw_rdlock()</TT> function:
+<P><PRE>
+int rw_rdlock(rwlock_t *rwlp);
+</PRE>
+<P>
+The readers/writer lock pointed to by <TT>rwlp</TT>. When the
+readers/writer lock is already locked for writing, the calling thread blocks until the write lock is released.
+Otherwise, the read lock is acquired.
+<P><TT>rw_rdlock()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred. When any of the following conditions occur, the function fails and returns the corresponding
+value to <TT>errno</TT>.
+<P>
+A function <TT>rw_tryrdlock(rwlock_t *rwlp)</TT> may also be used to attempt to acquire a read lock on the readers/writer lock pointed to
+by rwlp. When the readers/writer lock is already locked for writing, it returns an error. Otherwise, the read lock is acquired.
+This function returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P><B>Acquire a Write Lock</B>
+<P>
+The function <TT>rw_wrlock(rwlock_t *rwlp)</TT>  acquires a write lock on the readers/writer lock pointed to by <TT>rwlp</TT>. When the
+readers/writer lock is already locked for reading or writing, the calling thread blocks until all the read locks
+and write locks are released. Only one thread at a time can hold a write lock on a readers/writer lock.
+<P><TT>rw_wrlock()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P>
+Use <TT>rw_trywrlockrwlock_t *rwlp)</TT> to attempt to acquire a write lock on the readers/writer lock pointed to by rwlp. When
+the readers/writer lock is already locked for reading or writing, it returns an error.
+<P><TT>rw_trywrlock()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P><B>Unlock a Readers/Writer Lock</B>
+<P>
+The function <TT>rw_unlock(rwlock_t *rwlp)</TT>  unlocks a readers/writer lock pointed to by <TT>rwlp</TT>. The readers/writer lock must be
+locked and the calling thread must hold the lock either for reading or writing. When any other threads are waiting
+for the readers/writer lock to become available, one of them is unblocked.
+<P><TT>rw_unlock()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P><B>Destroy Readers/Writer Lock State</B>
+<P>
+The function <TT>rwlock_destroy(rwlock_t *rwlp)</TT> destroys any state associated with the readers/writer lock pointed to by <TT>rlwp</TT>.
+The space for storing the readers/writer lock is not freed.
+<P><TT>rwlock_destroy()</TT> returns zero after completing successfully. Any other returned value indicates that an error
+occurred.
+<P><H3><A NAME="SECTION002951500000000000000">
+Readers/Writer Lock Example</A>
+</H3>
+<P>
+The following example uses a bank account analogy to demonstrate readers/writer locks. While the program could allow multiple
+threads to have concurrent read-only access to the account balance, only a single writer is allowed. Note
+that the <TT>get_balance() </TT> function needs the lock to ensure that the addition of the checking and saving
+balances occurs atomically.
+<P><PRE>
+rwlock_t account_lock;
+float checking_balance = 100.0;
+float saving_balance = 100.0;
+...
+rwlock_init(&amp;account_lock, 0, NULL);
+...
+float
+get_balance() {
+float bal;
+rw_rdlock(&amp;account_lock);
+bal = checking_balance + saving_balance;
+rw_unlock(&amp;account_lock);
+return(bal);
+}
+void
+transfer_checking_to_savings(float amount) {
+rw_wrlock(&amp;account_lock);
+checking_balance = checking_balance - amount;
+saving_balance = saving_balance + amount;
+rw_unlock(&amp;account_lock);
+}
+</PRE>
+<P><H2><A NAME="SECTION002952000000000000000">
+Similar Solaris Threads Functions</A>
+</H2>
+<P>
+Here we simply list the similar thread functions and their prototype definitions, except where the complexity of the function merits
+further exposition.
+.
+<H3><A NAME="SECTION002952100000000000000">
+Create a Thread</A>
+</H3>
+<P>
+The <TT>thr_create()</TT> routine is one of the most elaborate of all the Solaris threads library routines.
+<P>
+It is prototyped as follows:
+<P><PRE>
+int thr_create(void *stack_base, size_t stack_size,
+void *(*start_routine) (void *), void *arg, long flags,
+thread_t *new_thread);
+</PRE>
+<P>
+Thjis function adds a new thread of control to the current process.
+Note that the new thread does not inherit pending signals, but it does inherit priority and signal masks.
+<P><TT>stack_base</TT> contains the address for the stack that the new thread uses. If <TT>stack_base</TT> is NULL then
+<TT>thr_create()</TT> allocates a stack for the new thread with at least <TT>stac_size</TT> bytes.
+<TT>stack_size</TT> Contains the size, in number of bytes, for the stack that the new thread uses. If <TT>stack_size</TT> is
+zero, a default size is used. In most cases, a zero value works best. If <TT>stack_size</TT> is not zero, it must be
+greater than the value returned by <TT>thr_min_stack(void)</TT> inquiry function.
+<P>
+There is no general need to allocate stack space for threads. The threads library allocates one megabyte of
+virtual memory for each thread's stack with no swap space reserved.
+<P><TT>start_routine</TT> contains the function with which the new thread begins execution. When <TT>start_routine</TT>
+returns, the thread exits with the exit status set to the value returned by <TT>start_routine</TT>
+<P><TT>arg</TT> can be anything that is described by void, which is typically any 4-byte value. Anything larger
+must be passed indirectly by having the argument point to it.
+<P>
+Note that you can supply only one argument. To get your procedure to take multiple arguments, encode
+them as one (such as by putting them in a structure).
+<P><TT>flags</TT> specifies attributes for the created thread. In most cases a zero value works best.
+The value in flags is constructed from the bitwise inclusive OR of the following:
+<DL>
+<DT><STRONG><TT>THR_SUSPENDED</TT></STRONG>
+<DD>--  Suspends the new thread and does not execute <TT>start_routine</TT> until the thread is
+started by <TT>thr_continue()</TT>. Use this to operate on the thread (such as changing its priority) before you run
+it. The termination of a detached thread is ignored.
+<DT><STRONG><TT>THR_DETACHED</TT></STRONG>
+<DD>-- Detaches the new thread so that its thread ID and other resources can be reused
+as soon as the thread terminates. Set this when you do not want to wait for the thread to terminate.
+Note - When there is no explicit synchronization to prevent it, an unsuspended, detached thread can die
+and have its thread ID reassigned to another new thread before its creator returns from <TT>thr_create()</TT>.
+<DT><STRONG><TT>THR_BOUND</TT></STRONG>
+<DD>-- Permanently binds the new thread to an LWP (the new thread is a bound thread).
+<DT><STRONG><TT>THR_NEW_LWP</TT></STRONG>
+<DD>-- Increases the concurrency level for unbound threads by one. The effect is
+similar to incrementing concurrency by one with <TT>thr_setconcurrency()</TT>, although <TT>THR_NEW_LWP</TT>
+does not affect the level set through the <TT>thr_setconcurrency()</TT> function. Typically, <TT>THR_NEW_LWP</TT>
+adds a new LWP to the pool of LWPs running unbound threads.
+<P>
+When you specify both <TT>THR_BOUND</TT> and <TT>THR_NEW_LWP</TT>, two LWPs
+are typically created -- one for the bound thread and another for the pool of LWPs running unbound threads.
+<DT><STRONG><TT>THR_DAEMON</TT></STRONG>
+<DD>-- Marks the new thread as a daemon. The process exits when all nondaemon
+threads exit. Daemon threads do not affect the process exit status and are ignored when counting the
+number of thread exits.
+<P>
+A process can exit either by calling <TT>exit()</TT> or by having every thread in the process that was not created
+with the <TT>THR_DAEMON</TT> flag call <TT>thr_exit()</TT>. An application, or a library it calls, can create one or
+more threads that should be ignored (not counted) in the decision of whether to exit. The
+<TT>THR_DAEMON</TT>l flag identifies threads that are not counted in the process exit criterion.
+</DL>
+<P><TT>new_thread</TT>  points to a location (when <TT>new_thread</TT> is not <TT>NULL</TT>) where the ID of the new thread is
+stored when <TT>thr_create()</TT> is successful. The caller is responsible for supplying the storage this argument
+points to. The ID is valid only within the calling process.
+If you are not interested in this identifier, supply a zero value to <TT>new_thread</TT>.
+<P><TT>thr_create()</TT> returns a zero and exits when it completes successfully. Any other returned value indicates that an error
+occurred. When any of the following conditions are detected, <TT>thr_create()</TT> fails and returns the corresponding
+value to <TT>errno</TT>.
+<P><H3><A NAME="SECTION002952200000000000000">
+Get the Thread Identifier</A>
+</H3>
+<P>
+The <TT>int thr_self(void)</TT> to get the ID of the calling thread.
+<P><H3><A NAME="SECTION002952300000000000000">
+Yield Thread Execution</A>
+</H3>
+<P><TT>void thr_yield(void)</TT> causes the current thread to yield its execution in favor of another thread with the same or greater
+priority; otherwise it has no effect. There is no guarantee that a thread calling <TT>thr_yield()</TT> will do so.
+<P><H3><A NAME="SECTION002952400000000000000">
+Signals and Solaris Threads</A>
+</H3>
+<P>
+The following functions exist and operate as do pthreads.
+<P><TT>int thr_kill(thread_t target_thread, int sig)</TT> sends a signal to a thread.
+<P><TT>int thr_sigsetmask(int how, const sigset_t *set, sigset_t *oset)</TT> to change or examine the signal mask of the calling thread.
+<P><H3><A NAME="SECTION002952500000000000000">
+Terminating a Thread</A>
+</H3>
+<P>
+The <TT>void th_exit(void *status)</TT> to terminates a thread.
+<P>
+The <TT>int thr_join(thread_t tid, thread_t *departedid, void **status)</TT> function to wait for a thread to terminate.
+<P>
+Therefore to  join specific threads one would do:
+<PRE>
+#include &lt;thread.h&gt;
+thread_t tid;
+thread_t departedid;
+int ret;
+int status;
+/* waiting to join thread &quot;tid&quot; with status */
+ret = thr_join(tid, &amp;departedid, (void**)&amp;status);
+/* waiting to join thread &quot;tid&quot; without status */
+ret = thr_join(tid, &amp;departedid, NULL);
+/* waiting to join thread &quot;tid&quot; without return id and status */
+ret = thr_join(tid, NULL, NULL);
+</PRE>
+<P>
+When the <TT>tid</TT> is <TT>(thread_t) 0</TT>, then <TT>thread_join()</TT> waits for any undetached thread in the process to terminate.
+In other words, when no thread identifier is specified, any undetached thread that exits causes <TT>thread_join()</TT>
+to return.
+<P>
+To join any threads: 
+<PRE>
+#include &lt;thread.h&gt;
+thread_t tid;
+thread_t departedid;
+int ret;
+int status;
+/* waiting to join thread &quot;tid&quot; with status */
+ret = thr_join(NULL, &amp;departedid, (void **)&amp;status);
+</PRE>
+<P>
+By indicating NULL as <TT>thread id</TT> in the  <TT>thr_join()</TT>, a join will take place when any non detached
+thread in the process exits. The departedid will indicate the thread ID of exiting thread.
+<P><H3><A NAME="SECTION002952600000000000000">
+<TT>Creating a Thread-Specific Data Key</TT></A>
+</H3>
+<P>
+Except for the function names and arguments, thread specific data is the same for Solaris as it is for
+POSIX.
+<P><TT>int thr_keycreate(thread_key_t *keyp, void (*destructor) (void *value))</TT> allocates a key that is used to identify
+thread-specific data in a process.
+<P><TT>int thr_setspecific(thread_key_t key, void *value)</TT> binds value to the thread-specific data key, key, for the calling thread.
+<P><TT>int thr_getspecific(thread_key_t key, void **valuep)</TT> stores the current value bound to key for the calling thread into the
+location pointed to by valuep.
+<P>
+In Solaris threads, if a thread is to be created with a priority other than that of its parent's, it is created in
+<TT>SUSPEND</TT> mode. While suspended, the threads priority is modified using the <TT>int thr_setprio(thread_t tid, int newprio)</TT>
+function call; then it is continued.
+<P>
+An unbound thread is usually scheduled only with respect to other threads in the process using simple
+priority levels with no adjustments and no kernel involvement. Its system priority is usually uniform and is
+inherited from the creating process.
+<P>
+The function <TT>thr_setprio()</TT> changes the priority of the thread, specified by <TT>tid</TT>, within the current process to
+the priority specified by newprio.
+<P>
+By default, threads are scheduled based on fixed priorities that range from zero, the least significant, to the
+largest integer. The <TT>tid</TT> will preempt lower priority threads, and will yield to higher priority threads. For example:
+<P><PRE>
+#include &lt;thread.h&gt;
+thread_t tid;
+int ret;
+int newprio = 20;
+/* suspended thread creation */
+ret = thr_create(NULL, NULL, func, arg, THR_SUSPEND, &amp;tid);
+/* set the new priority of suspended child thread */
+ret = thr_setprio(tid, newprio);
+/* suspended child thread starts executing with new priority */
+
+ret = thr_continue(tid);
+</PRE>
+<P>
+Use int thr_getprio(thread_t tid, int *newprio) to get the current priority for the thread. Each thread inherits a priority from
+its creator. <TT>thr_getprio()</TT> stores the current priority, <TT>tid</TT>, in the location pointed to by <TT>newprio</TT>.
+<P><H3><A NAME="SECTION002952700000000000000">
+Example Use of Thread Specific Data:Rethinking Global Variables</A>
+</H3>
+<P>
+Historically, most code has
+been designed for single-threaded programs. This is especially true for
+most of the library routines called from C programs. The following
+implicit assumptions were made for single-threaded code:
+<P><UL>
+<LI> When you write
+into a global variable and then, a moment later, read from it, what you
+read is exactly what you just wrote.
+<LI> This is also true for
+nonglobal, static storage.
+<LI> You do not need synchronization because
+there is nothing to synchronize with.
+<P></UL>
+<P>
+The next few examples discuss some
+of the problems that arise in multithreaded programs because of these
+assumptions, and how you can deal with them.
+<P>
+Traditional, single-threaded
+C and UNIX have a convention for handling errors detected in system
+calls. System calls can return anything as a functional value (for
+example, write returns the number of bytes that were transferred).
+However, the value -1 is reserved to indicate that something went wrong.
+So, when a system call returns -1, you know that it failed.
+<P>
+Consider the following piece of code:
+<P><PRE>
+extern int errno; 
+
+... 
+
+if (write(file_desc, buffer, size) == -1) 
+  { /* the system call failed */ 
+    fprintf(stderr, &quot;something went wrong, error code = %d\n&quot;, errno);
+    exit(1); 
+  }
+</PRE>
+<P>
+Rather than return the actual error code (which could
+be confused with normal return values), the error code is placed into the
+global variable <TT>errno</TT>. When the system call fails, you can look in
+<TT>errno</TT> to find out what went wrong.
+<P>
+Now consider what happens in a
+multithreaded environment when two threads fail at about the same time,
+but with different errors.
+<P><UL>
+<LI> Both expect to find their error codes in
+<TT>errno</TT>,
+<LI> <B>but</B> one copy of errno cannot hold both values.a
+</UL>
+<P>
+This global
+variable approach simply does not work for multithreaded programs.
+Threads solves this problem through a conceptually new storage class:
+<EM>thread-specific data</EM>.
+<P>
+This storage is similar to global storage in
+that it can be accessed from any procedure in which a thread might be
+running. However, it is private to the thread: when two threads refer to
+the thread-specific data location of the same name, they are referring to
+two different areas of storage.
+<P>
+So, when using threads, each reference to
+<TT>errno</TT> is thread-specific because each thread has a private copy of
+<TT>errno</TT>. This is achieved in this implementation by making <TT>errno</TT>
+a macro that expands to a function call.
+<P><H1><A NAME="SECTION002960000000000000000">
+Compiling a Multithreaded Application</A>
+</H1>
+<P>
+There are many options to consider for header files, define flags, and linking.
+<P><H2><A NAME="SECTION002961000000000000000">
+Preparing for Compilation</A>
+</H2>
+<P>
+The following items are required to compile and link a multithreaded program.
+<P><UL>
+<LI> A standard C compiler (<TT>cc, gcc</TT> <EM>etc</EM>)
+<LI> Include files:
+<UL>
+<LI> &lt;thread.h&gt; and &lt;pthread.h&gt;
+<LI> &lt;errno.h&gt;, &lt;limits.h&gt;, &lt;signal.h&gt;, &lt;unistd.h&gt;</UL>
+<LI> The Solaris threads library (<TT>libthread</TT>), the POSIX threads library (<TT>libpthread</TT>), and possibly the
+POSIX realtime library (<TT>libposix4</TT>) for semaphores
+<LI> MT-safe libraries (<TT>libc, libm, libw, libintl, libnsl, libsocket, libmalloc, libmapmalloc</TT>, and so on)
+</UL>
+<P>
+The include file &lt;thread.h&gt;, used with the <TT>-lthread</TT> library, compiles code that is upward compatible with
+earlier releases of the Solaris system. This library contains both interfaces: those with Solaris semantics
+and those with POSIX semantics. To call <TT>thr_setconcurrency()</TT>  with POSIX threads, your program
+needs to include &lt;thread.h&gt;.
+<P>
+The include file &lt;pthread.h&gt;, used with the <TT>-lpthread</TT> library, compiles code that is conformant with the
+multithreading interfaces defined by the POSIX 1003.1c standard. For complete POSIX compliance, the
+define flag <code>_POSIX_C_SOURCE</code>
+ should be set to a (long) value <IMG WIDTH="79" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.gif"
+ ALT="$\geq 199506$">, as follows:
+<P><PRE>
+cc [flags] file... -D_POSIX_C_SOURCE=N (where N 199506L)
+</PRE>
+<P>
+You can mix Solaris threads and POSIX threads in the same application, by including both &lt;thread.h&gt; and
+&lt;pthread.h&gt;, and linking with either the <TT>-lthread</TT> or <TT>-lpthread</TT> library.
+In mixed use, Solaris semantics prevail when compiling with <code>-D_REENTRANT</code> flag set <IMG WIDTH="91" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.gif"
+ ALT="$\geq 199506L$"> and linking with
+<TT>-lthread</TT>, whereas POSIX semantics prevail when compiling with <code>D_POSIX_C_SOURCE</code> flag set <IMG WIDTH="91" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.gif"
+ ALT="$\geq 199506L$"> and linking
+with <TT>-lpthread</TT>.
+Defining <TT>_REENTRANT</TT> or <TT>_POSIX_C_SOURCE</TT>
+<P><B>Linking With libthread or libpthread</B>
+<P>
+For POSIX threads behavior, load the <TT>libpthread</TT> library. For Solaris threads behavior, load the <TT>libthread</TT>
+library. Some POSIX programmers might want to link with <TT>-lthread</TT>to preserve the Solaris distinction
+between <TT>fork()</TT> and <TT>fork1()</TT>. All that <TT>-lpthread</TT> really does is to make <TT>fork()</TT> behave the same way as the Solaris
+<TT>fork1()</TT>  call, and change the behavior of <TT>alarm()</TT>.
+<P>
+To use libthread, specify <TT>-lthread</TT>  last on the <TT>cc</TT> command
+line.
+<P>
+To use libpthread, specify <TT>-lpthread</TT>  last on the <TT>cc</TT> command
+line.
+<P>
+Do not link a <EM>nonthreaded</EM> program with <TT>-lthread</TT> or <TT>-lpthread</TT>. Doing so establishes multithreading
+mechanisms at link time that are initiated at run time. These <EM>slow down</EM> a single-threaded application,
+waste system resources, and produce misleading results when you debug your code.
+<P><B>Note</B>:  For C++ programs that use threads, use the <TT>-mt</TT> option, rather than <TT>-lthread</TT>, to compile and
+link your application. The <TT>-mt</TT> option links with <TT>libthread </TT> and ensures proper library linking order.
+( Using <TT>-lthread</TT> might cause your program to crash (core dump).
+<P><EM>Linking with -lposix4 for POSIX Semaphores</EM>
+<P>
+The Solaris semaphore routines (see Chapter&nbsp;<A HREF="node31.html#ch:thread_sem">30.3</A>) are contained in the <TT>libthread</TT> library. By contrast,
+you link with the <TT>-lposix4</TT> library to get the standard  POSIX  semaphore routines (See Chapter&nbsp;<A HREF="node26.html#ch:semaphores">25</A>)
+<P><H2><A NAME="SECTION002962000000000000000">
+Debugging a Multithreaded Program</A>
+</H2>
+<P>
+The following list points out some of the more frequent oversights and errors that can cause bugs in multithreaded
+programs.
+<P><UL>
+<LI> Passing a pointer to the caller's stack as an argument to a new thread.
+<LI> Accessing global memory (shared changeable state) without the protection of a synchronization
+mechanism.
+<LI> Creating deadlocks caused by two threads trying to acquire rights to the same pair of global resources
+in alternate order (so that one thread controls the first resource and the other controls the second
+resource and neither can proceed until the other gives up).
+<LI> Trying to reacquire a lock already held (recursive deadlock).
+<LI> Creating a hidden gap in synchronization protection. This is caused when a code segment protected by
+a synchronization mechanism contains a call to a function that frees and then reacquires the
+synchronization mechanism before it returns to the caller. The result is that it appears to the caller that
+the global data has been protected when it actually has not.
+<LI> Mixing UNIX signals with threads -- it is better to use the <TT>sigwait()</TT> model for handling
+asynchronous signals.
+<LI> Forgetting that default threads are created <TT>PTHREAD_CREATE_JOINABLE</TT> and must be reclaimed
+with <TT>pthread_join()</TT>. <B>Note</B>, <TT>pthread_exit()</TT> does not free up its storage space.
+<LI> Making deeply nested, recursive calls and using large automatic arrays can cause problems because
+multithreaded programs have a more limited stack size than single-threaded programs.
+<LI> Specifying an inadequate stack size, or using non-default stacks.
+And, note that multithreaded programs (especially those containing bugs) often behave differently in two
+successive runs, given identical inputs, because of differences in the thread scheduling order.
+</UL>
+<P>
+In general, multithreading bugs are statistical instead of deterministic. Tracing is usually a more effective
+method of finding order of execution problems than is breakpoint-based debugging.
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node29.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:24 GMT -->
+</HTML>

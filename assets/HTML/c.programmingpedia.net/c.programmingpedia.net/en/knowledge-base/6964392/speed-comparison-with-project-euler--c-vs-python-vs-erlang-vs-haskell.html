@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6964392/speed-comparison-with-project-euler--c-vs-python-vs-erlang-vs-haskell by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Speed comparison with Project Euler: C vs Python vs Erlang vs Haskell | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Speed comparison with Project Euler: C vs Python vs Erlang vs Haskell | C Language Knowledge Base">
+        <title>[SOLVED] Speed comparison with Project Euler: C vs Python vs Erlang vs Haskell | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="speed-comparison-with-project-euler-c-vs-python-vs-erlang-vs-haskell">Speed comparison with Project Euler: C vs Python vs Erlang vs Haskell</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/erlang.html">erlang</a></span>
+                        <span class="tag-item"><a href="../tag/haskell.html">haskell</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                        <span class="tag-item"><a href="../tag/python.html">python</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have taken <a href="http://projecteuler.net/index.php?section=problems&amp;id=12" rel="noreferrer">Problem #12</a> from <a href="http://projecteuler.net/" rel="noreferrer">Project Euler</a> as a programming exercise and to compare my (surely not optimal) implementations in C, Python, Erlang and Haskell. In order to get some higher execution times, I search for the first triangle number with more than 1000 divisors instead of 500 as stated in the original problem.</p>
+
+<p>The result is the following:</p>
+
+<p><strong>C:</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>lorenzo@enzo:~/erlang$ gcc -lm -o euler12.bin euler12.c
+lorenzo@enzo:~/erlang$ time ./euler12.bin
+842161320
+
+real    0m11.074s
+user    0m11.070s
+sys 0m0.000s
+</code></pre>
+
+<p><strong>Python:</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>lorenzo@enzo:~/erlang$ time ./euler12.py 
+842161320
+
+real    1m16.632s
+user    1m16.370s
+sys 0m0.250s
+</code></pre>
+
+<p><strong>Python with PyPy:</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>lorenzo@enzo:~/Downloads/pypy-c-jit-43780-b590cf6de419-linux64/bin$ time ./pypy /home/lorenzo/erlang/euler12.py 
+842161320
+
+real    0m13.082s
+user    0m13.050s
+sys 0m0.020s
+</code></pre>
+
+<p><strong>Erlang:</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>lorenzo@enzo:~/erlang$ erlc euler12.erl 
+lorenzo@enzo:~/erlang$ time erl -s euler12 solve
+Erlang R13B03 (erts-5.7.4) [source] [64-bit] [smp:4:4] [rq:4] [async-threads:0] [hipe] [kernel-poll:false]
+
+Eshell V5.7.4  (abort with ^G)
+1&gt; 842161320
+
+real    0m48.259s
+user    0m48.070s
+sys 0m0.020s
+</code></pre>
+
+<p><strong>Haskell:</strong></p>
+
+<pre class="lang-none prettyprint-override"><code>lorenzo@enzo:~/erlang$ ghc euler12.hs -o euler12.hsx
+[1 of 1] Compiling Main             ( euler12.hs, euler12.o )
+Linking euler12.hsx ...
+lorenzo@enzo:~/erlang$ time ./euler12.hsx 
+842161320
+
+real    2m37.326s
+user    2m37.240s
+sys 0m0.080s
+</code></pre>
+
+<p><strong>Summary:</strong></p>
+
+<ul>
+<li>C: 100%</li>
+<li>Python: 692% (118% with PyPy)</li>
+<li>Erlang: 436% (135% thanks to RichardC)</li>
+<li>Haskell: 1421%</li>
+</ul>
+
+<p>I suppose that C has a big advantage as it uses long for the calculations and not arbitrary length integers as the other three. Also it doesn't need to load a runtime first (Do the others?).</p>
+
+<p><strong>Question 1:</strong>
+Do Erlang, Python and Haskell lose speed due to using arbitrary length integers or don't they as long as the values are less than <code>MAXINT</code>?</p>
+
+<p><strong>Question 2:</strong>
+Why is Haskell so slow? Is there a compiler flag that turns off the brakes or is it my implementation? (The latter is quite probable as Haskell is a book with seven seals to me.)</p>
+
+<p><strong>Question 3:</strong>
+Can you offer me some hints how to optimize these implementations without changing the way I determine the factors? Optimization in any way: nicer, faster, more "native" to the language.</p>
+
+<p><strong>EDIT:</strong></p>
+
+<p><strong>Question 4:</strong>
+Do my functional implementations permit LCO (last call optimization, a.k.a tail recursion elimination) and hence avoid adding unnecessary frames onto the call stack?</p>
+
+<p>I really tried to implement the same algorithm as similar as possible in the four languages, although I have to admit that my Haskell and Erlang knowledge is very limited.</p>
+
+<hr>
+
+<p>Source codes used:</p>
+
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int factorCount (long n)
+{
+    double square = sqrt (n);
+    int isquare = (int) square;
+    int count = isquare == square ? -1 : 0;
+    long candidate;
+    for (candidate = 1; candidate &lt;= isquare; candidate ++)
+        if (0 == n % candidate) count += 2;
+    return count;
+}
+
+int main ()
+{
+    long triangle = 1;
+    int index = 1;
+    while (factorCount (triangle) &lt; 1001)
+    {
+        index ++;
+        triangle += index;
+    }
+    printf ("%ld\n", triangle);
+}
+</code></pre>
+
+<hr>
+
+<pre class="lang-py prettyprint-override"><code>#! /usr/bin/env python3.2
+
+import math
+
+def factorCount (n):
+    square = math.sqrt (n)
+    isquare = int (square)
+    count = -1 if isquare == square else 0
+    for candidate in range (1, isquare + 1):
+        if not n % candidate: count += 2
+    return count
+
+triangle = 1
+index = 1
+while factorCount (triangle) &lt; 1001:
+    index += 1
+    triangle += index
+
+print (triangle)
+</code></pre>
+
+<hr>
+
+<pre class="lang-erlang prettyprint-override"><code>-module (euler12).
+-compile (export_all).
+
+factorCount (Number) -&gt; factorCount (Number, math:sqrt (Number), 1, 0).
+
+factorCount (_, Sqrt, Candidate, Count) when Candidate &gt; Sqrt -&gt; Count;
+
+factorCount (_, Sqrt, Candidate, Count) when Candidate == Sqrt -&gt; Count + 1;
+
+factorCount (Number, Sqrt, Candidate, Count) -&gt;
+    case Number rem Candidate of
+        0 -&gt; factorCount (Number, Sqrt, Candidate + 1, Count + 2);
+        _ -&gt; factorCount (Number, Sqrt, Candidate + 1, Count)
+    end.
+
+nextTriangle (Index, Triangle) -&gt;
+    Count = factorCount (Triangle),
+    if
+        Count &gt; 1000 -&gt; Triangle;
+        true -&gt; nextTriangle (Index + 1, Triangle + Index + 1)  
+    end.
+
+solve () -&gt;
+    io:format ("~p~n", [nextTriangle (1, 1) ] ),
+    halt (0).
+</code></pre>
+
+<hr>
+
+<pre class="lang-hs prettyprint-override"><code>factorCount number = factorCount' number isquare 1 0 - (fromEnum $ square == fromIntegral isquare)
+    where square = sqrt $ fromIntegral number
+          isquare = floor square
+
+factorCount' number sqrt candidate count
+    | fromIntegral candidate &gt; sqrt = count
+    | number `mod` candidate == 0 = factorCount' number sqrt (candidate + 1) (count + 2)
+    | otherwise = factorCount' number sqrt (candidate + 1) count
+
+nextTriangle index triangle
+    | factorCount triangle &gt; 1000 = triangle
+    | otherwise = nextTriangle (index + 1) (triangle + index + 1)
+
+main = print $ nextTriangle 1 1
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/763505/hyperboreus" target="_blank"><span itemprop="name">Hyperboreus</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">638</div>
+                                    <div itemprop="dateCreated">8/10/2017 7:06:56 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Using <code>GHC 7.0.3</code>, <code>gcc 4.4.6</code>, <code>Linux 2.6.29</code> on an x86_64 Core2 Duo (2.5GHz) machine, compiling using <code>ghc -O2 -fllvm -fforce-recomp</code> for Haskell and <code>gcc -O3 -lm</code> for C.</p>
+
+<ul>
+<li>Your C routine runs in 8.4 seconds (faster than your run probably because of <code>-O3</code>)</li>
+<li>The Haskell solution runs in 36 seconds (due to the <code>-O2</code> flag)</li>
+<li>Your <code>factorCount'</code> code isn't explicitly typed and defaulting to <code>Integer</code> (thanks to Daniel for correcting my misdiagnosis here!).  Giving an explicit type signature (which is standard practice anyway) using <code>Int</code> and the time changes to <strong>11.1 seconds</strong></li>
+<li>in <code>factorCount'</code> you have needlessly called <code>fromIntegral</code>. A fix results in no change though (the compiler is smart, lucky for you).</li>
+<li>You used <code>mod</code> where <code>rem</code> is faster and sufficient. This changes the time to <strong>8.5 seconds</strong>.</li>
+<li><code>factorCount'</code> is constantly applying two extra arguments that never change (<code>number</code>, <code>sqrt</code>).  A worker/wrapper transformation gives us:</li>
+</ul>
+
+<pre class="lang-hs prettyprint-override"><code> $ time ./so
+ 842161320  
+
+ real    0m7.954s  
+ user    0m7.944s  
+ sys     0m0.004s  
+</code></pre>
+
+<p>That's right, <strong>7.95 seconds</strong>.  Consistently <strong>half a second faster than the C solution</strong>.  Without the <code>-fllvm</code> flag I'm still getting <code>8.182 seconds</code>, so the NCG backend is doing well in this case too.</p>
+
+<p>Conclusion: Haskell is awesome.</p>
+
+<p><strong>Resulting Code</strong></p>
+
+<pre class="lang-hs prettyprint-override"><code>factorCount number = factorCount' number isquare 1 0 - (fromEnum $ square == fromIntegral isquare)
+    where square = sqrt $ fromIntegral number
+          isquare = floor square
+
+factorCount' :: Int -&gt; Int -&gt; Int -&gt; Int -&gt; Int
+factorCount' number sqrt candidate0 count0 = go candidate0 count0
+  where
+  go candidate count
+    | candidate &gt; sqrt = count
+    | number `rem` candidate == 0 = go (candidate + 1) (count + 2)
+    | otherwise = go (candidate + 1) count
+
+nextTriangle index triangle
+    | factorCount triangle &gt; 1000 = triangle
+    | otherwise = nextTriangle (index + 1) (triangle + index + 1)
+
+main = print $ nextTriangle 1 1
+</code></pre>
+
+<p>EDIT: So now that we've explored that, lets address the questions</p>
+
+<blockquote>
+  <p>Question 1: Do erlang, python and haskell lose speed due to using
+  arbitrary length integers or don't they as long as the values are less
+  than MAXINT?</p>
+</blockquote>
+
+<p>In Haskell, using <code>Integer</code> is slower than <code>Int</code> but how much slower depends on the computations performed.  Luckily (for 64 bit machines) <code>Int</code> is sufficient.  For portability sake you should probably rewrite my code to use <code>Int64</code> or <code>Word64</code> (C isn't the only language with a <code>long</code>).</p>
+
+<blockquote>
+  <p>Question 2: Why is haskell so slow? Is there a compiler flag that
+  turns off the brakes or is it my implementation? (The latter is quite
+  probable as haskell is a book with seven seals to me.)</p>
+  
+  <p>Question 3: Can you offer me some hints how to optimize these
+  implementations without changing the way I determine the factors?
+  Optimization in any way: nicer, faster, more "native" to the language.</p>
+</blockquote>
+
+<p>That was what I answered above.   The answer was </p>
+
+<ul>
+<li>0) Use optimization via <code>-O2</code> </li>
+<li>1) Use fast  (notably: unbox-able) types when possible </li>
+<li>2) <code>rem</code> not <code>mod</code> (a frequently forgotten optimization) and </li>
+<li>3) worker/wrapper transformation (perhaps the most common optimization).</li>
+</ul>
+
+<blockquote>
+  <p>Question 4: Do my functional implementations permit LCO and hence
+  avoid adding unnecessary frames onto the call stack?</p>
+</blockquote>
+
+<p>Yes, that wasn't the issue.  Good work and glad you considered this.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/216164/thomas-m--dubuisson" target="_blank"><span itemprop="name">Thomas M. DuBuisson</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6964392/speed-comparison-with-project-euler--c-vs-python-vs-erlang-vs-haskell#answer-0</div>
+                                            <div itemprop="upvoteCount">772</div>
+                                            <div itemprop="dateCreated">10/6/2013 2:41:14 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>There are some problems with the Erlang implementation. As baseline for the following, my measured execution time for your unmodified Erlang program was 47.6 seconds, compared to 12.7 seconds for the C code.</p>
+
+<p>The first thing you should do if you want to run computationally intensive Erlang code is to use native code. Compiling with <code>erlc +native euler12</code> got the time down to 41.3 seconds. This is however a much lower speedup (just 15%) than expected from native compilation on this kind of code, and the problem is your use of <code>-compile(export_all)</code>. This is useful for experimentation, but the fact that all functions are potentially reachable from the outside causes the native compiler to be very conservative. (The normal BEAM emulator is not that much affected.) Replacing this declaration with <code>-export([solve/0]).</code> gives a much better speedup: 31.5 seconds (almost 35% from the baseline).</p>
+
+<p>But the code itself has a problem: for <em>each iteration</em> in the factorCount loop, you perform this test:</p>
+
+<pre><code>factorCount (_, Sqrt, Candidate, Count) when Candidate == Sqrt -&gt; Count + 1;
+</code></pre>
+
+<p>The C code doesn't do this. In general, it can be tricky to make a fair comparison between different implementations of the same code, and in particular if the algorithm is numerical, because you need to be sure that they are actually doing the same thing. A slight rounding error in one implementation due to some typecast somewhere may cause it to do many more iterations than the other even though both eventually reach the same result.</p>
+
+<p>To eliminate this possible error source (and get rid of the extra test in each iteration), I rewrote the factorCount function as follows, closely modelled on the C code:</p>
+
+<pre><code>factorCount (N) -&gt;
+    Sqrt = math:sqrt (N),
+    ISqrt = trunc(Sqrt),
+    if ISqrt == Sqrt -&gt; factorCount (N, ISqrt, 1, -1);
+       true          -&gt; factorCount (N, ISqrt, 1, 0)
+    end.
+
+factorCount (_N, ISqrt, Candidate, Count) when Candidate &gt; ISqrt -&gt; Count;
+factorCount ( N, ISqrt, Candidate, Count) -&gt;
+    case N rem Candidate of
+        0 -&gt; factorCount (N, ISqrt, Candidate + 1, Count + 2);
+        _ -&gt; factorCount (N, ISqrt, Candidate + 1, Count)
+    end.
+</code></pre>
+
+<p>This rewrite, no <code>export_all</code>, and native compilation, gave me the following run time:</p>
+
+<pre><code>$ erlc +native euler12.erl
+$ time erl -noshell -s euler12 solve
+842161320
+
+real    0m19.468s
+user    0m19.450s
+sys 0m0.010s
+</code></pre>
+
+<p>which is not too bad compared to the C code:</p>
+
+<pre><code>$ time ./a.out 
+842161320
+
+real    0m12.755s
+user    0m12.730s
+sys 0m0.020s
+</code></pre>
+
+<p>considering that Erlang is not at all geared towards writing numerical code, being only 50% slower than C on a program like this is pretty good.</p>
+
+<p>Finally, regarding your questions:</p>
+
+<p><strong>Question 1: Do erlang, python and haskell loose speed due to using arbitrary length integers or 
+don't they as long as the values are less than MAXINT?</strong></p>
+
+<p>Yes, somewhat. In Erlang, there is no way of saying "use 32/64-bit arithmetic with wrap-around", so unless the compiler can prove some bounds on your integers (and it usually can't), it must check all computations to see if they can fit in a single tagged word or if it has to turn them into heap-allocated bignums. Even if no bignums are ever used in practice at runtime, these checks will have to be performed. On the other hand, that means you <em>know</em> that the algorithm will never fail because of an unexpected integer wraparound if you suddenly give it larger inputs than before.</p>
+
+<p><strong>Question 4: Do my functional implementations permit LCO and hence avoid adding unnecessary frames onto the call stack?</strong></p>
+
+<p>Yes, your Erlang code is correct with respect to last call optimization.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/240949/richardc" target="_blank">RichardC</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6964392" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6964392/speed-comparison-with-project-euler--c-vs-python-vs-erlang-vs-haskell by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:36 GMT -->
+</html>

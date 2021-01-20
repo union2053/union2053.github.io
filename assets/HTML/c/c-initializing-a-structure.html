@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-initializing-a-structure.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Initializing a Structure</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Initializing a Structure'>C Initializing a Structure</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-definition.html'>C Structure Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-defining-a-structure-variable.html'>C Structure Variable
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Structure Initialize 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-gaining-access-to-structure-members.html'>C Structure Members
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializers-for-structures.html'>C Structure Initializers 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-structures.html'>C Structure Array
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-nested-structures.html'>C Nested Structures
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-structures.html'>C Structure Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-passing-structure-members-to-a-function.html'>C Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-structures-by-using-pointers.html'>C struct update via pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-returns-structures-from-a-function.html'>C return structure
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compound-literals-and-structures-c99.html'>C Structure Compound Literal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-anonymous-structures-c11.html'>C Anonymous Structures
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-using-an-array-of-structures.html'>C Array Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-saving-the-structure-contents-in-a-file.html'>C Save Structure 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Initializing a Structure</h1>
+<a class ='btn btn-outline-dark' href=c-defining-a-structure-variable.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-gaining-access-to-structure-members.html>Next</a><p>Suppose we have the following structure:
+</p><div class='myCodeDiv'><button id='BPQLR' class='myCopyButton' data-clipboard-target='#TVQBT'>Copy</button><pre  id='TVQBT' style='font-size:18px;' class='code'><span class='r'>struct</span> {         <span class='c'>/* no tag */</span>
+    <span class='r'>char</span> title[MAXTITL];
+    <span class='r'>char</span> author[MAXAUTL];
+    <span class='r'>float</span> value;
+} library;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BPQLR');clipboard.on('success', function(e) {$('#BPQLR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BPQLR').text('error');});</script></div><p>To initialize a structure, you use a syntax similar to that used for arrays:
+
+</p><div class='myCodeDiv'><button id='DFQKC' class='myCopyButton' data-clipboard-target='#VQLSH'>Copy</button><pre  id='VQLSH' style='font-size:18px;' class='code'><span class='r'>struct</span> book library = {
+    <span class='q'>"How to use HTML"</span>,
+    <span class='q'>"demo2s.com"</span>,
+    1.95
+};
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DFQKC');clipboard.on('success', function(e) {$('#DFQKC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DFQKC').text('error');});</script></div><p>In short, you use a comma-separated list of initializers enclosed in braces. 
+
+</p><p>Each initializer should match the type of the structure member being initialized. 
+
+</p><p>Therefore, you can initialize the title member to a string and the value member to a number.
+
+</p><p>To make the associations more obvious, we gave each member its own line of initialization, 
+but all the compiler needs are commas to separate one member's initialization from the next.
+</p><a class ='btn btn-outline-dark' href=c-defining-a-structure-variable.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-gaining-access-to-structure-members.html>Next</a><h2>Related</h2><UL><LI><a href='c-file-exercise-2.html'>C File Exercise 2</a></LI><LI><a href='c-structure-definition.html'>C Structure Definition</a></LI><LI><a href='c-defining-a-structure-variable.html'>C Defining a Structure Variable</a></LI><LI><a href='c-gaining-access-to-structure-members.html'>C Gaining Access to Structure Members</a></LI><LI><a href='c-initializers-for-structures.html'>C Initializers for Structures</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-initializing-a-structure.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

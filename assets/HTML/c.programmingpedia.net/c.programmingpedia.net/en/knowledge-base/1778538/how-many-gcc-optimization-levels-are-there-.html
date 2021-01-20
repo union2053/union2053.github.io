@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1778538/how-many-gcc-optimization-levels-are-there- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:29:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How many GCC optimization levels are there? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How many GCC optimization levels are there? | C Language Knowledge Base">
+        <title>[SOLVED] How many GCC optimization levels are there? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-many-gcc-optimization-levels-are-there-">How many GCC optimization levels are there?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/compiler-construction.html">compiler-construction</a></span>
+                        <span class="tag-item"><a href="../tag/gcc.html">gcc</a></span>
+                        <span class="tag-item"><a href="../tag/optimization.html">optimization</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>How many <a href="http://en.wikipedia.org/wiki/GNU_Compiler_Collection" rel="noreferrer">GCC</a> optimization levels are there?</p>
+
+<p>I tried gcc -O1, gcc -O2, gcc -O3, and gcc -O4</p>
+
+<p>If I use a really large number, it won't work.</p>
+
+<p>However, I have tried</p>
+
+<pre><code>gcc -O100
+</code></pre>
+
+<p>and it compiled.</p>
+
+<p>How many optimization levels are there?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/209512/neuromancer" target="_blank"><span itemprop="name">neuromancer</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">86</div>
+                                    <div itemprop="dateCreated">11/22/2009 2:02:07 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>To be pedantic, there are 8 different valid -O options you can give to gcc, though there are some that mean the same thing. </p>
+
+<p>The original version of this answer stated there were 7 options. GCC has since added <code>-Og</code> to bring the total to 8</p>
+
+<p>From the <a href="http://linux.die.net/man/1/gcc" rel="noreferrer">man page:</a></p>
+
+<ul>
+<li><code>-O</code>     (Same as <code>-O1</code>) </li>
+<li><code>-O0</code>    (do no optimization, the default if no optimization level is specified)</li>
+<li><code>-O1</code>    (optimize minimally)</li>
+<li><code>-O2</code>    (optimize more)</li>
+<li><code>-O3</code>    (optimize even more)</li>
+<li><code>-Ofast</code> (optimize very aggressively to the point of breaking standard compliance)</li>
+<li><code>-Og</code>    (Optimize debugging experience.  -Og enables optimizations that do not interfere with debugging. It should be the
+       optimization level of choice for the standard edit-compile-debug cycle, offering a reasonable level of optimization
+       while maintaining fast compilation and a good debugging experience.)</li>
+<li><code>-Os</code> (Optimize for size. <code>-Os</code> enables all <code>-O2</code> optimizations that do not typically increase code size. It also performs further optimizations
+designed to reduce code size.
+<code>-Os</code> disables the following optimization flags: <code>-falign-functions -falign-jumps -falign-loops -falign-labels -freorder-blocks -freorder-blocks-and-partition -fprefetch-loop-arrays -ftree-vect-loop-version</code>)</li>
+</ul>
+
+<p>There may also be platform specific optimizations, as @pauldoo notes, OS X has <code>-Oz</code></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/52888/glen" target="_blank"><span itemprop="name">Glen</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1778538/how-many-gcc-optimization-levels-are-there-#answer-0</div>
+                                            <div itemprop="upvoteCount">120</div>
+                                            <div itemprop="dateCreated">2/3/2017 12:00:54 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Let's <strong>interpret the source code of GCC 5.1</strong> to see what happens on <code>-O100</code> since it is not clear on the man page.</p>
+
+<p>We shall conclude that:</p>
+
+<ul>
+<li>anything above <code>-O3</code> up to <code>INT_MAX</code> is the same as <code>-O3</code>, but that could easily change in the future, so don't rely on it.</li>
+<li>GCC 5.1 runs undefined behavior if you enter integers larger than <code>INT_MAX</code>.</li>
+<li>the argument can only have digits, or it fails gracefully. In particular, this excludes negative integers like <code>-O-1</code></li>
+</ul>
+
+<p><strong>Focus on subprograms</strong></p>
+
+<p>First remember that GCC is just a front-end for <code>cpp</code>, <code>as</code>, <code>cc1</code>, <code>collect2</code>. A quick <code>./XXX --help</code> says that only <code>collect2</code> and <code>cc1</code> take <code>-O</code>, so let's focus on them.</p>
+
+<p>And:</p>
+
+<pre><code>gcc -v -O100 main.c |&amp; grep 100
+</code></pre>
+
+<p>gives:</p>
+
+<pre><code>COLLECT_GCC_OPTIONS='-O100' '-v' '-mtune=generic' '-march=x86-64'
+/usr/local/libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/cc1 [[noise]] hello_world.c -O100 -o /tmp/ccetECB5.
+</code></pre>
+
+<p>so <code>-O</code> was forwarded to both <code>cc1</code> and <code>collect2</code>.</p>
+
+<p><strong>O in common.opt</strong></p>
+
+<p><a href="https://github.com/gcc-mirror/gcc/blob/gcc-5_1_0-release/gcc/common.opt" rel="noreferrer">common.opt</a> is a GCC specific CLI option description format described in the <a href="https://gcc.gnu.org/onlinedocs/gcc-5.1.0/gccint/Option-file-format.html#Option-file-format" rel="noreferrer">internals documentation</a> and translated to C by <a href="https://github.com/gcc-mirror/gcc/blob/gcc-5_1_0-release/gcc/opth-gen.awk" rel="noreferrer">opth-gen.awk</a> and <a href="https://github.com/gcc-mirror/gcc/blob/gcc-5_1_0-release/gcc/optc-gen.awk" rel="noreferrer">optc-gen.awk</a>.</p>
+
+<p>It contains the following interesting lines:</p>
+
+<pre><code>O
+Common JoinedOrMissing Optimization
+-O&lt;number&gt;  Set optimization level to &lt;number&gt;
+
+Os
+Common Optimization
+Optimize for space rather than speed
+
+Ofast
+Common Optimization
+Optimize for speed disregarding exact standards compliance
+
+Og
+Common Optimization
+Optimize for debugging experience rather than speed or size
+</code></pre>
+
+<p>which specify all the <code>O</code> options. Note how <code>-O&lt;n&gt;</code> is in a separate family from the other <code>Os</code>, <code>Ofast</code> and <code>Og</code>.</p>
+
+<p>When we build, this generates a <code>options.h</code> file that contains:</p>
+
+<pre><code>OPT_O = 139,                               /* -O */
+OPT_Ofast = 140,                           /* -Ofast */
+OPT_Og = 141,                              /* -Og */
+OPT_Os = 142,                              /* -Os */
+</code></pre>
+
+<p>As a bonus, while we are grepping for <code>\bO\n</code> inside <code>common.opt</code> we notice the lines:</p>
+
+<pre><code>-optimize
+Common Alias(O)
+</code></pre>
+
+<p>which teaches us that <code>--optimize</code> (double dash because it starts with a dash <code>-optimize</code> on the <code>.opt</code> file) is an undocumented alias for <code>-O</code> which can be used as <code>--optimize=3</code>!</p>
+
+<p><strong>Where OPT_O is used</strong></p>
+
+<p>Now we grep:</p>
+
+<pre><code>git grep -E '\bOPT_O\b'
+</code></pre>
+
+<p>which points us to two files:</p>
+
+<ul>
+<li><a href="https://github.com/gcc-mirror/gcc/blob/gcc-5_1_0-release/gcc/opts.c" rel="noreferrer">opts.c</a></li>
+<li><a href="https://github.com/gcc-mirror/gcc/blob/gcc-5_1_0-release/gcc/lto-wrapper.c" rel="noreferrer">lto-wrapper.c</a></li>
+</ul>
+
+<p>Let's first track down <code>opts.c</code></p>
+
+<p><strong>opts.c:default_options_optimization</strong></p>
+
+<p>All <code>opts.c</code> usages happen inside: <code>default_options_optimization</code>.</p>
+
+<p>We grep backtrack to see who calls this function, and we see that the only code path is:</p>
+
+<ul>
+<li><code>main.c:main</code></li>
+<li><code>toplev.c:toplev::main</code></li>
+<li><code>opts-global.c:decode_opts</code></li>
+<li><code>opts.c:default_options_optimization</code></li>
+</ul>
+
+<p>and <code>main.c</code> is the entry point of <code>cc1</code>. Good!</p>
+
+<p>The first part of this function:</p>
+
+<ul>
+<li>does <code>integral_argument</code> which calls <code>atoi</code> on the string corresponding to <code>OPT_O</code> to parse the input argument</li>
+<li>stores the value inside  <code>opts-&gt;x_optimize</code> where <code>opts</code> is a <code>struct gcc_opts</code>.</li>
+</ul>
+
+<p><strong>struct gcc_opts</strong></p>
+
+<p>After grepping in vain, we notice that this <code>struct</code> is also generated at <code>options.h</code>:</p>
+
+<pre><code>struct gcc_options {
+    int x_optimize;
+    [...]
+}
+</code></pre>
+
+<p>where <code>x_optimize</code> comes from the lines:</p>
+
+<pre><code>Variable
+int optimize
+</code></pre>
+
+<p>present in <code>common.opt</code>, and that <code>options.c</code>:</p>
+
+<pre><code>struct gcc_options global_options;
+</code></pre>
+
+<p>so we guess that this is what contains the entire configuration global state, and <code>int x_optimize</code> is the optimization value.</p>
+
+<p><strong>255 is an internal maximum</strong></p>
+
+<p>in <code>opts.c:integral_argument</code>, <code>atoi</code> is applied to the input argument, so <code>INT_MAX</code> is an upper bound. And if you put anything larger, it seem that GCC runs C undefined behaviour. Ouch?</p>
+
+<p><code>integral_argument</code> also thinly wraps <code>atoi</code> and rejects the argument if any character is not a digit. So negative values fail gracefully.</p>
+
+<p>Back to <code>opts.c:default_options_optimization</code>, we see the line:</p>
+
+<pre><code>if ((unsigned int) opts-&gt;x_optimize &gt; 255)
+  opts-&gt;x_optimize = 255;
+</code></pre>
+
+<p>so that the optimization level is truncated to <code>255</code>. While reading <code>opth-gen.awk</code> I had come across:</p>
+
+<pre><code># All of the optimization switches gathered together so they can be saved and restored.
+# This will allow attribute((cold)) to turn on space optimization.
+</code></pre>
+
+<p>and on the generated <code>options.h</code>:</p>
+
+<pre><code>struct GTY(()) cl_optimization
+{
+  unsigned char x_optimize;
+</code></pre>
+
+<p>which explains why the truncation: the options must also be forwarded to <code>cl_optimization</code>, which uses a <code>char</code> to save space. So 255 is an internal maximum actually.</p>
+
+<p><strong>opts.c:maybe_default_options</strong></p>
+
+<p>Back to <code>opts.c:default_options_optimization</code>, we come across <code>maybe_default_options</code> which sounds interesting. We enter it, and then <code>maybe_default_option</code> where we reach a big switch:</p>
+
+<pre><code>switch (default_opt-&gt;levels)
+  {
+
+  [...]
+
+  case OPT_LEVELS_1_PLUS:
+    enabled = (level &gt;= 1);
+    break;
+
+  [...]
+
+  case OPT_LEVELS_3_PLUS:
+    enabled = (level &gt;= 3);
+    break;
+</code></pre>
+
+<p>There are no <code>&gt;= 4</code> checks, which indicates that <code>3</code> is the largest possible.</p>
+
+<p>Then we search for the definition of <code>OPT_LEVELS_3_PLUS</code> in  <code>common-target.h</code>:</p>
+
+<pre><code>enum opt_levels
+{
+  OPT_LEVELS_NONE, /* No levels (mark end of array).  */
+  OPT_LEVELS_ALL, /* All levels (used by targets to disable options
+                     enabled in target-independent code).  */
+  OPT_LEVELS_0_ONLY, /* -O0 only.  */
+  OPT_LEVELS_1_PLUS, /* -O1 and above, including -Os and -Og.  */
+  OPT_LEVELS_1_PLUS_SPEED_ONLY, /* -O1 and above, but not -Os or -Og.  */
+  OPT_LEVELS_1_PLUS_NOT_DEBUG, /* -O1 and above, but not -Og.  */
+  OPT_LEVELS_2_PLUS, /* -O2 and above, including -Os.  */
+  OPT_LEVELS_2_PLUS_SPEED_ONLY, /* -O2 and above, but not -Os or -Og.  */
+  OPT_LEVELS_3_PLUS, /* -O3 and above.  */
+  OPT_LEVELS_3_PLUS_AND_SIZE, /* -O3 and above and -Os.  */
+  OPT_LEVELS_SIZE, /* -Os only.  */
+  OPT_LEVELS_FAST /* -Ofast only.  */
+};
+</code></pre>
+
+<p>Ha! This is a strong indicator that there are only 3 levels.</p>
+
+<p><strong>opts.c:default_options_table</strong></p>
+
+<p><code>opt_levels</code> is so interesting, that we grep <code>OPT_LEVELS_3_PLUS</code>, and come across <code>opts.c:default_options_table</code>:</p>
+
+<pre><code>static const struct default_options default_options_table[] = {
+    /* -O1 optimizations.  */
+    { OPT_LEVELS_1_PLUS, OPT_fdefer_pop, NULL, 1 },
+    [...]
+
+    /* -O3 optimizations.  */
+    { OPT_LEVELS_3_PLUS, OPT_ftree_loop_distribute_patterns, NULL, 1 },
+    [...]
+}
+</code></pre>
+
+<p>so this is where the <code>-On</code> to specific optimization mapping mentioned in the docs is encoded. Nice!</p>
+
+<p><strong>Assure that there are no more uses for x_optimize</strong></p>
+
+<p>The main usage of <code>x_optimize</code> was to set other specific optimization options like <code>-fdefer_pop</code> as documented on the man page. Are there any more?</p>
+
+<p>We <code>grep</code>, and find a few more. The number is small, and upon manual inspection we see that every usage only does at most a <code>x_optimize &gt;= 3</code>, so our conclusion holds.</p>
+
+<p><strong>lto-wrapper.c</strong></p>
+
+<p>Now we go for the second occurrence of <code>OPT_O</code>, which was in <code>lto-wrapper.c</code>.</p>
+
+<p>LTO means Link Time Optimization, which as the name suggests is going to need an <code>-O</code> option, and will be linked to <code>collec2</code> (which is basically a linker).</p>
+
+<p>In fact, the first line of <code>lto-wrapper.c</code> says:</p>
+
+<pre><code>/* Wrapper to call lto.  Used by collect2 and the linker plugin.
+</code></pre>
+
+<p>In this file, the <code>OPT_O</code> occurrences seems to only normalize the value of <code>O</code> to pass it forward, so we should be fine.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank">Ciro Santilli 新疆改造中心996ICU六四事件</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1778538" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1778538/how-many-gcc-optimization-levels-are-there- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:29:25 GMT -->
+</html>

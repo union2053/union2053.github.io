@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-join-two-string-with-strcat-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Join two string with strcat() Function</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Join two string with strcat() Function'>C Join two string with strcat() Function</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Join two string with strcat() Function</h1>
+<a class ='btn btn-outline-dark' href=c-shorten-character-string.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-compare-character-string.html>Next</a><p>The <i style='color:blue'>strcat</i>() (string concatenation) function takes two strings for arguments. 
+
+</p><p>A copy of the second string is tacked onto the end of the first, and this combined 
+version becomes the new first string. 
+
+</p><p>The second string is not altered. 
+
+</p><p>The <i style='color:blue'>strcat</i>() function is type char * (a pointer-to-char). 
+
+</p><p>It returns the value of its first argument-the address of the first character of
+the string to which the second string is appended.
+
+</p><p>Join two strings
+</p><div class='myCodeDiv'><button id='TSFDQ' class='myCopyButton' data-clipboard-target='#BOZIL'>Copy</button><pre  id='BOZIL' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt; <span class='c'>/* declares the strcat() function */</span>
+#define SIZE 80
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> flower[SIZE] = <span class='q'>"test test"</span>;
+    <span class='r'>char</span> addon[] = <span class='q'>"s smell like old shoes."</span>;
+
+    strcat(flower, addon);
+    puts(flower);
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#TSFDQ');clipboard.on('success', function(e) {$('#TSFDQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#TSFDQ').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAADfUlEQVR42u3cW3LcIBBAUS9i9r/IeAGTfKWmZiRomoeQfW7lw6VI0CBZXDegrycAAMBN+NIFAACAuAAAABAXAABAXAAAAIgLAAAAcQEAAMQFAACAuAAAABAXAABAXAAABf58f//7px8A4gIAN1CW3cRlz6gA4gIAG4nCbsrCXUBcAAC7i8uhx7hHIC4AgL3E5TAG4gLiAgDjR/3X3MDhTMfhJMjUS4Jhn8lBoajDGg9LLndXQlw+O6HpBuX+N9dSgLgAuFPS4vDI+kuquY3D0fdzwD5zqbJCtdZbVYfE5cG+qlpjU0sB4gKAuIwRl/56gyVUA0uYRyRJE29FrmeqRwDigt15PB46gbiUF5bGh8mxl0RcodVLEsN5ZC6m1TzK7a2WHJ+ZIi4gLhjjCv/JndBfRVVcempf1lGzY96hE9a7y+fakcgSikmX5MSlsC35WnEJigJxwQ8RlwUv0P4qbhHkjbId196Rfbo6HsnwmInLHcUlkV4aKy7VtbStQRIXEBfiQlyIC3E5GMA+l22Wt9jMvuSO4hIJIKcmxAW3EZfHCYXTquW8vZGDVdwiyEIJiba8lvB65PNgUzMvF5dIhG9t/Dx52ZRWOchJt/u16nKc/XN//a0Y5S5Nm1/WXNIvLiunioI5GOICGZfjt235hOo5w/88XRBkpISmJryVcKYsb+fEB93LMy5BcUnczURXJ/Rr6u0+O9L5VA9vxS8Rl7hkFMbvgbtvgkfOUkpNvVTVr2d2GxdxwTXiMmpcmTpMrglypXsd/hxp5r3EJd6i1hRdZ0f1x5Drn4KkJk54bjMblRjVZl8S2YgU+fZd/3B+6ENntlGOqikPVG7FjA3SwDpxaZ1DGfLS3zPI9GxXpISIuMQn3fYXl8jURnpucQdxqT4w/eIy5LFf5i7xrMCCSyJfxY1/OTf4ud6ILsSt5XAxcjyjk/uSb39LgWsyLokC12dcFgQ5tlG5jMsMq9gw49If2CXi0poO6c+4LHhoAYC4EJdfKi4rHxXiQlwA/FhxGb4k8Dl/ueWCIGeITpO4NMVwF3HJ3Zp+RWjtwP7Fuf0P7ZBftPLeJS9NAPcQl2fLnszqJPpV32ydHWTPqotqCW9HCpuiW5tZ2Gaca0h/FZ+tqxYy+2kJ7n7v3MZfdoXctvCxj72XJoDbiAsAAABxAQAAIC4AAIC4AAAAXMJfe1JXWgWiae8AAAAASUVORK5CYII='><h3>strncat() Function
+</h3><p>The <i style='color:blue'>strcat</i>() function does not check to see whether the second string will fit 
+in the first array. 
+
+</p><p>If you fail to allocate enough space for the first array, you will run into problems as
+excess characters overflow into adjacent memory locations. 
+
+</p><p><i style='color:blue'>strncat</i>() takes a second argument indicating the maximum number of characters to add. 
+
+</p><p>For example, <i style='color:blue'>strncat</i>(bugs, <i style='color:blue'>addon</i>, 13) will add the contents of the <i style='color:blue'>addon</i> string to bugs, 
+stopping when it reaches 13 additional characters or the null character, whichever comes 
+first. 
+
+</p><p>The following code joins two strings and check size first.
+
+</p><div class='myCodeDiv'><button id='POHLA' class='myCopyButton' data-clipboard-target='#OUFRK'>Copy</button><pre  id='OUFRK' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;
+#define SIZE 30
+#define BUGSIZE 13
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> flower[SIZE]=<span class='q'>"test test"</span>;
+    <span class='r'>char</span> addon[] = <span class='q'>"long string string."</span>;
+    <span class='r'>char</span> bug[BUGSIZE] = <span class='q'>"new value"</span>;
+    <span class='r'>int</span> available;
+
+    puts(<span class='q'>"What is your favorite flower?"</span>);
+    <span class='r'>if</span> ((strlen(addon) + strlen(flower) + 1) &lt;= SIZE)
+        strcat(flower, addon);
+    puts(flower);
+    puts(<span class='q'>"What is your favorite bug?"</span>);
+    available = BUGSIZE - strlen(bug) - 1;
+    strncat(bug, addon, available);
+    puts(bug);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#POHLA');clipboard.on('success', function(e) {$('#POHLA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#POHLA').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAB8CAIAAAC0UNK7AAAJdElEQVR42u3da5KrNhAG0Cxi9r/G3BWQ/Lo1ZYPobjUPm3MqlZrLYCzJHvRZluCfBQDgQ/yjCQAAwQUAQHABAAQXAADBBQBAcAEABBcAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQBAcAEABBcAAMEFAOCRweXn58fr6sUCQHDZ7Htu1f3oC3+/Ln8JLtmGun/rfVY5Ac4ILsETessZ02lXeju/CpFnuXNjvpTNHxHw9OAyOBW+RBl9reAiuNyhlfwdAYLLT/Dn3SHrrR1+NmTP4LsPfNkn/hTxrxIGxdiq+NaW+XYYHGFc+NU94629W4t42Xbbs/wVSfwtF39HjRttdftkS/oAAAgum+fBl87+/eSb+iB43CfFYPdTywSpSkXquLVlckBr/JBBObe6z1Q147UYZ4JaFU4bcSk0y7hNZlpScAEEl1xwyZ49Lw8uLUee7PK3thxR1HIIiHeuhVrUgks2Ax0RXHY37v7c25LL/abJA3x2cImM/B8aXJaOhTa1j8uTYzDt/fH4tegKLvMvVrz8LS9ob3BZ/WPZ+pJo/u9CZAEEl2U1ryyxseurOuwlOXPlgcElVYZg8c4PLl1/ACcEl/f/H5FIBBdAcBFcog0iuAgulwcXAMHlwOASGRJvn27ZFREGK5IKM5QvDy6R9SyFV6o9uBw0ufu4ybm7waUxyLoAHSC4JE6m2VW1v9dOb51/a1/i7E7d6LqYbGF9bLAduuZtpBYSBxdvx6uZKkB2zfbWQdobqmVJdmT6dqqhBBdAcOGQj+kAgOAitQCA4EIgr7ibHQAILgAAggsAILgAAAguAACCCwAguMDYQ5ZfWWVGlz9//v3/P+0Agst5HZj10oILlCPLVwaX31WTzDgvuJxwap5/ivsU8tN7MoEDLuzavzu1iC8ILoKLHl01+ao+/gmpRXbhwODys2Gw2+5xlo3bNJavTnu3QtZuT/hy18Pdmwsue7dCDJYhW83fWyI31FTNQ6uJ4PJB1RFcuMuIy/sJfXeH3X3aP0CfWchgoInck3nwz3J3Pl/N1SiQagfVbKkmgsudqxMZifG6c0FwiZzKI2fkQ4PLyYWMd2+pONWS9lqqGexl4yNSqrn46kpw+aK+fLcWggsXB5fs1zSpj61dweXMQt45uLRUs3fkSTUFFwQXuHjEpXDA80dcjivkzYPLfDU/sUd/SDURXFQWwUVwEVwEF8GloYt6n9kQXGwSXJxy+dFmmiXYl8cnt77s0FWFrpVB44dvvSLzb7/2Ch7UzvQHl8JE12wv0jIf86pCzkzOjT+kZdZqV8s09uiq+f6oL5i6O39C7+0ejjtaoc+O9JQzHeSgM4730+PH1t4PwV/NRMNCWgpW8KB2pi24LOFVnZG5I8HVyLVP1RcWcnJJ9vv28Srccrxrr2aqHVQzW82vuRxzpA+IJ4M7H63QYUf6yMhDVgdyth6S7aQLYye1d0KqAPF23k178dIe1M40BxduyJXiVPPLgsug8/igo82MNMz3qeUxpOz2ck+cGm4pBJdsDC1XsLedEVwe0c89oUdXzadll3gyuPPRsh32ZHCJ98SFXxW+RWpvhFRTl4dPai9NVzsjuHxz9/b1nZxqCi6Cy3s0iV8+v7FDzU4Z7mqEg6b91vY/JyAiuAAfE1zGy2oKX5RcfrRCd1XODY0h7OjgEt9nctqv4CK4AByYXQbhINij3PBozwkuqe4/Vf7emb8z+wsuggsguKx0/+PfftbRBJdaatnKLtnQI7gILgCdwWX1wmLZa47d+Wi9wSV1IZkjgkthsKqcWrbiS+0NNm6xmQoKLoIL8LhBl3E3mbrU6Q2PlupQy7nhnMm55a+B5jvp8qVvI6WdqaDgIrj0cMMXLxafG1x2f/tZR5sPLsthl6UpFKAw3FIYK6qNV820mOXQjwsud1vMqS/8/brcfLXtVQU7rU0euOB5vl/p/Wrg2qPVDj54VPAqLwcFl8ZL543HihqDS6RU85lScLlRcBlfy/zvxoPugceTG/PoKpzQRPO333rIoMv8mf1uR8tGn/h1WYJTVs/81RK4vn688LWbHuxml5kWq8UpweXKEZfIDeQEF8FFcIk8hTd58LN4y41pLjxa6tbH73eHTvXE5eQ0U+zsKFE2uGSfJd7O2Wvfnd/ONAeX8c/lG9r9bMh2ErsPfNkn/hTBkaclcNO++Jb5dgjeb/J94+qe8dberUXqXpiF21WmUsWghOMty9stEndLIri8nL7Lv7350VJ95Mss0eCRU/lm5le7x8+Oduw+NljTJX/tuOzc3kL67GpneoLLS2f/3uGlPmse92E0MkS0lGY5ZCsVqePWlskBrfFDBuXcShKpasZrMU6ZtSpkE1755Rv/CQguALcOLtkT9OXBpeXIk13+1pYjiloOAfGYUqhFLbhkM1DtINmXezdpSS0AnxRcIiP/hwaXpWOhTeoDetcYTHtwGb8WXcFl/sWKl79l/Oy44CKyAJwdXFZntMRP4qd12Ety5soDg0uqDMHinR9cDmoiwQVAcPmq4LJafcFFcJFOAL45uES+Kip3A/E5Lr3BZSnN7rw8uERWBhVeqfbg0j65u/AdWW1yrgvQAZwaXCIfPVOragdrR2cmoOxOepicEhHvblNrwgerqWcm4qQWEgcXb8ermSpAds321kFqqSVVgPFaccEF4C7BhSMGRfCuAEBw0T9xzbvCGwNAcLldz2TYn9W3hNYAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcppyweNX6WAAQXPrjxRc8BQAILoKL4AIAnxxcareje9++tX+wANnDxm87/FLNwZYl/GVQ7faEwaYGAMEllF22OubUPwvDEltRY7wl+7zZA2azUeQIu00NAIJLOjf83rKbKiI/Z8sQHKppDC7B8JTdORJlvE0BoDO4rFrd//2HxuAyLsN8cNmtpuACAB8QXIJHeP9/LbvUvjmaDy7lmCW4AIDgIrgAgOCSzwTBHSaDy7Kx0mfrGSeDS2Se7PxTlOMXAAgum1lhdbbH6m6D9dLznfHuOuffBdgq9u6C5K0j7Faz8BSFpgYAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAEF00AAAguAACCCwAguAAACC4AAIILACC4AAAILgAAU/4DPrRtqtbp3A4AAAAASUVORK5CYII='><p><i style='color:blue'>strcat</i>() can lead to buffer overflows. 
+</p><a class ='btn btn-outline-dark' href=c-shorten-character-string.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-compare-character-string.html>Next</a><h2>Related</h2><UL><LI><a href='c-create-function-to-print-output-string.html'>C Create function to print/output string</a></LI><LI><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C Finding Out The Length Of A String excluding the null character</a></LI><LI><a href='c-shorten-character-string.html'>C shorten character string</a></LI><LI><a href='c-compare-character-string.html'>C Compare character string</a></LI><LI><a href='c-character-string-copy.html'>C Character String copy</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-join-two-string-with-strcat-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

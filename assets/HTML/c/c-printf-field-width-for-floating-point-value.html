@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-field-width-for-floating-point-value.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C printf() field width for floating point value</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C printf() field width for floating point value'>C printf() field width for floating point value</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>printf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-conversion-specifications.html'>C printf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-format.html'>C printf function format
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-escape.html'>C printf escape %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conversion-specification-modifiers-for-printf.html'>C printf Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-flags.html'>C printf() Flags
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-integer.html'>C printf int width
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C printf floating width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-string-options.html'>C printf string options
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-return-value-of-printf.html'>C Return Value of printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-printf.html'>C printf * Modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-print-columns-of-data.html'>C printf() align column
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>printf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-output.html'>C printf int
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() octal hexadecimal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-outputting-floating-point-values.html'>C printf() floating point 
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-character-output.html'>C printf() char
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-function.html'>C scanf() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-format-specifier.html'>C scanf format specifier
+
+The most general form of a format specifier is shown in the follows:
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-specification-characters.html'>C scanf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-scanf.html'>C scanf() * Modifier
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-reading-characters-and-string-using-scanf-with-filter.html'>C scanf() string %[]
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-2.html'>C Exercise 2
+
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C printf() field width for floating point value</h1>
+<a class ='btn btn-outline-dark' href=c-printf-field-width-for-integer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-string-options.html>Next</a><p>Now look at some floating-point formats.
+
+</p><div class='myCodeDiv'><button id='VZPDM' class='myCopyButton' data-clipboard-target='#WSMYY'>Copy</button><pre  id='WSMYY' style='font-size:18px;' class='code'><span class='c'>// main.c -- some floating-point combinations</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>const</span> <span class='r'>double</span> RENT = 3852.99;       <span class='c'>// const-style constant</span>
+
+    printf(<span class='q'>"*%f*\n"</span>, RENT);
+    printf(<span class='q'>"*%e*\n"</span>, RENT);
+    printf(<span class='q'>"*%4.2f*\n"</span>, RENT);
+    printf(<span class='q'>"*%3.1f*\n"</span>, RENT);
+    printf(<span class='q'>"*%10.3f*\n"</span>, RENT);
+    printf(<span class='q'>"*%10.3E*\n"</span>, RENT);
+    printf(<span class='q'>"*%+4.2f*\n"</span>, RENT);
+    printf(<span class='q'>"*%010.2f*\n"</span>, RENT);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VZPDM');clipboard.on('success', function(e) {$('#VZPDM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VZPDM').text('error');});</script></div><p>This time, the program uses the keyword const to create a symbolic constant.
+
+</p><p>The output is
+</p><img src='data:image/png;base64,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'><h3>Note
+</h3><p>The example begins with the default version, %f.
+
+</p><p>In this case, there are two defaults-the field width and the number of digits to the right of the decimal.
+
+</p><p>The second default is six digits, and the field width is whatever it takes to hold the number.
+
+</p><p>Next is the default for %e.
+
+</p><p>It prints one digit to the left of the decimal point and six places to the right.
+
+</p><p>We can specify the number of decimal places to the right of the decimal, and
+the next four examples in this segment do that.
+
+</p><p>Notice how the fourth and the sixth examples cause the output to be rounded off.
+
+</p><p>The sixth example uses E instead of e.
+
+</p><p>Finally, the + flag causes the result to be printed with its algebraic sign,
+which is a plus sign in this case, and the 0 flag produces leading zeros to pad the result to the full field width.
+
+</p><p>Note that in the specifier %010.2f, the first 0 is a flag, and the remaining digits before the period
+(10) specify the field width.
+
+</p><p>You can modify the RENT value to see how variously sized values are printed.
+</p><a class ='btn btn-outline-dark' href=c-printf-field-width-for-integer.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-string-options.html>Next</a><h2>Related</h2><UL><LI><a href='c-conversion-specification-modifiers-for-printf.html'>C Conversion Specification Modifiers for printf()</a></LI><LI><a href='c-printf-flags.html'>C printf Flags</a></LI><LI><a href='c-printf-field-width-for-integer.html'>C printf() field width for integer</a></LI><LI><a href='c-printf-string-options.html'>C printf string options</a></LI><LI><a href='c-return-value-of-printf.html'>C Return Value of printf()</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-field-width-for-floating-point-value.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

@@ -1,0 +1,1100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node27.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>IPC:Shared Memory</TITLE>
+<META NAME="description" CONTENT="IPC:Shared Memory">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1256"
+ HREF="node27.html#SECTION002710000000000000000">
+Accessing a Shared Memory Segment</A>
+<UL>
+<LI><A NAME="tex2html1257"
+ HREF="node27.html#SECTION002711000000000000000">
+Controlling a Shared Memory Segment</A>
+</UL>
+<LI><A NAME="tex2html1258"
+ HREF="node27.html#SECTION002720000000000000000">
+Attaching and Detaching a Shared Memory Segment</A>
+<LI><A NAME="tex2html1259"
+ HREF="node27.html#SECTION002730000000000000000">
+Example two processes comunicating via shared memory:<TT>
+shm_server.c, shm_client.c</TT></A>
+<UL>
+<LI><A NAME="tex2html1260"
+ HREF="node27.html#SECTION002731000000000000000">
+<TT>shm_server.c</TT></A>
+<LI><A NAME="tex2html1261"
+ HREF="node27.html#SECTION002732000000000000000">
+<TT>shm_client.c</TT></A>
+</UL>
+<LI><A NAME="tex2html1262"
+ HREF="node27.html#SECTION002740000000000000000">
+POSIX Shared Memory</A>
+<LI><A NAME="tex2html1263"
+ HREF="node27.html#SECTION002750000000000000000">
+Mapped memory</A>
+<UL>
+<LI><A NAME="tex2html1264"
+ HREF="node27.html#SECTION002751000000000000000">
+Address Spaces and Mapping</A>
+<LI><A NAME="tex2html1265"
+ HREF="node27.html#SECTION002752000000000000000">
+Coherence</A>
+<LI><A NAME="tex2html1266"
+ HREF="node27.html#SECTION002753000000000000000">
+Creating and Using Mappings</A>
+<LI><A NAME="tex2html1267"
+ HREF="node27.html#SECTION002754000000000000000">
+Other Memory Control Functions</A>
+</UL>
+<LI><A NAME="tex2html1268"
+ HREF="node27.html#SECTION002760000000000000000">
+Some further example shared memory programs</A>
+<UL>
+<LI><A NAME="tex2html1269"
+ HREF="node27.html#SECTION002761000000000000000">
+<TT>shmget.c</TT>:Sample Program to Illustrate shmget()</A>
+<LI><A NAME="tex2html1270"
+ HREF="node27.html#SECTION002762000000000000000">
+<TT>shmctl.c</TT>: Sample Program to Illustrate <TT>shmctl()</TT></A>
+<LI><A NAME="tex2html1271"
+ HREF="node27.html#SECTION002763000000000000000">
+<TT>shmop.c</TT>: Sample Program to Illustrate <TT>shmat()</TT> and
+<TT>shmdt()</TT></A>
+</UL>
+<LI><A NAME="tex2html1272"
+ HREF="node27.html#SECTION002770000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION002700000000000000000">
+IPC:Shared  Memory</A>
+</H1>
+<P><EM>Shared Memory</EM> is an efficeint means of passing data between
+programs. One program will create a memory portion which other
+processes (if permitted) can access.
+<P>
+In the Solaris 2.x operating
+system, the most efficient way to implement shared memory applications is
+to rely on the <TT>mmap()</TT> function and on the system's native virtual
+memory facility. Solaris 2.x also supports System V shared memory, which
+is another way to let multiple processes attach a segment of physical
+memory to their virtual address spaces. When write access is allowed for
+more than one process, an outside protocol or mechanism such as a
+semaphore can be used to prevent inconsistencies and collisions.
+<P>
+A
+process creates a shared memory segment using <TT>shmget()|</TT>. The
+original owner of a shared memory segment can assign ownership to another
+user with <TT>shmctl()</TT>. It can also revoke this assignment. Other
+processes with proper permission can perform various control functions on
+the shared memory segment using <TT>shmctl()</TT>. Once created, a shared
+segment can be attached to a process address space using <TT>shmat()</TT>.
+It can be detached using <TT>shmdt()</TT> (see <TT>shmop()</TT>). The attaching
+process must have the appropriate permissions for <TT>shmat()</TT>. Once
+attached, the process can read or write to the segment, as allowed by the
+permission requested in the attach operation. A shared segment can be
+attached multiple times by the same process. A shared memory segment is
+described by a control structure with a unique ID that points to an area
+of physical memory. The identifier of the segment is called the shmid. The
+structure definition for the shared memory segment control structures
+and prototypews can be found in &lt;<TT>sys/shm.h</TT>&gt;.
+<P><H1><A NAME="SECTION002710000000000000000">
+Accessing a Shared Memory Segment</A>
+</H1>
+<P> <TT>shmget()</TT> is used to
+obtain access to a shared memory segment.  It is prottyped by:
+<P><PRE>
+int shmget(key_t key, size_t size, int shmflg);
+</PRE>
+<P>
+The
+<TT>key</TT> argument is a access value associated with the semaphore ID.
+The <TT>size</TT> argument is the size in bytes of the requested shared
+memory. The <TT>
+shmflg</TT> argument specifies the initial access permissions and creation
+control flags.
+<P>
+When the call succeeds, it returns the shared memory segment ID.
+This call is also used to get the ID of an existing shared segment (from
+a process requesting sharing of some existing memory portion).
+<P>
+The
+following code illustrates <TT>shmget()</TT>:
+<PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt; 
+#include &lt;sys/shm.h&gt; 
+
+... 
+
+key_t key; /* key to be passed to shmget() */ 
+int shmflg; /* shmflg to be passed to shmget() */ 
+int shmid; /* return value from shmget() */ 
+int size; /* size to be passed to shmget() */ 
+
+... 
+
+key = ... 
+size = ...
+shmflg) = ... 
+
+if ((shmid = shmget (key, size, shmflg)) == -1) {
+   perror(&quot;shmget: shmget failed&quot;); exit(1); } else {
+   (void) fprintf(stderr, &quot;shmget: shmget returned %d\n&quot;, shmid);
+   exit(0);
+  }
+...
+</PRE>
+<P><H2><A NAME="SECTION002711000000000000000">
+Controlling a Shared Memory Segment</A>
+</H2>
+<P><TT>shmctl()</TT> is used to alter the permissions and other characteristics
+of a shared memory segment. It is prototyped as follows:
+<P><PRE>
+int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+</PRE>
+<P>
+The process must
+have an effective <TT>shmid</TT>  of owner, creator or superuser to perform
+this command.
+The <TT>cmd</TT> argument
+is one of following control commands:
+<P><DL>
+<DT><STRONG><TT>SHM_LOCK</TT></STRONG>
+<DD>-- Lock the specified shared memory segment in
+memory. The process must have the effective ID of superuser to perform
+this command. 
+<DT><STRONG><TT>SHM_UNLOCK</TT></STRONG>
+<DD>--
+Unlock the shared memory segment. The process must have the effective ID of
+superuser to perform this command.
+<DT><STRONG><TT>IPC_STAT</TT></STRONG>
+<DD>-- Return the status information contained in the
+control structure and place it in the buffer pointed to by buf. The
+process must have read permission on the segment to perform this command.
+<DT><STRONG><TT>IPC_SET</TT></STRONG>
+<DD>-- Set the effective user and group identification
+and access permissions. The process must have an effective ID of owner,
+creator or superuser to perform this command.
+<DT><STRONG><TT>IPC_RMID</TT></STRONG>
+<DD>-- Remove the shared memory segment. 
+</DL>
+<P>
+The <TT>buf</TT> is a sructure of type <TT>struct shmid_ds</TT> which is
+defined in &lt;<TT>sys/shm.h</TT>&gt;
+<P>
+The following code illustrates <TT>shmctl()</TT>:
+<P><PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+
+...
+
+int cmd; /* command code for shmctl() */
+int shmid; /* segment ID */
+struct shmid_ds shmid_ds; /* shared memory data structure to 
+                             hold results */ 
+...
+
+shmid = ...
+cmd = ...
+if ((rtrn = shmctl(shmid, cmd, shmid_ds)) == -1) {
+    perror(&quot;shmctl: shmctl failed&quot;);
+    exit(1);
+   }
+...
+</PRE>
+<P><H1><A NAME="SECTION002720000000000000000">
+Attaching and Detaching a Shared Memory Segment</A>
+</H1>
+<P><TT>shmat()</TT> and <TT>shmdt()</TT> are used to attach and detach shared
+memory segments. They are prototypes as follows:
+<PRE>
+void *shmat(int shmid, const void *shmaddr, int shmflg);
+
+int shmdt(const void *shmaddr);
+</PRE>
+<P><TT>shmat()</TT> returns a pointer, <TT>shmaddr</TT>, to the head of the shared
+segment associated with a valid <TT>shmid</TT>. <TT>shmdt()</TT> detaches the
+shared memory segment located at the address indicated by <TT>shmaddr</TT>
+<P>.
+The following code illustrates calls to <TT>shmat()</TT> and <TT>shmdt()</TT>:
+<P><PRE>
+#include &lt;sys/types.h&gt; 
+#include &lt;sys/ipc.h&gt; 
+#include &lt;sys/shm.h&gt; 
+
+static struct state { /* Internal record of attached segments. */ 
+          int shmid; /* shmid of attached segment */ 
+          char *shmaddr; /* attach point */ 
+          int shmflg; /* flags used on attach */
+         } ap[MAXnap]; /* State of current attached segments. */
+int nap; /* Number of currently attached segments. */
+
+...
+
+char *addr; /* address work variable */
+register int i; /* work area */
+register struct state *p; /* ptr to current state entry */
+...
+
+p = &amp;ap[nap++];
+p-&gt;shmid = ...
+p-&gt;shmaddr = ...
+p-&gt;shmflg = ...
+
+p-&gt;shmaddr = shmat(p-&gt;shmid, p-&gt;shmaddr, p-&gt;shmflg);
+if(p-&gt;shmaddr == (char *)-1) {
+     perror(&quot;shmop: shmat failed&quot;);
+     nap--;
+    } else
+    (void) fprintf(stderr, &quot;shmop: shmat returned %#8.8x\n&quot;,
+p-&gt;shmaddr);
+
+... 
+i = shmdt(addr);
+if(i == -1) {
+    perror(&quot;shmop: shmdt failed&quot;);
+    } else {
+  (void) fprintf(stderr, &quot;shmop: shmdt returned %d\n&quot;, i);
+
+for (p = ap, i = nap; i--; p++)   
+  if (p-&gt;shmaddr == addr) *p = ap[--nap];
+  
+}
+...
+</PRE>
+<P><H1><A NAME="SECTION002730000000000000000">
+Example two processes comunicating via shared memory:<TT>
+shm_server.c, shm_client.c</TT></A>
+</H1>
+<P>
+We develop two programs here that illustrate the passing of a simple
+piece of memery (a string) between the processes if running
+simulatenously:
+<P><DL>
+<DT><STRONG><TT>shm_server.c</TT></STRONG>
+<DD>-- simply creates the string and shared
+memory portion.
+<DT><STRONG><TT>shm_client.c</TT></STRONG>
+<DD>-- attaches itself to the created shared
+memory portion and uses the string (<TT>printf</TT>.
+</DL>
+<P>
+The code listings of the 2 programs no follow:
+<P><H2><A NAME="SECTION002731000000000000000">
+<TT>shm_server.c</TT></A>
+</H2>
+<P><PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;stdio.h&gt;
+
+#define SHMSZ     27
+
+main()
+{
+    char c;
+    int shmid;
+    key_t key;
+    char *shm, *s;
+
+    /*
+     * We'll name our shared memory segment
+     * &quot;5678&quot;.
+     */
+    key = 5678;
+
+    /*
+     * Create the segment.
+     */
+    if ((shmid = shmget(key, SHMSZ, IPC_CREAT | 0666)) &lt; 0) {
+        perror(&quot;shmget&quot;);
+        exit(1);
+    }
+
+    /*
+     * Now we attach the segment to our data space.
+     */
+    if ((shm = shmat(shmid, NULL, 0)) == (char *) -1) {
+        perror(&quot;shmat&quot;);
+        exit(1);
+    }
+
+    /*
+     * Now put some things into the memory for the
+     * other process to read.
+     */
+    s = shm;
+
+    for (c = 'a'; c &lt;= 'z'; c++)
+        *s++ = c;
+    *s = NULL;
+
+    /*
+     * Finally, we wait until the other process 
+     * changes the first character of our memory
+     * to '*', indicating that it has read what 
+     * we put there.
+     */
+    while (*shm != '*')
+        sleep(1);
+
+    exit(0);
+}
+</PRE>
+<P><H2><A NAME="SECTION002732000000000000000">
+<TT>shm_client.c</TT></A>
+</H2>
+<PRE>
+/*
+ * shm-client - client program to demonstrate shared memory.
+ */
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;stdio.h&gt;
+
+#define SHMSZ     27
+
+main()
+{
+    int shmid;
+    key_t key;
+    char *shm, *s;
+
+    /*
+     * We need to get the segment named
+     * &quot;5678&quot;, created by the server.
+     */
+    key = 5678;
+
+    /*
+     * Locate the segment.
+     */
+    if ((shmid = shmget(key, SHMSZ, 0666)) &lt; 0) {
+        perror(&quot;shmget&quot;);
+        exit(1);
+    }
+
+    /*
+     * Now we attach the segment to our data space.
+     */
+    if ((shm = shmat(shmid, NULL, 0)) == (char *) -1) {
+        perror(&quot;shmat&quot;);
+        exit(1);
+    }
+
+    /*
+     * Now read what the server put in the memory.
+     */
+    for (s = shm; *s != NULL; s++)
+        putchar(*s);
+    putchar('\n');
+
+    /*
+     * Finally, change the first character of the 
+     * segment to '*', indicating we have read 
+     * the segment.
+     */
+    *shm = '*';
+
+    exit(0);
+}
+</PRE>
+<P><H1><A NAME="SECTION002740000000000000000">
+POSIX Shared Memory</A>
+</H1>
+<P>
+POSIX shared memory is actually a variation of mapped memory. The major
+differences are to use <TT>shm_open()</TT> to open the shared memory object
+(instead of calling <TT>open()</TT>) and use <TT>shm_unlink()</TT> to close and
+delete the object (instead of calling <TT>close()</TT> which does not remove
+the object). The options in <TT>shm_open()</TT> are substantially fewer than
+the number of options provided in <TT>open()</TT>.
+<P><H1><A NAME="SECTION002750000000000000000">
+Mapped memory</A>
+</H1>
+<P>
+In a system with fixed memory (non-virtual), the address space of a process occupies and is limited to a
+portion of the system's main memory. For example, in Solaris 2.x virtual memory the
+actual address space of a process occupies a file in the swap partition
+of disk storage (the file is called the backing store). Pages of main
+memory buffer the active (or recently active) portions of the process
+address space to provide code for the CPU(s) to execute and data for the
+program to process.
+<P>
+A page of address space is loaded when an address
+that is not currently in memory is accessed by a CPU, causing a page
+fault. Since execution cannot continue until the page fault is resolved
+by reading the referenced address segment into memory, the process sleeps
+until the page has been read. The most obvious difference between the two
+memory systems for the application developer is that virtual memory lets
+applications occupy much larger address spaces. Less obvious advantages
+of virtual memory are much simpler and more efficient file I/O and very
+efficient sharing of memory between processes.
+<P><H2><A NAME="SECTION002751000000000000000">
+Address Spaces and Mapping</A>
+</H2>
+<P>
+Since backing store files (the process address space) exist only in swap
+storage, they are not included in the UNIX named file space. (This makes
+backing store files inaccessible to other processes.) However, it is a
+simple extension to allow the logical insertion of all, or part, of one,
+or more, named files in the backing store and to treat the result as a
+single address space. This is called mapping. With mapping, any part of
+any readable or writable file can be logically included in a process's
+address space. Like any other portion of the process's address space, no
+page of the file is not actually loaded into memory until a page fault
+forces this action. Pages of memory are written to the file only if their
+contents have been modified. So, reading from and writing to files is
+completely automatic and very efficient. More than one process can map a
+single named file. This provides very efficient memory sharing between
+processes. All or part of other files can also be shared between
+processes.
+<P>
+Not all named file system objects can be mapped. Devices that cannot be treated as
+storage, such as terminal and network device files, are examples of objects that cannot
+be mapped. A process address space is defined by all of the files (or portions of
+files) mapped into the address space. Each mapping is sized and aligned to the page
+boundaries of the system on which the process is executing. There is no memory
+associated with processes themselves.
+<P>
+A process page maps to only one object at a time, although an object address may be the
+subject of many process mappings. The notion of a &quot;page&quot; is not a property of the
+mapped object. Mapping an object only provides the potential for a process to read or
+write the object's contents. Mapping makes the object's contents directly addressable
+by a process. Applications can access the storage resources they use directly rather
+than indirectly through read and write. Potential advantages include efficiency
+(elimination of unnecessary data copying) and reduced complexity (single-step updates
+rather than the read, modify buffer, write cycle). The ability to access an object and
+have it retain its identity over the course of the access is unique to this access
+method, and facilitates the sharing of common code and data.
+<P>
+Because the file system name space includes any directory trees that are connected from
+other systems via NFS, any networked file can also be mapped into a process's address
+space.
+<P><H2><A NAME="SECTION002752000000000000000">
+Coherence</A>
+</H2>
+<P>
+Whether to share memory or to share data contained in the file, when multiple process
+map a file simultaneously there may be problems with simultaneous access to data
+elements. Such processes can cooperate through any of the synchronization mechanisms
+provided in Solaris 2.x. Because they are very light weight, the most efficient
+synchronization mechanisms in Solaris 2.x are the threads library ones.
+<P><H2><A NAME="SECTION002753000000000000000">
+Creating and Using Mappings</A>
+</H2>
+<P> <TT>mmap()</TT> establishes a
+mapping of a named file system object (or part of one) into a process address space. It
+is the basic memory management function and it is very simple.
+<P><UL>
+<LI> First <TT>open()</TT> the file, then
+<LI> <TT>mmap()</TT> it with appropriate access and sharing
+options
+<LI> Away you go. 
+</UL>
+<P><TT>mmap</TT> is prototypes as follows:
+<PRE>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/mman.h&gt;
+
+caddr_t mmap(caddr_t addr, size_t len, int prot, int flags,
+          int fildes, off_t off);
+</PRE>
+<P>
+The mapping established by <TT>mmap()</TT> replaces any
+previous mappings for specified address range. The <TT>flags</TT> <TT>MAP_SHARED</TT> and
+<TT>MAP_PRIVATE</TT> specify the mapping type, and one of them must be specified.
+<TT>MAP_SHARED</TT> specifies that writes modify the mapped object. No further operations
+on the object are needed to make the change. <TT>MAP_PRIVATE</TT> specifies that an
+initial write to the mapped area creates a copy of the page and all writes reference
+the copy. Only modified pages are copied.
+<P>
+A mapping type is retained across a <TT>fork()</TT>. The file descriptor used in a mmap
+call need not be kept open after the mapping is established. If it is closed, the
+mapping remains until the mapping is undone by <TT>munmap()</TT> or be replacing in with a
+new mapping. If a mapped file is shortened by a call to truncate, an access to the area
+of the file that no longer exists causes a <TT>SIGBUS</TT> signal.
+<P>
+The following code fragment demonstrates a use of this to create a block
+of scratch storage in a program, at an address that the system chooses.:
+<P><PRE>
+int fd; 
+caddr_t result; 
+if ((fd = open(&quot;/dev/zero&quot;, O_RDWR)) == -1) 
+   return ((caddr_t)-1); 
+
+result = mmap(0, len, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0); 
+(void) close(fd);
+</PRE>
+<P><H2><A NAME="SECTION002754000000000000000">
+Other Memory Control Functions</A>
+</H2>
+<P><TT>int mlock(caddr_t addr, size_t len)</TT> causes the pages in the specified address
+range to be locked in physical memory. References to locked pages (in this or other
+processes) do not result in page faults that require an I/O operation. This operation
+ties up physical resources and can disrupt normal system operation, so, use of <TT>
+mlock()</TT> is limited to the superuser. The system lets only a configuration dependent
+limit of pages be locked in memory. The call to mlock fails if this limit is exceeded.
+<P><TT>int munlock(caddr_t addr, size_t len)</TT> releases the locks on
+physical pages. If multiple <TT>mlock()</TT> calls are made on an address range of a single
+mapping, a single <tt>munlock</tt> call is release the locks. However, if different mappings to
+the same pages are mlocked, the pages are not unlocked until the locks on all the
+mappings are released. Locks are also released when a mapping is removed, either
+through being replaced with an mmap operation or removed with <tt>munmap</tt>. 
+A lock is
+transferred between pages on the <i>copy-on-write</i> event associated with a
+<TT>MAP_PRIVATE</TT> mapping, thus locks on an address range that includes <TT>
+MAP_PRIVATE</TT> mappings will be retained transparently along with the copy-on-write
+redirection (see mmap above for a discussion of this redirection)
+<P><TT>int mlockall(int flags)</TT> and <TT>int munlockall(void)</TT>
+are similar to <TT>mlock()</TT> and <TT>munlock()</TT>, but they operate on entire address
+spaces. <TT>mlockall()</TT> sets locks on all pages in the address space and 
+<TT>munlockall()</TT> removes
+all locks on all pages in the address space, whether established by mlock or mlockall.
+<P><TT>int msync(caddr_t addr, size_t len, int flags)</TT> causes all modified pages in the
+specified address range to be flushed to the objects mapped by those addresses. It is
+similar to <TT>fsync()</TT> for files.
+<P><TT>long  sysconf(int name)</TT> returns the system dependent size of a memory page. For
+portability, applications should not embed any constants specifying the size of a page.
+Note that it is not unusual for page sizes to vary even among implementations of the
+same instruction set.
+<P><TT>int mprotect(caddr_t addr, size_t len, int prot)</TT> assigns the
+specified protection to all pages in the specified address range. The protection cannot
+exceed the permissions allowed on the underlying object.
+<P><TT>int brk(void *endds)</TT> and
+<TT>void *sbrk(int incr)</TT> are called to add storage to the data segment of a process.
+A process can manipulate this area by calling <TT>brk()</TT> and <TT>sbrk()</TT>. <TT>brk()</TT>
+sets the system idea of the lowest data segment location not used by the caller to addr
+(rounded up to the next multiple of the system page size). <TT>sbrk()</TT> adds incr bytes
+to the caller data space and returns a pointer to the start of the new data area.
+<P><H1><A NAME="SECTION002760000000000000000">
+Some further example shared memory programs</A>
+</H1>
+<P>
+The following suite of programs can be used to investigate interactively
+a variety of shared ideas (see exercises below).
+<P>
+The semaphore <B>must</B> be initialised with the <TT>shmget.c</TT>
+program. The effects of controlling  shared memory and accessing can be
+investigated with <TT>shmctl.c</TT> and <TT>shmop.c</TT> respectively.
+<P><H2><A NAME="SECTION002761000000000000000">
+<TT>shmget.c</TT>:Sample Program to Illustrate shmget()</A>
+</H2>
+<P><PRE>
+/*
+ * shmget.c: Illustrate the shmget() function.
+ *
+ * This is a simple exerciser of the shmget() function. It
+prompts
+ * for the arguments, makes the call, and reports the results.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+
+extern void    exit();
+extern void    perror();
+
+main()
+{
+ key_t  key;   /* key to be passed to shmget() */
+ int  shmflg;   /* shmflg to be passed to shmget() */
+ int  shmid;   /* return value from shmget() */
+ int  size;   /* size to be passed to shmget() */
+
+ (void) fprintf(stderr,
+  &quot;All numeric input is expected to follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+    &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+
+ /* Get the key. */
+ (void) fprintf(stderr, &quot;IPC_PRIVATE == %#lx\n&quot;, IPC_PRIVATE);
+ (void) fprintf(stderr, &quot;Enter key: &quot;);
+ (void) scanf(&quot;%li&quot;, &amp;key);
+
+ /* Get the size of the segment. */
+ (void) fprintf(stderr, &quot;Enter size: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;size);
+
+ /* Get the shmflg value. */
+ (void) fprintf(stderr,
+    &quot;Expected flags for the shmflg argument are:\n&quot;);
+ (void) fprintf(stderr, &quot;\tIPC_CREAT = \t%#8.8o\n&quot;,
+IPC_CREAT);
+ (void) fprintf(stderr, &quot;\tIPC_EXCL = \t%#8.8o\n&quot;, IPC_EXCL);
+ (void) fprintf(stderr, &quot;\towner read =\t%#8.8o\n&quot;, 0400);
+ (void) fprintf(stderr, &quot;\towner write =\t%#8.8o\n&quot;, 0200);
+ (void) fprintf(stderr, &quot;\tgroup read =\t%#8.8o\n&quot;, 040);
+ (void) fprintf(stderr, &quot;\tgroup write =\t%#8.8o\n&quot;, 020);
+ (void) fprintf(stderr, &quot;\tother read =\t%#8.8o\n&quot;, 04);
+ (void) fprintf(stderr, &quot;\tother write =\t%#8.8o\n&quot;, 02);
+ (void) fprintf(stderr, &quot;Enter shmflg: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;shmflg);
+
+ /* Make the call and report the results. */
+ (void) fprintf(stderr,
+     &quot;shmget: Calling shmget(%#lx, %d, %#o)\n&quot;,
+     key, size, shmflg);
+ if ((shmid = shmget (key, size, shmflg)) == -1) {
+  perror(&quot;shmget: shmget failed&quot;);
+  exit(1);
+ } else {
+  (void) fprintf(stderr,
+     &quot;shmget: shmget returned %d\n&quot;, shmid);
+  exit(0);
+ }
+}
+</PRE>
+<P><H2><A NAME="SECTION002762000000000000000">
+<TT>shmctl.c</TT>: Sample Program to Illustrate <TT>shmctl()</TT></A>
+</H2>
+<P><PRE>
+/*
+ * shmctl.c: Illustrate the shmctl() function.
+ *
+ * This is a simple exerciser of the shmctl() function. It lets you
+ * to perform one control operation on one shared memory segment.
+ * (Some operations are done for the user whether requested or
+not.
+ * It gives up immediately if any control operation fails. Be
+careful
+ * not to set permissions to preclude read permission; you won't
+be
+ *able to reset the permissions with this code if you do.)
+*/
+
+#include   &lt;stdio.h&gt;
+#include   &lt;sys/types.h&gt;
+#include   &lt;sys/ipc.h&gt;
+#include   &lt;sys/shm.h&gt;
+#include   &lt;time.h&gt;
+static void   do_shmctl();
+extern void   exit();
+extern void   perror();
+
+main()
+{
+ int  cmd;  /* command code for shmctl() */
+ int  shmid;  /* segment ID */
+ struct shmid_ds  shmid_ds;     /* shared memory data structure to
+         hold results */
+
+ (void) fprintf(stderr,
+  &quot;All numeric input is expected to follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+     &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+
+ /* Get shmid and cmd. */
+ (void) fprintf(stderr,
+     &quot;Enter the shmid for the desired segment: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;shmid);
+ (void) fprintf(stderr, &quot;Valid shmctl cmd values are:\n&quot;);
+ (void) fprintf(stderr, &quot;\tIPC_RMID =\t%d\n&quot;, IPC_RMID);
+ (void) fprintf(stderr, &quot;\tIPC_SET =\t%d\n&quot;, IPC_SET);
+ (void) fprintf(stderr, &quot;\tIPC_STAT =\t%d\n&quot;, IPC_STAT);
+ (void) fprintf(stderr, &quot;\tSHM_LOCK =\t%d\n&quot;, SHM_LOCK);
+ (void) fprintf(stderr, &quot;\tSHM_UNLOCK =\t%d\n&quot;, SHM_UNLOCK);
+ (void) fprintf(stderr, &quot;Enter the desired cmd value: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;cmd);
+
+ switch (cmd) {
+  case IPC_STAT:
+   /* Get shared memory segment status. */
+   break;
+  case IPC_SET:
+   /* Set owner UID and GID and permissions. */
+   /* Get and print current values. */
+   do_shmctl(shmid, IPC_STAT, &amp;shmid_ds);
+   /* Set UID, GID, and permissions to be loaded. */
+   (void) fprintf(stderr, &quot;\nEnter shm_perm.uid: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;shmid_ds.shm_perm.uid);
+   (void) fprintf(stderr, &quot;Enter shm_perm.gid: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;shmid_ds.shm_perm.gid);
+   (void) fprintf(stderr,
+    &quot;Note: Keep read permission for yourself.\n&quot;);
+   (void) fprintf(stderr, &quot;Enter shm_perm.mode: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;shmid_ds.shm_perm.mode);
+   break;
+  case IPC_RMID:
+   /* Remove the segment when the last attach point is
+      detached. */
+   break;
+  case SHM_LOCK:
+   /* Lock the shared memory segment. */
+   break;
+  case SHM_UNLOCK:
+   /* Unlock the shared memory segment. */
+   break;
+  default:
+   /* Unknown command will be passed to shmctl. */
+   break;
+ }
+ do_shmctl(shmid, cmd, &amp;shmid_ds);
+ exit(0);
+}
+
+/*
+ * Display the arguments being passed to shmctl(), call shmctl(),
+ * and report the results. If shmctl() fails, do not return; this
+ * example doesn't deal with errors, it just reports them.
+ */
+static void
+do_shmctl(shmid, cmd, buf)
+int   shmid,   /* attach point */
+   cmd;   /* command code */
+struct shmid_ds   *buf;   /* pointer to shared memory data structure */
+{
+ register int    rtrn;  /* hold area */
+
+ (void) fprintf(stderr, &quot;shmctl: Calling shmctl(%d, %d,
+buf)\n&quot;,
+  shmid, cmd);
+ if (cmd == IPC_SET) {
+  (void) fprintf(stderr, &quot;\tbuf-&gt;shm_perm.uid == %d\n&quot;,
+     buf-&gt;shm_perm.uid);
+  (void) fprintf(stderr, &quot;\tbuf-&gt;shm_perm.gid == %d\n&quot;,
+     buf-&gt;shm_perm.gid);
+  (void) fprintf(stderr, &quot;\tbuf-&gt;shm_perm.mode == %#o\n&quot;,
+     buf-&gt;shm_perm.mode);
+ }
+ if ((rtrn = shmctl(shmid, cmd, buf)) == -1) {
+  perror(&quot;shmctl: shmctl failed&quot;);
+  exit(1);
+ } else {
+  (void) fprintf(stderr,
+      &quot;shmctl: shmctl returned %d\n&quot;, rtrn);
+ }
+ if (cmd != IPC_STAT &amp;&amp; cmd != IPC_SET)
+  return;
+
+ /* Print the current status. */
+ (void) fprintf(stderr, &quot;\nCurrent status:\n&quot;);
+ (void) fprintf(stderr, &quot;\tshm_perm.uid = %d\n&quot;,
+      buf-&gt;shm_perm.uid);
+ (void) fprintf(stderr, &quot;\tshm_perm.gid = %d\n&quot;,
+      buf-&gt;shm_perm.gid);
+ (void) fprintf(stderr, &quot;\tshm_perm.cuid = %d\n&quot;,
+      buf-&gt;shm_perm.cuid);
+ (void) fprintf(stderr, &quot;\tshm_perm.cgid = %d\n&quot;,
+      buf-&gt;shm_perm.cgid);
+ (void) fprintf(stderr, &quot;\tshm_perm.mode = %#o\n&quot;,
+      buf-&gt;shm_perm.mode);
+ (void) fprintf(stderr, &quot;\tshm_perm.key = %#x\n&quot;,
+      buf-&gt;shm_perm.key);
+ (void) fprintf(stderr, &quot;\tshm_segsz = %d\n&quot;, buf-&gt;shm_segsz);
+ (void) fprintf(stderr, &quot;\tshm_lpid = %d\n&quot;, buf-&gt;shm_lpid);
+ (void) fprintf(stderr, &quot;\tshm_cpid = %d\n&quot;, buf-&gt;shm_cpid);
+ (void) fprintf(stderr, &quot;\tshm_nattch = %d\n&quot;, buf-&gt;shm_nattch);
+ (void) fprintf(stderr, &quot;\tshm_atime = %s&quot;,
+   buf-&gt;shm_atime ? ctime(&amp;buf-&gt;shm_atime) : &quot;Not Set\n&quot;);
+ (void) fprintf(stderr, &quot;\tshm_dtime = %s&quot;,
+   buf-&gt;shm_dtime ? ctime(&amp;buf-&gt;shm_dtime) : &quot;Not Set\n&quot;);
+ (void) fprintf(stderr, &quot;\tshm_ctime = %s&quot;,
+      ctime(&amp;buf-&gt;shm_ctime));
+}
+</PRE>
+<P><H2><A NAME="SECTION002763000000000000000">
+<TT>shmop.c</TT>: Sample Program to Illustrate <TT>shmat()</TT> and
+<TT>shmdt()</TT></A>
+</H2>
+<P><PRE>
+/*
+ * shmop.c: Illustrate the shmat() and shmdt() functions.
+ *
+ * This is a simple exerciser for the shmat() and shmdt() system
+ * calls. It allows you to attach and detach segments and to
+ * write strings into and read strings from attached segments.
+ */
+
+#include   &lt;stdio.h&gt;
+#include   &lt;setjmp.h&gt;
+#include   &lt;signal.h&gt;
+#include   &lt;sys/types.h&gt;
+#include   &lt;sys/ipc.h&gt;
+#include   &lt;sys/shm.h&gt;
+
+#define   MAXnap  4 /* Maximum number of concurrent attaches. */
+
+static   ask();
+static void  catcher();
+extern void  exit();
+static   good_addr();
+extern void  perror();
+extern char  *shmat();
+
+static struct state     { /* Internal record of currently attached
+segments. */
+ int  shmid;   /* shmid of attached segment */
+ char  *shmaddr;   /* attach point */
+ int  shmflg;   /* flags used on attach */
+} ap[MAXnap];     /* State of current attached segments. */
+
+static int    nap;  /* Number of currently attached segments. */
+static jmp_buf   segvbuf;   /* Process state save area for SIGSEGV
+         catching. */
+
+main()
+{
+ register int    action;   /* action to be performed */
+ char    *addr;   /* address work area */
+ register int    i;   /* work area */
+ register struct state   *p;    /* ptr to current state entry */
+ void   (*savefunc)();  /* SIGSEGV state hold area */
+ (void) fprintf(stderr,
+  &quot;All numeric input is expected to follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+  &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+ while (action = ask()) {
+  if (nap) {
+   (void) fprintf(stderr,
+      &quot;\nCurrently attached segment(s):\n&quot;);
+   (void) fprintf(stderr, &quot; shmid address\n&quot;);
+   (void) fprintf(stderr, &quot;------ ----------\n&quot;);
+   p = &amp;ap[nap];
+   while (p-- != ap) {
+    (void) fprintf(stderr, &quot;%6d&quot;, p-&gt;shmid);
+    (void) fprintf(stderr, &quot;%#11x&quot;, p-&gt;shmaddr);
+    (void) fprintf(stderr, &quot; Read%s\n&quot;,
+     (p-&gt;shmflg &amp; SHM_RDONLY) ?
+     &quot;-Only&quot; : &quot;/Write&quot;);
+   }
+  } else
+   (void) fprintf(stderr,
+    &quot;\nNo segments are currently attached.\n&quot;);
+  switch (action) {
+  case 1:   /* Shmat requested. */
+   /* Verify that there is space for another attach. */
+   if (nap == MAXnap) {
+    (void) fprintf(stderr, &quot;%s %d %s\n&quot;,
+       &quot;This simple example will only allow&quot;,
+       MAXnap, &quot;attached segments.&quot;);
+    break;
+   }
+   p = &amp;ap[nap++];
+   /* Get the arguments, make the call, report the
+    results, and update the current state array. */
+   (void) fprintf(stderr,
+    &quot;Enter shmid of segment to attach: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;p-&gt;shmid);
+
+   (void) fprintf(stderr, &quot;Enter shmaddr: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;p-&gt;shmaddr);
+   (void) fprintf(stderr,
+    &quot;Meaningful shmflg values are:\n&quot;);
+   (void) fprintf(stderr, &quot;\tSHM_RDONLY = \t%#8.8o\n&quot;,
+    SHM_RDONLY);
+   (void) fprintf(stderr, &quot;\tSHM_RND = \t%#8.8o\n&quot;,
+    SHM_RND);
+   (void) fprintf(stderr, &quot;Enter shmflg value: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;p-&gt;shmflg);
+
+   (void) fprintf(stderr,
+    &quot;shmop: Calling shmat(%d, %#x, %#o)\n&quot;,
+    p-&gt;shmid, p-&gt;shmaddr, p-&gt;shmflg);
+   p-&gt;shmaddr = shmat(p-&gt;shmid, p-&gt;shmaddr, p-&gt;shmflg);
+   if(p-&gt;shmaddr == (char *)-1) {
+    perror(&quot;shmop: shmat failed&quot;);
+    nap--;
+   } else {
+    (void) fprintf(stderr,
+     &quot;shmop: shmat returned %#8.8x\n&quot;,
+     p-&gt;shmaddr);
+   }
+   break;
+
+  case 2:   /* Shmdt requested. */
+   /* Get the address, make the call, report the results,
+    and make the internal state match. */
+   (void) fprintf(stderr,
+    &quot;Enter detach shmaddr: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;addr);
+
+   i = shmdt(addr);
+   if(i == -1) {
+    perror(&quot;shmop: shmdt failed&quot;);
+   } else {
+    (void) fprintf(stderr,
+     &quot;shmop: shmdt returned %d\n&quot;, i);
+    for (p = ap, i = nap; i--; p++) {
+     if (p-&gt;shmaddr == addr)
+      *p = ap[--nap];
+    }
+   }
+   break;
+  case 3: /* Read from segment requested. */
+   if (nap == 0)
+    break;
+
+   (void) fprintf(stderr, &quot;Enter address of an %s&quot;,
+    &quot;attached segment: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;addr);
+
+   if (good_addr(addr))
+    (void) fprintf(stderr, &quot;String @ %#x is `%s'\n&quot;,
+     addr, addr);
+   break;
+
+  case 4: /* Write to segment requested. */
+   if (nap == 0)
+    break;
+
+   (void) fprintf(stderr, &quot;Enter address of an %s&quot;,
+    &quot;attached segment: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;addr);
+
+   /* Set up SIGSEGV catch routine to trap attempts to
+    write into a read-only attached segment. */
+   savefunc = signal(SIGSEGV, catcher);
+
+   if (setjmp(segvbuf)) {
+    (void) fprintf(stderr, &quot;shmop: %s: %s\n&quot;,
+     &quot;SIGSEGV signal caught&quot;,
+     &quot;Write aborted.&quot;);
+   } else {
+    if (good_addr(addr)) {
+     (void) fflush(stdin);
+     (void) fprintf(stderr, &quot;%s %s %#x:\n&quot;,
+      &quot;Enter one line to be copied&quot;,
+      &quot;to shared segment attached @&quot;,
+      addr);
+     (void) gets(addr);
+    }
+   }
+   (void) fflush(stdin);
+
+   /* Restore SIGSEGV to previous condition. */
+   (void) signal(SIGSEGV, savefunc);
+   break;
+  }
+ }
+ exit(0);
+ /*NOTREACHED*/
+}
+/*
+** Ask for next action.
+*/
+static
+ask()
+{
+ int  response;   /* user response */
+ do {
+   (void) fprintf(stderr, &quot;Your options are:\n&quot;);
+   (void) fprintf(stderr, &quot;\t^D = exit\n&quot;);
+   (void) fprintf(stderr, &quot;\t 0 = exit\n&quot;);
+   (void) fprintf(stderr, &quot;\t 1 = shmat\n&quot;);
+   (void) fprintf(stderr, &quot;\t 2 = shmdt\n&quot;);
+   (void) fprintf(stderr, &quot;\t 3 = read from segment\n&quot;);
+   (void) fprintf(stderr, &quot;\t 4 = write to segment\n&quot;);
+   (void) fprintf(stderr,
+    &quot;Enter the number corresponding to your choice: &quot;);
+
+   /* Preset response so &quot;^D&quot; will be interpreted as exit. */
+   response = 0;
+   (void) scanf(&quot;%i&quot;, &amp;response);
+ } while (response &lt; 0 || response &gt; 4);
+ return (response);
+}
+/*
+** Catch signal caused by attempt to write into shared memory
+segment
+** attached with SHM_RDONLY flag set.
+*/
+/*ARGSUSED*/
+static void
+catcher(sig)
+{
+ longjmp(segvbuf, 1);
+ /*NOTREACHED*/
+}
+/*
+** Verify that given address is the address of an attached
+segment.
+** Return 1 if address is valid; 0 if not.
+*/
+static
+good_addr(address)
+char *address;
+{
+ register struct state          *p;   /* ptr to state of attached
+segment */
+
+ for (p = ap; p != &amp;ap[nap]; p++)
+   if (p-&gt;shmaddr == address)
+    return(1);
+ return(0);
+}
+</PRE>
+</tt>
+<P><H1><A NAME="SECTION002770000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12771</B></P>
+<P>
+Write  2 programs that will  communicate  via shared memory and
+semaphores. Data will be exchanged via memory and semaphores will be used
+to synchronise and notify each process when operations such as memory
+loaded and memory read have been performed.</P>
+<P>
+<P>
+<B>Exercise 12772</B></P>
+<P>
+Compile the programs <TT>shmget.c</TT>, <TT>shmctl.c</TT> and <TT>shmop.c</TT> and
+then
+<UL>
+<LI> investigate and understand fully the operations of the flags
+(access, creation <EM>etc.</EM> permissions) you can set interactively in the
+programs.
+<LI> Use the prgrams to:
+<UL>
+<LI> Exchange data between two processe running as <TT>shmop.c</TT>.
+<LI> Inquire about the state of shared memory with <TT>shmctl.c</TT>.
+<LI> Use <TT>semctl.c</TT> to lock a shared memory segment.
+<LI> Use <TT>semctl.c</TT> to delete a shared memory segment.
+</UL></UL></P>
+<P><P>
+<B>Exercise 12773</B></P>
+<P>
+Write  2 programs that will  communicate  via mapped memory.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node27.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+</HTML>

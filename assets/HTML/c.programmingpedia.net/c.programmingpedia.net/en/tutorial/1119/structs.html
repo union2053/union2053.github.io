@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1119/structs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Structs | C Language Tutorial">
+        <meta name="description" property="og:description" content="Structs | C Language Tutorial">
+        <title>Structs | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="structs">Structs</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>Structures provide a way to group a set of related variables of diverse types into a single unit of memory. The structure as a whole can be referenced by a single name or pointer; the structure members can be accessed individually too. Structures can be passed to functions and returned from functions.  They are defined using the keyword <code>struct</code>.</p>
+
+
+            </div>
+
+
+
+
+
+            <h2 id="flexible-array-members">Flexible Array Members</h2>
+            <div>
+                <div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<h3 id="type-declaration">Type Declaration</h3>
+<p>A structure <em>with at least one member</em> may additionally contain a single array member of unspecified length at the end of the structure. This is called a flexible array member:</p>
+<pre><code>struct ex1 
+{
+    size_t foo;
+    int flex[];
+};
+
+struct ex2_header 
+{
+    int foo;
+    char bar;
+};
+
+struct ex2 
+{
+    struct ex2_header hdr;
+    int flex[];
+};
+
+/* Merged ex2_header and ex2 structures. */
+struct ex3 
+{
+    int foo;
+    char bar;
+    int flex[];
+};
+</code></pre>
+<h3 id="effects-on-size-and-padding">Effects on Size and Padding</h3>
+<p>A flexible array member is treated as having no size when calculating the size of a structure, though padding between that member and the previous member of the structure may still exist:</p>
+<pre><code>/* Prints &quot;8,8&quot; on my machine, so there is no padding. */
+printf(&quot;%zu,%zu\n&quot;, sizeof(size_t), sizeof(struct ex1));
+
+/* Also prints &quot;8,8&quot; on my machine, so there is no padding in the ex2 structure itself. */
+printf(&quot;%zu,%zu\n&quot;, sizeof(struct ex2_header), sizeof(struct ex2));
+
+/* Prints &quot;5,8&quot; on my machine, so there are 3 bytes of padding. */
+printf(&quot;%zu,%zu\n&quot;, sizeof(int) + sizeof(char), sizeof(struct ex3));
+</code></pre>
+<p>The flexible array member is considered to have an incomplete array type, so its size cannot be calculated using <code>sizeof</code>.</p>
+<h3 id="usage">Usage</h3>
+<p>You can declare and initialize an object with a structure type containing a flexible array member, but you must not attempt to initialize the flexible array member since it is treated as if it does not exist. It is forbidden to try to do this, and compile errors will result.</p>
+<p>Similarly, you should not attempt to assign a value to any element of a flexible array member when declaring a structure in this way since there may not be enough padding at the end of the structure to allow for any objects required by the flexible array member. The compiler will not necessarily prevent you from doing this, however, so this can lead to undefined behavior.</p>
+<pre><code>/* invalid: cannot initialize flexible array member */
+struct ex1 e1 = {1, {2, 3}};
+/* invalid: hdr={foo=1, bar=2} OK, but cannot initialize flexible array member */
+struct ex2 e2 = {{1, 2}, {3}};
+/* valid: initialize foo=1, bar=2 members */
+struct ex3 e3 = {1, 2};
+
+e1.flex[0] = 3; /* undefined behavior, in my case */
+e3.flex[0] = 2; /* undefined behavior again */
+e2.flex[0] = e3.flex[0]; /* undefined behavior */
+</code></pre>
+<p>You may instead choose to use <code>malloc</code>, <code>calloc</code>, or <code>realloc</code> to allocate the structure with extra storage and later free it, which allows you to use the flexible array member as you wish:</p>
+<pre><code>/* valid: allocate an object of structure type `ex1` along with an array of 2 ints */
+struct ex1 *pe1 = malloc(sizeof(*pe1) + 2 * sizeof(pe1-&gt;flex[0]));
+
+/* valid: allocate an object of structure type ex2 along with an array of 4 ints */
+struct ex2 *pe2 = malloc(sizeof(struct ex2) + sizeof(int[4]));
+
+/* valid: allocate 5 structure type ex3 objects along with an array of 3 ints per object */
+struct ex3 *pe3 = malloc(5 * (sizeof(*pe3) + sizeof(int[3])));
+
+pe1-&gt;flex[0] = 3; /* valid */
+pe3[0]-&gt;flex[0] = pe1-&gt;flex[0]; /* valid */
+</code></pre>
+</div></div>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;LessThan&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-lessthan'>C99</span></span></span><div class='version-specific-content'>
+<h4 id="the-struct-hack-">The 'struct hack'</h4>
+<p>Flexible array members did not exist prior to C99 and are treated as errors. A common workaround is to declare an array of length 1, a technique called the 'struct hack':</p>
+<pre><code>struct ex1 
+{
+    size_t foo;
+    int flex[1];
+};
+</code></pre>
+<p>This will affect the size of the structure, however, unlike a true flexible array member:</p>
+<pre><code>/* Prints &quot;8,4,16&quot; on my machine, signifying that there are 4 bytes of padding. */
+printf(&quot;%d,%d,%d\n&quot;, (int)sizeof(size_t), (int)sizeof(int[1]), (int)sizeof(struct ex1));
+</code></pre>
+<p>To use the <code>flex</code> member as a flexible array member, you'd allocate it with <code>malloc</code> as shown above, except that <code>sizeof(*pe1)</code> (or the equivalent <code>sizeof(struct ex1)</code>) would be replaced with <code>offsetof(struct ex1, flex)</code> or the longer, type-agnostic expression <code>sizeof(*pe1)-sizeof(pe1-&gt;flex)</code>. Alternatively, you might subtract 1 from the desired length of the &quot;flexible&quot; array since it's already included in the structure size, assuming the desired length is greater than 0. The same logic may be applied to the other usage examples.</p>
+</div></div>
+<h3 id="compatibility">Compatibility</h3>
+<p>If compatibility with compilers that do not support flexible array members is desired, you may use a macro defined like <code>FLEXMEMB_SIZE</code> below:</p>
+<pre><code>#if __STDC_VERSION__ &lt; 199901L
+#define FLEXMEMB_SIZE 1
+#else
+#define FLEXMEMB_SIZE /* nothing */
+#endif
+
+struct ex1 
+{
+    size_t foo;
+    int flex[FLEXMEMB_SIZE];
+};
+</code></pre>
+<p>When allocating objects, you should use the <code>offsetof(struct ex1, flex)</code> form to refer to the structure size (excluding the flexible array member) since it is the only expression that will remain consistent between compilers that support flexible array members and compilers that do not:</p>
+<pre><code>struct ex1 *pe10 = malloc(offsetof(struct ex1, flex) + n * sizeof(pe10-&gt;flex[0]));
+</code></pre>
+<p>The alternative is to use the preprocessor to conditionally subtract 1 from the specified length. Due to the increased potential for inconsistency and general human error in this form, I moved the logic into a separate function:</p>
+<pre><code>struct ex1 *ex1_alloc(size_t n)
+{
+    struct ex1 tmp;
+#if __STDC_VERSION__ &lt; 199901L
+    if (n != 0)
+        n--;
+#endif
+    return malloc(sizeof(tmp) + n * sizeof(tmp.flex[0]));
+}
+...
+
+/* allocate an ex1 object with &quot;flex&quot; array of length 3 */
+struct ex1 *pe1 = ex1_alloc(3);
+</code></pre>
+
+
+            </div>
+            <h2 id="object-based-programming-using-structs">Object-based programming using structs</h2>
+            <div>
+                <p>Structs may be used to implement code in an object oriented manner. A struct is similar to a class, but is missing the functions which normally also form part of a class, we can add these as function pointer member variables. To stay with our coordinates example:</p>
+<pre><code>/* coordinates.h */
+
+typedef struct coordinate_s 
+{
+    /* Pointers to method functions */
+    void (*setx)(coordinate *this, int x);
+    void (*sety)(coordinate *this, int y);
+    void (*print)(coordinate *this);
+    /* Data */
+    int x;
+    int y;
+} coordinate;
+
+/* Constructor */
+coordinate *coordinate_create(void);
+/* Destructor */
+void coordinate_destroy(coordinate *this);
+</code></pre>
+<p>And now the implementing C file:</p>
+<pre><code>/* coordinates.c */
+
+#include &quot;coordinates.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Constructor */
+coordinate *coordinate_create(void)
+{
+    coordinate *c = malloc(sizeof(*c));
+    if (c != 0)
+    {
+        c-&gt;setx = &amp;coordinate_setx;
+        c-&gt;sety = &amp;coordinate_sety;
+        c-&gt;print = &amp;coordinate_print;
+        c-&gt;x = 0;
+        c-&gt;y = 0;
+    }
+    return c;
+}
+
+/* Destructor */
+void coordinate_destroy(coordinate *this)
+{
+    if (this != NULL)
+    {
+        free(this);  
+    }  
+}
+
+/* Methods */
+static void coordinate_setx(coordinate *this, int x)
+{
+    if (this != NULL)
+    {    
+        this-&gt;x = x;
+    }
+}
+
+static void coordinate_sety(coordinate *this, int y)
+{
+    if (this != NULL)
+    {
+        this-&gt;y = y;
+    }
+}
+
+static void coordinate_print(coordinate *this)
+{
+    if (this != NULL)
+    {
+        printf(&quot;Coordinate: (%i, %i)\n&quot;, this-&gt;x, this-&gt;y);
+    }
+    else
+    {
+        printf(&quot;NULL pointer exception!\n&quot;);
+    }
+}
+</code></pre>
+<p>An example usage of our coordinate class would be:</p>
+<pre><code>/* main.c */
+
+#include &quot;coordinates.h&quot;
+#include &lt;stddef.h&gt;
+
+int main(void) 
+{
+    /* Create and initialize pointers to coordinate objects */
+    coordinate *c1 = coordinate_create();
+    coordinate *c2 = coordinate_create();
+    
+    /* Now we can use our objects using our methods and passing the object as parameter */
+    c1-&gt;setx(c1, 1);
+    c1-&gt;sety(c1, 2);
+
+    c2-&gt;setx(c2, 3);
+    c2-&gt;sety(c2, 4);
+
+    c1-&gt;print(c1);
+    c2-&gt;print(c2);
+
+    /* After using our objects we destroy them using our &quot;destructor&quot; function */
+    coordinate_destroy(c1);
+    c1 = NULL;
+    coordinate_destroy(c2);
+    c2 = NULL;
+
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="passing-structs-to-functions">Passing structs to functions</h2>
+            <div>
+                <p>In C, all arguments are passed to functions by value, including structs. For small structs, this is a good thing as it means there is no overhead from accessing the data through a pointer. However, it also makes it very easy to accidentally pass a huge struct resulting in poor performance, particularly if the programmer is used to other languages where arguments are passed by reference.</p>
+<pre><code>struct coordinates
+{
+    int x;
+    int y;
+    int z;
+};
+
+// Passing and returning a small struct by value, very fast
+struct coordinates move(struct coordinates position, struct coordinates movement)
+{
+    position.x += movement.x;
+    position.y += movement.y;
+    position.z += movement.z;
+    return position;
+}
+
+// A very big struct
+struct lotsOfData
+{
+    int param1;
+    char param2[80000];
+};
+
+// Passing and returning a large struct by value, very slow!
+// Given the large size of the struct this could even cause stack overflow
+struct lotsOfData doubleParam1(struct lotsOfData value)
+{
+    value.param1 *= 2;
+    return value;
+}
+
+// Passing the large struct by pointer instead, fairly fast
+void doubleParam1ByPtr(struct lotsOfData *value)
+{
+    value-&gt;param1 *= 2;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="pointers-to-structs">Pointers to structs</h2>
+            <div>
+                <p>When you have a variable containing a <code>struct</code>, you can access its fields using the dot operator (<code>.</code>).  However, if you have a pointer to a <code>struct</code>, this will not work.  You have to use the arrow operator (<code>-&gt;</code>) to access its fields.  Here's an example of a terribly simple (some might say &quot;terrible and simple&quot;) implementation of a stack that uses pointers to <code>struct</code>s and demonstrates the arrow operator.</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+/* structs */
+struct stack
+{
+    struct node *top;
+    int size;
+};
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+/* function declarations */
+int push(int, struct stack*);
+int pop(struct stack*);
+void destroy(struct stack*);
+
+int main(void)
+{
+    int result = EXIT_SUCCESS;
+
+    size_t i;
+
+    /* allocate memory for a struct stack and record its pointer */
+    struct stack *stack = malloc(sizeof *stack);
+    if (NULL == stack)
+    {
+        perror(&quot;malloc() failed&quot;);
+        return EXIT_FAILURE;
+    }
+
+    /* initialize stack */
+    stack-&gt;top = NULL;
+    stack-&gt;size = 0;
+
+    /* push 10 ints */
+    {
+        int data = 0;
+        for(i = 0; i &lt; 10; i++)
+        {
+            printf(&quot;Pushing: %d\n&quot;, data);
+            if (-1 == push(data, stack))
+            {
+                perror(&quot;push() failed&quot;);
+                result = EXIT_FAILURE;
+                break;
+            }
+
+            ++data;
+        }
+    }
+
+    if (EXIT_SUCCESS == result)
+    {
+        /* pop 5 ints */
+        for(i = 0; i &lt; 5; i++)
+        {
+            printf(&quot;Popped: %i\n&quot;, pop(stack));
+        }
+    }
+
+    /* destroy stack */
+    destroy(stack);
+
+    return result;
+}
+
+/* Push a value onto the stack. */
+/* Returns 0 on success and -1 on failure. */
+int push(int data, struct stack *stack)
+{
+    int result = 0;
+
+    /* allocate memory for new node */
+    struct node *new_node = malloc(sizeof *new_node);
+    if (NULL == new_node)
+    {
+        result = -1;
+    }
+    else
+    {
+        new_node-&gt;data = data;
+        new_node-&gt;next = stack-&gt;top;
+        stack-&gt;top = new_node;
+        stack-&gt;size++;
+    }
+
+    return result;
+}
+
+/* Pop a value off of the stack. */
+/* Returns the value popped off the stack */
+int pop(struct stack *stack)
+{
+    struct node *top = stack-&gt;top;
+    int data = top-&gt;data;
+    stack-&gt;top = top-&gt;next;
+    stack-&gt;size--;
+    free(top);
+    return data;
+}
+
+/* destroy the stack */
+void destroy(struct stack *stack)
+{
+    /* free all pointers */
+    while(stack-&gt;top != NULL)
+    {
+        pop(stack);
+    }
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="simple-data-structures">Simple data structures</h2>
+            <div>
+                <p>Structure data types are useful way to package related data and have them behave
+like a single variable.</p>
+<p>Declaring a simple <code>struct</code> that holds two <code>int</code> members:</p>
+<pre><code>struct point 
+{
+    int x;
+    int y; 
+};
+</code></pre>
+<p><code>x</code> and <code>y</code> are called the <em>members</em> (or <em>fields</em>) of <code>point</code> struct.</p>
+<p>Defining and using structs:</p>
+<pre><code>struct point p;    // declare p as a point struct
+p.x = 5;           // assign p member variables
+p.y = 3;
+</code></pre>
+<p>Structs can be initialized at definition. The above is equivalent to:</p>
+<pre><code>struct point p = {5, 3};
+</code></pre>
+<p>Structs may also be initialized using <a class='doc-link' href="http://www.riptutorial.com/c/example/18609/using-designated-initializers">designated initializers</a>.</p>
+<p>Accessing fields is also done using the <code>.</code> operator</p>
+<pre><code>printf(&quot;point is (x = %d, y = %d)&quot;, p.x, p.y);
+</code></pre>
+
+
+            </div>
+            <h2 id="typedef-structs">Typedef Structs</h2>
+            <div>
+                <p>Combining <code>typedef</code> with <code>struct</code> can make code clearer. For example:</p>
+<pre><code>typedef struct 
+{
+    int x, y;
+} Point;
+</code></pre>
+<p>as opposed to:</p>
+<pre><code>struct Point 
+{
+    int x, y;
+};
+</code></pre>
+<p>could be declared as:</p>
+<pre><code>Point point;
+</code></pre>
+<p>instead of:</p>
+<pre><code>struct Point point;
+</code></pre>
+<p>Even better is to use the following</p>
+<pre><code>typedef struct Point Point;
+
+struct Point 
+{
+    int x, y;
+};
+</code></pre>
+<p>to have advantage of both possible definitions of <code>point</code>. Such a declaration is most convenient if you learned C++ first, where you may omit the <code>struct</code> keyword if the name is not ambiguous.</p>
+<p><code>typedef</code> names for structs could be in conflict with other identifiers of other parts of the program. Some consider this a disadvantage, but for most people having a <code>struct</code> and another identifier the same is quite disturbing. Notorious is e.g POSIX' <code>stat</code></p>
+<pre><code>int stat(const char *pathname, struct stat *buf);
+</code></pre>
+<p>where you see a function <code>stat</code> that has one argument that is <code>struct stat</code>.</p>
+<p><code>typedef</code>'d structs without a tag name always impose that the whole <code>struct</code> declaration is visible to code that uses it. The entire <code>struct</code> declaration must then be placed in a header file.</p>
+<p>Consider:</p>
+<pre><code>#include &quot;bar.h&quot;
+
+struct foo 
+{
+    bar *aBar;
+};
+</code></pre>
+<p>So with a <code>typedef</code>d <code>struct</code> that has no tag name, the <code>bar.h</code> file always has to include the whole definition of <code>bar</code>. If we use</p>
+<pre><code>typedef struct bar bar;
+</code></pre>
+<p>in <code>bar.h</code>, the details of the <code>bar</code> structure can be hidden.</p>
+<p>See <a class='doc-link' href="http://www.riptutorial.com/c/topic/2681/typedef">Typedef</a></p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../1990/strings.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../4590/structure-padding-and-packing.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-21</div>
+        <div itemprop="datePublished">2016-07-21</div>
+        <div itemprop="dateModified">2017-06-28</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=1119" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1431374512" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#flexible-array-members">
+                    Flexible Array Members
+                </a>
+            
+
+
+<ul id="accordion_385207237" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#type-declaration">
+                    Type Declaration
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#effects-on-size-and-padding">
+                    Effects on Size and Padding
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#usage">
+                    Usage
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#compatibility">
+                    Compatibility
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#object-based-programming-using-structs">
+                    Object-based programming using structs
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#passing-structs-to-functions">
+                    Passing structs to functions
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#pointers-to-structs">
+                    Pointers to structs
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#simple-data-structures">
+                    Simple data structures
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#typedef-structs">
+                    Typedef Structs
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1119/structs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/5568/jump-statements by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Jump Statements | C Language Tutorial">
+        <meta name="description" property="og:description" content="Jump Statements | C Language Tutorial">
+        <title>Jump Statements | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="jump-statements">Jump Statements</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>return val; /* Returns from the current function. val can be a value of any type that is converts to the function's return type. */</li>
+<li>return; /* Returns from the current void-function.  */</li>
+<li>break; /* Unconditionally jumps beyond the end (&quot;breaks out&quot;) of an Iteration Statement (loop) or out of the innermost switch statement. */</li>
+<li>continue; /* Unconditionally jumps to the beginning of an Iteration Statement (loop).  */</li>
+<li>goto LBL; /* Jumps to label LBL. */</li>
+<li>LBL:      <em>statement</em> /* any statement in the same function. */</li>
+</ul>
+
+
+            </div>
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>These are the jumps that are integrated into C by means of keywords.</p>
+<p>C also has another jump construct, <em>long jump</em>, that is specified with a data type, <code>jmp_buf</code>, and C library calls, <code>setjmp</code> and <code>longjmp</code>.</p>
+<a class="remarks-subsection-anchor" name="remarks-see-also-0"></a>
+<h3 id="see-also">See also</h3>
+<p><a class='doc-link' href="http://www.riptutorial.com/c/topic/5151/iteration-statements-loops--for--while--do-while">Iteration Statements/Loops: for, while, do-while</a></p>
+
+
+            </div>
+
+
+            <h2 id="using-break-and-continue">Using break and continue</h2>
+            <div>
+                <p>Immediately <code>continue</code> reading on invalid input or <code>break</code> on user request or end-of-file:</p>
+<pre><code>#include &lt;stdlib.h&gt; /* for EXIT_xxx macros */
+#include &lt;stdio.h&gt;  /* for printf() and getchar() */
+#include &lt;ctype.h&gt; /* for isdigit() */
+
+void flush_input_stream(FILE * fp);
+
+
+int main(void)
+{
+  int sum = 0;
+  printf(&quot;Enter digits to be summed up or 0 to exit:\n&quot;);
+
+  do
+  {
+    int c = getchar();
+    if (EOF == c)
+    {
+      printf(&quot;Read 'end-of-file', exiting!\n&quot;);
+
+      break;
+    }
+
+    if ('\n' != c)
+    {
+      flush_input_stream(stdin);
+    }
+
+    if (!isdigit(c))
+    {
+      printf(&quot;%c is not a digit! Start over!\n&quot;, c);
+
+      continue;
+    }
+
+    if ('0' == c)
+    {
+      printf(&quot;Exit requested.\n&quot;);
+
+      break;
+    }
+
+    sum += c - '0';
+
+    printf(&quot;The current sum is %d.\n&quot;, sum);
+  } while (1);
+
+  return EXIT_SUCCESS;
+}
+
+void flush_input_stream(FILE * fp)
+{
+  size_t i = 0;
+  int c;
+  while ((c = fgetc(fp)) != '\n' &amp;&amp; c != EOF) /* Pull all until and including the next new-line. */
+  {
+    ++i;
+  }
+
+  if (0 != i)
+  {
+    fprintf(stderr, &quot;Flushed %zu characters from input.\n&quot;, i);
+  }
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="using-goto-to-jump-out-of-nested-loops">Using goto to jump out of nested loops</h2>
+            <div>
+                <p>Jumping out of nested loops would usually require use of a boolean variable with a check for this variable in the loops. Supposing we are iterating over <code>i</code> and <code>j</code>, it could look like this</p>
+<pre><code>size_t i,j;
+for (i = 0; i &lt; myValue &amp;&amp; !breakout_condition; ++i) {
+    for (j = 0; j &lt; mySecondValue &amp;&amp; !breakout_condition; ++j) {
+        ... /* Do something, maybe modifying breakout_condition */
+            /* When breakout_condition == true the loops end */
+     }
+}   
+</code></pre>
+<p>But the C language offers the <code>goto</code> clause, which can be useful in this case. By using it with a label declared after the loops, we can easily break out of the loops.</p>
+<pre><code>size_t i,j;
+for (i = 0; i &lt; myValue; ++i) {
+    for (j = 0; j &lt; mySecondValue; ++j) {
+        ...
+        if(breakout_condition) 
+          goto final;
+    }
+}
+final:
+</code></pre>
+<p>However, often when this need comes up a <code>return</code> could be better used instead. This construct is also considered &quot;unstructured&quot; in structural programming theory.</p>
+<p>Another situation where <code>goto</code> might be useful is for jumping to an error-handler:</p>
+<pre><code>ptr = malloc(N *  x);
+if(!ptr)
+  goto out_of_memory;
+
+/* normal processing */
+free(ptr);
+return SUCCESS;
+
+out_of_memory:
+ free(ptr); /* harmless, and necessary if we have further errors */
+ return FAILURE;
+</code></pre>
+<p>Use of <code>goto</code> keeps error flow separate from normal program control flow. It is however also considered &quot;unstructured&quot; in the technical sense.</p>
+
+
+            </div>
+            <h2 id="using-return">Using return</h2>
+            <div>
+                <h3 id="returning-a-value">Returning a value</h3>
+<p>One commonly used case: returning from <code>main()</code></p>
+<pre><code>#include &lt;stdlib.h&gt; /* for EXIT_xxx macros */
+
+int main(int argc, char ** argv)
+{
+  if (2 &lt; argc)
+  {
+    return EXIT_FAILURE; /* The code expects one argument: 
+                            leave immediately skipping the rest of the function's code */
+  }
+
+  /* Do stuff. */
+
+  return EXIT_SUCCESS;
+}
+</code></pre>
+<p>Additional notes:</p>
+<ol>
+<li>
+<p>For a function having a return type as <code>void</code> (not including <code>void *</code> or related types), the <code>return</code> statement should not have any associated expression; i.e, the only allowed return statement would be <code>return;</code>.</p>
+</li>
+<li>
+<p>For a function having a non-<code>void</code> return type, the <code>return</code> statement shall not appear without an expression.</p>
+</li>
+<li>
+<p>For <code>main()</code> (and only for <code>main()</code>), an <em>explicit</em> <code>return</code> statement is not required (in C99 or later). If the execution reaches the terminating <code>}</code>, an implicit value of <code>0</code> is returned.  Some people think omitting this <code>return</code> is bad practice; others actively suggest leaving it out.</p>
+</li>
+</ol>
+<h3 id="returning-nothing">Returning nothing</h3>
+<p>Returning from a <code>void</code> function</p>
+<pre><code>void log(const char * message_to_log)
+{
+  if (NULL == message_to_log)
+  {
+    return; /* Nothing to log, go home NOW, skip the logging. */
+  }
+
+  fprintf(stderr, &quot;%s:%d %s\n&quot;, __FILE__, _LINE__, message_to_log);
+
+  return; /* Optional, as this function does not return a value. */
+}
+</code></pre>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../5151/iteration-statements-loops--for--while--do-while.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../560/linked-lists.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-08-20</div>
+        <div itemprop="datePublished">2016-08-20</div>
+        <div itemprop="dateModified">2016-12-19</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=5568" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1252068495" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+
+
+<ul id="accordion_554275486" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#see-also">
+                    See also
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-break-and-continue">
+                    Using break and continue
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-goto-to-jump-out-of-nested-loops">
+                    Using goto to jump out of nested loops
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-return">
+                    Using return
+                </a>
+            
+
+
+<ul id="accordion_-1446222544" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#returning-a-value">
+                    Returning a value
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#returning-nothing">
+                    Returning nothing
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/5568/jump-statements by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

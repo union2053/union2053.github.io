@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4989451/mutex-example---tutorial- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Mutex example / tutorial? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Mutex example / tutorial? | C Language Knowledge Base">
+        <title>[SOLVED] Mutex example / tutorial? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="mutex-example-tutorial-">Mutex example / tutorial?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/multithreading.html">multithreading</a></span>
+                        <span class="tag-item"><a href="../tag/mutex.html">mutex</a></span>
+                        <span class="tag-item"><a href="../tag/synchronization.html">synchronization</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm new to multithreading, and was trying to understand how mutexes work. Did a lot of Googling and <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPosixThreads.html" rel="noreferrer">I found a decent tutorial</a>, but it still left some doubts of how it works because I created my own program in which locking didn't work.</p>
+
+<p>One absolutely non-intuitive syntax of the mutex is <code>pthread_mutex_lock( &amp;mutex1 );</code>, where it looks like the mutex is being locked, when what I really want to lock is some other variable. Does this syntax mean that locking a mutex locks a region of code until the mutex is unlocked? Then how do threads know that the region is locked? [<em>UPDATE: Threads know that the region is locked, by</em> <a href="http://en.wikipedia.org/wiki/Memory_barrier#Multithreaded_programming_and_memory_visibility" rel="noreferrer">Memory Fencing</a> ]. And isn't such a phenomenon supposed to be called critical section? [<em>UPDATE: Critical section objects are available in Windows only, where the objects are faster than mutexes and are visible only to the thread which implements it. Otherwise, critical section just refers to the area of code protected by a mutex</em>]</p>
+
+<p>In short, could you please help with the simplest possible mutex <strong>example program</strong> and the simplest possible <strong>explanation</strong> on the logic of how it works? I'm sure this will help <strong><em>plenty</em></strong> of other newbies.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/453673/nav" target="_blank"><span itemprop="name">Nav</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">159</div>
+                                    <div itemprop="dateCreated">6/26/2014 9:37:27 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><em>Here goes my humble attempt to explain the concept to newbies around the world: (a <a href="http://nrecursions.blogspot.in/2014/08/mutex-tutorial-and-example.html" rel="noreferrer">color coded version</a> on my blog too)</em>  </p>
+
+<p>A lot of people run to a lone phone booth (no mobiles) to talk to their loved ones. The first person to catch the door-handle of the booth, is the one who is allowed to use the phone. He has to keep holding on to the handle of the door as long as he uses the phone, otherwise someone else will catch hold of the handle, throw him out and talk to his wife :) There's no queue system as such. When the person finishes his call, comes out of the booth and leaves the door handle, the next person to get hold of the door handle will be allowed to use the phone.  </p>
+
+<p>A <strong>thread</strong> is     : Each person<br>
+The <strong>mutex</strong> is    : The door handle<br>
+The <strong>lock</strong> is     : The person's hand<br>
+The <strong>resource</strong> is : The phone  </p>
+
+<p>Any thread which has to execute some lines of code which should not be modified by other threads at the same time (using the phone to talk to his wife), has to first acquire a lock on a mutex (clutching the door handle of the booth). Only then will a thread be able to run those lines of code (making the phone call).  </p>
+
+<p>Once the thread has executed that code, it should release the lock on the mutex so that another thread can acquire a lock on the mutex (other people being able to access the phone booth).</p>
+
+<p>[<em>The concept of having a mutex is a bit absurd when considering real-world exclusive access, but in the programming world I guess there was no other way to let the other threads 'see' that a thread was already executing some lines of code. There are concepts of recursive mutexes etc, but this example was only meant to show you the basic concept. Hope the example gives you a clear picture of the concept.</em>]  </p>
+
+<p><strong>With C++11 threading:</strong></p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;mutex&gt;
+
+std::mutex m;//you can use std::lock_guard if you want to be exception safe
+int i = 0;
+
+void makeACallFromPhoneBooth() 
+{
+    m.lock();//man gets a hold of the phone booth door and locks it. The other men wait outside
+      //man happily talks to his wife from now....
+      std::cout &lt;&lt; i &lt;&lt; " Hello Wife" &lt;&lt; std::endl;
+      i++;//no other thread can access variable i until m.unlock() is called
+      //...until now, with no interruption from other men
+    m.unlock();//man lets go of the door handle and unlocks the door
+}
+
+int main() 
+{
+    //This is the main crowd of people uninterested in making a phone call
+
+    //man1 leaves the crowd to go to the phone booth
+    std::thread man1(makeACallFromPhoneBooth);
+    //Although man2 appears to start second, there's a good chance he might
+    //reach the phone booth before man1
+    std::thread man2(makeACallFromPhoneBooth);
+    //And hey, man3 also joined the race to the booth
+    std::thread man3(makeACallFromPhoneBooth);
+
+    man1.join();//man1 finished his phone call and joins the crowd
+    man2.join();//man2 finished his phone call and joins the crowd
+    man3.join();//man3 finished his phone call and joins the crowd
+    return 0;
+}
+</code></pre>
+
+<p>Compile and run using <code>g++ -std=c++0x -pthread -o thread thread.cpp;./thread</code></p>
+
+<p>Instead of explicitly using <code>lock</code> and <code>unlock</code>, you can use brackets <a href="https://software.intel.com/en-us/node/527509" rel="noreferrer">as shown here</a>, if you are using a scoped lock <a href="https://stackoverflow.com/questions/15179553/boost-scoped-lock-vs-plain-lock-unlock">for the advantage it provides</a>. Scoped locks have a slight performance overhead though. </p>
+
+<p><strong>With TBB:</strong>
+You'll need <a href="http://threadingbuildingblocks.org/download.php" rel="noreferrer">TBB</a> to run the below program, but the intent of posting TBB code is that you understand the sequence of locking and unlocking just by looking at the simple code (could've shown scoped locking by not using acquire and release - <a href="https://stackoverflow.com/questions/4989451/mutex-example-tutorial/5156479#5156479">which also is exception safe</a> -, but this is clearer).</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include "/tbb/mutex.h"
+#include "/tbb/tbb_thread.h"
+using namespace tbb;
+
+typedef mutex myMutex;
+static myMutex sm;
+int i = 0;
+
+void someFunction() 
+{ 
+      //Note: Since a scoped lock is used below, you should know that you 
+      //can specify a scope for the mutex using curly brackets, instead of 
+      //using lock.acquire() and lock.release(). The lock will automatically 
+      //get released when program control goes beyond the scope.
+      myMutex::scoped_lock lock;//create a lock
+      lock.acquire(sm);//Method acquire waits until it can acquire a lock on the mutex
+         //***only one thread can access the lines from here...***
+         ++i;//incrementing i is safe (only one thread can execute the code in this scope) because the mutex locked above protects all lines of code until the lock release.
+         sleep(1);//simply creating a delay to show that no other thread can increment i until release() is executed
+         std::cout&lt;&lt;"In someFunction "&lt;&lt;i&lt;&lt;"\n";
+         //***...to here***
+      lock.release();//releases the lock (duh!)      
+}
+
+int main()
+{
+   tbb_thread my_thread1(someFunction);//create a thread which executes 'someFunction'
+   tbb_thread my_thread2(someFunction);
+   tbb_thread my_thread3(someFunction);
+
+   my_thread1.join();//This command causes the main thread (which is the 'calling-thread' in this case) to wait until thread1 completes its task.
+   my_thread2.join();
+   my_thread3.join();
+}
+</code></pre>
+
+<p>Note that <code>tbb_thread.h</code> is deprecated. The replacement is shown <a href="http://www.threadingbuildingblocks.org/docs/help/reference/appendices/compatibility_features/tbb_thread_cls.htm" rel="noreferrer">here</a>.  </p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/453673/nav" target="_blank"><span itemprop="name">Nav</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/4989451/mutex-example---tutorial-#answer-0</div>
+                                            <div itemprop="upvoteCount">249</div>
+                                            <div itemprop="dateCreated">5/5/2018 3:24:10 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>While a mutex may be used to solve other problems, the primary reason they exist is to provide mutual exclusion and thereby solve what is known as a race condition. When two (or more) threads or processes are attempting to access the same variable concurrently, we have potential for a race condition. Consider the following code</p>
+
+<pre><code>//somewhere long ago, we have i declared as int
+void my_concurrently_called_function()
+{
+  i++;
+}
+</code></pre>
+
+<p>The internals of this function look so simple. It's only one statement. However, a typical pseudo-assembly language equivalent might be:</p>
+
+<pre><code>load i from memory into a register
+add 1 to i
+store i back into memory
+</code></pre>
+
+<p>Because the equivalent assembly-language instructions are all required to perform the increment operation on i, we say that incrementing i is a non-atmoic operation. An atomic operation is one that can be completed on the hardware with a gurantee of not being interrupted once the instruction execution has begun. Incrementing i consists of a chain of 3 atomic instructions. In a concurrent system where several threads are calling the function, problems arise when a thread reads or writes at the wrong time. Imagine we have two threads running simultaneoulsy and one calls the function immediately after the other. Let's also say that we have i initialized to 0. Also assume that we have plenty of registers and that the two threads are using completely different registers, so there will be no collisions. The actual timing of these events may be:</p>
+
+<pre><code>thread 1 load 0 into register from memory corresponding to i //register is currently 0
+thread 1 add 1 to a register //register is now 1, but not memory is 0
+thread 2 load 0 into register from memory corresponding to i
+thread 2 add 1 to a register //register is now 1, but not memory is 0
+thread 1 write register to memory //memory is now 1
+thread 2 write register to memory //memory is now 1
+</code></pre>
+
+<p>What's happened is that we have two threads incrementing i concurrently, our function gets called twice, but the outcome is inconsistent with that fact. It looks like the function was only called once. This is because the atomicity is "broken" at the machine level, meaning threads can interrupt each other or work together at the wrong times.</p>
+
+<p>We need a mechanism to solve this. We need to impose some ordering to the instructions above. One common mechanism is to block all threads except one. Pthread mutex uses this mechanism.</p>
+
+<p>Any thread which has to execute some lines of code which may unsafely modify shared values by other threads at the same time (using the phone to talk to his wife), should first be made acquire a lock on a mutex. In this way, any thread that requires access to the shared data must pass through the mutex lock. Only then will a thread be able to execute the code. This section of code is called a critical section.</p>
+
+<p>Once the thread has executed the critical section, it should release the lock on the mutex so that another thread can acquire a lock on the mutex.</p>
+
+<p>The concept of having a mutex seems a bit odd when considering humans seeking exclusive access to real, physical objects but when programming, we must be intentional. Concurrent threads and processes don't have the social and cultural upbringing that we do, so we must force them to share data nicely.</p>
+
+<p>So technically speaking, how does a mutex work? Doesn't it suffer from the same race conditions that we mentioned earlier? Isn't pthread_mutex_lock() a bit more complex that a simple increment of a variable?</p>
+
+<p>Technically speaking, we need some hardware support to help us out. The hardware designers give us machine instructions that do more than one thing but are guranteed to be atomic. A classic example of such an instruction is the test-and-set (TAS). When trying to acquire a lock on a resource, we might use the TAS might check to see if a value in memory is 0. If it is, that would be our signal that the resource is in use and we do nothing (or more accurately, we wait by some mechanism. A pthreads mutex will put us into a special queue in the operating system and will notify us when the resource becomes available. Dumber systems may require us to do a tight spin loop, testing the condition over and over). If the value in memory is not 0, the TAS sets the location to something other than 0 without using any other instructions. It's like combining two assembly instructions into 1 to give us atomicity. Thus, testing and changing the value (if changing is appropriate) cannot be interrupted once it has begun. We can build mutexes on top of such an instruction.</p>
+
+<p>Note: some sections may appear similar to an earlier answer. I accepted his invite to edit, he preferred the original way it was, so I'm keeping what I had which is infused with a little bit of his verbiage.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/124493/san-jacinto" target="_blank">San Jacinto</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/4989451" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4989451/mutex-example---tutorial- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:05 GMT -->
+</html>

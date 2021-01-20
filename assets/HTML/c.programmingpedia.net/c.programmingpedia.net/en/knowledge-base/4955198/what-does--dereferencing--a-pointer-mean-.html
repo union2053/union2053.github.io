@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4955198/what-does--dereferencing--a-pointer-mean- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What does &quot;dereferencing&quot; a pointer mean? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What does &quot;dereferencing&quot; a pointer mean? | C Language Knowledge Base">
+        <title>[SOLVED] What does &quot;dereferencing&quot; a pointer mean? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-does-dereferencing-a-pointer-mean-">What does "dereferencing" a pointer mean?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/dereference.html">dereference</a></span>
+                        <span class="tag-item"><a href="../tag/pointers.html">pointers</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Please include an example with the explanation.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/606344/asir" target="_blank"><span itemprop="name">asir</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">473</div>
+                                    <div itemprop="dateCreated">6/20/2017 12:37:45 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <h2 id="reviewing-the-basic-terminology">Reviewing the basic terminology</h2>
+
+<p>It's <em>usually</em> good enough - unless you're programming assembly - to envisage a <strong><em>pointer</em></strong> containing a numeric memory address, with 1 referring to the second byte in the process's memory, 2 the third, 3 the fourth and so on....</p>
+
+<ul>
+<li>What happened to 0 and the first byte?  Well, we'll get to that later - see <em>null pointers</em> below.</li>
+<li>For a more accurate definition of what pointers store, and how memory and addresses relate, see <em>"More about memory addresses, and why you probably don't need to know"</em>.</li>
+</ul>
+
+<p>When you want to access the data/value in the memory that the pointer points to - the contents of the address with that numerical index - then you <strong><em>dereference</em></strong> the pointer.</p>
+
+<p>Different computer languages have different notations to tell the compiler or interpreter that you're now interested in the pointed-to value - I focus below on C and C++.</p>
+
+<h2 id="a-pointer-scenario">A pointer scenario</h2>
+
+<p>Consider in C, given a pointer such as <code>p</code> below...</p>
+
+<pre><code>const char* p = "abc";
+</code></pre>
+
+<p>...four bytes with the numerical values used to encode the letters 'a', 'b', 'c', and a 0 byte to denote the end of the textual data, are stored somewhere in memory and the numerical address of that data is stored in <code>p</code>.</p>
+
+<p>For example, if the string literal happened to be at address 0x1000 and <code>p</code> a 32-bit pointer at 0x2000, the memory content would be:</p>
+
+<pre><code>Memory Address (hex)    Variable name    Contents
+1000                                     'a' == 97 (ASCII)
+1001                                     'b' == 98
+1002                                     'c' == 99
+1003                                     0
+...
+2000-2003               p                1000 hex
+</code></pre>
+
+<p>Note that there is no variable name/identifier for address 0x1000, but we can indirectly refer to the string literal using a pointer storing its address: <code>p</code>.</p>
+
+<h2 id="dereferencing-the-pointer">Dereferencing the pointer</h2>
+
+<p>To refer to the characters <code>p</code> points to, we dereference <code>p</code> using one of these notations (again, for C):</p>
+
+<pre><code>assert(*p == 'a');  // The first character at address p will be 'a'
+assert(p[1] == 'b'); // p[1] actually dereferences a pointer created by adding
+                     // p and 1 times the size of the things to which p points:
+                     // In this case they're char which are 1 byte in C...
+assert(*(p + 1) == 'b');  // Another notation for p[1]
+</code></pre>
+
+<p>You can also move pointers through the pointed-to data, dereferencing them as you go:</p>
+
+<pre><code>++p;  // Increment p so it's now 0x1001
+assert(*p == 'b');  // p == 0x1001 which is where the 'b' is...
+</code></pre>
+
+<p>If you have some data that can be written to, then you can do things like this:</p>
+
+<pre><code>int x = 2;
+int* p_x = &amp;x;  // Put the address of the x variable into the pointer p_x
+*p_x = 4;       // Change the memory at the address in p_x to be 4
+assert(x == 4); // Check x is now 4
+</code></pre>
+
+<p>Above, you must have known at compile time that you would need a variable called <code>x</code>, and the code asks the compiler to arrange where it should be stored, ensuring the address will be available via <code>&amp;x</code>.</p>
+
+<h2 id="dereferencing-and-accessing-a-structure-data-member">Dereferencing and accessing a structure data member</h2>
+
+<p>In C, if you have a variable that is a pointer to a structure with data members, you can access those members using the <code>-&gt;</code> dereferencing operator:</p>
+
+<pre><code>typedef struct X { int i_; double d_; } X;
+X x;
+X* p = &amp;x;
+p-&gt;d_ = 3.14159;  // Dereference and access data member x.d_
+(*p).d_ *= -1;    // Another equivalent notation for accessing x.d_
+</code></pre>
+
+<h2 id="multi-byte-data-types">Multi-byte data types</h2>
+
+<p>To use a pointer, a computer program also needs some insight into the type of data that is being pointed at - if that data type needs more than one byte to represent, then the pointer normally points to the lowest-numbered byte in the data.</p>
+
+<p>So, looking at a slightly more complex example:</p>
+
+<pre><code>double sizes[] = { 10.3, 13.4, 11.2, 19.4 };
+double* p = sizes;
+assert(p[0] == 10.3);  // Knows to look at all the bytes in the first double value
+assert(p[1] == 13.4);  // Actually looks at bytes from address p + 1 * sizeof(double)
+                       // (sizeof(double) is almost always eight bytes)
+assert(++p);           // Advance p by sizeof(double)
+assert(*p == 13.4);    // The double at memory beginning at address p has value 13.4
+*(p + 2) = 29.8;       // Change sizes[3] from 19.4 to 29.8
+                       // Note: earlier ++p and + 2 here =&gt; sizes[3]
+</code></pre>
+
+<h2 id="pointers-to-dynamically-allocated-memory">Pointers to dynamically allocated memory</h2>
+
+<p>Sometimes you don't know how much memory you'll need until your program is running and sees what data is thrown at it... then you can dynamically allocate memory using <code>malloc</code>. It is common practice to store the address in a pointer...</p>
+
+<pre><code>int* p = malloc(sizeof(int)); // Get some memory somewhere...
+*p = 10;            // Dereference the pointer to the memory, then write a value in
+fn(*p);             // Call a function, passing it the value at address p
+(*p) += 3;          // Change the value, adding 3 to it
+free(p);            // Release the memory back to the heap allocation library
+</code></pre>
+
+<p>In C++, memory allocation is normally done with the <code>new</code> operator, and deallocation with <code>delete</code>:</p>
+
+<pre><code>int* p = new int(10); // Memory for one int with initial value 10
+delete p;
+
+p = new int[10];      // Memory for ten ints with unspecified initial value
+delete[] p;
+
+p = new int[10]();    // Memory for ten ints that are value initialised (to 0)
+delete[] p;
+</code></pre>
+
+<p>See also <em>C++ smart pointers</em> below.</p>
+
+<h2 id="losing-and-leaking-addresses">Losing and leaking addresses</h2>
+
+<p>Often a pointer may be the only indication of where some data or buffer exists in memory. If ongoing use of that data/buffer is needed, or the ability to call <code>free()</code> or <code>delete</code> to avoid leaking the memory, then the programmer must operate on a copy of the pointer...</p>
+
+<pre><code>const char* p = asprintf("name: %s", name);  // Common but non-Standard printf-on-heap
+
+// Replace non-printable characters with underscores....
+for (const char* q = p; *q; ++q)
+    if (!isprint(*q))
+        *q = '_';
+
+printf("%s\n", p); // Only q was modified
+free(p);
+</code></pre>
+
+<p>...or carefully orchestrate reversal of any changes...</p>
+
+<pre><code>const size_t n = ...;
+p += n;
+...
+p -= n;  // Restore earlier value...
+</code></pre>
+
+<h2 id="cplusplus-smart-pointers">C++ smart pointers</h2>
+
+<p>In C++, it's best practice to use <a href="http://en.wikipedia.org/wiki/Smart_pointer" rel="noreferrer">smart pointer</a> objects to store and manage the pointers, automatically deallocating them when the smart pointers' destructors run. Since C++11 the Standard Library provides two, <a href="http://en.cppreference.com/w/cpp/memory/unique_ptr" rel="noreferrer"><code>unique_ptr</code></a> for when there's a single owner for an allocated object...</p>
+
+<pre><code>{
+    std::unique_ptr&lt;T&gt; p{new T(42, "meaning")};
+    call_a_function(p);
+    // The function above might throw, so delete here is unreliable, but...
+} // p's destructor's guaranteed to run "here", calling delete
+</code></pre>
+
+<p>...and <a href="http://en.cppreference.com/w/cpp/memory/shared_ptr" rel="noreferrer"><code>shared_ptr</code></a> for share ownership (using <a href="http://en.wikipedia.org/wiki/Reference_counting" rel="noreferrer">reference counting</a>)...</p>
+
+<pre><code>{
+    std::shared_ptr&lt;T&gt; p(new T(3.14, "pi"));
+    number_storage.may_add(p); // Might copy p into its container
+} // p's destructor will only delete the T if number_storage didn't copy
+</code></pre>
+
+<h2 id="null-pointers">Null pointers</h2>
+
+<p>In C, <code>NULL</code> and <code>0</code> - and additionally in C++ <code>nullptr</code> - can be used to indicate that a pointer doesn't currently hold the memory address of a variable, and shouldn't be dereferenced or used in pointer arithmetic. For example:</p>
+
+<pre><code>const char* p_filename = NULL; // Or "= 0", or "= nullptr" in C++
+char c;
+while ((c = getopt(argc, argv, "f:")) != EOF)
+    switch (c) {
+      case f: p_filename = optarg; break;
+    }
+if (p_filename)  // Only NULL converts to false
+    ...   // Only get here if -f flag specified
+</code></pre>
+
+<p>In C and C++, just as inbuilt numeric types don't necessarily default to <code>0</code>, nor <code>bools</code> to <code>false</code>, pointers are not always set to <code>NULL</code>. All these are set to 0/false/NULL when they're <code>static</code> variables or (C++ only) direct or indirect member variables of static objects or their bases, or undergo zero initialisation (e.g. <code>new T();</code> and <code>new T(x, y, z);</code> perform zero-initialisation on T's members including pointers, whereas <code>new T;</code> does not).</p>
+
+<p>Further, when you assign <code>0</code>, <code>NULL</code> and <code>nullptr</code> to a pointer the bits in the pointer are not necessarily all reset: the pointer may not contain "0" at the hardware level, or refer to address 0 in your virtual address space. The compiler is allowed to store something else there if it has reason to, but whatever it does - if you come along and compare the pointer to <code>0</code>, <code>NULL</code>, <code>nullptr</code> or another pointer that was assigned any of those, the comparison must work as expected. So, below the source code at the compiler level, "NULL" is potentially a bit "magical" in the C and C++ languages...</p>
+
+<h2 id="more-about-memory-addresses-and-why-you-probably-don-t-need-to-know">More about memory addresses, and why you probably don't need to know</h2>
+
+<p>More strictly, initialised pointers store a bit-pattern identifying either <code>NULL</code> or a (often <a href="http://en.wikipedia.org/wiki/Virtual_address_space" rel="noreferrer">virtual</a>) memory address.</p>
+
+<p>The simple case is where this is a numeric offset into the process's entire virtual address space; in more complex cases the pointer may be relative to some specific memory area, which the CPU may select based on CPU "segment" registers or some manner of segment id encoded in the bit-pattern, and/or looking in different places depending on the machine code instructions using the address.</p>
+
+<p>For example, an <code>int*</code> properly initialised to point to an <code>int</code> variable might - after casting to a <code>float*</code> - access a value in "GPU" memory quite distinct from the <code>int</code> variable, then once cast to a function pointer might refer to distinct memory holding the machine opcodes for the function.</p>
+
+<p>3GL programming languages like C and C++ tend to hide this complexity, such that:</p>
+
+<ul>
+<li><p>If the compiler gives you a pointer to a variable or function, you can dereference it freely (as long as the variable's not destructed/deallocated meanwhile) and it's the compiler's problem whether e.g. a particular CPU register needs to be restored beforehand, or a distinct machine code instruction used</p></li>
+<li><p>If you get a pointer to an element in an array, you can use pointer arithmetic to move anywhere else in the array, or even to form an address one-past-the-end of the array that's legal to compare with other pointers to elements in the array (or that have similarly been moved by pointer arithmetic to the same one-past-the-end value); again in C and C++, it's up to the compiler to ensure this "just works"</p></li>
+<li><p>Specific OS functions, e.g. shared memory mapping, may give you pointers, and they'll "just work" within the range of addresses that makes sense for them</p></li>
+<li><p>Attempts to move legal pointers beyond these boundaries, or to cast arbitrary numbers to pointers, or use pointers cast to unrelated types, typically have <a href="http://en.wikipedia.org/wiki/Undefined_behavior" rel="noreferrer"><em>undefined behaviour</em></a>, so should be avoided in higher level libraries and applications, but code for OSes, device drivers, etc. may need to rely on behaviour left undefined by C or C++, that is nevertheless well defined by their specific hardware.</p></li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/410767/tony-delroy" target="_blank"><span itemprop="name">Tony Delroy</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/4955198/what-does--dereferencing--a-pointer-mean-#answer-0</div>
+                                            <div itemprop="upvoteCount">666</div>
+                                            <div itemprop="dateCreated">7/3/2018 12:08:18 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Dereferencing a pointer means getting the value that is stored in the memory location pointed by the pointer. The operator * is used to do this, and is called the dereferencing operator.</p>
+
+<pre><code>int a = 10;
+int* ptr = &amp;a;
+
+printf("%d", *ptr); // With *ptr I'm dereferencing the pointer. 
+                    // Which means, I am asking the value pointed at by the pointer.
+                    // ptr is pointing to the location in memory of the variable a.
+                    // In a's location, we have 10. So, dereferencing gives this value.
+
+// Since we have indirect control over a's location, we can modify its content using the pointer. This is an indirect way to access a.
+
+ *ptr = 20;         // Now a's content is no longer 10, and has been modified to 20.
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/528724/mahesh" target="_blank">Mahesh</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/4955198" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4955198/what-does--dereferencing--a-pointer-mean- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:40 GMT -->
+</html>

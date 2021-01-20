@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/51666736/how-do-i-use-a-c-library-in-a-rust-library-compiled-to-webassembly- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="How do I use a C library in a Rust library compiled to WebAssembly? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="How do I use a C library in a Rust library compiled to WebAssembly? | C Language Knowledge Base">
+        <title>How do I use a C library in a Rust library compiled to WebAssembly? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-do-i-use-a-c-library-in-a-rust-library-compiled-to-webassembly-">How do I use a C library in a Rust library compiled to WebAssembly?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/javascript.html">javascript</a></span>
+                        <span class="tag-item"><a href="../tag/rust.html">rust</a></span>
+                        <span class="tag-item"><a href="../tag/webassembly.html">webassembly</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm experimenting with Rust, WebAssembly and C interoperability to eventually use the Rust (with static C dependency) library in the browser or Node.js. I'm using <a href="https://github.com/rustwasm/wasm-bindgen" rel="noreferrer"><code>wasm-bindgen</code></a> for the JavaScript glue code.</p>
+
+<pre><code>#![feature(libc, use_extern_macros)]
+extern crate wasm_bindgen;
+
+use wasm_bindgen::prelude::*;
+use std::os::raw::c_char;
+use std::ffi::CStr;
+
+extern "C" {
+    fn hello() -&gt; *const c_char; // returns "hello from C" 
+}
+
+#[wasm_bindgen]
+pub fn greet() -&gt; String {
+    let c_msg = unsafe { CStr::from_ptr(hello()) };
+    format!("{} and Rust!", c_msg.to_str().unwrap())
+}
+</code></pre>
+
+<p>My first naive approach was to have a <code>build.rs</code> script that uses the gcc crate to generate a static library from the C code. Before introducing the WASM bits, I could compile the Rust program and see the <code>hello from C</code> output in the console, now I get an error from the compiler saying</p>
+
+<pre class="lang-none prettyprint-override"><code>rust-lld: error: unknown file type: hello.o
+</code></pre>
+
+<p>build.rs</p>
+
+<pre><code>extern crate gcc;                                                                                         
+
+fn main() {
+    gcc::Build::new()
+        .file("src/hello.c")
+        .compile("libhello.a");
+}
+</code></pre>
+
+<p>This  makes sense, now that I think about it, since the <code>hello.o</code> file was compiled for my laptop's architecture not WebAssembly. </p>
+
+<p>Ideally I'd like this to work out of the box adding some magic in my build.rs that would for example compile the C library to be a static WebAssembly library that Rust can use.</p>
+
+<p>What I think that could work, but would like to avoid since it sounds more problematic, is using Emscripten to create a WASM library for the C code then compile the Rust library separately and glue them together in JavaScript.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/931340/olanod" target="_blank"><span itemprop="name">olanod</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">22</div>
+                                    <div itemprop="dateCreated">8/3/2018 1:06:43 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>TL;DR: Jump to "<strong>New week, new adventures</strong>" in order to get "Hello from C and Rust!"</p>
+
+<p>The nice way would be creating a WASM library and passing it to the linker. <code>rustc</code> has an option for that (and there seem to be source-code directives too):</p>
+
+<pre class="lang-none prettyprint-override"><code>rustc &lt;yourcode.rs&gt; --target wasm32-unknown-unknown --crate-type=cdylib -C link-arg=&lt;library.wasm&gt;
+</code></pre>
+
+<p>The trick is that the library has to be a library, so it needs to contain <code>reloc</code> (and in practice <code>linking</code>) sections. Emscripten seems to have a symbol for that, <code>RELOCATABLE</code>:</p>
+
+<pre class="lang-none prettyprint-override"><code>emcc &lt;something.c&gt; -s WASM=1 -s SIDE_MODULE=1 -s RELOCATABLE=1 -s EMULATED_FUNCTION_POINTERS=1 -s ONLY_MY_CODE=1 -o &lt;something.wasm&gt;
+</code></pre>
+
+<p>(<code>EMULATED_FUNCTION_POINTERS</code> is included with <code>RELOCATABLE</code>, so it is not really necessary, <code>ONLY_MY_CODE</code> strips some extras, but it does not matter here either)  </p>
+
+<p>The thing is, <code>emcc</code> never generated a relocatable <code>wasm</code> file for me, at least not the version I downloaded this week, for Windows (I played this on hard difficulty, which retrospectively might have not been the best idea). So the sections are missing and <code>rustc</code> keeps complaining about <code>&lt;something.wasm&gt; is not a relocatable wasm file</code>.  </p>
+
+<p>Then comes <code>clang</code>, which can generate a relocatable <code>wasm</code> module with a very simple one-liner:</p>
+
+<pre class="lang-none prettyprint-override"><code>clang -c &lt;something.c&gt; -o &lt;something.wasm&gt; --target=wasm32-unknown-unknown
+</code></pre>
+
+<p>Then <code>rustc</code> says "Linking sub-section ended prematurely". Aw, yes (by the way, my Rust setup was brand new too). Then I read that there are two <code>clang</code> <code>wasm</code> targets: <code>wasm32-unknown-unknown-wasm</code> and <code>wasm32-unknown-unknown-elf</code>, and maybe the latter one should be used here. As my also brand new <code>llvm+clang</code> build runs into an internal error with this target, asking me to send an error report to the developers, it might be something to test on easy or medium, like on some *nix or Mac box.</p>
+
+<h3 id="minimal-success-story-sum-of-three-numbers">Minimal success story: sum of three numbers</h3>
+
+<p>At this point I just added <code>lld</code> to <code>llvm</code> and succeeded with linking a test code manually from bitcode files:</p>
+
+<pre class="lang-none prettyprint-override"><code>clang cadd.c --target=wasm32-unknown-unknown -emit-llvm -c
+rustc rsum.rs --target wasm32-unknown-unknown --crate-type=cdylib --emit llvm-bc
+lld -flavor wasm rsum.bc cadd.bc -o msum.wasm --no-entry
+</code></pre>
+
+<p>Aw yes, it sums numbers, 2 in <code>C</code> and 1+2 in Rust:</p>
+
+<p><strong>cadd.c</strong></p>
+
+<pre class="lang-c prettyprint-override"><code>int cadd(int x,int y){
+  return x+y;
+}
+</code></pre>
+
+<p><strong>msum.rs</strong></p>
+
+<pre><code>extern "C" {
+    fn cadd(x: i32, y: i32) -&gt; i32;
+}
+
+#[no_mangle]
+pub fn rsum(x: i32, y: i32, z: i32) -&gt; i32 {
+    x + unsafe { cadd(y, z) }
+}
+</code></pre>
+
+<p><strong>test.html</strong></p>
+
+<pre><code>&lt;script&gt;
+  fetch('msum.wasm')
+    .then(response =&gt; response.arrayBuffer())
+    .then(bytes =&gt; WebAssembly.compile(bytes))
+    .then(module =&gt; {
+      console.log(WebAssembly.Module.exports(module));
+      console.log(WebAssembly.Module.imports(module));
+      return WebAssembly.instantiate(module, {
+        env:{
+          _ZN4core9panicking5panic17hfbb77505dc622acdE:alert
+        }
+      });
+    })
+    .then(instance =&gt; {
+      alert(instance.exports.rsum(13,14,15));
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>That <code>_ZN4core9panicking5panic17hfbb77505dc622acdE</code> feels very natural (the module is compiled and instantiated in two steps in order to log the exports and imports, that is a way how such missing pieces can be found), and forecasts the demise of this attempt: the entire thing works because there is no other reference to the runtime library, and this particular method could be mocked/provided manually.</p>
+
+<h3 id="side-story-string">Side story: string</h3>
+
+<p>As <a href="https://doc.rust-lang.org/std/alloc/fn.alloc.html" rel="noreferrer"><code>alloc</code></a> and its <code>Layout</code> thing scared me a little, I went with the vector-based approach described/used from time to time, for example <a href="https://stackoverflow.com/questions/39550856/what-is-the-right-way-to-allocate-data-to-pass-to-an-ffi-call">here</a> or on <a href="https://www.hellorust.com/demos/import-memory/" rel="noreferrer">Hello, Rust!</a>.<br>
+Here is an example, getting the "Hello from ..." string from the outside...</p>
+
+<p><strong>rhello.rs</strong></p>
+
+<pre><code>use std::ffi::CStr;
+use std::mem;
+use std::os::raw::{c_char, c_void};
+use std::ptr;
+
+extern "C" {
+    fn chello() -&gt; *mut c_char;
+}
+
+#[no_mangle]
+pub fn alloc(size: usize) -&gt; *mut c_void {
+    let mut buf = Vec::with_capacity(size);
+    let p = buf.as_mut_ptr();
+    mem::forget(buf);
+    p as *mut c_void
+}
+
+#[no_mangle]
+pub fn dealloc(p: *mut c_void, size: usize) {
+    unsafe {
+        let _ = Vec::from_raw_parts(p, 0, size);
+    }
+}
+
+#[no_mangle]
+pub fn hello() -&gt; *mut c_char {
+    let phello = unsafe { chello() };
+    let c_msg = unsafe { CStr::from_ptr(phello) };
+    let message = format!("{} and Rust!", c_msg.to_str().unwrap());
+    dealloc(phello as *mut c_void, c_msg.to_bytes().len() + 1);
+    let bytes = message.as_bytes();
+    let len = message.len();
+    let p = alloc(len + 1) as *mut u8;
+    unsafe {
+        for i in 0..len as isize {
+            ptr::write(p.offset(i), bytes[i as usize]);
+        }
+        ptr::write(p.offset(len as isize), 0);
+    }
+    p as *mut c_char
+}
+</code></pre>
+
+<p>Built as <code>rustc rhello.rs --target wasm32-unknown-unknown --crate-type=cdylib</code></p>
+
+<p>... and actually working with <code>JavaScript</code>:</p>
+
+<p><strong>jhello.html</strong></p>
+
+<pre><code>&lt;script&gt;
+  var e;
+  fetch('rhello.wasm')
+    .then(response =&gt; response.arrayBuffer())
+    .then(bytes =&gt; WebAssembly.compile(bytes))
+    .then(module =&gt; {
+      console.log(WebAssembly.Module.exports(module));
+      console.log(WebAssembly.Module.imports(module));
+      return WebAssembly.instantiate(module, {
+        env:{
+          chello:function(){
+            var s="Hello from JavaScript";
+            var p=e.alloc(s.length+1);
+            var m=new Uint8Array(e.memory.buffer);
+            for(var i=0;i&lt;s.length;i++)
+              m[p+i]=s.charCodeAt(i);
+            m[s.length]=0;
+            return p;
+          }
+        }
+      });
+    })
+    .then(instance =&gt; {
+      /*var*/ e=instance.exports;
+      var ptr=e.hello();
+      var optr=ptr;
+      var m=new Uint8Array(e.memory.buffer);
+      var s="";
+      while(m[ptr]!=0)
+        s+=String.fromCharCode(m[ptr++]);
+      e.dealloc(optr,s.length+1);
+      console.log(s);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>It is not particularly beautiful (actually I have no clue about Rust), but it does something what I expect from it, and even that <code>dealloc</code> might work (at least invoking it twice throws a panic).<br>
+There was an important lesson on the way: when the module manages its memory, its size may change which results in invalidating the backing <code>ArrayBuffer</code> object and its views. So that is why <code>memory.buffer</code> is checked multiple times, and checked <em>after</em> calling into <code>wasm</code> code.</p>
+
+<p>And this is where I am stuck, because this code would refer to runtime libraries, and <code>.rlib</code>-s. The closest I could get to a manual build is the following:</p>
+
+<pre class="lang-none prettyprint-override"><code>rustc rhello.rs --target wasm32-unknown-unknown --crate-type=cdylib --emit obj
+lld -flavor wasm rhello.o -o rhello.wasm --no-entry --allow-undefined
+     liballoc-5235bf36189564a3.rlib liballoc_system-f0b9538845741d3e.rlib
+     libcompiler_builtins-874d313336916306.rlib libcore-5725e7f9b84bd931.rlib
+     libdlmalloc-fffd4efad67b62a4.rlib liblibc-453d825a151d7dec.rlib
+     libpanic_abort-43290913ef2070ae.rlib libstd-dcc98be97614a8b6.rlib
+     libunwind-8cd3b0417a81fb26.rlib
+</code></pre>
+
+<p>Where I had to use the <code>lld</code> sitting in the depths of the Rust toolchain as <code>.rlib</code>-s are said to be <a href="https://doc.rust-lang.org/reference/linkage.html" rel="noreferrer">interpreted</a>, so they are bound to the <code>Rust</code> toolchain</p>
+
+<blockquote>
+  <p><code>--crate-type=rlib</code>, <code>#[crate_type = "rlib"]</code> - A "Rust library" file will be produced. This is used as an intermediate artifact and can be thought of as a "static Rust library". These <code>rlib</code> files, unlike <code>staticlib</code> files, are interpreted by the Rust compiler in future linkage. This essentially means that <code>rustc</code> will look for metadata in <code>rlib</code> files like it looks for metadata in dynamic libraries. This form of output is used to produce statically linked executables as well as <code>staticlib</code> outputs.</p>
+</blockquote>
+
+<p>Of course this <code>lld</code> does not eat the <code>.wasm</code>/<code>.o</code> files generated with <code>clang</code> or <code>llc</code> ("Linking sub-section ended prematurely"), perhaps the Rust-part also should be rebuilt with the custom <code>llvm</code>.<br>
+Also, this build seems to be missing the actual allocators, besides <code>chello</code>, there will be 4 more entries in the import table: <code>__rust_alloc</code>, <code>__rust_alloc_zeroed</code>, <code>__rust_dealloc</code> and <code>__rust_realloc</code>. Which in fact could be provided from JavaScript after all, just defeats the idea of letting Rust handle its own memory, plus an allocator was present in the single-pass <code>rustc</code> build... Oh, yes, this is where I gave up for this week (Aug 11, 2018, at 21:56)</p>
+
+<h3 id="new-week-new-adventures-with-binaryen-wasm-dis-merge">New week, new adventures, with Binaryen, <code>wasm-dis/merge</code></h3>
+
+<p>The idea was to modify the ready-made Rust code (having allocators and everything in place). And this one works. As long as your C code has no data.</p>
+
+<p>Proof of concept code:</p>
+
+<p><strong>chello.c</strong></p>
+
+<pre class="lang-c prettyprint-override"><code>void *alloc(int len); // allocator comes from Rust
+
+char *chello(){
+  char *hell=alloc(13);
+  hell[0]='H';
+  hell[1]='e';
+  hell[2]='l';
+  hell[3]='l';
+  hell[4]='o';
+  hell[5]=' ';
+  hell[6]='f';
+  hell[7]='r';
+  hell[8]='o';
+  hell[9]='m';
+  hell[10]=' ';
+  hell[11]='C';
+  hell[12]=0;
+  return hell;
+}
+</code></pre>
+
+<p>Not extremely usual, but it is C code.</p>
+
+<pre class="lang-none prettyprint-override"><code>rustc rhello.rs --target wasm32-unknown-unknown --crate-type=cdylib
+wasm-dis rhello.wasm -o rhello.wast
+clang chello.c --target=wasm32-unknown-unknown -nostdlib -Wl,--no-entry,--export=chello,--allow-undefined
+wasm-dis a.out -o chello.wast
+wasm-merge rhello.wast chello.wast -o mhello.wasm -O
+</code></pre>
+
+<p>(<code>rhello.rs</code> is the same one presented in "Side story: string")<br>
+And the result works as</p>
+
+<p><strong>mhello.html</strong></p>
+
+<pre><code>&lt;script&gt;
+  fetch('mhello.wasm')
+    .then(response =&gt; response.arrayBuffer())
+    .then(bytes =&gt; WebAssembly.compile(bytes))
+    .then(module =&gt; {
+      console.log(WebAssembly.Module.exports(module));
+      console.log(WebAssembly.Module.imports(module));
+      return WebAssembly.instantiate(module, {
+        env:{
+          memoryBase: 0,
+          tableBase: 0
+        }
+      });
+    })
+    .then(instance =&gt; {
+      var e=instance.exports;
+      var ptr=e.hello();
+      console.log(ptr);
+      var optr=ptr;
+      var m=new Uint8Array(e.memory.buffer);
+      var s="";
+      while(m[ptr]!=0)
+        s+=String.fromCharCode(m[ptr++]);
+      e.dealloc(optr,s.length+1);
+      console.log(s);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>Even the allocators seem to do something (<code>ptr</code> readings from repeated blocks with/without <code>dealloc</code> show how memory does not leak/leaks accordingly).</p>
+
+<p>Of course this is super-fragile and has mysterious parts too:</p>
+
+<ul>
+<li>if the final merge is run with <code>-S</code> switch (generates source code instead of <code>.wasm</code>), and the result assembly file is compiled separately (using <code>wasm-as</code>), the result will be a couple bytes shorter (and those bytes are somewhere in the very middle of the running code, not in export/import/data sections)</li>
+<li>the order of merge matters, file with "Rust-origin" has to come first. <code>wasm-merge chello.wast rhello.wast [...]</code> dies with an entertaining message  
+
+<blockquote>
+  <p>[wasm-validator error in module] unexpected false: segment offset should be reasonable, on<br>
+  [i32] (i32.const 1)<br>
+  Fatal: error in validating output</p>
+</blockquote></li>
+<li>probably my fault, but I had to build a complete <code>chello.wasm</code> module (so, with linking). Compiling only (<code>clang -c [...]</code>) resulted in the relocatable module which was missed so much at the very beginning of this story, but decompiling that one (to <code>.wast</code>) lost the named export (<code>chello()</code>):<br>
+<code>(export "chello" (func $chello))</code> disappears completely<br>
+<code>(func $chello ...</code> becomes <code>(func $0 ...</code>, an internal function (<code>wasm-dis</code> loses <code>reloc</code> and <code>linking</code> sections, putting only a remark about them and their size into the assembly source)</li>
+<li>related to the previous one: this way (building a complete module) data from the secondary module can not be relocated by <code>wasm-merge</code>: while there is a chance for catching references to the string itself (<code>const char *HELLO="Hello from C";</code> becomes a constant at offset 1024 in particular, and later referred as <code>(i32.const 1024)</code> if it is local constant, inside a function), it does not happen. And if it is a global constant, its address becomes a global constant too, number 1024 stored at offset 1040, and the string is going to be referred as <code>(i32.load offset=1040 [...]</code>, which starts being difficult to catch.</li>
+</ul>
+
+<p>For laughs, this code compiles and works too...</p>
+
+<pre><code>void *alloc(int len);
+
+int my_strlen(const char *ptr){
+  int ret=0;
+  while(*ptr++)ret++;
+  return ret;
+}
+
+char *my_strcpy(char *dst,const char *src){
+  char *ret=dst;
+  while(*src)*dst++=*src++;
+  *dst=0;
+  return ret;
+}
+
+char *chello(){
+  const char *HELLO="Hello from C";
+  char *hell=alloc(my_strlen(HELLO)+1);
+  return my_strcpy(hell,HELLO);
+}
+</code></pre>
+
+<p>... just it writes "Hello from C" in the middle of Rust's message pool, resulting in the printout</p>
+
+<blockquote>
+  <p>Hello from Clt::unwrap()` on an `Err`an value and Rust!</p>
+</blockquote>
+
+<p>(Explanation: 0-initializers are not present in the recompiled code because of the optimization flag, <code>-O</code>)<br>
+And it also brings up the question about locating a <code>libc</code> (though defining them without <code>my_</code>, <code>clang</code> mentions <code>strlen</code> and <code>strcpy</code> as built-ins, also telling their correct singatures, it does not emit code for them and they become imports for the resulting module).</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/7916438/tevemadar" target="_blank"><span itemprop="name">tevemadar</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/51666736/how-do-i-use-a-c-library-in-a-rust-library-compiled-to-webassembly-#answer-0</div>
+                                            <div itemprop="upvoteCount">14</div>
+                                            <div itemprop="dateCreated">8/21/2018 9:39:02 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/51666736" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/51666736/how-do-i-use-a-c-library-in-a-rust-library-compiled-to-webassembly- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:57 GMT -->
+</html>

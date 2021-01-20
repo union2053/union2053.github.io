@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-concept-of-a-file.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:54:45 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Concept of a File</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Concept of a File'>C Concept of a File</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C File Structure Intro
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-open-a-file-and-display-it.html'>C Open file for read
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-fprintf-and-fscanf-functions.html'>C fprintf() and fscanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-random-file-access-fseek-and-ftell.html'>C fseek() ftell()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-append-a-list-of-file-to-a-single-file.html'>C fread() and fwrite() Example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-random-file-access-with-binary-i-o.html'>C Binary File
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-binary-viewer.html'>C file binary viewer
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Questions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-1.html'>C Review Questions 1
+      
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Concept of a File</h1>
+<a class ='btn btn-outline-dark' href=c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-open-a-file-and-display-it.html>Next</a><p>A file is essentially a serial sequence of bytes. 
+
+</p><center><img alt='c-file-structure.png' src='data:image/png;base64,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'/></center><br/><h3>Positions in a File 
+
+</h3><p>A file has a beginning and an end, and it has a current position, typically defined as so 
+many bytes from the beginning. 
+
+</p><p>The current position is where any file action, read or write, will take place. 
+
+</p><p>You can move the current position to any point in the file. 
+
+</p><p>A new current position can be specified as an offset from the beginning of the file or. 
+
+</p><p>You can also move the position to the end of the file. 
+
+</p><h3> File Streams 
+
+</h3><p>The C library provides functions for reading and writing to or from data streams. 
+
+</p><p>A stream is an abstract representation of any external source or destination for data.
+
+</p><p>The keyboard, the command line on your display, and files are all examples of things you can work  
+with as streams. 
+
+</p><p>You use the same input/output functions for reading and writing any external device that is mapped to a stream. 
+
+</p><h3>Text vs Binary
+
+</h3><p>There are two ways of writing data to a stream that represents a file. 
+
+</p><p>First, you can write a file as a text file, in which case data are written as a sequence of characters organized as lines, where each line is  
+terminated by a newline character. 
+
+</p><p>Second, you can write a file as a binary file. Data written to a binary file are written as a series of bytes exactly as they appear in memory, so a value of  
+type double, for example, would be written as the 8 bytes that appear in memory. 
+
+</p><h3>Accessing Files  
+
+</h3><p>The files that are on your disk drive each have a name, and the rules for naming files are determined  
+by your operating system. 
+
+</p><h3>File pointer
+
+</h3><p>A file pointer points to a struct of type  <b>FILE</b> that represents a stream. 
+
+</p><p>The  <b>FILE</b> structure contains information about the file. 
+
+</p><p>If you want to use several files simultaneously in a program, you need a separate  
+file pointer for each file.
+
+</p><p>As soon as you've finished using one file, you can associate the file pointer you were using with 
+another file. 
+
+</p><p>If you need to process several files, but you'll be working with them one at a time, you can do it with one file pointer. 
+</p><a class ='btn btn-outline-dark' href=c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-open-a-file-and-display-it.html>Next</a><h2>Related</h2><UL><LI><a href='c-copying-strings-with-strcpy-s.html'>C Copying Strings with strcpy_s</a></LI><LI><a href='c-concatenating-strings-using-strcat-s.html'>C Concatenating Strings using strcat_s()</a></LI><LI><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C Join four strings into a single string using strnlen_s() and strncat_s()</a></LI><LI><a href='c-open-a-file-and-display-it.html'>C open a file and display it</a></LI><LI><a href='c-fprintf-and-fscanf-functions.html'>C fprintf() and fscanf() Functions</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-concept-of-a-file.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:54:55 GMT -->
+</html>
+

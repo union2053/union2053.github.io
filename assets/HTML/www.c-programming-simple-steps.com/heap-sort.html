@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<!-- Mirrored from www.c-programming-simple-steps.com/heap-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:34:03 GMT -->
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Heap sort algorithm</title><meta name="description" content="Heap sort is a very fast sorting algorithm. It runs in O(n*log n) time and requires only constant additional space O(1). Here is how to implement it."><meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link href="sd/support-files/A.style.css.pagespeed.cf.J7qGLGG26B.css" rel="stylesheet" type="text/css">
+<!-- start: tool_blocks.sbi_html_head -->
+<link rel="canonical" href="heap-sort.html"/>
+<meta property="og:site_name" content="C Programming Simple Steps"/>
+<meta property="og:title" content="Heap sort algorithm"/>
+<meta property="og:description" content="Heap sort is a very fast sorting algorithm. It runs in O(n*log n) time and requires only constant additional space O(1). Here is how to implement it."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="heap-sort.html"/>
+<meta property="og:image" content="images/heapify.png"/>
+<meta property="og:image" content="images/sift-down.png"/>
+<meta property="og:image" content="c-programming-fb.png"/>
+<meta property="og:image" content="images/heap-sort.png"/>
+<script type="text/javascript" language="JavaScript">var https_page=0</script>
+
+
+    <script src="sd/support-files/eucookie.js.pagespeed.jm.ksMg6Nudeq.js" async defer type="text/javascript"></script><!-- end: tool_blocks.sbi_html_head -->
+<!-- start: shared_blocks.2087538#end-of-head -->
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');ga('create','UA-70996381-1','auto');ga('send','pageview');</script>
+
+<!-- end: shared_blocks.2087538#end-of-head -->
+    
+    <script type="text/javascript">var FIX=FIX||{};</script>
+    
+</head>
+<body class="responsive">
+
+    <div id="PageWrapper" class="modern">
+
+      <div id="HeaderWrapper">
+        <div id="Header">
+          <div class="Liner">
+            <div class="WebsiteName">
+              <a href="index.html"> </a>
+            </div><div class="Tagline"> </div>
+<!-- start: shared_blocks.2087525#top-of-header -->
+
+<!-- start: tool_blocks.navbar.horizontal.left --><div class="ResponsiveNavWrapper"> 
+ 		        <div class="ResponsiveNavButton"><span>Menu</span></div><div class="HorizontalNavBarLeft HorizontalNavBar HorizontalNavBarCSS ResponsiveNav"> 
+ 	
+                <ul class="root"><li class="li1"><a href="index.html">Home</a></li><li class="li1"><a href="online-computer-programming-courses.html">Courses</a></li><li class="li1 submenu">
+                            <span class="navheader">Tutorials</span><ul><li class="li2"><a href="programming-for-beginners.html">Beginners</a></li><li class="li2"><a href="c-programming-tutorial.html">C Tutorial</a></li><li class="li2"><a href="number-systems.html">Number Systems</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">C</span><ul><li class="li2"><a href="c-language-programming.html">C Language</a></li><li class="li2"><a href="c-keywords.html">C Keywords</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">Algorithms</span><ul><li class="li2"><a href="algorithms.html">Algorithms</a></li><li class="li2"><a href="sorting-algorithms.html">Sorting algorithms</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">General</span><ul><li class="li2"><a href="computer-programming.html">Computer Programming</a></li><li class="li2"><a href="c-programming-examples.html">Examples Download</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">About</span><ul><li class="li2"><a href="contact-me.html">Contact me</a></li><li class="li2"><a href="privacy-policy.html">Privacy Policy</a></li></ul></li></ul>
+            </div></div><!-- end: tool_blocks.navbar.horizontal.left -->
+<div id="google_custom_search">
+<script>(function(){var cx='004800009253881390622:5z6xrveedtw';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src='https://cse.google.com/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script>
+<gcse:search></gcse:search>
+</div>
+
+<!-- end: shared_blocks.2087525#top-of-header -->
+<!-- start: shared_blocks.2087491#bottom-of-header -->
+
+
+<!-- end: shared_blocks.2087491#bottom-of-header -->
+</div><!-- end Liner -->
+        </div><!-- end Header -->
+      </div><!-- end HeaderWrapper -->
+
+      <div id="ContentWrapper">
+        <div id="ContentColumn">
+          <div class="Liner">
+<!-- start: shared_blocks.2087484#above-h1 -->
+
+
+<!-- end: shared_blocks.2087484#above-h1 -->
+<h1><span style="color: #000000;"><span style="font-family: times new roman, serif;">Heap
+sort</span></span></h1>
+<!-- start: shared_blocks.2087549#below-h1 -->
+
+
+<!-- end: shared_blocks.2087549#below-h1 -->
+<h2>Background</h2>
+<p>&#xa0;&#xa0;&#xa0; Heap sort is a very fast sorting algorithm. It runs in O(n*log n) time and requires only constant additional space O(1). It is kind of evolved selection sort, which uses a complete binary tree structure. This reduces the time to find the max element and thus makes the routine very efficient. The algorithm is unstable, because its structure could change the order of elements with equal keys. One downside is that this sorting is not adaptive to nearly sorted input.<br/></p>
+<!-- start: shared_blocks.2087535#below-paragraph-1 -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087535#below-paragraph-1 -->
+<p>&#xa0;&#xa0;&#xa0; Aside from being very fast, heap sort has another major advantage. Its execution time is very predictive, because its best, average and worst cases all complete in O(n*log n) time.</p><p>&#xa0;&#xa0;&#xa0; Unlike bubble, selection and insertion sorts, explaining this method requires some preparation. For that reason we begin with explaining the basics</p>
+<h2>Heap</h2>
+<p>&#xa0;&#xa0;&#xa0; Heap sort uses a min or max heap to optimize the finding of the min/max element. Heap or also binary heap is a special type of binary tree. A given tree could be a heap only if:</p><p>- is complete (has at most one incomplete level of nodes and that is its deepest level)<br/>- the incomplete level is filled left to right</p><p>Here are 3 correct examples of heaps:</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/heap-examples.png" width="550" alt="Binary trees representing heaps" title="Binary trees representing heaps" data-pin-media="images/heap-examples.png"></div>
+<p>&#xa0;&#xa0;&#xa0; The first example has three elements, located on two levels. This is a complete heap – all levels are filled to their capacity.<br/>&#xa0;&#xa0;&#xa0; The second and third examples are 3-level heaps. Their leaves(3rd level) are incomplete, but they are filled left to right, so they are still correct heaps.<br/>Here are two examples of trees that violate the heap rules(properties):<br/></p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/not-heap-examples.png" width="550" alt="Binary trees violating the heap properties" title="Binary trees violating the heap properties" data-pin-media="images/not-heap-examples.png"></div>
+<p>&#xa0;&#xa0;&#xa0; The graph on the left has incomplete levels 3 and 4. This violates the first property of the heap. The right example has a “hole” in its 3rd level. This violates the second property.</p>
+<h2>Terms</h2>
+<ul><li>Node – this is a synonym to element. We represent them with the circles in the graphics.</li><li>Root – the first node, located above all other nodes. The root is the only element in the first level.</li><li>Leaf – leaf is any node of the last level.</li><li>Parent-Child
+ – This relation is valid for any pair of directly connected nodes. The 
+node, which is closer to the root is the parent and the other is the 
+child. For example, the root is the parent of the two nodes of level 2.</li><li>Height – the number of levels in the tree. Also defined as the shortest path from the root to any leaf.</li></ul>
+<h2>Max and Min Heap</h2>
+<p>&#xa0;&#xa0;&#xa0; The point of using heaps is to make some operations very quick. Such
+ operations could be searching for an element with certain value, 
+finding the maximum value and others. For that purpose we need to 
+arrange the data in a specific way.<br/>In max heap each node is greater than or equal to its children and smaller than or equal to its parent. Parent &gt;= Child<br/>Min heap is exactly the opposite. Parent &lt;= Child.<br/>Here are examples of max and min heap:</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/max-min-heap.png" width="550" alt="Max heap and min heap" title="Max heap and min heap" data-pin-media="images/max-min-heap.png"></div>
+&nbsp;&nbsp;&nbsp;&nbsp;Earlier we said that heap sort is kind of “evolved selection sort”. Remember how the selection sort works? It finds the smallest element and puts it in its correct place. Then it repeats this until all elements are in sorted. Finding the smallest element was a task with linear complexity O(n), because each time we were comparing the minimum value with each element. Repeating this for n elements resulted in O(n<sup>2</sup>) complexity.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Obviously, the biggest element in a max heap is always the root. So, if we have a max heap, we can find the max element in a constant time. You will see that extracting the maximum element and maintaining the max heap structure takes logarithmic time. Repeating this n times will allow us to sort an array in O(n * log n).
+<h2>The array as a heap</h2>
+<p>&#xa0;&#xa0;&#xa0; Usually the data that needs to be sorted is located in an array. 
+There is a smart way to work with the indices, which allows to simulate 
+the tree structure for the heap sort:<br/>&#xa0;- the root is always the first element from the array (index = 0)<br/>If the current index is “i”:<br/>&#xa0;- the index of the left child is: i * 2 + 1<br/>&#xa0;- the index of the right child is: i * 2 + 2<br/>&#xa0;- the parent index is: (i – 1) / 2<br/><br/>For example, let's map one array to a heap: 5, 2, 0, 6, 5, 10, 1<br/><br/>&#xa0;&#xa0;&#xa0; The root is the element with index 0.<br/>&#xa0;&#xa0;&#xa0;
+ It has the value 5. Its left child is calculated: 0*2 + 1 = 1. So, this
+ is the element with index 1 (value 2). The right child of the root has 
+index 0*2 + 2= 2, the element with value 0. Now we have completed the 
+first two levels.</p><p>&#xa0;&#xa0;&#xa0; To map the third level, we need to find the 
+children of the nodes of level 2. We take the left node and find its 
+children: 1*2 + 1 = 3, 1*2 + 2 = 4. And then the children of the right 
+node from level 2: 2*2 + 1 = 5, 2*2&#xa0; + 2 = 6. Left-to-right the nodes on
+ level 3 have indices 3, 4, 5, 6 with values 6, 5, 10, 1.<br/>Now we have the heap representation of the array. What kind of heap is that? Min?Max?</p><p>&#xa0;&#xa0;&#xa0; This is just a random heap, neither min nor max. </p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/array-heap-mapping.png" width="461" alt="Mapping array to a heap" title="Mapping array to a heap" data-pin-media="images/array-heap-mapping.png"></div>
+<h2>Heapify</h2>
+<p>&#xa0;&#xa0;&#xa0; Heap sort uses min or max heap. You just saw that the heap representation of a random array is not a min or max heap. Therefore we need to rearrange the elements in the array, so its tree representation is a max heap. This procedure is called “heapify”. Let's look at the implementation of this routine:</p><p>&#xa0;&#xa0;&#xa0; We start with the last leaf and go upwards until we reach the root. <br/>1. Our first step is to compare the current node to its "brother" and remember which one is bigger.&#xa0; <br/>2. Then we compare the bigger child with the parent. If the child is bigger we swap their places. This orders these three elements according to the max heap rules.<br/>3. If there was a swap in 2. we apply a function called "sift down" to the ex-parent, which went a level down. We will look more in the sift down algorithm in a moment. <br/>4. We go to the next pair of children and continue with 1-2-3-4 until we reach the root element.<br/><br/>&#xa0;&#xa0;&#xa0; This function runs in O(n*log n) time. It makes linear number of steps and each step takes logarithmic time, because of the Sift down procedure.<br/></p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/heapify.png" width="602" alt="Heapify flowchart" title="Heapify flowchart" data-pin-media="images/heapify.png"></div>
+<h2>Sift down</h2>
+<p>&#xa0;&#xa0;&#xa0; "Sift down" is a routine that sinks the current element to its correct place. This is used when we arrange our array to a correct max heap. In "heapify", when we find that a child is bigger than its parent we swap their places. In this situation it is likely that the smaller element needs to go down even further and that is exactly what "sift down" does.</p><p>1. We check if the current element has at least one child. If there are no children, the element is a leaf, it can't sink further and we are done.<br/>2. We compare the children of the current element and remember which one is the bigger one.<br/>3. We compare the bigger child to the parent.<br/>4. If the parent is bigger then it doesn't need to sink further and we are done. Otherwise we make a swap and repeat the procedure with the same element, but one level lower.</p><p>&#xa0;&#xa0;&#xa0; This algorithm makes at most O(log n) number of steps, because it goes only over one branch of the tree. The max depth that it could go is the number of level in the tree and that is O(log n) complexity.<br/></p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/sift-down.png" width="513" alt="Sift down flowchart" title="Sift down flowchart" data-pin-media="images/sift-down.png"></div>
+<h2>Heap Sort</h2>
+<p>&#xa0;&#xa0;&#xa0; Now that our array is a correct max heap we can start the sorting routine. We are going to repeat 2 for each element in the array:</p><p>1. Extract the max element from the heap. Since we have a max heap this means we always take the first element(the root). By "extract" we mean, swapping the first and the last element of the array and marking that we don't need to sort the last element anymore, since it is in its correct place.<br/>2. Sink the root element to its correct place, so our array will be a correct max heap again. Note that extracted elements will not be moved. Continue with step 1 until we extract all elements.</p><p>&#xa0;&#xa0;&#xa0; Heap sort runs in O(n*log n) time. It takes n-number of steps and each step has the comlpexity of extracting the root + the sift down. O(1) + O(log n). <br/></p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/heap-sort.png" width="391" alt="Heap sort flowchart" title="Heap sort flowchart" data-pin-media="images/heap-sort.png"></div>
+<p>&#xa0;&#xa0;&#xa0; At this point many of you will just discard this sorting as too complex. But guess what! Although the explanation is rather long, the typical implementation is about 60 lines of code.</p>
+<h2>Summary</h2>
+<p>Heap sort:<br/>&#xa0;- is guaranteed to run in O(n * log n) time<br/>&#xa0;- is unstable<br/>&#xa0;- is not adaptive<br/>&#xa0;- has constant space complexity O(1)<br/>&#xa0;- is used in practice to complement algorithms like quicksort<br/></p>
+<!-- start: shared_blocks.2087532#above-socialize-it -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087532#above-socialize-it -->
+<br>
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="index.html" itemprop="url">
+<span itemprop="title">C Programming</span></a>
+
+</span>
+
+ ›
+
+<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="sorting-algorithms.html" itemprop="url">
+<span itemprop="title">Sorting Algorithms</span></a>
+</span>
+
+ › Heap sort
+<!-- start: shared_blocks.2087488#socialize-it -->
+
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 100%; box-sizing: border-box">
+<div class="desktopOnly"><div class="" style="width: 50%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 53%;vertical-align:top;">
+<p>Did this help? Support me with your vote ;-)</p>
+</td><td class="column_1" style="width: 22.42%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/heap-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 24.29%;vertical-align:top;">
+
+<div class="" style="margin-left: auto; margin-right: auto; padding-top: 13px; float: none; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/heap-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div></div>
+
+<div class="mobileOnly"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 39.991%;vertical-align:top;">
+<p>Did this help?<br/></p>
+</td><td class="column_1" style="width: 29.989%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/heap-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 30%;vertical-align:top;">
+
+<div class="" style="padding-top: 13px; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/heap-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div>
+</div>
+
+<!-- end: shared_blocks.2087488#socialize-it -->
+<!-- start: shared_blocks.2087520#below-socialize-it -->
+
+<div id="disqus_thread"></div>
+<script>(function(){var d=document,s=d.createElement('script');s.src='http://c-programming-simple-steps.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<!-- end: shared_blocks.2087520#below-socialize-it -->
+</div><!-- end Liner -->
+        </div><!-- end ContentColumn -->
+      </div><!-- end ContentWrapper -->
+
+      <div id="FooterWrapper">
+        <div id="Footer">
+          <div class="Liner">
+<!-- start: shared_blocks.2087493#above-bottom-nav -->
+
+<!-- Share Desktop -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+<!-- Share Mobile -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+
+<!-- end: shared_blocks.2087493#above-bottom-nav -->
+<!-- start: shared_blocks.2087504#bottom-navigation -->
+
+
+<!-- end: shared_blocks.2087504#bottom-navigation -->
+<!-- start: shared_blocks.2087486#below-bottom-nav -->
+
+
+<!-- end: shared_blocks.2087486#below-bottom-nav -->
+<!-- start: shared_blocks.2087501#footer -->
+
+<p><a href="index.html">© Copyright 2008-2016 c-programming-simple-steps.com</a><br/></p>
+
+<!-- end: shared_blocks.2087501#footer -->
+</div><!-- end Liner -->
+        </div><!-- end Footer -->
+      </div><!-- end FooterWrapper -->
+
+    </div><!-- end PageWrapper -->
+
+    
+    <script type="text/javascript" src="sd/support-files/fix.js.pagespeed.jm.3phKUrh9Pj.js"></script>
+    
+    <script type="text/javascript">FIX.doEndOfBody();</script>
+    <script type="text/javascript" src="sd/support-files/design.js.pagespeed.jm.IGpaLo39T1.js"></script>
+<!-- start: tool_blocks.sbi_html_body_end -->
+    <script>var SS_PARAMS={pinterest_enabled:false,googleplus1_on_page:true,socializeit_onpage:false};</script>            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&autoLogAppEvents=1"></script><style>.g-recaptcha{display:inline-block}.recaptcha_wrapper{text-align:center}</style>
+	    <script>if(typeof recaptcha_callbackings!=="undefined"){SS_PARAMS.recaptcha_callbackings=recaptcha_callbackings||[]};</script>
+	    
+  <script>(function(d,id){if(d.getElementById(id)){return;}var s=d.createElement('script');s.async=true;s.defer=true;s.src="ssjs/ldr.js";s.id=id;d.getElementsByTagName('head')[0].appendChild(s);})(document,'_ss_ldr_script');</script><!-- end: tool_blocks.sbi_html_body_end -->
+  
+<!-- Generated at 13:14:33 07-Nov-2019 -->
+
+</body>
+
+<!-- Mirrored from www.c-programming-simple-steps.com/heap-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:34:10 GMT -->
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3323117/tries-data-structure-implementation----------application---dictionary by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] tries data structure implementation......... Application - Dictionary | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] tries data structure implementation......... Application - Dictionary | C Language Knowledge Base">
+        <title>[SOLVED] tries data structure implementation......... Application - Dictionary | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="tries-data-structure-implementation--application-dictionary">tries data structure implementation......... Application - Dictionary</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/data-structures.html">data-structures</a></span>
+                        <span class="tag-item"><a href="../tag/dictionary.html">dictionary</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Wanted to write a program to implement a dictionary of words using <strong>Tries Data Structure</strong>.</p>
+
+<p>Please tell me the structure for the implementation so that I could start the program, as i haven't got any article on internet, for Tries Implementation..</p>
+
+<p>The confusion is, that when we search through the word, and we get through the word at the leaf node, only then is the meaning of the word would be stored.. But all the nodes in Tries data structure will be of waste. i.e. storing a variable of meaning in every internal node......</p>
+
+<p>So, the basic idea, is with a help of small example as how to store dictionary, please let me know the structure for Tries Data Structure.. </p>
+
+<p>And please C program Implementation..</p>
+
+<p>Thanks..</p>
+
+<p>Compressed Tries.. This is giving me the correct Compressed Trie, as expected,,,, but there are some issues with it.... And wanted to discuss that....</p>
+
+<p>1)   I Build a simple trie first, and then compressed it using a function trie_compress(), Now when i want to add any word into it, it would want a changed trie_add(), also changed trie_lookup(), ok i will do this on my own, just wanted to know, is my approach correct or there could be some better way..</p>
+
+<p>2)   In trie_new(), I have used        t->substr = (char*)malloc(10);,,,,,, This doesn't look efficient, as memory should be allocated, as in when required. Can we improve upon this.</p>
+
+<pre><code>typedef struct trie
+{
+   int on;
+   char *substr;
+   struct trie *first_child;
+   struct trie *next_sibling;
+}trie;
+
+trie* trie_new()
+{
+   trie *t = (trie*)malloc(sizeof(trie));
+   t-&gt;substr = (char*)malloc(10);
+   t-&gt;on = 0;
+   t-&gt;substr[0] = '\0';
+   t-&gt;first_child = NULL;
+   t-&gt;next_sibling = NULL;
+
+   return t;
+}
+
+trie* trie_at_level(trie *t, char c)
+{
+   while(t != NULL)
+   {
+      if(t-&gt;substr[0] == c)
+      {
+         return t;
+      }
+      t = t-&gt;next_sibling;
+   }
+   return NULL;
+}
+
+void trie_add(trie *t, const char *str)
+{
+   const int n = strlen(str);
+   int i;
+
+   for(i=0; i&lt;n; i++)
+   {
+      const char c = str[i];
+      trie* parent = t;
+
+      t = t-&gt;first_child;
+      t = trie_at_level(t,c);
+      if(t == NULL)
+      {
+         t = trie_new();
+         t-&gt;substr[0] = c;
+         t-&gt;substr[1] = '\0';
+         t-&gt;next_sibling = parent-&gt;first_child;
+         parent-&gt;first_child = t;
+      }
+   }
+   t-&gt;on = 1;
+}
+
+int trie_lookup(trie *t, const char *str)
+{
+   const int n = strlen(str);
+   int i;
+
+   for(i=0; i&lt;n; i++)
+   {
+      const char c = str[i];
+      t = t-&gt;first_child;
+      t = trie_at_level(t,c);
+      if(t == NULL)
+         return 0;
+   }
+   return t-&gt;on;
+}
+
+void trie_compress(trie *t)
+{
+   trie* parent = t;
+   t = t-&gt;first_child;
+
+   if(t-&gt;first_child != NULL)
+      trie_compress(t);
+
+   if(t-&gt;next_sibling == NULL)
+   {
+      parent-&gt;substr = strcat(parent-&gt;substr,t-&gt;substr);
+      parent-&gt;first_child = t-&gt;first_child;
+      parent-&gt;on = t-&gt;first_child-&gt;on;
+      free(t);
+
+      return;
+   }
+   else
+      trie_compress(t-&gt;next_sibling);
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/66593/ageek" target="_blank"><span itemprop="name">AGeek</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">3</div>
+                                    <div itemprop="dateCreated">7/25/2010 2:54:31 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Okay, I think I got it right this time around.</p>
+
+<p>Compressed Trie:</p>
+
+<pre><code>#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct trie {
+  int value;
+  char* key;
+  struct trie* kids;
+  struct trie* next;
+} trie;
+
+/* Creates an empty trie.
+ */
+trie* trie_new () {
+  trie* t = (trie*) malloc (sizeof (trie));
+  t-&gt;value = 0;
+  t-&gt;key = NULL;
+  t-&gt;kids = NULL;
+  t-&gt;next = NULL;
+  return t;
+}
+
+/* Sets |t-&gt;key| to |key|.
+ */
+static void trie_set_key (trie* t, const char* key) {
+  char* key_copy = (char*) malloc (sizeof (char) * (strlen (key) + 1));
+  strcpy (key_copy, key);
+  free (t-&gt;key);
+  t-&gt;key = key_copy;
+}
+
+/* Creates a trie with |-&gt;key| set to |key| whose |-&gt;value| is on.
+ */
+static trie* trie_new_init (const char* key) {
+  trie* t = trie_new ();
+  t-&gt;value = 1;
+  trie_set_key (t, key);
+  return t;
+}
+
+/* Frees all memory used by the trie |t|.
+ */
+void trie_delete (trie* t) {
+  if (t == NULL) {
+    return;
+  }
+  trie_delete (t-&gt;kids);
+  trie_delete (t-&gt;next);
+  free (t-&gt;key);
+  free (t);
+}
+
+typedef struct trie_str_pair {
+  trie* trie;
+  const char* str;
+} trie_str_pair;
+
+/* Creates a trie_str_pair with the values |-&gt;trie| and |-&gt;str| set to
+ *  |t| and |str|, respectively.
+ */
+static trie_str_pair mk_trie_str_pair (trie* t, const char* str) {
+  trie_str_pair pair;
+  pair.trie = t;
+  pair.str = str;
+  return pair;
+}
+
+/* Tries to find a sibling of |t| or |t| itself that matches the input
+ *  choice function |choiceFunc|. A match occurs if |choiceFunc| returns
+ *  a string other than NULL. Upon a match, the matching trie and the string
+ *  are returned. Otherwise NULL values are returned in the pair struct.
+ */
+static trie_str_pair lookup_by (
+      const char* (*choiceFunc)(const char*, trie*)
+    , const char* key, trie* t
+  ) {
+  while (t != NULL) {
+    const char* str = choiceFunc (key, t);
+    if (str != NULL) {
+      return mk_trie_str_pair (t, str);
+    }
+    t = t-&gt;next;
+  }
+  return mk_trie_str_pair (NULL, NULL);
+}
+
+/* If |prefix| is a prefix of |str|, returns a pointer into |str| immediately
+ *  after the prefix.
+ */
+static const char* strip_prefix (const char* prefix, const char* str) {
+  int i;
+  for (i = 0; prefix [i] != '\0'; ++i) {
+    if (str [i] != prefix [i]) {
+      return NULL;
+    }
+  }
+  return str + i;
+}
+
+/* If |t-&gt;key| is a prefix of |str|, returns a pointer into |str| immediately
+ *  after the prefix.
+ */
+static const char* strip_prefix_with_key (const char* str, trie* t) {
+  return strip_prefix (t-&gt;key, str);
+}
+
+/* If |str| is a prefix of |t-&gt;key|, returns a pointer into |t-&gt;key|
+ *  immediately after the prefix.
+ */
+static const char* strip_prefix_from_key (const char* str, trie* t) {
+  return strip_prefix (str, t-&gt;key);
+}
+
+/* Returns a pointer into |str1| immediately after the longest common prefix
+ *  between |str1| and |str2|.
+ */
+static const char* strip_common_prefix (const char* str1, const char* str2) {
+  int i;
+  for (i = 0; str1 [i] != '\0' &amp;&amp; str2 [i] != '\0'; ++i) {
+    if (str1 [i] != str2 [i]) {
+      break;
+    }
+  }
+  if (i == 0) {
+    return NULL;
+  }
+  return str1 + i;
+}
+
+/* Returns a pointer into |str| past the longest common prefix between
+ *  |str| and |t-&gt;str|.
+ */
+static const char* strip_common_prefix_on_key (const char* str, trie* t) {
+  return strip_common_prefix (str, t-&gt;key);
+}
+
+/* Returns 1 if |key| is in the trie |t|. Returns 0 if not.
+ */
+int trie_lookup (trie* t, const char* key) {
+  while (key != NULL &amp;&amp; key [0] != '\0') {
+    trie_str_pair pair = lookup_by (strip_prefix_with_key, key, t-&gt;kids);
+    t = pair.trie;
+    if (t == NULL) {
+      return 0;
+    }
+    key = pair.str;
+  }
+  return t-&gt;value;
+}
+
+/* Adds |kid| to |t|'s list of kids.
+ */
+static void trie_add_kid (trie* t, trie* kid) {
+  kid-&gt;next = t-&gt;kids;
+  t-&gt;kids = kid;
+}
+
+/* Removes |kid| from |t|'s list of kids.
+ * |kid| must be in |t|'s list of kids.
+ */
+static void trie_remove_kid (trie* t, trie* kid) {
+  if (t-&gt;kids == kid) {
+    t-&gt;kids = kid-&gt;next;
+  }
+  else {
+    t = t-&gt;kids;
+    while (t-&gt;next != kid) {
+      t = t-&gt;next;
+    }
+    t-&gt;next = kid-&gt;next;
+  }
+}
+
+/* Replaces |kid| from |t|'s list of kids with |new_kid|.
+ * |kid| must be in |t|'s list of kids.
+ */
+static void trie_replace_kid (trie* t, trie* kid, trie* new_kid) {
+  trie_remove_kid (t, kid);
+  trie_add_kid (t, new_kid);
+}
+
+/* If |t| has exactly one kid and no grandkids, |t| and its kid are merged
+ *  into one trie node. In other words, |t|'s kid's |-&gt;key| is appended to
+ *  |t-&gt;key| and |t-&gt;value| becomes that of its kid's |-&gt;value|.
+ */
+static void trie_try_merge_with_kids (trie* t) {
+  if (t-&gt;key != NULL) {
+    trie* kid = t-&gt;kids;
+    if (kid != NULL &amp;&amp; kid-&gt;next == NULL) {
+      t-&gt;value = kid-&gt;value;
+      t-&gt;kids = kid-&gt;kids;
+      int new_len = strlen (t-&gt;key) + strlen (kid-&gt;key);
+      t-&gt;key = realloc (t-&gt;key, sizeof (char) * (new_len + 1));
+      strcat (t-&gt;key, kid-&gt;key);
+      free (kid-&gt;key);
+      free (kid);
+    }
+  }
+}
+
+/* Helper for trie_insert.
+ */
+static void trie_insert_split_key (
+      trie* t
+    , const char* key_prefix, const char* key_suffix
+  ) {
+  trie* kid = trie_new_init (key_suffix);
+  trie_add_kid (t, kid);
+  trie_set_key (t, key_prefix);
+}
+
+/* Helper for trie_insert.
+ */
+static void trie_insert_simple (trie* t, const char* key) {
+  trie* kid = trie_new_init (key);
+  trie_add_kid (t, kid);
+}
+
+/* Helper for trie_insert.
+ */
+static void trie_insert_fork (
+      trie* t
+    , trie* kid
+    , char* key_prefix  /* Caller loses ownership of this string */
+    , const char* key_suffix
+    , const char* kid_key_suffix
+  ) {
+  trie* fork_kid = trie_new ();
+  fork_kid-&gt;key = key_prefix;
+  fork_kid-&gt;kids = trie_new_init (key_suffix);
+  fork_kid-&gt;kids-&gt;next = kid;
+  trie_replace_kid (t, kid, fork_kid);
+  fork_kid-&gt;next = kid-&gt;next;
+  kid-&gt;next = NULL;
+  trie_set_key (kid, kid_key_suffix);
+}
+
+/* Inserts |key| into the trie |t|.
+ */
+void trie_insert (trie* t, const char* key) {
+  if (key [0] == '\0') {
+    return;
+  }
+  while (1) {
+    trie_str_pair pair = lookup_by (strip_prefix_with_key, key, t-&gt;kids);
+    trie* kid = pair.trie;
+    const char* stripped = pair.str;
+    if (kid != NULL) {
+      if (stripped [0] == '\0') {
+        kid-&gt;value = 1;
+        return;
+      }
+      t = kid;
+      key = stripped;
+      continue;
+    }
+    pair = lookup_by (strip_prefix_from_key, key, t-&gt;kids);
+    kid = pair.trie;
+    stripped = pair.str;
+    if (kid != NULL) {
+      trie_insert_split_key (kid, key, stripped);
+      return;
+    }
+    pair = lookup_by (strip_common_prefix_on_key, key, t-&gt;kids);
+    kid = pair.trie;
+    stripped = pair.str;
+    if (kid == NULL) {
+      trie_insert_simple (t, key);
+      return;
+    }
+    int prefix_len = stripped - key;
+    char* common_prefix = (char*) malloc (sizeof (char) * (prefix_len + 1));
+    strncpy (common_prefix, key, prefix_len);
+    common_prefix [prefix_len] = '\0';
+    trie_insert_fork (t, kid, common_prefix, stripped, kid-&gt;key + prefix_len);
+    return;
+  }
+}
+
+/* Helper for trie_remove.
+ */
+static void trie_remove_simple (trie* t, trie* kid) {
+  trie_remove_kid (t, kid);
+  free (kid-&gt;key);
+  free (kid);
+}
+
+/* Helper for trie_remove.
+ */
+static void trie_remove_merge (trie* t) {
+  t-&gt;value = 0;
+  trie_try_merge_with_kids (t);
+}
+
+/* Removes |key| from the trie |t|.
+ */
+void trie_remove (trie* t, const char* key) {
+  trie_str_pair pair = lookup_by (strip_prefix_with_key, key, t-&gt;kids);
+  trie* kid = pair.trie;
+  const char* stripped = pair.str;
+  if (kid == NULL) {
+    return;
+  }
+  if (stripped [0] == '\0') {
+    if (kid-&gt;kids == NULL) {
+      trie_remove_simple (t, kid);
+    }
+    else {
+      trie_remove_merge (kid);
+    }
+  }
+  else {
+    trie_remove (kid, stripped);
+  }
+  trie_try_merge_with_kids (t);
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/239916/thomas-eding" target="_blank"><span itemprop="name">Thomas Eding</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/3323117/tries-data-structure-implementation----------application---dictionary#answer-0</div>
+                                            <div itemprop="upvoteCount">5</div>
+                                            <div itemprop="dateCreated">7/27/2010 6:45:35 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/3323117" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3323117/tries-data-structure-implementation----------application---dictionary by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:12:52 GMT -->
+</html>

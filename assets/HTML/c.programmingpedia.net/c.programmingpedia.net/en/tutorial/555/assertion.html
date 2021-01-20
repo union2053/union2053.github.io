@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/555/assertion by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Assertion | C Language Tutorial">
+        <meta name="description" property="og:description" content="Assertion | C Language Tutorial">
+        <title>Assertion | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="assertion">Assertion</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>An <strong><em>assertion</em></strong> is a predicate that the presented condition must be true at the moment the assertion is encountered by the software. Most common are <strong><em>simple assertions</em></strong>, which are validated at execution time. However, <strong><em>static assertions</em></strong> are checked at compile time.</p>
+
+
+            </div>
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>assert(expression)</li>
+<li>static_assert(expression, message)</li>
+<li>_Static_assert(expression, message)</li>
+</ul>
+
+
+            </div>
+
+            <h2 id="parameters">Parameters</h2>
+            <div>
+                <table><thead><tr><th>Parameter</th><th>Details</th></tr></thead><tbody><tr><td>expression</td><td>expression of scalar type.</td></tr><tr><td>message</td><td>string literal to be included in the diagnostic message.</td></tr></tbody></table>
+
+            </div>
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>Both <code>assert</code> and <code>static_assert</code> are macros defined in <code>assert.h</code>.</p>
+<p>The definition of <code>assert</code> depends on the macro <code>NDEBUG</code> which is not defined by the standard library. If <code>NDEBUG</code> is defined, <code>assert</code> is a no-op:</p>
+<pre>#ifdef NDEBUG
+#  define assert(condition) ((void) 0)
+#else
+#  define assert(condition) /* implementation defined */
+#endif
+</pre>
+<p>Opinion varies about whether <code>NDEBUG</code> should always be used for production compilations.</p>
+<ul>
+<li>The pro-camp argues that <code>assert</code> calls <code>abort</code> and assertion messages are not helpful for end users, so the result is not helpful to user. If you have fatal conditions to check in production code you should use ordinary <code>if/else</code> conditions and <code>exit</code> or <code>quick_exit</code> to end the program. In contrast to <code>abort</code>, these allow the program to do some cleanup (via functions registered with <code>atexit</code> or <code>at_quick_exit</code>).</li>
+<li>The con-camp argues that <code>assert</code> calls should never fire in production code, but if they do, the condition that is checked means there is something dramatically wrong and the program will misbehave worse if execution continues.  Therefore, it is better to have the assertions active in production code because if they fire, hell has already broken loose.</li>
+<li>Another option is to use a home-brew system of assertions which always perform the check but handle errors differently between development (where <code>abort</code> is appropriate) and production (where an 'unexpected internal error - please contact Technical Support' may be more appropriate).</li>
+</ul>
+<p><code>static_assert</code> expands to <code>_Static_assert</code> which is a keyword. The condition is checked at compile time, thus <code>condition</code> must be a constant expression.  There is no need for this to be handled differently between development and production.</p>
+
+
+            </div>
+
+
+            <h2 id="assert-error-messages">Assert Error Messages</h2>
+            <div>
+                <p>A trick exists that can display an error message along with an assertion. Normally, you would write code like this</p>
+<pre><code>void f(void *p)
+{
+    assert(p != NULL);
+    /* more code */
+}
+</code></pre>
+<p>If the assertion failed, an error message would resemble</p>
+<blockquote>
+<p>Assertion failed: p != NULL, file main.c, line 5</p>
+</blockquote>
+<p>However, you can use logical AND (<code>&amp;&amp;</code>) to give an error message as well</p>
+<pre><code>void f(void *p)
+{
+    assert(p != NULL &amp;&amp; &quot;function f: p cannot be NULL&quot;);
+    /* more code */
+}
+</code></pre>
+<p>Now, if the assertion fails, an error message will read something like this</p>
+<blockquote>
+<p>Assertion failed: p != NULL &amp;&amp; &quot;function f: p cannot be NULL&quot;, file main.c, line 5</p>
+</blockquote>
+<p>The reason as to why this works is that a string literal always evaluates to non-zero (true). Adding <code>&amp;&amp; 1</code> to a Boolean expression has no effect. Thus, adding <code>&amp;&amp; &quot;error message&quot;</code> has no effect either, except that the compiler will display the entire expression that failed.</p>
+
+
+            </div>
+            <h2 id="assertion-of-unreachable-code">Assertion of Unreachable Code</h2>
+            <div>
+                <p>During development, when certain code paths must be prevented from the reach of control flow, you may use <code>assert(0)</code> to indicate that such a condition is erroneous:</p>
+<pre><code>switch (color) {
+    case COLOR_RED:
+    case COLOR_GREEN:
+    case COLOR_BLUE:
+        break;
+
+    default:
+        assert(0);
+}
+</code></pre>
+<p>Whenever the argument of the <code>assert()</code> macro evaluates false, the macro will write diagnostic information to the standard error stream and then abort the program.  This information includes the file and line number of the <code>assert()</code> statement and can be very helpful in debugging.  Asserts can be disabled by defining the macro <code>NDEBUG</code>.</p>
+<p>Another way to terminate a program when an error occurs are with the standard library functions <code>exit</code>, <code>quick_exit</code> or <code>abort</code>. <code>exit</code> and <code>quick_exit</code> take an argument that can be passed back to your environment. <code>abort()</code> (and thus <code>assert</code>) can be a really severe termination of your program, and certain cleanups that would otherwise be performed at the end of the execution, may not be performed.</p>
+<p>The primary advantage of <code>assert()</code> is that it automatically prints debugging information.  Calling <code>abort()</code> has the advantage that it cannot be disabled like an assert, but it may not cause any debugging information to be displayed.  In some situations, using both constructs together may be beneficial:</p>
+<pre><code>if (color == COLOR_RED || color == COLOR_GREEN) {
+   ...
+} else if (color == COLOR_BLUE) {
+   ...
+} else {
+   assert(0), abort();
+}
+</code></pre>
+<p>When asserts are <em>enabled</em>, the <code>assert()</code> call will print debug information and terminate the program.  Execution never reaches the <code>abort()</code> call.  When asserts are <em>disabled</em>, the <code>assert()</code> call does nothing and <code>abort()</code> is called.  This ensures that the program <em>always</em> terminates for this error condition; enabling and disabling asserts only effects whether or not debug output is printed.</p>
+<p>You should never leave such an <code>assert</code> in production code, because the debug information is not helpful for end users and because <code>abort</code> is generally a much too severe termination that inhibit cleanup handlers that are installed for <code>exit</code> or <code>quick_exit</code> to run.</p>
+
+
+            </div>
+            <h2 id="precondition-and-postcondition">Precondition and Postcondition</h2>
+            <div>
+                <p>One use case for assertion is precondition and postcondition.
+This can be very useful to maintain <a href="https://en.wikipedia.org/wiki/Invariant_(computer_science)" rel="nofollow">invariant</a> and <a href="https://en.wikipedia.org/wiki/Design_by_contract" rel="nofollow">design by contract</a>.
+For a example a length is always zero or positive so this function must return a zero or positive value.</p>
+<pre><code>#include &lt;stdio.h&gt;
+/* Uncomment to disable `assert()` */
+/* #define NDEBUG */
+#include &lt;assert.h&gt;
+
+int length2 (int *a, int count)
+{
+    int i, result = 0;
+
+    /* Precondition: */
+    /* NULL is an invalid vector */
+    assert (a != NULL);
+    /* Number of dimensions can not be negative.*/ 
+    assert (count &gt;= 0);
+
+    /* Calculation */
+    for (i = 0; i &lt; count; ++i) 
+    {
+        result = result + (a[i] * a[i]);
+    }
+
+    /* Postcondition: */
+    /* Resulting length can not be negative. */
+    assert (result &gt;= 0);
+    return result;
+}
+
+#define COUNT 3
+
+int main (void)
+{
+    int a[COUNT] = {1, 2, 3};
+    int *b = NULL;
+    int r;
+    r = length2 (a, COUNT);
+    printf (&quot;r = %i\n&quot;, r);
+    r = length2 (b, COUNT);
+    printf (&quot;r = %i\n&quot;, r);
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="simple-assertion">Simple Assertion</h2>
+            <div>
+                <p>An assertion is a statement used to assert that a fact must be true when that line of code is reached. Assertions are useful for ensuring that expected conditions are met.  When the condition passed to an assertion is true, there is no action.  The behavior on false conditions depends on compiler flags.  When assertions are enabled, a false input causes an immediate program halt.  When they are disabled, no action is taken.  It is common practice to enable assertions in internal and debug builds, and disable them in release builds, though assertions are often enabled in release. (Whether termination is better or worse than errors depends on the program.) Assertions should be used only to catch internal programming errors, which usually means being passed bad parameters.</p>
+<pre><code>#include &lt;stdio.h&gt;
+/* Uncomment to disable `assert()` */
+/* #define NDEBUG */
+#include &lt;assert.h&gt;
+
+int main(void)
+{
+    int x = -1;
+    assert(x &gt;= 0);
+
+    printf(&quot;x = %d\n&quot;, x);   
+    return 0;
+}
+</code></pre>
+<p>Possible output with <code>NDEBUG</code> undefined:</p>
+<pre><code>a.out: main.c:9: main: Assertion `x &gt;= 0' failed.
+</code></pre>
+<p>Possible output with <code>NDEBUG</code> defined:</p>
+<pre><code>x = -1
+</code></pre>
+<p>It's good practice to define <code>NDEBUG</code> globally, so that you can easily compile your code with all assertions either on or off. An easy way to do this is define <code>NDEBUG</code> as an option to the compiler, or define it in a shared configuration header (e.g. <code>config.h</code>).</p>
+
+
+            </div>
+            <h2 id="static-assertion">Static Assertion</h2>
+            <div>
+                <div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C11&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C11</span></span></span><div class='version-specific-content'>
+<p>Static assertions are used to check if a condition is true when the code is compiled. If it isn't, the compiler is required to issue an error message and stop the compiling process.</p>
+<p>A static assertion is one that is checked at compile time, not run time. The condition must be a constant expression, and if false will result in a compiler error. The first argument, the condition that is checked, must be a constant expression, and the second a string literal.</p>
+<p>Unlike assert, <code>_Static_assert</code> is a keyword. A convenience macro <code>static_assert</code> is defined in <code>&lt;assert.h&gt;</code>.</p>
+<pre><code>#include &lt;assert.h&gt;
+
+enum {N = 5};
+_Static_assert(N == 5, &quot;N does not equal 5&quot;);
+static_assert(N &gt; 10, &quot;N is not greater than 10&quot;);  /* compiler error */
+</code></pre>
+</div></div>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;Equal&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-equal'>C99</span></span></span><div class='version-specific-content'>
+<p>Prior to C11, there was no direct support for static assertions. However, in C99, static assertions could be emulated with macros that would trigger a compilation failure if the compile time condition was false. Unlike <code>_Static_assert</code>, the second parameter needs to be a proper token name so that a variable name can be created with it. If the assertion fails, the variable name is seen in the compiler error, since that variable was used in a syntactically incorrect array declaration.</p>
+<pre><code>#define STATIC_MSG(msg, l) STATIC_MSG2(msg, l)
+#define STATIC_MSG2(msg,l) on_line_##l##__##msg
+#define STATIC_ASSERT(x, msg) extern char STATIC_MSG(msg, __LINE__) [(x)?1:-1]
+ 
+enum { N = 5 };
+STATIC_ASSERT(N == 5, N_must_equal_5);
+STATIC_ASSERT(N &gt; 5, N_must_be_greater_than_5); /* compile error */
+</code></pre>
+<p>Before C99, you could not declare variables at arbitrary locations in a block, so you would have to be extremely cautious about using this macro, ensuring that it only appears where a variable declaration would be valid.</p>
+</div></div>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../322/arrays.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../4924/atomics.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-04-19</div>
+        <div itemprop="datePublished">2016-04-19</div>
+        <div itemprop="dateModified">2017-03-02</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=555" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1784112242" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#parameters">
+                    Parameters
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#assert-error-messages">
+                    Assert Error Messages
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#assertion-of-unreachable-code">
+                    Assertion of Unreachable Code
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#precondition-and-postcondition">
+                    Precondition and Postcondition
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#simple-assertion">
+                    Simple Assertion
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#static-assertion">
+                    Static Assertion
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/555/assertion by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+</html>

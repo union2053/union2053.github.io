@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-a-pointer-when-receiving-input-from-scanf.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Using A Pointer When Receiving Input from scanf</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Using A Pointer When Receiving Input from scanf'>C Using A Pointer When Receiving Input from scanf</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Using A Pointer When Receiving Input from scanf</h1>
+<a class ='btn btn-outline-dark' href=c-function-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-to-constants.html>Next</a><p>When you've used <i style='color:blue'>scanf</i>() to input values, you've used the &amp; operator to obtain the address  
+of the variable that is to receive the input and used that as the argument to the function. 
+
+</p><p>When you have a pointer that already contains an address, you can use the pointer name as an argument. 
+
+</p><p>You can see this in the following example: 
+</p><div class='myCodeDiv'><button id='DOKQG' class='myCopyButton' data-clipboard-target='#EXMXV'>Copy</button><pre  id='EXMXV' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> value = 0; 
+  <span class='r'>int</span> *pvalue = &amp;value;                     <span class='c'>// Set pointer to refer to value </span>
+
+  printf (<span class='q'>"Input an integer: "</span>); 
+  scanf(<span class='q'>" %d"</span>, pvalue);                   <span class='c'>// Read into value via the pointer </span>
+
+  printf(<span class='q'>"You entered %d.\n"</span>, value);       <span class='c'>// Output the value entered </span>
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DOKQG');clipboard.on('success', function(e) {$('#DOKQG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DOKQG').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABACAIAAADH6BVtAAAEtUlEQVR42u3dy47jNhBA0fkI//83BsjslcliAKMtkVVFSjblc5CVx3qxA/C2Xv1rAwBYxC9DAAAIFwAA4QIACBcAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADC5U0ej4dBAADhIlxuNUrtgXr8ZawASITLY48acJjjydI42Od/0i4AJMLlQ+YP4fI9B/v6uXYBYE64PP/2vHs+Jv6Fo08eB8q/6xd2cmTlqXHoHmZ3D5//tbCG58+7XxvsCeECwNXhclQe2S9cMHUN7uQFA9XdaGrxo2qJxOjWu1gjXABYOFzKs+OV4TISAZfNx8HbPmrD2F1Do3jOIFz4Br//+ffPf8YBhEtlmmxchVkiXNrXkiI/iODVqGv+/xMufEOyLBQuzzssthAubw6Xwk4uccZl/AdR2JBwgWwNLFct8gXhIlyEi3BBuCyzk8KFbw+X1M255btK4zu/yqWi7E5mb84tH/ipN+du3uOCcLl2Dxt7rl1YL1y691VEPtliT+GOPMebOpCt99xvYUPjAxU5zO4z4T+OMbuG4GPns34QZz9xDcKlHC6bO4tZ/YzLGb9YY+RBuNh5EC5sTlewxKT443pE4+bQo7tHr1w2e1ztub+95qPdOFpJfJcGw+V16Go/9PJ3Jo4MwuVw+jSDXhkrBpzl2iX+i/5raly8bHyab0zA7al3N31SsZWd4xtH1FhhoeciSdTY24kjg3ABqLdLMCB2n3y5ftn4gWzHD+wEv9Y+ddQukvguBY8ovon40ZUHcGRkEC4AM8OlMbt/wrKpUzK7827k5FM2O4IbStXGqYPzerzlfpoSaggXgJknXVKdcfay8akxfrfN3HCJ3EdSS40pN8qkvjM96RAuADPD5Wgi/5xlB8NlZL5/Y7hspft8hQvCBbh/uGyxSwnvWvbe4RLsjPINLsIF4QLcp11+PBvSnUrftexdwyV7KmUwSoQLwmUZg2+e7X7BE9GsHi7Pn2fj44Jlg1N46iGXt9/jUrt/JfgWmcbmhAvTwmXKu/A/JxRW36X2u/xf16ldWC5cjp4ficxqFy9bC5f42Y4pTxWlTqtE3n9TyILUy2wieytchEt6cl10OrxBuHQX9HeVWTpcsi+Fe++ykem5/WH78aXzwiX1VPPri90KAzX3eIWLcMlNk5E/kbh7kqDxSfxkQ3sTR995HIhvYuv9UcbIGra9P/QoXGB81rl42fYijbe7Nr550vScev1d8Ant9mmS+OAM7q1wES6hmfJoRs/OnYVLJN0VFnYjtYndQWgkXXcHRq64CReEyweGy26mBCfybgBtA2+4j/xZgGC4jJypCj6LFDyQKSPDN4bLrJTJTtJzaymyiXZqdNcQ3IRwAYAJ4ZKaeqeHS/dCz3i4BK8lldcgXADgW8Kl8J3xMy6pr3XXIFwAQLgIF+ECgHAZmCzPuCk1ss7BRcbvKS5scXq4bLH3uHhDHQB3Dpf2nR9b6THg2rvX2k87dyfm+FG0l62tYXwcIjfiRLpEuABw53ABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgDwv/8AjVsioPKZbVQAAAAASUVORK5CYII='><p>The <i style='color:blue'>scanf</i>() statement:
+</p><div class='myCodeDiv'><button id='VPRCS' class='myCopyButton' data-clipboard-target='#OYGDR'>Copy</button><pre  id='OYGDR' style='font-size:18px;' class='code'>scanf(<span class='q'>" %d"</span>, pvalue);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VPRCS');clipboard.on('success', function(e) {$('#VPRCS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VPRCS').text('error');});</script></div><p>You normally store the value entered by the user at the address of the variable. 
+
+</p><p>You could have used &amp;value, but the <i style='color:blue'>pvalue</i> pointer is used to pass the address of value to <i style='color:blue'>scanf</i>(). 
+
+</p><p>You already stored the address of value in <i style='color:blue'>pvalue</i> when you created it:
+</p><div class='myCodeDiv'><button id='BMQJJ' class='myCopyButton' data-clipboard-target='#JEBIT'>Copy</button><pre  id='JEBIT' style='font-size:18px;' class='code'><span class='r'>int</span> *pvalue = &amp;value;                   <span class='c'>// Set pointer to refer to value</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BMQJJ');clipboard.on('success', function(e) {$('#BMQJJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BMQJJ').text('error');});</script></div><p>here, <i style='color:blue'>pvalue</i> and &amp;value are the same, so you can use either.
+</p><p>
+You then just display value:
+</p><div class='myCodeDiv'><button id='ICCQE' class='myCopyButton' data-clipboard-target='#YXKLB'>Copy</button><pre  id='YXKLB' style='font-size:18px;' class='code'>printf(<span class='q'>"You entered %d\n"</span>, value);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ICCQE');clipboard.on('success', function(e) {$('#ICCQE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ICCQE').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-function-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-to-constants.html>Next</a><h2>Related</h2><UL><LI><a href='c-const-pointer.html'>C const pointer</a></LI><LI><a href='c-pointer-compatibility.html'>C Pointer Compatibility</a></LI><LI><a href='c-function-pointers.html'>C Function Pointers</a></LI><LI><a href='c-pointers-to-constants.html'>C Pointers to Constants</a></LI><LI><a href='c-arrays-and-pointers.html'>C Arrays and Pointers</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-a-pointer-when-receiving-input-from-scanf.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

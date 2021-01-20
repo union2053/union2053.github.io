@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2688466/why-mallocplusmemset-is-slower-than-calloc- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:08:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Why malloc+memset is slower than calloc? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Why malloc+memset is slower than calloc? | C Language Knowledge Base">
+        <title>[SOLVED] Why malloc+memset is slower than calloc? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="why-mallocplusmemset-is-slower-than-calloc-">Why malloc+memset is slower than calloc?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/malloc.html">malloc</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>It's known that <code>calloc</code> is different than <code>malloc</code> in that it initializes the memory allocated. With <code>calloc</code>, the memory is set to zero. With <code>malloc</code>, the memory is not cleared.</p>
+
+<p>So in everyday work, I regard <code>calloc</code> as <code>malloc</code>+<code>memset</code>.
+Incidentally, for fun, I wrote the following code for a benchmark.</p>
+
+<p>The result is confusing.</p>
+
+<p>Code 1:</p>
+
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#define BLOCK_SIZE 1024*1024*256
+int main()
+{
+        int i=0;
+        char *buf[10];
+        while(i&lt;10)
+        {
+                buf[i] = (char*)calloc(1,BLOCK_SIZE);
+                i++;
+        }
+}
+</code></pre>
+
+<p>Output of Code 1:</p>
+
+<pre><code>time ./a.out  
+**real 0m0.287s**  
+user 0m0.095s  
+sys 0m0.192s  
+</code></pre>
+
+<p>Code 2:  </p>
+
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;string.h&gt;
+#define BLOCK_SIZE 1024*1024*256
+int main()
+{
+        int i=0;
+        char *buf[10];
+        while(i&lt;10)
+        {
+                buf[i] = (char*)malloc(BLOCK_SIZE);
+                memset(buf[i],'\0',BLOCK_SIZE);
+                i++;
+        }
+}
+</code></pre>
+
+<p>Output of Code 2:</p>
+
+<pre><code>time ./a.out   
+**real 0m2.693s**  
+user 0m0.973s  
+sys 0m1.721s  
+</code></pre>
+
+<p>Replacing <code>memset</code> with <code>bzero(buf[i],BLOCK_SIZE)</code> in Code 2 produces the same result.</p>
+
+<p><strong>My question is:</strong> Why is <code>malloc</code>+<code>memset</code> so much slower than <code>calloc</code>? How can <code>calloc</code> do that?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/316224/kingkai" target="_blank"><span itemprop="name">kingkai</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">244</div>
+                                    <div itemprop="dateCreated">7/20/2013 7:03:03 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The short version: Always use <code>calloc()</code> instead of <code>malloc()+memset()</code>.  In most cases, they will be the same.  In some cases, <code>calloc()</code> will do less work because it can skip <code>memset()</code> entirely.  In other cases, <code>calloc()</code> can even cheat and not allocate any memory!  However, <code>malloc()+memset()</code> will always do the full amount of work.</p>
+
+<p>Understanding this requires a short tour of the memory system.</p>
+
+<h2 id="quick-tour-of-memory">Quick tour of memory</h2>
+
+<p>There are four main parts here: your program, the standard library, the kernel, and the page tables.  You already know your program, so...</p>
+
+<p>Memory allocators like <code>malloc()</code> and <code>calloc()</code> are mostly there to take small allocations (anything from 1 byte to 100s of KB) and group them into larger pools of memory.  For example, if you allocate 16 bytes, <code>malloc()</code> will first try to get 16 bytes out of one of its pools, and then ask for more memory from the kernel when the pool runs dry.  However, since the program you're asking about is allocating for a large amount of memory at once, <code>malloc()</code> and <code>calloc()</code> will just ask for that memory directly from the kernel.  The threshold for this behavior depends on your system, but I've seen 1 MiB used as the threshold.</p>
+
+<p>The kernel is responsible for allocating actual RAM to each process and making sure that processes don't interfere with the memory of other processes.  This is called <em>memory protection,</em> it has been dirt common since the 1990s, and it's the reason why one program can crash without bringing down the whole system.  So when a program needs more memory, it can't just take the memory, but instead it asks for the memory from the kernel using a system call like <code>mmap()</code> or <code>sbrk()</code>.  The kernel will give RAM to each process by modifying the page table.</p>
+
+<p>The page table maps memory addresses to actual physical RAM.  Your process's addresses, 0x00000000 to 0xFFFFFFFF on a 32-bit system, aren't real memory but instead are addresses in <em>virtual memory.</em>  The processor divides these addresses into 4 KiB pages, and each page can be assigned to a different piece of physical RAM by modifying the page table.  Only the kernel is permitted to modify the page table.</p>
+
+<h2 id="how-it-doesn-t-work">How it doesn't work</h2>
+
+<p>Here's how allocating 256 MiB does <em>not</em> work:</p>
+
+<ol>
+<li><p>Your process calls <code>calloc()</code> and asks for 256 MiB.</p></li>
+<li><p>The standard library calls <code>mmap()</code> and asks for 256 MiB.</p></li>
+<li><p>The kernel finds 256 MiB of unused RAM and gives it to your process by modifying the page table.</p></li>
+<li><p>The standard library zeroes the RAM with <code>memset()</code> and returns from <code>calloc()</code>.</p></li>
+<li><p>Your process eventually exits, and the kernel reclaims the RAM so it can be used by another process.</p></li>
+</ol>
+
+<h2 id="how-it-actually-works">How it actually works</h2>
+
+<p>The above process would work, but it just doesn't happen this way.  There are three major differences.</p>
+
+<ul>
+<li><p>When your process gets new memory from the kernel, that memory was probably used by some other process previously.  This is a security risk.  What if that memory has passwords, encryption keys, or secret salsa recipes?  To keep sensitive data from leaking, the kernel always scrubs memory before giving it to a process.  We might as well scrub the memory by zeroing it, and if new memory is zeroed we might as well make it a guarantee, so <code>mmap()</code> guarantees that the new memory it returns is always zeroed.</p></li>
+<li><p>There are a lot of programs out there that allocate memory but don't use the memory right away.  Some times memory is allocated but never used.  The kernel knows this and is lazy.  When you allocate new memory, the kernel doesn't touch the page table at all and doesn't give any RAM to your process.  Instead, it finds some address space in your process, makes a note of what is supposed to go there, and makes a promise that it will put RAM there if your program ever actually uses it.  When your program tries to read or write from those addresses, the processor triggers a <em>page fault</em> and the kernel steps in assign RAM to those addresses and resumes your program.  If you never use the memory, the page fault never happens and your program never actually gets the RAM.</p></li>
+<li><p>Some processes allocate memory and then read from it without modifying it.  This means that a lot of pages in memory across different processes may be filled with pristine zeroes returned from <code>mmap()</code>.  Since these pages are all the same, the kernel makes all these virtual addresses point a single shared 4 KiB page of memory filled with zeroes.  If you try to write to that memory, the processor triggers another page fault and the kernel steps in to give you a fresh page of zeroes that isn't shared with any other programs.</p></li>
+</ul>
+
+<p>The final process looks more like this:</p>
+
+<ol>
+<li><p>Your process calls <code>calloc()</code> and asks for 256 MiB.</p></li>
+<li><p>The standard library calls <code>mmap()</code> and asks for 256 MiB.</p></li>
+<li><p>The kernel finds 256 MiB of unused <em>address space,</em> makes a note about what that address space is now used for, and returns.</p></li>
+<li><p>The standard library knows that the result of <code>mmap()</code> is always filled with zeroes (or <em>will be</em> once it actually gets some RAM), so it doesn't touch the memory, so there is no page fault, and the RAM is never given to your process.</p></li>
+<li><p>Your process eventually exits, and the kernel doesn't need to reclaim the RAM because it was never allocated in the first place.</p></li>
+</ol>
+
+<p>If you use <code>memset()</code> to zero the page, <code>memset()</code> will trigger the page fault, cause the RAM to get allocated, and then zero it even though it is already filled with zeroes.  This is an enormous amount of extra work, and explains why <code>calloc()</code> is faster than <code>malloc()</code> and <code>memset()</code>.  If end up using the memory anyway, <code>calloc()</code> is still faster than <code>malloc()</code> and <code>memset()</code> but the difference is not quite so ridiculous.</p>
+
+<hr>
+
+<h2 id="this-doesn-t-always-work">This doesn't always work</h2>
+
+<p>Not all systems have paged virtual memory, so not all systems can use these optimizations.  This applies to very old processors like the 80286 as well as embedded processors which are just too small for a sophisticated memory management unit.</p>
+
+<p>This also won't always work with smaller allocations.  With smaller allocations, <code>calloc()</code> gets memory from a shared pool instead of going directly to the kernel.  In general, the shared pool might have junk data stored in it from old memory that was used and freed with <code>free()</code>, so <code>calloc()</code> could take that memory and call <code>memset()</code> to clear it out.  Common implementations will track which parts of the shared pool are pristine and still filled with zeroes, but not all implementations do this.</p>
+
+<h2 id="dispelling-some-wrong-answers">Dispelling some wrong answers</h2>
+
+<p>Depending on the operating system, the kernel may or may not zero memory in its free time, in case you need to get some zeroed memory later.  Linux does not zero memory ahead of time, and <a href="http://lists.dragonflybsd.org/pipermail/commits/2016-August/624202.html" rel="noreferrer">Dragonfly BSD recently also removed this feature from their kernel</a>.  Some other kernels do zero memory ahead of time, however.  Zeroing pages durign idle isn't enough to explain the large performance differences anyway.</p>
+
+<p>The <code>calloc()</code> function is not using some special memory-aligned version of <code>memset()</code>, and that wouldn't make it much faster anyway.  Most <code>memset()</code> implementations for modern processors look kind of like this:</p>
+
+<pre><code>function memset(dest, c, len)
+    // one byte at a time, until the dest is aligned...
+    while (len &gt; 0 &amp;&amp; ((unsigned int)dest &amp; 15))
+        *dest++ = c
+        len -= 1
+    // now write big chunks at a time (processor-specific)...
+    // block size might not be 16, it's just pseudocode
+    while (len &gt;= 16)
+        // some optimized vector code goes here
+        // glibc uses SSE2 when available
+        dest += 16
+        len -= 16
+    // the end is not aligned, so one byte at a time
+    while (len &gt; 0)
+        *dest++ = c
+        len -= 1
+</code></pre>
+
+<p>So you can see, <code>memset()</code> is very fast and you're not really going to get anything better for large blocks of memory.</p>
+
+<p>The fact that <code>memset()</code> is zeroing memory that is already zeroed does mean that the memory gets zeroed twice, but that only explains a 2x performance difference.  The performance difference here is much larger (I measured more than three orders of magnitude on my system between <code>malloc()+memset()</code> and <code>calloc()</code>).</p>
+
+<h2 id="party-trick">Party trick</h2>
+
+<p>Instead of looping 10 times, write a program that allocates memory until <code>malloc()</code> or <code>calloc()</code> returns NULL.</p>
+
+<p>What happens if you add <code>memset()</code>?</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/82294/dietrich-epp" target="_blank"><span itemprop="name">Dietrich Epp</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2688466/why-mallocplusmemset-is-slower-than-calloc-#answer-0</div>
+                                            <div itemprop="upvoteCount">436</div>
+                                            <div itemprop="dateCreated">8/5/2016 7:30:26 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Because on many systems, in spare processing time, the OS goes around setting free memory to zero on its own and marking it safe for <code>calloc()</code>, so when you call <code>calloc()</code>, it may already have free, zeroed memory to give you.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/60777/chris-lutz" target="_blank">Chris Lutz</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2688466" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2688466/why-mallocplusmemset-is-slower-than-calloc- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:08:47 GMT -->
+</html>

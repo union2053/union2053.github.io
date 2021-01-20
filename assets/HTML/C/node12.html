@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node12.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Advanced Pointer Topics</TITLE>
+<META NAME="description" CONTENT="Advanced Pointer Topics">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html993"
+ HREF="node12.html#SECTION001210000000000000000">
+Pointers to Pointers</A>
+<LI><A NAME="tex2html994"
+ HREF="node12.html#SECTION001220000000000000000">
+Command line input</A>
+<LI><A NAME="tex2html995"
+ HREF="node12.html#SECTION001230000000000000000">
+Pointers to a Function</A>
+<LI><A NAME="tex2html996"
+ HREF="node12.html#SECTION001240000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001200000000000000000">
+Advanced Pointer Topics</A>
+</H1>
+<P>
+We have introduced many  applications and techniques that use pointers.
+We have introduced some advanced pointer issues already. This chapter
+brings together some topics we have briefly mentioned and others to
+complete our study C pointers.
+<P>
+In this chapter we will:
+<P><UL>
+<LI> Examine pointers to pointers in more detail.
+<LI> See how pointers are used in command line input in C.
+<LI> Study pointers to functions
+</UL><H1><A NAME="SECTION001210000000000000000">
+Pointers to Pointers</A>
+</H1>
+<P>
+We introduced the concept of a pointer to a pointer previously. You can
+have a pointer to a pointer of any type.
+<P>
+Consider the following:
+<P><PRE>
+char ch;  /* a character */
+char *pch; /* a pointer to a character */
+char **ppch; /* a pointer to a pointer to a character */
+</PRE>
+<P>
+We can visualise this in Figure&nbsp;<A HREF="node12.html#fig:ptrtoptr">11.1</A>. Here we can see that
+<TT>**ppch</TT> refers to memory address of <TT>*pch</TT> which refers to the
+memory address of the variable <TT>ch</TT>. But what does this mean in
+practice?
+<P><A NAME="fig:ptrtoptr">&#160;</A><img src= ptrtoptr.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node12.html#fig:ptrtoptr">11.1</A> Pointers to pointers</B>
+Recall that <TT>char *</TT> refers to a (<TT>NULL</TT> terminated string. So
+one common and convenient notion is to declare a pointer to a pointer to
+a string (Figure&nbsp;<A HREF="node12.html#fig:ptrtostr">11.2</A>)
+<P><A NAME="fig:ptrtostr">&#160;</A><img src= ptrtostr.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node12.html#fig:ptrtostr">11.2</A> Pointer to String</B>
+Taking this one stage further we can have several strings being pointed
+to by the pointer (Figure&nbsp;<A HREF="node12.html#fig:argv">11.3</A>)
+<P><A NAME="fig:argv">&#160;</A><img src= argv.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node12.html#fig:argv">11.3</A> Pointer to Several Strings</B>
+We can refer to individual strings by <TT>ppch[0], ppch[1], ....</TT>.
+Thus this is identical to declaring <TT>char *ppch[]</TT>.
+<P>
+One common occurrence of this type is in C command line argument input
+which we now consider.
+<P><H1><A NAME="SECTION001220000000000000000">
+Command line input</A>
+</H1>
+<P>
+C lets read arguments from the command line which can then be used in our
+programs.
+<BR>
+<P>
+We can type arguments after the program name when we run the program.
+<BR>
+<P>
+We have seen this with the compiler for example
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>c89 -o prog prog.c</TT>
+<BR>
+<P><TT>c89</TT> is the program, <TT>-o prog prog.c</TT> the arguments.
+ <BR>
+<P>
+In order to be able to use such arguments in our code we must define them as
+follows:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>main(int argc, char **argv)</TT>
+<BR>
+<P>
+So our <TT>main</TT> function now has its own arguments. These are the only
+arguments main accepts.
+<BR>
+<P><UL>
+<LI> <B>argc</B> is the number of arguments typed -- including the program
+name.
+<LI> <B>argv</B> is an array of strings holding each command line argument --
+including the program name in the first array element.
+</UL>
+<P>
+A simple program example:
+ <BR>
+<P><TT>
+<PRE><TT>
+#include&lt;stdio.h&gt;
+&nbsp;
+main (int argc, char **argv)
+&nbsp;&nbsp;&nbsp; { /* program to print arguments
+				 from command line */
+&nbsp;
+				 int i;
+&nbsp;
+				 printf("argc = %d\n\n",argc);
+				 for (i=0;i&lt;argc;++i)
+						 printf("argv[%d]: %s\n",
+								 i, argv[i]);
+		 }
+</TT></PRE>
+</TT>
+<BR>
+<P>
+Assume it is compiled to run it as args.
+ <BR>
+<P>
+So if we type:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>args f1 "f2" f3 4 stop!
+<BR>
+<P>
+The output would be:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;argc = 6
+&nbsp;
+		 argv[0] = args
+		 argv[1] = f1
+		 argv[2] = f2
+		 argv[3] = f3
+		 argv[4] = 4
+		 argv[5] = stop!
+</TT></PRE>
+</TT>
+<PRE><TT>
+<B>NOTE:</B> <IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$\bullet$"> argv[0] is program name.
+		 <IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$\bullet$"> argc counts program name
+		 <IMG WIDTH="12" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$\bullet$"> Embedded " " are ignored.
+		 Blank spaces delimit end of arguments.
+		 Put blanks in "" if needed.
+</PRE></TT></TT><H1><A NAME="SECTION001230000000000000000">
+Pointers to a Function</A>
+</H1>
+<A NAME="ch:ptr2fn">&#160;</A>
+<P>
+Pointer to a function are perhaps on of the more confusing uses of
+pointers in C. Pointers to functions are not as common as other pointer
+uses. However, one common use is in a passing pointers to a function 
+as a parameter in a function call. (Yes this is getting confusing, hold
+on to your hats for a moment).
+<P>
+This is especially useful when alternative functions maybe used to
+perform similar tasks on data. You can pass the data and the function to
+be used to some <EM>control</EM> function for instance. As we will see
+shortly the C standard library provided some  basic sorting  (<TT>
+qsort</TT>) and searching (<TT>bsearch</TT>)  functions for free. You can easily
+embed your own functions.
+<P>
+To declare a pointer to a function do:
+<P><PRE>
+int (*pf) ();
+</PRE>
+<P>
+This simply declares a pointer <TT>*pf</TT> to function that returns and
+<TT>int</TT>.  No actual function is <EM>pointed</EM> to yet.
+<P>
+If we have a function <TT>int f()</TT> then we may simply (!!) write:
+<P><PRE>
+pf = &amp;f;
+</PRE>
+<P>
+For compiler prototyping to fully work it is better to have full function
+prototypes for the function and the pointer to a function:
+<P><PRE>
+int f(int);
+int (*pf) (int) = &amp;f;
+</PRE>
+<P>
+Now <TT>f()</TT> returns an <TT>int</TT> and takes one <TT>int</TT> as a parameter.
+<P>
+You can do things like:
+<P><PRE>
+ans = f(5);
+ans = pf(5);
+</PRE>
+<P>
+which are equivalent.
+<P>
+The <TT>qsort</TT> standard library function is very useful function that is
+designed to sort an array by a <EM>key</EM> value of <EM>any type</EM> into
+ascending order, as long as the elements of the array are of fixed type.
+<P>
+qsort is prototyped in (<TT>stdlib.h</TT>):
+<P><PRE>
+void qsort(void *base, size_t num_elements, size_t element_size,
+   int (*compare)(void const *, void  const *));
+</PRE>
+<P>
+The argument <TT>base</TT> points to the array to be sorted, <TT>
+num_elements</TT> indicates how long the array is, <TT>element_size</TT> is
+the size in bytes of each array element and the final argument <TT>
+compare</TT> is a pointer to a function.
+<P><TT>qsort</TT> calls the <TT>compare</TT> function which is user defined to
+compare the data when sorting. Note that <TT>qsort</TT> maintains it's data
+type independence by giving the comparison responsibility to the user.
+The compare function must return certain (<TT>integer</TT>) values according
+to the comparison result:
+<DL>
+<DT><STRONG>less than zero</STRONG>
+<DD>: if first value is less than the second value
+<DT><STRONG>zero</STRONG>
+<DD>: if first value is equal to the second value
+<DT><STRONG>greater than zero</STRONG>
+<DD>: if first value is greater than the second value
+</DL>
+<P>
+Some quite complicated data structures can be sorted in
+this manner. For example, to sort the following structure by <TT>integer</TT>
+key:
+<P><PRE>
+typedef struct {
+        int   key;
+								struct other_data;
+} Record;
+</PRE>
+<P>
+We can write a compare function, <TT>record_compare</TT>:
+<PRE>
+int record\_compare(void const *a, void  const *a)
+  {  return ( ((Record *)a)-&gt;key - ((Record *)b)-&gt;key );
+  }
+</PRE>
+<P>
+Assuming that we have an <TT>array</TT> of <TT>array_length Record</TT>s
+suitably filled with date we can call <TT>qsort</TT> like this:
+<P><PRE>
+qsort( array, arraylength, sizeof(Record), record_compare);
+</PRE>
+<P>
+Further examples of standard library and system calls that use pointers
+to functions may be found in Chapters&nbsp;<A HREF="node16.html#ch:search">15.4</A> and&nbsp;<A HREF="node20.html#ch:dir">19.1</A>.
+<P><H1><A NAME="SECTION001240000000000000000">
+Exercises</A>
+</H1>
+<P><P>
+<B>Exercise 12476</B></P>
+<P>
+Write a program last that prints the last n lines of its text
+input. By default n should be 5, but your program should allow an optional
+argument so that
+<P><PRE>
+			last -n
+</PRE>
+<P>
+prints out the last n lines, where n is any integer. Your program should make
+the best use of available storage. (Input of text  could be by reading a file
+specified from the command or reading a file from standard input)
+<P></P>
+<P>
+<P>
+<B>Exercise 12477</B></P>
+<P>
+Write a program that sorts a list of integers in ascending order. However if
+a -r flag is present on the command line your program should sort the list in
+descending order. (You may use any sorting routine you wish)
+<P></P>
+<P><P>
+<B>Exercise 12478</B></P>
+<P>
+Write a program that reads the following structure and sorts the data by
+keyword using <TT>qsort</TT>
+<P><PRE>
+typedef struct {
+        char   keyword[10];
+								int    other_data;
+} Record;
+</PRE></P>
+<P><P>
+<B>Exercise 12479</B></P>
+<P>
+An <EM>insertion sort</EM> is performed by adding values to an array one by
+one. The first value is simply stored at the beginning of the array. Each
+subsequent value is added by finding its ordered position in the array,
+moving data as needed to accommodate the value and inserting the value in
+this position.
+<P>
+Write a function called <TT>insort</TT> that performs this task and behaves
+in the same manner as <TT>qsort</TT>, <EM>i.e</EM> it can sort  an array by a
+<EM>key</EM> value of <EM>any type</EM> and it has similar
+prototyping.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node12.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:04 GMT -->
+</HTML>

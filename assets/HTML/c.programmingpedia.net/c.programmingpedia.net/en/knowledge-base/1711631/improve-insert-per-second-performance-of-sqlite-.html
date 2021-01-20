@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1711631/improve-insert-per-second-performance-of-sqlite- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:25:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Improve INSERT-per-second performance of SQLite? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Improve INSERT-per-second performance of SQLite? | C Language Knowledge Base">
+        <title>[SOLVED] Improve INSERT-per-second performance of SQLite? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="improve-insert-per-second-performance-of-sqlite-">Improve INSERT-per-second performance of SQLite?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/optimization.html">optimization</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                        <span class="tag-item"><a href="../tag/sqlite.html">sqlite</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Optimizing SQLite is tricky. Bulk-insert performance of a C application can vary from 85 inserts per second to over 96,000 inserts per second!</p>
+
+<p><strong>Background:</strong> We are using SQLite as part of a desktop application. We have large amounts of configuration data stored in XML files that are parsed and loaded into an SQLite database for further processing when the application is initialized. SQLite is ideal for this situation because it's fast, it requires no specialized configuration, and the database is stored on disk as a single file.</p>
+
+<p><strong>Rationale:</strong> <em>Initially I was disappointed with the performance I was seeing.</em> It turns-out that the performance of SQLite can vary significantly (both for bulk-inserts and selects) depending on how the database is configured and how you're using the API. It was not a trivial matter to figure out what all of the options and techniques were, so I thought it prudent to create this community wiki entry to share the results with Stack&nbsp;Overflow readers in order to save others the trouble of the same investigations.</p>
+
+<p><strong>The Experiment:</strong> Rather than simply talking about performance tips in the general sense (i.e. <em>"Use a transaction!"</em>), I thought it best to write some C code and <em>actually measure</em> the impact of various options. We're going to start with some simple data:</p>
+
+<ul>
+<li>A 28 MB TAB-delimited text file (approximately 865,000 records) of the <a href="http://www.toronto.ca/open/datasets/ttc-routes" rel="noreferrer">complete transit schedule for the city of Toronto</a></li>
+<li>My test machine is a 3.60 GHz P4 running Windows XP.</li>
+<li>The code is compiled with <a href="http://en.wikipedia.org/wiki/Visual_C++#32-bit_versions" rel="noreferrer">Visual C++</a> 2005 as "Release" with "Full Optimization" (/Ox) and Favor Fast Code (/Ot).</li>
+<li>I'm using the SQLite "Amalgamation", compiled directly into my test application. The SQLite version I happen to have is a bit older (3.6.7), but I suspect these results will be comparable to the latest release (please leave a comment if you think otherwise).</li>
+</ul>
+
+<p><em>Let's write some code!</em></p>
+
+<p><strong>The Code:</strong> A simple C program that reads the text file line-by-line, splits the string into values and then will inserts the data into an SQLite database. In this "baseline" version of the code, the database is created, but we won't actually insert data:</p>
+
+<pre><code>/*************************************************************
+    Baseline code to experiment with SQLite performance.
+
+    Input data is a 28 MB TAB-delimited text file of the
+    complete Toronto Transit System schedule/route info
+    from http://www.toronto.ca/open/datasets/ttc-routes/
+
+**************************************************************/
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#include &lt;string.h&gt;
+#include "sqlite3.h"
+
+#define INPUTDATA "C:\\TTC_schedule_scheduleitem_10-27-2009.txt"
+#define DATABASE "c:\\TTC_schedule_scheduleitem_10-27-2009.sqlite"
+#define TABLE "CREATE TABLE IF NOT EXISTS TTC (id INTEGER PRIMARY KEY, Route_ID TEXT, Branch_Code TEXT, Version INTEGER, Stop INTEGER, Vehicle_Index INTEGER, Day Integer, Time TEXT)"
+#define BUFFER_SIZE 256
+
+int main(int argc, char **argv) {
+
+    sqlite3 * db;
+    sqlite3_stmt * stmt;
+    char * sErrMsg = 0;
+    char * tail = 0;
+    int nRetCode;
+    int n = 0;
+
+    clock_t cStartClock;
+
+    FILE * pFile;
+    char sInputBuf [BUFFER_SIZE] = "\0";
+
+    char * sRT = 0;  /* Route */
+    char * sBR = 0;  /* Branch */
+    char * sVR = 0;  /* Version */
+    char * sST = 0;  /* Stop Number */
+    char * sVI = 0;  /* Vehicle */
+    char * sDT = 0;  /* Date */
+    char * sTM = 0;  /* Time */
+
+    char sSQL [BUFFER_SIZE] = "\0";
+
+    /*********************************************/
+    /* Open the Database and create the Schema */
+    sqlite3_open(DATABASE, &amp;db);
+    sqlite3_exec(db, TABLE, NULL, NULL, &amp;sErrMsg);
+
+    /*********************************************/
+    /* Open input file and import into Database*/
+    cStartClock = clock();
+
+    pFile = fopen (INPUTDATA,"r");
+    while (!feof(pFile)) {
+
+        fgets (sInputBuf, BUFFER_SIZE, pFile);
+
+        sRT = strtok (sInputBuf, "\t");     /* Get Route */
+        sBR = strtok (NULL, "\t");            /* Get Branch */
+        sVR = strtok (NULL, "\t");            /* Get Version */
+        sST = strtok (NULL, "\t");            /* Get Stop Number */
+        sVI = strtok (NULL, "\t");            /* Get Vehicle */
+        sDT = strtok (NULL, "\t");            /* Get Date */
+        sTM = strtok (NULL, "\t");            /* Get Time */
+
+        /* ACTUAL INSERT WILL GO HERE */
+
+        n++;
+    }
+    fclose (pFile);
+
+    printf("Imported %d records in %4.2f seconds\n", n, (clock() - cStartClock) / (double)CLOCKS_PER_SEC);
+
+    sqlite3_close(db);
+    return 0;
+}
+</code></pre>
+
+<hr>
+
+<h2 id="the-control-">The "Control"</h2>
+
+<p>Running the code as-is doesn't actually perform any database operations, but it will give us an idea of how fast the raw C file I/O and string processing operations are.</p>
+
+<blockquote>
+  <p>Imported 864913 records in 0.94
+  seconds</p>
+</blockquote>
+
+<p>Great! We can do 920,000 inserts per second, provided we don't actually do any inserts :-)</p>
+
+<hr>
+
+<h2 id="the-worst-case-scenario-">The "Worst-Case-Scenario"</h2>
+
+<p>We're going to generate the SQL string using the values read from the file and invoke that SQL operation using sqlite3_exec:</p>
+
+<pre><code>sprintf(sSQL, "INSERT INTO TTC VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s')", sRT, sBR, sVR, sST, sVI, sDT, sTM);
+sqlite3_exec(db, sSQL, NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<p>This is going to be slow because the SQL will be compiled into VDBE code for every insert and every insert will happen in its own transaction. <em>How slow?</em></p>
+
+<blockquote>
+  <p>Imported 864913 records in 9933.61
+  seconds</p>
+</blockquote>
+
+<p>Yikes! 2 hours and 45 minutes! That's only <strong>85 inserts per second.</strong></p>
+
+<h2 id="using-a-transaction">Using a Transaction</h2>
+
+<p>By default, SQLite will evaluate every INSERT / UPDATE statement within a unique transaction. If performing a large number of inserts, it's advisable to wrap your operation in a transaction:</p>
+
+<pre><code>sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &amp;sErrMsg);
+
+pFile = fopen (INPUTDATA,"r");
+while (!feof(pFile)) {
+
+    ...
+
+}
+fclose (pFile);
+
+sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 38.03
+  seconds</p>
+</blockquote>
+
+<p>That's better. Simply wrapping all of our inserts in a single transaction improved our performance to <strong>23,000 inserts per second.</strong></p>
+
+<h2 id="using-a-prepared-statement">Using a Prepared Statement</h2>
+
+<p>Using a transaction was a huge improvement, but recompiling the SQL statement for every insert doesn't make sense if we using the same SQL over-and-over. Let's use <code>sqlite3_prepare_v2</code> to compile our SQL statement once and then bind our parameters to that statement using <code>sqlite3_bind_text</code>:</p>
+
+<pre><code>/* Open input file and import into the database */
+cStartClock = clock();
+
+sprintf(sSQL, "INSERT INTO TTC VALUES (NULL, @RT, @BR, @VR, @ST, @VI, @DT, @TM)");
+sqlite3_prepare_v2(db,  sSQL, BUFFER_SIZE, &amp;stmt, &amp;tail);
+
+sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &amp;sErrMsg);
+
+pFile = fopen (INPUTDATA,"r");
+while (!feof(pFile)) {
+
+    fgets (sInputBuf, BUFFER_SIZE, pFile);
+
+    sRT = strtok (sInputBuf, "\t");   /* Get Route */
+    sBR = strtok (NULL, "\t");        /* Get Branch */
+    sVR = strtok (NULL, "\t");        /* Get Version */
+    sST = strtok (NULL, "\t");        /* Get Stop Number */
+    sVI = strtok (NULL, "\t");        /* Get Vehicle */
+    sDT = strtok (NULL, "\t");        /* Get Date */
+    sTM = strtok (NULL, "\t");        /* Get Time */
+
+    sqlite3_bind_text(stmt, 1, sRT, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, sBR, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, sVR, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 4, sST, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 5, sVI, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 6, sDT, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 7, sTM, -1, SQLITE_TRANSIENT);
+
+    sqlite3_step(stmt);
+
+    sqlite3_clear_bindings(stmt);
+    sqlite3_reset(stmt);
+
+    n++;
+}
+fclose (pFile);
+
+sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &amp;sErrMsg);
+
+printf("Imported %d records in %4.2f seconds\n", n, (clock() - cStartClock) / (double)CLOCKS_PER_SEC);
+
+sqlite3_finalize(stmt);
+sqlite3_close(db);
+
+return 0;
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 16.27
+  seconds</p>
+</blockquote>
+
+<p>Nice! There's a little bit more code (don't forget to call <code>sqlite3_clear_bindings</code> and <code>sqlite3_reset</code>), but we've more than doubled our performance to <strong>53,000 inserts per second.</strong></p>
+
+<h2 id="pragma-synchronous-off">PRAGMA synchronous = OFF</h2>
+
+<p>By default, SQLite will pause after issuing a OS-level write command. This guarantees that the data is written to the disk. By setting <code>synchronous = OFF</code>, we are instructing SQLite to simply hand-off the data to the OS for writing and then continue. There's a chance that the database file may become corrupted if the computer suffers a catastrophic crash (or power failure) before the data is written to the platter:</p>
+
+<pre><code>/* Open the database and create the schema */
+sqlite3_open(DATABASE, &amp;db);
+sqlite3_exec(db, TABLE, NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "PRAGMA synchronous = OFF", NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 12.41
+  seconds</p>
+</blockquote>
+
+<p>The improvements are now smaller, but we're up to <strong>69,600 inserts per second.</strong></p>
+
+<h2 id="pragma-journal-mode-memory">PRAGMA journal_mode = MEMORY</h2>
+
+<p>Consider storing the rollback journal in memory by evaluating <code>PRAGMA journal_mode = MEMORY</code>. Your transaction will be faster, but if you lose power or your program crashes during a transaction you database could be left in a corrupt state with a partially-completed transaction:</p>
+
+<pre><code>/* Open the database and create the schema */
+sqlite3_open(DATABASE, &amp;db);
+sqlite3_exec(db, TABLE, NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "PRAGMA journal_mode = MEMORY", NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 13.50
+  seconds</p>
+</blockquote>
+
+<p>A little slower than the previous optimization at <strong>64,000 inserts per second.</strong></p>
+
+<h2 id="pragma-synchronous-off-and-pragma-journal-mode-memory">PRAGMA synchronous = OFF <em>and</em> PRAGMA journal_mode = MEMORY</h2>
+
+<p>Let's combine the previous two optimizations. It's a little more risky (in case of a crash), but we're just importing data (not running a bank):</p>
+
+<pre><code>/* Open the database and create the schema */
+sqlite3_open(DATABASE, &amp;db);
+sqlite3_exec(db, TABLE, NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "PRAGMA synchronous = OFF", NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "PRAGMA journal_mode = MEMORY", NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 12.00
+  seconds</p>
+</blockquote>
+
+<p>Fantastic! We're able to do <strong>72,000 inserts per second.</strong></p>
+
+<h2 id="using-an-in-memory-database">Using an In-Memory Database</h2>
+
+<p>Just for kicks, let's build upon all of the previous optimizations and redefine the database filename so we're working entirely in RAM:</p>
+
+<pre><code>#define DATABASE ":memory:"
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 10.94
+  seconds</p>
+</blockquote>
+
+<p>It's not super-practical to store our database in RAM, but it's impressive that we can perform <strong>79,000 inserts per second.</strong></p>
+
+<h2 id="refactoring-c-code">Refactoring C Code</h2>
+
+<p>Although not specifically an SQLite improvement, I don't like the extra <code>char*</code> assignment operations in the <code>while</code> loop. Let's quickly refactor that code to pass the output of <code>strtok()</code> directly into <code>sqlite3_bind_text()</code>, and let the compiler try to speed things up for us:</p>
+
+<pre><code>pFile = fopen (INPUTDATA,"r");
+while (!feof(pFile)) {
+
+    fgets (sInputBuf, BUFFER_SIZE, pFile);
+
+    sqlite3_bind_text(stmt, 1, strtok (sInputBuf, "\t"), -1, SQLITE_TRANSIENT); /* Get Route */
+    sqlite3_bind_text(stmt, 2, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Branch */
+    sqlite3_bind_text(stmt, 3, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Version */
+    sqlite3_bind_text(stmt, 4, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Stop Number */
+    sqlite3_bind_text(stmt, 5, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Vehicle */
+    sqlite3_bind_text(stmt, 6, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Date */
+    sqlite3_bind_text(stmt, 7, strtok (NULL, "\t"), -1, SQLITE_TRANSIENT);    /* Get Time */
+
+    sqlite3_step(stmt);        /* Execute the SQL Statement */
+    sqlite3_clear_bindings(stmt);    /* Clear bindings */
+    sqlite3_reset(stmt);        /* Reset VDBE */
+
+    n++;
+}
+fclose (pFile);
+</code></pre>
+
+<p><strong>Note: We are back to using a real database file. In-memory databases are fast, but not necessarily practical</strong></p>
+
+<blockquote>
+  <p>Imported 864913 records in 8.94
+  seconds</p>
+</blockquote>
+
+<p>A slight refactoring to the string processing code used in our parameter binding has allowed us to perform <strong>96,700 inserts per second.</strong> I think it's safe to say that this is <em>plenty fast</em>. As we start to tweak other variables (i.e. page size, index creation, etc.) this will be our benchmark.</p>
+
+<hr>
+
+<h2 id="summary-so-far-">Summary (so far)</h2>
+
+<p><em>I hope you're still with me!</em> The reason we started down this road is that bulk-insert performance varies so wildly with SQLite, and it's not always obvious what changes need to be made to speed-up our operation. Using the same compiler (and compiler options), the same version of SQLite and the same data we've optimized our code and our usage of SQLite to go <strong>from a worst-case scenario of 85 inserts per second to over 96,000 inserts per second!</strong></p>
+
+<hr>
+
+<h2 id="create-index-then-insert-vs-insert-then-create-index">CREATE INDEX then INSERT vs. INSERT then CREATE INDEX</h2>
+
+<p>Before we start measuring <code>SELECT</code> performance, we know that we'll be creating indices. It's been suggested in one of the answers below that when doing bulk inserts, it is faster to create the index after the data has been inserted (as opposed to creating the index first then inserting the data). Let's try:</p>
+
+<p><strong>Create Index then Insert Data</strong></p>
+
+<pre><code>sqlite3_exec(db, "CREATE  INDEX 'TTC_Stop_Index' ON 'TTC' ('Stop')", NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &amp;sErrMsg);
+...
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 18.13
+  seconds</p>
+</blockquote>
+
+<p><strong>Insert Data then Create Index</strong></p>
+
+<pre><code>...
+sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &amp;sErrMsg);
+sqlite3_exec(db, "CREATE  INDEX 'TTC_Stop_Index' ON 'TTC' ('Stop')", NULL, NULL, &amp;sErrMsg);
+</code></pre>
+
+<blockquote>
+  <p>Imported 864913 records in 13.66
+  seconds</p>
+</blockquote>
+
+<p>As expected, bulk-inserts are slower if one column is indexed, but it does make a difference if the index is created after the data is inserted. Our no-index baseline is 96,000 inserts per second. <strong>Creating the index first then inserting data gives us 47,700 inserts per second, whereas inserting the data first then creating the index gives us 63,300 inserts per second.</strong></p>
+
+<hr>
+
+<p>I'd gladly take suggestions for other scenarios to try... And will be compiling similar data for SELECT queries soon.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/203690/mike-willekes" target="_blank"><span itemprop="name">Mike Willekes</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">2826</div>
+                                    <div itemprop="dateCreated">4/24/2019 1:14:42 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Several tips:</p>
+
+<ol>
+<li>Put inserts/updates in a transaction.</li>
+<li>For older versions of SQLite - Consider a less paranoid journal mode (<code>pragma journal_mode</code>). There is <code>NORMAL</code>, and then there is <code>OFF</code>, which can significantly increase insert speed if you're not too worried about the database possibly getting corrupted if the OS crashes. If your application crashes the data should be fine. Note that in newer versions, the <code>OFF/MEMORY</code> settings are not safe for application level crashes.</li>
+<li>Playing with page sizes makes a difference as well (<code>PRAGMA page_size</code>). Having larger page sizes can make reads and writes go a bit faster as larger pages are held in memory. Note that more memory will be used for your database.</li>
+<li>If you have indices, consider calling <code>CREATE INDEX</code> after doing all your inserts. This is significantly faster than creating the index and then doing your inserts.</li>
+<li>You have to be quite careful if you have concurrent access to SQLite, as the whole database is locked when writes are done, and although multiple readers are possible, writes will be locked out. This has been improved somewhat with the addition of a WAL in newer SQLite versions.</li>
+<li>Take advantage of saving space...smaller databases go faster. For instance, if you have key value pairs, try making the key an <code>INTEGER PRIMARY KEY</code> if possible, which will replace the implied unique row number column in the table.</li>
+<li>If you are using multiple threads, you can try using the <a href="http://sqlite.org/c3ref/enable_shared_cache.html" rel="noreferrer">shared page cache</a>, which will allow loaded pages to be shared between threads, which can avoid expensive I/O calls.</li>
+<li><a href="https://stackoverflow.com/q/5431941/6850771">Don't use <code>!feof(file)</code>!</a></li>
+</ol>
+
+<p>I've also asked similar questions <a href="https://stackoverflow.com/questions/784173/what-are-the-performance-characteristics-of-sqlite-with-very-large-database-files">here</a> and <a href="https://stackoverflow.com/questions/768708/are-there-known-issues-with-using-sqlite-and-file-locking-on-different-platforms">here</a>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/92633/snazzer" target="_blank"><span itemprop="name">Snazzer</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1711631/improve-insert-per-second-performance-of-sqlite-#answer-0</div>
+                                            <div itemprop="upvoteCount">740</div>
+                                            <div itemprop="dateCreated">6/4/2018 3:07:47 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Try using <code>SQLITE_STATIC</code> instead of <code>SQLITE_TRANSIENT</code> for those inserts. </p>
+
+<p><code>SQLITE_TRANSIENT</code> will cause SQLite to copy the string data before returning. </p>
+
+<p><code>SQLITE_STATIC</code> tells it that the memory address you gave it will be valid until the query has been performed (which in this loop is always the case). This will save you several allocate, copy and deallocate operations per loop. Possibly a large improvement.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/4051370/tiredofbuttons" target="_blank">Tiredofbuttons</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1711631" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1711631/improve-insert-per-second-performance-of-sqlite- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:25:13 GMT -->
+</html>

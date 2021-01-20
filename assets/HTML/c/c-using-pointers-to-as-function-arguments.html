@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-pointers-to-as-function-arguments.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Using Pointers to as Function arguments</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Using Pointers to as Function arguments'>C Using Pointers to as Function arguments</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Using Pointers to as Function arguments</h1>
+<a class ='btn btn-outline-dark' href=c-use-pointer-to-access-two-dimensional-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-example-calculate-average-using-pointer-and-realloc.html>Next</a><p>The following code is using pointers to make swapping work.
+
+</p><p>We want a function that alters the values x and y. By
+passing the function the addresses of x and y, we give <i style='color:blue'>interchange</i>() access to those variables.
+Using pointers and the * operator, the function can examine the values stored at those 
+locations and change them.
+
+
+</p><div class='myCodeDiv'><button id='EBSXB' class='myCopyButton' data-clipboard-target='#OCYGQ'>Copy</button><pre  id='OCYGQ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>void</span> interchange(<span class='r'>int</span> * u, <span class='r'>int</span> * v);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> x = 5, y = 10;
+    printf(<span class='q'>"Originally x = %d and y = %d.\n"</span>, x, y);
+    interchange(&amp;x, &amp;y); <span class='c'>// send addresses to function</span>
+    printf(<span class='q'>"Now x = %d and y = %d.\n"</span>, x, y);
+
+    <span class='r'>return</span> 0;
+}
+
+<span class='r'>void</span> interchange(<span class='r'>int</span> * u, <span class='r'>int</span> * v)
+{
+    <span class='r'>int</span> temp;
+
+    temp = *u;              <span class='c'>// temp gets value that u points to</span>
+    *u = *v;
+    *v = temp;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EBSXB');clipboard.on('success', function(e) {$('#EBSXB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EBSXB').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABACAIAAADH6BVtAAAFeElEQVR42u3dYY6rNhSA0beI7H+R7QJopf5Jk2Dfaxuw4RxVVftmYIijF39jIPmzAQAs4o8hAACECwCAcAEAhAsAgHABABAuAIBwAQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAID5wuX1el2+BwBAuCwfLq83bd9wG6//m+R4lh7MyGh7PQIYGS7PeXmtPsYnhItDGpgshYN//5J2ARgWLo96eRUuwuWcg//+c+0CMCBcqi+v7ysxPxdmIucd3r8hu4ePDTtP9zSEy8/dZs+2FPawYiXsPfzgk/Xx1fghDXkuhAtj/fX3X//+YxzgjHAJvuZ+zy57s1F1b21V8XOCjBzzwBWX/nmocw+vfc3N0TaVloe6+mRVv3+VkRQu/Jcsy4XL+2GrLm4bLpHX3GDNtIXLcf1x5jw04Vm54ZdUlwcqlbwHhYsVF46Y/tetFu3CbVdcJg+X4G/PPde4DMmO7MmRCcOlPNQnhMtUCShc5MtCE//3oWoXhMs14RL/KTOES9tZibEnOI5b7Zg/XJwq4pnhsneQ2oWVwiW+mCFchqyXfFzmvOKKyyThsk2zdiVchMvq4bKttm7E08Nl4Lxy6MW5qcnyoFNFnZPlDDNZ21paaqgHPllLh8sWWxbyDnXCxaOAdLiUXz2ry+mRJffyva/lPQRvJP6+w3bvjtnq5p1XyQRH+MLboTt/dGGohzxZxy0XHTSMkb8+DX/1lp7/3ifC8qWge9eKnr95w2OsTvnV/e8dT0NY9FxsG/y5zbsdcuQDx4o7hMskv6EuwS/Hngv6p8Dvr86wefahFabb6ixbDaxCC8YPLPWsFf6wc4edRz5wrBAujb+nminxXAiXn91w7ebZ2X1vjox3wPtkXJ5945HUkBqRh9C/t7YjHztWCJdErNzgs/RcjuC54Ih2SU1yR2+eWpMorBD0LNikHkLqwNqWWxrGqq2N4osuPamKcAFoD5dUYZyweX+4lC+76Vkfyp4SCk7eY4crVUvxI+8fK4QLQGJO2ruUNTVlnrB5dpbdm2IPWpoaHi7Vx5Wd/oULwgW4Q7uk0uHazZ8TLpGvZvNFuCBcgOXDZW9eD9bAyZs/KlyCR9h5xYxwQbgAa4TLx20gHzNK8O1PTt58SLhEbr2+Nlza3rom3jrlHypcEC7A1O2STYdrNw/uLRsTl1yc27zW0pYCwYefPXLhIlz4rXqH7VR34a57P7Bbmp8cLlvsbTau3Tw+H2fv3R0+Gcc7KRU02Q2Dx9985MJFuOxOw4+dSwqfSPD+PT//+9rDXnS0/f18TrikvnT55qncib+F65D3IGnYSbZayhcAZVeMeh5+Z6AIlzuvuEQ+JO9pBRP88xkGSrgwf7tkv3Tt5pHi2Xv7+erkfdBk3HBFSMN7zDQs9gz8sALhIlw+p5DyWkL1gwmrCzkLrfocHS7lwdxqbzT8/fGEPT/3qvM1wkW4rBguPzMl+M3xrGn+IJ54JQTDpbDUlB2rng9ZPGKsuHm4pP63bWbqbILXvtnCpTqY2cHPHsMkQ+0aFwC6wuXnf+zNanvf0HMJyDyXj5x5qqhagann4oRwsQADwNrhUt1Ddva6fA47esWlsNhwQrhsLjEG4B7hssWud9kLl+9/N0/q/TUw56mi6h7mD5exQy1cAFg1XN5Xa+56qmiScNmmWdwSLgB0hcuWvz50SLhMdeHFce/jkh3q7YCLc2cIl/j13S7dBRAulbmhfHtzZDWi+ezDtTNW8PRH57F938z8sdRUHYfCHhZa5IicYxIuAMIFpggXABAuqBYAhAs36hVv+waAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwDgXv4B5FSs7RiivO4AAAAASUVORK5CYII='><h3>Note
+
+</h3><p>First, the function call looks like this:
+</p><div class='myCodeDiv'><button id='ZOPUE' class='myCopyButton' data-clipboard-target='#TYXZF'>Copy</button><pre  id='TYXZF' style='font-size:18px;' class='code'>interchange(&amp;x, &amp;y);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZOPUE');clipboard.on('success', function(e) {$('#ZOPUE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZOPUE').text('error');});</script></div><p>Instead of transmitting the values of x and y, the function transmits their addresses. 
+
+</p><p>That means the formal arguments u and v, appearing in the prototype and in the 
+definition of <i style='color:blue'>interchange</i>(), will have addresses as their values. 
+
+</p><p>Therefore, they should be declared as pointers. 
+
+</p><p>Because x and y are integers, u and v are pointers to integers, so declare them as
+follows:
+</p><div class='myCodeDiv'><button id='MBBAE' class='myCopyButton' data-clipboard-target='#DOEBY'>Copy</button><pre  id='DOEBY' style='font-size:18px;' class='code'><span class='r'>void</span> interchange (<span class='r'>int</span> * u, <span class='r'>int</span> * v)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MBBAE');clipboard.on('success', function(e) {$('#MBBAE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MBBAE').text('error');});</script></div><p>Next, the body of the function declares
+</p><div class='myCodeDiv'><button id='UXQQF' class='myCopyButton' data-clipboard-target='#EJSDZ'>Copy</button><pre  id='EJSDZ' style='font-size:18px;' class='code'><span class='r'>int</span> temp;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UXQQF');clipboard.on('success', function(e) {$('#UXQQF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UXQQF').text('error');});</script></div><p>to provide the needed temporary storage. To store the value of x in temp, use
+</p><div class='myCodeDiv'><button id='VEEJD' class='myCopyButton' data-clipboard-target='#HNNAQ'>Copy</button><pre  id='HNNAQ' style='font-size:18px;' class='code'>temp = *u;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VEEJD');clipboard.on('success', function(e) {$('#VEEJD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VEEJD').text('error');});</script></div><p>Remember, u has the value &amp;x, so u points to x. 
+
+</p><p>This means that *u gives you the value of x, which is what we want. Don't write
+</p><div class='myCodeDiv'><button id='CDAIV' class='myCopyButton' data-clipboard-target='#WDYWD'>Copy</button><pre  id='WDYWD' style='font-size:18px;' class='code'>temp = u;        <span class='c'>/* NO */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CDAIV');clipboard.on('success', function(e) {$('#CDAIV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CDAIV').text('error');});</script></div><p>because that would assign temp the address of x rather than its value, 
+and we are trying to interchange values, not addresses.
+
+</p><p>Similarly, to assign the value of y to x, use
+</p><div class='myCodeDiv'><button id='LYEBJ' class='myCopyButton' data-clipboard-target='#MTGGQ'>Copy</button><pre  id='MTGGQ' style='font-size:18px;' class='code'>*u = *v;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LYEBJ');clipboard.on('success', function(e) {$('#LYEBJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LYEBJ').text('error');});</script></div><p>which ultimately has this effect:
+</p><div class='myCodeDiv'><button id='BGOWB' class='myCopyButton' data-clipboard-target='#PMTEL'>Copy</button><pre  id='PMTEL' style='font-size:18px;' class='code'>x = y;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BGOWB');clipboard.on('success', function(e) {$('#BGOWB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BGOWB').text('error');});</script></div><p>You can omit the variable names in the ANSI C prototype. 
+
+</p><p>Then the prototype declaration looks like this:
+</p><div class='myCodeDiv'><button id='YDOAF' class='myCopyButton' data-clipboard-target='#EFXDS'>Copy</button><pre  id='EFXDS' style='font-size:18px;' class='code'><span class='r'>void</span> interchange(<span class='r'>int</span> *, <span class='r'>int</span> *);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YDOAF');clipboard.on('success', function(e) {$('#YDOAF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YDOAF').text('error');});</script></div><p>In general, you can communicate two kinds of information about a variable to a function. If
+you use a call of the form
+</p><div class='myCodeDiv'><button id='QNSLK' class='myCopyButton' data-clipboard-target='#RUWEH'>Copy</button><pre  id='RUWEH' style='font-size:18px;' class='code'>function1(x);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QNSLK');clipboard.on('success', function(e) {$('#QNSLK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QNSLK').text('error');});</script></div><p>you transmit the value of x. 
+
+</p><p>If you use a call of the form
+</p><div class='myCodeDiv'><button id='CJZMA' class='myCopyButton' data-clipboard-target='#PWRTY'>Copy</button><pre  id='PWRTY' style='font-size:18px;' class='code'>function2(&amp;x);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CJZMA');clipboard.on('success', function(e) {$('#CJZMA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CJZMA').text('error');});</script></div><p>you transmit the address of x. 
+
+</p><p>The first form requires that the function definition includes a formal argument of the same type as x:
+</p><div class='myCodeDiv'><button id='OJZEG' class='myCopyButton' data-clipboard-target='#XGYUM'>Copy</button><pre  id='XGYUM' style='font-size:18px;' class='code'><span class='r'>int</span> function1(<span class='r'>int</span> num)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OJZEG');clipboard.on('success', function(e) {$('#OJZEG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OJZEG').text('error');});</script></div><p>The second form requires the function definition to include a formal parameter that is a
+pointer to the right type:
+</p><div class='myCodeDiv'><button id='CFDPK' class='myCopyButton' data-clipboard-target='#QJCZK'>Copy</button><pre  id='QJCZK' style='font-size:18px;' class='code'><span class='r'>int</span> function2(<span class='r'>int</span> * ptr)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CFDPK');clipboard.on('success', function(e) {$('#CFDPK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CFDPK').text('error');});</script></div><p>Use the first form if the function needs a value for some calculation or action. 
+
+</p><p>Use the second form if the function needs to alter variables in the calling function. 
+</p><a class ='btn btn-outline-dark' href=c-use-pointer-to-access-two-dimensional-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-example-calculate-average-using-pointer-and-realloc.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to Multidimensional Arrays</a></LI><LI><a href='c-two-dimensional-arrays-and-pointers.html'>C Two-Dimensional Arrays And Pointers</a></LI><LI><a href='c-use-pointer-to-access-two-dimensional-array.html'>C use pointer to access two-dimensional array</a></LI><LI><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C function example calculate average using pointer and realloc()</a></LI><LI><a href='c-pointer-review-question-1.html'>C Pointer Review Question 1</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-pointers-to-as-function-arguments.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

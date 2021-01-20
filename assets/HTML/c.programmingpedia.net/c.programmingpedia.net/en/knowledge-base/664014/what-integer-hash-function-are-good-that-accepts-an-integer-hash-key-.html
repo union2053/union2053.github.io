@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:59:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What integer hash function are good that accepts an integer hash key? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What integer hash function are good that accepts an integer hash key? | C Language Knowledge Base">
+        <title>[SOLVED] What integer hash function are good that accepts an integer hash key? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-integer-hash-function-are-good-that-accepts-an-integer-hash-key-">What integer hash function are good that accepts an integer hash key?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/hash.html">hash</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>What integer hash function are good that accepts an integer hash key?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/80223/lear" target="_blank"><span itemprop="name">Lear</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">89</div>
+                                    <div itemprop="dateCreated">10/18/2015 8:17:05 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Knuth's multiplicative method:</p>
+
+<pre><code>hash(i)=i*2654435761 mod 2^32
+</code></pre>
+
+<p>In general, you should pick a multiplier that is in the order of your hash size (<code>2^32</code> in the example) and has no common factors with it. This way the hash function covers all your hash space uniformly.</p>
+
+<p>Edit: The biggest disadvantage of this hash function is that it preserves divisibility, so if your integers are all divisible by 2 or by 4 (which is not uncommon), their hashes will be too. This is a problem in hash tables - you can end up with only 1/2 or 1/4 of the buckets being used.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/12166/rafal-dowgird" target="_blank"><span itemprop="name">Rafał Dowgird</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key-#answer-0</div>
+                                            <div itemprop="upvoteCount">39</div>
+                                            <div itemprop="dateCreated">3/21/2009 10:53:38 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>I found the following algorithm provides a very good statistical distribution. Each input bit affects each output bit with about 50% probability. There are no collisions (each input results in a different output). The algorithm is fast except if the CPU doesn't have a built-in integer multiplication unit. C code, assuming <code>int</code> is 32 bit (for Java, replace <code>&gt;&gt;</code> with <code>&gt;&gt;&gt;</code> and remove <code>unsigned</code>):</p>
+
+<pre><code>unsigned int hash(unsigned int x) {
+    x = ((x &gt;&gt; 16) ^ x) * 0x45d9f3b;
+    x = ((x &gt;&gt; 16) ^ x) * 0x45d9f3b;
+    x = (x &gt;&gt; 16) ^ x;
+    return x;
+}
+</code></pre>
+
+<p>The magic number was calculated using a <a href="https://github.com/h2database/h2database/blob/master/h2/src/test/org/h2/test/store/CalculateHashConstant.java" rel="noreferrer">special multi-threaded test program</a> that ran for many hours, which calculates the avalanche effect (the number of output bits that change if a single input bit is changed; should be nearly 16 on average), independence of output bit changes (output bits should not depend on each other), and the probability of a change in each output bit if any input bit is changed. The calculated values are better than the 32-bit finalizer used by <a href="https://code.google.com/p/smhasher/wiki/MurmurHash3" rel="noreferrer">MurmurHash</a>, and nearly as good (not quite) as when using <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" rel="noreferrer">AES</a>. A slight advantage is that the same constant is used twice (it did make it slightly faster the last time I tested, not sure if it's still the case).</p>
+
+<p>You can reverse the process (get the input value from the hash) if you replace the <code>0x45d9f3b</code> with <code>0x119de1f3</code> (the <a href="https://lemire.me/blog/2017/09/18/computing-the-inverse-of-odd-integers/" rel="noreferrer">multiplicative inverse</a>):</p>
+
+<pre><code>unsigned int unhash(unsigned int x) {
+    x = ((x &gt;&gt; 16) ^ x) * 0x119de1f3;
+    x = ((x &gt;&gt; 16) ^ x) * 0x119de1f3;
+    x = (x &gt;&gt; 16) ^ x;
+    return x;
+}
+</code></pre>
+
+<p>For 64-bit numbers, I suggest to use the following, even thought it might not be the fastest. This one is based on <a href="http://xorshift.di.unimi.it/splitmix64.c" rel="noreferrer">splitmix64</a>, which seems to be based on the blog article <a href="http://zimbry.blogspot.it/2011/09/better-bit-mixing-improving-on.html" rel="noreferrer">Better Bit Mixing</a> (mix 13). </p>
+
+<pre><code>uint64_t hash(uint64_t x) {
+    x = (x ^ (x &gt;&gt; 30)) * UINT64_C(0xbf58476d1ce4e5b9);
+    x = (x ^ (x &gt;&gt; 27)) * UINT64_C(0x94d049bb133111eb);
+    x = x ^ (x &gt;&gt; 31);
+    return x;
+}
+</code></pre>
+
+<p>For Java, use <code>long</code>, add <code>L</code> to the constant, replace <code>&gt;&gt;</code> with <code>&gt;&gt;&gt;</code> and remove <code>unsigned</code>. In this case, reversing is more complicated:</p>
+
+<pre><code>uint64_t unhash(uint64_t x) {
+    x = (x ^ (x &gt;&gt; 31) ^ (x &gt;&gt; 62)) * UINT64_C(0x319642b2d24d8ec3);
+    x = (x ^ (x &gt;&gt; 27) ^ (x &gt;&gt; 54)) * UINT64_C(0x96de1b173f119089);
+    x = x ^ (x &gt;&gt; 30) ^ (x &gt;&gt; 60);
+    return x;
+}
+</code></pre>
+
+<p>Update: You may also want to look at the <a href="https://github.com/skeeto/hash-prospector" rel="noreferrer">Hash Function Prospector</a> project, where other (possibly better) constants are listed.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/382763/thomas-mueller" target="_blank">Thomas Mueller</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/664014" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:59:15 GMT -->
+</html>

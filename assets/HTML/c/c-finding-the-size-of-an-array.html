@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-finding-the-size-of-an-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Finding the Size of an Array</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Finding the Size of an Array'>C Finding the Size of an Array</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Finding the Size of an Array</h1>
+<a class ='btn btn-outline-dark' href=c-specifying-an-array-size.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-length-arrays.html>Next</a><p>You've already seen that the  sizeof operator computes the number of bytes that a variable of a given type  
+occupies. You can apply the sizeof operator to a type name like this: 
+</p><div class='myCodeDiv'><button id='INIBM' class='myCopyButton' data-clipboard-target='#SSGVF'>Copy</button><pre  id='SSGVF' style='font-size:18px;' class='code'>printf(<span class='q'>"The size of a variable of type long is %zu bytes.\n"</span>, <span class='r'>sizeof</span>(<span class='r'>long</span>));
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#INIBM');clipboard.on('success', function(e) {$('#INIBM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#INIBM').text('error');});</script></div><p>The parentheses around the type name following the sizeof operator are required. 
+
+</p><p>You can also apply the sizeof operator to a variable, and it will  
+compute the number of bytes occupied by the variable. 
+
+</p><h3>Note     
+
+</h3><p>The sizeof operator produces a value of type size_t, which is an implementation-defined unsigned  
+integer type. 
+
+</p><p>If you use the %u specifier for output and your compiler happens to define size_t as unsigned  
+long or unsigned long long, you may get warning messages from the compiler that the specifier %u does not  
+match the value being output by the <i style='color:blue'>printf</i>() function. 
+
+</p><p>Using %zu will eliminate the warning messages. 
+
+</p><p>The sizeof operator works with arrays too. Suppose that you declare an array with the following
+statement:
+</p><div class='myCodeDiv'><button id='RQRVL' class='myCopyButton' data-clipboard-target='#KUIKQ'>Copy</button><pre  id='KUIKQ' style='font-size:18px;' class='code'><span class='r'>double</span> values[5] = { 1.5, 2.5, 3.5, 4.5, 5.5 };
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RQRVL');clipboard.on('success', function(e) {$('#RQRVL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RQRVL').text('error');});</script></div><p>You can output the number of bytes that the array occupies with the following statement:
+</p><div class='myCodeDiv'><button id='OZJVC' class='myCopyButton' data-clipboard-target='#ZBEMU'>Copy</button><pre  id='ZBEMU' style='font-size:18px;' class='code'>printf(<span class='q'>"The size of the array, values, is %zu bytes.\n"</span>, <span class='r'>sizeof</span> values);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OZJVC');clipboard.on('success', function(e) {$('#OZJVC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OZJVC').text('error');});</script></div><p>This will produce the following output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAEq0lEQVR42u2dba6bMBAAe4jc/5DNAWilJ1Fq7PV+Ykhm1B99CIyxITtZ2+TXBgAAAPAQftEEAAAAgLgAAAAAIC4AAACAuAAAAAAgLgAAAACICwAAACAuAAAAAIgLAMA38v79/vuPdgBAXAAAHqAs9xeXYz1xLEBcAADQl/fNq4e7AOICAAB3F5dz3XAXQFwAABCX9z0rJlQYdwHEBQAAcXmAuGxMKAbEBQAAcaHOAIgLAHxOaG9GKEYzRruTSS870Ho5ggTI82GnFdDUyj3fVqjSsVa+Lnbvk9ImgLgAAGS6iz6CrjpQH+9lLxGE4Ow9Ssea1kTfHY6m07eJtbYpbQKICwBAvrsoN649UB/vt8HKHc0+Gg3qBmk5x+O4EP0p3NcVOTZoaYC4LOb1etGvAE98sp4uLpoBDllcrJkJfflW2yhtk/OVmqTHfdsA4vLv4+xWrvAIcXn9T26x3NY37GXExX0P7xF9b0zrt/O9zMjXep91jeL0dLZNJEhr5pH4xCVlooxpn0SZgy8Sl9cYkhxLAoB8OH3xtSH/MxrqxzOaCNps7LZnVzX2jXpx6U6nPRaSJS65+adEcZm+3MU0UQZxgTXiYvo/IC5Ap7hbqSsuTZal2QdxSRQXpWdELgFxgRuJi5wYj6fNmxKacqbly0mjoko66qAsfFTCNX0hF3LcOKqkvINwCv3G+KVNNypPLVydvMV6Y1dIkvIC43U43hLNgtufLbtSaJIuzUqTvczpzdPstieBpo9es1u3YqaGul5crKmUoJQgLrBYXLrhU/mn4zur/DmuLMG6g6OSSzIu1X2hb0whLafcwd19FTkS9z2j3x686tL5NPonK/js7JKxBx6ruJxDnTzAvadwjgd2qyFfwjFYNuUfs0TNzJuROlwsLr75K9NRp+npEBfIF5f4568yBkSitXVPZdizpkMiGxPFpbovlCe1ClaKKtXFad99Vf3gXDkIVSTiJnFphn5M4nIOY0eTGInLyEVG1tKUIIjL1B6Cq4pMaZXpzr7F1aZ3zGhqi7jAdeISHCLpluMWF/0gzkeKS0VfODRCs4P+FBXxW6MIypYsfXCKVqiZuix+Owmpi+0wQ2XqEKMYNn0Su/N/RyJi+gBpfKsZhCoK0tZ3600b0y0Ho9fM+GqLuMDKjMuq73913xqfm3FJya/kiov1FNX3mG/kaMmDc/1QUbwO3ZB/c3GRkyvCa16bMwpveg0GadP6auXabLk05S8bxGuLuCAuXyQukTwN4nI3cdl6E2UQlyeKy/nwJRmXfbfGQkzi0tWUURDtDjBt6t9aGp1uVI5SKUbiojydnHdR/lCRRrB8bQKIi/YTPD4joTpIVFTymsm58UnH8cusFhdh2dGmSOAHWzs+KdVdQlZvpowiuZ+s9O8A7sHNoApf8+h90ksLAVaKi7z+drS8UFmCowLTkf5pBYqmCzhWZSee5Zq+2HqrOuXJGY5GkE/hztwkioujHaarna2dFZxk43v0pk9WyrkSI3rTvJFJcqb3Hbg7C3EBSMu4ANyN0nTLxzQR7ZByRwEA4gJQGGOIQLQDbQWAuADcIrqkLIwnGIPpjgIAxAUAAADAwB8EYWFbTQn13wAAAABJRU5ErkJggg=='><p>You can also obtain the number of bytes occupied by a single element of the array with the expression  
+sizeof values[0]. 
+
+</p><p>This expression will have the value 8. Of course, any legal index value for an element  
+could be used to produce the same result. 
+
+</p><p>The memory occupied by an array is the size of a single element  
+multiplied by the number of elements. 
+
+</p><p>Thus, you can use the sizeof operator to calculate the number of  
+elements in an array: 
+</p><div class='myCodeDiv'><button id='CNLJS' class='myCopyButton' data-clipboard-target='#HOBQW'>Copy</button><pre  id='HOBQW' style='font-size:18px;' class='code'>size_t element_count = <span class='r'>sizeof</span> values/<span class='r'>sizeof</span> values[0];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CNLJS');clipboard.on('success', function(e) {$('#CNLJS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CNLJS').text('error');});</script></div><p>After executing this statement, element_count will contain the number of elements in the values array.  
+
+</p><p>I declared element_count to be type size_t because that is the type that the sizeof operator produces. 
+
+</p><p>Because you can apply the sizeof operator to a data type, you could have written the previous  
+statement to calculate the number of array elements as follows: 
+</p><div class='myCodeDiv'><button id='XPZKS' class='myCopyButton' data-clipboard-target='#XSQIL'>Copy</button><pre  id='XSQIL' style='font-size:18px;' class='code'>size_t element_count = <span class='r'>sizeof</span> values/<span class='r'>sizeof</span>(<span class='r'>double</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XPZKS');clipboard.on('success', function(e) {$('#XPZKS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XPZKS').text('error');});</script></div><p><i style='color:blue'>sizeof</i>(double) produces the number of bytes occupied by an element. 
+
+</p><div class='myCodeDiv'><button id='ZSZEA' class='myCopyButton' data-clipboard-target='#OHGIR'>Copy</button><pre  id='OHGIR' style='font-size:18px;' class='code'>#<span class='r'>include</span>&lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+    <span class='r'>double</span> values[5] = { 1.5, 2.5, 3.5, 4.5, 5.5 }; 
+    size_t element_count = <span class='r'>sizeof</span>(values)/<span class='r'>sizeof</span>(values[0]); 
+    printf(<span class='q'>"The size of the array is %zu bytes "</span>, <span class='r'>sizeof</span>(values)); 
+    printf(<span class='q'>"and there are %zu elements of %zu bytes each\n"</span>, 
+            element_count, <span class='r'>sizeof</span>(values[0])); 
+
+    <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZSZEA');clipboard.on('success', function(e) {$('#ZSZEA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZSZEA').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAFHklEQVR42u2dW3LcIBBFZxGz/0Um+VdSSZVLAdT0E6HxOZWPWJageTVXDcivAwAAAOAhvKgCAAAAQLgAAAAAIFwAAAAA4QIAAACAcAEAAABAuAAAAADCBQAApvz4+evPP+oBAOECAPAAybKhcNnWMACECwDAFiphQ8mCdgGECwAA7C5chjqGZgKECwAA7CVchmYgXADhAgAACBcAhAsAfNdZ/7yiMdyfMdy6UfqI0mxBGQipDTMdJm5KVq+rGvtNzeS4IVJeAIQLADwgaDG8sv6RaWBjOOkOJ+YrOSWrKGvWmjDMlW368uqtCpYXAOECAAiXkHDxJSJImcRkldZaU5iWxVdFVksAEC4AsJdwkV/cb3lEIxSmoiRFuGhWYRyyQy61cp1r+iDCBRAuAPDJQZd+74hm50TRIz7hIn9PZY1wkXe36Le2OG5AuADCxcP7/aZdgQ6DcLlFuFjTKRIuQu4a+YJwgQ8XLu+/MA85Ku2L3GTp1ht2GKFp3N3gM5q7P+QyPfYyfaSvGUcu06reU7joD0ZZl4r0wkXwbynCpcJ5fryXi1Tabj7qZS3wsPD0npUzpfw4bbFtiw+bJjiOUpr79j7jOCg7feRKZ5geOd+pFC7Wszy5wkW/68VavU0iU+GyJuKyubvbxLzEGWcTH/VyG41wQbiAqb36ptFcQbjsIFz+/VY5BwtHbxLP3SivCFJDE1MxleUc8UK4fIZw2dNHZQoXORIVD+41KTTpTNOXg0ZFRjpscES/hi/3pW0hJ3K+eGWkfIOQhf5ipKU0XW4r4eKrKE2Psg4uRyn69YVGT/TW9rPd1AZhylSOrKGRvanNbxsLmxyH9zS5TzXE8f8CkJDI18XzbU3lXJVRr9LiwkU5ovWDt3c+vRdyuDg5F+vIiiziVMw42/qoNOEynD6VPzqqT/ahyhSsNziMvCXiUt0W+soUwnLKG9zNF69PfZdzR1lTnIK8bhvP1DFwUsZOP53LNzQT59AGOUrRT/N9uc6z9dCGo1suaS42Kyln7dIIhWEK0xNDV4l8behpbDjne9UQ1i/nNtOM8IXiq8f16sTRaa8ki3UcBZ1SfOCsn3FS9sfEfdSrwsVriloXbtLcqexh1nBI5GKicKluC2WmVoGVIpXqhEvFmC8KwyZmqukwFfFwU3Nn9eoFI8v6xrV4bC6zIcWRur3u9P++bh8ULim1WjTjBDf2pvuoRcIlHrDSV980ZX1I7SOFS0VbOCZgzQ36LHIXcYtG7C3CJTjHOyLe7hjedAF0c+GirKhgVZeOzSwbgsJFb4PPmWuEi3JRPjiccxdxFsw4FcLFMZxvi7ikv5MFRW7R4HxExCXlHS5XuFizKBIucVUR9323C5fqiepwrds+IuKyoKpzx+ZiX704PBOMuFS4wTVl33BzLsIlxzUgXB4nXA7xmPEOwuUuT6fZcoRwQbggXBAumwgXq49aIVyKCh/cnLvAyDWbc+ObjuPFrBYuwp75OuGSuI1GOYBTvu/kqKj9e5TVhoqlvZR6SNHrpWNzmRu80dv7vvERb+4PmHE28VEvU97yuS/hypH35T7lKrvyfJq+mA47fQWJ5LKmLY6LE2uRxrJmER+Tjg4TGfmakro9Qnzvl+lQ5YIuLR+Yn7ZXRLvUjSxrt79lbK5xg5EZJ+jMmyvCoej4rHcozlQ/a8bZxEfxRxbh2fDBPSoKAL6Vj0K4AJMxFQUA8BgfhXCBR3Zx/soaFQUA39NHIVwAAADgMfwGyAdMiBgBoyQAAAAASUVORK5CYII='><p>You can use the  sizeof operator when you use a loop to process all the elements in an array, for example:
+</p><div class='myCodeDiv'><button id='KLUVR' class='myCopyButton' data-clipboard-target='#IUEPI'>Copy</button><pre  id='IUEPI' style='font-size:18px;' class='code'><span class='r'>double</span> values[5] = { 1.5, 2.5, 3.5, 4.5, 5.5 }; 
+<span class='r'>double</span> sum = 0.0; 
+<span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; <span class='r'>sizeof</span>(values)/<span class='r'>sizeof</span>(values[0]) ; ++i) 
+  sum += values[i]; 
+printf(<span class='q'>"The sum of the values is %.2f"</span>, sum);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KLUVR');clipboard.on('success', function(e) {$('#KLUVR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KLUVR').text('error');});</script></div><p>This loop totals the values of all the array elements. 
+
+</p><p>Using sizeof to compute the number of elements in  
+the array ensures that the upper limit for the loop variable, i, is always correct, whatever the size of the array. 
+</p><a class ='btn btn-outline-dark' href=c-specifying-an-array-size.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-length-arrays.html>Next</a><h2>Related</h2><UL><LI><a href='c-assigning-array-element-values.html'>C Assigning Array Element Values</a></LI><LI><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds</a></LI><LI><a href='c-specifying-an-array-size.html'>C Specifying an Array Size</a></LI><LI><a href='c-variable-length-arrays.html'>C Variable-Length Arrays</a></LI><LI><a href='c-multidimensional-arrays.html'>C Multidimensional Arrays</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-finding-the-size-of-an-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

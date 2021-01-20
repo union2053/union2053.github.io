@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12646734/how-to-sort-an-array-of-string-alphabetically--case-sensitive--nonstandard-collation- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="How to sort an array of string alphabetically (case sensitive, nonstandard collation) | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="How to sort an array of string alphabetically (case sensitive, nonstandard collation) | C Language Knowledge Base">
+        <title>How to sort an array of string alphabetically (case sensitive, nonstandard collation) | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-sort-an-array-of-string-alphabetically-case-sensitive-nonstandard-collation-">How to sort an array of string alphabetically (case sensitive, nonstandard collation)</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/alphabetical.html">alphabetical</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/case-sensitive.html">case-sensitive</a></span>
+                        <span class="tag-item"><a href="../tag/sorting.html">sorting</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I need a c language code to sort some strings and it should be case sensitive and <strong>for the same letter in upper- and lower-cases, the lower-case must come first</strong>. For example the result of the sort for the following strings:</p>
+
+<pre><code>eggs
+bacon
+cheese
+Milk
+spinach
+potatoes
+milk
+spaghetti
+</code></pre>
+
+<p>should be:</p>
+
+<pre><code>bacon
+cheese
+eggs
+milk
+Milk
+potatoes
+spaghetti
+spinach
+</code></pre>
+
+<p>I have written a code but the result that I am getting is:</p>
+
+<pre><code>Milk
+bacon
+cheese
+eggs
+milk
+potatoes
+spaghetti
+spinach
+</code></pre>
+
+<p>I have no idea how to improve this and I have searched a lot. Could anyone help me with this?</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(){
+    char c;
+    char name[20][10], temp[10];
+    int count_name = 0;
+    int name_index = 0;
+    int i, j;
+
+    while ((c = getchar()) != EOF){
+        if (c == 10){
+            name[count_name][name_index] = '\0';
+            count_name++;
+            name_index = 0;
+        } else {
+            name[count_name][name_index] = c;
+            name_index++;
+        }
+    }
+
+    for(i=0; i &lt; count_name-1 ; i++){
+        for(j=i+1; j&lt; count_name; j++)
+        {
+            if(strcmp(name[i],name[j]) &gt; 0)
+            {
+                strcpy(temp,name[i]);
+                strcpy(name[i],name[j]);
+                strcpy(name[j],temp);
+            }
+        }
+    }
+
+    for (i = 0; i &lt; count_name; i++){
+        printf("%s\n", name[i]);
+    }
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1707239/brad-capehart" target="_blank"><span itemprop="name">Brad Capehart</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">18</div>
+                                    <div itemprop="dateCreated">7/20/2014 11:44:30 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <h1 id="keep-alike-words-together-">Keep alike words together...</h1>
+
+<p>For lists of words, it is often more useful to group the "same" words together (even though they differ in case). For example:</p>
+
+<pre><code>Keeping things together:          Simple "M after m":
+------------------------          -------------------
+mars                              mars
+mars bar                          mars bar
+Mars bar                          milk
+milk                              milk-duds
+Milk                              milky-way
+milk-duds                         Mars bar
+milky-way                         Milk
+Milky-way                         Milky-way
+</code></pre>
+
+<p>If you want words arranged like the first column, I present three ways of doing so:</p>
+
+<ul>
+<li>Using <code>strcasecmp()</code> combined with <code>strcmp()</code>.</li>
+<li>A single pass implementation tracking the character type with <code>isalpha()</code>, <code>tolower()</code>, and <code>isupper()</code>.</li>
+<li>A single pass implementation that utilizes a collating table.</li>
+</ul>
+
+<p>In the end I discuss two alternatives:</p>
+
+<ul>
+<li>Using the collating table to establish an arbitrary ordering.</li>
+<li>Setting the locale to use locale based collating.</li>
+</ul>
+
+<h1 id="using-available-library-functions">Using available library functions</h1>
+
+<p>If it is possible to do so, avoid reinventing the wheel. In this case, we can do so by using the POSIX function <code>strcasecmp()</code> to see if they are equal with a case-insensitive comparison, and falling back on <code>strcmp()</code> when they are.</p>
+
+<pre><code>int alphaBetize (const char *a, const char *b) {
+    int r = strcasecmp(a, b);
+    if (r) return r;
+    /* if equal ignoring case, use opposite of strcmp() result to get
+     * lower before upper */
+    return -strcmp(a, b); /* aka: return strcmp(b, a); */
+}
+</code></pre>
+
+<p>(On some systems, the case-insensitive comparison function is called <code>stricmp()</code> or <code>_stricmp()</code>. If one is not available to you, an implementation is provided below.)</p>
+
+<pre><code>#ifdef I_DONT_HAVE_STRCASECMP
+int strcasecmp (const char *a, const char *b) {
+    while (*a &amp;&amp; *b) {
+        if (tolower(*a) != tolower(*b)) {
+            break;
+        }
+        ++a;
+        ++b;
+    }
+    return tolower(*a) - tolower(*b);
+}
+#endif
+</code></pre>
+
+<h1 id="avoiding-two-passes-over-the-strings">Avoiding two passes over the strings</h1>
+
+<p>Sometimes, existing functions do not perform well enough, and you have to do something else to make things faster. The following function does the comparison in roughly the same way in a single pass, and without using either <code>strcasecmp()</code> or <code>strcmp()</code>. But, it treats all non-alphabetical characters as being less than letters.</p>
+
+<pre><code>int alphaBetize (const char *a, const char *b) {
+    int weight = 0;
+    do {
+        if (*a != *b) {
+            if (!(isalpha(*a) &amp;&amp; isalpha(*b))) {
+                if (isalpha(*a) || isalpha(*b)) {
+                    return isalpha(*a) - isalpha(*b);
+                }
+                return *a - *b;
+            }
+            if (tolower(*a) != tolower(*b)) {
+                return tolower(*a) - tolower(*b);
+            }
+            /* treat as equal, but mark the weight if not set */
+            if (weight == 0) {
+                weight = isupper(*a) - isupper(*b);
+            }
+        }
+        ++a;
+        ++b;
+    } while (*a &amp;&amp; *b);
+    /* if the words compared equal, use the weight as tie breaker */
+    if (*a == *b) {
+        return weight;
+    }
+    return !*b - !*a;
+}
+</code></pre>
+
+<p>Using this comparison for sorting will keep <code>milk</code> and <code>Milk</code> next to each other even if the list includes <code>milk-duds</code>.</p>
+
+<h1 id="using-a-collating-table">Using a collating table</h1>
+
+<p>Here is a way to dynamically create a collating table from a "configuration". It serves to illustrate a contrastive technique to change how strings get compared.</p>
+
+<p>You can map how the letters of the alphabet are compared with a kind of simple table that describes the relative order you want letters (or any character except the NUL byte) to have:</p>
+
+<pre><code>const char * alphaBetical =
+    "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
+</code></pre>
+
+<p>From this ordering, we can create a look-up table to see how two letters are supposed to compare to each other. The following function initializes the table if it has not already been done first, and otherwise performs the table look-up.</p>
+
+<pre><code>int alphaBeta_lookup (int c) {
+    static int initialized;
+    static char table[CHAR_MAX+1];
+    if (!initialized) {
+        /* leave all non-alphaBeticals in their relative order, but below
+           alphaBeticals */
+        int i, j;
+        for (i = j = 1; i &lt; CHAR_MAX+1; ++i) {
+            if (strchr(alphaBetical, i)) continue;
+            table[i] = j++;
+        }
+        /* now run through the alphaBeticals */
+        for (i = 0; alphaBetical[i]; ++i) {
+            table[(int)alphaBetical[i]] = j++;
+        }
+        initialized = 1;
+    }
+    /* return the computed ordinal of the provided character */
+    if (c &lt; 0 || c &gt; CHAR_MAX) return c;
+    return table[c];
+}
+</code></pre>
+
+<p>With this look-up table, we can now simplify the loop body of the <code>alphaBetize()</code> comparison function:</p>
+
+<pre><code>int alphaBetize (const char *a, const char *b) {
+    int ax = alphaBeta_lookup(*a);
+    int bx = alphaBeta_lookup(*b);
+    int weight = 0;
+    do {
+        char al = tolower(*a);
+        char bl = tolower(*b);
+        if (ax != bx) {
+            if (al != bl) {
+                return alphaBeta_lookup(al) - alphaBeta_lookup(bl);
+            }
+            if (weight == 0) {
+                weight = ax - bx;
+            }
+        }
+        ax = alphaBeta_lookup(*++a);
+        bx = alphaBeta_lookup(*++b);
+    } while (ax &amp;&amp; bx);
+    /* if the words compared equal, use the weight as tie breaker */
+    return (ax != bx) ? !bx - !ax : weight;
+}
+</code></pre>
+
+<h1 id="can-we-make-things-simpler-">Can we make things simpler?</h1>
+
+<p>Using the collating table, you can create many different orderings with a simplified comparison function, like:</p>
+
+<pre><code>int simple_collating (const char *a, const char *b) {
+    while (alphaBeta_lookup(*a) == alphaBeta_lookup(*b)) {
+        if (*a == '\0') break;
+        ++a, ++b;
+    }
+    return alphaBeta_lookup(*a) - alphaBeta_lookup(*b);
+}
+</code></pre>
+
+<p>Using this same function and through modifying the <code>alphaBetical</code> string, you can achieve nearly any ordering you want (alphabetical, reverse alphabetical, vowels before consonants, etc.). However, the arrangement of keeping alike words together requires interspersing capitalized words with words in lowercase, and this can only be done by doing a comparison that ignores case.</p>
+
+<p>Note that with the <code>simple_collating()</code> function above and the <code>alphaBetical</code> string I provided, <code>Bacon</code> will come before <code>milk</code>, but <code>Mars</code> will go after <code>milk</code> and before <code>Milk</code>.</p>
+
+<h1 id="if-you-want-to-sort-based-on-your-locale-">If you want to sort based on your locale.</h1>
+
+<p>If you want to use a collating sequence that is already defined for your locale, you can set the locale and call the collating comparison function:</p>
+
+<pre><code>/*
+ * To change the collating locale, use (for example):
+       setlocale(LC_COLLATE, "en.US");
+ */
+int iso_collating (const char *a, const char *b) {
+    return strcoll(a, b);
+}
+</code></pre>
+
+<p>Now, by changing the locale, the sorting order will be based on a standardized collating sequence.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/315052/jxh" target="_blank"><span itemprop="name">jxh</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12646734/how-to-sort-an-array-of-string-alphabetically--case-sensitive--nonstandard-collation-#answer-0</div>
+                                            <div itemprop="upvoteCount">21</div>
+                                            <div itemprop="dateCreated">8/29/2014 6:58:29 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12646734" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12646734/how-to-sort-an-array-of-string-alphabetically--case-sensitive--nonstandard-collation- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+</html>

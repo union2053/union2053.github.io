@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2978979/how-to-improve-performance-of-this-numerical-computation-in-haskell- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to improve performance of this numerical computation in Haskell? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to improve performance of this numerical computation in Haskell? | C Language Knowledge Base">
+        <title>[SOLVED] How to improve performance of this numerical computation in Haskell? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-improve-performance-of-this-numerical-computation-in-haskell-">How to improve performance of this numerical computation in Haskell?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/haskell.html">haskell</a></span>
+                        <span class="tag-item"><a href="../tag/math.html">math</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm in the middle of porting David Blei's original <a href="http://www.cs.princeton.edu/~blei/lda-c/index.html" rel="nofollow noreferrer">C implementation</a> of Latent Dirichlet Allocation to Haskell, and I'm trying to decide whether to leave some of the low-level stuff in C. The following function is one example—it's an approximation of the second derivative of <code>lgamma</code>:</p>
+
+<pre><code>double trigamma(double x)
+{
+    double p;
+    int i;
+
+    x=x+6;
+    p=1/(x*x);
+    p=(((((0.075757575757576*p-0.033333333333333)*p+0.0238095238095238)
+         *p-0.033333333333333)*p+0.166666666666667)*p+1)/x+0.5*p;
+    for (i=0; i&lt;6 ;i++)
+    {
+        x=x-1;
+        p=1/(x*x)+p;
+    }
+    return(p);
+}
+</code></pre>
+
+<p>I've translated this into more or less idiomatic Haskell as follows:</p>
+
+<pre class="lang-hs prettyprint-override"><code>trigamma :: Double -&gt; Double
+trigamma x = snd $ last $ take 7 $ iterate next (x' - 1, p')
+  where
+    x' = x + 6
+    p  = 1 / x' ^ 2
+    p' = p / 2 + c / x'
+    c  = foldr1 (\a b -&gt; (a + b * p)) [1, 1/6, -1/30, 1/42, -1/30, 5/66]
+    next (x, p) = (x - 1, 1 / x ^ 2 + p)
+</code></pre>
+
+<p>The problem is that when I run both through <a href="http://hackage.haskell.org/package/criterion" rel="nofollow noreferrer">Criterion</a>, my Haskell version is six or seven times slower (I'm compiling with <code>-O2</code> on GHC 6.12.1). Some similar functions are even worse.</p>
+
+<p>I know practically nothing about Haskell performance, and I'm not terribly interested in <a href="http://hackage.haskell.org/package/ghc-core-0.5.4" rel="nofollow noreferrer">digging through Core</a> or anything like that, since I can always just call the handful of math-intensive C functions through FFI.</p>
+
+<p>But I'm curious about whether there's low-hanging fruit that I'm missing—some kind of extension or library or annotation that I could use to speed up this numeric stuff without making it too ugly.</p>
+
+<hr>
+
+<p><strong>UPDATE:</strong> Here are two better solutions, thanks to <a href="https://stackoverflow.com/questions/2978979/haskell-math-performance/2979049#2979049">Don Stewart</a> and <a href="https://stackoverflow.com/questions/2978979/haskell-math-performance/2983578#2983578">Yitz</a>. I've modified Yitz's answer slightly to use <code>Data.Vector</code>.</p>
+
+<pre class="lang-hs prettyprint-override"><code>invSq x = 1 / (x * x)
+computeP x = (((((5/66*p-1/30)*p+1/42)*p-1/30)*p+1/6)*p+1)/x+0.5*p
+  where p = invSq x
+
+trigamma_d :: Double -&gt; Double
+trigamma_d x = go 0 (x + 5) $ computeP $ x + 6
+  where
+    go :: Int -&gt; Double -&gt; Double -&gt; Double
+    go !i !x !p
+        | i &gt;= 6    = p
+        | otherwise = go (i+1) (x-1) (1 / (x*x) + p)
+
+trigamma_y :: Double -&gt; Double
+trigamma_y x = V.foldl' (+) (computeP $ x + 6) $ V.map invSq $ V.enumFromN x 6
+</code></pre>
+
+<p>The performance of the two seems to be almost exactly the same, with one or the other winning by a percentage point or two depending on the compiler flags.</p>
+
+<p>As <a href="https://stackoverflow.com/users/157360/camccann">camccann</a> said <a href="http://www.reddit.com/r/haskell/comments/cbnwp/when_translating_c_to_haskell_use_the_same/" rel="nofollow noreferrer">over at Reddit</a>, the moral of the story is "For best results, use Don Stewart as your GHC backend code generator." Barring that solution, the safest bet seems to be just to translate the C control structures directly into Haskell, although loop fusion can give similar performance in a more idiomatic style.</p>
+
+<p>I'll probably end up using the <code>Data.Vector</code> approach in my code.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/334519/travis-brown" target="_blank"><span itemprop="name">Travis Brown</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">48</div>
+                                    <div itemprop="dateCreated">5/23/2017 10:27:52 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Use the same control and data structures, yielding:</p>
+
+<pre class="lang-hs prettyprint-override"><code>{-# LANGUAGE BangPatterns #-}
+{-# OPTIONS_GHC -fvia-C -optc-O3 -fexcess-precision -optc-march=native #-}
+
+{-# INLINE trigamma #-}
+trigamma :: Double -&gt; Double
+trigamma x = go 0 (x' - 1) p'
+    where
+        x' = x + 6
+        p  = 1 / (x' * x')
+
+        p' =(((((0.075757575757576*p-0.033333333333333)*p+0.0238095238095238)
+                  *p-0.033333333333333)*p+0.166666666666667)*p+1)/x'+0.5*p
+
+        go :: Int -&gt; Double -&gt; Double -&gt; Double
+        go !i !x !p
+            | i &gt;= 6    = p
+            | otherwise = go (i+1) (x-1) (1 / (x*x) + p)
+</code></pre>
+
+<p>I don't have your testsuite, but this yields the following asm:</p>
+
+<pre><code>A_zdwgo_info:
+        cmpq    $5, %r14
+        jg      .L3
+        movsd   .LC0(%rip), %xmm7
+        movapd  %xmm5, %xmm8
+        movapd  %xmm7, %xmm9
+        mulsd   %xmm5, %xmm8
+        leaq    1(%r14), %r14
+        divsd   %xmm8, %xmm9
+        subsd   %xmm7, %xmm5
+        addsd   %xmm9, %xmm6
+        jmp     A_zdwgo_info
+</code></pre>
+
+<p>Which looks ok. This is the kind of code the <code>-fllvm</code> backend does a good job.</p>
+
+<p>GCC unrolls the loop though, and the only way to do that is either via Template Haskell or manual unrolling. You might consider  that (a TH macro) if doing a lot of this.</p>
+
+<p>Actually, the GHC LLVM backend does unroll the loop :-)</p>
+
+<p>Finally, if you really like the original Haskell version, write it using <a href="http://hackage.haskell.org/package/vector" rel="nofollow noreferrer">stream fusion combinators,</a> and GHC will convert it back into loops. (Exercise for the reader).</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/83805/don-stewart" target="_blank"><span itemprop="name">Don Stewart</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2978979/how-to-improve-performance-of-this-numerical-computation-in-haskell-#answer-0</div>
+                                            <div itemprop="upvoteCount">49</div>
+                                            <div itemprop="dateCreated">9/10/2014 12:00:46 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Before the optimization work, I wouldn't say that your original translation is the most idiomatic way to express in Haskell what the C code is doing.</p>
+
+<p>How would the optimization process have proceeded if we started with the following instead:</p>
+
+<pre><code>trigamma :: Double -&gt; Double
+trigamma x = foldl' (+) p' . map invSq . take 6 . iterate (+ 1) $ x
+where
+  invSq y = 1 / (y * y)
+  x' = x + 6
+  p  = invSq x'
+  p' =(((((0.075757575757576*p-0.033333333333333)*p+0.0238095238095238)
+              *p-0.033333333333333)*p+0.166666666666667)*p+1)/x'+0.5*p
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/284588/yitz" target="_blank">Yitz</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2978979" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2978979/how-to-improve-performance-of-this-numerical-computation-in-haskell- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:22 GMT -->
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointers Introduction</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointers Introduction'>C Pointers Introduction</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointers Introduction</h1>
+<a class ='btn btn-outline-dark' href=c-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-declaring-pointers.html>Next</a><p>A pointer is a variable whose value is a memory address. 
+
+</p><p>The pointer variable has an address as a value. 
+
+</p><p>If you give a particular pointer variable the name <i style='color:blue'>ptr</i>, 
+you can have statements such as the following:
+</p><div class='myCodeDiv'><button id='KMPXG' class='myCopyButton' data-clipboard-target='#KZEGA'>Copy</button><pre  id='KZEGA' style='font-size:18px;' class='code'><span class='r'>int</span> my_<span class='r'>int</span> = 1;
+ptr = &amp;my_<span class='r'>int</span>;    <span class='c'>// assigns my_int's address to ptr</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KMPXG');clipboard.on('success', function(e) {$('#KMPXG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KMPXG').text('error');});</script></div><p>We say that <i style='color:blue'>ptr</i> "points to" my_int. 
+
+</p><p>The difference between <i style='color:blue'>ptr</i> and &amp;my_int is that ptr is a variable, 
+and &amp;my_int is a constant. 
+
+</p><h3>Declaring Pointers 
+
+</h3><p>You can declare a pointer to a variable of type  int with the following statement: 
+</p><div class='myCodeDiv'><button id='VMCJG' class='myCopyButton' data-clipboard-target='#COXGK'>Copy</button><pre  id='COXGK' style='font-size:18px;' class='code'><span class='r'>int</span> *pnumber;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VMCJG');clipboard.on('success', function(e) {$('#VMCJG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VMCJG').text('error');});</script></div><p>The type of the variable with the name <i style='color:blue'>pnumber</i> is int*. 
+
+</p><p>It can store the address of any variable of type int. 
+
+</p><p>Note that you can also write the statement like this: 
+</p><div class='myCodeDiv'><button id='FSITQ' class='myCopyButton' data-clipboard-target='#NKHXJ'>Copy</button><pre  id='NKHXJ' style='font-size:18px;' class='code'><span class='r'>int</span>* pnumber;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FSITQ');clipboard.on('success', function(e) {$('#FSITQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FSITQ').text('error');});</script></div><p>This is exactly the same as the previous statement in its effect. 
+
+</p><p>You can use either notation, but it is best to stick to one or the other. 
+
+</p><h3>NULL
+</h3><p>The statement just creates the <i style='color:blue'>pnumber</i> variable but doesn't initialize it. 
+
+</p><p>Uninitialized pointers are particularly dangerous.
+
+</p><p>You can initialize <i style='color:blue'>pnumber</i> so that it doesn't point to anything  
+by rewriting the declaration like this: 
+</p><div class='myCodeDiv'><button id='KTRRQ' class='myCopyButton' data-clipboard-target='#MDJHD'>Copy</button><pre  id='MDJHD' style='font-size:18px;' class='code'><span class='r'>int</span> *pnumber = NULL;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KTRRQ');clipboard.on('success', function(e) {$('#KTRRQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KTRRQ').text('error');});</script></div><p>NULL is a constant that's defined in the standard library and is the equivalent of zero for a pointer. 
+</p><p>NULL is a value that's guaranteed not to point to any location in memory. 
+
+</p><p>This means that it implicitly prevents the accidental overwriting of memory by using a pointer that doesn't point to anything specific. 
+
+</p><p>NULL is defined in several standard library header files, including <i style='color:blue'>stddef.h</i>, <i style='color:blue'>stdlib.h</i>, <i style='color:blue'>stdio.h</i>, 
+<i style='color:blue'>string.h</i>, <i style='color:blue'>time.h</i>, <i style='color:blue'>wchar.h</i>, and <i style='color:blue'>locale.h</i>. 
+
+</p><p>Anytime that it's not recognized by the compiler, just add an #include directive for <i style='color:blue'>stddef.h</i>  
+to your source file. 
+
+</p><p>If you want to initialize your variable <i style='color:blue'>pnumber</i> with the address of a variable you've already declared, you  
+use the address of operator, &amp;: 
+</p><div class='myCodeDiv'><button id='XYPVV' class='myCopyButton' data-clipboard-target='#ESOZS'>Copy</button><pre  id='ESOZS' style='font-size:18px;' class='code'><span class='r'>int</span> number = 99; 
+<span class='r'>int</span> *pnumber = &amp;number;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XYPVV');clipboard.on('success', function(e) {$('#XYPVV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XYPVV').text('error');});</script></div><p>Now the initial value of <i style='color:blue'>pnumber</i> is the address of the variable number. 
+
+</p><p>You can declare regular variables and pointers in the same statement, for example: 
+</p><div class='myCodeDiv'><button id='YHTRF' class='myCopyButton' data-clipboard-target='#EHPSL'>Copy</button><pre  id='EHPSL' style='font-size:18px;' class='code'><span class='r'>double</span> value, *pVal, fnum;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YHTRF');clipboard.on('success', function(e) {$('#YHTRF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YHTRF').text('error');});</script></div><p>This statement declares two double-precision floating-point variables, <i style='color:blue'>value</i> and <i style='color:blue'>fnum</i>, and a variable  
+<i style='color:blue'>pVal</i> of type "pointer to double." 
+
+</p><p>With this statement, it is obvious that only the second variable, <i style='color:blue'>pVal</i>, is a pointer. 
+
+</p><h3>Indirection Operator: *
+
+</h3><p>To create a pointer variable, you need to be able to declare its type. 
+
+</p><p>Suppose you want to declare <i style='color:blue'>ptr</i> so that it can hold the address of an int. 
+
+</p><p>To make this declaration, you need to use a new operator. 
+
+</p><p>Suppose you know that <i style='color:blue'>ptr</i> points to my_int, as shown here:
+</p><div class='myCodeDiv'><button id='OCZPW' class='myCopyButton' data-clipboard-target='#YELQP'>Copy</button><pre  id='YELQP' style='font-size:18px;' class='code'><span class='r'>int</span> my_<span class='r'>int</span> = 1;
+ptr = &amp;my_<span class='r'>int</span>;    <span class='c'>// assigns my_int's address to ptr</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OCZPW');clipboard.on('success', function(e) {$('#OCZPW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OCZPW').text('error');});</script></div><p>Then you can use the indirection operator * (also called the dereferencing operator) 
+to find the value stored in my_int:
+
+int val = *ptr;    // finding the value ptr points to
+
+</p><p>The statements ptr = &amp;my_int; and val = *my_int; taken together amount to the following
+statement:
+</p><div class='myCodeDiv'><button id='ERLZM' class='myCopyButton' data-clipboard-target='#ALGOW'>Copy</button><pre  id='ALGOW' style='font-size:18px;' class='code'>val = my_<span class='r'>int</span>;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ERLZM');clipboard.on('success', function(e) {$('#ERLZM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ERLZM').text('error');});</script></div><p>Using the address and indirection operators is a rather indirect way of accomplishing this
+result, hence the name "indirection operator."
+
+</p><p>Suppose you declare the following variables: 
+</p><div class='myCodeDiv'><button id='QBXNE' class='myCopyButton' data-clipboard-target='#MPIZN'>Copy</button><pre  id='MPIZN' style='font-size:18px;' class='code'><span class='r'>int</span> number = 15; 
+<span class='r'>int</span> *pointer = &amp;number; 
+<span class='r'>int</span> result = 0;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QBXNE');clipboard.on('success', function(e) {$('#QBXNE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QBXNE').text('error');});</script></div><p>The <i style='color:blue'>pointer</i> variable contains the address of the variable <i style='color:blue'>number</i>, so you can use this in an expression  
+to calculate a new value for result, like this: 
+</p><div class='myCodeDiv'><button id='QKVSC' class='myCopyButton' data-clipboard-target='#ZRXNN'>Copy</button><pre  id='ZRXNN' style='font-size:18px;' class='code'>result = *pointer + 5;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QKVSC');clipboard.on('success', function(e) {$('#QKVSC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QKVSC').text('error');});</script></div><p>The expression *pointer will evaluate to the value stored at the address contained in the pointer. 
+
+</p><p>This is the value stored in number, 15, so result will be set to 15 + 5, which is 20. 
+</p><a class ='btn btn-outline-dark' href=c-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-declaring-pointers.html>Next</a><h2>Related</h2><UL><LI><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C calculates reciprocal of array element and store in separate array</a></LI><LI><a href='c-array-exercise-1.html'>C Array Exercise 1</a></LI><LI><a href='c-operator.html'>C &amp; Operator</a></LI><LI><a href='c-declaring-pointers.html'>C Declaring Pointers</a></LI><LI><a href='c-declare-a-variable-and-a-pointer.html'>C declare a variable and a pointer</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

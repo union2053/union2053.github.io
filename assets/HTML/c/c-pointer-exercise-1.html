@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-exercise-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointer Exercise 1</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointer Exercise 1'>C Pointer Exercise 1</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointer Exercise 1</h1>
+<a class ='btn btn-outline-dark' href=c-pointer-review-question-3.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-exercise-2.html>Next</a><h3>Question 1
+
+</h3><p>The following program finds the total rainfall for each year, 
+the average yearly rainfall, and the average rainfall for each month.
+
+</p><p>To find the total rainfall for a year, you have to add all the data in a given row. 
+
+</p><p>To find the average rainfall for a given month, you have to add all the data in 
+a given column. 
+
+</p><p>The two-dimensional array makes it easy to visualize and execute these activities. 
+
+</p><div class='myCodeDiv'><button id='BZKHU' class='myCopyButton' data-clipboard-target='#IALGN'>Copy</button><pre  id='IALGN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define MONTHS 12      <span class='c'>// number of months in a year</span>
+#define YEARS    5     <span class='c'>// number of years of data</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='c'>// initializing rainfall data for 2010 - 2014</span>
+     <span class='r'>const</span> <span class='r'>float</span> rain[YEARS][MONTHS] =
+    {
+        {4.3,4.3,4.2,3.0,2.0,2.2,0.2,0.2,0.4,2.4,3.5,6.6},
+        {8.5,8.2,1.2,1.6,2.4,0.0,5.2,0.9,0.3,0.9,1.4,7.3},
+        {9.1,8.5,6.7,4.3,2.1,0.8,0.2,0.2,1.1,2.3,6.1,8.4},
+        {7.2,9.9,8.4,3.3,1.2,0.8,0.4,0.1,0.6,1.7,4.3,6.2},
+        {7.6,5.6,3.8,2.8,3.9,0.2,0.1,0.1,0.0,1.3,2.6,5.2}
+    };
+     <span class='r'>int</span> year, month;
+     <span class='r'>float</span> subtot, total;
+
+    printf(<span class='q'>" YEAR    RAINFALL (inches)\n"</span>);
+    <span class='r'>for</span> (year = 0, total = 0; year &lt; YEARS; year++)
+    {             <span class='c'>// for each year, sum rainfall for each month</span>
+        <span class='r'>for</span> (month = 0, subtot = 0; month &lt; MONTHS; month++)
+            subtot += rain[year][month];
+        printf(<span class='q'>"%5d %15.1f\n"</span>, 2010 + year, subtot);
+        total += subtot; <span class='c'>// total for all years</span>
+      }
+    printf(<span class='q'>"\nThe yearly average is %.1f inches.\n\n"</span>,
+            total/YEARS);
+    printf(<span class='q'>"MONTHLY AVERAGES:\n\n"</span>);
+    printf(<span class='q'>" Jan Feb Mar Apr May Jun Jul Aug Sep Oct "</span>);
+    printf(<span class='q'>" Nov Dec\n"</span>);
+
+    <span class='r'>for</span> (month = 0; month &lt; MONTHS; month++)
+    {             <span class='c'>// for each month, sum rainfall over years</span>
+        <span class='r'>for</span> (year = 0, subtot =0; year &lt; YEARS; year++)
+            subtot += rain[year][month];
+        printf(<span class='q'>"%4.1f "</span>, subtot/YEARS);
+    }
+    printf(<span class='q'>"\n"</span>);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BZKHU');clipboard.on('success', function(e) {$('#BZKHU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BZKHU').text('error');});</script></div><p>Modify the code that it does the calculations using pointers instead of subscripts. 
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='DQS' href='#DQS'>Click to view the answer</button></p><pre style='font-size:120%' id='DQS' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define MONTHS 12    <span class='c'>// number of months in a year</span>
+#define YEARS   5    <span class='c'>// number of years of data</span>
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='c'>// initializing rainfall data for 2010 - 2014</span>
+  <span class='r'>const</span> <span class='r'>float</span> rain[YEARS][MONTHS] =
+    {
+      {4.3,4.3,4.3,3.0,2.0,1.2,0.2,0.2,0.4,2.4,3.5,6.6},
+      {8.5,8.2,1.2,1.6,2.4,0.0,5.2,0.9,0.3,0.9,1.4,7.3},
+      {9.1,8.5,6.7,4.3,2.1,0.8,0.2,0.2,1.1,2.3,6.1,8.4},
+      {7.2,9.9,8.4,3.3,1.2,0.8,0.4,0.0,0.6,1.7,4.3,6.2},
+      {7.6,5.6,3.8,2.8,3.8,0.2,0.0,0.0,0.0,1.3,2.6,5.2}
+    };
+  <span class='r'>int</span> year, month;
+  <span class='r'>float</span> subtot, total;
+  printf(<span class='q'>" YEAR     RAINFALL  (inches)\n"</span>);
+  <span class='r'>for</span> (year = 0, total = 0; year &lt; YEARS; year++) {
+    <span class='c'>// for each year, sum rainfall for each month</span>
+    <span class='r'>for</span> (month = 0, subtot = 0; month &lt; MONTHS; month++)
+      subtot += *(*(rain + year) + month);
+    printf(<span class='q'>"%5d %15.1f\n"</span>, 2010 + year, subtot);
+    total += subtot; <span class='c'>// total for all years</span>
+  }
+  printf(<span class='q'>"\nThe yearly average is %.1f inches.\n\n"</span>, total/YEARS);
+  printf(<span class='q'>"MONTHLY AVERAGES:\n\n"</span>);
+  printf(<span class='q'>" Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec\n"</span>);
+  <span class='r'>for</span> (month = 0; month &lt; MONTHS; month++) {
+    <span class='c'>// for each month, sum rainfall over years</span>
+    <span class='r'>for</span> (year = 0, subtot =0; year &lt; YEARS; year++)
+      subtot += *(*(rain + year) + month);
+    printf(<span class='q'>"%4.1f "</span>, subtot/YEARS);
+  }
+  printf(<span class='q'>"\n"</span>);
+
+  <span class='r'>return</span> 0;
+}
+
+
+</pre><h3>Question 2
+</h3><p>Write a program that initializes an array-of-double and then copies the contents of the
+    array into three other arrays. 
+    
+</p><p>To make the first copy, use a function with array notation. 
+
+</p><p>To make the second copy, use a function with pointer notation and pointer incrementing. 
+
+</p><p>Have the first two functions take as arguments the name of the target array, 
+the name of the source array, and the number of elements to be copied. 
+
+</p><p>Have the third function take as arguments the name of the target, the name of the source, 
+and a pointer to the element following the last element of the source. 
+
+</p><p>That is, the function calls would look like this, given the following declarations:
+</p><div class='myCodeDiv'><button id='QOSVB' class='myCopyButton' data-clipboard-target='#LLCTG'>Copy</button><pre  id='LLCTG' style='font-size:18px;' class='code'><span class='r'>double</span> source[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
+<span class='r'>double</span> target1[5];
+<span class='r'>double</span> target2[5];
+<span class='r'>double</span> target3[5];
+copy_arr(target1, source, 5);
+copy_ptr(target2, source, 5);
+copy_ptrs(target3, source, source + 5);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QOSVB');clipboard.on('success', function(e) {$('#QOSVB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QOSVB').text('error');});</script></div><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='RTM' href='#RTM'>Click to view the answer</button></p><pre style='font-size:120%' id='RTM' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>void</span> copy_arr(<span class='r'>double</span> target[], <span class='r'>const</span> <span class='r'>double</span> source[], <span class='r'>int</span> size);
+<span class='r'>void</span> copy_ptr(<span class='r'>double</span> * target, <span class='r'>const</span> <span class='r'>double</span> * source, <span class='r'>int</span> size);
+<span class='r'>void</span> copy_ptrs(<span class='r'>double</span> * target, <span class='r'>const</span> <span class='r'>double</span> * source, 
+               <span class='r'>const</span> <span class='r'>double</span> * following_last);
+<span class='r'>void</span> print_array(<span class='r'>const</span> <span class='r'>double</span> arr[], <span class='r'>int</span> size);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>double</span> source[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
+  <span class='r'>double</span> target1[5];
+  <span class='r'>double</span> target2[5];
+  <span class='r'>double</span> target3[5];
+  copy_arr(target1, source, 5);
+  copy_ptr(target2, source, 5);
+  copy_ptrs(target3, source, source + 5);
+
+  printf(<span class='q'>"source[5]  = "</span>);
+  print_array(source, 5);
+  printf(<span class='q'>"target1[5] = "</span>);
+  print_array(target1, 5);
+  printf(<span class='q'>"target2[5] = "</span>);
+  print_array(target2, 5);
+  printf(<span class='q'>"target3[5] = "</span>);
+  print_array(target3, 5);
+
+  <span class='r'>return</span> 0;
+}
+
+<span class='r'>void</span> copy_arr(<span class='r'>double</span> target[],<span class='r'>const</span> <span class='r'>double</span> source[], <span class='r'>int</span> size)
+<span class='c'>// copy content of the source array to target</span>
+{
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; size; ++i) {
+    target[i] = source[i];
+  }
+}
+
+<span class='r'>void</span> copy_ptr(<span class='r'>double</span> * target, <span class='r'>const</span> <span class='r'>double</span> * source, <span class='r'>int</span> size)
+<span class='c'>// copy content of the source array to target</span>
+{
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; size; ++i) {
+    *(target + i) = *(source + i);
+  }
+}
+
+<span class='r'>void</span> copy_ptrs(
+  <span class='r'>double</span> * target,
+  <span class='r'>const</span> <span class='r'>double</span> * source,
+  <span class='r'>const</span> <span class='r'>double</span> * following_last)
+<span class='c'>// copy content of the source array to target</span>
+{
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; source + i &lt; following_last; ++i) {
+    target[i] = source[i];
+  }
+}
+
+<span class='r'>void</span> print_array(<span class='r'>const</span> <span class='r'>double</span> arr[], <span class='r'>int</span> size)
+<span class='c'>// print the content of an array of doubles (literal representation)</span>
+{
+  putchar(<span class='q'>'{'</span>);
+  <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; size; ++i) {
+    printf(<span class='q'>"%f, "</span>, arr[i]);
+  }
+  printf(<span class='q'>"\b\b  \b\b}\n"</span>); 
+  <span class='c'>// delete last ',' and ' ' chars and close curly brackets</span>
+}
+
+
+</pre><h3>Question 3
+</h3><p>Write a function that returns the largest value stored in an array-of-int. 
+
+</p><p>Test the function in a simple program.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='IDY' href='#IDY'>Click to view the answer</button></p><pre style='font-size:120%' id='IDY' class='collapse code'>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> max(<span class='r'>int</span> size,<span class='r'>const</span> <span class='r'>int</span> arr[size]);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>int</span> arr1[] = {1, 2, 3, 4};
+  <span class='r'>const</span> <span class='r'>int</span> arr2[] = {1, 2, 3, 2, 1};
+  printf(<span class='q'>"Largest value of arr1 = %d.\n"</span>,
+         max(4, arr1));
+  printf(<span class='q'>"Largest value of arr2 = %d.\n"</span>,
+         max(5, arr2));
+
+  <span class='r'>return</span> 0;
+}
+
+<span class='r'>int</span> max(<span class='r'>int</span> size, <span class='r'>const</span> <span class='r'>int</span> arr[size])
+<span class='c'>// return the largest int a an array</span>
+<span class='c'>// note that it also works for const arrays</span>
+{
+  <span class='r'>int</span> max = arr[0];
+  <span class='r'>for</span> (<span class='r'>int</span> i = 1; i &lt; size; ++i) {
+    <span class='r'>if</span> (arr[i] &gt; max)
+      max = arr[i];
+  }
+  <span class='r'>return</span> max;
+}
+
+
+</pre><h3>Question 4
+</h3><p>Write a function that returns the index of the largest value stored in an array-of-double.
+
+</p><p>Test the function in a simple program.
+
+</p><br/><p><button type='button' class='btn btn-outline-success' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='LOB' href='#LOB'>Click to view the answer</button></p><pre style='font-size:120%' id='LOB' class='collapse code'>
+
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> index_largest(<span class='r'>int</span> size, <span class='r'>const</span> <span class='r'>double</span> []);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>double</span> arr1[] = {2.72, 3.14, 1.2};
+  <span class='r'>const</span> <span class='r'>double</span> arr2[] = {1.1};
+
+  printf(<span class='q'>"Index of largest element of arr1 = %d.\n"</span>,
+         index_largest(3, arr1));
+  printf(<span class='q'>"Index of largest element of arr2 = %d.\n"</span>,
+         index_largest(1, arr2));
+
+  <span class='r'>return</span> 0;
+}
+
+<span class='r'>int</span> index_largest(<span class='r'>int</span> size, <span class='r'>const</span> <span class='r'>double</span> arr[])
+<span class='c'>// return the index of the last largest element of the array</span>
+{
+  <span class='r'>int</span> index_largest = 0;
+  <span class='r'>double</span> max = arr[0];
+  <span class='r'>for</span> (<span class='r'>int</span> i = 1; i &lt; size; ++i) {
+    <span class='r'>if</span> (arr[i] &gt; max) {
+      max = arr[i];
+      index_largest = i;
+    }
+  }
+  <span class='r'>return</span> index_largest;
+}
+</pre><a class ='btn btn-outline-dark' href=c-pointer-review-question-3.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-exercise-2.html>Next</a><h2>Related</h2><UL><LI><a href='c-pointer-review-question-1.html'>C Pointer Review Question 1</a></LI><LI><a href='c-pointer-review-question-2.html'>C Pointer Review Question 2</a></LI><LI><a href='c-pointer-review-question-3.html'>C pointer review question 3</a></LI><LI><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2</a></LI><LI><a href='c-pointer-exercise-3.html'>C Pointer Exercise 3</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointer-exercise-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

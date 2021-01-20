@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node17.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Mathematics: &lt;math.h&gt;</TITLE>
+<META NAME="description" CONTENT="Mathematics: &lt;math.h&gt;">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1071"
+ HREF="node17.html#SECTION001710000000000000000">
+Math Functions</A>
+<LI><A NAME="tex2html1072"
+ HREF="node17.html#SECTION001720000000000000000">
+Math Constants</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001700000000000000000">
+Mathematics: <TT>&lt;math.h&gt;</TT></A>
+</H1>
+<P>
+Mathematics is relatively straightforward library to use again. You <B>
+must</B> <code>#include &lt;math.h&gt;</code> and must <B>remember</B> to link in the math
+library at compilation:
+<P>&nbsp;&nbsp;&nbsp;<TT>cc mathprog.c -o mathprog -lm</TT>
+<P>
+A common source of error is in forgetting to include the 
+<TT>&lt;math.h&gt;</TT> file (and
+yes experienced programmers make this error also). Unfortunately the C
+compiler does not help much. Consider:
+<P><PRE>
+double x;
+x = sqrt(63.9);
+</PRE>
+<P>
+Having not seen the prototype for <TT>sqrt</TT> the compiler (by default)
+assumes that the function returns an <TT>int</TT> and converts the value to
+a <TT>double</TT> with meaningless results.
+<P><H1><A NAME="SECTION001710000000000000000">
+Math Functions</A>
+</H1>
+<P>
+Below we list some common math functions. Apart from the note above they
+should be easy to use and we have already used some in previous examples.
+We give no further examples here:
+<P> <code> double acos(double x)</code> -- Compute arc cosine of x. 
+<BR><code>double asin(double x)</code> -- Compute arc sine of x.
+<BR><code>double atan(double x)</code> -- Compute arc tangent of x. 
+<BR><code>double atan2(double y, double x)</code> -- Compute arc tangent of
+y/x, using the signs of both arguments to determine the quadrant of the return value.
+<BR><code>double ceil(double x)</code> -- Get smallest integral value that
+exceeds x.
+<BR><code>double cos(double x)</code> -- Compute cosine of angle in radians.
+<BR><code>double cosh(double x)</code> -- Compute the hyperbolic cosine of x.
+<BR><code>div_t div(int number, int denom)</code> -- Divide one integer by
+another.
+<BR><code>double exp(double x</code> -- Compute exponential of x
+<BR><code>double fabs (double x )</code> -- Compute absolute value of x.
+<BR><code>double floor(double x)</code> -- Get largest integral value less
+than x.
+<BR><code>double fmod(double x, double y)</code> -- Divide x by y with
+integral quotient and return  remainder.
+<BR><code>double frexp(double x, int *expptr)</code> -- Breaks down x into
+mantissa and exponent of no.
+<BR><code>labs(long n)</code> -- Find absolute value of long integer n.
+<BR><code>double ldexp(double x, int exp)</code> -- Reconstructs x out of
+mantissa and exponent of  two.
+<BR><code>ldiv_t ldiv(long number, long denom)</code> -- Divide one long
+integer by another.
+<BR><code>double log(double x)</code> -- Compute log(x).
+<BR><code>double log10 (double x )</code> -- Compute log to the base 10 of
+x.
+<BR><code>double modf(double x, double *intptr)</code> -- Breaks x into
+fractional and integer parts.
+<BR><code>double pow (double x, double y)</code> -- Compute x raised to
+the power y.
+<BR><code>double sin(double x)</code> -- Compute sine of angle in
+radians. 
+<BR><code> double sinh(double x)</code> - Compute the hyperbolic sine of x.
+<BR><code>double sqrt(double x)</code> -- Compute the square root of x.
+<BR><code>void srand(unsigned seed)</code> -- Set a new seed for the random
+number generator  (rand).
+<BR><code>double tan(double x)</code> -- Compute tangent of angle in radians.
+<BR><code>double tanh(double x)</code> -- Compute the hyperbolic tangent of x.
+<P><H1><A NAME="SECTION001720000000000000000">
+Math Constants</A>
+</H1>
+<P>
+The <TT>math.h</TT> library defines many (often neglected) constants. It is
+always advisable to use these definitions:
+<P><DL>
+<DT><DD><TT>HUGE</TT>  --         The  maximum  value  of  a   single-precision
+floating-point number.
+<DT><DD><TT>M_E</TT>   --         The base of natural logarithms (e).
+<P><DT><DD><TT>M_LOG2E</TT> --       The base-2 logarithm of e.
+<P><DT><DD><TT>M_LOG10E</TT> -      The base-10 logarithm of e.
+<P><DT><DD><TT>M_LN2</TT>   --     The natural logarithm of 2.
+<P> <DT><DD><TT>M_LN10</TT>  --      The natural logarithm of 10.
+<P><DT><DD><TT>M_PI  </TT>  --       <IMG WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.gif"
+ ALT="$\pi$">.<P><DT><DD><TT>M_PI_2 </TT>  --      <IMG WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.gif"
+ ALT="$\pi$">/2.
+<P><DT><DD><TT>M_PI_4</TT>  --       <IMG WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.gif"
+ ALT="$\pi$">/4.
+<DT><DD><TT>M_1_PI</TT>  --       1/<IMG WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.gif"
+ ALT="$\pi$">.<P><DT><DD><TT>M_2_PI</TT>    --     2/<IMG WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.gif"
+ ALT="$\pi$">.<P><DT><DD><TT>M_2_SQRTPI</TT>  --   2/<IMG WIDTH="30" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.gif"
+ ALT="$\sqrt{\pi}$">.<P> <DT><DD><TT>M_SQRT2</TT>   --     The positive square root of 2.
+<P><DT><DD><TT>M_SQRT1_2</TT>  --    The positive square root of 1/2.
+<P><DT><DD><TT>MAXFLOAT </TT>  --    The maximum value of a  non-infinite  single-
+precision floating point number.
+<P><DT><DD><TT>HUGE_VAL</TT>  --     positive infinity.
+</DL>
+<P>
+There are also a number a machine dependent values defined in
+<code>#include &lt;value.h&gt;</code> -- see <TT>man value</TT> or list <TT>value.h</TT>
+for further details.
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node17.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:16 GMT -->
+</HTML>

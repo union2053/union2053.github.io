@@ -1,0 +1,884 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_11.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:56 GMT -->
+<head>
+	<title>C Programlama Ders: XI</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, Arrays, Array, Dizi, Diziler, Sıralama Algoritmaları, Bubble Sort, Kabarcık Sıralaması, Sorting Algorithms, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">23 Ekim 2006</font></div>
+	<h2>C Programlama Dersi - XI</h2>
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>	
+		<div id="content_div" style="display:none">
+			<p>- Diziler</p>
+			<p>- Dizilere ilk değer atama</p>
+			<p>- Dizilerin fonksiyonlara aktarımı</p>
+			<p>- Dizilere Pointer ile erişim</p>
+			<p>- Fonksiyondan dizi döndürmek</p>
+			<p>- Sıralama (Sorting)</p>
+			<p>- Konuyla ilgili örnek sorular </p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	
+	<h3>Diziler</h3>
+	<p>
+		Bir bilgisayar programı yaptığınızı düşünün. Kullanıcının 100 değer girmesi 
+		isteniyor. Girilen bütün bu sayıların farklı aşamalardan geçeceğini ve bu yüzden 
+		hepsini ayrı bir değişkende tutmamız gerektiğini varsayalım. Bu durumda ne 
+		yapardınız?  a0, a1, a2, ..., a99 şeklinde 100 tane değişken tanımlamak elbette 
+		mümkün; ama oldukça zahmetli olurdu. Sırf değişkenleri tanımlarken kaybedeceğiniz 
+		zamanı düşünürseniz ne demek istediğimi anlarsınız. Bunun için alternatif bir 
+		çözümün gerektiği mutlak! 
+	</p>
+	<p>
+		Çok sayıda değişkenin gerektiği durumlarda, diziler imdadımıza yetişir. (Dizi, 
+		İngilizce kaynaklarda array olarak geçer.) 100 değişken tanımlamamızın gerektiği 
+		yukardaki örneğe dönelim. Tek tek a0, ..., a100	yaparak bunu nasıl yazacağınızı 
+		zaten biliyorsunuz. Şimdi tek satırda dizi tanımlayarak, bunu nasıl yapacağımızı 
+		görelim:         
+	</p>
+<pre>
+int a[100];
+</pre>
+	<p>
+		Yukardaki tek satır, bellek bloğunda 100 adet int değişken yeri ayırır. Tek satır 
+		kod elbette açıklayıcı değil, o yüzden bunu aşağıdaki şekille açıklayalım:     
+	</p>	
+	<div align="center">
+		<img src="c_operands/array_1.png" alt="[Array Definiton]" border="0"/>
+	</div>
+	<p>
+		Her şeyin başında dizideki elemanların değişken tipini yazıyoruz; buradaki 
+		örneğimizde	tam sayı gerektiği için 'int' yazdık. Daha sonra diziye 'a' yazarak 
+		bir isim	veriyoruz. Değişkenleri nasıl isimlendiriyorsak, aynı kurallar diziler için 
+		de	geçerli... Son aşamada bu dizinin kaç eleman içereceğini belirtiyoruz. Köşeli 
+		parantezler (&nbsp;[&nbsp;&nbsp;]&nbsp;) içinde yazdığımız 100 sayısı, 100 adet 
+		int tipinde değişkenin oluşturulmasını sağlıyor.              
+	</p>
+	<p>
+		Bir değişkene ulaşırken, onun adını yazarız. Dizilerde de aşağı yukarı böyle sayılır. 
+		Fakat ufak farklar vardır. Bir dizi, birden çok elemandan oluşur. Bu yüzden sadece 
+		dizi adını yazmaz, ulaşmak istediğimiz elemanı da yer numarasını yazarak belirtiriz. 
+		Örneğin a dizisinin, 25.elemanı gerekiyorsa, a[24] ile çağrılır. Sanırım 25 yerine 24 
+		yazıldığını fark etmişsinizdir. C programlama dilinde, dizilerin ilk elemanı 
+		0'dır. Diziler 0'dan başladığı için, ulaşmak istenilen dizi elemanı hangisiyse 
+		bir eksiğini yazarız. Yani a dizisinin 25.elemanı, a[24]; 100.elemanı a[99] ile 
+		çağırırız. 
+	</p>
+	<p> 
+		Şimdi basit bir örnek yapalım. Bu örnekte, her aya ait güneşli gün sayısı sorulsun 
+		ve sonunda yıllık güneşli gün sayısı yazılsın. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Aylari temsil etmesi icin 
+	// aylar adinda 12 elemanli 
+	// bir dizi olusturuyoruz. 
+	<b>int aylar[ 12 ];</b>
+	int toplam = 0;
+	int i;
+
+	// Birinci dongu, deger atamak icindir
+	for( i = 0; i < 12; i++ ) {
+		printf( "%2d.Ay: ", (i+1) );
+		// aylara deger atıyoruz:
+		<b>scanf( "%d", &amp;aylar[ i ] );</b>
+	}
+
+	// Az evvel girilen degerleri gostermek icin 
+	// ikinci bir dongu kurduk
+	printf( "\nGİRDİĞİNİZ DEĞERLER\n\n" );
+	for( i = 0; i < 12; i++ ) {
+		printf( "%2d.Ay için %d girdiniz\n", (i+1), <b>aylar[i]</b> );
+		toplam += aylar[ i ];
+	}
+
+	printf( "Toplam güneşli gün sayısı: %d\n", toplam );
+	return 0;
+}
+</pre>
+	<p>
+		Örneğimizi inceleyelim. En başta 12 elemanlı <i>aylar</i> dizisini, 
+		"<i>int aylar[12]</i>" yazarak tanımlıyoruz. Her ay için değer girilmesini gerekiyor. 
+		Klavyeden girilen sayıların okunması için elbette scanf(&nbsp;&nbsp;) fonksiyonunu 
+		kullanacağız ama ufak bir farkla! Eğer 'a' isimde bir değişkene atama yapıyor 
+		olsaydık, hepinizin	bileceği şekilde "<i>scanf("%d",&nbsp;&amp;a&nbsp;)</i>" yazardık. 
+		Fakat	dizi elemanlarına atama	yapılacağından komutu,
+		"<i>scanf(&nbsp;"%d",&nbsp;&amp;aylar[&nbsp;i&nbsp;]&nbsp;)</i>" şeklinde yazmamız 
+		gerekiyor. Döngü içindeki <i>i</i> değişkeni, 0'dan 11'e kadar sırasıyla artıyor. 
+		Bu	sayede, döngünün her adımında farklı bir dizi elemanına değer atıyabiliyoruz. 
+		(&nbsp;<i>i</i> değişkeni, bir nevi indis olarak düşünülebilir.&nbsp;) Klavyeden 
+		okunan değerlerin	dizi elemanlarına	atanmasından sonra, ikinci	döngü	başlıyor. Bu 
+		döngüde girmiş olduğunuz değerler listelenip, aynı esnada toplam güneşli gün sayısı 
+		bulunuyor. Son aşamada, hesaplanan toplam değerini yazdırıp, programı bitiriyoruz. 
+	</p>
+	<p>
+		Dikkat ederseniz, değerlerin alınması veya okunması gibi işlemler döngüler 
+		aracılığıyla yapıldı. Bunları döngüler aracılığı ile yapmak zorunda değildik. 
+		Mesela "<i>scanf("%d",&nbsp;&amp;aylar[5]&nbsp;)</i>" yazıp, 6.ayın değerini; 
+		"<i>scanf("%d",&nbsp;&amp;aylar[9]&nbsp;)</i>" yazıp, 10.ayın değerini klavyeden 
+		alabilirdik. Ancak böyle yapmak, döngü kullanmaktan daha zahmetlidir. Yanılgıya 
+		düşmemeniz için döngüleri kullanmanın kural olmadığını, sadece işleri 
+		kolaylaştırdığını	hatırlatmak istedim. Gerek tek tek, gerekse örnekte yaptığımız 
+		gibi döngülerle çözüm üretebilirsiniz.		 
+	</p>
+	<p>
+		Başka bir örnek yapalım. Kullanıcımız, float tipinde 10 adet değer girsin. Önce 
+		bu değerlerin ortalaması bulunsun, ardından kaç adet elemanın ortalamanın altında 
+		kaldığı ve kaç adet elemanın ortalamanın üstünde olduğu gösterilsin.        
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Degerleri tutacagimiz 'dizi'
+	// adinda bir dizi olusturuyoruz.
+	<b>float dizi[ 10 ];</b>
+	float ortalama, toplam = 0;
+	int ortalama_ustu_adedi = 0;
+	int ortalama_alti_adedi = 0;
+	int i;
+
+	// Kullanici dizinin elemanlarini giriyor:
+	for( i = 0; i < 10; i++ ) {
+		printf( "%2d. elemanı giriniz> ", (i+1) );
+		<b>scanf( "%f", &amp;dizi[ i ] );</b>
+		toplam += dizi[ i ];
+	}
+	
+	// dizinin ortalamasi hesaplaniyor.
+	ortalama = toplam / 10.0;
+	
+	// ortalamadan kucuk ve buyuk elemanlarin
+	// kac adet oldugu belirleniyor.
+	for( i = 0; i < 10; i++ ) {
+		if( dizi[ i ] < ortalama )
+			ortalama_alti_adedi++;
+		else if( dizi[ i ] > ortalama )
+			ortalama_ustu_adedi++;
+	}
+
+	// raporlama yapiliyor.
+	printf( "Ortalama: %.2f\n", ortalama );
+	printf( "Ortalamadan düşük %d eleman vardır.\n", ortalama_alti_adedi ); 
+	printf( "Ortalamadan yüksek %d eleman vardır.\n", ortalama_ustu_adedi );
+
+	return 0;
+}
+</pre>
+	<p>
+		Program pek karmaşık değil. Dizi elemanlarını alıyor, ortalamalarını hesaplıyor, 
+		elemanları ortalamayla karşılaştırıp, ortalamadan büyük ve küçük elemanların  
+		adedini veriyoruz. Anlaşılması güç bir şey bulacağınızı sanmıyorum. Tek karmaşık 
+		gelecek nokta, ikinci döngüde neden bir <i>else</i> olmadığı olabilir. Oldukça 
+		geçerli bir sebebi var ve <i>if&nbsp;else-if</i> yapısını iyice öğrenenler böyle 
+		bırakılmasını anlayacaklardır. Bilmeyenlere gelince... her şeyi ben söylersem, işin 
+		tadı tuzu kalmaz; eski konuları gözden geçirmelisiniz.
+	</p>
+	
+	<h3>Dizilere İlk Değer Atama</h3>
+	<p>
+		Değişken tanımı yaparken, ilk değer atamayı biliyoruz. Örneğin "<i>int a = 5;</i>" 
+		şeklinde yazacağınız bir kod, <i>a</i> değişkenini oluşturacağı gibi, içine 5 
+		değerini de atayacaktır. (&nbsp;Bu değişkene, tanımladıktan sonra farklı değerler 
+		atayabilirsiniz.&nbsp;)	Benzer şekilde, bir diziyi tanımlarken, dizinin	
+		elemanlarına değer atayabilirsiniz. Aşağıda bunu nasıl yapabileceğinizi 
+		görebilirsiniz: 
+	</p>
+<pre>
+int dizi1[ 6 ] = { 4, 8, 15, 16, 23, 42 };
+float dizi2[ 5 ] = { 11.5, -1.6, 46.3, 5, 21.56 };
+</pre>
+	<p>
+		Küme parantezleri içinde gördüğünüz her değer, sırasıyla bir elemana atanmıştır. 
+		Örneğin dizi1'in ilk elemanı 4 olurken, son elemanı 42'dir.  
+	</p>
+	<p>
+		Yukardaki tanımlamalarda farkedeceğiniz gibi dizi boyutlarını 6 ve 5 şeklinde 
+		belirttik. İlk değer ataması yapacağımız durumlarda, dizinin boyutunu belirtmeniz 
+		gerekmez; dizi boyutunu yazıp yazmamak size bağlıdır. Dilerseniz dizi boyutunu 
+		belirtmeden aşağıdaki gibi de yazabilirdiniz:
+	</p>	
+<pre>
+int dizi1[ ] = { 4, 8, 15, 16, 23, 42 };
+float dizi2[ ] = { 11.5, -1.6, 46.3, 5, 21.56 };
+</pre>
+	<p>
+		Derleyici, atanmak istenen değer sayısına bakar ve <i>dizi1</i> ile <i>dizi2</i>'nin 
+		boyutunu buna göre belirler. <i>dizi1</i> için 6, <i>dizi2</i> için 5 tane değer 
+		belirtmişiz. Bu <i>dizi1</i> dizisinin 6, <i>dizi2</i> dizisinin 5 elemanlı 
+		olacağını işaret eder.      
+	</p>
+	<p>
+		Değer atamayla ilgili ufak bir bilgi daha aktarmak istiyorum. Aşağıda iki farklı 
+		ilk değer atama yöntemi bulunuyor. Yazım farkı olmasına rağmen, ikisi de aynı işi 
+		yapar.   
+	</p>
+<pre>
+int dizi[ 7 ] = { 0, 0, 0, 0, 0, 0, 0 };
+</pre>
+<pre>
+int dizi[ 7 ] = { 0 };
+</pre>
+	<p>
+		Bir diziyi tanımlayın ve hiçbir değer atamadan, dizinin elemanlarını 
+		printf(&nbsp;&nbsp;) fonksiyonuyla yazdırın. Ortaya anlamsız sayılar çıktığını 
+		göreceksiniz. Bir dizi tanımlandığında, hafızada gerekli olan yer ayrılır. 
+		Fakat daha önce bu hafıza alanında ne olup olmadığıyla ilgilenilmez. Ortaya çıkan 
+		anlamsız	sayılar bundan kaynaklanır. Önceden hafızada bulunan değerlerin yansımasını 
+		görürsünüz. Modern programlama dillerinin bir çoğunda, dizi	tanımladığınızda, 
+		dizinin bütün elemanları 0 değeriyle başlar; sizin herhangi bir atama yapmanıza 
+		gerek yoktur. C programlama dilindeyse, kendiliğinden bir başlangıç değeri atanmaz. 
+		Bunu yapıp yapmamak size kalmıştır. Kısacası işlerin daha kontrolü gitmesini 
+		istiyorsanız, dizileri tanımlarken "<i>dizi[ 7 ] = { 0 };</i>" şeklinde tanımlamalar 
+		yapabilirsiniz. 
+	</p>
+	<p>
+		 İlk değer atanmasıyla ilgili bir örnek yapalım. 10 elemanlı bir diziye atadığımız 
+		 ilk değerin maksimum ve minimum değerleri gösterilsin:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void ) 
+{
+	// dizi'yi tanitirken, ilk deger 
+	// atiyoruz
+	int dizi[ ] = { 15, 54, 1, 44, 55,
+			40, 60, 4, 77, 45 };
+	int i, max, min;
+
+	// Dizinin ilk elemanini, en kucuk
+	// ve en buyuk deger kabul ediyoruz. 
+	// Bunun yanlis olmasi onemli degil; 
+	// sadece bir noktadan kontrole baslamamiz 
+	// gerektiginden boyle bir secim yaptik. 
+	min = dizi[ 0 ];
+	max = dizi[ 0 ];
+
+	for( i = 1; i < 10; i++ ) {
+		// min'in degeri, dizi elemanindan 
+		// buyukse, min'in degerini degistiririz.
+		// Kendisinden daha kucuk sayi oldugunu 
+		// gosterir. 
+		if( min > dizi[i] )
+			min = dizi[i];
+
+		// max'in degeri, dizi elemanindan 
+		// kucukse, max'in degerini degistiririz. 
+		// Kendisinden daha buyuk sayi oldugunu 
+		// gosterir. 
+		if( max < dizi[i] )
+			max = dizi[i];
+	}
+
+	printf( "En Küçük Değer: %d\n", min );
+	printf( "En Büyük Değer: %d\n", max ); 
+
+	return 0;
+}
+</pre>
+	<h3>Dizilerin fonksiyonlara aktarımı</h3>
+	<p>
+		Dizileri fonksiyonlara aktarmak, tıpkı değişkenleri aktarmaya benzemektedir. Uzun 
+		uzadıya anlatmak yerine, örnek üstünden gitmenin daha fayda olacağını düşünüyorum. 
+		Bir fonksiyon yazalım ve bu fonksiyon kendisine gönderilen dizinin elemanlarını 
+		ekrana yazsın. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void elemanlari_goster( <b>int [ 5 ]</b> );
+int main( void )
+{
+	int dizi[ 5 ] = { 55, 414, 7, 210, 15 };
+	<b>elemanlari_goster( dizi );</b>
+	return 0;
+}
+void elemanlari_goster( <b>int gosterilecek_dizi[ 5 ]</b> )
+{
+	int i;
+	for( i = 0; i < 5; i++) 
+		printf( "%d\n", gosterilecek_dizi[ i ] );
+}
+</pre>
+	<p>
+		Fonksiyon prototipini yazarken, dizinin tipini ve boyutunu belirttiğimizi  
+		fark etmişsinizdir. Fonksiyonu tanımlama aşamasında, bunlara ilaveten parametre 
+		olarak dizinin	adını da yazıyoruz. (&nbsp;Bu isim herhangi bir şey olabilir, 
+		kendisine gönderilecek dizinin adıyla aynı olması gerekmez.&nbsp;) Bir dizi yerine 
+		sıradan bir değişken kullansaydık, benzer	şeyleri yapacaktık. Farklı olan tek 
+		nokta; dizi eleman sayısını belirtmemiz. Şimdi main(&nbsp;&nbsp;) fonksiyonuna 
+		dönelim ve elemanlari_goster(&nbsp;&nbsp;); fonksiyonuna bakalım. Anlayacağınız 
+		gibi, "<i>dizi</i>" ismindeki dizinin fonksiyona argüman olarak gönderilmesi için 
+		sadece adını yazmamız yeterli.   
+	</p>
+	<p>
+		Fonksiyonlarla ilgili bir başka örnek yapalım. Bu sefer üç fonksiyon oluşturalım. 
+		Birinci fonksiyon kendisine gönderilen dizideki en büyük değeri bulsun; ikinci 
+		fonksiyon, dizinin en küçük değerini bulsun; üçüncü fonksiyon ise elemanların 
+		ortalamasını döndürsün. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+float maksimum_bul( <b>float [ 8 ]</b> );
+float minimum_bul( <b>float [ 8 ]</b> );
+float ortalama_bul( <b>float [ 8 ]</b> );
+int main( void )
+{
+	// 8 boyutlu bir dizi olusturup buna 
+	// keyfi degerler atiyoruz.
+	float sayilar[ 8 ] = {  12.36, 4.715, 6.41, 13,
+				1.414, 1.732, 2.236, 2.645 };
+	float max, min, ortalama;
+	// Ornek olmasi acisindan fonksiyonlar 
+	// kullaniliyor.
+	max = maksimum_bul( sayilar );
+	min = minimum_bul( sayilar );
+	ortalama = ortalama_bul( sayilar );
+	printf( "Maksimum: %.2f\n", max );
+	printf( "Minimum: %.2f\n", min );
+	printf( "Ortalama: %.2f\n", ortalama );
+
+	return 0;
+}
+/* Dizi icindeki maksimum degeri bulur */
+float maksimum_bul( <b>float dizi[ 8 ]</b> )
+{
+	int i, max;
+	max = dizi[0];
+	for( i = 1; i < 8; i++ ) {
+		if( max < dizi[ i ] )
+			max = dizi[ i ];
+	}
+	return max;
+}
+/* Dizi icindeki minimum degeri bulur */ 
+float minimum_bul( <b>float dizi[ 8 ]</b> )
+{
+	int i, min;
+	min = dizi[ 0 ];
+	for( i = 1; i < 8; i++ ) {
+		if( min > dizi[ i ] ) {
+			min = dizi[ i ];
+		}
+	}
+	return min;
+}
+/* Dizi elemanlarinin ortalamasini bulur */
+float ortalama_bul( <b>float dizi[ 8 ]</b> )
+{
+	int i, ortalama = 0;
+	for( i = 0; i < 8; i++ )
+		ortalama += dizi[ i ];
+
+	return ortalama / 8.0;
+}
+</pre>
+	<p>
+		Yukardaki örneklerimizde, dizilerin boyutlarını bilerek fonksiyonlarımızı yazdık. 
+		Ancak gerçek hayat böyle değildir; bir fonksiyona farklı farklı boyutlarda diziler 
+		göndermeniz	gerekir. Mesela <i>ortalama_bul(&nbsp;&nbsp;)</i> fonksiyonu hem 8 elemanlı  
+		bir diziye hizmet edecek, hem de 800 elemanlı bir başka diziye uyacak şekilde 
+		yazılmalıdır. Son örneğimizi her boyutta dizi için kullanılabilecek hâle getirelim 
+		ve <i>ortalama_bul(&nbsp;&nbsp;)</i>, <i>minimum_bul(&nbsp;&nbsp;)</i> ve 
+		<i>maksimum_bul(&nbsp;&nbsp;)</i> fonksiyonlarını biraz değiştirelim. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+float maksimum_bul( <b>float [ ]</b>, <b>int</b> );
+float minimum_bul( <b>float [ ]</b>, <b>int</b> );
+float ortalama_bul( <b>float [ ]</b>, <b>int</b> );
+int main( void )
+{
+	// 8 boyutlu bir dizi olusturup buna 
+	// keyfi degerler atiyoruz.
+	float sayilar[ 8 ] = {  12.36, 4.715, 6.41, 13,
+				1.414, 1.732, 2.236, 2.645 };
+	float max, min, ortalama;
+	// Ornek olmasi acisindan fonksiyonlar 
+	// kullaniliyor.
+	max = maksimum_bul( sayilar, 8 );
+	min = minimum_bul( sayilar, 8 );
+	ortalama = ortalama_bul( sayilar, 8 );
+	printf( "Maksimum: %.2f\n", max );
+	printf( "Minimum: %.2f\n", min );
+	printf( "Ortalama: %.2f\n", ortalama );
+
+	return 0;
+}
+/* Dizi icindeki maksimum degeri bulur */
+float maksimum_bul( <b>float dizi[ ]</b>, <b>int eleman_sayisi</b> )
+{
+	int i;
+	float max;
+	max = dizi[0];
+	for( i = 1; i < eleman_sayisi; i++ ) {
+		if( max < dizi[ i ] )
+			max = dizi[ i ];
+	}
+	return max;
+}
+/* Dizi icindeki minimum degeri bulur */ 
+float minimum_bul( <b>float dizi[ ]</b>, <b>int eleman_sayisi</b> )
+{
+	int i;
+	float min;
+	min = dizi[ 0 ];
+	for( i = 1; i < eleman_sayisi; i++ ) {
+		if( min > dizi[ i ] ) {
+			min = dizi[ i ];
+		}
+	}
+	return min;
+}
+/* Dizi elemanlarinin ortalamasini bulur */
+float ortalama_bul( <b>float dizi[ ]</b>, <b>int eleman_sayisi</b> )
+{
+	int i;
+	float ortalama = 0;
+	for( i = 0; i < eleman_sayisi; i++ )
+		ortalama += dizi[ i ];
+
+	return ortalama / 8.0;
+}
+</pre>
+	<p>
+		Fonksiyonlara dikkatlice bakın. Geçen sefer sadece dizi adını gönderirken,	artık 
+		dizi adıyla birlikte boyutunu da yolluyoruz. Böylece dizinin boyutu n'olursa 
+		olsun, fark etmiyor. Yeni bir parametre açıp dizinin eleman sayısını isterseniz, 
+		fonksiyon her dizi için çalışabilir.
+	</p>
+	
+	<h3>Dizilere Pointer ile Erişim</h3>	
+	<p>
+		Pointer'ların değişkenleri işaret etmesini geçen dersimizde işlemiştik. Benzer 
+		şekilde dizileri de işaret edebilirler. Örneğin, <i>int dizi[6];</i> şeklinde 
+		tanımlanmış bir diziyi, pointer ile işaret etmek istersek, <i>ptr = dizi;</i> 
+		yazmamız yeterlidir. Değişkenlerde, değişken adının başına '&amp;' işareti 
+		getiriyorduk, fakat dizilerde buna gerek yoktur. Çünkü dizilerin kendisi de 
+		bir pointer'dır. Dizilerin hepsi hafıza alanında bir başlangıç noktası işaret eder. 
+		Örnek olması açısından bu noktaya 6066 diyelim. Siz "<i>dizi[0]</i>" dediğiniz 
+		zaman 6066 ile 6068 arasında kalan bölgeyi kullanırsınız. Ya da "<i>dizi[4]</i>" 
+		dediğiniz zaman 6074 ile 6076 hafıza bölgesi işleme alınır.    
+	</p>
+	<p>
+		Bir diziyi işaret eden pointer aynen dizi gibi kullanılabilir. Yani 
+		<i>ptr = dizi;</i> komutunu vermenizden sonra, ptr[0] ile dizi[0] birbirinin 
+		aynısıdır. Eğer *ptr yazarsanız, yine dizinin ilk elemanı dizi[0]'ı işaret etmiş 
+		olursunuz. Ancak dizi işaret eden pointer'lar genellikle, 
+		*(&nbsp;ptr&nbsp;+&nbsp;0&nbsp;) şeklinde kullanılır. Burada 0 yerine ne yazarsanız, 
+		dizinin o elemanını elde ederseniz. Diyelim ki, 5.elemanı 
+		(&nbsp;yani dizi[&nbsp;4&nbsp;]&nbsp;) kullanmak istiyorsunuz, o zaman 
+		*(&nbsp;ptr&nbsp;+&nbsp;4&nbsp;) yazarsanız. Bir resim, bin sözden iyidir... 
+		Aşağıdaki resmi incelerseniz, durumu daha net anlayacağınızı düşünüyorum.
+	</p>
+	
+	<div align="center">
+ 		<img src="c_operands/pointer_to_array.png" alt="[Pointer to Array Sample]" border="0"/>			
+	</div>
+	<p>
+		Gördüğünüz gibi <i>dizi</i>, 6066 numaralı hafıza adresini işaret ediyor. 
+		<i>ptr</i> isimli pointer ise, dizi üzerinden 6066 numaralı adresi gösteriyor. 
+		Kısacası ikisi de aynı noktayı işaret ediyorlar. Şimdi bunu koda dökelim:  
+	</p>	
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i;
+	// dizi'yi tanimliyoruz.
+	int dizi[ 6 ] = { 4, 8, 15, 16, 23, 42 };
+	// ptr adinda bir pointer tanimliyoruz.
+	int *ptr;
+	// ptr'nin dizi'yi isaret etmesini soyluyoruz.
+	<b>ptr = dizi;</b>
+	// ptr'in degerini artirip, dizi'nin butun 
+	// elemanlarini yazdiriyoruz.
+	for( i = 0; i < 6; i++ ) 
+		printf( "%d\n", <b>*( ptr + i )</b> );
+
+	return 0;
+}
+</pre>
+	<p>
+		Pointer'lar farklı şekillerde kullanılabilir. Her defasında, dizinin başlangıç 
+		elemanını atamanız gerekmez. Örneğin, <i>ptr = &dizi[&nbsp;2&nbsp;]</i> şeklinde 
+		bir komut kullanarak, dizinin 3.elemanının adresini pointer'a atayabilirsiniz. 
+		Pointer'larin değişik kullanım çeşitlerini aşağıda görebilirsiniz: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int elm;
+	int month[ 12 ];
+	int *ptr; 
+	ptr = month; // month[0] adresini atar
+	elm = ptr[ 3 ]; // elm = month[ 3 ] değerini atar 
+	ptr = month + 3; // month[ 3 ] adresini atar
+	ptr = &month[ 3 ]; // month[ 3 ] adresini atar
+	elm = ( ptr+2 )[ 2 ]; // elm = ptr[ 4 ] ( = month[ 7 ] )değeri atanır. 
+	elm = *( month + 3 );
+	ptr = month;
+	elm = *( ptr + 2 ); // elm = month[ 2 ] değerini atar
+	elm = *( month + 1 ); // elm = month[ 1 ] değerini atar 
+
+	return 0;
+}
+</pre>
+	<p>
+		Dizilerin fonksiyonlara gönderilmesini görmüştük. Parametre kısmına dizinin tipini 
+		ve boyutunu yazıyorduk. Ancak bunun yerine pointer da kullanabiliriz. Örneğin 
+		aşağıdaki iki komut satırı birbirinin aynısıdır.       
+	</p>
+<pre>
+int toplam_bul( <b>int dizi[ ]</b>, int boyut );  
+</pre>
+<pre>
+int toplam_bul( <b>int *dizi</b>, int boyut );
+</pre>
+	<h3>Fonksiyondan Dizi Döndürmek</h3>
+	<p>
+		Fonksiyondan bir diziyi döndürmeden önce önemli bir konuyla başlayalım. 
+		Hatırlarsanız fonksiyonlara iki şekilde argüman yolluyorduk. Birinci yöntemde, 
+		sadece değer gidiyordu ve değişken üzerinde bir değişiklik olmuyordu. 
+		(&nbsp;Call by Value&nbsp;) İkinci yöntemdeyse, yollanılan değişken, fonksiyon 
+		içersinde yapacağınız işlemlerden etkileniyordu. (&nbsp;Call by Reference&nbsp;)
+		Dizilerin aktarılması, referans yoluyla olur. Fonksiyon içersinde yapacağınız bir 
+		değişiklik, dizinin aslında da değişikliğe sebep olur. Aşağıdaki örneğe	bakalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+/* Kendisine verilen dizinin butun 
+   elemanlarinin karesini alir */
+void karesine_donustur( int [ ], int );
+int main( void )
+{
+	int i;
+	int liste[ ] = { 1,2,3,4,5,6,7 };
+	for( i = 0; i < 7; i++ ) {
+		printf( "%d ", liste[ i ] );
+	}
+	printf("\n");
+
+	// Fonksiyonu cagiriyoruz. Fonksiyon geriye 
+	// herhangi bir deger dondurmuyor. Diziler 
+	// referans yontemiyle aktarildigi icin dizinin 
+	// degeri bu sekilde degismis oluyor.
+	karesine_donustur( liste, 7 );
+	for( i = 0; i < 7; i++ ) {
+		printf( "%d ", liste[ i ] );
+	}
+	printf("\n");
+	return 0;
+}
+void karesine_donustur( int dizi[ ], int boyut )
+{
+	int i;
+	for( i = 0; i < boyut; i++ ) {
+		dizi[ i ] = dizi[ i ] * dizi[ i ];
+	}
+}
+</pre>
+	<p>
+		Gördüğünüz gibi fonksiyon içersinde diziyle ilgili yaptığımız değişikler, 
+		dizinin aslına da yansımıştır. Sırada, fonksiyondan dizi döndürmek var. 
+	</p>
+	<p>
+		Aslında fonksiyondan dizi pek doğru bir isimlendirme değil. Gerçekte döndürdüğümüz 
+		şey, dizinin kendisi değil, sadece başlangıç adresi oluyor. Dolayısıyla bir dizi 
+		döndürdüğümüzü söylemek yerine, Pointer döndürdüğümüzü söyleyebiliriz. Basit 
+		bir fonksiyon hazırlayalım; bu fonksiyon kendisine gönderilen iki diziyi 
+		birleştirip, tek bir dizi hâline getirsin.    
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+/* Kendisine verilen iki diziyi birlestirip 
+   sonuclari ucuncu bir diziye atar */
+<b>int *dizileri_birlestir( int [], int, 
+			 int [], int, 
+			 int []);</b>
+int main( void )
+{
+	// liste_1, 5 elemanli bir dizidir. 
+	int liste_1[5] = { 6, 7, 8, 9, 10 };
+	// liste_2, 7 elemanli bir dizidir.
+	int liste_2[7] = {13, 7, 12, 9, 7, 1, 14 };
+	// sonuclarin toplanacagi toplam_sonuc dizisi
+	int toplam_sonuc[13];
+	// sonucun dondurulmesi icin pointer tanimliyoruz
+	int *ptr;
+	int i;
+
+	// fonksiyonu calistiriyoruz.
+	<b>ptr = dizileri_birlestir( liste_1, 5, liste_2, 7, 
+				  toplam_sonuc );</b>
+
+	// pointer uzerinden sonuclari yazdiriyoruz.
+	for( i = 0; i < 12; i++ ) 
+		printf("%d ", *(ptr+i) );
+	printf("\n");
+
+	return 0;
+}
+<b>int *dizileri_birlestir( int dizi_1[], int boyut_1, 
+			 int dizi_2[], int boyut_2, 
+			 int sonuc[] )</b>
+{
+	int i, k;
+	// Birinci dizinin degerleri ataniyor.
+	for( i = 0; i < boyut_1; i++ ) 
+		sonuc[i] = dizi_1[i];
+	
+	// Ikinci dizinin degerleri ataniyor.
+	for( k = 0; k < boyut_2; i++, k++ ) {
+		sonuc[i] = dizi_2[k];
+	}
+	
+	// Geriye sonuc dizisi gonderiliyor.  
+	<b>return sonuc;</b>
+}
+</pre>
+	<p>
+		Neyin nasıl olduğunu sanırım anlamışsınızdır. Diziler referans yoluyla 
+		gönderilirken ve gönderdiğimiz dizilerin boyutları belliyken, neden bir de işin 
+		içine pointer'ları soktuğumuzu sorabilirsiniz. İlerki konumuzda, dinamik yer ayırma 
+		konusunu işleyeceğiz. Şimdilik çok lüzumlu gözükmese de, ön hazırlık olarak 
+		olarak bunları öğrenmeniz önemli!  
+	</p>
+	
+	<h3>Sıralama</h3>
+	<p>
+		Sıralama oldukça önemli bir konudur. Çeşit çeşit algoritmalar (&nbsp;QuickSort, 
+		Insertion, Shell Sort, vs...&nbsp;) bulunmaktadır. Ben sizlere en basit sıralama 
+		yöntemlerinden biri olan, "<i>Bubble Sort</i>" ("<i>Kabarcık Sıralaması</i>") 
+		metodundan bahsedeceğim.    
+	</p>
+	<p>
+		Elinizde, {7, 3, 66, 3, -5, 22, -77, 2} elemanlarından oluşan bir dizi olduğunu 
+		varsayın. Dizinin en sonuna gidiyorsunuz ve 8.elemanla 
+		(&nbsp;<i>dizi[&nbsp;7&nbsp;]</i>&nbsp;), 7.elemanı 
+		(&nbsp;<i>dizi[&nbsp;6&nbsp;]</i>&nbsp;) karşılaştırıyorsunuz. Eğer 
+		8.eleman, 7.elemandan küçükse bu ikisi yer değiştiriyor; değilse, bir değişiklik 
+		yapmıyorsunuz. Sonra 7.elemanla (&nbsp;<i>dizi[&nbsp;6&nbsp;]</i>&nbsp;) 6.eleman 
+		için aynı işlemler yapılıyor. Bu böyle dizinin son elemanına
+		(&nbsp;<i>dizi[&nbsp;0&nbsp;]</i>&nbsp;) kadar gidiyor. Buraya kadar yaptığımız 
+		işlemlere birinci aşama diyelim. İkinci aşamada da tamamen aynı işlemleri 
+		yapıyorsunuz. Sadece süreç dizinin son elemanına
+		(&nbsp;<i>dizi[&nbsp;0&nbsp;]</i>&nbsp;) kadar değil, ondan bir önceki elemana 
+		kadar sürüyor. Kısacası her aşamada, kontrol ettiğiniz eleman sayısını bir 
+		azaltıyorsunuz. Aşama sayısı da, dizi eleman sayısının bir eksiği oluyor. Yani 
+		bu örneğimizde 7 aşama gerekiyor. Bunu grafik üzerinde anlatmak daha kolay 
+		olacağından, linke tıklayın: 
+		<a href="c_operands/bubble_sort.png" target="_blank">Bubble Sort Örneği</a>  
+	</p>
+	<p>
+		Konu biraz karmaşık; tek seferde anlaşılmayabilir. Bu dediklerimizi algoritmaya 
+		dökelim: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void dizi_goster( int [ ], int );
+<b>void kabarcik_siralamasi( int [ ], int );</b>
+int main( void )
+{
+	int i, j;
+	int dizi[ 8 ] = { 7, 3, 66, 3, 
+			 -5, 22, -77, 2 };
+
+	// Siralama islemi icin fonksiyonu
+	// cagriyoruz.
+	kabarcik_siralamasi( dizi, 8 );
+	// Sonucu gostermesi icin dizi_gosteri
+	// calistiriyoruz.
+	dizi_goster( dizi, 8 );
+	return 0;
+}
+// Dizi elemanlarini gostermek icin yazilmis 
+// bir fonksiyondur. 
+void dizi_goster( int dizi[ ], int boyut )
+{
+	int i;
+	for( i = 0; i < boyut; i++ ) {
+		printf("%d ",dizi[i]);
+	}
+	printf("\n");
+}
+// Bubble Sort algoritmasina gore, siralama islemi 
+// yapar.
+<b>void kabarcik_siralamasi( int dizi[ ], int boyut )</b>
+{
+	int i, j, temp;
+	// Ilk dongu asama sayisini temsil ediyor. 
+	// Bu donguye gore, ornegin boyutu 8 olan 
+	// bir dizi icin 7 asama gerceklesir.
+	for( i = 0; i < boyut-1; i++ ) {
+		// Ikinci dongu, her asamada yapilan 
+		// islemi temsil eder. Dizinin elemanlari 
+		// en sondan baslayarak kontrol edilir. 
+		// Eger kendisinden once gelen elemandan
+		// kucuk bir degeri varsa, elemanlarin 
+		// degerleri yer degistirir.
+		for( j = boyut - 1; j > i; j-- )  {
+			if( dizi[ j ] < dizi[ j - 1 ] ) {
+				temp = dizi[ j -1 ];
+				dizi[ j - 1 ] = dizi[ j ];
+				dizi[ j ] = temp;
+			}
+
+		}
+	}
+}
+</pre>
+	<p>
+		Çeşitli sıralama algoritmaları 
+		<a href="http://www.codecodex.com/wiki/index.php?title=Bubble_sort" target="_blank">CodeCodex</a> 
+		Internet sitesinde mevcut. Ayrıca sıralama demoları izlemenizi tavsiye ederim; 
+		algoritmaların ne kadar başarılı olduğunu görerek ayırt edebilirsiniz.
+		<a href="http://www.cs.ubc.ca/~harrison/Java/sorting-demo.html" target="_blank">Burada</a>
+		ve 
+		<a href="http://www.whoishostingthis.com/resources/sorting/" target="_blank">burada</a> 
+		güzel bir demo ile bir anlatım sayfası bulunuyor; mutlaka bakın!
+	</p>
+	
+	<h3>Örnek Sorular</h3>	
+	
+	<p><b>Soru 1:</b> Kendisine parametre olarak gelen bir diziyi, yine parametre olarak 
+	bir başka diziye ters çevirip atayacak bir fonksiyon yazınız. 
+	</p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+void diziyi_ters_cevir( int[], int[], int );
+int main( void )
+{
+	int i;
+	int liste_1[] = { 6, 7, 8, 9, 10 };
+	int liste_2[5];
+
+	diziyi_ters_cevir( liste_1, liste_2, 5 );
+
+	for( i = 0; i < 5; i++ ) {
+		printf("%d ", liste_2[i]);				
+	}
+	printf("\n");
+}
+void diziyi_ters_cevir( int dizi_1[], int dizi_2[], int boyut )
+{
+	int i, k;
+	for( i = 0, k = boyut - 1; i < boyut; i++, k-- )
+		dizi_2[k] = dizi_1[i];
+}
+</pre>
+	</div>
+	<p><b>Soru 2:</b> Kendisine parametre olarak gelen bir dizinin bütün elemanlarını,  
+	mutlak değeriyle değiştiren programı yazınız. 
+	</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+void dizi_mutlak_deger( int[], int );
+int main( void )
+{
+	int i;
+	int liste[] = { -16, 71, -18, -4, 10, 0 };
+
+	dizi_mutlak_deger( liste, 6 );
+
+	for( i = 0; i < 6; i++ ) {
+		printf("%d ", liste[i]);				
+	}
+	printf("\n");
+}
+void dizi_mutlak_deger( int dizi[], int boyut )
+{
+	int i;
+	for( i = 0; i < boyut; i++ ) {
+		if( dizi[i] < 0 )
+			dizi[i] *= -1;
+	}
+}
+</pre>
+	</div>
+
+	<p><b>Soru 3:</b> int *ptr = &month[&nbsp;3&nbsp;] şeklinde bir atama yapılıyor. 
+	Buna göre, aşağıdakilerden hangileri *ptr değerine eşittir? 
+	</p>
+<pre>
+<b>a)</b> month;		<b>e)</b> (&nbsp;month&nbsp;+&nbsp;3&nbsp;)[&nbsp;0&nbsp;];
+<b>b)</b> ptr[&nbsp;0&nbsp;];		<b>f)</b> (&nbsp;month&nbsp;+&nbsp;1&nbsp;)[&nbsp;2&nbsp;];
+<b>c)</b> ptr[&nbsp;1&nbsp;];		<b>g)</b> *(&nbsp;month&nbsp;+&nbsp;3&nbsp;)[&nbsp;0&nbsp;];
+<b>d)</b> *(&nbsp;month&nbsp;+&nbsp;3&nbsp;)
+</pre>
+	<p>
+	<a href="#soru3" name="soru3" onMouseDown="change_display_of_object('Cevap3')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap3" style="display:none;">
+<pre>
+b, d, e ve f şıkları, *ptr'ye eşittir.
+</pre>
+</div>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_10.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_12.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_11.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:59 GMT -->
+</html>

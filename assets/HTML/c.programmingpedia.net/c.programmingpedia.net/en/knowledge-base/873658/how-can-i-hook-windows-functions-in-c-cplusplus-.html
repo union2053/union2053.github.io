@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/873658/how-can-i-hook-windows-functions-in-c-cplusplus- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:07:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How can I hook Windows functions in C/C++? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How can I hook Windows functions in C/C++? | C Language Knowledge Base">
+        <title>[SOLVED] How can I hook Windows functions in C/C++? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-can-i-hook-windows-functions-in-c-cplusplus-">How can I hook Windows functions in C/C++?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/hook.html">hook</a></span>
+                        <span class="tag-item"><a href="../tag/windows.html">windows</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>If I have a function <code>foo()</code> that windows has implemented in kernel32.dll and it always returns true, can I have my program: "bar.exe" hook/detour that Windows function and make it return false for all processes instead?</p>
+
+<p>So, if my svchost, for example, calls <code>foo()</code>, it will return false instead of true. The same action should be expected for all other processes currently running.</p>
+
+<p>If so, how? I guess I'm looking for a system-wide hook or something.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/105760/clark-gaebel" target="_blank"><span itemprop="name">Clark Gaebel</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">30</div>
+                                    <div itemprop="dateCreated">8/30/2014 10:22:40 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Take a look at <a href="http://research.microsoft.com/en-us/projects/detours/" rel="noreferrer" title="Detours">Detours</a>, it's perfect for this sort of stuff.</p>
+
+<hr>
+
+<p>For system-wide hooking, read <a href="http://web.archive.org/web/20091228193034/http://msdn.microsoft.com/en-us/library/ms997537.aspx" rel="noreferrer" title="MSDN">this article</a> from MSDN.</p>
+
+<hr>
+
+<p>First, create a DLL which handles hooking the functions. This example below hooks the socket send and receive functions.</p>
+
+<pre><code>#include &lt;windows.h&gt;
+#include &lt;detours.h&gt;
+
+#pragma comment( lib, "Ws2_32.lib" )
+#pragma comment( lib, "detours.lib" )
+#pragma comment( lib, "detoured.lib" )
+
+int ( WINAPI *Real_Send )( SOCKET s, const char *buf, int len, int flags ) = send;
+int ( WINAPI *Real_Recv )( SOCKET s, char *buf, int len, int flags ) = recv;  
+int WINAPI Mine_Send( SOCKET s, const char* buf, int len, int flags );
+int WINAPI Mine_Recv( SOCKET s, char *buf, int len, int flags );
+
+int WINAPI Mine_Send( SOCKET s, const char *buf, int len, int flags ) {
+    // .. do stuff ..
+
+    return Real_Send( s, buf, len, flags );
+}
+
+int WINAPI Mine_Recv( SOCKET s, char *buf, int len, int flags ) {
+    // .. do stuff ..
+
+    return Real_Recv( s, buf, len, flags );
+}
+
+BOOL WINAPI DllMain( HINSTANCE, DWORD dwReason, LPVOID ) {
+    switch ( dwReason ) {
+        case DLL_PROCESS_ATTACH:       
+            DetourTransactionBegin();
+            DetourUpdateThread( GetCurrentThread() );
+            DetourAttach( &amp;(PVOID &amp;)Real_Send, Mine_Send );
+            DetourAttach( &amp;(PVOID &amp;)Real_Recv, Mine_Recv );
+            DetourTransactionCommit();
+            break;
+
+        case DLL_PROCESS_DETACH:
+            DetourTransactionBegin();
+            DetourUpdateThread( GetCurrentThread() );
+            DetourDetach( &amp;(PVOID &amp;)Real_Send, Mine_Send );
+            DetourDetach( &amp;(PVOID &amp;)Real_Recv, Mine_Recv );
+            DetourTransactionCommit(); 
+        break;
+    }
+
+    return TRUE;
+}
+</code></pre>
+
+<p>Then, create a program to inject the DLL into the target application.</p>
+
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;windows.h&gt;
+#include &lt;tlhelp32.h&gt;
+
+void EnableDebugPriv() {
+    HANDLE hToken;
+    LUID luid;
+    TOKEN_PRIVILEGES tkp;
+
+    OpenProcessToken( GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &amp;hToken );
+
+    LookupPrivilegeValue( NULL, SE_DEBUG_NAME, &amp;luid );
+
+    tkp.PrivilegeCount = 1;
+    tkp.Privileges[0].Luid = luid;
+    tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
+    AdjustTokenPrivileges( hToken, false, &amp;tkp, sizeof( tkp ), NULL, NULL );
+
+    CloseHandle( hToken ); 
+}
+
+int main( int, char *[] ) {
+    PROCESSENTRY32 entry;
+    entry.dwSize = sizeof( PROCESSENTRY32 );
+
+    HANDLE snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, NULL );
+
+    if ( Process32First( snapshot, &amp;entry ) == TRUE ) {
+        while ( Process32Next( snapshot, &amp;entry ) == TRUE ) {
+            if ( stricmp( entry.szExeFile, "target.exe" ) == 0 ) {
+                EnableDebugPriv();
+
+                char dirPath[MAX_PATH];
+                char fullPath[MAX_PATH];
+
+                GetCurrentDirectory( MAX_PATH, dirPath );
+
+                sprintf_s( fullPath, MAX_PATH, "%s\\DllToInject.dll", dirPath );
+
+                HANDLE hProcess = OpenProcess( PROCESS_CREATE_THREAD | PROCESS_VM_OPERATION | PROCESS_VM_WRITE, FALSE, entry.th32ProcessID );
+                LPVOID libAddr = (LPVOID)GetProcAddress( GetModuleHandle( "kernel32.dll" ), "LoadLibraryA" );
+                LPVOID llParam = (LPVOID)VirtualAllocEx( hProcess, NULL, strlen( fullPath ), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE );
+
+                WriteProcessMemory( hProcess, llParam, fullPath, strlen( fullPath ), NULL );
+                CreateRemoteThread( hProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)libAddr, llParam, NULL, NULL );
+                CloseHandle( hProcess );
+            }
+        }
+    }
+
+    CloseHandle( snapshot );
+
+    return 0;
+}
+</code></pre>
+
+<p>This should be more than enough to get you started!</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/59844/xian" target="_blank"><span itemprop="name">xian</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/873658/how-can-i-hook-windows-functions-in-c-cplusplus-#answer-0</div>
+                                            <div itemprop="upvoteCount">35</div>
+                                            <div itemprop="dateCreated">3/8/2013 9:50:53 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><a href="http://www.codeplex.com/easyhook" rel="nofollow noreferrer">EASYHOOK</a> <a href="http://www.codeplex.com/easyhook" rel="nofollow noreferrer">http://www.codeplex.com/easyhook</a></p>
+
+<p>Dominate's all aformentioned techniques in simpleicty, flexability and functionality.</p>
+
+<p>It was not discussed previously on <a href="https://stackoverflow.com/questions/299261/hook-processes">Hook processes</a> either.  I've read all leaf's of this thread and with absolute certanty, <a href="http://www.codeplex.com/easyhook" rel="nofollow noreferrer">EASYHOOK</a> is vastly superiour. No matter if your using C, C++, CLR, whatever.</p>
+
+<p>I'll paste a bit from the codeplex homepage, to ensure sufficient omage being paid.</p>
+
+<h2 id="the-following-is-an-incomplete-list-of-features-">The following is an incomplete list of features:</h2>
+
+<ol>
+<li>A so called "Thread Deadlock Barrier" will get rid of many core problems when hooking unknown APIs; this technology is unique to EasyHook  </li>
+<li>You can write managed hook handlers for unmanaged APIs  </li>
+<li>You can use all the convenience managed code provides, like NET Remoting, WPF and WCF for example  </li>
+<li>A documented, pure unmanaged hooking API  </li>
+<li>Support for 32- and 64-bit kernel mode hooking (also check out my PatchGuard 3 bypass driver which can be found in the release list)  </li>
+<li>No resource or memory leaks are left in the target  </li>
+<li>Experimental stealth injection mechanism that won't raise attention of any current AV Software  </li>
+<li>EasyHook32.dll and EasyHook64.dll are pure unmanaged modules and can be used without any NET framework installed!  </li>
+<li>All hooks are installed and automatically removed in a stable manner  </li>
+<li>Support for Windows Vista SP1 x64 and Windows Server 2008 SP1 x64 by utilizing totally undocumented APIs, to still allow hooking into any terminal session.  </li>
+<li>Managed/Unmanaged module stack trace inside a hook handler  </li>
+<li>Get calling managed/unmanaged module inside a hook handler  </li>
+<li>Create custom stack traces inside a hook handler  </li>
+<li>You will be able to write injection libraries and host processes compiled for AnyCPU, which will allow you to inject your code into 32- and 64-Bit processes from 64- and 32-Bit processes by using the very same assembly in all cases.  </li>
+<li>EasyHook supports RIP-relative addressing relocation for 64-Bit targets.  </li>
+<li>No unpacking/installation necessary.  </li>
+<li>The Visual Studio Redistributable is not required.</li>
+</ol>
+
+<p>I'm happy that my hooker's still know a few tricks in comparison that makes me keep them around.  But to be sure, when you need a HOOK, 99 times of 100, EASYHOOK'r will get you there faster.  And it's quite actively maintained.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/67819/randomnickname42" target="_blank">RandomNickName42</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/873658" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/873658/how-can-i-hook-windows-functions-in-c-cplusplus- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:07:36 GMT -->
+</html>

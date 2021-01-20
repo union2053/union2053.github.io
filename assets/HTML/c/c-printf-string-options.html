@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-string-options.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C printf string options</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C printf string options'>C printf string options</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>printf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-conversion-specifications.html'>C printf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-format.html'>C printf function format
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-escape.html'>C printf escape %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conversion-specification-modifiers-for-printf.html'>C printf Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-flags.html'>C printf() Flags
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-integer.html'>C printf int width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-floating-point-value.html'>C printf floating width
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C printf string options
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-return-value-of-printf.html'>C Return Value of printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-printf.html'>C printf * Modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-print-columns-of-data.html'>C printf() align column
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>printf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-output.html'>C printf int
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() octal hexadecimal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-outputting-floating-point-values.html'>C printf() floating point 
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-character-output.html'>C printf() char
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-function.html'>C scanf() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-format-specifier.html'>C scanf format specifier
+
+The most general form of a format specifier is shown in the follows:
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-specification-characters.html'>C scanf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-scanf.html'>C scanf() * Modifier
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-reading-characters-and-string-using-scanf-with-filter.html'>C scanf() string %[]
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-2.html'>C Exercise 2
+
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C printf string options</h1>
+<a class ='btn btn-outline-dark' href=c-printf-field-width-for-floating-point-value.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-return-value-of-printf.html>Next</a><p>Let's examine some of the string options.
+
+</p><p>Consider the example in the following code.
+
+</p><div class='myCodeDiv'><button id='ZFFJT' class='myCopyButton' data-clipboard-target='#WSMIY'>Copy</button><pre  id='WSMIY' style='font-size:18px;' class='code'><span class='c'>/* stringf.c -- string formatting */</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define BLURB <span class='q'>"ABCDEDFG HIJKLMN!"</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    printf(<span class='q'>"[%2s]\n"</span>, BLURB);
+    printf(<span class='q'>"[%24s]\n"</span>, BLURB);
+    printf(<span class='q'>"[%24.5s]\n"</span>, BLURB);
+    printf(<span class='q'>"[%-24.5s]\n"</span>, BLURB);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZFFJT');clipboard.on('success', function(e) {$('#ZFFJT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZFFJT').text('error');});</script></div><p>Here is the output:
+</p><img src='data:image/png;base64,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'><p>For the %2s specification, the field is expanded to contain all the characters in the
+string.
+
+</p><p>Also notice how the precision specification limits the number of characters printed.
+
+</p><p>The .5 in the format specifier tells <i style='color:blue'>printf</i>() to print just five characters.
+
+</p><p>The - modifier left-justifies the text.
+</p><a class ='btn btn-outline-dark' href=c-printf-field-width-for-floating-point-value.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-return-value-of-printf.html>Next</a><h2>Related</h2><UL><LI><a href='c-printf-flags.html'>C printf Flags</a></LI><LI><a href='c-printf-field-width-for-integer.html'>C printf() field width for integer</a></LI><LI><a href='c-printf-field-width-for-floating-point-value.html'>C printf() field width for floating point value</a></LI><LI><a href='c-return-value-of-printf.html'>C Return Value of printf()</a></LI><LI><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-string-options.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-reading-characters-and-string-using-scanf-with-filter.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Reading Characters and String Using scanf() with filter</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Reading Characters and String Using scanf() with filter'>C Reading Characters and String Using scanf() with filter</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>printf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-conversion-specifications.html'>C printf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-format.html'>C printf function format
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-escape.html'>C printf escape %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conversion-specification-modifiers-for-printf.html'>C printf Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-flags.html'>C printf() Flags
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-integer.html'>C printf int width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-floating-point-value.html'>C printf floating width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-string-options.html'>C printf string options
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-return-value-of-printf.html'>C Return Value of printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-printf.html'>C printf * Modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-print-columns-of-data.html'>C printf() align column
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>printf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-output.html'>C printf int
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() octal hexadecimal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-outputting-floating-point-values.html'>C printf() floating point 
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-character-output.html'>C printf() char
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-function.html'>C scanf() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-format-specifier.html'>C scanf format specifier
+
+The most general form of a format specifier is shown in the follows:
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-specification-characters.html'>C scanf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-scanf.html'>C scanf() * Modifier
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf() usage
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C scanf() string %[]
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-2.html'>C Exercise 2
+
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Reading Characters and String Using scanf() with filter</h1>
+<a class ='btn btn-outline-dark' href=c-modifier-with-scanf.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-scanf-review-questions-1.html>Next</a><p>You can read a single character and store it as type char using the format specifier %c. 
+
+</p><p>For a string of characters, you use either the specifier %s or the specifier %[]. 
+
+</p><p>In this case, the string is stored as a null-terminated string with  '\0' as the last character. 
+
+</p><p>With the %[] format specification, the string to be read must include only the characters that appear between the square  
+brackets.
+
+</p><p>If the first character between the square brackets is ^, the string must contain only characters that  
+are not among those following the ^ character. 
+
+</p><p>Thus, %[aeiou] will read a string that consists only of vowels. 
+
+</p><p>The first character that isn't a vowel will signal the end of the string. 
+
+</p><p>The specification %[^aeiou] reads a string that contains any character that isn't a vowel. 
+
+</p><p>The first vowel or whitespace character will signal the end of the string. 
+
+</p><p>The %[] specification enables you to read a string containing spaces, something that the %s specification can't do. 
+
+</p><p>You just need to include a space as one of the characters between the square brackets. 
+
+</p><h3>Reading Characters And Strings 
+
+</h3><p>You can see these character reading capabilities in operation with the following example: 
+</p><div class='myCodeDiv'><button id='AQIDG' class='myCopyButton' data-clipboard-target='#DMOVB'>Copy</button><pre  id='DMOVB' style='font-size:18px;' class='code'><span class='c'>// Reading characters with scanf() </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+#define MAX_TOWN 10 
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>char</span> initial = <span class='q'>' '</span>; 
+  <span class='r'>char</span> name[80] = { <span class='q'>' '</span> }; 
+  <span class='r'>char</span> age[4] = { <span class='q'>'0'</span> }; 
+  printf(<span class='q'>"One letter: "</span>); 
+  scanf(<span class='q'>"%c"</span>, &amp;initial); 
+  printf(<span class='q'>"Name: "</span> ); 
+  scanf(<span class='q'>"%s"</span>, name); 
+  fflush(stdin); 
+
+  <span class='r'>if</span>(initial  != name[0]) 
+    printf(<span class='q'>"%s,letter is not matching your name.\n"</span>, name); 
+  <span class='r'>else</span> 
+    printf(<span class='q'>"Name is %s\n"</span>, name ); 
+  printf(<span class='q'>"Enter full name and age separated by a comma:\n"</span> ); 
+  scanf(<span class='q'>"%[^,] , %[0123456789]"</span>, name, age); 
+  printf(<span class='q'>"\nYour name is %s and you are %s years old.\n"</span>, name, age ); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AQIDG');clipboard.on('success', function(e) {$('#AQIDG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AQIDG').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p>The following program will read the numerical values in the following line of input and
+output the total:
+</p><div class='myCodeDiv'><button id='WVUZH' class='myCopyButton' data-clipboard-target='#VTHXW'>Copy</button><pre  id='VTHXW' style='font-size:18px;' class='code'>$3.50  ,  $4.75 , $9.95 , $2.50
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WVUZH');clipboard.on('success', function(e) {$('#WVUZH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WVUZH').text('error');});</script></div><div class='myCodeDiv'><button id='BQQYO' class='myCopyButton' data-clipboard-target='#XPRDS'>Copy</button><pre  id='XPRDS' style='font-size:18px;' class='code'><span class='c'>/*
+  You only need to ensure that the input format string specifies that '$',
+  spaces, and commas are ignored.
+*/</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+#define COUNT 4
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+  <span class='r'>double</span> amounts[COUNT] = {0.0};
+  <span class='r'>double</span> total = 0.0;
+ 
+   printf(<span class='q'>"Enter the %d amounts:\n"</span>, COUNT);
+   <span class='r'>for</span>(size_t i = 0 ; i &lt; COUNT ; ++i)
+   {
+     scanf(<span class='q'>"%*[ ,$]%lf"</span>, &amp;amounts[i]);
+     total += amounts[i];
+   }
+     
+   printf(<span class='q'>"The total of the input is: $%.2lf\n"</span>, total);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BQQYO');clipboard.on('success', function(e) {$('#BQQYO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BQQYO').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-modifier-with-scanf.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-scanf-review-questions-1.html>Next</a><h2>Related</h2><UL><LI><a href='c-scanf-conversion-specification-characters.html'>C scanf() conversion-specification characters</a></LI><LI><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers</a></LI><LI><a href='c-modifier-with-scanf.html'>C * Modifier with scanf()</a></LI><LI><a href='c-printf-scanf-review-questions-1.html'>C printf() scanf() Review Questions 1</a></LI><LI><a href='c-printf-scanf-review-questions-2.html'>C printf() scanf() Review Questions 2</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-reading-characters-and-string-using-scanf-with-filter.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

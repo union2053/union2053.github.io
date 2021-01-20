@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/14409466/simple-hash-functions by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Simple hash functions | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Simple hash functions | C Language Knowledge Base">
+        <title>[SOLVED] Simple hash functions | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="simple-hash-functions">Simple hash functions</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/function.html">function</a></span>
+                        <span class="tag-item"><a href="../tag/hashtable.html">hashtable</a></span>
+                        <span class="tag-item"><a href="../tag/string-hashing.html">string-hashing</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to write a <strong>C</strong> program that uses a hash table to store different words and I could use some help.</p>
+
+<p>Firstly, I create a hash table with the size of a prime number which is closest to the number of the words I have to store, and then I use a hash function to find an address for each word.
+I started with the simplest function, adding the letters together, which ended up with 88% collision.
+Then I started experimenting with the function and found out that whatever I change it to, the collisions don't get lower than 35%.
+Right now I'm using </p>
+
+<pre><code>unsigned int stringToHash(char *word, unsigned int hashTableSize){
+  unsigned int counter, hashAddress =0;
+  for (counter =0; word[counter]!='\0'; counter++){
+    hashAddress = hashAddress*word[counter] + word[counter] + counter;
+  }
+  return (hashAddress%hashTableSize);
+}
+</code></pre>
+
+<p>which is just a random function that I came up with, but it gives me the best results - around 35% collision.</p>
+
+<p>I've been reading articles on hash functions for the past a few hours and I tried to use a few simple ones, such as djb2, but all of them gave me even worse results.(djb2 resulted in 37% collision, which is't much worse, but I was expecting something better rather than worse)
+I also don't know how to use some of the other, more complex ones, such as the murmur2, because I don't know what the parameters (key, len, seed) they take in are.</p>
+
+<p>Is it normal to get more than 35% collisions, even with using the djb2, or am I doing something wrong?
+What are the key, len and seed values?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1955457/hardell" target="_blank"><span itemprop="name">Hardell</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">32</div>
+                                    <div itemprop="dateCreated">2/2/2017 12:18:24 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Try sdbm:</p>
+
+<pre><code>hashAddress = 0;
+for (counter = 0; word[counter]!='\0'; counter++){
+    hashAddress = word[counter] + (hashAddress &lt;&lt; 6) + (hashAddress &lt;&lt; 16) - hashAddress;
+}
+</code></pre>
+
+<p>Or djb2:</p>
+
+<pre><code>hashAddress = 5381;
+for (counter = 0; word[counter]!='\0'; counter++){
+    hashAddress = ((hashAddress &lt;&lt; 5) + hashAddress) + word[counter];
+}
+</code></pre>
+
+<p>Or Adler32:</p>
+
+<pre><code>uint32_t adler32(const void *buf, size_t buflength) {
+     const uint8_t *buffer = (const uint8_t*)buf;
+
+     uint32_t s1 = 1;
+     uint32_t s2 = 0;
+
+     for (size_t n = 0; n &lt; buflength; n++) {
+        s1 = (s1 + buffer[n]) % 65521;
+        s2 = (s2 + s1) % 65521;
+     }     
+     return (s2 &lt;&lt; 16) | s1;
+}
+
+// ...
+
+hashAddress = adler32(word, strlen(word));
+</code></pre>
+
+<p>None of these are really great, though. If you really want good hashes, you need something more complex like <a href="http://burtleburtle.net/bob/c/lookup3.c">lookup3</a> for example.</p>
+
+<p>Note that a hashtable is expected to have plenty of collisions as soon as it is filled <em>by more than 70-80%</em>. This is perfectly normal and will even happen if you use a very good hash algorithm. That's why most hashtable implementations increase the capacity of the hashtable (e.g. <code>capacity * 1.5</code> or even <code>capacity * 2</code>) as soon as you are adding something to the hashtable and the ratio <code>size / capacity</code> is already above 0.7 to 0.8. Increasing the capacity means a new hashtable is created with a higher capacity, all values from the current one are added to the new one (therefor they must all be rehashed, as their new index will be different in most cases), the new hastable array replaces the old one and the old one is released/freed. If you plan on hashing 1000 words, a hashtable capacity of at 1250 least recommended, better 1400 or even 1500. </p>
+
+<p>Hashtables are not supposed to be "filled to brim", at least not if they shall be fast and efficient (thus they always should have spare capacity). That's the downsize of hashtables, they are fast (<code>O(1)</code>), yet they will usually waste more space than would be necessary for storing the same data in another structure (when you store them as a sorted array, you will only need a capacity of 1000 for 1000 words; the downsize is that the lookup cannot be faster than <code>O(log n)</code> in that case). A collision free hashtable is not possible in most cases either way. Pretty much all hashtable implementations expect collisions to happen and usually have some kind of way to deal with them (usually collisions make the lookup somewhat slower, but the hashtable will still work and still beat other data structures in many cases).</p>
+
+<p>Also note that if you are using a pretty good hash function, there is no requirement, yet not even an advantage, if the hashtable has a power of 2 capacity if you are cropping hash values using modulo (<code>%</code>) in the end. The reason why many hashtable implementations always use power of 2 capacities is because <strong>they do not use modulo</strong>, instead they use AND (<code>&amp;</code>) for cropping because an AND operation is among the fastest operations you will find on most CPUs (modulo is never faster than AND, in the best case it would be equally fast, in most cases it is a lot slower). If your hashtable uses power of 2 sizes, you can replace any module with an AND operation:</p>
+
+<pre><code>x % 4  == x &amp; 3
+x % 8  == x &amp; 7
+x % 16 == x &amp; 15
+x % 32 == x &amp; 31
+...
+</code></pre>
+
+<p>This only works for power of 2 sizes, though. If you use modulo, power of 2 sizes can only buy something, if the hash is a very bad hash with a very bad "bit distribution". A bad bit distribution is usually caused by hashes that do not use any kind of bit shifting (<code>&gt;&gt;</code> or <code>&lt;&lt;</code>) or any other operations that would have a similar effect as bit shifting.</p>
+
+<p>I created a stripped down lookup3 implementation for you:</p>
+
+<pre><code>#include &lt;stdint.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define rot(x,k) (((x)&lt;&lt;(k)) | ((x)&gt;&gt;(32-(k))))
+
+#define mix(a,b,c) \
+{ \
+  a -= c;  a ^= rot(c, 4);  c += b; \
+  b -= a;  b ^= rot(a, 6);  a += c; \
+  c -= b;  c ^= rot(b, 8);  b += a; \
+  a -= c;  a ^= rot(c,16);  c += b; \
+  b -= a;  b ^= rot(a,19);  a += c; \
+  c -= b;  c ^= rot(b, 4);  b += a; \
+}
+
+#define final(a,b,c) \
+{ \
+  c ^= b; c -= rot(b,14); \
+  a ^= c; a -= rot(c,11); \
+  b ^= a; b -= rot(a,25); \
+  c ^= b; c -= rot(b,16); \
+  a ^= c; a -= rot(c,4);  \
+  b ^= a; b -= rot(a,14); \
+  c ^= b; c -= rot(b,24); \
+}
+
+uint32_t lookup3 (
+  const void *key,
+  size_t      length,
+  uint32_t    initval
+) {
+  uint32_t  a,b,c;
+  const uint8_t  *k;
+  const uint32_t *data32Bit;
+
+  data32Bit = key;
+  a = b = c = 0xdeadbeef + (((uint32_t)length)&lt;&lt;2) + initval;
+
+  while (length &gt; 12) {
+    a += *(data32Bit++);
+    b += *(data32Bit++);
+    c += *(data32Bit++);
+    mix(a,b,c);
+    length -= 12;
+  }
+
+  k = (const uint8_t *)data32Bit;
+  switch (length) {
+    case 12: c += ((uint32_t)k[11])&lt;&lt;24;
+    case 11: c += ((uint32_t)k[10])&lt;&lt;16;
+    case 10: c += ((uint32_t)k[9])&lt;&lt;8;
+    case 9 : c += k[8];
+    case 8 : b += ((uint32_t)k[7])&lt;&lt;24;
+    case 7 : b += ((uint32_t)k[6])&lt;&lt;16;
+    case 6 : b += ((uint32_t)k[5])&lt;&lt;8;
+    case 5 : b += k[4];
+    case 4 : a += ((uint32_t)k[3])&lt;&lt;24;
+    case 3 : a += ((uint32_t)k[2])&lt;&lt;16;
+    case 2 : a += ((uint32_t)k[1])&lt;&lt;8;
+    case 1 : a += k[0];
+             break;
+    case 0 : return c;
+  }
+  final(a,b,c);
+  return c;
+}
+</code></pre>
+
+<p>This code is not as highly optimized for performance as the original code, therefor it is a lot simpler. It is also not as portable as the original code, but it is portable to all major consumer platforms in use today. It is also completely ignoring the CPU endian, yet that is not really an issue, it will work on big and little endian CPUs. Just keep in mind that it will not calculate the same hash for the same data on big and little endian CPUs, but that is no requirement; it will calculate a good hash on both kind of CPUs and its only important that it always calculates the same hash for the same input data on a single machine.</p>
+
+<p>You would use this function as follows:</p>
+
+<pre><code>unsigned int stringToHash(char *word, unsigned int hashTableSize){
+  unsigned int initval;
+  unsigned int hashAddress;
+
+  initval = 12345;
+  hashAddress = lookup3(word, strlen(word), initval);
+  return (hashAddress%hashTableSize);
+  // If hashtable is guaranteed to always have a size that is a power of 2,
+  // replace the line above with the following more effective line:
+  //     return (hashAddress &amp; (hashTableSize - 1));
+}
+</code></pre>
+
+<p>You way wonder what <code>initval</code> is. Well, it is whatever you want it to be. You could call it a salt. It will influence the hash values, yet the hash values will not get better or worse in quality because of this (at least not in the average case, it may lead to more or less collisions for very specific data, though). E.g. you can use different <code>initval</code> values if you want to hash the same data twice, yet each time should produce a different hash value (there is no guarantee it will, but it is rather likely if <code>initval</code> is different; if it creates the same value, this would be a very unlucky coincident that you must treat that as a kind of collision). It is not advisable to use different <code>initval</code> values when hashing data for the same hashtable (this will rather cause more collisions on average). Another use for initval is if you want to combine a hash with some other data, in which case the already existing hash becomes <code>initval</code> when hashing the other data (so both, the other data as well as the previous hash influence the outcome of the hash function). You may even set <code>initval</code> to <code>0</code> if you like or pick a random value when the hashtable is created (and always use this random value for this instance of hashtable, yet each hashtable has its own random value).</p>
+
+<p>A note on collisions:</p>
+
+<p>Collisions are usually not such a huge problem in practice, it usually does not pay off to waste tons of memory just to avoid them. The question is rather how you are going to deal with them in an efficient way. </p>
+
+<p>You said you are currently dealing with 9000 words. If you were using an unsorted array, finding a word in the array will need 4500 comparisons on average. On my system, 4500 string comparisons (assuming that words are between 3 and 20 characters long) need 38 microseconds (0.000038 seconds). So even such a simple, ineffective algorithm is fast enough for most purposes. Assuming that you are sorting the word list and use a binary search, finding a word in the array will need only 13 comparisons on average. 13 comparisons are close to nothing in terms of time, it's too little to even benchmark reliably. So if finding a word in a hashtable needs 2 to 4 comparisons, I wouldn't even waste a single second on the question whether that may be a huge performance problem.</p>
+
+<p>In your case, a sorted list with binary search may even beat a hashtable by far. Sure, 13 comparisons need more time than 2-4 comparisons, however, in case of a hashtable you must first hash the input data to perform a lookup. Hashing alone may already take longer than 13 comparisons! The <em>better</em> the hash, the <em>longer</em> it will take for the same amount of data to be hashed. So a hashtable only pays off performance-wise if you have a really huge amount of data or if you must update the data frequently (e.g. constantly adding/removing words to/from the table, since these operations are less costly for a hashtable than they are for a sorted list). The fact that a hashatble is <code>O(1)</code> only means that regardless how big it is, a lookup will approx. always need the same amount of time. <code>O(log n)</code> only means that the lookup grows logarithmically with the number of words, that means more words, slower lookup. Yet the Big-O notation says nothing about absolute speed! This is a big misunderstanding. It is not said that a <code>O(1)</code> algorithm always performs faster than a <code>O(log n)</code> one. The Big-O notation only tells you that if the <code>O(log n)</code> algorithm is faster for a certain number of values and you keep increasing the number of values, the <code>O(1)</code> algorithm will certainly overtake the <code>O(log n)</code> algorithm at some point of time, but your current word count may be far below that point. Without benchmarking both approaches, you cannot say which one is faster by just looking at the Big-O notation.</p>
+
+<p>Back to collisions. What should you do if you run into a collision? If the number of collisions is small, and here I don't mean the overall number of collisions (the number of words that are colliding in the hashtable) but the per index one (the number of words stored at the same hashtable index, so in your case maybe 2-4), the simplest approach is to store them as a linked list. If there was no collision so far for this table index, there is just a single key/value pair. If there was a collision, there is a linked list of key/value pairs. In that case your code must iterate over the linked list and verify each of the keys and return the value if it matches. Going by your numbers, this linked list won't have more than 4 entries and doing 4 comparisons is insignificant in terms of performance. So finding the index is <code>O(1)</code>, finding the value (or detecting that this key is not in the table) is <code>O(n)</code>, but here <code>n</code> is only the number of linked list entries (so it is 4 at most).</p>
+
+<p>If the number of collisions raises, a linked list can become to slow and you may also store a dynamically sized, sorted array of key/value pairs, which allows lookups of <code>O(log n)</code> and again, <code>n</code> is only the number of keys in that array, not of all keys in the hastable. Even if there were 100 collisions at one index, finding the right key/value pair takes at most 7 comparisons. That's still close to nothing. Despite the fact that if you really have 100 collisions at one index, either your hash algorithm is unsuited for your key data or the hashtable is far too small in capacity. The disadvantage of a dynamically sized, sorted array is that adding/removing keys is somewhat more work than in case of a linked list (code-wise, not necessarily performance-wise). So using a linked list is usually sufficient if you keep the number of collisions low enough and it is almost trivial to implement such a linked list yourself in C and add it to an existing hashtable implementation.</p>
+
+<p>Most hashtable implementations I have seem use such a "fallback to an alternate data structure" to deal with collisions. The disadvantage is that these require a little bit extra memory to store the alternative data structure and a bit more code to also search for keys in that structure. There are also solutions that store collisions inside the hashtable itself and that don't require any additional memory. However, these solutions have a couple of drawbacks. The first drawback is that every collision increases the chances for even more collisions as more data is added. The second drawback is that while lookup times for keys decrease linearly with the number of collisions so far (and as I said before, every collision leads to even more collisions as data is added), lookup times for keys not in the hashtable decrease even worse and in the end, if you perform a lookup for a key that is not in the hashtable (yet you cannot know without performing the lookup), the lookup may take as long as a linear search over the whole hashtable (YUCK!!!). So if you can spare the extra memory, go for an alternate structure to handle collisions.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/15809/mecki" target="_blank"><span itemprop="name">Mecki</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/14409466/simple-hash-functions#answer-0</div>
+                                            <div itemprop="upvoteCount">72</div>
+                                            <div itemprop="dateCreated">1/10/2014 2:49:28 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <blockquote>
+  <p>Firstly, I create a hash table with the size of a prime number which is the closes to the number of the words I have to store, and then I use a hash function to find an address for each word.</p>
+</blockquote>
+
+<p>...</p>
+
+<blockquote>
+  <p>return (hashAddress%hashTableSize);</p>
+</blockquote>
+
+<p>Since the number of different hashes is comparable to the number of words you cannot expect to have much lower collisions.</p>
+
+<p>I made a simple statistical test with a random hash (which is the best you could achieve) and found that 26% is the limiting collision rate if you have #words == #different hashes.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/1221660/emanuele-paolini" target="_blank">Emanuele Paolini</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/14409466" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/14409466/simple-hash-functions by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:41 GMT -->
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-turning-bits-off-clearing-bits.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Turning Bits Off (Clearing Bits)</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Turning Bits Off (Clearing Bits)'>C Turning Bits Off (Clearing Bits)</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operators.html'>C Bitwise Operators
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-negation.html'>C Bitwise Negation
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-and.html'>C Bitwise AND: &amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-or.html'>C Bitwise OR: |
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-exclusive-or.html'>C Bitwise EXCLUSIVE OR: ^
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-left-shift-operator.html'>C Left Shift: &lt;&lt;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-right-shift-operator.html'>C Right Shift: >>
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-shift-operators-usage.html'>C Bit Shift Usage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-fields.html'>C Bit Fields
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-masks.html'>C Bit Masks
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operators-as-mask.html'>C Bitwise mask
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Bitwise Mask Multiple
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-on-setting-bits.html'>C Set Bit
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Clear Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-toggling-bits.html'>C Toggling Bits
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-the-value-of-a-bit.html'>C Check Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-convert-numbers-to-a-binary-representation-using-bitwise-operator.html'>C Convert to binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-invert-bit.html'>C Invert Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-convert-letter-to-lowercase.html'>C Bitwise on char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html'>C Bitwise Swap
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-do-encryption.html'>C Bitwise encryption
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Turning Bits Off (Clearing Bits)</h1>
+<a class ='btn btn-outline-dark' href=c-turning-bits-on-setting-bits.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-toggling-bits.html>Next</a><p>We can turn bit off. 
+
+</p><p>Suppose you want to turn off bit 1 in the variable flags.
+
+</p><p>Once again, MASK has only the 1 bit turned on. You can do this:
+</p><div class='myCodeDiv'><button id='GLVYZ' class='myCopyButton' data-clipboard-target='#TQFKX'>Copy</button><pre  id='TQFKX' style='font-size:18px;' class='code'>flags = flags &amp; ~MASK;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GLVYZ');clipboard.on('success', function(e) {$('#GLVYZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GLVYZ').text('error');});</script></div><p>Because MASK is all 0s except for bit 1, ~MASK is all 1s except for bit 1. 
+
+</p><p>A 1 combined with any bit using &amp; is that bit, so the statement leaves all the bits 
+other than bit 1 unchanged. 
+
+</p><p>Also, a 0 combined with any bit using &amp; is 0, so bit 1 is set to 0 regardless of its original value.
+
+</p><p>For example, suppose flags is 00001111 and MASK is 10110110. The expression
+</p><div class='myCodeDiv'><button id='CQBHL' class='myCopyButton' data-clipboard-target='#HOWJA'>Copy</button><pre  id='HOWJA' style='font-size:18px;' class='code'>flags &amp; ~MASK
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CQBHL');clipboard.on('success', function(e) {$('#CQBHL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CQBHL').text('error');});</script></div><p>becomes
+</p><div class='myCodeDiv'><button id='VHJWO' class='myCopyButton' data-clipboard-target='#VQDAY'>Copy</button><pre  id='VQDAY' style='font-size:18px;' class='code'>(00001111) &amp;^ (10110110)       <span class='c'>// expression</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VHJWO');clipboard.on('success', function(e) {$('#VHJWO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VHJWO').text('error');});</script></div><p>and evaluates to the following:
+</p><div class='myCodeDiv'><button id='KALWA' class='myCopyButton' data-clipboard-target='#WQPBT'>Copy</button><pre  id='WQPBT' style='font-size:18px;' class='code'>(00001001)                    <span class='c'>// resulting value</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KALWA');clipboard.on('success', function(e) {$('#KALWA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KALWA').text('error');});</script></div><p>All the bits that are set to 1 in MASK are set to 0 (cleared) in the result. All the bits in flags that
+corresponded to 0 bits in MASK are left unchanged.
+
+</p><p>You can use this short form instead:
+</p><div class='myCodeDiv'><button id='SBWFP' class='myCopyButton' data-clipboard-target='#QSQKE'>Copy</button><pre  id='QSQKE' style='font-size:18px;' class='code'>flags &amp;= ~MASK;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SBWFP');clipboard.on('success', function(e) {$('#SBWFP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SBWFP').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-turning-bits-on-setting-bits.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-toggling-bits.html>Next</a><h2>Related</h2><UL><LI><a href='c-use-bitwise-operators-as-mask.html'>C Use Bitwise Operators as mask</a></LI><LI><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Use bitwise operator and mask to select multiple bits</a></LI><LI><a href='c-turning-bits-on-setting-bits.html'>C Turning Bits On (Setting Bits)</a></LI><LI><a href='c-toggling-bits.html'>C Toggling Bits</a></LI><LI><a href='c-checking-the-value-of-a-bit.html'>C Checking the Value of a Bit</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-turning-bits-off-clearing-bits.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1395591/what-is-exactly-the-base-pointer-and-stack-pointer--to-what-do-they-point- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:58:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What is exactly the base pointer and stack pointer? To what do they point? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What is exactly the base pointer and stack pointer? To what do they point? | C Language Knowledge Base">
+        <title>[SOLVED] What is exactly the base pointer and stack pointer? To what do they point? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-is-exactly-the-base-pointer-and-stack-pointer-to-what-do-they-point-">What is exactly the base pointer and stack pointer? To what do they point?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/assembly.html">assembly</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/x86.html">x86</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Using <a href="http://en.wikipedia.org/wiki/Call_stack" rel="noreferrer">this example</a> coming from wikipedia, in which DrawSquare() calls DrawLine(),</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Call_stack_layout.svg/342px-Call_stack_layout.svg.png" alt="alt text"></p>
+
+<p>(Note that this diagram has high addresses at the bottom and low addresses at the top.)</p>
+
+<p>Could anyone explain me what <code>ebp</code> and <code>esp</code> are in this context?</p>
+
+<p>From what I see, I'd say the stack pointer points always to the top of the stack, and the base pointer to the beginning of the the current function? Or what?</p>
+
+<hr>
+
+<p>edit: I mean this in the context of windows programs</p>
+
+<p><strong>edit2: And how does <code>eip</code> work, too?</strong></p>
+
+<p><strong>edit3:</strong> I have the following code from MSVC++:</p>
+
+<pre><code>var_C= dword ptr -0Ch
+var_8= dword ptr -8
+var_4= dword ptr -4
+hInstance= dword ptr  8
+hPrevInstance= dword ptr  0Ch
+lpCmdLine= dword ptr  10h
+nShowCmd= dword ptr  14h
+</code></pre>
+
+<p>All of them seem to be dwords, thus taking 4 bytes each. So I can see there is a gap from hInstance to var_4 of 4 bytes. What are they? I assume it is the return address, as can be seen in wikipedia's picture?</p>
+
+<hr>
+
+<p>(editor's note: removed a long quote from Michael's answer, which doesn't belong in the question, but a followup question was edited in):</p>
+
+<p>This is because the flow of the function call is:</p>
+
+<pre><code>* Push parameters (hInstance, etc.)
+* Call function, which pushes return address
+* Push ebp
+* Allocate space for locals
+</code></pre>
+
+<p><strong>My question (last, i hope!) now is, what is exactly what happens from the instant I pop the arguments of the function i want to call up to the end of the prolog? I want to know how the ebp, esp evolve during those moments(I already understood how the prolog works, I just want to know what is happening after i pushed the arguments on the stack and before the prolog).</strong></p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/130758/devoured-elysium" target="_blank"><span itemprop="name">devoured elysium</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">207</div>
+                                    <div itemprop="dateCreated">3/24/2019 10:10:15 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><code>esp</code> is as you say it is, the top of the stack.</p>
+
+<p><code>ebp</code> is usually set to <code>esp</code> at the start of the function. Function parameters and local variables are accessed by adding and subtracting, respectively, a constant offset from <code>ebp</code>.  All x86 calling conventions define <code>ebp</code> as being preserved across function calls.  <code>ebp</code> itself actually points to the previous frame's base pointer, which enables stack walking in a debugger and viewing other frames local variables to work.  </p>
+
+<p>Most function prologs look something like:</p>
+
+<pre class="lang-none prettyprint-override"><code>push ebp      ; Preserve current frame pointer
+mov ebp, esp  ; Create new frame pointer pointing to current stack top
+sub esp, 20   ; allocate 20 bytes worth of locals on stack.
+</code></pre>
+
+<p>Then later in the function you may have code like (presuming both local variables are 4 bytes)</p>
+
+<pre class="lang-none prettyprint-override"><code>mov [ebp-4], eax    ; Store eax in first local
+mov ebx, [ebp - 8]  ; Load ebx from second local
+</code></pre>
+
+<p>FPO or <em>frame pointer omission</em> optimization which you can enable will actually eliminate this and use <code>ebp</code> as another register and access locals directly off of <code>esp</code>, but this makes debugging a bit more difficult since the debugger can no longer directly access the stack frames of earlier function calls.</p>
+
+<p>EDIT:</p>
+
+<p>For your updated question, the missing two entries in the stack are:</p>
+
+<pre class="lang-none prettyprint-override"><code>var_C = dword ptr -0Ch
+var_8 = dword ptr -8
+var_4 = dword ptr -4
+*savedFramePointer = dword ptr 0*
+*return address = dword ptr 4*
+hInstance = dword ptr  8h
+PrevInstance = dword ptr  0C
+hlpCmdLine = dword ptr  10h
+nShowCmd = dword ptr  14h
+</code></pre>
+
+<p>This is because the flow of the function call is:</p>
+
+<ul>
+<li>Push parameters (<code>hInstance</code>, etc.)</li>
+<li>Call function, which pushes return address</li>
+<li>Push <code>ebp</code></li>
+<li>Allocate space for locals</li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/67132/michael" target="_blank"><span itemprop="name">Michael</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1395591/what-is-exactly-the-base-pointer-and-stack-pointer--to-what-do-they-point-#answer-0</div>
+                                            <div itemprop="upvoteCount">216</div>
+                                            <div itemprop="dateCreated">8/10/2017 5:58:22 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>ESP is the current stack pointer, which will change any time a word or address is pushed or popped onto/off off the stack. EBP is a more convenient way for the compiler to keep track of a function's parameters and local variables than using the ESP directly.</p>
+
+<p>Generally (and this may vary from compiler to compiler), all of the arguments to a function being called are pushed onto the stack by the calling function (usually in the reverse order that they're declared in the function prototype, but this varies). Then the function is called, which pushes the return address (EIP) onto the stack.</p>
+
+<p>Upon entry to the function, the old EBP value is pushed onto the stack and EBP is set to the value of ESP. Then the ESP is decremented (because the stack grows downward in memory) to allocate space for the function's local variables and temporaries. From that point on, during the execution of the function, the arguments to the function are located on the stack at positive offsets from EBP (because they were pushed prior to the function call), and the local variables are located at negative offsets from EBP (because they were allocated on the stack after the function entry). That's why the EBP is called the <em>frame pointer</em>, because it points to the center of the <a href="http://en.wikipedia.org/wiki/Call_stack#STACK-FRAME" rel="nofollow noreferrer"><em>function call frame</em></a>.</p>
+
+<p>Upon exit, all the function has to do is set ESP to the value of EBP (which deallocates the local variables from the stack, and exposes the entry EBP on the top of the stack), then pop the old EBP value from the stack, and then the function returns (popping the return address into EIP).</p>
+
+<p>Upon returning back to the calling function, it can then increment ESP in order to remove the function arguments it pushed onto the stack just prior to calling the other function. At this point, the stack is back in the same state it was in prior to invoking the called function.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/170383/david-r-tribble" target="_blank">David R Tribble</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1395591" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1395591/what-is-exactly-the-base-pointer-and-stack-pointer--to-what-do-they-point- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:58:41 GMT -->
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-bit-fields.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Bit Fields</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Bit Fields'>C Bit Fields</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operators.html'>C Bitwise Operators
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-negation.html'>C Bitwise Negation
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-and.html'>C Bitwise AND: &amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-or.html'>C Bitwise OR: |
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-exclusive-or.html'>C Bitwise EXCLUSIVE OR: ^
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-left-shift-operator.html'>C Left Shift: &lt;&lt;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-right-shift-operator.html'>C Right Shift: >>
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-shift-operators-usage.html'>C Bit Shift Usage
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Bit Fields
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-masks.html'>C Bit Masks
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operators-as-mask.html'>C Bitwise mask
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Bitwise Mask Multiple
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-on-setting-bits.html'>C Set Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-off-clearing-bits.html'>C Clear Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-toggling-bits.html'>C Toggling Bits
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-the-value-of-a-bit.html'>C Check Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-convert-numbers-to-a-binary-representation-using-bitwise-operator.html'>C Convert to binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-invert-bit.html'>C Invert Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-convert-letter-to-lowercase.html'>C Bitwise on char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html'>C Bitwise Swap
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-do-encryption.html'>C Bitwise encryption
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Bit Fields</h1>
+<a class ='btn btn-outline-dark' href=c-bitwise-shift-operators-usage.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bit-masks.html>Next</a><p>C bit field is a set of neighboring bits within a signed int or an unsigned int. 
+
+</p><p>C99 and C11 additionally allow type _Bool bit fields.
+
+</p><p>A bit field is set up with a structure declaration that labels each field and determines
+its width. 
+
+</p><p>For example, the following declaration sets up four 1-bit fields:
+</p><div class='myCodeDiv'><button id='AYDHK' class='myCopyButton' data-clipboard-target='#NWMPI'>Copy</button><pre  id='NWMPI' style='font-size:18px;' class='code'><span class='r'>struct</span>   {
+    <span class='r'>unsigned</span>   <span class='r'>int</span>   flag1    :   1;
+    <span class='r'>unsigned</span>   <span class='r'>int</span>   flag2    :   1;
+    <span class='r'>unsigned</span>   <span class='r'>int</span>   flag3    :   1;
+    <span class='r'>unsigned</span>   <span class='r'>int</span>   flag4    :   1;
+} prnt;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AYDHK');clipboard.on('success', function(e) {$('#AYDHK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AYDHK').text('error');});</script></div><p>This definition causes print to contain four 1-bit fields. 
+
+</p><p>Now you can use the usual structure membership operator to assign values to individual fields:
+</p><div class='myCodeDiv'><button id='HIPYP' class='myCopyButton' data-clipboard-target='#KZTSB'>Copy</button><pre  id='KZTSB' style='font-size:18px;' class='code'>prnt.flag4 = 0;
+prnt.flag3 = 1;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HIPYP');clipboard.on('success', function(e) {$('#HIPYP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HIPYP').text('error');});</script></div><p>Because each of these particular fields is just 1 bit, 1 and 0 are the only values you can use for
+assignment. 
+
+</p><p>The variable print is stored in an int-sized memory cell, but only 4 bits are used in this example.
+
+</p><p>Structures with bit fields provide a handy way to keep track of settings. 
+
+</p><p>Many settings, such as boldface and italics for fonts, are simply a matter specifying one of two choices, such as on or
+off, yes or no, or true or false. 
+
+</p><p>There's no need to use a whole variable when all you need is a single bit. 
+
+</p><p>A structure with bit fields allows you to store several settings in a single unit.
+
+</p><p>Sometimes there are more than two choices for a setting, so you need more than a single bit to
+represent all the choices. 
+
+</p><p>That's not a problem because fields aren't limited to 1-bit sizes. You
+can also do this:
+</p><div class='myCodeDiv'><button id='EZRWH' class='myCopyButton' data-clipboard-target='#LOUVB'>Copy</button><pre  id='LOUVB' style='font-size:18px;' class='code'><span class='r'>struct</span> {
+    <span class='r'>unsigned</span> <span class='r'>int</span> code1 : 2;
+    <span class='r'>unsigned</span> <span class='r'>int</span> code2 : 2;
+    <span class='r'>unsigned</span> <span class='r'>int</span> code3 : 8;
+} prcode;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EZRWH');clipboard.on('success', function(e) {$('#EZRWH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EZRWH').text('error');});</script></div><p>This code creates two 2-bit fields and one 8-bit field. You can now make assignments such as
+the following:
+</p><div class='myCodeDiv'><button id='NYEHS' class='myCopyButton' data-clipboard-target='#WHVMR'>Copy</button><pre  id='WHVMR' style='font-size:18px;' class='code'>prcode.code1 = 0;
+prcode.code2 = 3;
+prcode.code3 = 102;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NYEHS');clipboard.on('success', function(e) {$('#NYEHS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NYEHS').text('error');});</script></div><p>Just make sure the value doesn't exceed the capacity of the field.
+
+</p><p>You can "pad" a field structure with unnamed holes by using unnamed field widths. Using an
+unnamed field width of 0 forces the next field to align with the next integer:
+</p><div class='myCodeDiv'><button id='LXTOK' class='myCopyButton' data-clipboard-target='#DKMXT'>Copy</button><pre  id='DKMXT' style='font-size:18px;' class='code'><span class='r'>struct</span> {
+    <span class='r'>unsigned</span>   <span class='r'>int</span> field1 : 1;
+    <span class='r'>unsigned</span>   <span class='r'>int</span>        : 2;
+    <span class='r'>unsigned</span>   <span class='r'>int</span> field2 : 1;
+    <span class='r'>unsigned</span>   <span class='r'>int</span>        : 0;
+    <span class='r'>unsigned</span>   <span class='r'>int</span> field3 : 1;
+} stuff;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LXTOK');clipboard.on('success', function(e) {$('#LXTOK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LXTOK').text('error');});</script></div><p>Here, there is a 2-bit gap between stuff.field1 and stuff.field2, and stuff.field3 is
+stored in the next int.
+
+</p><h3>Bit-Field Example
+</h3><div class='myCodeDiv'><button id='QAPDE' class='myCopyButton' data-clipboard-target='#GJDIA'>Copy</button><pre  id='GJDIA' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdbool.h&gt;
+#define SOLID   0<span style='color:#aaa9ba'>/</span><span style='color:#aabb9b'>/</span><span style='color:#a999b9'>w</span><span style='color:#9a99ba'> </span><span style='color:#b9babb'>w</span><span style='color:#9b999a'>w</span><span style='color:#9bbb9a'> </span><span style='color:#b99b99'> </span><span style='color:#a9bbba'>.</span><span style='color:#abbaab'> </span><span style='color:#aaa9b9'> </span><span style='color:#9aaa9a'>d</span><span style='color:#bbb9aa'>e</span><span style='color:#99b9ba'>m</span><span style='color:#99bbba'>o</span><span style='color:#abbbb9'>2</span><span style='color:#ab999b'>s</span><span style='color:#aaa999'> </span><span style='color:#ab9a99'> </span><span style='color:#99a99b'>.</span><span style='color:#aaaba9'> </span><span style='color:#ab9bbb'>c</span><span style='color:#a99ba9'> </span><span style='color:#aaabbb'> </span><span style='color:#a9abb9'>o</span><span style='color:#baa9b9'> </span><span style='color:#ba9bbb'>m</span>
+#define DOTTED 1
+#define DASHED 2
+#define BLUE    4
+#define GREEN     2
+#define RED       1
+#define BLACK     0
+#define YELLOW    (RED |    GREEN)
+#define MAGENTA   (RED |    BLUE)
+#define CYAN      (GREEN    | BLUE)
+#define WHITE     (RED |    GREEN | BLUE)
+
+<span class='r'>const</span> <span class='r'>char</span> * colors[8] = {<span class='q'>"black"</span>, <span class='q'>"red"</span>, <span class='q'>"green"</span>, <span class='q'>"yellow"</span>,
+    <span class='q'>"blue"</span>, <span class='q'>"magenta"</span>, <span class='q'>"cyan"</span>, <span class='q'>"white"</span>};
+
+<span class='r'>struct</span> canvas {
+    <span class='r'>bool</span> opaque                      :   1;  
+    <span class='r'>unsigned</span> <span class='r'>int</span> fill_color          :   3;
+    <span class='r'>unsigned</span> <span class='r'>int</span>                     :   4;
+    <span class='r'>bool</span> show_border                 :   1; 
+    <span class='r'>unsigned</span> <span class='r'>int</span> border_color        :   3;
+    <span class='r'>unsigned</span> <span class='r'>int</span> border_style        :   2;
+    <span class='r'>unsigned</span> <span class='r'>int</span>                     :   2;
+};
+
+<span class='r'>void</span> display(<span class='r'>const</span> <span class='r'>struct</span> canvas * pb);
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='c'>/* create and initialize canvas structure */</span>
+    <span class='r'>struct</span> canvas box = {<span class='r'>true</span>, GREEN , <span class='r'>true</span>,YELLOW , DASHED};
+
+    printf(<span class='q'>"Original box settings:\n"</span>);
+    display(&amp;box);
+
+    box.opaque = <span class='r'>false</span>;
+    box.fill_color = WHITE;
+    box.border_color = MAGENTA;
+    box.border_style = SOLID;
+    printf(<span class='q'>"\nModified box settings:\n"</span>);
+    display(&amp;box);
+
+    <span class='r'>return</span> 0;
+}
+
+<span class='r'>void</span> display(<span class='r'>const</span> <span class='r'>struct</span> canvas * pb)
+{
+    printf(<span class='q'>"Box is %s.\n"</span>,
+           pb-&gt;opaque == <span class='r'>true</span> ? <span class='q'>"opaque"</span>: <span class='q'>"transparent"</span>);
+    printf(<span class='q'>"The fill color is %s.\n"</span>, colors[pb-&gt;fill_color]);
+    printf(<span class='q'>"Border %s.\n"</span>,
+           pb-&gt;show_border == <span class='r'>true</span> ? <span class='q'>"shown"</span> : <span class='q'>"not shown"</span>);
+    printf(<span class='q'>"The border color is %s.\n"</span>, colors[pb-&gt;border_color]);
+    printf (<span class='q'>"The border style is "</span>);
+    <span class='r'>switch</span>(pb-&gt;border_style)
+    {
+        <span class='r'>case</span> SOLID : printf(<span class='q'>"solid.\n"</span>); <span class='r'>break</span>;
+        <span class='r'>case</span> DOTTED : printf(<span class='q'>"dotted.\n"</span>); <span class='r'>break</span>;
+        <span class='r'>case</span> DASHED : printf(<span class='q'>"dashed.\n"</span>); <span class='r'>break</span>;
+        <span class='r'>default</span>     : printf(<span class='q'>"unknown type.\n"</span>);
+    }
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QAPDE');clipboard.on('success', function(e) {$('#QAPDE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QAPDE').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-bitwise-shift-operators-usage.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bit-masks.html>Next</a><h2>Related</h2><UL><LI><a href='c-bitwise-left-shift-operator.html'>C Bitwise Left Shift operator: &lt;&lt;</a></LI><LI><a href='c-binary-right-shift-operator.html'>C Binary Right Shift Operator: >></a></LI><LI><a href='c-bitwise-shift-operators-usage.html'>C Bitwise Shift Operators Usage</a></LI><LI><a href='c-bit-masks.html'>C Bit Masks</a></LI><LI><a href='c-use-bitwise-operators-as-mask.html'>C Use Bitwise Operators as mask</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-bit-fields.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

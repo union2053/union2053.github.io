@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-partially-initialized-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Partially initialized array</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Partially initialized array'>C Partially initialized array</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Partially initialized array</h1>
+<a class ='btn btn-outline-dark' href=c-array-initialization.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-array-designated-initializers.html>Next</a><p>The number of items in the list should match the size of the array. 
+
+</p><p>But what if you count wrong? 
+
+</p><p>The following code with a list that is two too short.
+
+</p><div class='myCodeDiv'><button id='WYYIU' class='myCopyButton' data-clipboard-target='#HIKVB'>Copy</button><pre  id='HIKVB' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define SIZE 4
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> some_data[SIZE] = {1492, 1066};
+    <span class='r'>int</span> i;
+
+     printf(<span class='q'>"%2s%14s\n"</span>,
+            <span class='q'>"i"</span>, <span class='q'>"some_data[i]"</span>);
+     <span class='r'>for</span> (i = 0; i &lt; SIZE; i++)
+         printf(<span class='q'>"%2d%14d\n"</span>, i, some_data[i]);
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WYYIU');clipboard.on('success', function(e) {$('#WYYIU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WYYIU').text('error');});</script></div><p>This time the output looks like this:
+</p><img src='data:image/png;base64,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'><p>When it ran out of values from the list, it initialized the remaining elements to 0. 
+
+</p><p>That is, if you don't initialize an array at all, its elements, like
+uninitialized ordinary variables, get garbage values, but if you partially initialize an array, the
+remaining elements are set to 0.
+
+</p><p>Instead, you can let the compiler match the array size to the 
+list by omitting the size from the braces.
+
+</p><div class='myCodeDiv'><button id='POGOH' class='myCopyButton' data-clipboard-target='#LHATO'>Copy</button><pre  id='LHATO' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>const</span> <span class='r'>int</span> days[] = {31,28,31,30,31,30,31,31,30,31};
+    <span class='r'>int</span> index;
+
+    <span class='r'>for</span> (index = 0; index &lt; <span class='r'>sizeof</span> days / <span class='r'>sizeof</span> days[0]; index++)
+        printf(<span class='q'>"Month %2d has %d days.\n"</span>, index +1,
+               days[index]);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#POGOH');clipboard.on('success', function(e) {$('#POGOH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#POGOH').text('error');});</script></div><p>When you use empty brackets to initialize an array, the compiler counts the number of
+items in the list and makes the array that large.
+
+</p><p>Notice what we did in the for loop control statement. 
+
+</p><p>The sizeof operator gives the size, in bytes, of the object, or type, following it. 
+
+</p><p>So sizeof days is the size, in bytes, of the whole array, and sizeof days[0] 
+is the size, in bytes, of one element. 
+
+</p><p>Dividing the size of the entire array by the size of one element tells us how
+many elements are in the array.
+
+</p><p>Here is the result of running this program:
+</p><img src='data:image/png;base64,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'><p>Oops! We put in just 10 values, but our method of letting the program find 
+the array size kept us from trying to print past the end of the array. 
+
+</p><p>This points out a potential disadvantage of
+automatic counting: Errors in the number of elements could pass unnoticed.
+</p><a class ='btn btn-outline-dark' href=c-array-initialization.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-array-designated-initializers.html>Next</a><h2>Related</h2><UL><LI><a href='c-function-exercise-3.html'>C function exercise 3</a></LI><LI><a href='c-arrays-introduction.html'>C Arrays Introduction</a></LI><LI><a href='c-array-initialization.html'>C Array Initialization</a></LI><LI><a href='c-array-designated-initializers.html'>C Array Designated Initializers</a></LI><LI><a href='c-array-compound-literals.html'>C Array Compound Literals</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-partially-initialized-array.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

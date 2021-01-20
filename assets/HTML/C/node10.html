@@ -1,0 +1,748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node10.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Pointers</TITLE>
+<META NAME="description" CONTENT="Pointers">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html955"
+ HREF="node10.html#SECTION001010000000000000000">
+What is a Pointer?</A>
+<LI><A NAME="tex2html956"
+ HREF="node10.html#SECTION001020000000000000000">
+Pointer and Functions</A>
+<LI><A NAME="tex2html957"
+ HREF="node10.html#SECTION001030000000000000000">
+Pointers and Arrays</A>
+<LI><A NAME="tex2html958"
+ HREF="node10.html#SECTION001040000000000000000">
+Arrays of Pointers</A>
+<LI><A NAME="tex2html959"
+ HREF="node10.html#SECTION001050000000000000000">
+Multidimensional arrays and pointers</A>
+<LI><A NAME="tex2html960"
+ HREF="node10.html#SECTION001060000000000000000">
+Static Initialisation of Pointer Arrays</A>
+<LI><A NAME="tex2html961"
+ HREF="node10.html#SECTION001070000000000000000">
+Pointers and Structures</A>
+<LI><A NAME="tex2html962"
+ HREF="node10.html#SECTION001080000000000000000">
+Common Pointer Pitfalls</A>
+<UL>
+<LI><A NAME="tex2html963"
+ HREF="node10.html#SECTION001081000000000000000">
+Not assigning a pointer to memory address before using it</A>
+<LI><A NAME="tex2html964"
+ HREF="node10.html#SECTION001082000000000000000">
+Illegal indirection</A>
+</UL>
+<LI><A NAME="tex2html965"
+ HREF="node10.html#SECTION001090000000000000000">
+Exercise</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001000000000000000000">
+Pointers</A>
+</H1>
+<A NAME="ch:pointers">&#160;</A>
+Pointer are a fundamental part of C. If you cannot use pointers properly then
+you have basically lost all the power and flexibility that C allows. The secret
+to C is in its use of pointers.
+<P>
+C uses <EM>pointers</EM> <U>a lot</U>. <B>Why?</B>:
+<P><UL>
+<LI> It is the only way to express some computations.
+<LI> It produces compact and efficient code.
+<LI> It provides a very powerful tool.
+</UL>
+<P>
+C uses pointers explicitly with:
+<P><UL>
+<LI> Arrays,
+<LI> Structures,
+<LI> Functions.
+</UL>
+<P><B>NOTE:</B> Pointers are perhaps the most difficult part of C to understand.
+C's implementation is slightly different <U>DIFFERENT</U> from other
+languages.
+<P><H1><A NAME="SECTION001010000000000000000">
+What is a Pointer?</A>
+</H1>
+<P>
+A pointer is a variable which contains the address in memory
+of another variable. We can have a pointer to any variable type.
+<P>
+The <EM>unary</EM> or <EM>monadic</EM> operator <B>&amp;</B> gives the ``address of a
+variable''.
+<P>
+The <EM>indirection</EM> or dereference operator <B>*</B> gives the ``contents of
+an object <EM>pointed to</EM> by a pointer''.
+<P>
+To declare a pointer to a variable do:
+<P>&nbsp;&nbsp;&nbsp;<TT>int *pointer;</TT>
+<P><B>NOTE:</B> We must associate a pointer to a particular type: You can't assign
+the address of a <B>short int</B> to a <B>long int</B>, for instance.
+<P>
+Consider the effect of the following code:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int x = 1, y = 2;
+		 int *ip;
+&nbsp;
+		 ip = &amp;x;
+&nbsp;
+<P>
+y = *ip;
+&nbsp;
+<P>
+x = ip;
+&nbsp;
+<P>		 *ip = 3;
+</TT></PRE>
+</TT>
+<P>
+It is worth considering what is going on at the <EM>machine level</EM> in memory
+to fully understand how pointer work. Consider Fig.&nbsp;<A HREF="node10.html#fig:point">9.1</A>. Assume for
+the sake of this discussion that variable <TT>x resides at memory location
+100, <TT>y</TT> at 200 and <TT>ip</TT> at 1000. <B>Note</B> A pointer is a variable
+and thus its values need to be stored somewhere. It is the nature of the
+pointers value that is <EM>new</EM>.
+<P><A NAME="fig:point">&#160;</A><img src= point.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:point">9.1</A> Pointer, Variables and Memory</B>
+Now the assignments <TT>x = 1</TT> and <TT>y = 2</TT> obviously load these values
+into the variables. <TT>ip</TT> is declared to be a <EM>pointer to an integer</EM>
+and is assigned to the address of <TT>x</TT> (<TT>&amp;x</TT>). So ip gets loaded with
+the value 100.
+<P>
+Next <TT>y</TT> gets assigned to the <EM>contents of</EM> <TT>ip</TT>. In this example
+<TT>ip</TT> currently <EM>points</EM> to memory location 100 -- the location of <TT>
+x</TT>. So <TT>y</TT> gets assigned to the values of <TT>x</TT> -- which is 1.
+<P>
+We have already seen that C is not too fussy about assigning values of
+different type. Thus it is perfectly <B>legal</B> (although not all that common)
+to assign the current value of <TT>ip</TT> to <TT>x</TT>. The value of <TT>ip</TT> at
+this instant is 100.
+<P>
+Finally we can assign a value to the contents of a pointer (<TT>*ip</TT>).
+<P><B>IMPORTANT</B>: When a pointer is declared it does not point anywhere. You
+must set it to point somewhere before you use it.
+<P>
+So ...
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int *ip;
+&nbsp;
+		 *ip = 100;
+</TT></PRE>
+</TT>
+<P>
+will generate an error (program crash!!).
+<P>
+The correct use is:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int *ip;
+		 int x;
+&nbsp;
+		 ip = &amp;x;
+		 *ip = 100;
+</PRE>
+</TT>
+<P>
+We can do integer arithmetic on a pointer:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;float *flp, *flq;
+&nbsp;
+		 *flp = *flp + 10;
+&nbsp;
+		 ++*flp;
+&nbsp;
+		 (*flp)++;
+&nbsp;
+		 flq = flp;
+</PRE>
+</TT>
+<P><B>NOTE</B>: A pointer to any variable type is an address in memory -- which is
+an integer address. A pointer is <U>definitely NOT</U> an integer.
+<P>
+The reason we associate a pointer to a data type is so that it knows how many
+bytes the data is stored in. When we increment a pointer we increase the
+pointer by one ``block'' memory.
+<P>
+So for a character pointer  ++ch_ptr adds 1 byte to the address.
+<P>
+For an integer or float ++ip or ++flp adds 4 bytes to the address.
+<P>
+Consider a float variable (<TT>fl) and a pointer to a float (<TT>flp</TT>) as
+shown in Fig.&nbsp;<A HREF="node10.html#fig:float">9.2</A>.
+<P><A NAME="fig:float">&#160;</A><img src= float.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:float">9.2</A> Pointer Arithmetic</B>
+Assume that <TT>flp</TT> points to <TT>fl</TT> then if we increment the pointer (<TT>
+++flp</TT>) it moves to the position shown 4 bytes on. If on the other hand we
+added 2 to the pointer then it moves 2 <B>float positions</B> <EM>i.e</EM>
+<U>8 bytes</U> as shown in the Figure.
+<P></TT></TT></TT></TT><H1><A NAME="SECTION001020000000000000000">
+Pointer and Functions</A>
+</H1>
+<P>
+Let us now examine the close relationship between pointers and C's other major
+parts. We will start with functions.
+<P>
+When C passes arguments to functions it passes them <U>by value</U>.
+<P>
+There are many cases when we may want to alter a passed argument in the
+function and receive the new value back once to function has finished. Other
+languages do this (<EM>e.g.</EM> <TT>var</TT> parameters in PASCAL). C uses pointers
+explicitly to do this. Other languages mask the fact that pointers also
+underpin the implementation of this.
+<P>
+The best way to study this is to look at an example where we must be able to
+receive changed parameters.
+<P>
+Let us try and write a function to swap variables around?
+<P>
+The usual function <EM>call</EM>:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>swap(a, b)</TT>&nbsp;&nbsp; WON'T WORK.
+<BR>
+<P>
+Pointers provide the solution: <EM>Pass the address of the variables to the
+functions and access address of function.</EM>
+<BR>
+<P>
+Thus our function call in our program would look like this:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<TT>swap(&amp;a, &amp;b)</TT>
+  <BR>
+<P>
+The Code to swap is fairly straightforward:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp; void swap(int *px, int *py)
+&nbsp;
+		 &nbsp;&nbsp;&nbsp;{ int temp;
+&nbsp;
+				 temp = *px;
+				 /* contents of pointer */ 
+&nbsp;
+				 *px = *py;
+				 *py = temp;
+		 }
+</TT></PRE>
+</TT>
+<P>
+We can return pointer from functions. A 
+common example is when passing back structures. <EM>e.g.</EM>:
+<P><TT>
+<PRE><TT>
+typedef struct {float x,y,z;} COORD;
+&nbsp;
+		 main()
+&nbsp;
+		&nbsp;&nbsp;{ &nbsp;COORD p1, *coord_fn();
+						/* declare fn to return ptr of
+						 COORD type */ 
+&nbsp;
+						 ....
+						 p1 = *coord_fn(...);
+				 /* assign contents of address returned */
+						 ....
+				 }
+</PRE>
+</TT>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;COORD *coord_fn(...)
+&nbsp;
+		&nbsp;&nbsp;{ &nbsp;COORD p;
+&nbsp;
+						 .....
+						 p = ....;
+						 /* assign structure values */ 
+&nbsp;
+						 return &amp;p;
+						 /* return address of p */
+				 }
+</PRE>
+</TT>
+<P>
+Here we return a pointer whose contents are immediately <EM>unwrapped</EM> into a
+variable. We must do this straight away as the variable we pointed to was local
+to a function that has now finished. This means that the address space is free
+and can be overwritten. It will not have been overwritten straight after the
+function ha squit though so this is perfectly safe.
+<P></TT></TT><H1><A NAME="SECTION001030000000000000000">
+Pointers and Arrays</A>
+</H1>
+<P>
+Pointers and arrays are very closely linked in C.
+<BR>
+<P>
+Hint: think of array elements arranged in 
+consecutive memory locations.
+<BR>
+<P>
+Consider the following:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int a[10], x;
+		 int *pa;
+&nbsp;
+		 pa = &amp;a[0];  /* pa pointer to address of a[0] */
+&nbsp;
+		 x = *pa;
+		 /* x = contents of pa (a[0] in this case) */
+</TT></PRE>
+</TT>
+<P><A NAME="fig:arrays">&#160;</A><img src= arrays.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:arrays">9.3</A> Arrays and Pointers</B>
+<P>
+To get somewhere in the array (Fig.&nbsp;<A HREF="node10.html#fig:arrays">9.3</A>) using a pointer we could
+do:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>pa + i <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="$\equiv$"> a[i]
+<BR>
+<P><B>WARNING</B>: There is no bound checking of arrays and pointers so you can
+easily go beyond array memory and overwrite other things.
+<BR>
+<P>
+C however is much more subtle in its link between arrays and pointers.
+<BR>
+<P>
+For example we can just type
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>pa = a;</TT>
+<BR>
+<P>
+instead of
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>pa = &amp;a[0]</TT>
+<BR>
+<P>
+and
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>a[i]</TT> can be written as <TT>*(a + i)</TT>. <BR>
+<EM>i.e.</EM> <TT>&amp;a[i] <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="$\equiv$"> a + i</TT>.
+<BR>
+<P>
+We also express pointer addressing like this:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>pa[i] <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="$\equiv$"> *(pa + i)</TT>.
+  <BR>
+<P>
+However pointers and arrays are different:
+<P><UL>
+<LI> A pointer is a variable. We can do <BR>
+<TT>pa = a</TT> and <TT>pa++</TT>.
+<LI> An Array <U>is not</U> a variable. <TT>a = pa</TT> and <TT>a++</TT> ARE
+ILLEGAL.
+</UL>
+<P>
+This stuff is very important. Make sure you understand it. We will see a lot
+more of this.
+  <BR>
+<P>
+We can now understand how arrays are passed to functions.
+<BR>
+<P>
+When an array is passed to a function what is actually passed is its initial
+elements location in memory.
+<BR>
+<P>
+So:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>strlen(s) <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="$\equiv$"> strlen(&amp;s[0])</TT>
+<BR>
+<P>
+This is why we declare the function: 
+<BR>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TT>int strlen(char s[]);</TT>
+<BR>
+<P>
+An equivalent declaration is :&nbsp;<TT>int strlen(char *s);</TT> <BR>
+since <TT>char s[] <IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="$\equiv$"> char *s</TT>.
+<BR>
+<P><TT>strlen()</TT> is a <EM>standard library</EM> function
+(Chapter&nbsp;<A HREF="node19.html#ch:string">18</A>) that returns the length of a string. Let's look
+at how we may write a function:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int strlen(char *s)
+		&nbsp;&nbsp;&nbsp;{&nbsp;char *p = s;
+&nbsp;
+				 while (*p != `<IMG WIDTH="21" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="${\backslash}0$">);
+				&nbsp;&nbsp;&nbsp;p++;
+				 return p-s;
+		&nbsp;&nbsp;&nbsp;}
+</TT></PRE>
+</TT>
+<P>
+Now lets write a function to copy a string to another string. <TT>strcpy() is
+a standard library function that does this.
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;void strcpy(char *s, char *t)
+		&nbsp;&nbsp;&nbsp;{&nbsp; while ( (*s++ = *t++) != `<IMG WIDTH="21" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="${\backslash}0$">);}
+</TT></PRE>
+</TT>
+<BR>
+<P>
+This uses pointers and assignment by value. 
+<BR>
+<P>
+Very Neat!!
+<BR>
+<P><B>NOTE:</B> Uses of Null statements with <TT>while.
+<BR>
+<P></TT></TT></TT><H1><A NAME="SECTION001040000000000000000">
+Arrays of Pointers</A>
+</H1>
+<P>
+We can have arrays of pointers since pointers are variables.
+<BR>
+<P><U>Example use</U>:
+<BR>
+<P><EM>Sort lines of text of different length</EM>.
+<BR>
+<P><B>NOTE:</B> Text can't be moved or compared in a single operation.
+<BR>
+<P><EM>Arrays of Pointers</EM> are a data representation that will cope efficiently
+and conveniently with variable length text lines. 
+<BR>
+<P>
+How can we do this?:
+<P><UL>
+<LI> Store lines end-to-end in one big <TT>char</TT> array
+(Fig.&nbsp;<A HREF="node10.html#fig:strings">9.4</A>). <TT>
+\n</TT> will delimit lines.
+<LI> Store pointers in a different array where each pointer points to 1st char
+of each new line.
+<LI> Compare two lines using <TT>strcmp()</TT> standard library function.
+<LI> If 2 lines are out of order -- swap pointer in pointer array
+(<U>not text</U>).
+</UL>
+<P><A NAME="fig:strings">&#160;</A><img src= strings.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:strings">9.4</A> Arrays of Pointers (String Sorting Example)</B>
+<P>
+This eliminates:
+<P><UL>
+<LI> complicated storage management.
+<LI> high overheads of moving lines.
+</UL><H1><A NAME="SECTION001050000000000000000">
+Multidimensional arrays and pointers</A>
+</H1>
+<P>
+We should think of multidimensional arrays in a different way in C:
+<BR>
+<P><EM>A 2D array is really a 1D array, each of whose elements is itself an array</EM>
+<BR>
+<P>
+Hence
+<BR>
+<P>&nbsp;&nbsp;<TT>a[n][m]</TT> notation.
+<BR>
+<P>
+Array elements are stored row by row.
+<BR>
+<P>
+When we pass a 2D array to a function we must specify the number of columns --
+the number of rows is irrelevant. 
+<BR>
+<P>
+The reason for this is pointers again. C needs to know how many columns in
+order that it can jump from row to row in memory.
+  <BR>
+<P>
+Consider<TT>int a[5][35]</TT> to be passed in a function:
+<BR>
+<P>
+We can do:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>f(int a[][35]) {.....}</TT>
+<BR>
+<P>
+or even:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>f(int (*a)[35]) {.....}</TT>
+<BR>
+<P>
+We need parenthesis (*a) since [] have a higher precedence than *
+<BR>
+<P>
+So:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>int (*a)[35]</TT>; declares a pointer to an array of 35 <TT>int</TT>s.
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>int *a[35];</TT> declares an array of 35 pointers to <TT>int</TT>s.
+ <BR>
+<P>
+Now lets look at the (subtle) difference between pointers and arrays.
+Strings are a common application of this.
+<BR>
+<P>
+Consider:
+<BR>
+&nbsp;&nbsp;&nbsp;<TT>char *name[10];</TT>
+<P>&nbsp;&nbsp;&nbsp;<TT>char Aname[10][20];</TT>
+<BR>
+<P>
+We can legally do <TT>name[3][4]</TT> and <TT>Aname[3][4]</TT> in C.
+<P>
+However
+<UL>
+<LI> <TT>Aname</TT> is a <U>true</U> 200 element 2D char array.
+<LI> access elements via <BR>
+&nbsp;&nbsp;&nbsp;<EM>20*row + col + base_address</EM> <BR>
+in memory.
+<LI> <TT>name</TT> has 10 pointer elements.
+</UL>
+<P><B>NOTE:</B> If each pointer in <TT>name</TT> is set to point to a 20 element array
+then <U>and only then</U> will 200 chars be set aside (+ 10 elements).
+<BR>
+<P>
+The advantage of the latter is that each pointer can point to arrays be of
+different length.
+  <BR>
+<P>
+Consider:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;char *name[] = { ``no month'', ``jan'',
+				``feb'', ... };
+		 char Aname[][15] = { ``no month'', ``jan'',
+				``feb'', ... };
+</TT></PRE>
+<P><A NAME="fig:arrptr">&#160;</A><img src= arrptr.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:arrptr"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> 2D Arrays and Arrays of Pointers</B>
+<P></TT><H1><A NAME="SECTION001060000000000000000">
+Static Initialisation of Pointer Arrays</A>
+</H1>
+<P>
+Initialisation of arrays of pointers is an ideal application for an internal
+static array.
+<P><TT>
+<PRE><TT>
+some_fn()
+		 &nbsp;{ static char *months = { ``no month'',
+						 ``jan'', ``feb'',
+						 ...};
+&nbsp;
+				 }
+</TT></PRE>
+</TT>
+<P><TT>static reserves a private permanent bit of memory.
+<P></TT><H1><A NAME="SECTION001070000000000000000">
+Pointers and Structures</A>
+</H1>
+<P>
+These are fairly straight forward and are easily defined. Consider the
+following:
+<BR>
+<P><PRE><TT>
+&nbsp;&nbsp;&nbsp;struct COORD {float x,y,z;} pt;
+		 struct COORD *pt_ptr;
+&nbsp;
+<P>
+pt_ptr = &amp;pt; /* assigns pointer to pt */
+</TT></PRE>
+<P>
+the <IMG WIDTH="34" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.gif"
+ ALT="$-\!\gt$"> operator lets us access a member of the structure pointed to by a
+pointer.<EM>i.e.</EM>:
+<P>&nbsp;&nbsp;&nbsp;<TT>pt_ptr<IMG WIDTH="34" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.gif"
+ ALT="$-\!\gt$">x = 1.0;</TT>
+<P>&nbsp;&nbsp;&nbsp;<TT>pt_ptr<IMG WIDTH="34" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.gif"
+ ALT="$-\!\gt$">y = pt_ptr<IMG WIDTH="34" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.gif"
+ ALT="$-\!\gt$">y - 3.0;</TT>
+<P>
+<BR>
+<P>
+Example: Linked Lists
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;typedef struct { &nbsp;int value;
+						 ELEMENT *next;
+				 } ELEMENT; 
+&nbsp;
+<P>
+ELEMENT n1, n2;
+&nbsp;
+<P>
+n1.next = &amp;n2;
+</TT></PRE>
+</TT>
+<P><A NAME="fig:link">&#160;</A><img src= link.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node10.html#fig:link"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> Linking Two Nodes</B>
+<B>NOTE:</B> We can only declare <TT>next as a pointer to <TT>ELEMENT</TT>. We
+cannot have a element of the variable type as this would set up a <EM>
+recursive</EM> definition which is <B>NOT ALLOWED</B>. We are allowed to set a
+pointer reference since 4 bytes are set aside for any pointer.
+<P>
+The above code links a node <TT>n1</TT> to <TT>n2</TT> (Fig.&nbsp;<A HREF="#figure:link">9.6</A>) we will
+look at this matter further in the next Chapter.
+<P></TT><H1><A NAME="SECTION001080000000000000000">
+Common Pointer Pitfalls</A>
+</H1>
+<P>
+Here we will highlight two common mistakes made with pointers.
+<P><H2><A NAME="SECTION001081000000000000000">
+Not assigning a pointer to memory address before using it</A>
+</H2>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;int *x;
+&nbsp;
+		 *x = 100;
+&nbsp;
+we need a physical location say: int y;
+&nbsp;
+		 x = &amp;y;
+		 *x = 100;
+</TT></PRE>
+</TT>
+<P>
+This may be hard to spot. <B>NO COMPILER ERROR</B>. Also x could some random
+address at initialisation.
+<P><H2><A NAME="SECTION001082000000000000000">
+Illegal indirection</A>
+</H2>
+<P>
+Suppose we have a function <TT>malloc()</TT> which tries to allocate memory
+dynamically (at run time) and returns a pointer to block of memory requested if
+successful or a <TT>NULL</TT> pointer <BR>
+otherwise.
+<BR>
+<P>&nbsp;&nbsp;<TT>char *malloc()</TT> -- a standard library function (see later).
+<BR>
+<P>
+Let us have a pointer: <TT>char *p</TT>;
+<BR>
+<P>
+Consider:
+<BR>
+<P>&nbsp;&nbsp;<TT>*p = (char *) malloc(100);</TT>
+&nbsp;&nbsp; /* request 100 bytes of memory */
+<BR>
+<P>&nbsp;&nbsp;<TT>*p = `y';</TT>
+<BR>
+<P>
+There is mistake above. What is it?
+<BR>
+<BR>
+<P>
+No * in
+<P>&nbsp;&nbsp;&nbsp;<TT><U>*p</U> = (char *) malloc(100);</TT>
+<BR>
+<P>
+Malloc returns a pointer. Also <TT>p</TT> does not point to any address.
+<BR>
+<P>
+The correct code should be:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>p = (char *) malloc(100);</TT> 
+<BR>
+<P>
+If code rectified one problem is if no memory is available and <TT>p</TT> is <TT>
+NULL</TT>. Therefore we can't do: 
+<BR>
+&nbsp;&nbsp;&nbsp;<TT>*p = `y';</TT>.
+  <BR>
+<P>
+A good C program would check for this:
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;p = (char *) malloc(100);
+		 if ( p == NULL)
+		 &nbsp;&nbsp;{&nbsp;printf("Error: Out of Memory \n");
+						 exit(1);
+				 }
+		 *p = `y';
+</TT></PRE>
+</TT>
+<P><H1><A NAME="SECTION001090000000000000000">
+Exercise</A>
+</H1>
+<P>
+<B>Exercise 12453</B></P>
+<P>
+Write a C program to read through an array of any type using pointers. Write
+a C program 	to scan through this array to find a particular value.
+<P></P>
+<P><P>
+<B>Exercise 12454</B></P>
+<P>
+Write a program to find the number of times that a given
+word(i.e. a short string) occurs in a sentence (i.e. a long string!).
+<P>
+Read data from standard input.
+	The first line is a single word,
+	which is followed by general text on the second line.
+	Read both up to a newline character, and insert a terminating null before processing.
+<P>
+Typical output should be:
+<PRE>
+        The word is &quot;the&quot;.
+        The sentence is &quot;the cat sat on the mat&quot;.
+       The word occurs 2 times.
+</PRE>
+</P>
+<P><P>
+<B>Exercise 12455</B></P>
+<P>
+Write a program that takes three variable (a, b, b) in as separate parameters and
+rotates the values stored so that value a goes to be, b, to c and c to a.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node10.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:06:59 GMT -->
+</HTML>

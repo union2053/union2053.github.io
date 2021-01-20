@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3840582/still-reachable-leak-detected-by-valgrind by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:05:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Still Reachable Leak detected by Valgrind | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Still Reachable Leak detected by Valgrind | C Language Knowledge Base">
+        <title>[SOLVED] Still Reachable Leak detected by Valgrind | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="still-reachable-leak-detected-by-valgrind">Still Reachable Leak detected by Valgrind</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/pthreads.html">pthreads</a></span>
+                        <span class="tag-item"><a href="../tag/valgrind.html">valgrind</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>All the functions mentioned in this block are library functions. How can I rectify this memory leak? </p>
+
+<p>It is listed under the "<strong>Still reachable</strong>" category. (There are 4 more, which are very similar, but of varying sizes)</p>
+
+<pre><code> 630 bytes in 1 blocks are still reachable in loss record 5 of 5
+    at 0x4004F1B: calloc (vg_replace_malloc.c:418)
+    by 0x931CD2: _dl_new_object (dl-object.c:52)
+    by 0x92DD36: _dl_map_object_from_fd (dl-load.c:972)
+    by 0x92EFB6: _dl_map_object (dl-load.c:2251)
+    by 0x939F1B: dl_open_worker (dl-open.c:255)
+    by 0x935965: _dl_catch_error (dl-error.c:178)
+    by 0x9399C5: _dl_open (dl-open.c:584)
+    by 0xA64E31: do_dlopen (dl-libc.c:86)
+    by 0x935965: _dl_catch_error (dl-error.c:178)
+    by 0xA64FF4: __libc_dlopen_mode (dl-libc.c:47)
+    by 0xAE6086: pthread_cancel_init (unwind-forcedunwind.c:53)
+    by 0xAE61FC: _Unwind_ForcedUnwind (unwind-forcedunwind.c:126)
+</code></pre>
+
+<p><strong>Catch:</strong> Once I ran my program, it gave no memory leaks, but it had one additional line in the Valgrind output, which wasn't present before:</p>
+
+<blockquote>
+  <p>Discarding syms at 0x5296fa0-0x52af438
+  in /lib/libgcc_s-4.4.4-20100630.so.1
+  due to munmap()</p>
+</blockquote>
+
+<p>If the leak can't be rectified, can someone atleast explain why the munmap() line causes Valgrind to report 0 "still reachable" leaks?</p>
+
+<p><strong>Edit:</strong></p>
+
+<p>Here's a minimal test sample:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;pthread.h&gt;
+
+void *runner(void *param) {
+    /* some operations ... */
+    pthread_exit(NULL);
+}
+
+int n;
+
+int main(void) {
+
+    int i;
+    pthread_t *threadIdArray;
+
+    n=10; /* for example */
+
+    threadIdArray = malloc((n+n-1)*sizeof(pthread_t));  
+
+    for(i=0;i&lt;(n+n-1);i++) {
+        if( pthread_create(&amp;threadIdArray[i],NULL,runner,NULL) != 0 ) {
+            printf("Couldn't create thread %d\n",i);
+            exit(1);
+        }
+    }
+
+
+    for(i=0;i&lt;(n+n-1);i++) {
+        pthread_join(threadIdArray[i],NULL);
+    }
+
+    free(threadIdArray);
+
+    return(0);
+}
+</code></pre>
+
+<p>Run with:</p>
+
+<pre><code>valgrind -v --leak-check=full --show-reachable=yes ./a.out
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/0/user191776" target="_blank"><span itemprop="name">user191776</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">141</div>
+                                    <div itemprop="dateCreated">10/4/2010 5:27:33 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There is more than one way to define "memory leak". In particular, there are two primary definitions of "memory leak" that are in common usage among programmers.</p>
+
+<p>The first commonly used definition of "memory leak" is, "Memory was allocated and was not subsequently freed before the program terminated." However, many programmers (rightly) argue that certain types of memory leaks that fit this definition don't actually pose any sort of problem, and therefore should not be considered <em>true</em> "memory leaks".</p>
+
+<p>An arguably stricter (and more useful) definition of "memory leak" is, "Memory was allocated and <em>cannot</em> be subsequently freed because the program no longer has any pointers to the allocated memory block." In other words, you cannot free memory that you no longer have any pointers to. Such memory is therefore a "memory leak". Valgrind uses this stricter definition of the term "memory leak". This is the type of leak which can potentially cause significant heap depletion, especially for long lived processes.</p>
+
+<p>The "still reachable" category within Valgrind's leak report refers to allocations that fit only the first definition of "memory leak". These blocks were not freed, but they could have been freed (if the programmer had wanted to) because the program still was keeping track of pointers to those memory blocks.</p>
+
+<p>In general, there is no need to worry about "still reachable" blocks. They don't pose the sort of problem that <em>true</em> memory leaks can cause. For instance, there is normally no potential for heap exhaustion from "still reachable" blocks. This is because these blocks are usually one-time allocations, references to which are kept throughout the duration of the process's lifetime. While you could go through and ensure that your program frees <em>all</em> allocated memory, there is usually no practical benefit from doing so since the operating system will reclaim all of the process's memory after the process terminates, anyway. Contrast this with <em>true</em> memory leaks which, if left unfixed, could cause a process to run out of memory if left running long enough, or will simply cause a process to consume far more memory than is necessary.</p>
+
+<p>Probably the only time it is useful to ensure that all allocations have matching "frees" is if your leak detection tools cannot tell which blocks are "still reachable" (but Valgrind can do this) or if your operating system doesn't reclaim all of a terminating process's memory (all platforms which Valgrind has been ported to do this).</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/95706/dan-moulding" target="_blank"><span itemprop="name">Dan Moulding</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/3840582/still-reachable-leak-detected-by-valgrind#answer-0</div>
+                                            <div itemprop="upvoteCount">338</div>
+                                            <div itemprop="dateCreated">10/4/2010 5:30:19 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Since there is some routine from the the pthread family on the bottom (but I don't know that particular one), my guess would be that you have launched some thread as joinable that has terminated execution.</p>
+
+<p>The exit state information of that thread is kept available until you call <code>pthread_join</code>. Thus, the memory is kept in a loss record at program termination, but it is still reachable since you could use <code>pthread_join</code> to access it.</p>
+
+<p>If this analysis is correct, either launch these threads detached, or join them before terminating your program.</p>
+
+<p><strong>Edit</strong>: I ran your sample program (after some obvious corrections) and I don't have errors but the following</p>
+
+<pre><code>==18933== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 4 from 4)
+--18933-- 
+--18933-- used_suppression:      2 dl-hack3-cond-1
+--18933-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+</code></pre>
+
+<p>Since the <code>dl-</code> thing resembles much of what you see I guess that you see a known problem that has a solution in terms of a suppression file for <code>valgrind</code>. Perhaps your system is not up to date, or your distribution doesn't maintain these things. (Mine is ubuntu 10.4, 64bit)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/366377/jens-gustedt" target="_blank">Jens Gustedt</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/3840582" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/3840582/still-reachable-leak-detected-by-valgrind by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:05:40 GMT -->
+</html>

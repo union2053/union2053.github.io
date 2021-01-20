@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-block-scope-without-braces.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Variable Block Scope Without Braces</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Variable Block Scope Without Braces'>C Variable Block Scope Without Braces</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-block-scope.html'>C Block Scope
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Block Scope Without Braces
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Variable Block Scope Without Braces</h1>
+<a class ='btn btn-outline-dark' href=c-identifier-variable-block-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-identifier-variable-function-scope-and-function-prototype-scope.html>Next</a><p>A C99 treats statements that are part of a loop or if statement as a block even if braces 
+(that is, { }) aren't used. 
+
+</p><p>More completely, an entire loop is a sub-block to the block containing it, and the loop body 
+is a sub-block to the entire loop block.
+
+</p><p>Similarly, an if statement is a block, and its associated sub-statement is a sub-block to the if
+statement. 
+
+</p><p>These rules affect where you can declare a variable and the scope of that variable.
+
+</p><div class='myCodeDiv'><button id='BXSJP' class='myCopyButton' data-clipboard-target='#XDEMM'>Copy</button><pre  id='XDEMM' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main()
+{
+    <span class='r'>int</span> n = 8;
+
+    printf(<span class='q'>"        Start, n = %d at %p\n"</span>, n, &amp;n);
+    <span class='r'>for</span> (<span class='r'>int</span> n = 1; n &lt; 3; n++)
+        printf(<span class='q'>"      loop 1: n = %d at %p\n"</span>, n, &amp;n);
+    printf(<span class='q'>"After loop 1, n = %d at %p\n"</span>, n, &amp;n);
+    <span class='r'>for</span> (<span class='r'>int</span> n = 1; n &lt; 3; n++)
+    {
+        printf(<span class='q'>" loop 2 index n = %d at %p\n"</span>, n, &amp;n);
+        <span class='r'>int</span> n = 6;
+        printf(<span class='q'>"            loop 2: n = %d at %p\n"</span>, n, &amp;n);
+        n++;
+     }
+     printf(<span class='q'>"After loop 2, n = %d at %p\n"</span>, n, &amp;n);
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BXSJP');clipboard.on('success', function(e) {$('#BXSJP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BXSJP').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>The n declared in the control section of the first for loop is in scope to the end of the loop and
+hides the initial n. 
+
+</p><p>But after execution leaves the loop, the original n comes into scope.
+
+</p><p>In the second for loop, the n declared as a loop index hides the initial n. 
+
+</p><p>Then, the n declared inside the loop body hides the loop index n. 
+
+</p><p>When the program finishes executing the body,
+the n declared in the body disappears, and the loop test uses the index n. 
+
+</p><p>When the entire loop
+terminates, the original n comes back into scope. 
+</p><a class ='btn btn-outline-dark' href=c-identifier-variable-block-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-identifier-variable-function-scope-and-function-prototype-scope.html>Next</a><h2>Related</h2><UL><LI><a href='c-preprocessor-exercise-1.html'>C preprocessor Exercise 1</a></LI><LI><a href='c-identifier-storage-classes.html'>C Identifier Storage Classes</a></LI><LI><a href='c-identifier-variable-block-scope.html'>C Identifier Variable Block Scope</a></LI><LI><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C Identifier Variable function Scope and Function prototype scope</a></LI><LI><a href='c-identifier-variable-file-scope.html'>C Identifier Variable file scope</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-block-scope-without-braces.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

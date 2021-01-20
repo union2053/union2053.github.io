@@ -1,0 +1,828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_12.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:59 GMT -->
+<head>
+	<title>C Programlama Ders: XII</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, Multi-Dimensional Arrays, Çok boyutlu diziler, Two Dimensional Arrays, İki Boyutlu Diziler, Dinamik Bellek, Dynamic Memory Allocation, calloc, malloc, free, sizeof, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">13 Kasım 2006</font></div>
+	<h2>C Programlama Dersi - XII</h2>
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>	
+		<div id="content_div" style="display:none">
+			<p>- Çok boyutlu diziler</p>
+			<p>- Çok boyutlu dizilere ilk değer atama</p>
+			<p>- Fonksiyonlara 2 boyutlu dizileri aktarmak</p>
+			<p>- 2 boyutlu dizilerin hafıza yerleşimi</p>
+			<p>- Pointer dizileri</p>
+			<p>- Dinamik bellek yönetimi</p>
+			<p>- Konuyla ilgili örnek sorular</p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	
+	<h3>Çok Boyutlu Diziler</h3>
+	<p>
+		Önceki derslerimizde dizileri görmüştük. Kısaca özetleyecek olursak, belirlediğimiz 
+		sayıda değişkeni bir sıra içinde tutmamız, diziler sayesinde gerçekleşiyordu. Bu 
+		dersimizde, çok boyutlu dizileri inceleyip, ardından dinamik bellek konularına 
+		gireceğiz.     		
+	</p>
+	<p>
+		Şimdiye kadar gördüğümüz diziler, tek boyutluydu. Bütün elemanları tek boyutlu 
+		bir yapıda saklıyorduk. Ancak dizilerin tek boyutlu olması gerekmez; istediğiniz 
+		boyutta tanımlayabilirsiniz. Örneğin 3x4 bir matris için	2 boyutlu bir dizi 
+		kullanırız. Ya da üç boyutlu Öklid uzayındaki x, y, z noktalarını saklamak için 
+		3 boyutlu bir diziyi tercih ederiz.       
+	</p>
+	<p>
+		Hemen bir başka örnek verelim. 5 kişilik bir öğrenci grubu için 8 adet test 
+		uygulansın. Bunların sonuçlarını saklamak için 2 boyutlu bir dizi kullanalım: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// 5 adet ogrenci icin 8 adet sinavi
+	// temsil etmesi icin bir ogrenci tablosu 
+	// olusturuyoruz. Bunun icin 5x8 bir matris 
+	// yaratilmasi gerekiyor. 
+	<b>int ogrenci_tablosu[&nbsp;5&nbsp;][&nbsp;8&nbsp;];</b>
+	int i, j;
+	for( i = 0; i < 5; i++ ) {
+		for( j = 0; j < 8; j++ ) {
+			printf( "%d no.'lu ogrencinin ", ( i + 1 ) );
+			printf( "%d no.'lu sınavı> ", ( j + 1 ) );
+			// Tek boyutlu dizilerdeki gibi deger 
+			// atiyoruz 
+			<b>scanf( "%d", &ogrenci_tablosu[&nbsp;i&nbsp;][&nbsp;j&nbsp;] );</b>
+		}
+	}
+	
+	return 0;
+}
+</pre>
+	<p>
+		Bu programı çalıştırıp, öğrencilere çeşitli değerler atadığımızı düşünelim. Bunu 
+		görsel bir şekle sokarsak, aşağıdaki gibi bir çizelge oluşur:
+	</p>
+	<div align="center">
+		<img src="c_operands/two_dimensional_1.png" alt="[2D Example]" border="0"/>
+	</div>
+	<p>
+		Tabloya bakarsak, 1.öğrenci sınavlardan, 80, 76, 58, 90, 27, 60, 85 ve 95	puan 
+		almış	gözüküyor. Ya da 5.öğrencinin, 6.sınavından 67 aldığını anlıyoruz. Benzer 
+		şekilde diğer hücrelere gerekli değerler atanıp, ilgili öğrencinin sınav notları 
+		hafızada tutuluyor.  
+	</p>
+	<h3>Çok Boyutlu Dizilere İlk Değer Atama</h3>
+	<p>
+		Çok boyutlu bir diziyi tanımlarken, eleman değerlerini atamak mümkündür. Aşağıdaki 
+		örneği inceleyelim: 
+	</p>
+<pre>
+int tablo[3][4] = { 8, 16, 9, 52, 3, 15, 27, 6, 14, 25, 2, 10 };
+</pre>
+	<p>
+		Diziyi tanımlarken, yukardaki gibi bir ilk değer atama yaparsanız, elemanların 
+		değeri aşağıdaki gibi olur:
+	</p>
+	<table border="0" border="0" cellpadding="4" cellspacing="10" align="center">
+		<tr align="right">
+			<td><b>Satır 0</b></td>
+			<td><b>:</b></td>
+			<td>8</td>
+			<td>16</td>
+			<td>9</td>
+			<td>52</td>
+		</tr>
+		<tr align="right">
+			<td><b>Satır 1</b></td>
+			<td><b>:</b></td>
+			<td>3</td>
+			<td>15</td>
+			<td>27</td>
+			<td>6</td>
+		</tr>
+		<tr align="right">
+			<td><b>Satır 2</b></td>
+			<td><b>:</b></td>
+			<td>14</td>
+			<td>25</td>
+			<td>2</td>
+			<td>10</td>
+		</tr>
+	</table>
+	<p>
+		Çok boyutlu dizilerde ilk değer atama, tek boyutlu dizilerdekiyle aynıdır.
+		Girdiğiniz değerler sırasıyla hücrelere atanır. Bunun nedeni de basittir. 
+		Bilgisayar, çok boyutlu dizileri sizin gibi düşünmez; dizi elemanlarını 
+		hafızada arka arkaya gelen bellek hücreleri olarak değerlendirir.   
+	</p>
+	<p>
+		Çok boyutlu dizilerde ilk değer atama yapacaksanız, değerleri kümelendirmek iyi 
+		bir yöntemdir; karmaşıklığı önler. Örneğin yukarıda yazmış olduğumuz ilk değer 
+		atama kodunu, aşağıdaki gibi de yazabiliriz:
+	</p>
+<pre>
+int tablo[3][4] = { {8, 16, 9, 52}, {3, 15, 27, 6}, {14, 25, 2, 10} };
+</pre>
+	<p>
+		Farkedeceğiniz gibi elemanları dörderli üç gruba ayırdık. Bilgisayar açısından 
+		bir şey değişmemiş olsa da, kodu okuyacak kişi açısından daha yararlı oldu. 
+		Peki ya dört adet olması gereken grubun elemanlarını, üç adet yazsaydık ya da 
+		bir-iki grubu hiç yazmasaydık n'olurdu? Deneyelim...
+	</p>
+<pre>
+int tablo[3][4] = { {8, 16}, {3, 15, 27} };
+</pre>
+	<p>
+		Tek boyutlu dizilerde ilk değer ataması yaparken, eleman sayısından az değer 
+		girerseniz, kalan değerler 0 olarak kabul edilir. Aynı şey çok boyutlu diziler 
+		için de geçerlidir; olması gerektiği sayıda eleman ya da grup girilmezse, bu 
+		değerlerin hepsi 0 olarak kabul edilir. Yani üstte yazdığımız kodun yaratacağı 
+		sonuç, şöyle olacaktır:
+	</p>
+<table border="0" border="0" cellpadding="4" cellspacing="10" align="center">
+		<tr align="right">
+			<td><b>Satır 0</b></td>
+			<td><b>:</b></td>
+			<td>8</td>
+			<td>16</td>
+			<td>0</td>
+			<td>0</td>
+		</tr>
+		<tr align="right">
+			<td><b>Satır 1</b></td>
+			<td><b>:</b></td>
+			<td>3</td>
+			<td>15</td>
+			<td>27</td>
+			<td>0</td>
+		</tr>
+		<tr align="right">
+			<td><b>Satır 2</b></td>
+			<td><b>:</b></td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+		</tr>
+	</table>
+	<p>
+		Belirtmediğimiz bütün elemanlar 0 değerini almıştır. Satır 2'ninse bütün 
+		elemanları direkt 0 olmuştur; çünkü grup tanımı hiç yapılmamıştır.  
+	</p>
+	<h3>Fonksiyonlara 2 Boyutlu Dizileri Aktarmak</h3>
+	<p>
+		İki boyutlu bir diziyi fonksiyona parametre göndermek, tek boyutlu diziyi 
+		göndermekten farklı sayılmaz. Tek farkı dizinin iki boyutlu olduğunu belirtmemiz 
+		ve ikinci boyutun elemanını mutlaka yazmamızdır. Basit bir örnek yapalım;  
+		kendisine gönderilen iki boyutlu bir diziyi matris şeklinde yazan bir fonksiyon 
+		oluşturalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+/* Parametre tanimlamasi yaparken, iki boyutlu dizinin 
+   satir boyutunu girmemize gerek yoktur. Ancak sutun 
+   boyutunu girmek gerekir. 
+*/
+void matris_yazdir( <b>int [ ][ 4 ]</b>, <b>int</b> );
+int main( void )
+{
+	// Ornek olmasi acisindan matrise keyfi 
+	// degerler atiyoruz. Matrisimiz 3 satir 
+	// ve 4 sutundan ( 3 x 4 ) olusuyor. 
+	int matris[ 3 ][ 4 ] = { 
+			{10, 15, 20, 25},
+			{30, 35, 40, 45},
+			{50, 55, 60, 65} };
+
+	// Matris elemanlarini yazdiran fonksiyonu 
+	// cagriyoruz.
+	<b>matris_yazdir( matris, 3 );</b>
+
+	return 0;
+}
+void matris_yazdir( <b>int dizi[ ][ 4 ]</b>, <b>int satir_sayisi</b> )
+{
+	int i, j;
+	for( i = 0; i < satir_sayisi; i++ ) {
+		for( j = 0; j < 4; j++ ) {
+			printf( "%d ", dizi[ i ][ j ] );
+		}
+		printf( "\n" );
+	}
+}
+</pre>
+	<p>
+		Kod içersinde bulunan yorumlar, iki boyutlu dizilerin fonksiyonlara nasıl 
+		aktarıldığını göstermeye yetecektir. Yine de bir kez daha tekrar edelim...  
+		Fonksiyonu tanımlarken, çok boyutlu dizinin ilk boyutunu yazmak zorunda değilsiniz. 
+		Bizim örneğimizde <i>int dizi[&nbsp;][&nbsp;4&nbsp;]</i> şeklinde belirtmemiz 
+		bundan kaynaklanıyor. Şayet 7&nbsp;x&nbsp;6&nbsp;x&nbsp;4 boyutlarında dizilerin 
+		kullanılacağı bir fonksiyon yazsaydık tanımlamamızı   
+		<i>int dizi[&nbsp;][&nbsp;6&nbsp;][&nbsp;4&nbsp;]</i> olarak değiştirmemiz 
+		gerekirdi. Kısacası fonksiyonu tanımlarken dizi boyutlarına dair ilk değeri 
+		yazmamakta serbestsiniz; ancak diğer boyutların yazılması zorunlu! Bunun yararını  
+		merak ederseniz, sütun sayısı 4 olan her türlü matrisi bu fonksiyona 
+		gönderebileceğinizi hatırlatmak isterim. Yani fonksiyon her boyutta matrisi 
+		alabilir, tabii sütun sayısı 4 olduğu sürece...
+	</p>
+	<h3>2 Boyutlu Dizilerin Hafıza Yerleşimi</h3>
+	<p>
+		Dizilerin çok boyutlu olması sizi yanıltmasın, bilgisayar hafızası tek boyutludur. 
+		İster tek boyutlu bir dizi, ister iki boyut ya da isterseniz 10 boyutlu bir dizi 
+		içersinde bulunan elemanlar, birbiri peşi sıra gelen bellek hücrelerinde tutulur. 
+		İki boyutlu bir dizide bulunan elemanların, hafızada nasıl yerleştirildiğini 
+		aşağıdaki grafikte görebilirsiniz. 
+	</p>
+	<div align="center">
+		<img src="c_operands/two_dimensional_2.png" alt="[2D Memory Layout]" border="0"/>
+	</div>
+	<p>
+		Görüldüğü gibi elemanların hepsi sırayla yerleştirilmiştir. Bir satırın bittiği 
+		noktada ikinci satırın elemanları devreye girer. Kapsamlı bir örnekle hafıza 
+		yerleşimini ele alalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void satir_goster( int satir[ ] );
+int main( void )
+{
+	int tablo[5][4] = { 
+			{4, 3, 2, 1},
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+			{2, 5, 7, 9},
+			{0, 5, 9, 0} };
+	int i, j;
+
+	// Dizinin baslangic adresini yazdiriyoruz
+	printf( "2 boyutlu tablo %p adresinden başlar\n\n", tablo );
+
+	// Tablo icersinde bulunan dizi elemanlarinin adreslerini 
+	// ve degerlerini yazdiriyoruz.
+	printf( "Tablo elemanları ve hafıza adresleri:\n");
+	for( i = 0; i < 5; i++ ) {
+		for( j = 0; j < 4; j++ ) {
+			printf( "%d (%p) ", tablo[i][j], &tablo[i][j] );
+		}
+		printf( "\n" );
+	}
+
+	// Cok boyutlu diziler birden fazla dizinin toplami olarak 
+	// dusunulebilir ve her satir tek boyutlu bir dizi olarak 
+	// ele alinabilir. Once her satirin baslangic adresini 
+	// gosteriyoruz. Sonra satirlari tek boyutlu dizi seklinde 
+	// satir_goster( ) fonksiyonuna gonderiyoruz.
+	printf( "\nTablo satırlarının başlangıç adresleri: \n");
+	for( i = 0; i < 5; i++ )
+		printf( "tablo[%d]'nin başlangıç adresi %p\n", i, <b>tablo[i]</b> );
+
+	printf( "\nsatir_goster( ) fonksiyonuyla, "
+		"tablo elemanları ve hafıza adresleri:\n");
+	for( i = 0; i < 5; i++ )
+		<b>satir_goster( tablo[i] );</b>
+}
+// Kendisine gonderilen tek boyutlu bir dizinin 
+// elemanlarini yazdirir.
+void satir_goster( int satir[ ] )
+{
+	int i;
+	for( i = 0; i < 4; i++ ) {
+		printf( "%d (%p) ", satir[i], &satir[i] );
+	}
+	printf( "\n" );
+}
+</pre>
+	<p>
+		Örnekle ilgili en çok dikkat edilmesi gereken nokta, çok boyutlu dizilerin 
+		esasında, tek boyutlu dizilerden oluşmuş bir bütün olduğudur. Tablo isimli 2 
+		boyutlu dizimiz 5 adet satırdan oluşur ve bu satırların her biri kendi başına 
+		bir dizidir. Eğer tablo[2] derseniz bu üçüncü satırı temsil eden bir diziyi ifade 
+		eder. satir_goster(&nbsp;&nbsp;) fonksiyonunu ele alalım. Esasında fonksiyon 
+		içersinde satır diye bir kavramın olmadığını söyleyebiliriz. Bütün olan biten 
+		fonksiyona tek boyutlu bir dizi gönderilmesidir ve fonksiyon bu dizinin elemanlarını 
+		yazar. 
+	</p>
+	<p>
+		Dizi elemanlarının hafızadaki ardışık yerleşimi bize başka imkanlar da sunar. İki 
+		boyutlu bir diziyi bir hamlede, tek boyutlu bir diziye dönüştürmek bunlardan 
+		biridir.
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i;
+	int tablo[5][4] = { 
+			{4, 3, 2, 1},
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+			{2, 5, 7, 9},
+			{0, 5, 9, 0} };
+
+	// Cok boyutlu dizinin baslangic 
+	// adresini bir pointer'a atiyoruz. 
+	<b>int *p = tablo[0];</b>
+
+	// p isimli pointer'i tek boyutlu 
+	// bir dizi gibi kullanabiliriz. 
+	// Ayni zamanda p uzerinde yapacagimiz 
+	// degisikler, tablo'yu da etkiler. 
+	for( i = 0; i < 5*4; i++ ) 
+		printf( "%d\n", <b>p[i]</b> );
+
+	return 0;
+}
+</pre>
+	<p>
+		Daha önce sıralama konusunu işlemiştik. Ancak bunu iki boyutlu dizilerde nasıl 
+		yapacağımızı henüz görmedik. Aslında görmemize de gerek yok! İki boyutlu bir 
+		diziyi yukardaki gibi tek boyuta indirin ve sonrasında sıralayın. Çok boyutlu 
+		dizileri, tek boyuta indirmemizin ufak bir faydası...    
+	</p>
+	<h3>Pointer Dizileri</h3>
+	<p>
+		Çok boyutlu dizilerin tek boyutlu dizilerin bir bileşimi olduğundan bahsetmiştik. 
+		Şimdi anlatacağımız konuda çok farklı değil. Dizilerin, adresi göstermeye yarayan 
+		Pointer'lardan pek farklı olmadığını zaten biliyorsunuz. Şimdi de pointer dizilerini 
+		göreceğiz. Yani adres gösteren işaretçi saklayan dizileri... 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i, j;
+
+	// Dizi isimleri keyfi secilmistir.
+	// alfa, beta, gama gibi baska isimler de
+	// verebilirdik.
+	int Kanada[8];
+	int ABD[8];
+	int Meksika[8];
+	int Rusya[8];
+	int Japonya[8];
+
+	// Bir pointer dizisi tanimliyoruz.
+	<b>int *tablo[5];</b>
+	// Yukarda tanimlanan dizilerin adreslerini  
+	// tablo'ya aktiriyoruz. 
+	<b>tablo[0] = Kanada;
+	tablo[1] = ABD;
+	tablo[2] = Meksika;
+	tablo[3] = Rusya;
+	tablo[4] = Japonya;</b>
+	
+	// Tablo elemanlarinin adreslerini gosteriyor 
+	// gibi gozukse de, gosterilen adresler Kanada, 
+	// ABD, Meksika, Rusya ve Japonya dizilerinin 
+	// eleman adresleridir.
+	for( i = 0; i < 5; i++ ) {
+		for( j = 0 ; j < 8; j++ ) 
+			printf( "%p\n", &tablo[i][j] );
+	}
+	return 0;
+}
+</pre>
+	<p>
+		Ülke isimlerini verdiğimiz 5 adet dizi tanımladık. Bu dizileri daha sonra tabloya 
+		sırayla atadık. Artık her diziyle tek tek uğraşmak yerine tek bir diziden bütün 
+		ülkelere ulaşmak mümkün hâle gelmiştir. İki boyutlu <i>tablo</i> isimli matrise 
+		atamasını yaptığımız şey değer veya bir eleman değildir; dizilerin başlangıç 
+		adresleridir. Bu yüzden <i>tablo</i> dizisi içersinde yapacağımız herhangi 
+		bir değişiklik	orijinal diziyi de (örneğin Meksika) değiştirir.
+	</p>
+	<p>
+		Atama işlemini aşağıdaki gibi tek seferde de	yapabilirdik:  
+	</p>
+<pre>
+int *tablo[ ] = { Kanada, ABD, Meksika, Rusya, Japonya };
+</pre>
+	<p>
+		Şimdi de bir pointer dizisini fonksiyonlara nasıl argüman olarak göndereceğimize 
+		bakalım. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void adresleri_goster( <b>int *[ ]</b> );
+int main( void )
+{
+	int Kanada[8];
+	int ABD[8];
+	int Meksika[8];
+	int Rusya[8];
+	int Japonya[8];
+
+	int *tablo[ ] = { Kanada, ABD, Meksika, Rusya, Japonya };
+
+	// Adresleri gostermesi icin adresleri_goster( ) 
+	// fonksiyonunu cagriyoruz.
+	<b>adresleri_goster( tablo );</b>
+
+	return 0;
+}
+void adresleri_goster( <b>int *dizi[ ]</b> )
+{
+	int i, j;
+	for( i = 0; i < 5; i++ ) {
+		for( j = 0 ; j < 8; j++ ) 
+			printf( "%p\n", <b>&dizi[ i ][ j ]</b> );
+	}
+}
+</pre>
+	<h3>Dinamik Bellek Yönetimi</h3>
+	<p>
+		Dizileri etkin bir biçimde kullanmayı öğrendiğinizi ya da öğreneceğinizi umuyorum. 
+		Ancak dizilerle ilgili işlememiz gereken son bir konu var: Dinamik Bellek 
+		Yönetimi...
+	</p>
+	<p>
+		Şimdiye kadar yazdığımız programlarda kaç eleman olacağı önceden belliydi. Yani  
+		sınıf listesiyle ilgili bir program yazacaksak, sınıfın kaç kişi olduğunu 
+		biliyormuşuz gibi davranıyorduk. Programın en başında kaç elemanlık alana 
+		ihtiyacımız varsa, o kadar yer ayırıyorduk. Ama bu gerçek dünyada karşımıza çıkacak 
+		problemler için yeterli bir yaklaşım değildir. Örneğin bir sınıfta 100 öğrenci 
+		varken, diğer bir sınıfta 50 öğrenci olabilir ve siz her ortamda çalışsın diye 
+		200 kişilik bir üst sınır koyamazsınız. Bu, hem hafızanın verimsiz kullanılmasına 
+		yol açar; hem de karma eğitimlerin yapıldığı bazı fakültelerde sayı yetmeyebilir. 
+		Statik bir şekilde dizi tanımlayarak bu sorunların üstesinden gelemezsiniz. Çözüm 
+		dinamik bellek yönetimindedir.  
+	</p>
+	<p>
+		Dinamik bellek yönetiminde, dizilerin boyutları önceden belirlenmez. Program 
+		akışında dizi boyutunu ayarlarız ve gereken bellek miktarı, program çalışırken 
+		tahsis edilir. Dinamik bellek tahsisi için <i>calloc(&nbsp;&nbsp;)</i> ve 
+		<i>malloc(&nbsp;&nbsp;)</i> olmak üzere iki önemli fonksiyonumuz vardır. Bellekte 
+		yer ayrılmasını bu fonksiyonlarla sağlarız. Her iki fonksiyon da <i>stdlib</i> 
+		kütüphanesinde bulunur. Bu yüzden fonksiyonlardan herhangi birini kullanacağınız 
+		zaman, programın başına <i>#include&lt;stdlib.h&gt;</i> yazılması gerekir.
+	</p>
+	<p>
+		<i>calloc(&nbsp;&nbsp;)</i> fonksiyonu aşağıdaki gibi kullanılır:
+	</p>
+<pre>
+isaretci_adi = <b>calloc(</b> eleman_sayisi, her_elemanin_boyutu <b>)</b>; 
+</pre>
+	<p>
+		<i>calloc(&nbsp;&nbsp;)</i> fonksiyonu eleman sayısını, eleman boyutuyla çarparak 
+		hafızada gereken bellek alanını ayırır. Dinamik oluşturduğunuz dizi içersindeki her 
+		elemana, otomatik olarak ilk değer 0 atanır.   
+	</p>
+	<p>
+		<i>malloc(&nbsp;&nbsp;)</i> fonksiyonu, <i>calloc(&nbsp;&nbsp;)</i> gibi dinamik 
+		bellek ayrımı için kullanılır. <i>calloc(&nbsp;&nbsp;)</i> fonksiyonundan farklı 
+		olarak ilk değer ataması yapmaz. Kullanımıysa aşağıdaki gibidir:   
+	</p>
+<pre>
+isaretci_adi = <b>malloc(</b> eleman_sayisi * her_elemanin_boyutu <b>)</b>; 
+</pre>
+	<p>
+		Bu kadar konuşmadan sonra işi pratiğe dökelim ve dinamik bellekle ilgili ilk 
+		programımızı yazalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int main( void )
+{
+	// Dinamik bir dizi yaratmak icin 
+	// pointer kullaniriz.
+	<b>int *dizi;</b>
+	
+	// Dizimizin kac elemanli olacagini 
+	// eleman_sayisi isimli degiskende 
+	// tutuyoruz.
+	<b>int eleman_sayisi;</b>
+	int i;
+
+	// Kullanicidan eleman sayisini girmesini
+	// istiyoruz.
+	printf( "Eleman sayısını giriniz> ");
+	scanf( "%d", &eleman_sayisi );
+
+	// calloc( ) fonksiyonuyla dinamik olarak 
+	// dizimizi istedigimiz boyutta yaratiyoruz. 
+	<b>dizi = calloc( eleman_sayisi, sizeof( int ) );</b>
+
+	// Ornek olmasi acisindan dizinin elemanlarini 
+	// ekrana yazdiriliyor. Dizilerde yapabildiginiz 
+	// her seyi hicbir fark olmaksizin yapabilirsiniz.
+	for( i = 0; i < eleman_sayisi; i++ )
+		printf( "%d\n", <b>dizi[i]</b> );
+
+	// Dinamik olan diziyi kullandiktan ve isinizi 
+	// tamamladiktan sonra free fonksiyonunu kullanip
+	// hafizadan temizlemelisiniz.
+	<b>free( dizi );</b>
+
+	return 0;
+}
+</pre>
+	<p>
+		Yazdığınız programların bir süre sonra bilgisayar belleğini korkunç bir şekilde 
+		işgal etmesini istemiyorsanız, free(&nbsp;&nbsp;) fonksiyonunu kullanmanız 
+		gerekmektedir. Gelişmiş programlama dillerinde (&nbsp;örneğin, Java, C#, vb...&nbsp;)
+		kullanılmayan nesnelerin temizlenmesi otomatik olarak çöp toplayıcılarla 
+		(&nbsp;Garbage Collector&nbsp;) yapılmaktadır. Ne yazık ki C programlama 
+		dili için bir çöp toplayıcı yoktur ve iyi programcıyla, kötü programcı burada 
+		kendisini belli eder.     
+	</p>
+	<p>	 
+		Programınızı bir kereliğine çalıştırıyorsanız ya da yazdığınız program çok ufaksa, 
+		boş yere tüketilen bellek miktarını farketmeyebilirsiniz. Ancak büyük boyutta ve 
+		kapsamlı bir program söz konusuysa, efektif bellek yönetiminin ne kadar önemli 
+		olduğunu daha iyi anlarsınız. Gereksiz tüketilen bellekten kaçınmak gerekmektedir. 
+		Bunun için fazla bir şey yapmanız gerekmez; <i>calloc(&nbsp;&nbsp;)</i> fonksiyonuyla 
+		tahsis ettiğiniz alanı, işiniz bittikten sonra <i>free(&nbsp;&nbsp;)</i> 
+		fonksiyonuyla boşaltmanız yeterlidir. Konu önemli olduğu için tekrar ediyorum; 
+		artık kullanmadığınız bir dinamik dizi söz konusuysa onu <i>free(&nbsp;&nbsp;)</i>	fonksiyonuyla 
+		kaldırılabilir hâle getirmelisiniz! 
+	</p>
+	<p>
+		Az evvel <i>calloc(&nbsp;&nbsp;)</i> ile yazdığımız programın aynısını şimdi de 
+		<i>malloc(&nbsp;&nbsp;)</i> fonksiyonunu kullanarak yazalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int main( void )
+{
+	// Dinamik bir dizi yaratmak icin 
+	// pointer kullaniriz.
+	<b>int *dizi;</b>
+	// Dizimizin kac elemanli olacagini 
+	// eleman_sayisi isimli degiskende 
+	// tutuyoruz.
+	int eleman_sayisi;
+	int i;
+
+	printf( "Eleman sayısını giriniz> ");
+	scanf( "%d", &eleman_sayisi );
+
+	// malloc( ) fonksiyonuyla dinamik olarak 
+	// dizimizi istedigimiz boyutta yaratiyoruz. 
+	<b>dizi = malloc( eleman_sayisi * sizeof( int ) );</b>
+
+	for( i = 0; i < eleman_sayisi; i++ )
+		printf( "%d\n", dizi[i] );
+
+	// Dinamik olan diziyi kullandiktan ve isinizi 
+	// tamamladiktan sonra free fonksiyonunu kullanip
+	// hafizadan temizlemelisiniz.
+	<b>free( dizi );</b>
+
+	return 0;
+}
+</pre>
+	<p>
+		Hafıza alanı ayırırken bazen bir problem çıkabilir. Örneğin bellekte yeterli 
+		alan olmayabilir ya da benzeri bir sıkıntı olmuştur. Bu tarz problemlerin sık 
+		olacağını düşünmeyin. Ancak hafızanın gerçekten ayrılıp ayrılmadığını kontrol edip, 
+		işinizi garantiye almak isterseniz, aşağıdaki yöntemi kullanabilirsiniz: 
+	</p>
+<pre>
+	dizi = calloc( eleman_sayisi, sizeof( int ) );
+	// Eger hafiza dolmussa dizi pointer'i NULL'a 
+	// esit olacak ve asagidaki hata mesaji cikacaktir.
+	if( <b>dizi == NULL</b> )
+		printf( "Yetersiz bellek!\n" );
+</pre>
+	<p>
+		Dinamik hafıza kullanarak dizi yaratmayı gördük. Ancak bu diziler tek boyutlu 
+		dizilerdi. Daha önce pointer işaret eden pointer'ları görmüştük. Şimdi onları 
+		kullanarak dinamik çok boyutlu dizi oluşturacağız:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int main( void )
+{
+	int **matris;
+	int satir_sayisi, sutun_sayisi;
+	int i, j;
+	printf( "Satır sayısı giriniz> " );
+	scanf( "%d", &satir_sayisi );
+	printf( "Sütun sayısı giriniz> " );
+	scanf( "%d", &sutun_sayisi );
+
+	// Once satir sayisina gore hafizada yer ayiriyoruz. 
+	// Eger gerekli miktar yoksa, uyari veriliyor.
+	<b>matris = (int **)malloc( satir_sayisi * sizeof(int) );</b>
+	if( matris == NULL )
+		printf( "Yetersiz bellek!" );
+
+	// Daha sonra her satirda, sutun sayisi kadar hucrenin 
+	// ayrilmasini sagliyoruz.
+	<b>for( i = 0; i < satir_sayisi; i++ ) {</b>
+		<b>matris[i] = malloc( sutun_sayisi * sizeof(int) );</b>
+		if( matris[i] == NULL )
+			printf( "Yetersiz bellek!" );
+	<b>}</b>
+
+	// Ornek olmasi acisindan matris degerleri 
+	// gosteriliyor. Dizilerde yaptiginiz butun 
+	// islemleri burada da yapabilirsiniz.
+	for( i = 0; i < satir_sayisi; i++ ) {
+		for( j = 0; j < sutun_sayisi; j++ )
+			printf( "%d ", <b>matris[i][j]</b> );
+		printf( "\n" );
+	}
+
+	// Bu noktada matris ile isimiz bittiginden 
+	// hafizayi bosaltmamiz gerekiyor. Oncelikle
+	// satirlari bosaltiyoruz. 
+	<b>for( i = 0; i < satir_sayisi; i++ ) {
+		free( matris[i] );
+	}</b>
+	// Satirlar bosaldiktan sonra, matrisin 
+	// bos oldugunu isaretliyoruz.
+	<b>free( matris );</b>
+
+	return 0;
+}
+</pre>
+	<p>
+		Yukardaki örnek karmaşık gelebilir; tek seferde çözemeyebilirsiniz. Ancak bir iki 
+		kez üzerinden geçerseniz, temel yapının aklınıza yatacağını düşünüyorum. Kodun 
+		koyu yazılmış yerlerini öğrendiğiniz takdirde, sorun kalmayacaktır.   
+	</p>
+
+	<h3>Örnek Sorular</h3>
+	<p><b>Soru 1:</b> Kendisine gönderilen iki diziyi birleştirip geriye tek bir dizi 
+	döndüren fonksiyonu yazınız.   
+	</p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+/* Kendisine verilen iki diziyi birlestirip 
+   sonuc dizisini geriye dondurur */
+int *dizileri_birlestir( int [], int, 
+			 int [], int );
+int main( void )
+{	
+	int i;
+	// liste_1, 5 elemanli bir dizidir. 
+	int liste_1[5] = { 6, 7, 8, 9, 10 };
+	// liste_2, 7 elemanli bir dizidir.
+	int liste_2[7] = {13, 7, 12, 9, 7, 1, 14 };
+	// sonuclarin toplanacagi toplam_sonuc dizisi
+	// sonucun dondurulmesi icin pointer tanimliyoruz
+	int *ptr;
+
+	// fonksiyonu calistiriyoruz.
+	<b>ptr = dizileri_birlestir( liste_1, 5, liste_2, 7 );</b>
+
+	// ptr isimli pointer'i bir dizi olarak dusunebiliriz
+	for( i = 0; i < 12; i++ ) 
+		printf("%d ", <b>ptr[i]</b> );
+	printf("\n");
+
+	return 0;
+}
+int *dizileri_birlestir( int dizi_1[], int boyut_1, 
+			 int dizi_2[], int boyut_2 )
+{
+	<b>int *sonuc = calloc( boyut_1+boyut_2, sizeof(int) );</b>
+	int i, k;
+	// Birinci dizinin degerleri ataniyor.
+	for( i = 0; i < boyut_1; i++ ) 
+		sonuc[i] = dizi_1[i];
+	
+	// Ikinci dizinin degerleri ataniyor.
+	for( k = 0; k < boyut_2; i++, k++ ) {
+		sonuc[i] = dizi_2[k];
+	}
+	
+	// Geriye sonuc dizisi gonderiliyor.  
+	<b>return sonuc;</b>
+}
+</pre>
+</div>
+
+<p><b>Soru 2:</b> Sol aşağıda bulunan 4x4 boyutundaki matrisi saat yönünde 90<sup>o</sup> 
+döndürecek fonksiyonu yazınız. (&nbsp;Sol matris döndürüldüğü zaman sağ matrise eşit 
+olmalıdır.&nbsp;) 
+	</p>
+	<table align="center" border="0" cellpadding="6">
+		<tr>
+			<td align="center">
+<pre style="width: 160px;margin-left: 0px;">
+12  34  22  98
+88  54  67  11
+90  91  92  93
+38  39  40  41
+</pre>
+		</td>
+		<td>
+			<b>&gt;&gt;&gt;</b>
+		</td>
+	<td align="center">
+<pre style="width: 160px;margin-left: 0px;">
+38  90  88  12
+39  91  54  34
+40  92  67  22
+41  93  11  98
+</pre>
+		</td>
+	</table>
+	
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+void elemanlari_goster( int [][4] );
+<b>void saat_yonunde_cevir( int [][4] );</b>
+int main( void )
+{
+	int matris[4][4] = {
+		{12, 34, 22, 98},
+		{88, 54, 67, 11},
+		{90, 91, 92, 93},
+		{38, 39, 40, 41} };
+	elemanlari_goster( matris );
+	printf("\n");
+	saat_yonunde_cevir( matris );
+}
+void elemanlari_goster( int dizi[][4] )
+{
+	int i, j;
+	for( i = 0; i < 4; i++ ) {
+		for( j = 0; j < 4; j++ )
+			printf( "%d ", dizi[i][j] );
+		printf( "\n" );
+	}
+}
+<b>void saat_yonunde_cevir( int dizi[][4] )</b>
+{
+	int i, j;
+	for( i = 0; i < 4; i++ ) {
+		for( j = 0; j < 4 ; j++ )
+			printf( "%d ", dizi[3-j][i] );
+		printf( "\n" );
+	}
+}
+</pre>
+</div>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_11.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_13.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_12.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:24:03 GMT -->
+</html>

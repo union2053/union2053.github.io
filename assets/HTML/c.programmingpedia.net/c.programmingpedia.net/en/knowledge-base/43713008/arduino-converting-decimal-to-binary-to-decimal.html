@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/43713008/arduino-converting-decimal-to-binary-to-decimal by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Arduino Converting Decimal to Binary to Decimal | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Arduino Converting Decimal to Binary to Decimal | C Language Knowledge Base">
+        <title>[SOLVED] Arduino Converting Decimal to Binary to Decimal | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="arduino-converting-decimal-to-binary-to-decimal">Arduino Converting Decimal to Binary to Decimal</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/binary.html">binary</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/decimal.html">decimal</a></span>
+                        <span class="tag-item"><a href="../tag/pow.html">pow</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>First off, I'm very new to the Arduino world. I think my code is fairly simple though, but yet it doesn't work.</p>
+
+<p>So I'm making a script for my own knowledge converting decimal values to 8-bit binary values. So only 0 to 255 decimal to binary and then for checking converting it back to decimal.</p>
+
+<p>Now I'm very confused why my code looks like it's working but only until three!</p>
+
+<p>If anyone could help on this matter, it would be greatly appreciated.</p>
+
+<p>Here is my code:</p>
+
+<pre><code>void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+  for(int i=0;i&lt;=255;i++) {
+    Serial.print("DecToBin: ");
+    Serial.print(i);
+    Serial.print(" -&gt; ");
+    boolean Bin[] = {0,0,0,0,0,0,0,0};
+    convertDecToBin(i,Bin);
+    for(int j = 0;j&lt;8;j++)
+      Serial.print(Bin[j]);
+    Serial.print(" -&gt; ");
+    Serial.print(convertBinToDec(Bin));
+    Serial.print("\n");
+  }
+  delay(1000000);
+  // Very long delay to emulate only one "Execution" of the loop()
+}
+
+/*
+The following function convert any int from 0-255 to binary.
+You need to pass the int as agrument.
+You also need to pass the 8bit array of boolean
+*/
+void convertDecToBin(int Dec, boolean Bin[]) {
+  for(int i = 7 ; i &gt;= 0 ; i--) {
+    if(pow(2, i)&lt;=Dec) {
+      Dec = Dec - pow(2, i);
+      Bin[8-(i+1)] = 1;
+    } else {
+    }
+  }
+}
+
+/*
+This following function will convert any 8 bit array of boolean to a Decimal number.
+you need to pass an boolean array of 8 bits
+function return a int
+*/
+int convertBinToDec(boolean Bin[]) {
+  int ReturnInt = 0;
+  for(int i = 0;i&lt;8;i++) {
+    if(Bin[7-i]) {
+      Serial.print("2^");
+      Serial.print(i);
+      ReturnInt = ReturnInt + (int)pow(2, i);
+      Serial.print("=");
+      Serial.print((int)pow(2, i));
+      Serial.print("+");
+    }
+  }
+  Serial.print(",");
+  return ReturnInt;
+}
+</code></pre>
+
+<p>Now pay attention to the <code>3</code> value. That's where it starts being offset. To my knowledge everything is correct. Can anyone spot the mistake?</p>
+
+<pre><code>DecToBin: 0 -&gt; 00000000 -&gt; ,0
+DecToBin: 1 -&gt; 00000001 -&gt; 2^0=1+,1
+DecToBin: 2 -&gt; 00000010 -&gt; 2^1=2+,2
+DecToBin: 3 -&gt; 00000011 -&gt; 2^0=1+2^1=2+,3
+DecToBin: 4 -&gt; 00000100 -&gt; 2^2=3+,3
+DecToBin: 5 -&gt; 00000101 -&gt; 2^0=1+2^2=3+,4
+DecToBin: 6 -&gt; 00000110 -&gt; 2^1=2+2^2=3+,5
+DecToBin: 7 -&gt; 00000111 -&gt; 2^0=1+2^1=2+2^2=3+,6
+DecToBin: 8 -&gt; 00001000 -&gt; 2^3=7+,7
+DecToBin: 9 -&gt; 00001001 -&gt; 2^0=1+2^3=7+,8
+DecToBin: 10 -&gt; 00001010 -&gt; 2^1=2+2^3=7+,9
+DecToBin: 11 -&gt; 00001011 -&gt; 2^0=1+2^1=2+2^3=7+,10
+DecToBin: 12 -&gt; 00001100 -&gt; 2^2=3+2^3=7+,10
+DecToBin: 13 -&gt; 00001101 -&gt; 2^0=1+2^2=3+2^3=7+,11
+DecToBin: 14 -&gt; 00001110 -&gt; 2^1=2+2^2=3+2^3=7+,12
+DecToBin: 15 -&gt; 00001111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+,13
+DecToBin: 16 -&gt; 00010000 -&gt; 2^4=15+,15
+DecToBin: 17 -&gt; 00010001 -&gt; 2^0=1+2^4=15+,16
+DecToBin: 18 -&gt; 00010010 -&gt; 2^1=2+2^4=15+,17
+DecToBin: 19 -&gt; 00010011 -&gt; 2^0=1+2^1=2+2^4=15+,18
+DecToBin: 20 -&gt; 00010100 -&gt; 2^2=3+2^4=15+,18
+DecToBin: 21 -&gt; 00010101 -&gt; 2^0=1+2^2=3+2^4=15+,19
+DecToBin: 22 -&gt; 00010110 -&gt; 2^1=2+2^2=3+2^4=15+,20
+DecToBin: 23 -&gt; 00010111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+,21
+DecToBin: 24 -&gt; 00011000 -&gt; 2^3=7+2^4=15+,22
+DecToBin: 25 -&gt; 00011001 -&gt; 2^0=1+2^3=7+2^4=15+,23
+DecToBin: 26 -&gt; 00011010 -&gt; 2^1=2+2^3=7+2^4=15+,24
+DecToBin: 27 -&gt; 00011011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+,25
+DecToBin: 28 -&gt; 00011100 -&gt; 2^2=3+2^3=7+2^4=15+,25
+DecToBin: 29 -&gt; 00011101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+,26
+DecToBin: 30 -&gt; 00011110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+,27
+DecToBin: 31 -&gt; 00011111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+,28
+DecToBin: 32 -&gt; 00100000 -&gt; 2^5=31+,31
+DecToBin: 33 -&gt; 00100001 -&gt; 2^0=1+2^5=31+,32
+DecToBin: 34 -&gt; 00100010 -&gt; 2^1=2+2^5=31+,33
+DecToBin: 35 -&gt; 00100011 -&gt; 2^0=1+2^1=2+2^5=31+,34
+DecToBin: 36 -&gt; 00100100 -&gt; 2^2=3+2^5=31+,34
+DecToBin: 37 -&gt; 00100101 -&gt; 2^0=1+2^2=3+2^5=31+,35
+DecToBin: 38 -&gt; 00100110 -&gt; 2^1=2+2^2=3+2^5=31+,36
+DecToBin: 39 -&gt; 00100111 -&gt; 2^0=1+2^1=2+2^2=3+2^5=31+,37
+DecToBin: 40 -&gt; 00101000 -&gt; 2^3=7+2^5=31+,38
+DecToBin: 41 -&gt; 00101001 -&gt; 2^0=1+2^3=7+2^5=31+,39
+DecToBin: 42 -&gt; 00101010 -&gt; 2^1=2+2^3=7+2^5=31+,40
+DecToBin: 43 -&gt; 00101011 -&gt; 2^0=1+2^1=2+2^3=7+2^5=31+,41
+DecToBin: 44 -&gt; 00101100 -&gt; 2^2=3+2^3=7+2^5=31+,41
+DecToBin: 45 -&gt; 00101101 -&gt; 2^0=1+2^2=3+2^3=7+2^5=31+,42
+DecToBin: 46 -&gt; 00101110 -&gt; 2^1=2+2^2=3+2^3=7+2^5=31+,43
+DecToBin: 47 -&gt; 00101111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^5=31+,44
+DecToBin: 48 -&gt; 00110000 -&gt; 2^4=15+2^5=31+,46
+DecToBin: 49 -&gt; 00110001 -&gt; 2^0=1+2^4=15+2^5=31+,47
+DecToBin: 50 -&gt; 00110010 -&gt; 2^1=2+2^4=15+2^5=31+,48
+DecToBin: 51 -&gt; 00110011 -&gt; 2^0=1+2^1=2+2^4=15+2^5=31+,49
+DecToBin: 52 -&gt; 00110100 -&gt; 2^2=3+2^4=15+2^5=31+,49
+DecToBin: 53 -&gt; 00110101 -&gt; 2^0=1+2^2=3+2^4=15+2^5=31+,50
+DecToBin: 54 -&gt; 00110110 -&gt; 2^1=2+2^2=3+2^4=15+2^5=31+,51
+DecToBin: 55 -&gt; 00110111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^5=31+,52
+DecToBin: 56 -&gt; 00111000 -&gt; 2^3=7+2^4=15+2^5=31+,53
+DecToBin: 57 -&gt; 00111001 -&gt; 2^0=1+2^3=7+2^4=15+2^5=31+,54
+DecToBin: 58 -&gt; 00111010 -&gt; 2^1=2+2^3=7+2^4=15+2^5=31+,55
+DecToBin: 59 -&gt; 00111011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^5=31+,56
+DecToBin: 60 -&gt; 00111100 -&gt; 2^2=3+2^3=7+2^4=15+2^5=31+,56
+DecToBin: 61 -&gt; 00111101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^5=31+,57
+DecToBin: 62 -&gt; 00111110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+,58
+DecToBin: 63 -&gt; 00111111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+,59
+DecToBin: 64 -&gt; 01000000 -&gt; 2^6=63+,63
+DecToBin: 65 -&gt; 01000001 -&gt; 2^0=1+2^6=63+,64
+DecToBin: 66 -&gt; 01000010 -&gt; 2^1=2+2^6=63+,65
+DecToBin: 67 -&gt; 01000011 -&gt; 2^0=1+2^1=2+2^6=63+,66
+DecToBin: 68 -&gt; 01000100 -&gt; 2^2=3+2^6=63+,66
+DecToBin: 69 -&gt; 01000101 -&gt; 2^0=1+2^2=3+2^6=63+,67
+DecToBin: 70 -&gt; 01000110 -&gt; 2^1=2+2^2=3+2^6=63+,68
+DecToBin: 71 -&gt; 01000111 -&gt; 2^0=1+2^1=2+2^2=3+2^6=63+,69
+DecToBin: 72 -&gt; 01001000 -&gt; 2^3=7+2^6=63+,70
+DecToBin: 73 -&gt; 01001001 -&gt; 2^0=1+2^3=7+2^6=63+,71
+DecToBin: 74 -&gt; 01001010 -&gt; 2^1=2+2^3=7+2^6=63+,72
+DecToBin: 75 -&gt; 01001011 -&gt; 2^0=1+2^1=2+2^3=7+2^6=63+,73
+DecToBin: 76 -&gt; 01001100 -&gt; 2^2=3+2^3=7+2^6=63+,73
+DecToBin: 77 -&gt; 01001101 -&gt; 2^0=1+2^2=3+2^3=7+2^6=63+,74
+DecToBin: 78 -&gt; 01001110 -&gt; 2^1=2+2^2=3+2^3=7+2^6=63+,75
+DecToBin: 79 -&gt; 01001111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^6=63+,76
+DecToBin: 80 -&gt; 01010000 -&gt; 2^4=15+2^6=63+,78
+DecToBin: 81 -&gt; 01010001 -&gt; 2^0=1+2^4=15+2^6=63+,79
+DecToBin: 82 -&gt; 01010010 -&gt; 2^1=2+2^4=15+2^6=63+,80
+DecToBin: 83 -&gt; 01010011 -&gt; 2^0=1+2^1=2+2^4=15+2^6=63+,81
+DecToBin: 84 -&gt; 01010100 -&gt; 2^2=3+2^4=15+2^6=63+,81
+DecToBin: 85 -&gt; 01010101 -&gt; 2^0=1+2^2=3+2^4=15+2^6=63+,82
+DecToBin: 86 -&gt; 01010110 -&gt; 2^1=2+2^2=3+2^4=15+2^6=63+,83
+DecToBin: 87 -&gt; 01010111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^6=63+,84
+DecToBin: 88 -&gt; 01011000 -&gt; 2^3=7+2^4=15+2^6=63+,85
+DecToBin: 89 -&gt; 01011001 -&gt; 2^0=1+2^3=7+2^4=15+2^6=63+,86
+DecToBin: 90 -&gt; 01011010 -&gt; 2^1=2+2^3=7+2^4=15+2^6=63+,87
+DecToBin: 91 -&gt; 01011011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^6=63+,88
+DecToBin: 92 -&gt; 01011100 -&gt; 2^2=3+2^3=7+2^4=15+2^6=63+,88
+DecToBin: 93 -&gt; 01011101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^6=63+,89
+DecToBin: 94 -&gt; 01011110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^6=63+,90
+DecToBin: 95 -&gt; 01011111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^6=63+,91
+DecToBin: 96 -&gt; 01100000 -&gt; 2^5=31+2^6=63+,94
+DecToBin: 97 -&gt; 01100001 -&gt; 2^0=1+2^5=31+2^6=63+,95
+DecToBin: 98 -&gt; 01100010 -&gt; 2^1=2+2^5=31+2^6=63+,96
+DecToBin: 99 -&gt; 01100011 -&gt; 2^0=1+2^1=2+2^5=31+2^6=63+,97
+DecToBin: 100 -&gt; 01100100 -&gt; 2^2=3+2^5=31+2^6=63+,97
+DecToBin: 101 -&gt; 01100101 -&gt; 2^0=1+2^2=3+2^5=31+2^6=63+,98
+DecToBin: 102 -&gt; 01100110 -&gt; 2^1=2+2^2=3+2^5=31+2^6=63+,99
+DecToBin: 103 -&gt; 01100111 -&gt; 2^0=1+2^1=2+2^2=3+2^5=31+2^6=63+,100
+DecToBin: 104 -&gt; 01101000 -&gt; 2^3=7+2^5=31+2^6=63+,101
+DecToBin: 105 -&gt; 01101001 -&gt; 2^0=1+2^3=7+2^5=31+2^6=63+,102
+DecToBin: 106 -&gt; 01101010 -&gt; 2^1=2+2^3=7+2^5=31+2^6=63+,103
+DecToBin: 107 -&gt; 01101011 -&gt; 2^0=1+2^1=2+2^3=7+2^5=31+2^6=63+,104
+DecToBin: 108 -&gt; 01101100 -&gt; 2^2=3+2^3=7+2^5=31+2^6=63+,104
+DecToBin: 109 -&gt; 01101101 -&gt; 2^0=1+2^2=3+2^3=7+2^5=31+2^6=63+,105
+DecToBin: 110 -&gt; 01101110 -&gt; 2^1=2+2^2=3+2^3=7+2^5=31+2^6=63+,106
+DecToBin: 111 -&gt; 01101111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^5=31+2^6=63+,107
+DecToBin: 112 -&gt; 01110000 -&gt; 2^4=15+2^5=31+2^6=63+,109
+DecToBin: 113 -&gt; 01110001 -&gt; 2^0=1+2^4=15+2^5=31+2^6=63+,110
+DecToBin: 114 -&gt; 01110010 -&gt; 2^1=2+2^4=15+2^5=31+2^6=63+,111
+DecToBin: 115 -&gt; 01110011 -&gt; 2^0=1+2^1=2+2^4=15+2^5=31+2^6=63+,112
+DecToBin: 116 -&gt; 01110100 -&gt; 2^2=3+2^4=15+2^5=31+2^6=63+,112
+DecToBin: 117 -&gt; 01110101 -&gt; 2^0=1+2^2=3+2^4=15+2^5=31+2^6=63+,113
+DecToBin: 118 -&gt; 01110110 -&gt; 2^1=2+2^2=3+2^4=15+2^5=31+2^6=63+,114
+DecToBin: 119 -&gt; 01110111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^5=31+2^6=63+,115
+DecToBin: 120 -&gt; 01111000 -&gt; 2^3=7+2^4=15+2^5=31+2^6=63+,116
+DecToBin: 121 -&gt; 01111001 -&gt; 2^0=1+2^3=7+2^4=15+2^5=31+2^6=63+,117
+DecToBin: 122 -&gt; 01111010 -&gt; 2^1=2+2^3=7+2^4=15+2^5=31+2^6=63+,118
+DecToBin: 123 -&gt; 01111011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^5=31+2^6=63+,119
+DecToBin: 124 -&gt; 01111100 -&gt; 2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+,119
+DecToBin: 125 -&gt; 01111101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+,120
+DecToBin: 126 -&gt; 01111110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+,121
+DecToBin: 127 -&gt; 01111111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+,122
+DecToBin: 128 -&gt; 10000000 -&gt; 2^7=127+,127
+DecToBin: 129 -&gt; 10000001 -&gt; 2^0=1+2^7=127+,128
+DecToBin: 130 -&gt; 10000010 -&gt; 2^1=2+2^7=127+,129
+DecToBin: 131 -&gt; 10000011 -&gt; 2^0=1+2^1=2+2^7=127+,130
+DecToBin: 132 -&gt; 10000100 -&gt; 2^2=3+2^7=127+,130
+DecToBin: 133 -&gt; 10000101 -&gt; 2^0=1+2^2=3+2^7=127+,131
+DecToBin: 134 -&gt; 10000110 -&gt; 2^1=2+2^2=3+2^7=127+,132
+DecToBin: 135 -&gt; 10000111 -&gt; 2^0=1+2^1=2+2^2=3+2^7=127+,133
+DecToBin: 136 -&gt; 10001000 -&gt; 2^3=7+2^7=127+,134
+DecToBin: 137 -&gt; 10001001 -&gt; 2^0=1+2^3=7+2^7=127+,135
+DecToBin: 138 -&gt; 10001010 -&gt; 2^1=2+2^3=7+2^7=127+,136
+DecToBin: 139 -&gt; 10001011 -&gt; 2^0=1+2^1=2+2^3=7+2^7=127+,137
+DecToBin: 140 -&gt; 10001100 -&gt; 2^2=3+2^3=7+2^7=127+,137
+DecToBin: 141 -&gt; 10001101 -&gt; 2^0=1+2^2=3+2^3=7+2^7=127+,138
+DecToBin: 142 -&gt; 10001110 -&gt; 2^1=2+2^2=3+2^3=7+2^7=127+,139
+DecToBin: 143 -&gt; 10001111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^7=127+,140
+DecToBin: 144 -&gt; 10010000 -&gt; 2^4=15+2^7=127+,142
+DecToBin: 145 -&gt; 10010001 -&gt; 2^0=1+2^4=15+2^7=127+,143
+DecToBin: 146 -&gt; 10010010 -&gt; 2^1=2+2^4=15+2^7=127+,144
+DecToBin: 147 -&gt; 10010011 -&gt; 2^0=1+2^1=2+2^4=15+2^7=127+,145
+DecToBin: 148 -&gt; 10010100 -&gt; 2^2=3+2^4=15+2^7=127+,145
+DecToBin: 149 -&gt; 10010101 -&gt; 2^0=1+2^2=3+2^4=15+2^7=127+,146
+DecToBin: 150 -&gt; 10010110 -&gt; 2^1=2+2^2=3+2^4=15+2^7=127+,147
+DecToBin: 151 -&gt; 10010111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^7=127+,148
+DecToBin: 152 -&gt; 10011000 -&gt; 2^3=7+2^4=15+2^7=127+,149
+DecToBin: 153 -&gt; 10011001 -&gt; 2^0=1+2^3=7+2^4=15+2^7=127+,150
+DecToBin: 154 -&gt; 10011010 -&gt; 2^1=2+2^3=7+2^4=15+2^7=127+,151
+DecToBin: 155 -&gt; 10011011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^7=127+,152
+DecToBin: 156 -&gt; 10011100 -&gt; 2^2=3+2^3=7+2^4=15+2^7=127+,152
+DecToBin: 157 -&gt; 10011101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^7=127+,153
+DecToBin: 158 -&gt; 10011110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^7=127+,154
+DecToBin: 159 -&gt; 10011111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^7=127+,155
+DecToBin: 160 -&gt; 10100000 -&gt; 2^5=31+2^7=127+,158
+DecToBin: 161 -&gt; 10100001 -&gt; 2^0=1+2^5=31+2^7=127+,159
+DecToBin: 162 -&gt; 10100010 -&gt; 2^1=2+2^5=31+2^7=127+,160
+DecToBin: 163 -&gt; 10100011 -&gt; 2^0=1+2^1=2+2^5=31+2^7=127+,161
+DecToBin: 164 -&gt; 10100100 -&gt; 2^2=3+2^5=31+2^7=127+,161
+DecToBin: 165 -&gt; 10100101 -&gt; 2^0=1+2^2=3+2^5=31+2^7=127+,162
+DecToBin: 166 -&gt; 10100110 -&gt; 2^1=2+2^2=3+2^5=31+2^7=127+,163
+DecToBin: 167 -&gt; 10100111 -&gt; 2^0=1+2^1=2+2^2=3+2^5=31+2^7=127+,164
+DecToBin: 168 -&gt; 10101000 -&gt; 2^3=7+2^5=31+2^7=127+,165
+DecToBin: 169 -&gt; 10101001 -&gt; 2^0=1+2^3=7+2^5=31+2^7=127+,166
+DecToBin: 170 -&gt; 10101010 -&gt; 2^1=2+2^3=7+2^5=31+2^7=127+,167
+DecToBin: 171 -&gt; 10101011 -&gt; 2^0=1+2^1=2+2^3=7+2^5=31+2^7=127+,168
+DecToBin: 172 -&gt; 10101100 -&gt; 2^2=3+2^3=7+2^5=31+2^7=127+,168
+DecToBin: 173 -&gt; 10101101 -&gt; 2^0=1+2^2=3+2^3=7+2^5=31+2^7=127+,169
+DecToBin: 174 -&gt; 10101110 -&gt; 2^1=2+2^2=3+2^3=7+2^5=31+2^7=127+,170
+DecToBin: 175 -&gt; 10101111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^5=31+2^7=127+,171
+DecToBin: 176 -&gt; 10110000 -&gt; 2^4=15+2^5=31+2^7=127+,173
+DecToBin: 177 -&gt; 10110001 -&gt; 2^0=1+2^4=15+2^5=31+2^7=127+,174
+DecToBin: 178 -&gt; 10110010 -&gt; 2^1=2+2^4=15+2^5=31+2^7=127+,175
+DecToBin: 179 -&gt; 10110011 -&gt; 2^0=1+2^1=2+2^4=15+2^5=31+2^7=127+,176
+DecToBin: 180 -&gt; 10110100 -&gt; 2^2=3+2^4=15+2^5=31+2^7=127+,176
+DecToBin: 181 -&gt; 10110101 -&gt; 2^0=1+2^2=3+2^4=15+2^5=31+2^7=127+,177
+DecToBin: 182 -&gt; 10110110 -&gt; 2^1=2+2^2=3+2^4=15+2^5=31+2^7=127+,178
+DecToBin: 183 -&gt; 10110111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^5=31+2^7=127+,179
+DecToBin: 184 -&gt; 10111000 -&gt; 2^3=7+2^4=15+2^5=31+2^7=127+,180
+DecToBin: 185 -&gt; 10111001 -&gt; 2^0=1+2^3=7+2^4=15+2^5=31+2^7=127+,181
+DecToBin: 186 -&gt; 10111010 -&gt; 2^1=2+2^3=7+2^4=15+2^5=31+2^7=127+,182
+DecToBin: 187 -&gt; 10111011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^5=31+2^7=127+,183
+DecToBin: 188 -&gt; 10111100 -&gt; 2^2=3+2^3=7+2^4=15+2^5=31+2^7=127+,183
+DecToBin: 189 -&gt; 10111101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^5=31+2^7=127+,184
+DecToBin: 190 -&gt; 10111110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^7=127+,185
+DecToBin: 191 -&gt; 10111111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^7=127+,186
+DecToBin: 192 -&gt; 11000000 -&gt; 2^6=63+2^7=127+,190
+DecToBin: 193 -&gt; 11000001 -&gt; 2^0=1+2^6=63+2^7=127+,191
+DecToBin: 194 -&gt; 11000010 -&gt; 2^1=2+2^6=63+2^7=127+,192
+DecToBin: 195 -&gt; 11000011 -&gt; 2^0=1+2^1=2+2^6=63+2^7=127+,193
+DecToBin: 196 -&gt; 11000100 -&gt; 2^2=3+2^6=63+2^7=127+,193
+DecToBin: 197 -&gt; 11000101 -&gt; 2^0=1+2^2=3+2^6=63+2^7=127+,194
+DecToBin: 198 -&gt; 11000110 -&gt; 2^1=2+2^2=3+2^6=63+2^7=127+,195
+DecToBin: 199 -&gt; 11000111 -&gt; 2^0=1+2^1=2+2^2=3+2^6=63+2^7=127+,196
+DecToBin: 200 -&gt; 11001000 -&gt; 2^3=7+2^6=63+2^7=127+,197
+DecToBin: 201 -&gt; 11001001 -&gt; 2^0=1+2^3=7+2^6=63+2^7=127+,198
+DecToBin: 202 -&gt; 11001010 -&gt; 2^1=2+2^3=7+2^6=63+2^7=127+,199
+DecToBin: 203 -&gt; 11001011 -&gt; 2^0=1+2^1=2+2^3=7+2^6=63+2^7=127+,200
+DecToBin: 204 -&gt; 11001100 -&gt; 2^2=3+2^3=7+2^6=63+2^7=127+,200
+DecToBin: 205 -&gt; 11001101 -&gt; 2^0=1+2^2=3+2^3=7+2^6=63+2^7=127+,201
+DecToBin: 206 -&gt; 11001110 -&gt; 2^1=2+2^2=3+2^3=7+2^6=63+2^7=127+,202
+DecToBin: 207 -&gt; 11001111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^6=63+2^7=127+,203
+DecToBin: 208 -&gt; 11010000 -&gt; 2^4=15+2^6=63+2^7=127+,205
+DecToBin: 209 -&gt; 11010001 -&gt; 2^0=1+2^4=15+2^6=63+2^7=127+,206
+DecToBin: 210 -&gt; 11010010 -&gt; 2^1=2+2^4=15+2^6=63+2^7=127+,207
+DecToBin: 211 -&gt; 11010011 -&gt; 2^0=1+2^1=2+2^4=15+2^6=63+2^7=127+,208
+DecToBin: 212 -&gt; 11010100 -&gt; 2^2=3+2^4=15+2^6=63+2^7=127+,208
+DecToBin: 213 -&gt; 11010101 -&gt; 2^0=1+2^2=3+2^4=15+2^6=63+2^7=127+,209
+DecToBin: 214 -&gt; 11010110 -&gt; 2^1=2+2^2=3+2^4=15+2^6=63+2^7=127+,210
+DecToBin: 215 -&gt; 11010111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^6=63+2^7=127+,211
+DecToBin: 216 -&gt; 11011000 -&gt; 2^3=7+2^4=15+2^6=63+2^7=127+,212
+DecToBin: 217 -&gt; 11011001 -&gt; 2^0=1+2^3=7+2^4=15+2^6=63+2^7=127+,213
+DecToBin: 218 -&gt; 11011010 -&gt; 2^1=2+2^3=7+2^4=15+2^6=63+2^7=127+,214
+DecToBin: 219 -&gt; 11011011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^6=63+2^7=127+,215
+DecToBin: 220 -&gt; 11011100 -&gt; 2^2=3+2^3=7+2^4=15+2^6=63+2^7=127+,215
+DecToBin: 221 -&gt; 11011101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^6=63+2^7=127+,216
+DecToBin: 222 -&gt; 11011110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^6=63+2^7=127+,217
+DecToBin: 223 -&gt; 11011111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^6=63+2^7=127+,218
+DecToBin: 224 -&gt; 11100000 -&gt; 2^5=31+2^6=63+2^7=127+,221
+DecToBin: 225 -&gt; 11100001 -&gt; 2^0=1+2^5=31+2^6=63+2^7=127+,222
+DecToBin: 226 -&gt; 11100010 -&gt; 2^1=2+2^5=31+2^6=63+2^7=127+,223
+DecToBin: 227 -&gt; 11100011 -&gt; 2^0=1+2^1=2+2^5=31+2^6=63+2^7=127+,224
+DecToBin: 228 -&gt; 11100100 -&gt; 2^2=3+2^5=31+2^6=63+2^7=127+,224
+DecToBin: 229 -&gt; 11100101 -&gt; 2^0=1+2^2=3+2^5=31+2^6=63+2^7=127+,225
+DecToBin: 230 -&gt; 11100110 -&gt; 2^1=2+2^2=3+2^5=31+2^6=63+2^7=127+,226
+DecToBin: 231 -&gt; 11100111 -&gt; 2^0=1+2^1=2+2^2=3+2^5=31+2^6=63+2^7=127+,227
+DecToBin: 232 -&gt; 11101000 -&gt; 2^3=7+2^5=31+2^6=63+2^7=127+,228
+DecToBin: 233 -&gt; 11101001 -&gt; 2^0=1+2^3=7+2^5=31+2^6=63+2^7=127+,229
+DecToBin: 234 -&gt; 11101010 -&gt; 2^1=2+2^3=7+2^5=31+2^6=63+2^7=127+,230
+DecToBin: 235 -&gt; 11101011 -&gt; 2^0=1+2^1=2+2^3=7+2^5=31+2^6=63+2^7=127+,231
+DecToBin: 236 -&gt; 11101100 -&gt; 2^2=3+2^3=7+2^5=31+2^6=63+2^7=127+,231
+DecToBin: 237 -&gt; 11101101 -&gt; 2^0=1+2^2=3+2^3=7+2^5=31+2^6=63+2^7=127+,232
+DecToBin: 238 -&gt; 11101110 -&gt; 2^1=2+2^2=3+2^3=7+2^5=31+2^6=63+2^7=127+,233
+DecToBin: 239 -&gt; 11101111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^5=31+2^6=63+2^7=127+,234
+DecToBin: 240 -&gt; 11110000 -&gt; 2^4=15+2^5=31+2^6=63+2^7=127+,236
+DecToBin: 241 -&gt; 11110001 -&gt; 2^0=1+2^4=15+2^5=31+2^6=63+2^7=127+,237
+DecToBin: 242 -&gt; 11110010 -&gt; 2^1=2+2^4=15+2^5=31+2^6=63+2^7=127+,238
+DecToBin: 243 -&gt; 11110011 -&gt; 2^0=1+2^1=2+2^4=15+2^5=31+2^6=63+2^7=127+,239
+DecToBin: 244 -&gt; 11110100 -&gt; 2^2=3+2^4=15+2^5=31+2^6=63+2^7=127+,239
+DecToBin: 245 -&gt; 11110101 -&gt; 2^0=1+2^2=3+2^4=15+2^5=31+2^6=63+2^7=127+,240
+DecToBin: 246 -&gt; 11110110 -&gt; 2^1=2+2^2=3+2^4=15+2^5=31+2^6=63+2^7=127+,241
+DecToBin: 247 -&gt; 11110111 -&gt; 2^0=1+2^1=2+2^2=3+2^4=15+2^5=31+2^6=63+2^7=127+,242
+DecToBin: 248 -&gt; 11111000 -&gt; 2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,243
+DecToBin: 249 -&gt; 11111001 -&gt; 2^0=1+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,244
+DecToBin: 250 -&gt; 11111010 -&gt; 2^1=2+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,245
+DecToBin: 251 -&gt; 11111011 -&gt; 2^0=1+2^1=2+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,246
+DecToBin: 252 -&gt; 11111100 -&gt; 2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,246
+DecToBin: 253 -&gt; 11111101 -&gt; 2^0=1+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,247
+DecToBin: 254 -&gt; 11111110 -&gt; 2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,248
+DecToBin: 255 -&gt; 11111111 -&gt; 2^0=1+2^1=2+2^2=3+2^3=7+2^4=15+2^5=31+2^6=63+2^7=127+,249
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2700592/nicolas-racine" target="_blank"><span itemprop="name">Nicolas Racine</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">1</div>
+                                    <div itemprop="dateCreated">5/1/2017 2:49:43 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Since you are going through an array 0-7 of 1s, you should be using bit shifting:</p>
+
+<pre><code>int convertBinToDec(boolean Bin[]) {
+  int ReturnInt = 0;
+  for (int i = 0; i &lt; 8; i++) {
+    if (Bin[7 - i]) {
+      Serial.print("Set Bit ");
+      Serial.print(i);
+      ReturnInt += 1&lt;&lt;i;
+      Serial.print(" ==&gt; ");
+      Serial.print(1&lt;&lt;i);
+      Serial.print(", ");
+    }
+  }
+  return ReturnInt;
+}
+
+DecToBin: 1 -&gt; 00000001 -&gt; Set Bit 0 ==&gt; 1, 1
+DecToBin: 2 -&gt; 00000010 -&gt; Set Bit 1 ==&gt; 1, 2
+DecToBin: 3 -&gt; 00000011 -&gt; Set Bit 0 ==&gt; 1, Set Bit 1 ==&gt; 1, 3
+DecToBin: 4 -&gt; 00000100 -&gt; Set Bit 2 ==&gt; 2, 4
+DecToBin: 5 -&gt; 00000101 -&gt; Set Bit 0 ==&gt; 1, Set Bit 2 ==&gt; 2, 5
+DecToBin: 6 -&gt; 00000110 -&gt; Set Bit 1 ==&gt; 1, Set Bit 2 ==&gt; 2, 6
+DecToBin: 7 -&gt; 00000111 -&gt; Set Bit 0 ==&gt; 1, Set Bit 1 ==&gt; 1, Set Bit 2 ==&gt; 2, 7
+DecToBin: 8 -&gt; 00001000 -&gt; Set Bit 3 ==&gt; 4, 8
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1136195/dda" target="_blank"><span itemprop="name">dda</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/43713008/arduino-converting-decimal-to-binary-to-decimal#answer-0</div>
+                                            <div itemprop="upvoteCount">2</div>
+                                            <div itemprop="dateCreated">5/1/2017 3:03:10 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>pow() gives the output in double. Do as Paul suggested. </p>
+
+<p>You can also try including math.h if arduino has it and then using int(ceil(pow(int a, int b))) to get the exact value. As far as I can see.. pow() is giving output in double maybe like 3.999 something and int by default is doing flooring in it... so it converts to 3. ceil() takes it to the next largest int value. It may work.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/7942656/glados" target="_blank">GLaDOS</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/43713008" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/43713008/arduino-converting-decimal-to-binary-to-decimal by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:57:34 GMT -->
+</html>

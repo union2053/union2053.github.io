@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/array_ptr.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Arrays, String Constants and Pointers</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Arrays, String Constants and Pointers</H1>
+<H2>Arrays</H2>
+<UL>
+<LI>An array
+is declared as
+<VAR>datatype</VAR> <VAR>name</VAR>[<VAR>constant-size</VAR>]
+and
+groups one or more instances of a datatype into one addressable
+place
+<UL>
+<LI><VAR>constant-size</VAR> may be an expression, but the expression
+must evaluate to a constant, like:
+<PRE>
+	#define MAX_SIZE	16
+	...
+	int list[MAX_SIZE + 1];
+</PRE>
+</UL>
+<LI>C arrays begin at element 0, so an array definition like
+<CODE>int a[3];</CODE> would create three <CODE>int</CODE> elements,
+addressable as <CODE>a[0]</CODE>, <CODE>a[1]</CODE>, and <CODE>a[2]</CODE>
+<UL>
+<LI>Note that even tough the definition says <CODE>a[3]</CODE>, there
+is no element named <CODE>a[3]</CODE>
+</UL>
+<LI>As with other variables, global and static array elements are initialized
+to 0 by default, and automatic array elements are filled with garbage values
+<LI>Arrays can be initialized using one or more values in braces,<BR>
+like <CODE>int a[3] = {5, -2, 17};</CODE>
+<UL>
+<LI>Pre-ANSI C compilers may not allow initializers on automatic arrays
+</UL>
+<LI>If a list of initialization values is present but no
+<VAR>constant-size</VAR> is specified, the size of the array is the same as
+the number of initialization values
+<UL>
+<LI><CODE>int q[] = {1, 2, 3};</CODE> is the same as<BR>
+<CODE>int q[3] = {1, 2, 3};</CODE>
+</UL>
+<LI>To declare an external reference to an array defined in another file,<BR>
+use <CODE>extern int a[];</CODE>
+</UL>
+<H2>String Constants</H2>
+<UL>
+<LI>In C, an array of type <CODE>char</CODE> is used to represent
+a character string, the end of which is marked by a byte set to 0
+(also known as a NUL character)
+<LI>The following definitions both set their arrays to the same values:
+<PRE>
+	int str1[] = {'a', 'b', 'c', '\0'};
+	int str2[] = "abc";
+</PRE>
+<LI>ANSI C also allows a definition like <CODE>int str[3] = "abc";</CODE>
+which is the same as <CODE>int str[3] = {'a', 'b', 'c'};</CODE>
+(omitting the final NUL character)
+</UL>
+<H2>Multidimensional Arrays</H2>
+<UL>
+<LI>Multidimensional arrays are simply arrays of arrays (of arrays of arrays...)
+<LI>A multidimensional array like <CODE>m[3][2]</CODE> is stored in consecutive
+memory locations as m[0][0], m[0][1], m[1][0], m[1][1], m[2][0], m[2][1]
+</UL>
+<H2>Pointers</H2>
+<UL>
+<LI>A pointer is a variable that contains the address of a variable
+<LI>There are two operators associated with pointers:
+<UL>
+<LI>The <CODE>&</CODE> operator returns the address of its argument
+<LI>The <CODE>*</CODE> operator <EM>dereferences</EM> its argument to
+access the object pointer to by the pointer
+</UL>
+<LI>One simple example of a pointer is:
+<PRE>
+	int i, j;
+	int *p;	/* pointer to `int' */
+
+	i = 6;
+	p = &i;	/* set `p' to address of `i' */
+	j = *p;	/* set `j' to 6 (value of `i') */
+	*p = 5;	/* set `i' to 5 */
+</PRE>
+<LI>Pointers can either contain an address or a special value called a
+<EM>null pointer</EM> which is different from all valid pointers
+<UL>
+<LI>A 0 in a pointer context will be converted to a null pointer at
+compile time
+<LI>There is also a preprocessor macro NULL (defined in either 
+<CODE>&lt;stdio.h&gt</CODE> or
+<CODE>&lt;stdlib.h&gt</CODE>)
+<LI>An expression like <CODE>if (!ptr) <VAR>statement</VAR></CODE> will cause
+<VAR>statement</VAR> to be evaluated if <CODE>ptr</CODE> is a null pointer
+since <CODE>if (ptr)</CODE> is the same as <CODE>if (ptr == 0)</CODE>
+and since the <CODE>0</CODE> is converted to a null pointer in a pointer
+context, the code is implicitly comparing <CODE>ptr</CODE> against a
+null pointer
+<UL>
+<LI>Similarly, <CODE>if (ptr) <VAR>statement</VAR></CODE> will evaluate
+<VAR>statement</VAR> if <CODE>ptr</CODE> is <STRONG>not</STRONG> a null pointer
+</UL>
+</UL>
+<LI>Pointers cannot point at:
+<UL>
+<LI>constants (like 3, not <CODE>const</CODE>s like <CODE>const int a;</CODE>)
+since the value 3 doesn't have a permanent memory address
+<LI><CODE>register</CODE> variables since registers are not in memory
+and thus do not have a memory address
+<LI>expressions like <CODE>(8 * k)</CODE>, which are roughly the same
+as constants in that they don't have a permanent memory address
+<LI>
+</UL>
+</UL>
+<H2>Pointers and Arrays</H2>
+<UL>
+<LI>Pointers can be treated as arrays
+<UL>
+<LI>This code:
+<PRE>
+int
+identical(void)
+{
+	int a[3] = {6, 3, 7};
+	int *p = &a[0];	/* point `p' at the first element of `a' */
+
+	if (a[0] == p[0] && a[1] == p[1] && a[2] == p[2])
+		return 1;
+	else
+		return 0;
+}
+</PRE>
+would return 1, since <CODE>p[<VAR>n</VAR>]</CODE> points to
+<CODE>a[<VAR>n</VAR>]</CODE> for all valid values of <VAR>n</VAR>
+</UL>
+<LI>Pointers are <STRONG>not</STRONG>, however, the same as arrays
+<LI>This is one of the most confusing parts of C, so here are three
+different ways of stating the difference between an array <CODE>a</CODE>
+and a pointer <CODE>p</CODE> which points to the first element of <CODE>a
+</CODE>:
+<UL>
+<LI>The technical explanation: arrays are accessed using direct addressing,
+pointers are accessed using indirect addressing
+<LI>The less technical explanation: <CODE>a</CODE> is an address,
+<CODE>p</CODE> is an address which holds the address of <CODE>a</CODE>
+<LI>The extremely wordy explanation: to retrieve <VAR>value</VAR> from
+<CODE>a[<VAR>n</VAR>]</CODE>,
+the computer starts at address <CODE>a</CODE>, moves <VAR>n</VAR> past
+it and fetches <VAR>value</VAR> from there;
+to retrieve <VAR>value</VAR> from <CODE>p[<VAR>n</VAR>]</CODE>,
+the computer starts at address <CODE>p</CODE>, fetches the address stored
+there and adds <VAR>n</VAR> to it, then fetches <VAR>value</VAR> from 
+the resulting address
+</UL>
+<LI>Most of the time, however, pointer and array accesses can be treated as
+acting the same, the major exceptions being:
+<UL>
+<LI>the <CODE>sizeof</CODE> operator
+<UL>
+<LI><CODE>sizeof(array)</CODE> returns the amount of memory used by all
+elements in <CODE>array</CODE>
+<LI><CODE>sizeof(pointer)</CODE> only returns the amount of memory used by 
+the <CODE>pointer</CODE> variable itself
+</UL>
+<LI>the <CODE>&</CODE> operator
+<UL>
+<LI><CODE>&array</CODE> is an alias for <CODE>&array[0]</CODE> and returns
+the address of the first element in <CODE>array</CODE>
+<LI><CODE>&pointer</CODE> returns the address of <CODE>pointer</CODE>
+</UL>
+<LI>a string literal initialization of a character array
+<UL>
+<LI><CODE>char array[] = "abc"</CODE> sets the first four elements in
+<CODE>array</CODE> to 'a', 'b', 'c', and '\0'
+<LI><CODE>char *pointer = "abc"</CODE> sets <CODE>pointer</CODE> to the
+address of the "abc" string (which may be stored in read-only memory
+and thus unchangeable)
+</UL>
+</UL>
+<LI>Additionally, an array cannot be resized or reassigned
+</UL>
+<H2>Pointer Arithmetic</H2>
+<UL>
+<LI><CODE>ptr++</CODE> increments <CODE>ptr</CODE> by the appropriate
+amount to reach the next entry of <CODE>ptr</CODE>'s datatype
+<LI>If, for example, <CODE>ptr</CODE> points to address 0xff00:
+<UL>
+<LI>if <CODE>ptr</CODE> is a <CODE>char</CODE>, <CODE>ptr++</CODE> will
+set <CODE>ptr</CODE> to 0xff01
+<LI>if <CODE>ptr</CODE> is an <CODE>int</CODE> (and an <CODE>int</CODE> is
+4 bytes long), <CODE>ptr++</CODE> will set <CODE>ptr</CODE> to 0xff04
+</UL>
+<LI>If <CODE>ptr1</CODE> is pointing at <CODE>a[0]</CODE> and
+<CODE>ptr2</CODE> is pointing at <CODE>a[3]</CODE>, then
+<CODE>ptr2 - ptr1</CODE> returns the integer value 3, no matter what
+the datatype of <CODE>a</CODE> is
+<LI>Similarly, equality, inequality and other arithmetic relations all
+work appropriately, as long as the pointers being compared both
+point to the same group of elements
+<UL>
+<LI>That is, if <CODE>a</CODE> and <CODE>b</CODE> are different arrays, then
+given <CODE>ptr1 = &a[0]</CODE> and <CODE>ptr2 = &b[0]</CODE>,
+it is impossible to predict whether <CODE>ptr1 &lt ptr2</CODE> or
+<CODE>ptr1 &gt ptr2</CODE> (though <CODE>ptr1 != ptr2</CODE> will always
+be true)
+</UL>
+</UL>
+<A HREF="const_vol.html">Previous</A>, 
+<A HREF="odds_n_ends.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/array_ptr.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

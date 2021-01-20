@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/control.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Control Structures</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Control Structures</H1>
+<H2><CODE>if (<VAR>expression</VAR>) <VAR>statement</VAR></CODE></H2>
+<UL>
+<LI>evaluates <VAR>expression</VAR> and,
+if non-zero, executes <VAR>statement</VAR>
+<UL>
+<LI>Examples:
+<UL>
+<LI><CODE>if (a == 0) a = 1;</CODE>
+<LI><PRE>if (inches &gt 72 && weight &lt;= 98) {
+	beanpole_count++;
+	kick_sand_in_face();
+}</PRE>
+</UL>
+</UL>
+</UL>
+<H2><CODE>if (<VAR>expression</VAR>) <VAR>statement-1</VAR>
+else <VAR>statement-2</VAR></CODE></H2>
+<UL>
+<LI>evaluates <VAR>expression</VAR> and
+<UL>
+<LI>if expression is non-zero, <VAR>statement-1</VAR> is executed
+<LI>if expression is zero, <VAR>statement-2</VAR> is executed
+</UL>
+<UL>
+<LI>Examples:
+<UL>
+<LI><CODE>if (a != 0) ; else a = 1;</CODE>
+<UL>
+<LI>incredibly bad version of first example above
+</UL>
+<LI><PRE>if (first_time) {
+	initialize();
+	first_time = 0;
+} else {
+	do_something();
+}</PRE>
+</UL>
+<LI>Beware extra statements; this chunk of code is OK:
+<PRE>if (first_time)
+	initialize();
+else
+	do_something();
+</PRE>but this:
+<PRE>if (first_time)
+	initialize();
+	first_time = 0;
+else
+	do_something();
+</PRE>is a syntax error, as is:
+<PRE>if (first_time) {
+	initialize();
+	first_time = 0;
+};
+else {
+	do_something();
+}</PRE>
+</UL>
+<LI>An <CODE>else</CODE> statement matches the nearest previous <CODE>if</CODE>
+statement in the same scope:
+<UL>
+<LI>The <CODE>else</CODE> in this code:
+<PRE>if (a == b)
+	if (b &gt c)
+		a_lt_c();
+	else
+		a_ge_c();
+</PRE>
+matches the <CODE>if (b &gt c)</CODE>, even if it is written as:
+<PRE>if (a == b)
+	if (b &gt c)
+		a_lt_c();
+else
+	a_ge_c();
+</PRE>
+<LI>To get what seems to be the desired result in the second hunk of code, do:
+<PRE>if (a == b) {
+	if (b &gt c)
+		a_lt_c();
+} else
+	a_ge_c();
+</PRE>
+to push the <CODE>if (b &gt c)</CODE> down to a lower level of scope
+</UL>
+</UL>
+<H2>Conditional Expressions</H2>
+<UL>
+<LI>The statement:
+<PRE>
+if (a &lt c)
+	max = c;
+else
+	max = a;
+</PRE>
+can also be expressed using a conditional expression, which would look like:
+<PRE>
+max = (a &lt c) ? c : a;
+</PRE>
+<LI>While a bit more obscure than the <CODE>if</CODE>/<CODE>else</CODE>
+version, a conditional expression can be used in the same way as any other
+expression, and is thus a bit more versatile
+</UL>
+<H2><CODE>while (<VAR>expression</VAR>) <VAR>statement</VAR></CODE></H2>
+<UL>
+<LI>repeatedly evaluates <VAR>expression</VAR> and, if non-zero,
+executes <VAR>statement</VAR>
+<LI>if <VAR>expression</VAR> is initially zero, <VAR>statement</VAR>
+is never executed
+<UL>
+<LI>Examples:
+<UL>
+<LI><PRE>
+not_done = 1;
+while (not_done)
+	not_done = do_something();
+</PRE>
+<LI>Horrible way of setting an integer to zero:
+<PRE>
+while (a != 0)
+	if (a &gt 0)
+		a--;
+	else
+		a++;
+</PRE>
+</UL>
+</UL>
+</UL>
+<H2><CODE>do <VAR>statement</VAR> while (<VAR>expression</VAR>)</CODE></H2>
+<UL>
+<LI><CODE>do</CODE> is similar to the <CODE>while</CODE> statement except that
+<VAR>expression</VAR> is evaluated at after <VAR>statement</VAR> instead of
+before it
+<LI><VAR>statement</VAR> is always executed once
+<LI>This is useful when checking something that is initialized inside
+<VAR>statement</VAR>
+<UL>
+<LI>The first <CODE>while</CODE> example would be better written as:
+<PRE>
+do {
+	not_done = do_something();
+} while (not_done);
+</PRE>
+</UL>
+</UL>
+<H2><CODE>for (<VAR>init-expr</VAR>; <VAR>eval-expr</VAR>;
+<VAR>incr-expr</VAR>) <VAR>statement</VAR></CODE></H2>
+<UL>
+<LI><VAR>init-expr</VAR> or <VAR>incr-expr</VAR> may be empty statements
+<UL>
+<LI>if both are empty, the <CODE>for</CODE> is the same as a <CODE>while</CODE>
+statement:
+<PRE>
+for ( ; i &gt 0; ) {
+	do_something();
+}</PRE>
+is identical to <PRE>
+while (i &gt 0) {
+	do_something();
+}</PRE>
+and the <CODE>while</CODE> version is probably a bit more readable
+</UL>
+<LI><VAR>init-expr</VAR> or <VAR>incr-expr</VAR> are the places where the
+comma operator is most commonly used:
+<PRE>
+for (min = max = func(0), i = 1; i &lt num_entries - 1; i++) {
+	x = func(i);
+	if (x &lt min) {
+		min = x;
+	} else if (x &gt max) {
+		max = x;
+	}
+}
+</PRE>
+</UL>
+<H2><CODE>break</CODE></H2>
+<UL>
+<LI>exits the innermost control loop
+<LI><CODE>while (a &gt 0) a--;</CODE> could also be written as
+<PRE>
+while (1) {
+	if (a &lt;= 0)
+		break;
+	else
+		a--;
+}</PRE>
+<LI>For this code:
+<PRE>
+while (i &gt 0) {
+	while (j &gt 0) {
+		if (j &gt 50) {
+			break;
+		}
+		j--;
+	}
+	i--;
+}
+</PRE>
+if <CODE>j</CODE> is greater than 50, the <CODE>while (j &gt 0) { ... }</CODE>
+loop will be terminated and execution will resume at the <CODE>i++</CODE>
+statement
+</UL>
+<H2><CODE>continue</CODE></H2>
+<UL>
+<LI>jumps end of control loop but continues execution
+<LI>For this code:
+<PRE>
+while (i &gt 0) {
+	while (j &gt 0) {
+		if (j &gt 50) {
+			j = -100;
+			continue;
+		}
+		j--;
+	}
+	i--;
+}
+</PRE>
+if <CODE>j</CODE> is greater than 50, <CODE>j</CODE> will be set to -100,
+the <CODE>j++</CODE> statement will be skipped and execution will resume
+at the top of the <CODE>while (j &gt 0) { ... }</CODE> loop
+</UL>
+<H2><CODE>switch (<VAR>int-expression</VAR>) { <VAR>switch-body</VAR> }</CODE></H2>
+<UL>
+<LI>The <CODE>switch</CODE> statement is a way of branching to one
+of a number of blocks of code based on the result of <VAR>int-expression</VAR>
+<LI><VAR>switch-body</VAR> should contain two or more sets of code which
+are labeled with either a <CODE>case <VAR>int-constant</VAR>:</CODE> or
+<CODE>default:</CODE> label
+<LI>When a <CODE>switch</CODE> statement is executed,
+<VAR>int-expression</VAR> is evaluated and the value is checked
+against the <CODE>int-constant</CODE> argument of each <CODE>case</CODE>
+label
+<UL>
+<LI>if a match is found, the code immediately following that <CODE>case</CODE>
+label is executed
+<LI>if no match is found and a <CODE>default:</CODE> label exists, the
+code immediately following the <CODE>default</CODE> label is executed
+<LI>if no match is found and no <CODE>default</CODE> label exists, the
+<CODE>switch</CODE> statement is exited
+</UL>
+<LI>sets of code associated with a <CODE>case</CODE> or <CODE>default</CODE>
+label should be terminated with either a <CODE>break</CODE> or
+<CODE>return</CODE> statement or execution will "fall through" to the
+next executable code
+<LI>Simple <CODE>switch</CODE> example:
+<PRE>
+/* assumes ASCII character set */
+int
+read_number(void)
+{
+	int c;
+	int total = 0;
+
+	do {
+		c = getchar();
+		switch (c) {
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			total = (total * 10) + c - '0';
+			break;
+		case '\n':
+			c = EOF;
+			break;
+		case EOF:
+			break;
+		default:
+			return -1;
+		}
+	} while (c != EOF);
+}</PRE>
+<LI>Note the use of <CODE>break</CODE> to exit the <CODE>switch</CODE>
+statement
+<UL>
+<LI>Since the <CODE>case EOF</CODE> statement only does a <CODE>break</CODE>,
+the <CODE>break</CODE> in the <CODE>case '\n'</CODE> statement could have
+been eliminated, causing it to fall through to the <CODE>break</CODE> after
+the <CODE>case EOF</CODE>
+</UL>
+</UL>
+<H2><CODE>goto <VAR>label</VAR></CODE></H2>
+<UL>
+<LI>any statement can be preceeded by a <VAR>label</VAR>,
+which is a name followed by a `<CODE>:</CODE>' (colon)
+<PRE>
+label1:	a = 0;
+l_two:	{
+third:		b = 1;
+final:		c = 2;
+	}
+</PRE>
+<LI>note that it is illegal to put a label before the final `<CODE>}</CODE>'
+<UL>
+<LI>if this was needed for the above code,
+the last line could have been changed to:
+<PRE>
+empty:	; }
+</PRE>
+</UL>
+<LI><CODE>goto</CODE> is used to jump to a labelled statement in a function
+<LI>Labels can be referenced throughout a function, meaning they can
+be used before being declared:
+<PRE>
+		goto downbelow;
+downbelow:	goneto = 1;
+</PRE>
+<LI>You cannot, however, jump out of a function using a <CODE>goto</CODE>
+<LI>Jumping into the middle of a block of code is not recommended, since
+any initialization at the beginning of the block is skipped
+</UL>
+<A HREF="vstorage.html">Previous</A>, 
+<A HREF="const_vol.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/control.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

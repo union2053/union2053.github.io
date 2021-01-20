@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/comments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Comments</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Comments</H1>
+<UL>
+<LI>Comments are started with `<CODE>/*</CODE>'
+(slash immediately followed by asterisk)
+and ended with `<CODE>*/</CODE>' (asterisk followed by slash)
+<LI>comments can contain anything except the comment-ending `<CODE>*/</CODE>'
+<UL>
+<LI><CODE>/* good comment */</CODE>
+<LI><CODE>/ * * /</CODE> is not a valid comment (because of the whitespace
+between the `<CODE>/</CODE>' and the `<CODE>*</CODE>')
+<LI><CODE>/* can even contain another /* */</CODE>
+<LI><CODE>/* including "*/"  */</CODE> is an error
+<UL>
+<LI>compiler sees comment as `<CODE>/* including "*/</CODE>' then tried to
+compile `<CODE>" */</CODE>'
+</UL>
+</UL>
+<LI>Comments may even span multiple lines:
+<PRE>
+	/*
+	 * Good for setting comments off
+	 * from the rest of your code
+	 */
+</PRE>
+<UL>
+<LI>need to be careful because of this
+<PRE>
+	a = 1;	/* forgot comment terminator
+	a = 2;	/* everything ignored to here --&gt */
+	b = a;
+</PRE>
+causes <CODE>b</CODE> to be set to <CODE>1</CODE>
+</UL>
+<LI>Comments should not be used for disabling blocks of code
+<UL>
+<LI>block of code could potentially contain an unnoticed comment
+<PRE>
+	/* disabling block */
+	/*
+	  code
+	  ...
+	  code		/* unnoticed comment */
+	  ...
+	  code
+	*/
+</PRE>
+would cause the embedded <CODE>*/</CODE> to end the comment, and
+everything after it to get compiled (possibly unnoticed)
+<LI>a better way to disable a chunk of code is
+<PRE>
+	#ifdef 0
+	  code
+	  ...
+	  code		/* unnoticed comment */
+	  ...
+	  code
+	#endif
+</PRE>
+</UL>
+</UL>
+<A HREF="operators.html">Previous</A>, 
+<A HREF="statements.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/comments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

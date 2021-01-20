@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-random-file-access-fseek-and-ftell.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Random File Access: fseek() and ftell()</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Random File Access: fseek() and ftell()'>C Random File Access: fseek() and ftell()</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-concept-of-a-file.html'>C File Structure Intro
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-open-a-file-and-display-it.html'>C Open file for read
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-fprintf-and-fscanf-functions.html'>C fprintf() and fscanf()
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C fseek() ftell()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-append-a-list-of-file-to-a-single-file.html'>C fread() and fwrite() Example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-random-file-access-with-binary-i-o.html'>C Binary File
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-binary-viewer.html'>C file binary viewer
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Questions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-1.html'>C Review Questions 1
+      
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-file-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Random File Access: fseek() and ftell()</h1>
+<a class ='btn btn-outline-dark' href=c-fprintf-and-fscanf-functions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-append-a-list-of-file-to-a-single-file.html>Next</a><p>The <i style='color:blue'>fseek</i>() function enables you to treat a file like an array and move directly to any 
+particular byte in a file opened by <i style='color:blue'>fopen</i>(). 
+
+</p><p>The following code displays a file in reverse order. 
+
+</p><p>Note that <i style='color:blue'>fseek</i>() has three arguments and returns an int value. 
+
+</p><p>The <i style='color:blue'>ftell</i>() function returns the current position in a file as a long value.
+
+</p><div class='myCodeDiv'><button id='WDRXW' class='myCopyButton' data-clipboard-target='#EUSCK'>Copy</button><pre  id='EUSCK' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdlib.h&gt;
+#define CNTL_Z <span class='q'>'\032'</span>   <span class='c'>/* eof marker in DOS text files */</span>
+#define SLEN 81
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> file[SLEN];
+    <span class='r'>char</span> ch;
+    FILE *fp;
+    <span class='r'>long</span> count, last;
+
+    puts(<span class='q'>"Enter the name of the file to be processed:"</span>);
+    scanf(<span class='q'>"%80s"</span>, file);
+    <span class='r'>if</span> ((fp = fopen(file,<span class='q'>"rb"</span>)) == NULL)
+    {                               <span class='c'>/* read-only mode    */</span>
+        printf(<span class='q'>"reverse can't open %s\n"</span>, file);
+        exit(EXIT_FAILURE);
+    }
+     fseek(fp, 0L, SEEK_END);        <span class='c'>/* go to end of file */</span>
+     last = ftell(fp);
+     <span class='r'>for</span> (count = 1L; count &lt;= last; count++)
+     {
+         fseek(fp, -count, SEEK_END); <span class='c'>/* go backward      */</span>
+         ch = getc(fp);
+         <span class='r'>if</span> (ch != CNTL_Z &amp;&amp; ch != <span class='q'>'\r'</span>) <span class='c'>/* MS-DOS files */</span>
+             putchar(ch);
+     }
+     putchar(<span class='q'>'\n'</span>);
+     fclose(fp);
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WDRXW');clipboard.on('success', function(e) {$('#WDRXW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WDRXW').text('error');});</script></div><p>This program uses the binary mode so that it can deal with both MS-DOS text and Unix files.
+
+</p><p>However, it may not work correctly in an environment that uses some other format for text files.
+
+</p><h3>fseek()
+
+</h3><p>The first of the three arguments to <i style='color:blue'>fseek</i>() is a FILE pointer to the file being searched. 
+
+</p><p>The file should have been opened by using <i style='color:blue'>fopen</i>().
+
+</p><p>The second argument to <i style='color:blue'>fseek</i>() is called the <i style='color:blue'>offset</i>. This argument tells how far to move from
+the starting point (see the following list of mode starting points). The argument must be a long
+value. It can be positive (move forward), negative (move backward), or zero (stay put).
+
+</p><p>The third argument is the <i style='color:blue'>mode</i>, and it identifies the starting point. Since the ANSI standard,
+the stdio.h header file specifies the following manifest constants for the mode:
+
+</p><table class='table table-hover'><thead><tr><th>Mode</th><th> Measures Offset From</th></tr></thead><tbody><tr><td>SEEK_SET</td><td> Beginning of file</td></tr><tr><td>SEEK_CUR</td><td> Current position</td></tr><tr><td>SEEK_END</td><td> End of file</td></tr></tbody></table><p>Here are some sample function calls, where fp is a file pointer:
+</p><div class='myCodeDiv'><button id='VKCIR' class='myCopyButton' data-clipboard-target='#BAXQR'>Copy</button><pre  id='BAXQR' style='font-size:18px;' class='code'>fseek(fp, 0L, SEEK_SET);   <span class='c'>//   go to the beginning of the file</span>
+fseek(fp, 10L, SEEK_SET);  <span class='c'>//   go 10 bytes into the file</span>
+fseek(fp, 2L, SEEK_CUR);   <span class='c'>//   advance 2 bytes from the current position</span>
+fseek(fp, 0L, SEEK_END);   <span class='c'>//   go to the end of the file</span>
+fseek(fp, -10L, SEEK_END); <span class='c'>//   back up 10 bytes from the end of the file</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VKCIR');clipboard.on('success', function(e) {$('#VKCIR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VKCIR').text('error');});</script></div><p>The value returned by <i style='color:blue'>fseek</i>() is 0 if everything is okay, and -1 if there is an error, such as
+attempting to move past the bounds of the file.
+
+</p><p>The <i style='color:blue'>ftell</i>() function is type long, and it returns the current file location. 
+
+</p><p>It is declared in stdio.h. <i style='color:blue'>ftell</i>() specifies the file position by returning the number of 
+bytes from the beginning, with the first byte being byte 0, and so on.
+Under ANSI C, this definition applies to files opened in the binary mode, but not necessarily to
+files opened in the text mode. 
+
+</p><p>The statement
+</p><div class='myCodeDiv'><button id='NYAUZ' class='myCopyButton' data-clipboard-target='#KWBJW'>Copy</button><pre  id='KWBJW' style='font-size:18px;' class='code'>fseek(fp, 0L, SEEK_END);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NYAUZ');clipboard.on('success', function(e) {$('#NYAUZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NYAUZ').text('error');});</script></div><p>sets the position to an offset of 0 bytes from the file end. 
+
+</p><p>That is, it sets the position to the end of the file. Next, the statement
+</p><div class='myCodeDiv'><button id='KVDBB' class='myCopyButton' data-clipboard-target='#BHBMS'>Copy</button><pre  id='BHBMS' style='font-size:18px;' class='code'>last = ftell(fp);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KVDBB');clipboard.on('success', function(e) {$('#KVDBB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KVDBB').text('error');});</script></div><p>assigns to last the number of bytes from the beginning to the end of the file.
+
+</p><p>Next is this loop:
+</p><div class='myCodeDiv'><button id='EOEFG' class='myCopyButton' data-clipboard-target='#JFYVO'>Copy</button><pre  id='JFYVO' style='font-size:18px;' class='code'><span class='r'>for</span> (count = 1L; count &lt;= last; count++)
+{
+  fseek(fp, -count, SEEK_END);           <span class='c'>/* go backward */</span>
+     ch = getc(fp);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EOEFG');clipboard.on('success', function(e) {$('#EOEFG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EOEFG').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-fprintf-and-fscanf-functions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-append-a-list-of-file-to-a-single-file.html>Next</a><h2>Related</h2><UL><LI><a href='c-concept-of-a-file.html'>C Concept of a File</a></LI><LI><a href='c-open-a-file-and-display-it.html'>C open a file and display it</a></LI><LI><a href='c-fprintf-and-fscanf-functions.html'>C fprintf() and fscanf() Functions</a></LI><LI><a href='c-append-a-list-of-file-to-a-single-file.html'>C append a list of file to a single file</a></LI><LI><a href='c-random-file-access-with-binary-i-o.html'>C Random File Access with Binary I/O</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-random-file-access-fseek-and-ftell.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

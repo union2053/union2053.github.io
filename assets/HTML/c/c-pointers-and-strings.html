@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-and-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointers and Strings</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointers and Strings'>C Pointers and Strings</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-copy.html'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointers and Strings</h1>
+<a class ='btn btn-outline-dark' href=c-arrays-of-character-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-null-pointer-vs-null-character.html>Next</a><p>Most C operations for strings actually work with pointers. 
+
+</p><p>Consider the following program.
+</p><div class='myCodeDiv'><button id='DKRNO' class='myCopyButton' data-clipboard-target='#KSYIP'>Copy</button><pre  id='KSYIP' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>const</span> <span class='r'>char</span> * mesg = <span class='q'>"Hi!"</span>;
+    <span class='r'>const</span> <span class='r'>char</span> * copy;
+
+     copy = mesg;
+     printf(<span class='q'>"%s\n"</span>, copy);
+     printf(<span class='q'>"mesg = %s; &amp;mesg = %p; value = %p\n"</span>,
+             mesg, &amp;mesg, mesg);
+     printf(<span class='q'>"copy = %s; &amp;copy = %p; value = %p\n"</span>,
+             copy, &amp;copy, copy);
+
+     <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DKRNO');clipboard.on('success', function(e) {$('#DKRNO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DKRNO').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAABeCAIAAAD+NHaGAAAJk0lEQVR42u3d0a6sJhSA4fMQ+/3fsUnvbZOmO5MRYbHAEcfvTy9Odh1UQNfvAvTPBgAAcBP+qAIAAEBcAAAAiAsAACAuAAAAxAUAAIC4AAAA4gIAAEBcAAAAiAsAACAuAAAAxAUAAIC4AAAA4gIAAEBcAAAAiAsAACAuAAAAxAUAAODj4vLz86NOAQDAl4gLswEAACeKy8//VP4y0WwAAADy4lK0jbR/EBcAAHCxuPy8QFwAAMDS4hL3EuICAABOF5c9xAUAACwqLkH/IC4AAOB7xAUAAIC4AMCi/P33X//+px6A+4nLyAtgAOCmynJfcXk9fu6F24hL5AV0wdm7xAXAM63ldlH/7eDpC+4kLgCAcQO43TFXVEazgrgAAHFZ6Jjr58JdQFwAgLgsbS339TAQFwAAcQGICwAQF6cDEBcAF0a4fairL1SprGe5sJDcWTcjfWTBztExJ5RifInQ0a/eCuwtOX5U8VOYWG8gLgAe5y69z+6vIXCRQnqDej2+VjzpqAKPYnYwlgcDeUJcigczWGlTXGRKvYG4AHiiu/T+rzULyUX0I0epF1JM3tQjbpcnjUtG3cDGKy238dx6A3H5ErxDDxgXl3r8XrOQrgBc2W984+YwVnB3XYc3KC6D9TblFKbUG4jLg8SF2XysIdLvYg6+7nm/5RkbvG0zskHkrEdqsrnZfoP/4kFxF/Gg3psv6S2kWL2DqYhgSiA4CyeeliieSHMuyH6DSiGvuyj+PNKjXg+1+Sr2+i6m1BtxIS63D4GDQVGVflIfExUe/ALXuKSmZaLXSIL1UD/xXAn1Df6LT68xr/lMHA+u0wtJiEtw+m1QIwYD7WuMr4hFs6h9j9q34OvuXguJ9KhfHQl20bcjPDoG4kJcnp5HSfvH2eLiq08TG+tacZmSvfvdJqEdiZrs3WAfV34D6lFcj8fX6YXcWlyKVZ0Ql32PKlpL0V32OnLUx+L18CYuEbMhLs8Vl9/o+BomiyGzN9FdKSH4iPn5WNg8x3isGjnB5kiBxkrkz+q1VPz5lA2mGHBdXOqtGRGXeH842kUxmr4FjGYbFQ2gOJRwVFR9POhNXN4CebFxj05hP8KygrhUrou6uBylOvYW8isulZ/s661y7hXxJS7Epe0u+3+nn+Hqd/BEIPw55oyH+DXFRWONJBJOautmezUDbbPP1NPyzdYcLyGyQUVctuokmKa4bKUBkbfEyVF83QvKa8IgmDYopmrq4bk+KSQyvSOdcannS4r9oW4h2244qekZkV79qnfFpJGhIuISve0W/x1JsPfGjEsGQbpma055UJ6Yb3hgY/XmYMar9CRxaWplXCwiTdnMLXWVEO9RlfBZXLnadJe3MFYPz/tC9rmEEXE5mj269SwUKuZjJmZcjiagNJ2g95khIi5vqaCjdEvxFPaddnz1EHF5nLhEQn7XzXHZWLiCuASNSmNt4SmrXUNIc8UlMuaVNpW4uKRLmCIu8bBREZdiNqX+ZFL0pKMMR3B0sriL3sW66UBbmU60/+NbTugofVLRtWZzN3NyR0227ypdaSHiQlwyD/HpYnNlrjZU9IGA3RwG0lhbeFTuQnEZ1IJ6NeYSbL0HEN9FRSziYaO5miZySMU5pBFxqaQuuj4psP/7eUNF++33XhVPPBe95Egim/mw/cyYSn6oYjnxHkVciMsqsXC1jEs6ZdJbb/XZJw9vrPoM5RXEZZs9WSeRcVlHXILXxS3E5eh980dJl+YbbyeKy9t1UV83vj+v4qyXoqZEjmp7Gbkr1kNTXHpVmLgQl2k338H5nkuJS2IBS0564iHn+xoroVPp1vykuCRap/fnn5+cu+2mgwxeF0fRJT4vrb5l5eUibwmSygav02giS5GDZtP8e33uSFFEKodUFLK3t/IUF4hVhG+rToupTwSOnGau3ny06HvE5S0GV9bZds2ZaGb1L1le21xAGxzdGH+9afxQ9y3yhMZqVnXXcujmHJSRuuqqzPQ7c+vb7NcqR2qsq4RZu5jSH4JVlLi6u+rhC66L9F2ua4P0M57XWRGXtfjivvh9p+bGAb0IwKPF5bsl+stOzRMPXBcAniguK+RXobEAAMQFAACAuAAAAOICAABAXAAAAIgLAAAgLjjCahoAAIjL94gLs/lYQ6RXZce/8tj16tvcBtuM9+cGPyc58jXKLfbhp8FdXNuXvuDinXUikd44eAxHHwcdf0c5iMsTQ+BgUFSln9THRIXHvy99tsWmVWC/l6B5DNZk4pQHG2upx5Lvvi4iPWr8M5xbz4el7t6jQFw+esOa8g3nlZ+oNNbl4jIle9f19e+Rr0/nNljki+JPEJdZVR38kmu6uXuP6tY9CpeJy/7rYvUNimbdzApGSrvwmo8f1anfBuvNvj6wsRL5s8j3Eetf1MttMCWI1sWl3h+CYaarR+XCTK4X1Ws+3vMjx9ZMGFw+3jTrujhVXAathbjgT6LfRL5rH7nsJ3bEn2POeFhZWVw0Vu4gT2rrrfX16Xj8iHzdOijfc0sY38XgdRFMlQXDZ3r8Yjw8L3JddPWHEXEZeQ40VERc5neayDXce3l84GElPltzyoPyxOeqBzbW4P13HXGpHGdzg8jPe3NL03vUFpuePLE/jMzUyYlLbpxxzeviM+ISvzzTE95BXIYed3q3uaQjfizjMkWwNFb81KYkRU4Sl0huP20qiVTEeeJyaocJHvbIY0lwFObagDp+XYxPWBlP+/X+nbgQl1vGwtWGij5wYyoOQmuso30tKy6DWlCvxvHIdFIO71R3yY0cnZFxueN1kZiYNWWOSzqLzF2Iy5XisvUs6Vw845JOmXQd5KzJnt/aWG9D6QuKyzZ7ss6gg14rLoMpiruLy4LXxfbBVUXEBTPFZZsxK61r7Pzu4pJbtpCQnilzEm/aWNvwSHxaLE4Vl8EVGXefnDslaRGs50FxSaQi7nVdzDLX9MNS3NFZC3FpBONIgrES5E4N6uO3vODSwZH3OY6PfL+tO01MhLx7YzWrums5dOTtn5HltbkNthnvzN0CS9yDfSZSeH3h98guzhOX5kFGru6uerjW6adcFyNvrR3psbMeEfF0cZmezFg2Fq5TFesfoVsGnnNdACAuD715fY24iDQgLgC+U1y6cobuX5fHD40FAHi0uAAAABAXAABAXAAAAIgLAAAAcQEAAMQFAACAuAAAABAXAABAXAAAAIgLAAAAcQEAAMQFAACAuAAAABAXAABAXAAAAIgLAAAAcQEAAMQFAACAuAAAABAXAABAXAAAAE7mH372eomOT+rtAAAAAElFTkSuQmCC'><p>First, <i style='color:blue'>mesg</i> and copy are printed as strings (%s).
+
+</p><p>The next item on each line is the address of the specified pointer. 
+
+</p><p>The final item, the one we called value. 
+
+</p><p>It is the value of the specified pointer.
+
+</p><p>The value of the pointer is the address it contains. 
+
+</p><p>You can see that <i style='color:blue'>mesg</i> points to location 0x400678, and so does copy. 
+
+</p><p>Therefore, the string itself was never copied. 
+
+</p><p>All that copy = <i style='color:blue'>mesg</i>; does is produce a second pointer pointing to the very same string.
+
+</p><p>Since it more efficient to copy one address than to copy separate characters.
+
+</p><p>Often, the address is all that is needed to get the job done. 
+
+</p><p>If you truly require a copy that is a duplicate,
+you can use the <i style='color:blue'>strcpy</i>() or <i style='color:blue'>strncpy</i>() function. 
+</p><a class ='btn btn-outline-dark' href=c-arrays-of-character-strings.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-null-pointer-vs-null-character.html>Next</a><h2>Related</h2><UL><LI><a href='c-character-string-literals.html'>C Character String Literals</a></LI><LI><a href='c-character-string-arrays-and-initialization.html'>C Character String Arrays and Initialization</a></LI><LI><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings</a></LI><LI><a href='c-null-pointer-vs-null-character.html'>C NULL pointer vs Null character</a></LI><LI><a href='c-arrays-of-strings.html'>C Arrays of Strings</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-and-strings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

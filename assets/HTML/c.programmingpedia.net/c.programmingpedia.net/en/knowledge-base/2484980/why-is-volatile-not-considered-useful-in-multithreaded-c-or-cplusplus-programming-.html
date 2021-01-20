@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2484980/why-is-volatile-not-considered-useful-in-multithreaded-c-or-cplusplus-programming- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Why is volatile not considered useful in multithreaded C or C++ programming? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Why is volatile not considered useful in multithreaded C or C++ programming? | C Language Knowledge Base">
+        <title>[SOLVED] Why is volatile not considered useful in multithreaded C or C++ programming? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="why-is-volatile-not-considered-useful-in-multithreaded-c-or-cplusplus-programming-">Why is volatile not considered useful in multithreaded C or C++ programming?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus-faq.html">c++-faq</a></span>
+                        <span class="tag-item"><a href="../tag/multithreading.html">multithreading</a></span>
+                        <span class="tag-item"><a href="../tag/volatile.html">volatile</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>As demonstrated in <a href="https://stackoverflow.com/questions/2478397/atomic-swap-in-gnu-c/2478520#2478520">this answer</a> I recently posted, I seem to be confused about the utility (or lack thereof) of <code>volatile</code> in multi-threaded programming contexts.</p>
+
+<p>My understanding is this: any time a variable may be changed outside the flow of control of a piece of code accessing it, that variable should be declared to be <code>volatile</code>.  Signal handlers, I/O registers, and variables modified by another thread all constitute such situations.</p>
+
+<p>So, if you have a global int <code>foo</code>, and <code>foo</code> is read by one thread and set atomically by another thread (probably using an appropriate machine instruction), the reading thread sees this situation in the same way it sees a variable tweaked by a signal handler or modified by an external hardware condition and thus <code>foo</code> should be declared <code>volatile</code> (or, for multithreaded situations, accessed with memory-fenced load, which is probably a better a solution).</p>
+
+<p>How and where am I wrong?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1385039/michael-ekstrand" target="_blank"><span itemprop="name">Michael Ekstrand</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">156</div>
+                                    <div itemprop="dateCreated">5/23/2017 11:33:14 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The problem with <code>volatile</code> in a multithreaded context is that it doesn't provide <em>all</em> the guarantees we need. It does have a few properties we need, but not all of them, so we can't rely on <code>volatile</code> <em>alone</em>.</p>
+
+<p>However, the primitives we'd have to use for the <em>remaining</em> properties also provide the ones that <code>volatile</code> does, so it is effectively unnecessary.</p>
+
+<p>For thread-safe accesses to shared data, we need a guarantee that:</p>
+
+<ul>
+<li>the read/write actually happens (that the compiler won't just store the value in a register instead and defer updating main memory until much later)</li>
+<li>that no reordering takes place. Assume that we use a <code>volatile</code> variable as a flag to indicate whether or not some data is ready to be read. In our code, we simply set the flag after preparing the data, so all <em>looks</em> fine. But what if the instructions are reordered so the flag is set <em>first</em>?</li>
+</ul>
+
+<p><code>volatile</code> does guarantee the first point. It also guarantees that no reordering occurs <em>between different volatile reads/writes</em>. All <code>volatile</code> memory accesses will occur in the order in which they're specified. That is all we need for what <code>volatile</code> is intended for: manipulating I/O registers or memory-mapped hardware, but it doesn't help us in multithreaded code where the <code>volatile</code> object is often only used to synchronize access to non-volatile data. Those accesses can still be reordered relative to the <code>volatile</code> ones.</p>
+
+<p>The solution to preventing reordering is to use a <em>memory barrier</em>, which indicates both to the compiler and the CPU that <em>no memory access may be reordered across this point</em>. Placing such barriers around our volatile variable access ensures that even non-volatile accesses won't be reordered across the volatile one, allowing us to write thread-safe code.</p>
+
+<p>However, memory barriers <em>also</em> ensure that all pending reads/writes are executed when the barrier is reached, so it effectively gives us everything we need by itself, making <code>volatile</code> unnecessary. We can just remove the <code>volatile</code> qualifier entirely.</p>
+
+<p>Since C++11, atomic variables (<code>std::atomic&lt;T&gt;</code>) give us all of the relevant guarantees.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/33213/jalf" target="_blank"><span itemprop="name">jalf</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2484980/why-is-volatile-not-considered-useful-in-multithreaded-c-or-cplusplus-programming-#answer-0</div>
+                                            <div itemprop="upvoteCount">205</div>
+                                            <div itemprop="dateCreated">3/17/2015 8:18:22 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>You might also consider this from the <a href="https://www.kernel.org/doc/html/latest/process/volatile-considered-harmful.html" rel="nofollow noreferrer">Linux Kernel Documentation</a>.</p>
+
+<blockquote>
+  <p>C programmers have often taken volatile to mean that the variable
+  could be changed outside of the current thread of execution; as a
+  result, they are sometimes tempted to use it in kernel code when
+  shared data structures are being used.  In other words, they have been
+  known to treat volatile types as a sort of easy atomic variable, which
+  they are not.  The use of volatile in kernel code is almost never
+  correct; this document describes why.</p>
+  
+  <p>The key point to understand with regard to volatile is that its
+  purpose is to suppress optimization, which is almost never what one
+  really wants to do.  In the kernel, one must protect shared data
+  structures against unwanted concurrent access, which is very much a
+  different task.  The process of protecting against unwanted
+  concurrency will also avoid almost all optimization-related problems
+  in a more efficient way.</p>
+  
+  <p>Like volatile, the kernel primitives which make concurrent access to
+  data safe (spinlocks, mutexes, memory barriers, etc.) are designed to
+  prevent unwanted optimization.  If they are being used properly, there
+  will be no need to use volatile as well.  If volatile is still
+  necessary, there is almost certainly a bug in the code somewhere.  In
+  properly-written kernel code, volatile can only serve to slow things
+  down.</p>
+  
+  <p>Consider a typical block of kernel code:</p>
+
+<pre><code>spin_lock(&amp;the_lock);
+do_something_on(&amp;shared_data);
+do_something_else_with(&amp;shared_data);
+spin_unlock(&amp;the_lock);
+</code></pre>
+  
+  <p>If all the code follows the locking rules, the value of shared_data
+  cannot change unexpectedly while the_lock is held.  Any other code
+  which might want to play with that data will be waiting on the lock. 
+  The spinlock primitives act as memory barriers - they are explicitly
+  written to do so - meaning that data accesses will not be optimized
+  across them.  So the compiler might think it knows what will be in
+  shared_data, but the spin_lock() call, since it acts as a memory
+  barrier, will force it to forget anything it knows.  There will be no
+  optimization problems with accesses to that data.</p>
+  
+  <p>If shared_data were declared volatile, the locking would still be
+  necessary.  But the compiler would also be prevented from optimizing
+  access to shared_data <em>within</em> the critical section, when we know that
+  nobody else can be working with it.  While the lock is held,
+  shared_data is not volatile.  When dealing with shared data, proper
+  locking makes volatile unnecessary - and potentially harmful.</p>
+  
+  <p>The volatile storage class was originally meant for memory-mapped I/O
+  registers.  Within the kernel, register accesses, too, should be
+  protected by locks, but one also does not want the compiler
+  "optimizing" register accesses within a critical section.  But, within
+  the kernel, I/O memory accesses are always done through accessor
+  functions; accessing I/O memory directly through pointers is frowned
+  upon and does not work on all architectures.  Those accessors are
+  written to prevent unwanted optimization, so, once again, volatile is
+  unnecessary.</p>
+  
+  <p>Another situation where one might be tempted to use volatile is when
+  the processor is busy-waiting on the value of a variable.  The right
+  way to perform a busy wait is:</p>
+
+<pre><code>while (my_variable != what_i_want)
+    cpu_relax();
+</code></pre>
+  
+  <p>The cpu_relax() call can lower CPU power consumption or yield to a
+  hyperthreaded twin processor; it also happens to serve as a memory
+  barrier, so, once again, volatile is unnecessary.  Of course,
+  busy-waiting is generally an anti-social act to begin with.</p>
+  
+  <p>There are still a few rare situations where volatile makes sense in
+  the kernel:</p>
+  
+  <ul>
+  <li><p>The above-mentioned accessor functions might use volatile on
+  architectures where direct I/O memory access does work.  Essentially,
+  each accessor call becomes a little critical section on its own and
+  ensures that the access happens as expected by the programmer.</p></li>
+  <li><p>Inline assembly code which changes memory, but which has no other
+  visible side effects, risks being deleted by GCC.  Adding the volatile
+  keyword to asm statements will prevent this removal.</p></li>
+  <li><p>The jiffies variable is special in that it can have a different value
+  every time it is referenced, but it can be read without any special
+  locking.  So jiffies can be volatile, but the addition of other
+  variables of this type is strongly frowned upon.  Jiffies is considered
+  to be a "stupid legacy" issue (Linus's words) in this regard; fixing it
+  would be more trouble than it is worth.</p></li>
+  <li><p>Pointers to data structures in coherent memory which might be modified
+  by I/O devices can, sometimes, legitimately be volatile.  A ring buffer
+  used by a network adapter, where that adapter changes pointers to
+  indicate which descriptors have been processed, is an example of this
+  type of situation.</p></li>
+  </ul>
+  
+  <p>For most code, none of the above justifications for volatile apply. 
+  As a result, the use of volatile is likely to be seen as a bug and
+  will bring additional scrutiny to the code.  Developers who are
+  tempted to use volatile should take a step back and think about what
+  they are truly trying to accomplish.</p>
+</blockquote>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/0/user1831086" target="_blank">user1831086</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2484980" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2484980/why-is-volatile-not-considered-useful-in-multithreaded-c-or-cplusplus-programming- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:10:05 GMT -->
+</html>

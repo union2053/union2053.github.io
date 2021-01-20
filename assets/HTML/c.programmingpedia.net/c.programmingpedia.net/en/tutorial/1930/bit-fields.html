@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1930/bit-fields by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Bit-fields | C Language Tutorial">
+        <meta name="description" property="og:description" content="Bit-fields | C Language Tutorial">
+        <title>Bit-fields | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="bit-fields">Bit-fields</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>Most variables in C have a size that is an integral number of bytes.  Bit-fields are a part of a structure that don't necessarily occupy a integral number of bytes; they can any number of bits.  Multiple bit-fields can be packed into a single storage unit.  They are a part of standard C, but there are many aspects that are implementation defined.  They are one of the least portable parts of C.</p>
+
+
+            </div>
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>type-specifier identifier : size;</li>
+</ul>
+
+
+            </div>
+
+            <h2 id="parameters">Parameters</h2>
+            <div>
+                <table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>type-specifier</td><td><code>signed</code>, <code>unsigned</code>, <code>int</code> or <code>_Bool</code></td></tr><tr><td>identifier</td><td>The name for this field in the structure</td></tr><tr><td>size</td><td>The number of bits to use for this field</td></tr></tbody></table>
+
+            </div>
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>The only portable types for bit-fields are <code>signed</code>, <code>unsigned</code> or <code>_Bool</code>. The plain <code>int</code> type can be used, but the standard says (§6.7.2¶5) <em>… for bit-fields,
+it is implementation-defined whether the specifier <code>int</code> designates the same type as <code>signed int</code> or the same type as <code>unsigned int</code>.</em></p>
+<p>Other integer types may be allowed by a specific implementation, but using them is not portable.</p>
+
+
+            </div>
+
+
+            <h2 id="bit-field-alignment">Bit-field alignment</h2>
+            <div>
+                <p>Bit-fields give an ability to declare structure fields that are smaller than the character width. Bit-fields are implemented with byte-level or word-level mask. The following example results in a structure of 8 bytes.</p>
+<pre><code>struct C
+{
+    short s;            /* 2 bytes */
+    char  c;            /* 1 byte */
+    int   bit1 : 1;     /* 1 bit */
+    int   nib  : 4;     /* 4 bits padded up to boundary of 8 bits. Thus 3 bits are padded */
+    int   sept : 7;     /* 7 Bits septet, padded up to boundary of 32 bits. */
+};
+</code></pre>
+<p>The comments describe one possible layout, but because the standard says <em>the alignment of the addressable storage unit is unspecified</em>, other layouts are also possible.</p>
+<p>An unnamed bit-field may be of any size, but they can't be initialized or referenced.</p>
+<p>A zero-width bit-field cannot be given a name and aligns the next field to the boundary defined by the datatype of the bit-field. This is achieved by padding bits between the bit-fields.</p>
+<p>The size of structure 'A' is 1 byte.</p>
+<pre><code>struct A
+{
+    unsigned char c1 : 3;
+    unsigned char c2 : 4;
+    unsigned char c3 : 1;
+};
+</code></pre>
+<p>In structure B, the first unnamed bit-field skips 2 bits; the zero width bit-field after <code>c2</code> causes <code>c3</code> to start from the char boundary (so 3 bits are skipped between <code>c2</code> and <code>c3</code>. There are 3 padding bits after <code>c4</code>.  Thus the size of the structure is 2 bytes.</p>
+<pre><code>struct B
+{
+    unsigned char c1 : 1;
+    unsigned char    : 2;    /* Skips 2 bits in the layout */
+    unsigned char c2 : 2;
+    unsigned char    : 0;    /* Causes padding up to next container boundary */ 
+    unsigned char c3 : 4;
+    unsigned char c4 : 1;
+};
+</code></pre>
+
+
+            </div>
+            <h2 id="bit-fields">Bit-fields</h2>
+            <div>
+                <p>A simple bit-field can be used to describe things that may have a specific number of bits involved.</p>
+<pre><code>struct encoderPosition {
+   unsigned int encoderCounts : 23;
+   unsigned int encoderTurns  : 4;
+   unsigned int _reserved     : 5;
+};
+</code></pre>
+<p>In this example we consider an encoder with 23 bits of single precision and 4 bits to describe multi-turn. Bit-fields are often used when interfacing with hardware that outputs data associated with specific number of bits. Another example could be communication with an FPGA, where the FPGA writes data into your memory in 32 bit sections allowing for hardware reads:</p>
+<pre><code>struct FPGAInfo {
+    union {
+        struct bits {
+            unsigned int bulb1On  : 1;
+            unsigned int bulb2On  : 1;
+            unsigned int bulb1Off : 1;
+            unsigned int bulb2Off : 1;
+            unsigned int jetOn    : 1;
+        };
+        unsigned int data;
+   };
+};
+</code></pre>
+<p>For this example we have shown a commonly used construct to be able to access the data in its individual bits, or to write the data packet as a whole (emulating what the FPGA might do). We could then access the bits like this:</p>
+<pre><code>FPGAInfo fInfo;
+fInfo.data = 0xFF34F;
+if (fInfo.bits.bulb1On) {
+    printf(&quot;Bulb 1 is on\n&quot;);
+}
+</code></pre>
+<p>This is valid, but as per the C99 standard 6.7.2.1, item 10:</p>
+<blockquote>
+<p>The order of allocation of bit-fields within a unit (high-order to
+low-order or low-order to high-order) is implementation-defined.</p>
+</blockquote>
+<p>You need to be aware of endianness when defining bit-fields in this way. As such it may be necessary to use a preprocessor directive to check for the endianness of the machine. An example of this follows:</p>
+<pre><code>typedef union {
+    struct bits {
+#if defined(WIN32) || defined(LITTLE_ENDIAN)
+    uint8_t commFailure :1;
+    uint8_t hardwareFailure :1;
+    uint8_t _reserved :6;
+#else
+    uint8_t _reserved :6;
+    uint8_t hardwareFailure :1;
+    uint8_t commFailure :1;
+#endif
+    };
+    uint8_t data;
+} hardwareStatus;
+</code></pre>
+
+
+            </div>
+            <h2 id="don-ts-for-bit-fields">Don&#39;ts for bit-fields</h2>
+            <div>
+                <ol>
+<li>Arrays of bit-fields, pointers to bit-fields and functions returning bit-fields are not allowed.</li>
+<li>The address operator (&amp;) cannot be applied to bit-field members.</li>
+<li>The data type of a bit-field must be wide enough to contain the size of the field.</li>
+<li>The <code>sizeof()</code> operator cannot be applied to a bit-field.</li>
+<li>There is no way to create a <code>typedef</code> for a bit-field in isolation (though you can certainly create a <code>typedef</code> for a structure containing bit-fields).</li>
+</ol>
+
+<pre><code>typedef struct mybitfield
+{
+    unsigned char c1 : 20;   /* incorrect, see point 3 */
+    unsigned char c2 : 4;    /* correct */
+    unsigned char c3 : 1;
+    unsigned int x[10]: 5;   /* incorrect, see point 1 */
+} A;
+
+int SomeFunction(void)
+{
+    // Somewhere in the code
+    A a = { … };
+    printf(&quot;Address of a.c2 is %p\n&quot;, &amp;a.c2);      /* incorrect, see point 2 */
+    printf(&quot;Size of a.c2 is %zu\n&quot;, sizeof(a.c2)); /* incorrect, see point 4 */
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="using-bit-fields-as-small-integers">Using bit-fields as small integers</h2>
+            <div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    /* define a small bit-field that can hold values from 0 .. 7 */
+    struct
+    {
+        unsigned int uint3: 3;
+    } small;
+
+    /* extract the right 3 bits from a value */
+    unsigned int value = 255 - 2; /* Binary 11111101 */
+    small.uint3 = value;          /* Binary      101 */
+    printf(&quot;%d&quot;, small.uint3);
+
+    /* This is in effect an infinite loop */
+    for (small.uint3 = 0; small.uint3 &lt; 8; small.uint3++)
+    {
+        printf(&quot;%d\n&quot;, small.uint3);
+    }
+
+    return 0;
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="when-are-bit-fields-useful-">When are bit-fields useful?</h2>
+            <div>
+                <p>A bit-field is used to club together many variables into one object, similar to a structure. This allows for reduced memory usage and is especially useful in an embedded environment.</p>
+<pre><code> e.g. consider the following variables having the ranges as given below.
+ a --&gt; range 0 - 3
+ b --&gt; range 0 - 1
+ c --&gt; range 0 - 7
+ d --&gt; range 0 - 1
+ e --&gt; range 0 - 1
+</code></pre>
+<p>If we declare these variables separately, then each has to be at least an 8-bit integer and the total space required will be 5 bytes. Moreover the variables will not use the entire range of an 8 bit unsigned integer (0-255). Here we can use bit-fields.</p>
+<pre><code>typedef struct {
+   unsigned int a:2;
+   unsigned int b:1;
+   unsigned int c:3;
+   unsigned int d:1;
+   unsigned int e:1;
+} bit_a;
+</code></pre>
+<p>The bit-fields in the structure are accessed the same as any other structure. The programmer needs to take care that the variables are written in range. If out of range the behaviour is undefined.</p>
+<pre><code>int main(void)
+{
+   bit_a bita_var;
+   bita_var.a = 2;              // to write into element a
+   printf (&quot;%d&quot;,bita_var.a);    // to read from element a.
+   return 0;
+}
+</code></pre>
+<p>Often the programmer wants to zero the set of bit-fields. This can be done element by element, but there is second method. Simply create a union of the structure above with an unsigned type that is greater than, or equal to, the size of the structure. Then the entire set of bit-fields may be zeroed by zeroing this unsigned integer.</p>
+<pre><code>typedef union {
+    struct {
+       unsigned int a:2;
+       unsigned int b:1;
+       unsigned int c:3;
+       unsigned int d:1;
+       unsigned int e:1;
+    };
+    uint8_t data;
+} union_bit;    
+</code></pre>
+<p>Usage is as follows</p>
+<pre><code>int main(void)
+{
+   union_bit un_bit;
+   un_bit.data = 0x00;        // clear the whole bit-field
+   un_bit.a = 2;              // write into element a
+   printf (&quot;%d&quot;,un_bit.a);    // read from element a.
+   return 0;
+}
+</code></pre>
+<p>In conclusion, bit-fields are commonly used in memory constrained situations where you have a lot of variables which can take on limited ranges.</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../4924/atomics.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../3336/boolean.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-22</div>
+        <div itemprop="datePublished">2016-07-22</div>
+        <div itemprop="dateModified">2017-07-04</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=1930" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_641508464" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#parameters">
+                    Parameters
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#bit-field-alignment">
+                    Bit-field alignment
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#bit-fields">
+                    Bit-fields
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#don-ts-for-bit-fields">
+                    Don&amp;#39;ts for bit-fields
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-bit-fields-as-small-integers">
+                    Using bit-fields as small integers
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#when-are-bit-fields-useful-">
+                    When are bit-fields useful?
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1930/bit-fields by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+</html>

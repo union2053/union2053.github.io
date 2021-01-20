@@ -1,0 +1,628 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_4.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:17 GMT -->
+<head>
+	<title>C Programlama Ders: IV</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C Programlama, if - else if, switch-case, increment, arttırma, decrement, azaltma, postfix, prefix, conditional operator">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">30 Temmuz 2006</font></div>
+	<h2>C Programlama Dersi - IV</h2>
+	
+		<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- İçiçe geçmiş (Nested) koşullu ifadeler</p>
+				<p>- if - else if merdiveni</p>
+				<p>- switch - case ifadesi</p>
+				<p>- Arttırma (Increment) ve azaltma (Decrement) işlemleri</p>
+				<p>- Gelişmiş atama (Advanced Assignment) yöntemleri</p>
+				<p>- Conditional Operator&nbsp;(&nbsp;?&nbsp;) </p>
+				<p>- Konuyla ilgili örnek sorular </p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+		<br/>
+		<h3>İçiçe geçmiş (Nested) İfadeler</h3>		
+		<p>
+			Daha <a href="c_programming_3.html">önceki yazımızda</a>, koşullu ifadeleri 
+			görmüştük. Hatırlatmak için üzerinden geçersek, if ile bir ifadeyi kontrol ediyor 
+			ve doğruysa, buna göre işlemler yapıyorduk. Bir de if - else yapısı vardı. if - else
+			yapısında da, koşulu gene kontrol ediyor, doğruysa if bloğunun altında kalanları 
+			yapıyorduk; yanlışsa, else bloğunda olan kodlar işleme alınıyordu. Son derece basit
+			bir mantık üzerine kurulmuş bu yapıyla, yapılamayacak kontrol yoktur. Ancak öyle 
+			durumlar vardır ki, if - else yapısı yeterli verimliliği sunamaz.
+		</p>
+		<p>Diyelim ki, birden fazla kontrol yapmanız gereken bir durum oluştu. Hatta örnek 
+		vererek konuyu daha da somutlaştıralım. İstenilen bir programda, klavyeden size 
+		yaş bilgisi veriliyor. Siz de bu bilgiye göre, şayet yaş 18'den küçükse çocuk; 
+		18-30 yaş arasında genç; 30-50 yaş arasında ortayaş diye bir mesaj bastırıyorsunuz.
+		Basit bir program. 
+		</p>
+		<p>
+		Şimdi bunu sadece if yapısıyla kuruyor olsaydık, her seferinde yaşın uygun aralıklara 
+		düşüp düşmediğini kontrol eder ve ona göre sonucu ekrana bastırırdık. Ama bu 
+		son derece verimsiz bir yöntem olurdu. Çünkü zaten yaş bilgisinin genç olduğuna 
+		dair bir karar vermişsek, sonrasında tutup bunun yaşlı olup olmadığını kontrol 
+		etmenin bir esprisi olmayacaktır. Verilebilecek en kötü cevabı aşağıda bulabilirsiniz:
+		</p>
+		<pre>
+/*
+Sorulan soruya verilebilecek en 
+kötü cevap.
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_yas;
+	printf("Lütfen yaşınızı giriniz> ");
+	scanf("%d",&girilen_yas);
+	if( girilen_yas < 18 )
+		printf("Daha çocuk yaştasınız, hayatın başındasınız.\n");
+	if( girilen_yas >= 18 && girilen_yas <= 30 )
+		printf("Gençliğin, güzelliği bambaşka!\n");
+	if( girilen_yas > 30 && girilen_yas <= 50 )
+		printf("Hepsini boşverin, olgunluk ortayaşta başlar!\n");
+	return 0;
+}
+</pre>
+		<p>Yukarda ki kodu if - else kullanarak daha efektif hale getirebiliriz: </p>
+		<pre>
+/*
+if - else yapısıyla daha
+efektif bir yapı
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_yas;
+	printf("Lütfen yaşınızı giriniz> ");
+	scanf("%d",&girilen_yas);
+	if( girilen_yas < 18 )
+		printf("Daha çocuk yaştasınız, hayatın başındasınız.\n");
+	else {
+		if( girilen_yas >= 18 && girilen_yas <= 30 )
+			printf("Gençliğin, güzelliği bambaşka!\n");
+		else {
+			if( girilen_yas > 30 && girilen_yas <= 50 )
+				printf("Hepsini boşverin, olgunluk ortayaşta başlar!\n");
+		}
+	}
+	return 0;
+}
+</pre>
+		<p>
+		Yukardaki program daha efektif bir yapı sunmuş olmasına rağmen, eğer kontrol ettiğimiz 
+		aralıkların sayısı çok fazla olsaydı, tam bir başbelası olacaktı! Çünkü if - else içinde,
+		bir başka if - else bloğu ve onun içinde bir başkası... bu böyle sürüp gidecekti. Kısacası 
+		performans olarak çok bir şey değişmese de, kodu yazan ve/veya okuyacak olan için tam bir 
+		eziyete dönüşecekti. İşte bu nedenlerle daha efektif yapılara ihtiyaç duyuyoruz.
+		</p>
+		<h3>if - else if Merdiveni</h3>
+		<p>
+		if - else if merdiveni yukarda verdiğimiz örnekler için biçilmiş kaftandır. if - else if 
+		merdiveni, doğru bir şey bulduğu zaman kontrolu orada keser ve diğer koşulları 
+		kontrol etmeden blok sonlandırılır.
+		</p>
+		<p>Aşağıda if - else if yapısını ve akış diyagramını bulabilirsiniz:</p>
+
+	<div align="center">
+ 	<table border="0" cellspacing="1" cellpadding="7">
+ 	
+		<tr>
+			<td align="center"><b><i>if - else if Yapısı</i></b></td>
+			<td align="center"><b><i>if - else if Akış Diyagramı</i></b></td>
+		</tr>
+		
+		<tr>
+			<td align="left">
+			<pre style="width: 300px;margin-left: 0px;">
+if( <i><i>koşul 1</i></i> ) {
+	<i>komut(lar) 1</i>
+}
+else if( <i><i>koşul 2</i></i> ) {
+	<i>komut(lar) 2</i>
+}
+	.
+	.
+	.
+else if( <i><i>koşul n</i></i> ) {
+	<i>komut(lar) n</i>
+}
+else {
+	<i>komut(lar) n</i>
+}
+</pre></td>
+			<td align="center">
+			<div class="notcolorful">
+			<a href="c_operands/if_else_if.png" target="_blank">
+		 		<img src="c_operands/sm_if_else_if.png" alt="[if - else if structure]" border="0"/>			
+		 	</a>			
+		 	</div>
+			</td>			
+		</tr>
+	</table>
+	</div>
+	<p>if - else if ile söylenebilecek son bir şey sonunda ki else'tir. else koymak zorunlu 
+	değildir. Ancak hiçbir koşula uymayan bir durumla karşılaştığınızda, else devreye girer.
+	Örneğin yukarda anlatıp, kodunu vermiş olduğumuz programda, belirtilen yaş aralıklarında 
+	değer girilmezse, hiçbir şey ekrana bastırılmayacaktır. Çünkü programa tanınmayan yaş 
+	aralığında ne yapılacağı öğretilmemiştir. Şimdi bu durumu da içerecek şekilde, 
+	programamımızı if - else if yapısıyla tekrar yazalım:
+	 </p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int girilen_yas;
+	printf("Lütfen yaşınızı giriniz> ");
+	scanf("%d",&girilen_yas);
+
+	if( girilen_yas < 18 )
+		printf("Daha çocuk yaştasınız, hayatın başındasınız.\n");
+	else if( girilen_yas >= 18 && girilen_yas <= 30 )
+			printf("Gençliğin, güzelliği bambaşka!\n");
+	else if( girilen_yas > 30 && girilen_yas <= 50 )
+			printf("Hepsini boşverin, olgunluk ortayaşta başlar!\n");
+	else
+		printf("HATA: Girilen yaş tanımlı değildir!\n");
+		
+	return 0;
+}
+</pre>
+	<h3>swicth - case ifadesi</h3>
+	<p>switch - case, if - else if yapısına oldukça benzer bir ifadedir. Ancak aralarında iki 
+	fark vardır. Birincisi, switch - case yapısında, aralık değeri girmezsiniz. Direkt olarak 
+	ifadelerin bir şeylere eşit olup olmadığına bakarsınız. İkinci farksa, switch - case 
+	yapılarında, illa ki uygun koşulun sağlanmasıyla yapının kesilmek zorunda olmayışıdır. 
+	'break' komutu kullanmadığınız takdirde, diğer şartların içindeki işlemleri de yapma 
+	imkanınız olabilir. switch case en tepeden başlayarak şartları tek tek kontrol eder. 
+	Uygun şart yakalanırsa, bundan sonra ki ifadeleri kontrol etmeden doğru kabul eder. 
+	Ve şayet siz break koymamışsanız, eşitlik uygun olsun olmasın, alt tarafta kalan case'lere
+	ait komutlarda çalıştırılacaktır. if - else if ise daha önce söylemiş olduğumuz gibi böyle değildir. 
+	Uygun koşul sağlandığında, yapı dışarsına çıkılır.
+ 	</p>
+ 	<p>switch case yapısında ki durumu, aşağıdaki tabloda görebilirsiniz:</p>
+	<div align="center">
+ 	<table border="0" cellspacing="1" cellpadding="7">
+ 	
+		<tr>
+			<td align="center"><b><i>switch case Yapısı</i></b></td>
+			<td align="center"><b><i>switch case Akış Diyagramı</i></b></td>
+		</tr>
+		
+		<tr>
+			<td align="left">
+			<pre style="width: 300px;margin-left: 0px; ">
+switch( <i><i>degisken</i></i> ) {
+	case <i>sabit1</i>:
+		komut(lar)
+		[break]
+	case <i>sabit2</i>:
+		komut(lar)
+		[break]
+	.
+	.
+	.
+	case <i>sabitN</i>:
+		komut(lar)
+		[break]
+	default:
+		komut(lar);
+}		
+</pre>
+	</td>
+			<td align="center">
+			<div class="notcolorful">
+			<a href="c_operands/switch_case.png" target="_blank">
+		 		<img src="c_operands/sm_switch_case.png" alt="[switch case structure]" border="0"/>			
+		 	</a>			
+		 	</div>
+			</td>			
+		</tr>
+	</table>
+	</div>
+ 	<p>Sanırım gözünüze biraz farklı gözüktü. Yapı olarak şimdiye kadar görmüş olduğunuz 
+ 	if else gibi gözükmese de, bir örnekten sonra arasında pek bir fark olmadığını göreceksiniz.
+ 	Her komut sonunda koyduğum break komutu, zorunlu değildir ve o nedenle köşeli parantezle
+ 	belirtilmiştir. break koyduğuz takdirde, uygun koşul sağlandıktan sonra, daha fazla 
+ 	kontrol yapılmayacak ve aynen if - else if yapısında olduğu gibi program orada kesilecektir.
+ 	Ama break koymazsanız, altında kalan bütün işlemler -bir daha ki break'e kadar- yapılacaktır.
+	</p>
+	<p>
+	Kodun sonunda gördüğünüz default komutu, if - else if yapısında ki sonuncu else gibidir.
+	Uygun hiçbir şart bulunamazsa, default komutu çalışır.
+	</p>
+ 	<p>
+ 	Öğrendiğimiz bilginin pekişmesi için biraz pratik yapalım. Bir not değerlendirme sistemi 
+ 	olsun. 100 - 90 arası A, 89 - 80 arası B, 79 - 70 arası C, 69 - 60 arası D, 59 ve altıysa 
+ 	F olsun. Eğer 100'den büyük veya negatif bir sayı girilirse, o zaman program hatalı bir 
+ 	giriş yapıldığını konusunda bizleri uyarsın. Bunu şimdiye kadar öğrendiğiniz bilgilerle, 
+ 	if - else if yapısını kullanarak rahatlıkla yanıtlayabilirsiniz. Ama şu an konumuz 
+ 	switch case olduğundan, cevabını öyle verelim:
+ 	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int not;
+	printf("Lütfen notu giriniz> ");
+	scanf("%d",&amp;not);
+	switch( not / 10 ) {
+		case 10: 
+		case 9: printf("NOT: A\n"); break;
+		case 8: printf("NOT: B\n"); break;
+		case 7: printf("NOT: C\n"); break;
+		case 6: printf("NOT: D\n"); break;
+		case 5:
+		case 4:
+		case 3:
+		case 2: 
+		case 1:
+		case 0: printf("NOT: F\n"); break;
+		default:
+			printf("HATA: Bilinmeyen bir değer girdiniz!\n");
+	}
+	
+	return 0;
+}
+</pre>
+	<p>Algoritmaya bakalım: Önce sayıyı alıyor ve 10'a bölüyoruz. Yani girilen not, 57 ise
+	5.7 sonucunu elde ediyoruz. Ancak iki tam sayının sonucu bir virgüllü sayı veremez, 
+	tıpkı işleme giren değişkenler gibi tam sayı olarak döner. Dolayısıyla bilgisayarın elde
+	edeceği sonuç, 5.7 değil, sadece 5'tir. switch case yapısında koşullar yukardan başlayarak
+	kontrol ediliyor. case 5'e gelindiğinde eşitlik sağlanıyor. Ama break konmadığı için, 
+	switch case'ten çıkılmıyor. Ve altında kalan işlemlerde yapılıyor. Altında herhangi bir 
+	işlem veya break olmadığından case 0'a kadar bu böyle sürüyor. Ve case 0'da ekrana bir 
+	çıktı alıp switch case yapısı break ile sonlandırılmaktadır.
+	</p>
+ 	<p>switch case, if - else if yapısının sunduğu esnekliğe sahip değildir. Daha çok menü 
+ 	olarak sunulacak işlerde kullanılır. Örneğin Unix'in ünlü listeleme komutu <a href="http://cvs.opensolaris.org/source/xref/on/usr/src/cmd/ls/ls.c" style="text-decoration:none">ls</a> 
+ 	içersinde, verilen parametrelerin kontrolü switch case kullanılarak sağlanmıştır. <a href="http://www.opensolaris.org/" style="text-decoration:none">Open Solaris</a>, 
+ 	<a href="http://www.freebsd.org/" style="text-decoration:none">FreeBSD</a> veya <a href="http://www.kernel.org/" style="text-decoration:none">Linux</a> kodlarını 
+ 	incelerseniz bunun gibi yüzlerce örnek bulabilirsiniz. 
+ 	</p>
+	<h3>Arttırma (Increment) ve azaltma (decrement) işlemleri</h3>
+	<p>
+	Daha önceki derslerimizde, aritmetik işlemlerden bahsetmiştik. Bunların dışında 
+	yapabileceğimiz başka şeylerde bulunmaktadır. Bunlardan biri de, arttırma ve azaltma
+	işlemleridir. 
+	</p>
+	<p>Eğer i adında bir değişkenin değerini 1 arttırmak isterseniz, i = i + 1 olarak 
+	yazarsınız. Veya 1 azaltmak isterseniz, benzer şekilde i = i - 1 de yazabilirsiniz. 
+	Arttırma ve azaltma işlemleri bu olayı daha basit bir forma sokmaktadır. i = i + 1 
+	yazmak yerine i++ veya i = i - 1 yazmak yerine i-- yazabilirsiniz. 
+	</p>
+	<p>Arttırma ve azaltma işlemleri temelde iki çeşittir. Birinci yöntemde yukarda 
+	yazdığımız gibi, arttırma/azaltma sonradan yapılır. İkinci yöntemdeyse arttırma/azaltma 
+	ilk başta yapılır. Aşağıdaki örneklere bakalım. </p>
+	<pre>
+/*
+Bu programda, arttırma ve azaltma 
+işlemleri önce yapılacaktır. 
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i = 10, j = 60;
+	printf("i = %d ve j = %d\n", ++i, --j);
+	return 0;
+}
+</pre>
+	<p>Yukardaki programı yazar ve çalıştırısanız elde edeceğiniz çıktı şu şekilde görünecektir:
+	</p>
+	<p>i = 11 ve j = 59</p>
+	<p>Çünkü arttırma ve azaltma işlemleri ekrana bastırmadan önce yapılmış ve i ile j'nin 
+	değerleri değiştirilmiştir. Şimdi programı değiştirip şöyle yazalım:</p>
+	<pre>
+/*
+Bu programda, arttırma ve azaltma 
+işlemleri sonra yapılacaktır. 
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int i = 10, j = 60;
+	printf("i = %d ve j = %d\n", i++, j--);
+	return 0;
+}
+</pre>
+ 	<p>Bu sefer program çıktısı şöyle olacaktır:</p>
+ 	<p>i = 10 ve j = 60</p>
+ 	<p>Farkettiğiniz üzere hiçbir değişiklik yapılmamış gibi duruyor. Aslında değişiklik yapıldı
+ 	ve program sonlanmadan önce i 10 olurken, j'de 59 oldu. Ama arttırma ve azaltma işlemleri
+ 	printf komutu çalıştırıldıktan sonra yapıldığı için, biz bir değişiklik göremedik.</p>
+ 	<p>Kısacası önce arttırma (pre-increment) veya önce azaltma (pre-decrement) kullandığınızda,
+ 	ilgili komut satırında çalışacak ilk şey bu komutlar olur. Ancak sonra arttırma 
+ 	(post increment) veya sonra azaltma kullanırsanız, o zaman bu işlemlerin etkileri 
+ 	ilgili komut satırından sonra geçerli olacaktır. Aşağıdaki özel tabloya bakabilirsiniz:</p>
+	<div style="margin-left:60px;">
+		<table border="1" cellspacing="1" cellpadding="7">
+			<tr>
+				<td align="center"><b>Form</b></td>
+				<td align="center"><b>Tip</b></td>
+				<td align="center"><b>İsim</b></td>
+				<td align="center"><b>Açıklama</b></td>
+			</tr>
+			<tr>
+				<td>i++</td>
+				<td>postfix</td>
+				<td>post-increment</td>
+				<td>İşlem sonrası arttırma</td>
+			</tr>
+			<tr>
+				<td>++i</td>
+				<td>prefix</td>
+				<td>pre-increment</td>
+				<td>İşlem öncesi arttırma</td>
+			</tr>
+			<tr>
+				<td>i--</td>
+				<td>postfix</td>
+				<td>post-decrement</td>
+				<td>İşlem sonrası azaltma</td>
+			</tr>
+			<tr>
+				<td>--i</td>
+				<td>prefix</td>
+				<td>pre-decrement</td>
+				<td>İşlem öncesi azaltma</td>
+			</tr>
+		</table>
+		</div>
+	<h3>Gelişmiş atama (Advanced Assignment) yöntemleri</h3>
+	<p>
+	C'de yazım kolaylığı amacıyla sunulmuş bir başka konu da, gelişmiş aşama yöntemleridir.
+	Biraz daha uzun yazacağınız kodu, kısaltmanıza yaramaktadır.
+	</p>
+	<p> degisken_1 = degisken_1 (operator) degisken_2 şeklinde yazacağınız ifadeleri, daha 
+	kısa yazabilmeniz için, degisken_1 (operator) = degisken_2 şeklinde ifade edebilirsiniz.
+	Gelişmiş atamalarda sunulan genel formlar şu şekildedir:
+	</p>
+<div align="center"> 
+<pre style="width: 300px;margin-left: 0px;">
++= , -= , *= , /= , %=
+</pre>
+</div>
+	<p>
+		Sanırım aşağıdaki örneklere bakarsanız, konuyu çok daha net anlayacaksınız:
+	</p>
+	<pre>
+1-) j = j * ( 3 + x )  ==> j *= ( 3 + x )
+2-) a = a / ( 5 - z ) ==> a /= ( 5 - z )
+3-) x = x - 5 ==> x -= 5
+</pre>
+	<h3>Conditional Operator&nbsp;(&nbsp;?&nbsp;) </h3>
+	<p>Türkçe karşılık bulamadığım bir başka C kavramı da, Conditional Operator. Aslında
+	mot a mot çeviri yaparsam, koşullu operatör anlamına geliyor. Ama şu ana kadar 
+	gördüğümüz birçok yapıyı da bu şekilde tanımlamak mümkünken, koşullu operatör 
+	ifadesini kullanmayı pek tercih etmiyorum. Neyse lafı uzatmayalım...</p>
+	<p>Conditional Operator, if-else ile tamamen aynı yapıdadır. Hiçbir farkı yoktur. 
+	Tek farkı koda bakıldığında anlaşılmasının biraz daha zor oluşudur. Bir de if - else 
+	gibi yazıyla ifade edilmez. Onun yerine soru işareti (?) ve iki nokta üst üste  
+	(&nbsp;:&nbsp;) kullanarak yazarız. Aşağıdaki tabloda if else yapısıyla karşılaştırılmalı olarak, 
+	Conditional Operator verilmiştir: </p>
+		<div align="center">
+ 	<table border="0" cellspacing="1" cellpadding="7">
+ 	
+		<tr>
+			<td align="center"><b><i>if-else Yapısı</i></b></td>
+			<td align="center"><b><i>Conditional Operator&nbsp;(&nbsp;?&nbsp;) Yapısı</i></b></td>
+		</tr>
+		
+		<tr>
+			<td align="left">
+<pre style="width: 300px;margin-left: 0px;">
+if( <i>koşul</i> ) {
+	<i>if_komut(lar)</i>
+}
+else {
+	<i>else_komut(lar)</i>
+}
+</pre>
+		</td>
+		<td>
+			<pre style="width: 300px;margin-left: 0px;">
+<i>koşul</i>?if_komut(lar):else_komutlar
+</pre>
+		</tr>
+	</table>
+	</div>
+
+	<div align="center">
+	<table>
+	<tr>
+		<td align="center">
+			<b><i>Conditional Operator&nbsp;(&nbsp;?&nbsp;) Akış Diyagramı</i></b>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+		<div class="notcolorful">
+			<a href="c_operands/conditional_operator.png" target="_blank">
+		 		<img src="c_operands/sm_conditional_operator.png" alt="[Conditional Operator structure]" border="0"/>			
+		 	</a>			
+		 </div>
+		</td>
+	</tr>
+	</table>	
+	</div>
+	<p>
+		Şimdi de aynı programı, hem if-else, hem de conditional operator kullanarak yazalım:
+	</p>
+	<pre>
+/*
+Girilen tam sayının 
+10'dan büyük olup 
+olmadığını gösteren
+program
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi;
+	printf("Lütfen bir sayı giriniz> ");
+	scanf("%d",&sayi);
+	if( sayi > 10 ) 
+		printf("Sayı 10'dan büyüktür\n");
+	else
+		printf("Sayı 10'dan küçüktür veya 10'a eşittir\n");
+	return 0;
+}
+</pre>
+	<p>Şimdi de aynı programı conditional operator kullanarak yazalım:</p>
+	<pre>
+/*
+Girilen tam sayının 
+10'dan büyük olup 
+olmadığını söyleyen 
+program
+*/
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi;
+	printf("Lütfen bir sayı giriniz> ");
+	scanf("%d",&sayi);
+	( sayi > 10 ) ? printf("Sayı 10'dan büyüktür\n"):
+			printf("Sayı 10'dan küçüktür veya 10'a eşittir\n");
+	return 0;
+}
+</pre>
+	<p>Program gördüğünüz gibi biraz daha kısaldı. </p>
+	<p>Conditional Operator'ler pek kullanmayı sevmediğim bir yapıdır. Çünkü 
+	kodun kısa olmasından çok, anlaşılabilir olması önemli. Ve conditional 
+	operator kullanmak ne yazık ki, kodu daha karmaşık hale getiriyor. 
+	UNIX filozofisinde bir şeyi akıllıca yapacağınıza, temiz/açık yapın diye bir 
+	yaklaşım mevcut. Belki bu yüzden veya belki de tembellik, conditional 
+	operator'lere alışamadım gitti... :)
+	</p>
+	<p>Şimdi örnek sorularımıza gelelim...</p>
+	<h3>Örnek Sorular</h3>
+	<p><b>Soru 1:</b> Aşağıdaki kodu yorumlayınız:</p>
+	<p> s = ( x < 0 ) ? -1 : x * x </p>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+	<pre>
+Eğer x, 0'dan küçük bir değerse, s değişkenine, -1 değeri atanır. Eğer x, 0'dan büyükse,
+x'in karesi, s değişkenine atanır. (Gördüğünüz gibi ilk bakışta kodu yorumlamak biraz 
+sıkıcı olabiliyor. Sanırım yukarda ne demek istediğimi anlamışsınızdır.)
+</pre>
+	</div>	
+	
+	<p><b>Soru 2:</b> İki tam sayı alacak ve verilecek operatöre göre (+, -, *, /, %) 
+	işlem yapacak bir program yazınız.</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi_1, sayi_2;
+	char operator_simgesi;
+	printf("Lütfen işlem simgesi giriniz> ");
+	scanf("%c",&operator_simgesi);
+	printf("Lütfen birinci sayıyı giriniz> ");
+	scanf("%d",&sayi_1);
+	printf("Lütfen ikinci sayıyı giriniz> ");
+	scanf("%d",&sayi_2);
+	switch( operator_simgesi ) {
+		case '+':
+			printf("%d %c %d = %d\n",sayi_1,operator_simgesi, sayi_2, sayi_1 + sayi_2); break;
+		case '-': 
+			printf("%d %c %d = %d\n",sayi_1,operator_simgesi, sayi_2, sayi_1 - sayi_2); break;
+		case '%':
+			printf("%d %c %d = %d\n",sayi_1,operator_simgesi, sayi_2, sayi_1 % sayi_2); break;
+		case '*':
+			printf("%d %c %d = %d\n",sayi_1,operator_simgesi, sayi_2, sayi_1 * sayi_2); break;
+		case '/':
+			printf("%d %c %d = %.2f\n",sayi_1,operator_simgesi, sayi_2, (float)sayi_1 / sayi_2);break;
+		default:
+			printf("HATA: Tanımsız bir operatör girdiniz!\n");
+	}
+	return 0;
+}</pre>
+	</div>	
+
+	<p><b>Soru 3:</b> Verilecek üç sayıdan en büyüğünü ekrana yazdıracak bir program 
+	yazınız.</p>
+	<p>
+	<a href="#soru3" name="soru3" onMouseDown="change_display_of_object('Cevap3')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap3" style="display:none;">
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int sayi_1, sayi_2, sayi_3;
+	printf("Üç sayı giriniz> ");
+	scanf("%d %d %d", &sayi_1, &sayi_2, &sayi_3);
+	if( sayi_1 >= sayi_2 && sayi_1 > sayi_3 )
+		printf("%d en büyük sayıdır!\n", sayi_1);
+	else if( sayi_2 >= sayi_1 && sayi_2 >= sayi_3 )
+		printf("%d en büyük sayıdır!\n", sayi_2);
+	else if( sayi_3 >= sayi_1 && sayi_3 >= sayi_1 )
+		printf("%d en büyük sayıdır!\n", sayi_3);		
+	return 0;
+}
+</pre>
+	</div>		
+	
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_3.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_5.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+	
+	</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_4.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:29 GMT -->
+</html>

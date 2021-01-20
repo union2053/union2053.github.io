@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10715170/receiving-rtsp-stream-using-ffmpeg-library by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Receiving RTSP stream using FFMPEG library | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="Receiving RTSP stream using FFMPEG library | C Language Knowledge Base">
+        <title>Receiving RTSP stream using FFMPEG library | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="receiving-rtsp-stream-using-ffmpeg-library">Receiving RTSP stream using FFMPEG library</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/ffmpeg.html">ffmpeg</a></span>
+                        <span class="tag-item"><a href="../tag/ip-camera.html">ip-camera</a></span>
+                        <span class="tag-item"><a href="../tag/rtsp.html">rtsp</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have an IPCamera on my LAN streaming video using RTSP. I have been able to capture and display it successfully using ffplay command:</p>
+
+<pre><code>ffplay rtsp://admin:123456@192.168.2.50:7070 
+</code></pre>
+
+<p>(with authentication)</p>
+
+<p>So I would like to achieve the same using programming in C/C++ using <code>ffmpeg</code> library. I guess this must be possible.</p>
+
+<p>So let me phrase two simple questions :</p>
+
+<ol>
+<li><p>How do I receive the stream in a C/C++ program using FFMPEG library? (just provide some URL/tutorial, as google was not helpful)</p></li>
+<li><p>How do I display the received video? (same here, some good URL to direct me).</p></li>
+</ol>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1272071/bhanu-challa" target="_blank"><span itemprop="name">Bhanu Challa</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">31</div>
+                                    <div itemprop="dateCreated">12/9/2014 11:09:44 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>For rtsp streams the following is working for me (after receiving frames i save the result to a ppm file):</p>
+
+<pre><code>    #include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+
+extern "C"
+{
+    #include &lt;avcodec.h&gt;
+    #include &lt;avformat.h&gt;
+    #include &lt;avio.h&gt;
+    #include &lt;swscale.h&gt;
+}
+
+void log_callback(void *ptr, int level, const char *fmt, va_list vargs)
+{
+   static char message[8192];
+   const char *module = NULL;
+
+    if (ptr)
+    {
+        AVClass *avc = *(AVClass**) ptr;
+        module = avc-&gt;item_name(ptr);
+    }
+   vsnprintf_s(message, sizeof(message), fmt, vargs);
+
+   std::cout &lt;&lt; "LOG: " &lt;&lt; message &lt;&lt; std::endl;
+}
+
+
+int main(int argc, char** argv) {
+
+    SwsContext *img_convert_ctx;
+    AVFormatContext* context = avformat_alloc_context();
+    AVCodecContext* ccontext = avcodec_alloc_context();
+    int video_stream_index;
+
+    av_register_all();
+    avformat_network_init();
+    //av_log_set_callback(&amp;log_callback);
+
+    //open rtsp
+    if(avformat_open_input(&amp;context, "rtsp://134.169.178.187:8554/h264.3gp",NULL,NULL) != 0){
+        return EXIT_FAILURE;
+    }
+
+    if(avformat_find_stream_info(context,NULL) &lt; 0){
+        return EXIT_FAILURE;
+    }
+
+    //search video stream
+    for(int i =0;i&lt;context-&gt;nb_streams;i++){
+        if(context-&gt;streams[i]-&gt;codec-&gt;codec_type == AVMEDIA_TYPE_VIDEO)
+            video_stream_index = i;
+    }
+
+    AVPacket packet;
+    av_init_packet(&amp;packet);
+
+    //open output file
+    //AVOutputFormat* fmt = av_guess_format(NULL,"test2.mp4",NULL);
+    AVFormatContext* oc = avformat_alloc_context();
+    //oc-&gt;oformat = fmt;
+    //avio_open2(&amp;oc-&gt;pb, "test.mp4", AVIO_FLAG_WRITE,NULL,NULL);
+
+    AVStream* stream=NULL;
+    int cnt = 0;
+    //start reading packets from stream and write them to file
+    av_read_play(context);//play RTSP
+
+    AVCodec *codec = NULL;
+    codec = avcodec_find_decoder(CODEC_ID_H264);
+    if (!codec) exit(1);
+
+    avcodec_get_context_defaults3(ccontext, codec);
+    avcodec_copy_context(ccontext,context-&gt;streams[video_stream_index]-&gt;codec);
+    std::ofstream myfile;
+
+    if (avcodec_open(ccontext, codec) &lt; 0) exit(1);
+
+    img_convert_ctx = sws_getContext(ccontext-&gt;width, ccontext-&gt;height, ccontext-&gt;pix_fmt, ccontext-&gt;width, ccontext-&gt;height,
+                            PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
+
+    int size = avpicture_get_size(PIX_FMT_YUV420P, ccontext-&gt;width, ccontext-&gt;height);
+    uint8_t* picture_buf = (uint8_t*)(av_malloc(size));
+    AVFrame* pic = avcodec_alloc_frame();
+    AVFrame* picrgb = avcodec_alloc_frame();
+    int size2 = avpicture_get_size(PIX_FMT_RGB24, ccontext-&gt;width, ccontext-&gt;height);
+    uint8_t* picture_buf2 = (uint8_t*)(av_malloc(size2));
+    avpicture_fill((AVPicture *) pic, picture_buf, PIX_FMT_YUV420P, ccontext-&gt;width, ccontext-&gt;height);
+    avpicture_fill((AVPicture *) picrgb, picture_buf2, PIX_FMT_RGB24, ccontext-&gt;width, ccontext-&gt;height);
+
+    while(av_read_frame(context,&amp;packet)&gt;=0 &amp;&amp; cnt &lt;1000)
+    {//read 100 frames
+
+        std::cout &lt;&lt; "1 Frame: " &lt;&lt; cnt &lt;&lt; std::endl;
+        if(packet.stream_index == video_stream_index){//packet is video
+            std::cout &lt;&lt; "2 Is Video" &lt;&lt; std::endl;
+            if(stream == NULL)
+            {//create stream in file
+                std::cout &lt;&lt; "3 create stream" &lt;&lt; std::endl;
+                stream = avformat_new_stream(oc,context-&gt;streams[video_stream_index]-&gt;codec-&gt;codec);
+                avcodec_copy_context(stream-&gt;codec,context-&gt;streams[video_stream_index]-&gt;codec);
+                stream-&gt;sample_aspect_ratio = context-&gt;streams[video_stream_index]-&gt;codec-&gt;sample_aspect_ratio;
+            }
+            int check = 0;
+            packet.stream_index = stream-&gt;id;
+            std::cout &lt;&lt; "4 decoding" &lt;&lt; std::endl;
+            int result = avcodec_decode_video2(ccontext, pic, &amp;check, &amp;packet);
+            std::cout &lt;&lt; "Bytes decoded " &lt;&lt; result &lt;&lt; " check " &lt;&lt; check &lt;&lt; std::endl;
+            if(cnt &gt; 100)//cnt &lt; 0)
+            {
+                sws_scale(img_convert_ctx, pic-&gt;data, pic-&gt;linesize, 0, ccontext-&gt;height, picrgb-&gt;data, picrgb-&gt;linesize);
+                std::stringstream name;
+                name &lt;&lt; "test" &lt;&lt; cnt &lt;&lt; ".ppm";
+                myfile.open(name.str());
+                myfile &lt;&lt; "P3 " &lt;&lt; ccontext-&gt;width &lt;&lt; " " &lt;&lt; ccontext-&gt;height &lt;&lt; " 255\n";
+                for(int y = 0; y &lt; ccontext-&gt;height; y++)
+                {
+                    for(int x = 0; x &lt; ccontext-&gt;width * 3; x++)
+                        myfile &lt;&lt; (int)(picrgb-&gt;data[0] + y * picrgb-&gt;linesize[0])[x] &lt;&lt; " ";
+                }
+                myfile.close();
+            }
+            cnt++;
+        }
+        av_free_packet(&amp;packet);
+        av_init_packet(&amp;packet);
+    }
+    av_free(pic);
+    av_free(picrgb);
+    av_free(picture_buf);
+    av_free(picture_buf2);
+
+    av_read_pause(context);
+    avio_close(oc-&gt;pb);
+    avformat_free_context(oc);
+
+    return (EXIT_SUCCESS);
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1459240/technique" target="_blank"><span itemprop="name">technique</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/10715170/receiving-rtsp-stream-using-ffmpeg-library#answer-0</div>
+                                            <div itemprop="upvoteCount">30</div>
+                                            <div itemprop="dateCreated">6/15/2012 4:22:39 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/10715170" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10715170/receiving-rtsp-stream-using-ffmpeg-library by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+</html>

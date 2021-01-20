@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/html_coding/html_coding_6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:25:41 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+  <meta name="keywords" content="HTML Kodlama, HTML tag, HTML anlatımı, cagataycebi.com">
+	<meta name="robots" content="index,follow">
+	<title>HTML Kodlama Ders: VI</title>
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+
+	<body>
+	<h1>C</h1>
+  <div align="right" name="toc"><font size="-2">07 Temmuz 2013</font></div>
+	<h2>HTML Kodlama Dersi - VI</h2>
+
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>
+			<div id="content_div" style="display:none">
+				<p>- HTML5 Önbilgi</p>
+ 				<p>- canvas, audio, video etiketlerinin kullanımı</p>
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+
+	<h4>HTML5 ile Gelen Yenilikler</h4>
+  <p>Merhaba arkadaşlar,</p>
+  <p>Bu dersimizle HTML5''e başlıyoruz. Öncelikle &lt;!DOCTYPE&gt; etiketinden söz etmek istiyorum.
+	.&lt;!DOCTYPE&gt; bir web sayfasını tarayıcıya tanıtır ve sayfanın  düzgün görüntülenmesini sağlar.
+	Kullanımı şart olmasa da, tarayıcının kodları daha sağlıklı yorumlamasını sağlayıp, hata riskini azaltır.
+	Bu etiketi sayfanın en başına yazarız ve kapatmayız. Her HTML sürümü için farklı bir  &lt;!DOCTYPE&gt; tanımı vardır.
+	Ben sadece HTML 1.0 ve HTML5'teki kullanımlarını göstereceğim. Amacım HTML5 ile gelen gelişimi göstermek...
+	Diğer sürümlere dair bilgileri Internet'te bulabilirsiniz.
+ </p>
+
+	<p>- HTML 1.0 için:</p>
+  <pre>
+  &lt;!DOCTYPE HTML
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "<a href="http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd">http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd</a>"&gt;
+  </pre>
+
+  <p>- HTML5 için:<br />
+  <pre>&lt;!DOCTYPE HTML&gt;</pre>
+
+  <p>Gördüğünüz gibi DOCTYPE etiketimiz, HTML5'te gayet sade bir hâl almış.
+  &lt;!DOCTYPE&gt; etiketiyle tarayıcıya "<i>Ben HTML5 kullanıyorum. Sayfayı ona göre yorumla.</i>" demiş oluyoruz.</p>
+
+  <p>İlk dersimizde de  söylediğimiz gibi HTML5, HTML'in son sürümüdür; yani en güncel hâlidir.
+  HTML5 içinde biraz CSS ve Javascript barındırır ve diğer HTML sürümlerine göre daha esnektir.
+  Bu sürüme özgü bazı yeni kodlar gelirken, eskiden kullandığımız bazı kodlar da artık kullanılmayacaktır.
+  HTML5'te kullanılmayacak kodları sıralarsak: </p>
+  <pre>
+&lt;acronym&gt; , &lt;applet&gt;,  &lt;basefont&gt;, &lt;big&gt;, &lt;center&gt;, &lt;dir&gt;, &lt;font&gt;,
+&lt;frame&gt; &lt;frameset&gt;, &lt;noframes&gt;,  &lt;strike&gt;, &lt;tt&gt;, &lt;u&gt;,  &lt;xmp&gt;</pre>
+<p>
+    Bu kodların artık kullanılmamasının sebebi olarak, CSS ile de bu kodlarla  yapılabileceklerin yapılması,
+ HTML&rsquo;de bunlara duyulan ihtiyacın azalmasını söyleyebiliriz. HTML5  ile gelen yeni etiketler ise 
+ açıklamalarıyla beraber şöyle sıralayabiliriz:</p>
+
+<pre>
+<strong>&lt;canvas&gt;:</strong> Sayfada bir tuval alanı oluşturur. Tuvale çizim javascript  ile yapılabilir.
+<strong>&lt;audio&gt;:</strong> Sayfaya ses oynatıcı bir modül ekler.
+<strong>&lt;video&gt;:</strong> Video oynatıcı bir modül  ekler.
+<strong>&lt;progress&gt;:</strong> İşlem süreci göstergesi ekler.
+<strong>&lt;caption&gt;:</strong> Başlık olarak düşünülen metinleri düzenler.
+<strong>&lt;header&gt;:</strong> Sitenin başlık  ve açıklama içeriğini alır.
+<strong>&lt;nav&gt;:</strong> Menüleri ve bir takım zaruri işlevleri içine alır.
+<strong>&lt;footer&gt;:</strong> Sitelerin en alt  kısmını içine alır.
+<strong>&lt;article&gt;:</strong> Makale, deneme tarzı yazıları kapsar.
+<strong>&lt;aside&gt;:</strong> Ana içerikte ayrı yazılan kısımdır.
+<strong>&lt;datalist&gt;:</strong> Düzenlenebilir elementlere otomatik tamamlama özelliği  verilmesini sağlar.
+<strong>&lt;details&gt;:</strong> Detay bilgisi  içerir.
+<strong>&lt;embed&gt;:</strong> Dışarıdan eklenen componentler için kullanılır. (Örn&nbsp;: .swf uzantılı dosyalar)
+<strong>&lt;figcaption&gt;:</strong> &lt;figure&gt;&nbsp;elementinin başlığını belirler.
+<strong>&lt;figure&gt;:</strong> Çeşitli medya içeriği gruplarını belirler.
+<strong>&lt;hgroup&gt;:</strong> Başlık grubunu belirtir. H1, H2 gibi başlık elementleri burada tanımlanabilir.
+<strong>&lt;mark&gt;:</strong> Yazı içerisinde özellikle üstünde durulan kelimeleri  belirler.
+<strong>&lt;summary&gt;:</strong> Yazının başlığını belirler.
+<strong>&lt;time&gt;:</strong> Tarih, saat verilerini kapsar.
+</pre>
+
+<p>Bunların dışında &lt;command&gt;,&lt;meter&gt;,&lt;output&gt;,&lt;rp&gt;,&lt;source&gt;,&lt;ruby&gt;,&lt;section&gt;,
+  &lt;rt&gt; ve &lt;keygen&gt; de HTML5 ile gelen yeni etiketler arasındadır. Şimdi ilk olarak &lt;canvas&gt; etiketiyle
+  bir örnek yapalım.</p>
+
+<pre>
+&lt;!DOCTYPE HTML&gt;
+ &lt;html&gt;
+  &lt;body&gt;
+   &lt;canvas width=&quot;200&quot; height=&quot;100&quot;style=&quot;border:1px solid black;&quot;&gt;
+    &lt;script type=&rdquo;text/javascript&rdquo;&gt;
+     ...
+    &lt;/script&gt;
+   &lt;/canvas&gt;
+  &lt;/body&gt;
+ &lt;/html&gt;
+</pre>
+
+<p>Tarayıcıdaki görüntüsü sayfanın sol üstünde siyah kenarlıklı içi boş bir tablodur.
+  İçi javascriptle çizim yapılması için ayrılan alandır. Javascript&rsquo;e şimdi girmiyorum.
+  Ancak yazdığım kodları  açıklayayım. Width ve height ile oluşturduğumuz alanın enini ve boyunu pixel cinsinden belirlemiş olduk.
+  Style, kenarlık özelliklerini belirlemek için  açıldı. &rdquo;border:1px &ldquo; ifadesi kenarlık  kalınlığını belirler.
+  Solid kenarlığın düz çizgi olmasını sağladı. Solid yerine  dashed i kullansaydık kenarlık kesik çizgi halinde olacaktı.
+  Son olarak black  ise kenarlık rengi. Onu da red yellow şeklinde değiştirmek mümkün veya #000000  şeklinde renk kodunu yazabiliriz.</p>
+<p>Şimdi  de sırasıyla &lt;audio&gt; ve &lt;video&gt; etiketlerinden bahsedelim.</p>
+
+<pre>
+&lt;!DOCTYPE HTML&gt;
+ &lt;html&gt;
+  &lt;body&gt;
+   &lt;audio src=&quot;ses.mp3&quot; controls=&quot;controls&quot; autoplay=&quot;autoplay&quot; loop=&quot;loop&quot;&gt;
+    Tarayıcınız desteklemediği için ses dosyası çalınamıyor.
+   &lt;/audio&gt;
+  &lt;/body&gt;
+ &lt;/html&gt;</pre>
+
+  <p>Audio nun yanında kullandığımız dört ifadenin anlamlarını açıklayalım: <br/><br/>
+    <strong>src="ses.mp3"</strong> ses dosyasının yerini belirler. Hatırlarsanız resim dosyalarında da aynı şeyi yapmıştık. Benim ses dosyam aynı klasörde yer aldığı için sadece adını yazdım. <br/>
+    <strong>controls=&quot;controls&quot; </strong> eğer bunu yazmasaydık play tuşu gibi kontrol tuşları görünmeyecekti. <br/>
+    <strong>autoplay=&quot;autoplay&quot; </strong>bu ifade sayesinde sayfa yüklendiği  gibi ses dosyası yürütülmeye başlanır. Eğer kullanmazsak ses dosyasının çalması için 'play' tuşuna basılması gerekir.<br/>
+    <strong>loop=&quot;loop&quot; </strong> Kullandığımız takdirde ses doyası biter bitmez baştan başlayacaktır.</p>
+
+<p>Bu arada şunu da belirtelim ki &lt;audio&gt; elementinin desteklediği 3 tür ses uzantısı (.mp3 .ogg ve .wav) vardır.
+Tarayıcı ses dosyasını desteklemiyorsa ekranda bizim yazmış olduğumuz uyarı gözükür. Destekler ise uyarı yazısı görünmez.</p>
+</p>
+<p>Artık bir video dosyası ekleyebiliriz:<br />
+
+<pre>
+&lt;!DOCTYPE HTML&gt;
+ &lt;html&gt;
+  &lt;body&gt;
+   &lt;video src=&quot;video.ogg&quot; width=&quot;250&quot; height=&quot;200&quot; controls=&quot;controls&quot; loop=&quot;loop&quot;&gt;
+    Tarayıcınız desteklemediği için video açılmamaktadır.
+   &lt;/video&gt;
+  &lt;/body&gt;
+ &lt;/html&gt;
+</pre>
+
+  <p>Ses doyası eklerken kullandıklarımızın aynısını kullandık.
+  Farklı olarak bu sefer etiketimiz &lt;video&gt; idi ve  boyutunu belirten height="..."
+  ve width="..." ifadelerine yer verdik. Bu boyutlar da pixel cinsindendir. </p>
+<p>Bu dersimizde HTML5 hakkında bilgi sahibi olduk ve HTML5 etiketlerinin üçüyle örnekler yaptık.
+Diğer dersimizde görüşmek üzere...</p>
+
+<div align="right">
+	<a href="mailto:mustafa.gunes1702@gmail.com" style="color: black;font: 16px Times New Roman;">
+		Mustafa GÜNEŞ
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+  <tr>
+  <td align="left"><a href="html_coding_5.html"><<&nbsp;Geri</a></td>
+  <td align="center">
+      <div class="bottom_links">
+        <a href="http://www.cagataycebi.com/" target="_blank">
+          cagataycebi.com
+        </a>
+      </div>
+    </td>
+    <td align="right"><a href="../index-2.html">İleri&nbsp;>></a></td>
+  </tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/html_coding/html_coding_6.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:25:41 GMT -->
+</html>

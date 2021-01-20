@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/14782143/linux-socket--how-to-detect-disconnected-network-in-a-client-program- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Linux Socket: How to detect disconnected network in a client program? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Linux Socket: How to detect disconnected network in a client program? | C Language Knowledge Base">
+        <title>[SOLVED] Linux Socket: How to detect disconnected network in a client program? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="linux-socket-how-to-detect-disconnected-network-in-a-client-program-">Linux Socket: How to detect disconnected network in a client program?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/disconnection.html">disconnection</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/send.html">send</a></span>
+                        <span class="tag-item"><a href="../tag/sockets.html">sockets</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am debugging a c based linux socket program. As all the examples available in websites,
+I applied the following structure:</p>
+
+<pre><code>sockfd= socket(AF_INET, SOCK_STREAM, 0);
+
+connect(sockfd, (struct sockaddr *) &amp;serv_addr, sizeof(serv_addr));
+
+send_bytes = send(sockfd, sock_buff, (size_t)buff_bytes, MSG_DONTWAIT);
+</code></pre>
+
+<p>I can detect the disconnection when the remove server closes its server program. But if I unplug the ethernet cable, the send function still return positive values rather than -1. </p>
+
+<p>How can I check the network connection in a client program assuming that I can not change server side?  </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2052197/user2052197" target="_blank"><span itemprop="name">user2052197</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">13</div>
+                                    <div itemprop="dateCreated">2/8/2013 10:09:24 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <blockquote>
+  <p>But if I unplug the ethernet cable, the send function still return
+  positive values rather than -1.</p>
+</blockquote>
+
+<p>First of all you should know <code>send</code> doesn't actually send anything, it's just a memory-copying function/system call. It copies data from your process to the kernel - sometime later the kernel will fetch that data and send it to the other side after packaging it in segments and packets. Therefore <code>send</code> can only return an error if:</p>
+
+<ul>
+<li>The socket is invalid (for example bogus file descriptor)</li>
+<li>The connection is clearly invalid, for example it hasn't been established or has already been terminated in some way (FIN, RST, timeout - see below)</li>
+<li>There's no more room to copy the data</li>
+</ul>
+
+<p>The main point is that <code>send</code> doesn't send anything and therefore <strong>its return code doesn't tell you anything about data actually reaching the other side</strong>.</p>
+
+<p>Back to your question, when TCP sends data it expects a valid acknowledgement in a reasonable amount of time. If it doesn't get one, it resends. How often does it resend ? Each TCP stack does things differently, but the norm is to use exponential backoffs. That is, first wait 1 second, then 2, then 4 and so on. On some stacks this process can take minutes.</p>
+
+<p>The main point is that in the case of an interruption TCP will declare a connection dead <strong>only after a seriously large period of silence</strong> (on Linux it does something like 15 retries - more than 5 minutes).</p>
+
+<p>One way to solve this is to implement some acknowledgement mechanism in your application. You could for example send a request to the server "<em>reply within 5 seconds or I'll declare this connection dead</em>" and then <code>recv</code> with a timeout.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/714501/cnicutar" target="_blank"><span itemprop="name">cnicutar</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/14782143/linux-socket--how-to-detect-disconnected-network-in-a-client-program-#answer-0</div>
+                                            <div itemprop="upvoteCount">37</div>
+                                            <div itemprop="dateCreated">2/8/2013 10:25:27 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>You can't detect the unplugged ethernet cable only with calling write() funcation.
+That's because of tcp retransmission acted by tcp stack without your consciousness.
+Here are solutions.</p>
+
+<p>Even though you already set keepalive option to your application socket, you can't detect in time the dead connection state of the socket, in case of your app keeps writing on the socket.
+That's because of tcp retransmission by the kernel tcp stack.
+tcp_retries1 and tcp_retries2 are kernel parameters for configuring tcp retransmission timeout.
+It's hard to predict precise time of retransmission timeout because it's calculated by RTT mechanism.
+You can see this computation in rfc793. (3.7.  Data Communication)</p>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc793.txt" rel="nofollow noreferrer">https://www.rfc-editor.org/rfc/rfc793.txt</a>  </p>
+
+<p>Each platforms have kernel configurations for tcp retransmission.</p>
+
+<pre><code>Linux : tcp_retries1, tcp_retries2 : (exist in /proc/sys/net/ipv4)
+</code></pre>
+
+<p><a href="http://linux.die.net/man/7/tcp" rel="nofollow noreferrer">http://linux.die.net/man/7/tcp</a></p>
+
+<pre><code>HPUX : tcp_ip_notify_interval, tcp_ip_abort_interval
+</code></pre>
+
+<p><a href="http://www.hpuxtips.es/?q=node/53" rel="nofollow noreferrer">http://www.hpuxtips.es/?q=node/53</a></p>
+
+<pre><code>AIX : rto_low, rto_high, rto_length, rto_limit
+</code></pre>
+
+<p><a href="http://www-903.ibm.com/kr/event/download/200804_324_swma/socket.pdf" rel="nofollow noreferrer">http://www-903.ibm.com/kr/event/download/200804_324_swma/socket.pdf</a></p>
+
+<p>You should set lower value for tcp_retries2 (default 15) if you want to early detect dead connection, but it's not precise time as I already said.
+In addition, currently you can't set those values only for single socket. Those are global kernel parameters. 
+There was some trial to apply tcp retransmission socket option for single socket(<a href="http://patchwork.ozlabs.org/patch/55236/" rel="nofollow noreferrer">http://patchwork.ozlabs.org/patch/55236/</a>), but I don't think it was applied into kernel mainline. I can't find those options definition in system header files.</p>
+
+<p>For reference, you can monitor your keepalive socket option through 'netstat --timers' like below.
+<a href="https://stackoverflow.com/questions/34914278/how-can-i-clean-the-dead-connection-in-the-right-time-i-want-tcp-keepalive-and">https://stackoverflow.com/questions/34914278</a></p>
+
+<pre><code>netstat -c --timer | grep "192.0.0.1:43245             192.0.68.1:49742"
+
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (1.92/0/0)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (0.71/0/0)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (9.46/0/1)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (8.30/0/1)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (7.14/0/1)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (5.98/0/1)
+tcp        0      0 192.0.0.1:43245             192.0.68.1:49742            ESTABLISHED keepalive (4.82/0/1)
+</code></pre>
+
+<p>In addition, when keepalive timeout ocurrs, you can meet different return events depending on platforms you use, so you must not decide dead connection status only by return events.
+For example, HP returns POLLERR event and AIX returns just POLLIN event when keepalive timeout occurs.
+You will meet ETIMEDOUT error in recv() call at that time.</p>
+
+<p>In recent kernel version(since 2.6.37), you can use TCP_USER_TIMEOUT option will work well. This option can be used for single socket.</p>
+
+<p>Finally, you can use read function with MSG_PEEK flag, which can let you check that the socket is okay. (MSG_PEEK just peeks if data arrived at kernel stack buffer and never copies the data into user buffer.)
+So you can use this flag just for checking socket is okay without any side effect.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5195935/cloudrain21" target="_blank">cloudrain21</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/14782143" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/14782143/linux-socket--how-to-detect-disconnected-network-in-a-client-program- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+</html>

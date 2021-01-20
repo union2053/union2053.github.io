@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7775991/how-to-get-hexdump-of-a-structure-data by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] how to get hexdump of a structure data | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] how to get hexdump of a structure data | C Language Knowledge Base">
+        <title>[SOLVED] how to get hexdump of a structure data | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-get-hexdump-of-a-structure-data">how to get hexdump of a structure data</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/binary-data.html">binary-data</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/fwrite.html">fwrite</a></span>
+                        <span class="tag-item"><a href="../tag/hexdump.html">hexdump</a></span>
+                        <span class="tag-item"><a href="../tag/pointers.html">pointers</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <pre><code> ....
+ finalize(char *hdrs, sendip_data *headers[], int index,
+                    sendip_data *data, sendip_data *pack)
+ {
+
+ ........
+</code></pre>
+
+<p>For debugging purposes I want a hex dump of the <code>data</code> and <code>pack</code> structures, which are of type <code>sendip_data</code>, a really complex structure. Actually they contain some binary information so I am not sure whether output of my project is correct or not. So for debugging purposes, I want to write the data into a file so that I can use hexdump as follows -</p>
+
+<pre><code>$hexdump -C file.txt
+</code></pre>
+
+<p>Also as this is a run time generation of a n/w packet so I am also not sure about the length of <code>data</code> and <code>pack</code> structure which I think <code>fread / fwrite</code> will require ..So please suggest me something.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/892012/udit-gupta" target="_blank"><span itemprop="name">Udit Gupta</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">30</div>
+                                    <div itemprop="dateCreated">10/6/2015 2:55:58 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>The following code will give you a hex dump of arbitrary memory from within your code.</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+
+void hexDump (const char *desc, const void *addr, const int len) {
+    int i;
+    unsigned char buff[17];
+    const unsigned char *pc = (const unsigned char*)addr;
+
+    // Output description if given.
+    if (desc != NULL)
+        printf ("%s:\n", desc);
+
+    if (len == 0) {
+        printf("  ZERO LENGTH\n");
+        return;
+    }
+    if (len &lt; 0) {
+        printf("  NEGATIVE LENGTH: %i\n",len);
+        return;
+    }
+
+    // Process every byte in the data.
+    for (i = 0; i &lt; len; i++) {
+        // Multiple of 16 means new line (with line offset).
+
+        if ((i % 16) == 0) {
+            // Just don't print ASCII for the zeroth line.
+            if (i != 0)
+                printf ("  %s\n", buff);
+
+            // Output the offset.
+            printf ("  %04x ", i);
+        }
+
+        // Now the hex code for the specific character.
+        printf (" %02x", pc[i]);
+
+        // And store a printable ASCII character for later.
+        if ((pc[i] &lt; 0x20) || (pc[i] &gt; 0x7e))
+            buff[i % 16] = '.';
+        else
+            buff[i % 16] = pc[i];
+        buff[(i % 16) + 1] = '\0';
+    }
+
+    // Pad out last line if not exactly 16 characters.
+    while ((i % 16) != 0) {
+        printf ("   ");
+        i++;
+    }
+
+    // And print the final ASCII bit.
+    printf ("  %s\n", buff);
+}
+
+int main (int argc, char *argv[]) {
+    char my_str[] = "a char string greater than 16 chars";
+    hexDump ("my_str", &amp;my_str, sizeof (my_str));
+    return 0;
+}
+</code></pre>
+
+<p>You pass into <code>hexDump</code> a description, memory address and length, and it will output a hex dump (including character data) for examination. When you run it with the included <code>main</code>, the output is:</p>
+
+<pre><code>my_str:
+  0000  61 20 63 68 61 72 20 73 74 72 69 6e 67 20 67 72  a char string gr
+  0010  65 61 74 65 72 20 74 68 61 6e 20 31 36 20 63 68  eater than 16 ch
+  0020  61 72 73 00                                      ars.
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/14860/paxdiablo" target="_blank"><span itemprop="name">paxdiablo</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7775991/how-to-get-hexdump-of-a-structure-data#answer-0</div>
+                                            <div itemprop="upvoteCount">113</div>
+                                            <div itemprop="dateCreated">7/23/2019 8:02:53 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>A hex dump for Android, should be suitable for other platforms as well.</p>
+
+<p><code>LOGD()</code>, same as <code>DLOG()</code>, plays the role of <code>printf()</code> because <code>printf()</code> does not work in Android. For platforms other than Android, you may <code>#define DLOG printf</code>.</p>
+
+<p><em>dlog.h:</em></p>
+
+<pre><code>// Android logging
+#include &lt;android/log.h&gt;
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , "~~~~~~", __VA_ARGS__)
+#define DLOG(...) __android_log_print(ANDROID_LOG_DEBUG  , "~~~~~~", __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , "~~~~~~", __VA_ARGS__)
+#define ELOG(...) __android_log_print(ANDROID_LOG_ERROR  , "~~~~~~", __VA_ARGS__)
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void log_dump(const void*addr,int len,int linelen);
+void log_dumpf(const char*fmt,const void*addr,int len,int linelen);
+
+#ifdef __cplusplus
+}
+#endif
+</code></pre>
+
+<p><em>dump.cpp:</em></p>
+
+<pre><code>#include &lt;dlog.h&gt;
+//#include &lt;alloca.h&gt;
+
+inline char hdigit(int n){return "0123456789abcdef"[n&amp;0xf];};
+
+#define LEN_LIMIT 8
+#define SUBSTITUTE_CHAR '`'
+
+static const char* dumpline(char*dest, int linelen, const char*src, const char*srcend)
+{
+    if(src&gt;=srcend) {
+        return 0;
+    }
+    int i;
+    unsigned long s = (unsigned long)src;
+    for(i=0; i&lt;8; i++) {
+        dest[i] = hdigit(s&gt;&gt;(28-i*4));
+    }
+    dest[8] = ' ';
+    dest += 9;
+    for(i=0; i&lt;linelen/4 ; i++) {
+        if(src+i&lt;srcend) {
+            dest[i*3] = hdigit(src[i]&gt;&gt;4);
+            dest[i*3+1] = hdigit(src[i]);
+            dest[i*3+2] = ' ';
+            dest[linelen/4*3+i] = src[i] &gt;= ' ' &amp;&amp; src[i] &lt; 0x7f ? src[i] : SUBSTITUTE_CHAR;
+        }else{
+            dest[i*3] = dest[i*3+1] = dest[i*3+2] = dest[linelen/4*3+i] = ' ';
+        }
+    }
+    return src+i;
+}
+
+void log_dumpf(const char*fmt,const void*addr,int len,int linelen)
+{
+#if LEN_LIMIT
+    if(len&gt;linelen*LEN_LIMIT) {
+        len=linelen*LEN_LIMIT;
+    }
+#endif
+    linelen *= 4;
+    static char _buf[4096];
+    char*buf = _buf;//(char*)alloca(linelen+1); // alloca() causes the initialization to fail!!!!
+    buf[linelen]=0;
+    const char*start = (char*)addr;
+    const char*cur = start;
+    const char*end = start+len;
+    while(!!(cur = dumpline(buf,linelen,cur,start+len))){DLOG(fmt,buf);}
+}
+
+void log_dump(const void*addr,int len,int linelen)
+{
+    log_dumpf("%s\n",addr,len,linelen);
+}
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>log_dumpf("args: %s\n", &amp;p, 0x20, 0x10);
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>args: 61efadc4 00 3c 17 01 6d bc 59 61 02 00 00 00 80 ae ef 61 `&lt;``m`Ya```````a
+args: 61efadd4 00 3c 17 01 00 00 00 00 31 a5 59 61 80 ae ef 61 `&lt;``````1`Ya```a
+</code></pre>
+
+<p><strong>UPDATE:</strong>
+see <a href="https://github.com/18446744073709551615/reDroid/blob/master/jni/reDroid/dump.cpp" rel="nofollow">dump.cpp</a> and <a href="https://github.com/18446744073709551615/reDroid/blob/master/jni/re_dump.h" rel="nofollow">re_dump.h</a> in <a href="https://github.com/18446744073709551615/reDroid/tree/master/jni" rel="nofollow">reDroid (github)</a>, it includes a recursive dump that checks if a pointer is valid.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/755804/18446744073709551615" target="_blank">18446744073709551615</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7775991" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7775991/how-to-get-hexdump-of-a-structure-data by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:42 GMT -->
+</html>

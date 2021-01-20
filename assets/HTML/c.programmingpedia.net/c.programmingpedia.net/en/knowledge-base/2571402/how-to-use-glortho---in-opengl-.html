@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2571402/how-to-use-glortho---in-opengl- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to use glOrtho() in OpenGL? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to use glOrtho() in OpenGL? | C Language Knowledge Base">
+        <title>[SOLVED] How to use glOrtho() in OpenGL? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-use-glortho-in-opengl-">How to use glOrtho() in OpenGL?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/opengl.html">opengl</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I can't understand the usage of <code>glOrtho</code>. Can someone explain what it is used for?</p>
+
+<p>Is it used to set the range of x y and z coordinates limit?</p>
+
+<pre><code>glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+</code></pre>
+
+<p>It means that the x, y and z range is from -1 to 1?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/80932/ufk" target="_blank"><span itemprop="name">ufk</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">77</div>
+                                    <div itemprop="dateCreated">3/11/2018 10:26:29 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Have a look at this picture: <a href="http://en.wikipedia.org/wiki/File:Graphical_projection_comparison.png" rel="nofollow noreferrer">Graphical Projections</a>
+<a href="https://i.stack.imgur.com/75FHl.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/75FHl.png" alt="enter image description here"></a></p>
+
+<p>The <code>glOrtho</code> command produces an "Oblique" projection that you see in the bottom row. No matter how far away vertexes are in the z direction, they will not recede into the distance.</p>
+
+<p>I use glOrtho every time I need to do 2D graphics in OpenGL (such as health bars, menus etc)
+using the following code every time the window is resized:</p>
+
+<pre><code>glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(0.0f, windowWidth, windowHeight, 0.0f, 0.0f, 1.0f);
+</code></pre>
+
+<p>This will remap the OpenGL coordinates into the equivalent pixel values (X going from 0 to windowWidth and Y going from 0 to windowHeight). Note that I've flipped the Y values because OpenGL coordinates start from the bottom left corner of the window. So by flipping, I get a more conventional (0,0) starting at the top left corner of the window rather.</p>
+
+<p>Note that the Z values are clipped from 0 to 1. So be careful when you specify a Z value for your vertex's position, it will be clipped if it falls outside that range. Otherwise if it's inside that range, it will appear to have no effect on the position except for Z tests.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/310779/mikepote" target="_blank"><span itemprop="name">Mikepote</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/2571402/how-to-use-glortho---in-opengl-#answer-0</div>
+                                            <div itemprop="upvoteCount">136</div>
+                                            <div itemprop="dateCreated">8/13/2019 8:33:34 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><strong>Minimal runnable example</strong></p>
+
+<p><code>glOrtho</code>: 2D games, objects close and far appear the same size:</p>
+
+<p><a href="https://i.stack.imgur.com/jcU3G.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/jcU3G.png" alt="enter image description here"></a></p>
+
+<p><code>glFrustrum</code>: more real-life like 3D, identical objects further away appear smaller:</p>
+
+<p><a href="https://i.stack.imgur.com/1xusO.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/1xusO.png" alt="enter image description here"></a></p>
+
+<p>main.c</p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+
+#include &lt;GL/gl.h&gt;
+#include &lt;GL/glu.h&gt;
+#include &lt;GL/glut.h&gt;
+
+static int ortho = 0;
+
+static void display(void) {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+    if (ortho) {
+    } else {
+        /* This only rotates and translates the world around to look like the camera moved. */
+        gluLookAt(0.0, 0.0, -3.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    }
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glutWireCube(2);
+    glFlush();
+}
+
+static void reshape(int w, int h) {
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    if (ortho) {
+        glOrtho(-2.0, 2.0, -2.0, 2.0, -1.5, 1.5);
+    } else {
+        glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+    }
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&amp;argc, argv);
+    if (argc &gt; 1) {
+        ortho = 1;
+    }
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow(argv[0]);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glShadeModel(GL_FLAT);
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    glutMainLoop();
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p><a href="https://github.com/cirosantilli/cpp-cheat/blob/0d8575b0533a84dfdec2d8faad3746d93c1a17c8/opengl/ortho.c" rel="nofollow noreferrer">GitHub upstream</a>.</p>
+
+<p>Compile:</p>
+
+<pre><code>gcc -ggdb3 -O0 -o main -std=c99 -Wall -Wextra -pedantic main.c -lGL -lGLU -lglut
+</code></pre>
+
+<p>Run with <code>glOrtho</code>:</p>
+
+<pre><code>./main 1
+</code></pre>
+
+<p>Run with <code>glFrustrum</code>:</p>
+
+<pre><code>./main
+</code></pre>
+
+<p>Tested on Ubuntu 18.10.</p>
+
+<p><strong>Schema</strong></p>
+
+<p>Ortho: camera is a plane, visible volume a rectangle:</p>
+
+<p><a href="https://i.stack.imgur.com/EzTHQ.gif" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/EzTHQ.gif" alt="enter image description here"></a></p>
+
+<p>Frustrum: camera is a point,visible volume a slice of a pyramid:</p>
+
+<p><a href="https://i.stack.imgur.com/QeV7z.gif" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/QeV7z.gif" alt="enter image description here"></a></p>
+
+<p><a href="http://www.glprogramming.com/red/chapter03.html" rel="nofollow noreferrer">Image source</a>.</p>
+
+<p><strong>Parameters</strong></p>
+
+<p>We are always looking from +z to -z with +y upwards:</p>
+
+<pre><code>glOrtho(left, right, bottom, top, near, far)
+</code></pre>
+
+<ul>
+<li><code>left</code>: minimum <code>x</code> we see</li>
+<li><code>right</code>: maximum <code>x</code> we  see</li>
+<li><code>bottom</code>: minimum <code>y</code> we see</li>
+<li><code>top</code>: maximum <code>y</code> we  see</li>
+<li><code>-near</code>: minimum <code>z</code> we see. <em>Yes</em>, this is <code>-1</code> times <code>near</code>. So a negative input means positive <code>z</code>. </li>
+<li><code>-far</code>: maximum <code>z</code> we see. Also negative.</li>
+</ul>
+
+<p>Schema:</p>
+
+<p><img src="https://i.stack.imgur.com/RWCyH.jpg" width="300"/></p>
+
+<p><a href="http://pds26.egloos.com/pds/201303/28/17/e0306117_51532d416386e.jpg" rel="nofollow noreferrer">Image source</a>.</p>
+
+<p><strong>How it works under the hood</strong></p>
+
+<p>In the end, OpenGL always "uses":</p>
+
+<pre><code>glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+</code></pre>
+
+<p>If we use neither <code>glOrtho</code> nor <code>glFrustrum</code>, that is what we get.</p>
+
+<p><code>glOrtho</code> and <code>glFrustrum</code> are just linear transformations (AKA matrix multiplication) such that:</p>
+
+<ul>
+<li><code>glOrtho</code>: takes a given 3D rectangle into the default cube</li>
+<li><code>glFrustrum</code>: takes a given pyramid section into the default cube</li>
+</ul>
+
+<p>This transformation is then applied to all vertexes. This is what I mean in 2D:</p>
+
+<p><img src="https://i.stack.imgur.com/kFsjh.png" width="400"/></p>
+
+<p><a href="https://github.com/cirosantilli/media/blob/master/linear-transform-opengl-ortho.odg" rel="nofollow noreferrer">Image source</a>.</p>
+
+<p>The final step after transformation is simple:</p>
+
+<ul>
+<li>remove any points outside of the cube (culling): just ensure that <code>x</code>, <code>y</code> and <code>z</code> are in <code>[-1, +1]</code></li>
+<li>ignore the <code>z</code> component and take only <code>x</code> and <code>y</code>, which now can be put into a 2D screen</li>
+</ul>
+
+<p>With <code>glOrtho</code>, <code>z</code> is ignored, so you might as well always use <code>0</code>.</p>
+
+<p>One reason you might want to use <code>z != 0</code> is to make sprites hide the background with the depth buffer.</p>
+
+<p><strong>Deprecation</strong></p>
+
+<p><code>glOrtho</code> is deprecated as of <a href="https://www.opengl.org/registry/doc/glspec45.compatibility.pdf" rel="nofollow noreferrer">OpenGL 4.5</a>: the compatibility profile 12.1. "FIXED-FUNCTION VERTEX TRANSFORMATIONS" is in red.</p>
+
+<p>So don't use it for production.  In any case, understanding it is a good way to get some OpenGL insight.</p>
+
+<p>Modern OpenGL 4 programs calculate the transformation matrix (which is small) on the CPU, and then give the matrix and all points to be transformed to OpenGL, which can do the thousands of matrix multiplications for different points really fast in parallel.</p>
+
+<p>Manually written <a href="https://stackoverflow.com/a/36211337/895245">vertex shaders</a> then do the multiplication explicitly, usually with the convenient vector data types of the OpenGL Shading Language.</p>
+
+<p>Since you write the shader explicitly, this allows you to tweak the algorithm to your needs. Such flexibility is a major feature of more modern GPUs, which unlike the old ones that did a fixed algorithm with some input parameters, can now do arbitrary computations. See also: <a href="https://stackoverflow.com/a/36211337/895245">https://stackoverflow.com/a/36211337/895245</a></p>
+
+<p>With an explicit <code>GLfloat transform[]</code> it would look something like this:</p>
+
+<pre><code>#include &lt;math.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define GLEW_STATIC
+#include &lt;GL/glew.h&gt;
+
+#include &lt;GLFW/glfw3.h&gt;
+
+#include "common.h"
+
+static const GLuint WIDTH = 800;
+static const GLuint HEIGHT = 600;
+/* ourColor is passed on to the fragment shader. */
+static const GLchar* vertex_shader_source =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 position;\n"
+    "layout (location = 1) in vec3 color;\n"
+    "out vec3 ourColor;\n"
+    "uniform mat4 transform;\n"
+    "void main() {\n"
+    "    gl_Position = transform * vec4(position, 1.0f);\n"
+    "    ourColor = color;\n"
+    "}\n";
+static const GLchar* fragment_shader_source =
+    "#version 330 core\n"
+    "in vec3 ourColor;\n"
+    "out vec4 color;\n"
+    "void main() {\n"
+    "    color = vec4(ourColor, 1.0f);\n"
+    "}\n";
+static GLfloat vertices[] = {
+/*   Positions          Colors */
+     0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+     0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+};
+
+int main(void) {
+    GLint shader_program;
+    GLint transform_location;
+    GLuint vbo;
+    GLuint vao;
+    GLFWwindow* window;
+    double time;
+
+    glfwInit();
+    window = glfwCreateWindow(WIDTH, HEIGHT, __FILE__, NULL, NULL);
+    glfwMakeContextCurrent(window);
+    glewExperimental = GL_TRUE;
+    glewInit();
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glViewport(0, 0, WIDTH, HEIGHT);
+
+    shader_program = common_get_shader_program(vertex_shader_source, fragment_shader_source);
+
+    glGenVertexArrays(1, &amp;vao);
+    glGenBuffers(1, &amp;vbo);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    /* Position attribute */
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+    /* Color attribute */
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+    glBindVertexArray(0);
+
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glUseProgram(shader_program);
+        transform_location = glGetUniformLocation(shader_program, "transform");
+        /* THIS is just a dummy transform. */
+        GLfloat transform[] = {
+            0.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f,
+        };
+        time = glfwGetTime();
+        transform[0] = 2.0f * sin(time);
+        transform[5] = 2.0f * cos(time);
+        glUniformMatrix4fv(transform_location, 1, GL_FALSE, transform);
+
+        glBindVertexArray(vao);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(0);
+        glfwSwapBuffers(window);
+    }
+    glDeleteVertexArrays(1, &amp;vao);
+    glDeleteBuffers(1, &amp;vbo);
+    glfwTerminate();
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<p><a href="https://github.com/cirosantilli/cpp-cheat/blob/061fbb70efc4b27093395d2a573b18a4f588aebe/opengl/glfw_transform.c" rel="nofollow noreferrer">GitHub upstream</a>.</p>
+
+<p>Output:</p>
+
+<p><a href="https://i.stack.imgur.com/LeVdU.gif" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/LeVdU.gif" alt="enter image description here"></a></p>
+
+<p>The matrix for <code>glOrtho</code> is really simple, composed only of scaling and translation: </p>
+
+<pre><code>scalex, 0,      0,      translatex,
+0,      scaley, 0,      translatey,
+0,      0,      scalez, translatez,
+0,      0,      0,      1
+</code></pre>
+
+<p>as mentioned in the <a href="https://www.opengl.org/sdk/docs/man2/xhtml/glOrtho.xml" rel="nofollow noreferrer">OpenGL 2 docs</a>.</p>
+
+<p>The <a href="https://www.opengl.org/sdk/docs/man2/xhtml/glFrustum.xml" rel="nofollow noreferrer"><code>glFrustum</code> matrix</a> is not too hard to calculate by hand either, but starts getting annoying. Note how frustum cannot be made up with only scaling and translations like <code>glOrtho</code>, more info at: <a href="https://gamedev.stackexchange.com/a/118848/25171">https://gamedev.stackexchange.com/a/118848/25171</a></p>
+
+<p>The GLM OpenGL C++ math library is a popular choice for calculating such matrices. <a href="http://glm.g-truc.net/0.9.2/api/a00245.html" rel="nofollow noreferrer">http://glm.g-truc.net/0.9.2/api/a00245.html</a> documents both an <code>ortho</code> and <code>frustum</code> operations.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank">Ciro Santilli 新疆改造中心996ICU六四事件</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/2571402" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/2571402/how-to-use-glortho---in-opengl- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+</html>

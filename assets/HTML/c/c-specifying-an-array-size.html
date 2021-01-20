@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-specifying-an-array-size.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Specifying an Array Size</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Specifying an Array Size'>C Specifying an Array Size</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Specifying an Array Size</h1>
+<a class ='btn btn-outline-dark' href=c-array-element-length-bounds.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-finding-the-size-of-an-array.html>Next</a><p>We have used integer constants when declaring arrays:
+</p><div class='myCodeDiv'><button id='SCFEO' class='myCopyButton' data-clipboard-target='#GATGI'>Copy</button><pre  id='GATGI' style='font-size:18px;' class='code'>#define SIZE 4
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> arr[SIZE];           <span class='c'>// symbolic integer constant</span>
+    <span class='r'>double</span> lots[144];        <span class='c'>// literal integer constant</span>
+    ...
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SCFEO');clipboard.on('success', function(e) {$('#SCFEO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SCFEO').text('error');});</script></div><p>C99 allows us to use constant integer expression as array size.
+
+</p><p>A constant integer expression is one formed from integer constants. 
+
+</p><p>For this purpose, a sizeof expression is considered an integer constant. 
+
+</p><p>Also, the value of the expression must be greater than 0:
+</p><div class='myCodeDiv'><button id='RIVKR' class='myCopyButton' data-clipboard-target='#WBFVL'>Copy</button><pre  id='WBFVL' style='font-size:18px;' class='code'><span class='r'>int</span> n   = 5;
+<span class='r'>int</span> m   = 8;
+<span class='r'>float</span>   a1[5];                  <span class='c'>//   OK</span>
+<span class='r'>float</span>   a2[5*2 + 1];            <span class='c'>//   OK</span>
+<span class='r'>float</span>   a3[<span class='r'>sizeof</span>(<span class='r'>int</span>) + 1];    <span class='c'>//   OK</span>
+<span class='r'>float</span>   a4[-4];                 <span class='c'>//   no, size must be &gt; 0</span>
+<span class='r'>float</span>   a5[0];                  <span class='c'>//   no, size must be &gt; 0</span>
+<span class='r'>float</span>   a6[2.5];                <span class='c'>//   no, size must be an integer</span>
+<span class='r'>float</span>   a7[(<span class='r'>int</span>)2.5];           <span class='c'>//   yes, typecast float to int constant</span>
+<span class='r'>float</span>   a8[n];                  <span class='c'>//   not allowed before C99</span>
+<span class='r'>float</span>   a9[m];                  <span class='c'>//   not allowed before C99</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RIVKR');clipboard.on('success', function(e) {$('#RIVKR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RIVKR').text('error');});</script></div><p>As the comments indicate, C compilers following the C90 standard would not allow the last
+two declarations. 
+
+</p><p>As of C99, however, C does allow them, but they create a new breed of array,
+something called a variable-length array, or <b>VLA</b> for short. 
+</p><a class ='btn btn-outline-dark' href=c-array-element-length-bounds.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-finding-the-size-of-an-array.html>Next</a><h2>Related</h2><UL><LI><a href='c-array-compound-literals.html'>C Array Compound Literals</a></LI><LI><a href='c-assigning-array-element-values.html'>C Assigning Array Element Values</a></LI><LI><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds</a></LI><LI><a href='c-finding-the-size-of-an-array.html'>C Finding the Size of an Array</a></LI><LI><a href='c-variable-length-arrays.html'>C Variable-Length Arrays</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-specifying-an-array-size.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-identifier-variable-function-scope-and-function-prototype-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Identifier Variable function Scope and Function prototype scope</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Identifier Variable function Scope and Function prototype scope'>C Identifier Variable function Scope and Function prototype scope</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-block-scope.html'>C Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-block-scope-without-braces.html'>C Block Scope Without Braces
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Identifier Variable function Scope and Function prototype scope</h1>
+<a class ='btn btn-outline-dark' href=c-variable-block-scope-without-braces.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-identifier-variable-file-scope.html>Next</a><p>Function scope applies just to labels used with <i style='color:blue'>goto</i>  statements. 
+
+</p><p>This means that even if a label first appears inside an inner block in a function, 
+its scope extends to the whole function. 
+
+</p><p>Function prototype scope applies to variable names used in function prototypes, as in the
+following:
+</p><div class='myCodeDiv'><button id='GWCQT' class='myCopyButton' data-clipboard-target='#DSHRW'>Copy</button><pre  id='DSHRW' style='font-size:18px;' class='code'><span class='r'>int</span> my_function(<span class='r'>int</span> a, <span class='r'>double</span> large);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GWCQT');clipboard.on('success', function(e) {$('#GWCQT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GWCQT').text('error');});</script></div><p>Function prototype scope runs from the point the variable is defined to the end of the 
+prototype declaration. 
+
+</p><p>All the compiler cares about when handling a function prototype argument is the types; 
+the names you use, if any, normally don't matter, and 
+they needn't match the names you use in the function definition. 
+
+</p><p>One case in which the names matter a little is with variable-length array parameters:
+</p><div class='myCodeDiv'><button id='YTVFS' class='myCopyButton' data-clipboard-target='#ABAMS'>Copy</button><pre  id='ABAMS' style='font-size:18px;' class='code'><span class='r'>void</span> use_a_VLA(<span class='r'>int</span> n, <span class='r'>int</span> m, ar[n][m]);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YTVFS');clipboard.on('success', function(e) {$('#YTVFS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YTVFS').text('error');});</script></div><p>If you use names in the brackets, they have to be names declared earlier in the prototype.
+</p><a class ='btn btn-outline-dark' href=c-variable-block-scope-without-braces.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-identifier-variable-file-scope.html>Next</a><h2>Related</h2><UL><LI><a href='c-identifier-storage-classes.html'>C Identifier Storage Classes</a></LI><LI><a href='c-identifier-variable-block-scope.html'>C Identifier Variable Block Scope</a></LI><LI><a href='c-variable-block-scope-without-braces.html'>C Variable Block Scope Without Braces</a></LI><LI><a href='c-identifier-variable-file-scope.html'>C Identifier Variable file scope</a></LI><LI><a href='c-variable-scope-hide-or-shadow.html'>C Variable Scope Hide or Shadow</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-identifier-variable-function-scope-and-function-prototype-scope.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

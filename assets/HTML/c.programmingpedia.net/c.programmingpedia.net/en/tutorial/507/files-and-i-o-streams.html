@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/507/files-and-i-o-streams by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Files and I/O streams | C Language Tutorial">
+        <meta name="description" property="og:description" content="Files and I/O streams | C Language Tutorial">
+        <title>Files and I/O streams | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="files-and-i-o-streams">Files and I/O streams</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>#include &lt;stdio.h&gt; /* Include this to use any of the following sections */</li>
+<li>FILE *fopen(const char *path, const char *mode); /* Open a stream on the file at <em>path</em> with the specified <em>mode</em> */</li>
+<li>FILE *freopen(const char *path, const char *mode, FILE *stream); /* Re-open an existing stream on the file at <em>path</em> with the specified <em>mode</em> */</li>
+<li>int fclose(FILE *stream); /* Close an opened stream */</li>
+<li>size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream); /* Read at most <em>nmemb</em> elements of <em>size</em> bytes each from the <em>stream</em> and write them in <em>ptr</em>. Returns the number of read elements. */</li>
+<li>size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream); /* Write <em>nmemb</em> elements of <em>size</em> bytes each from <em>ptr</em> to the <em>stream</em>. Returns the number of written elements. */</li>
+<li>int fseek(FILE *stream, long offset, int whence); /* Set the cursor of the stream to <em>offset</em>, relative to the offset told by <em>whence</em>, and returns 0 if it succeeded. */</li>
+<li>long ftell(FILE *stream); /* Return the offset of the current cursor position from the beginning of the stream. */</li>
+<li>void rewind(FILE *stream); /* Set the cursor position to the beginning of the file. */</li>
+<li>int fprintf(FILE *fout, const char *fmt, ...); /* Writes printf format string on fout */</li>
+<li>FILE *stdin; /* Standard input stream */</li>
+<li>FILE *stdout; /* Standard output stream */</li>
+<li>FILE *stderr; /* Standard error stream */</li>
+</ul>
+
+
+            </div>
+
+            <h2 id="parameters">Parameters</h2>
+            <div>
+                <table><thead><tr><th>Parameter</th><th>Details</th></tr></thead><tbody><tr><td>const char *mode</td><td>A string describing the opening mode of the file-backed stream. See remarks for possible values.</td></tr><tr><td>int whence</td><td>Can be <code>SEEK_SET</code> to set from the beginning of the file, <code>SEEK_END</code> to set from its end, or <code>SEEK_CUR</code> to set relative to the current cursor value. Note: <code>SEEK_END</code> is non-portable.</td></tr></tbody></table>
+
+            </div>
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <a class="remarks-subsection-anchor" name="remarks-mode-strings:-0"></a>
+<h3 id="mode-strings-">Mode strings:</h3>
+<p>Mode strings in <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/fopen.html" rel="nofollow noreferrer"><code>fopen()</code></a> and <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/freopen.html" rel="nofollow noreferrer"><code>freopen()</code></a> can be one of those values:</p>
+<ul>
+<li><code>&quot;r&quot;</code>: Open the file in read-only mode, with the cursor set to the beginning of the file.</li>
+<li><code>&quot;r+&quot;</code>: Open the file in read-write mode, with the cursor set to the beginning of the file.</li>
+<li><code>&quot;w&quot;</code>: Open or create the file in write-only mode, with its content truncated to 0 bytes. The cursor is set to the beginning of the file.</li>
+<li><code>&quot;w+&quot;</code>: Open or create the file in read-write mode, with its content truncated to 0 bytes. The cursor is set to the beginning of the file.</li>
+<li><code>&quot;a&quot;</code>: Open or create the file in write-only mode, with the cursor set to the end of the file.</li>
+<li><code>&quot;a+&quot;</code>: Open or create the file in read-write mode, with the read-cursor set to the beginning of the file. The output, however, will <em>always</em> be appended to the end of the file.</li>
+</ul>
+<p>Each of these file modes may have a <code>b</code> added after the initial letter (e.g. <code>&quot;rb&quot;</code> or <code>&quot;a+b&quot;</code> or <code>&quot;ab+&quot;</code>).  The <code>b</code> means that the file should be treated as a binary file instead of a text file on those systems where there is a difference.  It doesn't make a difference on Unix-like systems; it is important on Windows systems.  (Additionally, Windows <a href="https://msdn.microsoft.com/en-us/library/yeby3zcb(v=vs.140).aspx" rel="nofollow noreferrer"><code>fopen</code></a> allows an explicit <code>t</code> instead of <code>b</code> to indicate 'text file' — and numerous other platform-specific options.)</p>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C11&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C11</span></span></span><div class='version-specific-content'>
+<ul>
+<li><code>&quot;wx&quot;</code>: Create a text file in write-only mode. <em>The file may not exist</em>.</li>
+<li><code>&quot;wbx&quot;</code>: Create a binary file in write-only mode. <em>The file may not exist</em>.</li>
+</ul>
+<p>The <code>x</code>, if present, must be the last character in the mode string.</p>
+</div></div>
+
+
+            </div>
+
+
+            <h2 id="fprintf">fprintf</h2>
+            <div>
+                <p>You can use <code>fprintf</code> on a file just like you might on a console with <code>printf</code>. For example to keep track of game wins, losses and ties you might write</p>
+<pre><code>/* saves wins, losses and, ties */
+void savewlt(FILE *fout, int wins, int losses, int ties)
+{
+    fprintf(fout, &quot;Wins: %d\nTies: %d\nLosses: %d\n&quot;, wins, ties, losses);
+}
+</code></pre>
+<p>A side note: Some systems (infamously, Windows) do not use what most programmers would call &quot;normal&quot; line endings. While UNIX-like systems use \n to terminate lines, Windows uses a pair of characters: \r (carriage return) and \n (line feed). This sequence is commonly called CRLF. However, whenever using C, you do not need to worry about these highly platform-dependent details. A C compiler is required to convert every instance of \n to the correct platform line ending. So a Windows compiler would convert \n to \r\n, but a UNIX compiler would keep it as-is.</p>
+
+
+            </div>
+            <h2 id="fscanf-">fscanf()</h2>
+            <div>
+                <p>Let's say we have a text file and we want to read all words in that file, in order to do some requirements.</p>
+<p><strong>file.txt</strong>:</p>
+<pre><code>This is just
+a test file
+to be used by fscanf()
+</code></pre>
+<p>This is the main function:</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+void printAllWords(FILE *);
+
+int main(void)
+{
+  FILE *fp;
+
+  if ((fp = fopen(&quot;file.txt&quot;, &quot;r&quot;)) == NULL) {
+      perror(&quot;Error opening file&quot;);
+      exit(EXIT_FAILURE);
+  }
+
+  printAllWords(fp);
+
+  fclose(fp);
+  
+  return EXIT_SUCCESS;
+}
+
+void printAllWords(FILE * fp)
+{
+    char tmp[20];
+    int i = 1;
+
+    while (fscanf(fp, &quot;%19s&quot;, tmp) != EOF) {
+        printf(&quot;Word %d: %s\n&quot;, i, tmp);
+        i++;
+    }
+}
+</code></pre>
+<p>The output will be:</p>
+<pre><code>Word 1: This 
+Word 2: is 
+Word 3: just
+Word 4: a 
+Word 5: test
+Word 6: file
+Word 7: to
+Word 8: be 
+Word 9: used
+Word 10: by
+Word 11: fscanf()
+</code></pre>
+
+
+            </div>
+            <h2 id="get-lines-from-a-file-using-getline-">Get lines from a file using getline()</h2>
+            <div>
+                <p>The POSIX C library defines the <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/getline.html" rel="nofollow"><code>getline()</code></a> function. This function allocates a buffer to hold the line contents and returns the new line, the number of characters in the line, and the size of the buffer.</p>
+<p>Example program that gets each line from <code>example.txt</code>:</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;  
+
+
+#define FILENAME &quot;example.txt&quot;
+
+int main(void)
+{
+  /* Open the file for reading */
+  char *line_buf = NULL;
+  size_t line_buf_size = 0;
+  int line_count = 0;
+  ssize_t line_size;
+  FILE *fp = fopen(FILENAME, &quot;r&quot;);
+  if (!fp)
+  {
+    fprintf(stderr, &quot;Error opening file '%s'\n&quot;, FILENAME);
+    return EXIT_FAILURE;
+  }
+
+  /* Get the first line of the file. */
+  line_size = getline(&amp;line_buf, &amp;line_buf_size, fp);
+
+  /* Loop through until we are done with the file. */
+  while (line_size &gt;= 0)
+  {
+    /* Increment our line count */
+    line_count++;
+
+    /* Show the line details */
+    printf(&quot;line[%06d]: chars=%06zd, buf size=%06zu, contents: %s&quot;, line_count,
+        line_size, line_buf_size, line_buf);
+
+    /* Get the next line */
+    line_size = getline(&amp;line_buf, &amp;line_buf_size, fp);
+  }
+
+  /* Free the allocated line buffer */
+  free(line_buf);
+  line_buf = NULL;
+
+  /* Close the file now that we are done with it */
+  fclose(fp);
+
+  return EXIT_SUCCESS;
+}
+</code></pre>
+<h4 id="input-file-example-txt">Input file <code>example.txt</code></h4>
+<pre><code>This is a file
+  which has
+multiple lines
+    with various indentation,
+blank lines
+
+
+
+a really long line to show that getline() will reallocate the line buffer if the length of a line is too long to fit in the buffer it has been given,
+  and punctuation at the end of the lines.
+</code></pre>
+<h4 id="output">Output</h4>
+<pre><code>line[000001]: chars=000015, buf size=000016, contents: This is a file
+line[000002]: chars=000012, buf size=000016, contents:   which has
+line[000003]: chars=000015, buf size=000016, contents: multiple lines
+line[000004]: chars=000030, buf size=000032, contents:     with various indentation,
+line[000005]: chars=000012, buf size=000032, contents: blank lines
+line[000006]: chars=000001, buf size=000032, contents: 
+line[000007]: chars=000001, buf size=000032, contents: 
+line[000008]: chars=000001, buf size=000032, contents: 
+line[000009]: chars=000150, buf size=000160, contents: a really long line to show that getline() will reallocate the line buffer if the length of a line is too long to fit in the buffer it has been given,
+line[000010]: chars=000042, buf size=000160, contents:  and punctuation at the end of the lines.
+line[000011]: chars=000001, buf size=000160, contents: 
+</code></pre>
+<p>In the example, <code>getline()</code> is initially called with no buffer allocated.  During this first call, <code>getline()</code> allocates a buffer, reads the first line and places the line's contents in the new buffer.  On subsequent calls, <code>getline()</code> updates the same buffer and only reallocates the buffer when it is no longer large enough to fit the whole line.  The temporary buffer is then freed when we are done with the file.</p>
+<p>Another option is <code>getdelim()</code>.  This is the same as <code>getline()</code> except you specify the line ending character.  This is only necessary if the last character of the line for your file type is not '\n'.  <code>getline()</code> works even with Windows text files because with the multibyte line ending (<code>&quot;\r\n&quot;)</code>'\n'` is still the last character on the line.</p>
+<h4 id="example-implementation-of-getline-">Example implementation of <code>getline()</code></h4>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdint.h&gt;
+
+
+#if !(defined _POSIX_C_SOURCE)
+typedef long int ssize_t;
+#endif
+
+/* Only include our version of getline() if the POSIX version isn't available. */
+
+#if !(defined _POSIX_C_SOURCE) || _POSIX_C_SOURCE &lt; 200809L
+
+#if !(defined SSIZE_MAX)
+#define SSIZE_MAX (SIZE_MAX &gt;&gt; 1)
+#endif
+
+ssize_t getline(char **pline_buf, size_t *pn, FILE *fin)
+{
+  const size_t INITALLOC = 16;
+  const size_t ALLOCSTEP = 16;
+  size_t num_read = 0;
+
+  /* First check that none of our input pointers are NULL. */
+  if ((NULL == pline_buf) || (NULL == pn) || (NULL == fin))
+  {
+    errno = EINVAL;
+    return -1;
+  }
+
+  /* If output buffer is NULL, then allocate a buffer. */
+  if (NULL == *pline_buf)
+  {
+    *pline_buf = malloc(INITALLOC);
+    if (NULL == *pline_buf)
+    {
+      /* Can't allocate memory. */
+      return -1;
+    }
+    else
+    {
+      /* Note how big the buffer is at this time. */
+      *pn = INITALLOC;
+    }
+  }
+
+  /* Step through the file, pulling characters until either a newline or EOF. */
+
+  {
+    int c;
+    while (EOF != (c = getc(fin)))
+    {
+      /* Note we read a character. */
+      num_read++;
+
+      /* Reallocate the buffer if we need more room */
+      if (num_read &gt;= *pn)
+      {
+        size_t n_realloc = *pn + ALLOCSTEP;
+        char * tmp = realloc(*pline_buf, n_realloc + 1); /* +1 for the trailing NUL. */
+        if (NULL != tmp)
+        {
+          /* Use the new buffer and note the new buffer size. */
+          *pline_buf = tmp;
+          *pn = n_realloc;
+        }
+        else
+        {
+          /* Exit with error and let the caller free the buffer. */
+          return -1;
+        }
+
+        /* Test for overflow. */
+        if (SSIZE_MAX &lt; *pn)
+        {
+          errno = ERANGE;
+          return -1;
+        }
+      }
+
+      /* Add the character to the buffer. */
+      (*pline_buf)[num_read - 1] = (char) c;
+
+      /* Break from the loop if we hit the ending character. */
+      if (c == '\n')
+      {
+        break;
+      }
+    }
+
+    /* Note if we hit EOF. */
+    if (EOF == c)
+    {
+      errno = 0;
+      return -1;
+    }
+  }
+
+  /* Terminate the string by suffixing NUL. */
+  (*pline_buf)[num_read] = '\0';
+
+  return (ssize_t) num_read;
+}
+
+#endif
+</code></pre>
+
+
+            </div>
+            <h2 id="open-and-write-to-a-binary-file">Open and write to a binary file</h2>
+            <div>
+                <pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+
+int main(void)
+{
+   result = EXIT_SUCCESS;
+
+   char file_name[] = &quot;outbut.bin&quot;;
+   char str[] = &quot;This is a binary file example&quot;;
+   FILE * fp = fopen(file_name, &quot;wb&quot;);
+   
+   if (fp == NULL)  /* If an error occurs during the file creation */
+   {
+     result = EXIT_FAILURE;
+     fprintf(stderr, &quot;fopen() failed for '%s'\n&quot;, file_name);
+   }
+   else
+   {
+     size_t element_size = sizeof *str;
+     size_t elements_to_write = sizeof str;
+
+     /* Writes str (_including_ the NUL-terminator) to the binary file. */
+     size_t elements_written = fwrite(str, element_size, elements_to_write, fp); 
+     if (elements_written != elements_to_write)
+     {
+       result = EXIT_FAILURE;
+       /* This works for &gt;=c99 only, else the z length modifier is unknown. */
+       fprintf(stderr, &quot;fwrite() failed: wrote only %zu out of %zu elements.\n&quot;, 
+         elements_written, elements_to_write);
+       /* Use this for &lt;c99: *
+       fprintf(stderr, &quot;fwrite() failed: wrote only %lu out of %lu elements.\n&quot;, 
+         (unsigned long) elements_written, (unsigned long) elements_to_write);
+        */
+     }
+
+     fclose(fp);
+   }
+
+   return result;
+}
+</code></pre>
+<p>This program creates and writes text in the binary form through the <code>fwrite</code> function to the file <code>output.bin</code>.</p>
+<p>If a file with the same name already exists, its contents are discarded and the file is treated as a new empty file.</p>
+<p>A binary stream is an ordered sequence of characters that can transparently record internal data. In this mode, bytes are written between the program and the file without any interpretation.</p>
+<p>To write integers portably, it must be known whether the file format expects them in big or little-endian format, and the size (usually 16, 32 or 64 bits). Bit shifting and masking may then be used to write out the bytes in the correct order. Integers in C are not guaranteed to have two's complement representation (though almost all implementations do). Fortunately a conversion to unsigned <em>is</em> guaranteed to use twos complement. The code for writing a signed integer to a binary file is therefore a little surprising.</p>
+<pre><code>/* write a 16-bit little endian integer */
+int fput16le(int x, FILE *fp)
+{
+    unsigned int rep = x;
+    int e1, e2;
+
+    e1 = fputc(rep &amp; 0xFF, fp);
+    e2 = fputc((rep &gt;&gt; 8) &amp; 0xFF, fp);
+
+    if(e1 == EOF || e2 == EOF)
+        return EOF;
+    return 0;  
+}
+</code></pre>
+<p>The other functions follow the same pattern with minor modifications for size and byte order.</p>
+
+
+            </div>
+            <h2 id="open-and-write-to-file">Open and write to file</h2>
+            <div>
+                <pre><code>#include &lt;stdio.h&gt;   /* for perror(), fopen(), fputs() and fclose() */
+#include &lt;stdlib.h&gt;  /* for the EXIT_* macros */
+ 
+int main(int argc, char **argv)
+{
+    int e = EXIT_SUCCESS;
+
+    /* Get path from argument to main else default to output.txt */
+    char *path = (argc &gt; 1) ? argv[1] : &quot;output.txt&quot;;
+
+    /* Open file for writing and obtain file pointer */
+    FILE *file = fopen(path, &quot;w&quot;);
+    
+    /* Print error message and exit if fopen() failed */
+    if (!file) 
+    {
+        perror(path);
+        return EXIT_FAILURE;
+    }
+
+    /* Writes text to file. Unlike puts(), fputs() does not add a new-line. */
+    if (fputs(&quot;Output in file.\n&quot;, file) == EOF)
+    {
+        perror(path);
+        e = EXIT_FAILURE;
+    }
+
+    /* Close file */
+    if (fclose(file)) 
+    {
+        perror(path);
+        return EXIT_FAILURE;
+    }
+    return e;
+}
+</code></pre>
+<p>This program opens the file with name given in the argument to main, defaulting to <code>output.txt</code> if no argument is given.  If a file with the same name already exists, its contents are discarded and the file is treated as a new empty file. If the files does not already exist the <code>fopen()</code> call creates it.</p>
+<p>If the <code>fopen()</code> call fails for some reason, it returns a <code>NULL</code> value and sets the global <code>errno</code> variable value. This means that the program can test the returned value after the <code>fopen()</code> call and use <code>perror()</code>  if <code>fopen()</code> fails.</p>
+<p>If the <code>fopen()</code> call succeeds, it returns a valid <code>FILE</code> pointer. This pointer can then be used to reference this file until <code>fclose()</code> is called on it.</p>
+<p>The <code>fputs()</code> function writes the given text to the opened file, replacing any previous contents of the file. Similarly to <code>fopen()</code>, the <code>fputs()</code> function also sets the <code>errno</code> value if it fails, though in this case the function returns <code>EOF</code> to indicate the fail (it otherwise returns a non-negative value).</p>
+<p>The <code>fclose()</code> function flushes any buffers, closes the file and frees the memory pointed to by <code>FILE *</code>. The return value indicates completion just as <code>fputs()</code> does (though it returns '0' if successful), again also setting the <code>errno</code> value in the case of a fail.</p>
+
+
+            </div>
+            <h2 id="read-lines-from-a-file">Read lines from a file</h2>
+            <div>
+                <p>The <code>stdio.h</code> header defines the <code>fgets()</code> function. This function reads a line from a stream and stores it in a specified string. The function stops reading text from the stream when either <code>n - 1</code> characters are read, the newline character (<code>'\n'</code>) is read or the end of file (EOF) is reached.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_LINE_LENGTH 80
+
+int main(int argc, char **argv)
+{
+    char *path;
+    char line[MAX_LINE_LENGTH] = {0};
+    unsigned int line_count = 0;
+    
+    if (argc &lt; 1)
+        return EXIT_FAILURE;
+    path = argv[1];
+    
+    /* Open file */
+    FILE *file = fopen(path, &quot;r&quot;);
+    
+    if (!file)
+    {
+        perror(path);
+        return EXIT_FAILURE;
+    }
+    
+    /* Get each line until there are none left */
+    while (fgets(line, MAX_LINE_LENGTH, file))
+    {
+        /* Print each line */
+        printf(&quot;line[%06d]: %s&quot;, ++line_count, line);
+        
+        /* Add a trailing newline to lines that don't already have one */
+        if (line[strlen(line) - 1] != '\n')
+            printf(&quot;\n&quot;);
+    }
+    
+    /* Close file */
+    if (fclose(file))
+    {
+        return EXIT_FAILURE;
+        perror(path);
+    }
+}
+</code></pre>
+<p>Calling the program with an argument that is a path to a file containing the following text:</p>
+<pre><code>This is a file
+  which has
+multiple lines
+    with various indentation,
+blank lines
+
+
+
+a really long line to show that the line will be counted as two lines if the length of a line is too long to fit in the buffer it has been given,
+  and punctuation at the end of the lines.
+</code></pre>
+<p>Will result in the following output:</p>
+<pre><code>line[000001]: This is a file
+line[000002]:   which has
+line[000003]: multiple lines
+line[000004]:     with various indentation,
+line[000005]: blank lines
+line[000006]: 
+line[000007]: 
+line[000008]: 
+line[000009]: a really long line to show that the line will be counted as two lines if the le
+line[000010]: ngth of a line is too long to fit in the buffer it has been given,
+line[000011]:  and punctuation at the end of the lines.
+line[000012]: 
+</code></pre>
+<p>This very simple example allows a fixed maximum line length, such that longer lines will effectively be counted as two lines. The <code>fgets()</code> function requires that the calling code provide the memory to be used as the destination for the line that is read.</p>
+<p>POSIX makes the <a class='doc-link' href="http://www.riptutorial.com/c/example/8274/get-lines-from-a-file-using-getline--"><code>getline()</code></a> function available which instead internally allocates memory to enlarge the buffer as necessary for a line of any length (as long as there is sufficient memory).</p>
+
+
+            </div>
+            <h2 id="run-process">Run process</h2>
+            <div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+void print_all(FILE *stream)
+{
+    int c;
+    while ((c = getc(stream)) != EOF)
+        putchar(c);
+}
+int main(void)
+{
+    FILE *stream;
+
+    /* call netstat command. netstat is available for Windows and Linux */
+    if ((stream = popen(&quot;netstat&quot;, &quot;r&quot;)) == NULL)
+        return 1;
+  
+    print_all(stream);
+    pclose(stream);
+    return 0;
+}
+</code></pre>
+<p>This program runs a process (<a href="http://man7.org/linux/man-pages/man8/netstat.8.html" rel="nofollow"><code>netstat</code></a>) via <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/popen.html" rel="nofollow"><code>popen()</code></a> and reads all the standard output from the process and echoes that to standard output.</p>
+<p><em>Note:</em> <code>popen()</code> does not exist in the <a href="https://en.wikipedia.org/wiki/C_standard_library" rel="nofollow">standard C library</a>, but it is rather a part of <a href="https://en.wikipedia.org/wiki/C_POSIX_library" rel="nofollow">POSIX C</a>)</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../2486/error-handling.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../3750/formatted-input-output.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-04-16</div>
+        <div itemprop="datePublished">2016-04-16</div>
+        <div itemprop="dateModified">2017-03-15</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=507" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1035529341" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#parameters">
+                    Parameters
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+
+
+<ul id="accordion_1947157274" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#mode-strings-">
+                    Mode strings:
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#fprintf">
+                    fprintf
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#fscanf-">
+                    fscanf()
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#get-lines-from-a-file-using-getline-">
+                    Get lines from a file using getline()
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#open-and-write-to-a-binary-file">
+                    Open and write to a binary file
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#open-and-write-to-file">
+                    Open and write to file
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#read-lines-from-a-file">
+                    Read lines from a file
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#run-process">
+                    Run process
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/507/files-and-i-o-streams by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

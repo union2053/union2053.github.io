@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12730477/close---is-not-closing-socket-properly by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="close() is not closing socket properly | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="close() is not closing socket properly | C Language Knowledge Base">
+        <title>close() is not closing socket properly | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="close-is-not-closing-socket-properly">close() is not closing socket properly</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/client-server.html">client-server</a></span>
+                        <span class="tag-item"><a href="../tag/sockets.html">sockets</a></span>
+                        <span class="tag-item"><a href="../tag/tcp.html">tcp</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have a multi-threaded server (thread pool) that is handling a large number of requests (up to 500/sec for one node), using 20 threads.  There's a listener thread that accepts incoming connections and queues them for the handler threads to process.  Once the response is ready, the threads then write out to the client and close the socket.  All seemed to be fine until recently, a test client program started hanging randomly after reading the response.  After a lot of digging, it seems that the close() from the server is not actually disconnecting the socket.  I've added some debugging prints to the code with the file descriptor number and I get this type of output.</p>
+
+<pre><code>Processing request for 21
+Writing to 21
+Closing 21
+</code></pre>
+
+<p>The return value of close() is 0, or there would be another debug statement printed. After this output with a client that hangs, lsof is showing an established connection.</p>
+
+<p>SERVER  8160      root   21u     IPv4           32754237                            TCP localhost:9980->localhost:47530 (ESTABLISHED)</p>
+
+<p>CLIENT   17747      root   12u     IPv4           32754228                            TCP localhost:47530->localhost:9980 (ESTABLISHED)</p>
+
+<p>It's as if the server never sends the shutdown sequence to the client, and this state hangs until the client is killed, leaving the server side in a close wait state</p>
+
+<p>SERVER  8160      root   21u     IPv4           32754237                  TCP localhost:9980->localhost:47530 (CLOSE_WAIT)</p>
+
+<p>Also if the client has a timeout specified, it will timeout instead of hanging.  I can also manually run</p>
+
+<pre><code>call close(21)
+</code></pre>
+
+<p>in the server from gdb, and the client will then disconnect.  This happens maybe once in 50,000 requests, but might not happen for extended periods.</p>
+
+<p>Linux version: 2.6.21.7-2.fc8xen
+Centos version: 5.4 (Final)</p>
+
+<p>socket actions are as follows</p>
+
+<p>SERVER:</p>
+
+<p>int client_socket;
+struct sockaddr_in client_addr;
+socklen_t client_len = sizeof(client_addr);</p>
+
+<pre><code>while(true) {
+  client_socket = accept(incoming_socket, (struct sockaddr *)&amp;client_addr, &amp;client_len);
+  if (client_socket == -1)
+    continue;
+  /*  insert into queue here for threads to process  */
+}
+</code></pre>
+
+<p>Then the thread picks up the socket and builds the response.</p>
+
+<pre><code>/*  get client_socket from queue  */
+
+/*  processing request here  */
+
+/*  now set to blocking for write; was previously set to non-blocking for reading  */
+int flags = fcntl(client_socket, F_GETFL);
+if (flags &lt; 0)
+  abort();
+if (fcntl(client_socket, F_SETFL, flags|O_NONBLOCK) &lt; 0)
+  abort();
+
+server_write(client_socket, response_buf, response_length);
+server_close(client_socket);
+</code></pre>
+
+<p>server_write and server_close.</p>
+
+<pre><code>void server_write( int fd, char const *buf, ssize_t len ) {
+    printf("Writing to %d\n", fd);
+    while(len &gt; 0) {
+      ssize_t n = write(fd, buf, len);
+      if(n &lt;= 0)
+        return;// I don't really care what error happened, we'll just drop the connection
+      len -= n;
+      buf += n;
+    }
+  }
+
+void server_close( int fd ) {
+    for(uint32_t i=0; i&lt;10; i++) {
+      int n = close(fd);
+      if(!n) {//closed successfully                                                                                                                                   
+        return;
+      }
+      usleep(100);
+    }
+    printf("Close failed for %d\n", fd);
+  }
+</code></pre>
+
+<p>CLIENT:</p>
+
+<p>Client side is using libcurl v 7.27.0</p>
+
+<pre><code>CURL *curl = curl_easy_init();
+CURLcode res;
+curl_easy_setopt( curl, CURLOPT_URL, url);
+curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_callback );
+curl_easy_setopt( curl, CURLOPT_WRITEDATA, write_tag );
+
+res = curl_easy_perform(curl);
+</code></pre>
+
+<p>Nothing fancy, just a basic curl connection.  Client hangs in tranfer.c (in libcurl) because the socket is not perceived as being closed.  It's waiting for more data from the server.</p>
+
+<p>Things I've tried so far:</p>
+
+<p>Shutdown before close</p>
+
+<pre><code>shutdown(fd, SHUT_WR);                                                                                                                                            
+char buf[64];                                                                                                                                                     
+while(read(fd, buf, 64) &gt; 0);                                                                                                                                         
+/*  then close  */ 
+</code></pre>
+
+<p>Setting SO_LINGER to close forcibly in 1 second</p>
+
+<pre><code>struct linger l;
+l.l_onoff = 1;
+l.l_linger = 1;
+if (setsockopt(client_socket, SOL_SOCKET, SO_LINGER, &amp;l, sizeof(l)) == -1)
+  abort();
+</code></pre>
+
+<p>These have made no difference.  Any ideas would be greatly appreciated.</p>
+
+<p>EDIT -- This ended up being a thread-safety issue inside a queue library causing the socket to be handled inappropriately by multiple threads.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/574636/davidmfrey" target="_blank"><span itemprop="name">DavidMFrey</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">23</div>
+                                    <div itemprop="dateCreated">3/15/2016 3:47:43 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Here is some code I've used on many Unix-like systems (e.g SunOS 4, SGI IRIX, HPUX 10.20, CentOS 5, Cygwin) to close a socket:</p>
+
+<pre><code>int getSO_ERROR(int fd) {
+   int err = 1;
+   socklen_t len = sizeof err;
+   if (-1 == getsockopt(fd, SOL_SOCKET, SO_ERROR, (char *)&amp;err, &amp;len))
+      FatalError("getSO_ERROR");
+   if (err)
+      errno = err;              // set errno to the socket SO_ERROR
+   return err;
+}
+
+void closeSocket(int fd) {      // *not* the Windows closesocket()
+   if (fd &gt;= 0) {
+      getSO_ERROR(fd); // first clear any errors, which can cause close to fail
+      if (shutdown(fd, SHUT_RDWR) &lt; 0) // secondly, terminate the 'reliable' delivery
+         if (errno != ENOTCONN &amp;&amp; errno != EINVAL) // SGI causes EINVAL
+            Perror("shutdown");
+      if (close(fd) &lt; 0) // finally call close()
+         Perror("close");
+   }
+}
+</code></pre>
+
+<p>But the above does not guarantee that any buffered writes are sent.</p>
+
+<p>Graceful close: It took me about 10 years to figure out how to close a socket. But for another 10 years I just lazily called <code>usleep(20000)</code> for a slight delay to 'ensure' that the write buffer was flushed before the close. This obviously is not very clever, because:</p>
+
+<ul>
+<li>The delay was too long most of the time.</li>
+<li>The delay was too short some of the time--maybe!</li>
+<li>A signal such SIGCHLD could occur to end <code>usleep()</code> (but I usually called <code>usleep()</code> twice to handle this case--a hack).</li>
+<li>There was no indication whether this works. But this is perhaps not important if a) hard resets are perfectly ok, and/or b) you have control over both sides of the link.</li>
+</ul>
+
+<p>But doing a proper flush is surprisingly hard. Using <code>SO_LINGER</code> is apparently <em>not</em> the way to go; see for example:</p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/ms740481(v=vs.85).aspx">http://msdn.microsoft.com/en-us/library/ms740481%28v=vs.85%29.aspx</a></li>
+<li><a href="https://www.google.ca/#q=the-ultimate-so_linger-page">https://www.google.ca/#q=the-ultimate-so_linger-page</a></li>
+</ul>
+
+<p>And <code>SIOCOUTQ</code> appears to be Linux-specific.</p>
+
+<p>Note <code>shutdown(fd, SHUT_WR)</code> <em>doesn't</em> stop writing, contrary to its name, and maybe contrary to <code>man 2 shutdown</code>.</p>
+
+<p>This code <code>flushSocketBeforeClose()</code> waits until a read of zero bytes, or until the timer expires.  The function <code>haveInput()</code> is a simple wrapper for select(2), and is set to block for up to 1/100th of a second.</p>
+
+<pre><code>bool haveInput(int fd, double timeout) {
+   int status;
+   fd_set fds;
+   struct timeval tv;
+   FD_ZERO(&amp;fds);
+   FD_SET(fd, &amp;fds);
+   tv.tv_sec  = (long)timeout; // cast needed for C++
+   tv.tv_usec = (long)((timeout - tv.tv_sec) * 1000000); // 'suseconds_t'
+
+   while (1) {
+      if (!(status = select(fd + 1, &amp;fds, 0, 0, &amp;tv)))
+         return FALSE;
+      else if (status &gt; 0 &amp;&amp; FD_ISSET(fd, &amp;fds))
+         return TRUE;
+      else if (status &gt; 0)
+         FatalError("I am confused");
+      else if (errno != EINTR)
+         FatalError("select"); // tbd EBADF: man page "an error has occurred"
+   }
+}
+
+bool flushSocketBeforeClose(int fd, double timeout) {
+   const double start = getWallTimeEpoch();
+   char discard[99];
+   ASSERT(SHUT_WR == 1);
+   if (shutdown(fd, 1) != -1)
+      while (getWallTimeEpoch() &lt; start + timeout)
+         while (haveInput(fd, 0.01)) // can block for 0.01 secs
+            if (!read(fd, discard, sizeof discard))
+               return TRUE; // success!
+   return FALSE;
+}
+</code></pre>
+
+<p>Example of use:</p>
+
+<pre><code>   if (!flushSocketBeforeClose(fd, 2.0)) // can block for 2s
+       printf("Warning: Cannot gracefully close socket\n");
+   closeSocket(fd);
+</code></pre>
+
+<p>In the above, my <code>getWallTimeEpoch()</code> is similar to <code>time(),</code> and <code>Perror()</code> is a wrapper for <code>perror().</code></p>
+
+<p><strong>Edit:</strong> Some comments:</p>
+
+<ul>
+<li><p>My first admission is a bit embarrassing. The OP and Nemo challenged the need to clear the internal <code>so_error</code> before close, but I cannot now find any reference for this. The system in question was HPUX 10.20.  After a failed <code>connect()</code>, just calling <code>close()</code> did not release the file descriptor, because the system wished to deliver an outstanding error to me. But I, like most people, never bothered to check the return value of <code>close.</code>  So I eventually ran out of file descriptors <code>(ulimit -n),</code> which finally got my attention.</p></li>
+<li><p>(very minor point) One commentator objected to the hard-coded numerical arguments to <code>shutdown()</code>, rather than e.g. SHUT_WR for 1. The simplest answer is that Windows uses different #defines/enums e.g. <code>SD_SEND</code>. And many other writers (e.g. Beej) use constants, as do many legacy systems.</p></li>
+<li><p>Also, I always, always, set FD_CLOEXEC on all my sockets, since in my applications I never want them passed to a child and, more importantly, I don't want a hung child to impact me.</p></li>
+</ul>
+
+<p>Sample code to set CLOEXEC:</p>
+
+<pre><code>   static void setFD_CLOEXEC(int fd) {
+      int status = fcntl(fd, F_GETFD, 0);
+      if (status &gt;= 0)
+         status = fcntl(fd, F_SETFD, status | FD_CLOEXEC);
+      if (status &lt; 0)
+         Perror("Error getting/setting socket FD_CLOEXEC flags");
+   }
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/318716/joseph-quinsey" target="_blank"><span itemprop="name">Joseph Quinsey</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/12730477/close---is-not-closing-socket-properly#answer-0</div>
+                                            <div itemprop="upvoteCount">58</div>
+                                            <div itemprop="dateCreated">1/24/2014 6:35:01 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/12730477" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/12730477/close---is-not-closing-socket-properly by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:15 GMT -->
+</html>

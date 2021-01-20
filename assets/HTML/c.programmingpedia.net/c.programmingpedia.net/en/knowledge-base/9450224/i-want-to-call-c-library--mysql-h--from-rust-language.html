@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9450224/i-want-to-call-c-library--mysql-h--from-rust-language by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] I want to call C library &quot;mysql.h&quot; from Rust language | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] I want to call C library &quot;mysql.h&quot; from Rust language | C Language Knowledge Base">
+        <title>[SOLVED] I want to call C library &quot;mysql.h&quot; from Rust language | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="i-want-to-call-c-library-mysql-h-from-rust-language">I want to call C library "mysql.h" from Rust language</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/rust.html">rust</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to connect to mysql from rust code. I've tried these steps.</p>
+
+<ol>
+1. I wrote c code using <code>mysql.h</code>, and command below.
+<pre><code>
+ $ gcc -shared mysqlrust.c -o libmysqlrust.so  $(mysql_config --cflags) $(mysql_config --libs)   $(mysql_config --cflags)
+ $ cp libmysqlrust.so /usr/local/lib/rustc/i686-unknown-linux-gnu/lib/
+</code></pre>
+
+2. I wrote Rust code, that calls <code>libmysqlrust.so</code>.
+</ol>
+
+<p>But I couldn't figure out way to use C type structure "<code>MYSQL</code>", "<code>MYSQL_RES</code>", "<code>MYSQL_ROW</code>".
+Please show me how to use c type structure from rust code.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1232676/takuya-horimatsu" target="_blank"><span itemprop="name">Takuya Horimatsu</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">11</div>
+                                    <div itemprop="dateCreated">2/26/2012 2:57:39 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There is not yet any way to automatically create Rust type definitions from C structs. In these situations there are a few ways to proceed. Not knowing the MySQL API, I can't say exactly what you should do, but here are some options.</p>
+
+<p>1) Treat them entirely as opaque pointers.</p>
+
+<p>This is the best situation to be in, and depends on the C API always taking the struct as a pointer, having its own constructor and destructor functions, and providing accessor functions for whatever you need to access inside the struct. In these cases you just define <code>type MYSQL = ctypes::void</code> and only ever use it as an unsafe pointer <code>*MYSQL</code>. Sometimes the easiest path is to write your own C wrappers to fill in the gaps and make this scenario possible.</p>
+
+<p>The remaining scenarios all involve redefining a Rust data structure with the same structure as the C struct. Rust tries to lay out its data structures in a way that is compatible with C (though doesn't always succeed yet), so it is often possible to create a Rust record or enum with the size, alignment and layout of the C struct you care about. You will want to make sure you use the types in <code>core::ctypes</code>, as they are defined to match various common C types.</p>
+
+<p>Note that the <code>ctypes</code> module will be going away soon in favor of a more comprehensive libc compatibility module.</p>
+
+<p>2) Define a Rust record that is partially correct.</p>
+
+<p>If the API provides constructors and destructors, but you still need access to some fields of the struct, then you can define just enough of the struct to get at the fields you care about, disregarding things like the correct size and alignment. e.g. <code>type MSQL = { filler1: ctypes::int, ..., connector_fd: *ctypes::char }</code>. You can stop defining the struct at the last field you care about since you have a C function to allocate it on the heap with the correct size and alignment. In Rust code you always refer to it with an unsafe pointer: <code>let mysql: *MYSQL = mysqlrust::create_mysql();</code></p>
+
+<p>3) Define a Rust record that is the correct size and alignment, without caring about the contents.</p>
+
+<p>If you don't have constructor/destructor functions, or need to store the struct on the stack, but you otherwise have accessor functions to manipulate the contents of the struct, then you need to define a Rust record with the correct size and alignment. To do this, just add fields of type <code>uint</code> (which is always pointer-sized) or tuples of <code>uint</code>, until both C's <code>sizeof</code> and <code>core::sys::size_of</code> agree on the size. Pad with <code>u8</code>s if the size isn't a multiple of the pointer size. Getting the alignment right is a more mystical process, but by using <code>uint</code> fields you will generally end up with a usable alignment (maybe - I really have no idea how accurate that statement is).</p>
+
+<p>I would recommend adding tests to sanity check that Rust and C agree on the size in order to guard against future breakage.</p>
+
+<p>3) Actually redefine the entire C struct.</p>
+
+<p>This is a pretty dire situation for large structs, and it is possible in theory, but I don't think anybody has done it for a struct as big as <code>MYSQL</code>. I would avoid it if you can. Eventually there will be a clang-based tool to do this automatically.</p>
+
+<p>Here are some examples of interop with C structs:</p>
+
+<p><a href="https://github.com/jdm/rust-socket/blob/master/socket.rs" rel="noreferrer">https://github.com/jdm/rust-socket/blob/master/socket.rs</a> - This redefines various socket structs, adding placeholders for fields it doesn't care about. Note that it uses <code>u8</code> for padding, but I think <code>uint</code> is more likely to produce correct alignment.</p>
+
+<p><a href="https://github.com/erickt/rust-zmq/blob/master/zmq.rs" rel="noreferrer">https://github.com/erickt/rust-zmq/blob/master/zmq.rs</a></p>
+
+<p><a href="https://github.com/pcwalton/rust-spidermonkey" rel="noreferrer">https://github.com/pcwalton/rust-spidermonkey</a> - This one demonstrates interop with a somewhat complex API.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1204536/brson" target="_blank"><span itemprop="name">brson</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/9450224/i-want-to-call-c-library--mysql-h--from-rust-language#answer-0</div>
+                                            <div itemprop="upvoteCount">17</div>
+                                            <div itemprop="dateCreated">2/26/2012 10:13:55 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/9450224" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9450224/i-want-to-call-c-library--mysql-h--from-rust-language by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:50 GMT -->
+</html>

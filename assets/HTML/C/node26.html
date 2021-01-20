@@ -1,0 +1,1176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node26.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>IPC:Semaphores</TITLE>
+<META NAME="description" CONTENT="IPC:Semaphores">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1235"
+ HREF="node26.html#SECTION002610000000000000000">
+Initializing
+a Semaphore Set</A>
+<LI><A NAME="tex2html1236"
+ HREF="node26.html#SECTION002620000000000000000">
+Controlling Semaphores</A>
+<LI><A NAME="tex2html1237"
+ HREF="node26.html#SECTION002630000000000000000">
+Semaphore Operations</A>
+<LI><A NAME="tex2html1238"
+ HREF="node26.html#SECTION002640000000000000000">
+POSIX Semaphores: &lt;semaphore.h&gt;</A>
+<LI><A NAME="tex2html1239"
+ HREF="node26.html#SECTION002650000000000000000">
+<TT>semaphore.c</TT>: Illustration of simple semaphore passing</A>
+<LI><A NAME="tex2html1240"
+ HREF="node26.html#SECTION002660000000000000000">
+Some further example semaphore programs</A>
+<UL>
+<LI><A NAME="tex2html1241"
+ HREF="node26.html#SECTION002661000000000000000">
+<TT>semget.c</TT>: Illustrate the <TT>semget()</TT> function</A>
+<LI><A NAME="tex2html1242"
+ HREF="node26.html#SECTION002662000000000000000">
+<TT>semctl.c</TT>: Illustrate the <TT>semctl()</TT> function</A>
+<LI><A NAME="tex2html1243"
+ HREF="node26.html#SECTION002663000000000000000">
+<TT>semop()</TT> Sample Program to Illustrate <TT>semop()</TT></A>
+</UL>
+<LI><A NAME="tex2html1244"
+ HREF="node26.html#SECTION002670000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION002600000000000000000">
+IPC:Semaphores</A>
+</H1>
+<A NAME="ch:semaphores">&#160;</A>
+Semaphores are a programming construct designed by
+E. W. Dijkstra in the late 1960s. Dijkstra's model was the operation of
+railroads: consider a stretch of railroad in which there is a single
+track over which only one train at a time is allowed. Guarding this track
+is a semaphore. A train must wait before entering the single track until
+the semaphore is in a state that permits travel. When the train enters the
+track, the semaphore changes state to prevent other trains from entering
+the track. A train that is leaving this section of track must again
+change the state of the semaphore to allow another train to enter. In the
+computer version, a semaphore appears to be a simple integer. A
+process (or a thread)  waits for permission to proceed by waiting for
+the integer to become 0. The signal if it proceeds signals that this by
+performing incrementing the integer by 1. 
+When it is finished, the process changes the
+semaphore's value by subtracting one from it.
+<P>
+Semaphores let processes query or alter status information. They are
+often used to monitor and control the availability of system resources
+such as shared memory segments.
+<P>
+Semaphores can be operated on as individual units or as elements in a
+set. Because System V IPC semaphores can be in a large array, they are
+extremely heavy weight. Much lighter weight semaphores are available in
+the threads library (see <TT>man semaphore</TT> and also
+Chapter&nbsp;<A HREF="node31.html#ch:thread_sem">30.3</A>) and POSIX semaphores (see below briefly).
+Threads library semaphores must be used with mapped memory . A semaphore
+set consists of a control structure and an array of individual
+semaphores. A set of semaphores can contain up to 25 elements.
+<P>
+In a similar fashion to message queues, the semaphore set must be
+initialized using <TT>semget()</TT>; the semaphore creator can change its
+ownership or permissions using <TT>semctl()</TT>; and semaphore operations
+are performed via the <TT>semop()</TT> function. These are now discussed
+below:
+<P><H1><A NAME="SECTION002610000000000000000">
+Initializing
+a Semaphore Set</A>
+</H1>
+<P>
+The function <TT>semget()</TT> initializes or gains access to a semaphore.
+It is prototyped by:
+<P><PRE>
+int semget(key_t key, int nsems, int semflg);
+</PRE>
+<P>
+When the call succeeds, it returns the semaphore ID (<TT>semid</TT>).
+<P>
+The
+<TT>key</TT> argument is a access value associated with the semaphore ID.
+<P>
+The
+<TT>nsems</TT> argument specifies the number of elements in a semaphore
+array. The call fails when <TT>nsems</TT> is greater than the number of
+elements in an existing array; when the correct count is not known,
+supplying 0 for this argument ensures that it will succeed.
+<P>
+The <TT>
+semflg</TT> argument specifies the initial access permissions and creation
+control flags.
+<P>
+The following code
+illustrates the semget() function.
+<P><PRE>
+#include &lt;sys/types.h&gt; 
+#include &lt;sys/ipc.h&gt; 
+#include &lt;sys/sem.h&gt; 
+
+... 
+key_t key; /* key to pass to semget() */ 
+int semflg; /* semflg to pass tosemget() */ 
+int nsems; /* nsems to pass to semget() */ 
+int semid; /* return value from semget() */ 
+
+... 
+
+key = ... 
+nsems = ...
+semflg = ... ... 
+if ((semid = semget(key, nsems, semflg)) == -1) {
+		perror(&quot;semget: semget failed&quot;); 
+		exit(1); } 
+else 
+   ...
+</PRE>
+<P><H1><A NAME="SECTION002620000000000000000">
+Controlling Semaphores</A>
+</H1>
+<P> <TT>semctl()</TT> changes permissions and
+other characteristics of a semaphore set. It is prototyped as follows:
+<P><PRE>
+int semctl(int semid, int semnum, int cmd, union semun arg);
+</PRE>
+<P>
+It must be called with a valid
+semaphore ID, <TT>semid</TT>. The <TT>semnum</TT> value selects a semaphore
+within an array by its index. The <TT>cmd</TT> argument is one of the
+following control flags:
+<DL>
+<DT><STRONG><TT>GETVAL</TT></STRONG>
+<DD>-- Return the value of a single semaphore. 
+<DT><STRONG><TT>SETVAL</TT></STRONG>
+<DD>--  Set
+the value of a single semaphore. In this case, arg is taken as arg.val, an
+int. 
+<DT><STRONG><TT>GETPID</TT></STRONG>
+<DD>--  Return the <TT>PID</TT> of the process that
+performed the last operation on the semaphore or array. 
+<DT><STRONG><TT>GETNCNT</TT></STRONG>
+<DD>--  Return the number of
+processes waiting for the value of a semaphore to increase. 
+<DT><STRONG><TT>GETZCNT</TT></STRONG>
+<DD>-- 
+Return the number of processes waiting for the value of a particular
+semaphore to reach zero. 
+<DT><STRONG><TT>GETALL</TT></STRONG>
+<DD>--  Return the values for all semaphores in a
+set. In this case, <TT>arg</TT> is taken as <TT>arg.array</TT>, a pointer to an
+array of unsigned shorts (see below). 
+<DT><STRONG><TT>SETALL</TT></STRONG>
+<DD>--  Set values for all semaphores in a set. In this
+case, <TT>arg</TT> is taken as <TT>arg.array</TT>, a pointer to an array of
+unsigned shorts. 
+<DT><STRONG><TT>IPC_STAT</TT></STRONG>
+<DD>--  Return the status information from the control
+structure for the semaphore set and place it in the data structure
+pointed to by <TT>arg.buf</TT>, a pointer to a buffer of type <TT>
+semid_ds</TT>.
+<P><DT><STRONG><TT>IPC_SET</TT></STRONG>
+<DD>--  Set the effective user
+and group identification and permissions. In this case, <TT>arg</TT> is taken
+as <TT>arg.buf</TT>. 
+<DT><STRONG><TT>IPC_RMID</TT></STRONG>
+<DD>--  Remove the specified semaphore set. 
+</DL>
+<P>
+A process must have
+an effective user identification of owner, creator, or superuser to
+perform an <TT>IPC_SET</TT> or <TT>IPC_RMID</TT> command. Read and write
+permission is required as for the other control commands. The following
+code illustrates <TT>semctl ()</TT>.
+<P>
+The  fourth  argument <TT>union semun arg</TT> is optional, depending upon
+the operation requested.  If required  it  is of  type  <TT>union 
+semun</TT>, which must be <EM>explicitly</EM> declared by the application
+program as:
+<P><PRE>
+          union semun {
+               int val;
+               struct semid_ds *buf;
+               ushort *array;
+          } arg;
+</PRE>
+<P><PRE>
+#include &lt;sys/types.h&gt; 
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/sem.h&gt; 
+
+union semun {
+               int val;
+               struct semid_ds *buf;
+               ushort *array;
+          } arg;
+
+int i; 
+int semnum = ....;
+int cmd = GETALL; /* get value */
+
+
+
+... 
+i = semctl(semid, semnum, cmd, arg); 
+if (i == -1) { 
+		perror(&quot;semctl: semctl failed&quot;); 
+  exit(1); 
+ }
+else
+...
+</PRE>
+<P><H1><A NAME="SECTION002630000000000000000">
+Semaphore Operations</A>
+</H1>
+<P><TT>semop()</TT> performs operations on a semaphore set. It is prototyped by:
+<P><PRE>
+int semop(int semid, struct sembuf *sops, size_t nsops);
+</PRE>
+<P>
+The <TT>semid</TT> argument
+is the semaphore ID returned by a previous <TT>semget()</TT> call. 
+The <TT>sops</TT>
+argument is a pointer to an array of structures, each containing the
+following information about a semaphore operation: 
+<UL>
+<LI> The semaphore number
+<LI> The operation to be performed
+<LI> Control flags, if any.
+</UL>
+<P>
+The <TT>sembuf</TT>
+structure specifies a semaphore operation, as defined in
+&lt;<TT>sys/sem.h</TT>&gt;.
+<P><PRE>
+struct sembuf {
+        ushort_t        sem_num;        /* semaphore number */
+        short           sem_op;         /* semaphore operation */
+        short           sem_flg;        /* operation flags */
+};
+</PRE>
+<P>
+The <TT>nsops</TT> argument specifies the length of the
+array, the maximum size of which is determined by the <TT>SEMOPM</TT>
+configuration option; this is the maximum number of operations allowed by
+a single semop() call, and is set to 10 by default. The operation to be
+performed is determined as follows: 
+<UL>
+<LI> A positive integer increments the semaphore
+value by that amount.
+<LI> A negative integer decrements the semaphore value
+by that amount. An attempt to set a semaphore to a value less than zero
+fails or blocks, depending on whether <TT>IPC_NOWAIT</TT> is in effect.
+<LI> A
+value of zero means to wait for the semaphore value to reach zero.
+</UL>
+<P>
+There
+are two control flags that can be used with <TT>semop()</TT>:
+<DL>
+<DT><STRONG><TT>IPC_NOWAIT</TT></STRONG>
+<DD>-- Can
+be set for any operations in the array. Makes the function return without
+changing any semaphore value if any operation for which <TT>IPC_NOWAIT</TT>
+is set cannot be performed. The function fails if it tries to decrement a
+semaphore more than its current value, or tests a nonzero semaphore to be
+equal to zero. 
+<DT><STRONG><TT>SEM_UNDO</TT></STRONG>
+<DD>--  Allows individual operations in the array to
+be undone when the process exits. 
+</DL>
+<P>
+This function takes a
+pointer, <TT>sops</TT>, to an array of semaphore operation structures. Each
+structure in the array contains data about an operation to perform on a
+semaphore. Any process with read permission can test whether a semaphore
+has a zero value. To increment or
+decrement a semaphore requires write permission. When an operation fails,
+none of the semaphores is altered.
+<P>
+The process blocks (unless the <TT>IPC_NOWAIT</TT> flag is set), and
+remains blocked until:
+<P><UL>
+<LI> the semaphore operations can all finish, so the
+call succeeds,
+<LI>
+the process receives a signal, or
+<LI> the semaphore set is
+removed.
+<P></UL>
+<P>
+Only one process at a time can update a semaphore. Simultaneous
+requests by different processes are performed in an arbitrary order. When
+an array of operations is given by a <TT>semop()</TT> call, no updates are
+done until all operations on the array can finish successfully.
+<P>
+If a process
+with exclusive use of a semaphore terminates abnormally and fails to undo
+the operation or free the semaphore, the semaphore stays locked in memory
+in the state the process left it. To prevent this, the <TT>SEM_UNDO</TT>
+control flag makes <TT>semop()</TT> allocate an undo structure for each
+semaphore operation, which contains the operation that returns the
+semaphore to its previous state. If the process dies, the system applies
+the operations in the undo structures. This prevents an aborted process
+from leaving a semaphore set in an inconsistent state. If processes share
+access to a resource controlled by a semaphore, operations on the
+semaphore should not be made with <TT>SEM_UNDO</TT> in effect. If the
+process that currently has control of the resource terminates abnormally,
+the resource is presumed to be inconsistent. Another process must be able
+to recognize this to restore the resource to a consistent state. When
+performing a semaphore operation with <TT>SEM_UNDO</TT> in effect, you must
+also have it in effect for the call that will perform the reversing
+operation. When the process runs normally, the reversing operation
+updates the undo structure with a complementary value. This ensures that,
+unless the process is aborted, the values applied to the undo structure
+are cancel to zero. When the undo structure reaches zero, it is removed.
+<P><B>NOTE:</B>Using <TT>SEM_UNDO</TT> inconsistently can lead to excessive
+resource consumption because allocated undo structures might not be freed
+until the system is rebooted.
+<P>
+The following code illustrates the <TT>semop()</TT>
+function:
+<PRE>
+#include &lt;sys/types.h&gt; 
+#include &lt;sys/ipc.h&gt; 
+#include &lt;sys/sem.h&gt; 
+
+... 
+int i; 
+int nsops; /* number of operations to do */ 
+int semid; /* semid of semaphore set */ 
+struct sembuf *sops; /* ptr to operations to perform */ 
+
+... 
+
+if ((semid = semop(semid, sops, nsops)) == -1) 
+{ 
+	perror(&quot;semop: semop failed&quot;); 
+ exit(1);
+} 
+else 
+(void) fprintf(stderr, &quot;semop: returned %d\n&quot;, i); 
+...
+</PRE>
+<P><H1><A NAME="SECTION002640000000000000000">
+POSIX Semaphores: &lt;semaphore.h&gt;</A>
+</H1>
+<P>
+POSIX semaphores are much lighter weight
+than are System V semaphores. A POSIX semaphore structure defines a single
+semaphore, not an array of up to twenty five semaphores. The POSIX
+semaphore functions are:
+<P><TT>sem_open()</TT> -- Connects to, and optionally
+creates, a named semaphore
+<P><TT>sem_init()</TT> -- Initializes a semaphore
+structure (internal to the calling program, so not a named semaphore).
+<P><TT>sem_close()</TT> -- Ends the connection to an open semaphore.
+<P><TT>sem_unlink()</TT> --  Ends the connection to an open semaphore and
+causes the semaphore to be removed when the last process closes it.
+<P><TT>sem_destroy()</TT> -- Initializes a semaphore structure (internal to
+the calling program, so not a named semaphore).
+<P><TT>sem_getvalue()</TT> -- Copies the
+value of the semaphore into the specified integer.
+<P><TT>sem_wait(), sem_trywait()</TT> --  Blocks while the semaphore is held
+by other processes or returns an error if the semaphore is held by another
+process.
+<P><TT>sem_post()</TT> -- Increments the count of the semaphore.
+<P>
+The basic operation of these functions is essence the same as described
+above, except note there are more specialised functions, here. These are
+not discussed further here and the reader is referred to the online <TT>
+man</TT> pages for further details.
+<P><H1><A NAME="SECTION002650000000000000000">
+<TT>semaphore.c</TT>: Illustration of simple semaphore passing</A>
+</H1>
+<P><PRE>
+/* semaphore.c --- simple illustration of dijkstra's semaphore analogy
+ *
+ *   We fork() a  child process so that we have two processes running:
+ *   Each process communicates via a semaphore.
+ *   The respective process can only do its work (not much here)
+ *   When it notices that the semaphore track is free when it returns to 0
+ *   Each process must modify the semaphore accordingly
+ */
+ 
+ #include &lt;stdio.h&gt;
+ #include &lt;sys/types.h&gt;
+ #include &lt;sys/ipc.h&gt;
+ #include &lt;sys/sem.h&gt;
+ 
+ union semun {
+               int val;
+               struct semid_ds *buf;
+               ushort *array;
+          };
+
+main()
+{ int i,j; 
+  int pid;
+  int semid; /* semid of semaphore set */
+  key_t key = 1234; /* key to pass to semget() */
+  int semflg = IPC_CREAT | 0666; /* semflg to pass to semget() */
+  int nsems = 1; /* nsems to pass to semget() */
+  int nsops; /* number of operations to do */
+  struct sembuf *sops = (struct sembuf *) malloc(2*sizeof(struct sembuf)); 
+  /* ptr to operations to perform */
+
+  /* set up semaphore */
+  
+  (void) fprintf(stderr, &quot;\nsemget: Setting up seamaphore: semget(%#lx, %\
+%#o)\n&quot;,key, nsems, semflg);
+   if ((semid = semget(key, nsems, semflg)) == -1) {
+	perror(&quot;semget: semget failed&quot;);
+	exit(1);
+      } else 
+	(void) fprintf(stderr, &quot;semget: semget succeeded: semid =\
+%d\n&quot;, semid);
+
+
+  /* get child process */
+  
+   if ((pid = fork()) &lt; 0) {
+        perror(&quot;fork&quot;);
+        exit(1);
+    }
+    
+if (pid == 0)
+     { /* child */
+       i = 0;
+       
+       
+       while (i  &lt; 3) {/* allow for 3 semaphore sets */
+       
+       nsops = 2;
+       
+       /* wait for semaphore to reach zero */
+       
+       sops[0].sem_num = 0; /* We only use one track */
+       sops[0].sem_op = 0; /* wait for semaphore flag to become zero */
+       sops[0].sem_flg = SEM_UNDO; /* take off semaphore asynchronous  */
+       
+       
+       sops[1].sem_num = 0;
+       sops[1].sem_op = 1; /* increment semaphore -- take control of track */
+       sops[1].sem_flg = SEM_UNDO | IPC_NOWAIT; /* take off semaphore */
+       
+       /* Recap the call to be made. */
+       
+       (void) fprintf(stderr,&quot;\nsemop:Child  Calling semop(%d, &amp;sops, %d) with:&quot;, semid, nsops);
+       for (j = 0; j &lt; nsops; j++)
+	{
+	  (void) fprintf(stderr, &quot;\n\tsops[%d].sem_num = %d, &quot;, j, sops[j].sem_num);
+	  (void) fprintf(stderr, &quot;sem_op = %d, &quot;, sops[j].sem_op);
+	  (void) fprintf(stderr, &quot;sem_flg = %#o\n&quot;, sops[j].sem_flg);
+	}
+	
+       /* Make the semop() call and report the results. */
+	if ((j = semop(semid, sops, nsops)) == -1) {
+		perror(&quot;semop: semop failed&quot;);
+		} 
+	   else 
+             {
+		(void) fprintf(stderr, &quot;\tsemop: semop returned %d\n&quot;, j);
+	
+		(void) fprintf(stderr, &quot;\n\nChild Process Taking Control of Track: %d/3 times\n&quot;, i+1);
+		sleep(5); /* DO Nothing for 5 seconds */
+
+      		 nsops = 1;
+       
+       		/* wait for semaphore to reach zero */
+       		sops[0].sem_num = 0;
+                sops[0].sem_op = -1; /* Give UP COntrol of track */
+       		sops[0].sem_flg = SEM_UNDO | IPC_NOWAIT; /* take off semaphore, asynchronous  */
+       
+       	      	
+       	      	if ((j = semop(semid, sops, nsops)) == -1) {
+			perror(&quot;semop: semop failed&quot;);
+			} 
+		   else
+		      (void) fprintf(stderr, &quot;Child Process Giving up Control of Track: %d/3 times\n&quot;, i+1);
+       	      	sleep(5); /* halt process to allow parent to catch semaphor change first */
+       	      }
+        ++i;
+      }
+       
+     }
+  else /* parent */
+     {  /* pid hold id of child */
+        
+        i = 0;
+       
+       
+       while (i  &lt; 3) { /* allow for 3 semaphore sets */
+       
+       nsops = 2;
+       
+       /* wait for semaphore to reach zero */
+       sops[0].sem_num = 0;
+       sops[0].sem_op = 0; /* wait for semaphore flag to become zero */
+       sops[0].sem_flg = SEM_UNDO; /* take off semaphore asynchronous  */
+       
+       
+       sops[1].sem_num = 0;
+       sops[1].sem_op = 1; /* increment semaphore -- take control of track */
+       sops[1].sem_flg = SEM_UNDO | IPC_NOWAIT; /* take off semaphore */
+       
+       /* Recap the call to be made. */
+       
+       (void) fprintf(stderr,&quot;\nsemop:Parent Calling semop(%d, &amp;sops, %d) with:&quot;, semid, nsops);
+       for (j = 0; j &lt; nsops; j++)
+	{
+	  (void) fprintf(stderr, &quot;\n\tsops[%d].sem_num = %d, &quot;, j, sops[j].sem_num);
+	  (void) fprintf(stderr, &quot;sem_op = %d, &quot;, sops[j].sem_op);
+	  (void) fprintf(stderr, &quot;sem_flg = %#o\n&quot;, sops[j].sem_flg);
+	}
+	
+       /* Make the semop() call and report the results. */
+	if ((j = semop(semid, sops, nsops)) == -1) {
+		perror(&quot;semop: semop failed&quot;);
+		} 
+	   else 
+             {
+		(void) fprintf(stderr, &quot;semop: semop returned %d\n&quot;, j);
+	
+		(void) fprintf(stderr, &quot;Parent Process Taking Control of Track: %d/3 times\n&quot;, i+1);
+		sleep(5); /* Do nothing for 5 seconds */
+
+      		 nsops = 1;
+       
+       		/* wait for semaphore to reach zero */
+       		sops[0].sem_num = 0;
+                sops[0].sem_op = -1; /* Give UP COntrol of track */
+       		sops[0].sem_flg = SEM_UNDO | IPC_NOWAIT; /* take off semaphore, asynchronous  */
+       
+       		if ((j = semop(semid, sops, nsops)) == -1) {
+			perror(&quot;semop: semop failed&quot;);
+			} 
+		   else
+		      (void) fprintf(stderr, &quot;Parent Process Giving up Control of Track: %d/3 times\n&quot;, i+1);
+       	      	sleep(5); /* halt process to allow child to catch semaphor change first */
+       	      }
+        ++i;
+        
+      }
+       
+     }
+}
+</PRE>
+<P>
+The key elements of this program are as follows:
+<P><UL>
+<LI> After a semaphore is created with as simple key <TT>1234</TT>, two
+prcesses are forked.
+<LI> Each process (parent and child) essentially performs the same
+operations:
+<UL>
+<LI> Each process accesses the same semaphore <EM>track</EM> (<TT>
+sops[].sem_num = 0</TT>).
+<LI> Each process waits for the <EM>track</EM> to become free and then
+attempts to take control of <EM>track</EM>
+<P>
+This is achieved by setting appropriate <TT>sops[].sem_op</TT> values in the
+array.
+<LI> Once the process has control it sleeps for 5 seconds (in reality
+some processing would take place in place of this simple illustration)
+<LI> The process then gives up control of the <EM>track</EM> <TT>
+sops[1].sem_op = -1</TT>
+<LI> an additional sleep operation is then performed to ensure that the
+other process has time to access the semaphore before a subsequent (same
+process) semaphore read.
+<P><B>Note</B>: There is no synchronisation here in this simple example an
+we have no control over how the OS will schedule the processes.
+</UL></UL><H1><A NAME="SECTION002660000000000000000">
+Some further example semaphore programs</A>
+</H1>
+<P>
+The following suite of programs can be used to investigate interactively
+a variety of semaphore ideas (see exercises below).
+<P>
+The semaphore <B>must</B> be initialised with the <TT>semget.c</TT>
+program. The effects of controlling the semaphore queue and sending and
+receiving semaphore can be investigated with <TT>semctl.c</TT> and <TT>
+semop.c</TT> respectively.
+<P><H2><A NAME="SECTION002661000000000000000">
+<TT>semget.c</TT>: Illustrate the <TT>semget()</TT> function</A>
+</H2>
+<P><PRE>
+/*
+ * semget.c: Illustrate the semget() function.
+ *
+ * This is a simple exerciser of the semget() function. It prompts
+ * for the arguments, makes the call, and reports the results.
+*/
+
+#include   &lt;stdio.h&gt;
+#include   &lt;sys/types.h&gt;
+#include   &lt;sys/ipc.h&gt;
+#include   &lt;sys/sem.h&gt;
+
+extern void    exit();
+extern void    perror();
+
+main()
+{
+ key_t  key;   /* key to pass to semget() */
+ int  semflg;   /* semflg to pass to semget() */
+ int  nsems;   /* nsems to pass to semget() */
+ int  semid;   /* return value from semget() */
+
+ (void) fprintf(stderr,
+  &quot;All numeric input must follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+  &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+ (void) fprintf(stderr, &quot;IPC_PRIVATE == %#lx\n&quot;, IPC_PRIVATE);
+ (void) fprintf(stderr, &quot;Enter key: &quot;);
+ (void) scanf(&quot;%li&quot;, &amp;key);
+
+ (void) fprintf(stderr, &quot;Enter nsems value: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;nsems);
+ (void) fprintf(stderr, &quot;\nExpected flags for semflg are:\n&quot;);
+ (void) fprintf(stderr, &quot;\tIPC_EXCL = \t%#8.8o\n&quot;, IPC_EXCL);
+ (void) fprintf(stderr, &quot;\tIPC_CREAT = \t%#8.8o\n&quot;,
+IPC_CREAT);
+ (void) fprintf(stderr, &quot;\towner read = \t%#8.8o\n&quot;, 0400);
+ (void) fprintf(stderr, &quot;\towner alter = \t%#8.8o\n&quot;, 0200);
+ (void) fprintf(stderr, &quot;\tgroup read = \t%#8.8o\n&quot;, 040);
+ (void) fprintf(stderr, &quot;\tgroup alter = \t%#8.8o\n&quot;, 020);
+ (void) fprintf(stderr, &quot;\tother read = \t%#8.8o\n&quot;, 04);
+ (void) fprintf(stderr, &quot;\tother alter = \t%#8.8o\n&quot;, 02);
+ (void) fprintf(stderr, &quot;Enter semflg value: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;semflg);
+ (void) fprintf(stderr, &quot;\nsemget: Calling semget(%#lx, %
+     %#o)\n&quot;,key, nsems, semflg);
+ if ((semid = semget(key, nsems, semflg)) == -1) {
+  perror(&quot;semget: semget failed&quot;);
+  exit(1);
+ } else {
+  (void) fprintf(stderr, &quot;semget: semget succeeded: semid =
+%d\n&quot;,
+   semid);
+  exit(0);
+ }
+}
+</PRE>
+<P><H2><A NAME="SECTION002662000000000000000">
+<TT>semctl.c</TT>: Illustrate the <TT>semctl()</TT> function</A>
+</H2>
+<P><PRE>
+/*
+ * semctl.c:   Illustrate the semctl() function.
+ *
+ * This is a simple exerciser of the semctl() function. It lets you
+ * perform one control operation on one semaphore set. It gives up
+ * immediately if any control operation fails, so be careful not
+to
+ * set permissions to preclude read permission; you won't be able
+to
+ * reset the permissions with this code if you do.
+ */
+
+#include    &lt;stdio.h&gt;
+#include    &lt;sys/types.h&gt;
+#include    &lt;sys/ipc.h&gt;
+#include    &lt;sys/sem.h&gt;
+#include    &lt;time.h&gt;
+
+struct semid_ds semid_ds;
+
+static void   do_semctl();
+static void   do_stat();
+extern char   *malloc();
+extern void   exit();
+extern void   perror();
+
+char    warning_message[] = &quot;If you remove read permission\
+    for yourself, this program will fail frequently!&quot;;
+
+main()
+{
+ union semun    arg;    /* union to pass to semctl() */
+ int    cmd,    /* command to give to semctl() */
+     i,    /* work area */
+     semid,    /* semid to pass to semctl() */
+     semnum;    /* semnum to pass to semctl() */
+
+ (void) fprintf(stderr,
+    &quot;All numeric input must follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+    &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+ (void) fprintf(stderr, &quot;Enter semid value: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;semid);
+
+ (void) fprintf(stderr, &quot;Valid semctl cmd values are:\n&quot;);
+ (void) fprintf(stderr, &quot;\tGETALL = %d\n&quot;, GETALL);
+ (void) fprintf(stderr, &quot;\tGETNCNT = %d\n&quot;, GETNCNT);
+ (void) fprintf(stderr, &quot;\tGETPID = %d\n&quot;, GETPID);
+ (void) fprintf(stderr, &quot;\tGETVAL = %d\n&quot;, GETVAL);
+ (void) fprintf(stderr, &quot;\tGETZCNT = %d\n&quot;, GETZCNT);
+ (void) fprintf(stderr, &quot;\tIPC_RMID = %d\n&quot;, IPC_RMID);
+ (void) fprintf(stderr, &quot;\tIPC_SET = %d\n&quot;, IPC_SET);
+ (void) fprintf(stderr, &quot;\tIPC_STAT = %d\n&quot;, IPC_STAT);
+ (void) fprintf(stderr, &quot;\tSETALL = %d\n&quot;, SETALL);
+ (void) fprintf(stderr, &quot;\tSETVAL = %d\n&quot;, SETVAL);
+ (void) fprintf(stderr, &quot;\nEnter cmd: &quot;);
+ (void) scanf(&quot;%i&quot;, &amp;cmd);
+ 
+ /* Do some setup operations needed by multiple commands. */
+ switch (cmd) {
+  case GETVAL:
+  case SETVAL:
+  case GETNCNT:
+  case GETZCNT:
+   /* Get the semaphore number for these commands. */
+   (void) fprintf(stderr, &quot;\nEnter semnum value: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;semnum);
+   break;
+  case GETALL:
+  case SETALL:
+   /* Allocate a buffer for the semaphore values. */
+   (void) fprintf(stderr,
+    &quot;Get number of semaphores in the set.\n&quot;);
+   arg.buf = &amp;semid_ds;
+   do_semctl(semid, 0, IPC_STAT, arg);
+   if (arg.array =
+    (ushort *)malloc((unsigned)
+     (semid_ds.sem_nsems * sizeof(ushort)))) {
+    /* Break out if you got what you needed. */
+    break;
+   }
+   (void) fprintf(stderr,
+    &quot;semctl: unable to allocate space for %d values\n&quot;,
+    semid_ds.sem_nsems);
+   exit(2);
+ }
+
+ /* Get the rest of the arguments needed for the specified
+    command. */
+ switch (cmd) {
+  case SETVAL:
+   /* Set value of one semaphore. */
+   (void) fprintf(stderr, &quot;\nEnter semaphore value: &quot;);
+   (void) scanf(&quot;%i&quot;, &amp;arg.val);
+   do_semctl(semid, semnum, SETVAL, arg);
+   /* Fall through to verify the result. */
+   (void) fprintf(stderr,
+    &quot;Do semctl GETVAL command to verify results.\n&quot;);
+  case GETVAL:
+   /* Get value of one semaphore. */
+   arg.val = 0;
+   do_semctl(semid, semnum, GETVAL, arg);
+   break;
+  case GETPID:
+   /* Get PID of last process to successfully complete a
+      semctl(SETVAL), semctl(SETALL), or semop() on the
+      semaphore. */
+   arg.val = 0;
+   do_semctl(semid, 0, GETPID, arg);
+   break;
+  case GETNCNT:
+   /* Get number of processes waiting for semaphore value to
+      increase. */
+   arg.val = 0;
+   do_semctl(semid, semnum, GETNCNT, arg);
+   break;
+  case GETZCNT:
+   /* Get number of processes waiting for semaphore value to
+      become zero. */
+   arg.val = 0;
+   do_semctl(semid, semnum, GETZCNT, arg);
+   break;
+  case SETALL:
+   /* Set the values of all semaphores in the set. */
+   (void) fprintf(stderr,
+       &quot;There are %d semaphores in the set.\n&quot;,
+       semid_ds.sem_nsems);
+   (void) fprintf(stderr, &quot;Enter semaphore values:\n&quot;);
+   for (i = 0; i &lt; semid_ds.sem_nsems; i++) {
+    (void) fprintf(stderr, &quot;Semaphore %d: &quot;, i);
+    (void) scanf(&quot;%hi&quot;, &amp;arg.array[i]);
+   }
+   do_semctl(semid, 0, SETALL, arg);
+   /* Fall through to verify the results. */
+   (void) fprintf(stderr,
+    &quot;Do semctl GETALL command to verify results.\n&quot;);
+  case GETALL:
+   /* Get and print the values of all semaphores in the
+      set.*/
+   do_semctl(semid, 0, GETALL, arg);
+   (void) fprintf(stderr,
+       &quot;The values of the %d semaphores are:\n&quot;,
+       semid_ds.sem_nsems);
+   for (i = 0; i &lt; semid_ds.sem_nsems; i++)
+    (void) fprintf(stderr, &quot;%d &quot;, arg.array[i]);
+   (void) fprintf(stderr, &quot;\n&quot;);
+   break;
+  case IPC_SET:
+   /* Modify mode and/or ownership. */
+   arg.buf = &amp;semid_ds;
+   do_semctl(semid, 0, IPC_STAT, arg);
+   (void) fprintf(stderr, &quot;Status before IPC_SET:\n&quot;);
+   do_stat();
+   (void) fprintf(stderr, &quot;Enter sem_perm.uid value: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;semid_ds.sem_perm.uid);
+   (void) fprintf(stderr, &quot;Enter sem_perm.gid value: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;semid_ds.sem_perm.gid);
+   (void) fprintf(stderr, &quot;%s\n&quot;, warning_message);
+   (void) fprintf(stderr, &quot;Enter sem_perm.mode value: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;semid_ds.sem_perm.mode);
+   do_semctl(semid, 0, IPC_SET, arg);
+   /* Fall through to verify changes. */
+   (void) fprintf(stderr, &quot;Status after IPC_SET:\n&quot;);
+  case IPC_STAT:
+   /* Get and print current status. */
+   arg.buf = &amp;semid_ds;
+   do_semctl(semid, 0, IPC_STAT, arg);
+   do_stat();
+   break;
+  case IPC_RMID:
+   /* Remove the semaphore set. */
+   arg.val = 0;
+   do_semctl(semid, 0, IPC_RMID, arg);
+   break;
+  default:
+   /* Pass unknown command to semctl. */
+   arg.val = 0;
+   do_semctl(semid, 0, cmd, arg);
+   break;
+ }
+ exit(0);
+}
+
+/*
+ * Print indication of arguments being passed to semctl(), call
+ * semctl(), and report the results. If semctl() fails, do not
+ * return; this example doesn't deal with errors, it just reports 
+ * them.
+ */
+static void
+do_semctl(semid, semnum, cmd, arg)
+union semun  arg;
+int  cmd,
+  semid,
+  semnum;
+{
+ register int      i;   /* work area */
+
+ void) fprintf(stderr, &quot;\nsemctl: Calling semctl(%d, %d, %d,
+&quot;,
+    semid, semnum, cmd);
+ switch (cmd) {
+  case GETALL:
+   (void) fprintf(stderr, &quot;arg.array = %#x)\n&quot;,
+       arg.array);
+   break;
+  case IPC_STAT:
+  case IPC_SET:
+   (void) fprintf(stderr, &quot;arg.buf = %#x)\n&quot;, arg.buf);
+   break;
+  case SETALL:
+   (void) fprintf(stderr, &quot;arg.array = [&quot;, arg.buf);
+   for (i = 0;i &lt; semid_ds.sem_nsems;) {
+    (void) fprintf(stderr, &quot;%d&quot;, arg.array[i++]);
+    if (i &lt; semid_ds.sem_nsems)
+      (void) fprintf(stderr, &quot;, &quot;);
+   }
+   (void) fprintf(stderr, &quot;])\n&quot;);
+   break;
+  case SETVAL:
+  default:
+   (void) fprintf(stderr, &quot;arg.val = %d)\n&quot;, arg.val);
+   break;
+ }
+ i = semctl(semid, semnum, cmd, arg);
+ if (i == -1) {
+  perror(&quot;semctl: semctl failed&quot;);
+  exit(1);
+ }
+ (void) fprintf(stderr, &quot;semctl: semctl returned %d\n&quot;, i);
+ return;
+}
+
+/*
+ * Display contents of commonly used pieces of the status
+structure.
+ */
+static void
+do_stat()
+{
+ (void) fprintf(stderr, &quot;sem_perm.uid = %d\n&quot;,
+       semid_ds.sem_perm.uid);
+ (void) fprintf(stderr, &quot;sem_perm.gid = %d\n&quot;,
+       semid_ds.sem_perm.gid);
+ (void) fprintf(stderr, &quot;sem_perm.cuid = %d\n&quot;,
+       semid_ds.sem_perm.cuid);
+ (void) fprintf(stderr, &quot;sem_perm.cgid = %d\n&quot;,
+       semid_ds.sem_perm.cgid);
+ (void) fprintf(stderr, &quot;sem_perm.mode = %#o, &quot;,
+       semid_ds.sem_perm.mode);
+ (void) fprintf(stderr, &quot;access permissions = %#o\n&quot;,
+       semid_ds.sem_perm.mode &amp; 0777);
+ (void) fprintf(stderr, &quot;sem_nsems = %d\n&quot;,
+semid_ds.sem_nsems);
+ (void) fprintf(stderr, &quot;sem_otime = %s&quot;, semid_ds.sem_otime ?
+      ctime(&amp;semid_ds.sem_otime) : &quot;Not Set\n&quot;);
+ (void) fprintf(stderr, &quot;sem_ctime = %s&quot;,
+       ctime(&amp;semid_ds.sem_ctime));
+}
+</PRE>
+<P><H2><A NAME="SECTION002663000000000000000">
+<TT>semop()</TT> Sample Program to Illustrate <TT>semop()</TT></A>
+</H2>
+<P><PRE>
+/*
+ * semop.c: Illustrate the semop() function.
+ *
+ * This is a simple exerciser of the semop() function. It lets you
+ * to set up arguments for semop() and make the call. It then
+reports
+ * the results repeatedly on one semaphore set. You must have read
+ * permission on the semaphore set or this exerciser will fail.
+(It
+ * needs read permission to get the number of semaphores in the set
+ * and to report the values before and after calls to semop().)
+ */
+
+#include    &lt;stdio.h&gt;
+#include    &lt;sys/types.h&gt;
+#include    &lt;sys/ipc.h&gt;
+#include    &lt;sys/sem.h&gt;
+
+static int      ask();
+extern void     exit();
+extern void     free();
+extern char     *malloc();
+extern void     perror();
+
+static struct semid_ds  semid_ds;            /* status of semaphore set */
+
+static char    error_mesg1[] = &quot;semop: Can't allocate space for %d\
+        semaphore values. Giving up.\n&quot;;
+static char   error_mesg2[] = &quot;semop: Can't allocate space for %d\
+        sembuf structures. Giving up.\n&quot;;
+
+main()
+{
+ register int    i;   /* work area */
+ int    nsops;   /* number of operations to do */
+ int    semid;   /* semid of semaphore set */
+ struct sembuf    *sops;   /* ptr to operations to perform */
+
+ (void) fprintf(stderr,
+    &quot;All numeric input must follow C conventions:\n&quot;);
+ (void) fprintf(stderr,
+    &quot;\t0x... is interpreted as hexadecimal,\n&quot;);
+ (void) fprintf(stderr, &quot;\t0... is interpreted as octal,\n&quot;);
+ (void) fprintf(stderr, &quot;\totherwise, decimal.\n&quot;);
+ /* Loop until the invoker doesn't want to do anymore. */
+ while (nsops = ask(&amp;semid, &amp;sops)) {
+  /* Initialize the array of operations to be performed.*/
+  for (i = 0; i &lt; nsops; i++) {
+   (void) fprintf(stderr,
+     &quot;\nEnter values for operation %d of %d.\n&quot;,
+       i + 1, nsops);
+   (void) fprintf(stderr,
+     &quot;sem_num(valid values are 0 &lt;= sem_num &lt; %d): &quot;,
+     semid_ds.sem_nsems);
+   (void) scanf(&quot;%hi&quot;, &amp;sops[i].sem_num);
+   (void) fprintf(stderr, &quot;sem_op: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;sops[i].sem_op);
+   (void) fprintf(stderr,
+     &quot;Expected flags in sem_flg are:\n&quot;);
+   (void) fprintf(stderr, &quot;\tIPC_NOWAIT =\t%#6.6o\n&quot;,
+     IPC_NOWAIT);
+   (void) fprintf(stderr, &quot;\tSEM_UNDO =\t%#6.6o\n&quot;,
+     SEM_UNDO);
+   (void) fprintf(stderr, &quot;sem_flg: &quot;);
+   (void) scanf(&quot;%hi&quot;, &amp;sops[i].sem_flg);
+  }
+
+  /* Recap the call to be made. */
+  (void) fprintf(stderr,
+     &quot;\nsemop: Calling semop(%d, &amp;sops, %d) with:&quot;,
+     semid, nsops);
+  for (i = 0; i &lt; nsops; i++)
+  {
+   (void) fprintf(stderr, &quot;\nsops[%d].sem_num = %d, &quot;, i,
+      sops[i].sem_num);
+   (void) fprintf(stderr, &quot;sem_op = %d, &quot;, sops[i].sem_op);
+   (void) fprintf(stderr, &quot;sem_flg = %#o\n&quot;,
+      sops[i].sem_flg);
+  }
+
+  /* Make the semop() call and report the results. */
+  if ((i = semop(semid, sops, nsops)) == -1) {
+   perror(&quot;semop: semop failed&quot;);
+  } else {
+   (void) fprintf(stderr, &quot;semop: semop returned %d\n&quot;, i);
+  }
+ }
+}
+
+/*
+ * Ask if user wants to continue.
+ *
+ * On the first call:
+ * Get the semid to be processed and supply it to the caller.
+ * On each call:
+ *  1. Print current semaphore values.
+ *  2. Ask user how many operations are to be performed on the next
+ *     call to semop. Allocate an array of sembuf structures
+ *     sufficient for the job and set caller-supplied pointer to
+that
+ *     array. (The array is reused on subsequent calls if it is big
+ *     enough. If it isn't, it is freed and a larger array is
+ *     allocated.)
+ */
+static
+ask(semidp, sopsp)
+int   *semidp;  /* pointer to semid (used only the first time) */
+struct sembuf   **sopsp;
+{
+ static union semun     arg;  /* argument to semctl */
+ int     i;  /* work area */
+ static int     nsops = 0;  /* size of currently allocated
+           sembuf array */
+ static int     semid = -1;   /* semid supplied by user */
+ static struct sembuf    *sops;     /* pointer to allocated array */
+ 
+ if (semid &lt; 0) {
+  /* First call; get semid from user and the current state of
+     the semaphore set. */
+  (void) fprintf(stderr,
+    &quot;Enter semid of the semaphore set you want to use: &quot;);
+  (void) scanf(&quot;%i&quot;, &amp;semid);
+  *semidp = semid;
+  arg.buf = &amp;semid_ds;
+  if (semctl(semid, 0, IPC_STAT, arg) == -1) {
+   perror(&quot;semop: semctl(IPC_STAT) failed&quot;);
+   /* Note that if semctl fails, semid_ds remains filled
+      with zeros, so later test for number of semaphores will
+      be zero. */
+   (void) fprintf(stderr,
+     &quot;Before and after values are not printed.\n&quot;);
+  } else {
+   if ((arg.array = (ushort *)malloc(
+    (unsigned)(sizeof(ushort) * semid_ds.sem_nsems)))
+       == NULL) {
+    (void) fprintf(stderr, error_mesg1,
+       semid_ds.sem_nsems);
+    exit(1);
+   }
+  }
+ }
+ /* Print current semaphore values. */
+ if (semid_ds.sem_nsems) {
+  (void) fprintf(stderr,
+      &quot;There are %d semaphores in the set.\n&quot;,
+      semid_ds.sem_nsems);
+  if (semctl(semid, 0, GETALL, arg) == -1) {
+   perror(&quot;semop: semctl(GETALL) failed&quot;);
+  } else {
+   (void) fprintf(stderr, &quot;Current semaphore values are:&quot;);
+   for (i = 0; i &lt; semid_ds.sem_nsems;
+    (void) fprintf(stderr, &quot; %d&quot;, arg.array[i++]));
+   (void) fprintf(stderr, &quot;\n&quot;);
+  }
+ }
+ /* Find out how many operations are going to be done in the
+next
+    call and allocate enough space to do it. */
+ (void) fprintf(stderr,
+     &quot;How many semaphore operations do you want %s\n&quot;,
+     &quot;on the next call to semop()?&quot;);
+ (void) fprintf(stderr, &quot;Enter 0 or control-D to quit: &quot;);
+ i = 0;
+ if (scanf(&quot;%i&quot;, &amp;i) == EOF || i == 0)
+  exit(0);
+ if (i &gt; nsops) {
+  if (nsops)
+   free((char *)sops);
+  nsops = i;
+  if ((sops = (struct sembuf *)malloc((unsigned)(nsops *
+   sizeof(struct sembuf)))) == NULL) {
+   (void) fprintf(stderr, error_mesg2, nsops);
+   exit(2);
+  }
+ }
+ *sopsp = sops;
+ return (i);
+}
+</PRE>
+<P><H1><A NAME="SECTION002670000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12763</B></P>
+<P>
+Write  2 programs that will  communicate <B>both ways</B> (<EM>i.e</EM> each
+process can read and write) when run concurrently via semaphores.</P>
+<P><P>
+<B>Exercise 12764</B></P>
+<P>
+Modify the <TT>semaphore.c</TT> program to handle synchronous semaphore
+communication semaphores.</P>
+<P><P>
+<B>Exercise 12765</B></P>
+<P>
+Write 3 programs that communicate together via semaphores according to
+the following specifications:
+<TT>sem_server.c</TT> -- a program that can communicate independently
+(on different semaphore tracks) with two clients programs.
+<TT>sem_client1.c</TT> -- a program that talks to <TT>sem_server.c</TT>
+on one track.
+<TT>sem_client2.c</TT> -- a program that talks to <TT>sem_server.c</TT>
+on another track to <TT>sem_client1.c</TT>.</P>
+<P><P>
+<B>Exercise 12766</B></P>
+<P>
+Compile the programs <TT>semget.c</TT>, <TT>semctl.c</TT> and <TT>semop.c</TT> and
+then
+<UL>
+<LI> investigate and understand fully the operations of the flags
+(access, creation <EM>etc.</EM> permissions) you can set interactively in the
+programs.
+<LI> Use the prgrams to:
+<UL>
+<LI> Send and receive semaphores of 3 different semaphore <TT>track</TT>s.
+<LI> Inquire about the state of
+the semaphore queue with <TT>semctl.c</TT>. Add/delete a few semaphores
+(using <TT>semop.c</TT> and perform the inquiry once more.
+<LI> Use <TT>semctl.c</TT> to alter a semaphore on the queue.
+<LI> Use <TT>semctl.c</TT> to delete a semaphore from the queue.
+</UL></UL></P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node26.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:18 GMT -->
+</HTML>

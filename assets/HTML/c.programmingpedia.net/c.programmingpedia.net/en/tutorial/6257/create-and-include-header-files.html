@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/6257/create-and-include-header-files by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Create and include header files | C Language Tutorial">
+        <meta name="description" property="og:description" content="Create and include header files | C Language Tutorial">
+        <title>Create and include header files | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="create-and-include-header-files">Create and include header files</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>In modern C, header files are crucial tools that must be designed and used correctly.  They allow the compiler to cross-check independently compiled parts of a program.</p>
+<p>Headers declare types, functions, macros etc that are needed by the consumers of a set of facilities.
+All the code that uses any of those facilities includes the header.
+All the code that defines those facilities includes the header.
+This allows the compiler to check that the uses and definitions match.</p>
+
+
+            </div>
+
+
+
+
+
+            <h2 id="idempotence">Idempotence</h2>
+            <div>
+                <p>If a particular header file is included more than once in a translation unit (TU),
+there should not be any compilation problems.
+This is termed 'idempotence'; your headers should be idempotent.
+Think how difficult life would be if you had to ensure that <code>#include &lt;stdio.h&gt;</code> was only included once.</p>
+<p>There are two ways to achieve idempotence: header guards and the <code>#pragma once</code> directive.</p>
+<h3 id="header-guards">Header guards</h3>
+<p>Header guards are simple and reliable and conform to the C standard.
+The first non-comment lines in a header file should be of the form:</p>
+<pre><code>#ifndef UNIQUE_ID_FOR_HEADER
+#define UNIQUE_ID_FOR_HEADER
+</code></pre>
+<p>The last non-comment line should be <code>#endif</code>, optionally with a comment after it:</p>
+<pre><code>#endif /* UNIQUE_ID_FOR_HEADER */
+</code></pre>
+<p>All the operational code, including other <code>#include</code> directives, should
+be between these lines.</p>
+<p>Each name must be unique. Often, a name scheme such as <code>HEADER_H_INCLUDED</code> is used.
+Some older code uses a symbol defined as the header guard (e.g. <code>#ifndef BUFSIZ</code> in <code>&lt;stdio.h&gt;</code>), but it is not as reliable as a unique name.</p>
+<p>One option would be to use a generated MD5 (or other) hash for the header guard name. You should avoid emulating the schemes used by system headers which frequently use names reserved to the implementation — names starting with an underscore followed by either another underscore or an upper-case letter.</p>
+<h3 id="the-sharppragma-once-directive">The <code>#pragma once</code> Directive</h3>
+<p>Alternatively, some compilers support the <code>#pragma once</code> directive which has the same effect as the three lines shown for header guards.</p>
+<pre><code>#pragma once
+</code></pre>
+<p>The compilers which support <code>#pragma once</code> include MS Visual Studio and GCC and Clang.
+However, if portability is a concern, it is better to use header guards, or use both.
+Modern compilers (those supporting C89 or later) are required to ignore, without comment, pragmas that they do not recognize ('Any such pragma that is not recognized by the implementation is ignored') but old versions of GCC were not so indulgent.</p>
+
+
+            </div>
+            <h2 id="include-what-you-use-iwyu-">Include What You Use (IWYU)</h2>
+            <div>
+                <p>Google's <a href="http://include-what-you-use.org/" rel="nofollow noreferrer">Include What You Use</a> project, or IWYU, ensures source files include all headers used in the code.</p>
+<p>Suppose a source file <code>source.c</code> includes a header <code>arbitrary.h</code> which in turn coincidentally includes <code>freeloader.h</code>, but the source file also explicitly and independently uses the facilities from <code>freeloader.h</code>.  All is well to start with.  Then one day <code>arbitrary.h</code> is changed so its clients no longer need the facilities of <code>freeloader.h</code>.  Suddenly, <code>source.c</code> stops compiling — because it didn't meet the IWYU criteria.  Because the code in <code>source.c</code> explicitly used the facilities of <code>freeloader.h</code>, it should have included what it uses — there should have been an explicit <code>#include &quot;freeloader.h&quot;</code> in the source too.  (<a class='doc-link' href="http://www.riptutorial.com/c/example/21638/idempotence">Idempotency</a> would have ensured there wasn't a problem.)</p>
+<p>The IWYU philosophy maximizes the probability that code continues to compile even with reasonable changes made to interfaces.  Clearly, if your code calls a function that is subsequently removed from the published interface, no amount of preparation can prevent changes becoming necessary.  This is why changes to APIs are avoided when possible, and why there are deprecation cycles over multiple releases, etc.</p>
+<p>This is a particular problem in C++ because standard headers are allowed to include each other. Source file <code>file.cpp</code> could include one header <code>header1.h</code> that on one platform includes another header <code>header2.h</code>.  <code>file.cpp</code> might turn out to use the facilities of <code>header2.h</code> as well. This wouldn't be a problem initially - the code would compile because <code>header1.h</code> includes <code>header2.h</code>. On another platform, or an upgrade of the current platform, <code>header1.h</code> could be revised so it no longer includes <code>header2.h</code>, and then<code>file.cpp</code> would stop compiling as a result.</p>
+<p>IWYU would spot the problem and recommend that <code>header2.h</code> be included directly in <code>file.cpp</code>. This would ensure it continues to compile.  Analogous considerations apply to C code too.</p>
+
+
+            </div>
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>There are a number of guidelines to follow when creating and using
+header files in a C project:</p>
+<ul>
+<li>
+<p>Idemopotence</p>
+<p>If a header file is included multiple times in a translation unit
+(TU), it should not break builds.</p>
+</li>
+<li>
+<p>Self-containment</p>
+<p>If you need the facilities declared in a header file, you should not
+have to include any other headers explicitly.</p>
+</li>
+<li>
+<p>Minimality</p>
+<p>You should not be able to remove any information from a header without
+causing builds to fail.</p>
+</li>
+<li>
+<p>Include What You Use (IWYU)</p>
+<p>Of more concern to C++ than C, but nevertheless important in C too.
+If the code in a TU (call it <code>code.c</code>) directly uses the features
+declared by a header (call it <code>&quot;headerA.h&quot;</code>), then <code>code.c</code> should
+<code>#include &quot;headerA.h&quot;</code> directly, even if the TU includes another
+header (call it <code>&quot;headerB.h&quot;</code>) that happens, at the moment, to include
+<code>&quot;headerA.h&quot;</code>.</p>
+</li>
+</ul>
+<p>Occasionally, there might be good enough reasons to break one or more of
+these guidelines, but you should both be aware that you are breaking the
+rule and be aware of the consequences of doing so before you break it.</p>
+
+
+            </div>
+            <h2 id="minimality">Minimality</h2>
+            <div>
+                <p>Headers are a crucial consistency checking mechanism, but they should be
+as small as possible.
+In particular, that means that a header should not include other headers
+just because the implementation file will need the other headers.
+A header should contain only those headers necessary for a consumer of
+the services described.</p>
+<p>For example, a project header should not include <code>&lt;stdio.h&gt;</code> unless one
+of the function interfaces uses the type <code>FILE *</code> (or one of the other
+types defined solely in <code>&lt;stdio.h&gt;</code>).
+If an interface uses <code>size_t</code>, the smallest header that suffices is
+<code>&lt;stddef.h&gt;</code>.
+Obviously, if another header that defines <code>size_t</code> is included, there is
+no need to include <code>&lt;stddef.h&gt;</code> too.</p>
+<p>If the headers are minimal, then it keeps the compilation time to a
+minimum too.</p>
+<p>It is possible to devise headers whose sole purpose is to include a lot
+of other headers.
+These seldom turn out to be a good idea in the long run because few
+source files will actually need all the facilities described by all the
+headers.
+For example, a <code>&lt;standard-c.h&gt;</code> could be devised that includes all the
+standard C headers — with care since some headers are not always
+present.
+However, very few programs actually use the facilities of <code>&lt;locale.h&gt;</code>
+or <code>&lt;tgmath.h&gt;</code>.</p>
+<ul>
+<li>See also <a href="http://stackoverflow.com/questions/15622409">How to link multiple implementation files in
+C?</a></li>
+</ul>
+
+
+            </div>
+            <h2 id="notation-and-miscellany">Notation and Miscellany</h2>
+            <div>
+                <p>The C standard says that there is very little difference between the
+<code>#include &lt;header.h&gt;</code> and <code>#include &quot;header.h&quot;</code> notations.</p>
+<blockquote>
+<p>[<code>#include &lt;header.h&gt;</code>] searches a sequence of implementation-defined
+places for a header identified uniquely by the specified sequence
+between the <code>&lt;</code> and <code>&gt;</code> delimiters, and causes the replacement of that
+directive by the entire contents of the header.
+How the places are specified or the header identified is
+implementation-defined.</p>
+</blockquote>
+<blockquote>
+<p>[<code>#include &quot;header.h&quot;</code>] causes the replacement of that directive by
+the entire contents of the source file identified by the specified
+sequence between the <code>&quot;…&quot;</code> delimiters.
+The named source file is searched for in an implementation-defined
+manner.
+If this search is not supported, or if the search fails, the directive
+is reprocessed as if it read [<code>#include &lt;header.h&gt;</code>] …</p>
+</blockquote>
+<p>So, the double quoted form may look in more places than the
+angle-bracketed form.
+The standard specifies by example that the standard headers should be
+included in angle-brackets, even though the compilation works if you use
+double quotes instead.
+Similarly, standards such as POSIX use the angle-bracketed format
+— and you should too.
+Reserve double-quoted headers for headers defined by the project.
+For externally-defined headers (including headers from other projects
+your project relies on), the angle-bracket notation is most appropriate.</p>
+<p>Note that there should be a space between <code>#include</code> and the header,
+even though the compilers will accept no space there.
+Spaces are cheap.</p>
+<p>A number of projects use a notation such as:</p>
+<pre><code>#include &lt;openssl/ssl.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;linux/kernel.h&gt;
+</code></pre>
+<p>You should consider whether to use that namespace control in your
+project (it is quite probably a good idea).
+You should steer clear of the names used by existing projects (in
+particular, both <code>sys</code> and <code>linux</code> would be bad choices).</p>
+<p>If you use this, your code should be careful and consistent in the use
+of the notation.</p>
+<p>Do not use <code>#include &quot;../include/header.h&quot;</code> notation.</p>
+<p>Header files should seldom if ever define variables.
+Although you will keep global variables to a minimum, if you need a
+global variable, you will declare it in a header, and define it in one
+suitable source file, and that source file will include the header to
+cross-check the declaration and definition, and all source files that
+use the variable will use the header to declare it.</p>
+<p>Corollary: you will not declare global variables in a source file — a
+source file will only contain definitions.</p>
+<p>Header files should seldom declare <code>static</code> functions, with the notable
+exception of <code>static inline</code> functions which will be defined in headers
+if the function is needed in more than one source file.</p>
+<ul>
+<li>Source files define global variables, and global functions.</li>
+<li>Source files do not declare the existence of global variables or functions; they include the header that declares the variable or function.</li>
+<li>Header files declare global variable and functions (and types and other supporting material).</li>
+<li>Header files do not define variables or any functions except (<code>static</code>) <code>inline</code> functions.</li>
+</ul>
+<hr>
+<h3 id="cross-references">Cross-references</h3>
+<ul>
+<li><a href="http://stackoverflow.com/questions/3568052">Where to document functions in C?</a></li>
+<li><a href="http://stackoverflow.com/questions/2027991">List of standard header files in C and C++</a></li>
+<li><a href="http://stackoverflow.com/questions/6312597">Is <code>inline</code> without <code>static</code> or <code>extern</code> ever useful in C99?</a></li>
+<li><a href="http://stackoverflow.com/questions/1433204">How do I use <code>extern</code> to share variables between source files?</a></li>
+<li><a href="http://stackoverflow.com/questions/597318">What are the benefits of a relative path such as <code>&quot;../include/header.h&quot;</code> for a header?</a></li>
+<li><a href="http://stackoverflow.com/questions/1869439">Header inclusion optimization</a></li>
+<li><a href="http://stackoverflow.com/questions/26611481">Should I include every header?</a></li>
+</ul>
+
+
+            </div>
+            <h2 id="self-containment">Self-containment</h2>
+            <div>
+                <p>Modern headers should be self-contained, which means that a program that needs to use the facilities defined by <code>header.h</code> can include that header (<code>#include &quot;header.h&quot;</code>) and not worry about whether other headers need to be included first.</p>
+<h3 id="recommendation-header-files-should-be-self-contained-">Recommendation: Header files should be self-contained.</h3>
+<hr>
+<h4 id="historical-rules">Historical rules</h4>
+<p>Historically, this has been a mildly contentious subject.</p>
+<p>Once upon another millennium, the <a href="http://www.literateprogramming.com/indhill-annot.pdf" rel="nofollow noreferrer">AT&amp;T Indian Hill C Style and Coding
+Standards</a> stated:</p>
+<blockquote>
+<p>Header files should not be nested.
+The prologue for a header file should, therefore, describe what other
+headers need to be <code>#include</code>d for the header to be functional.
+In extreme cases, where a large number of header files are to be
+included in several different source files, it is acceptable to put
+all common <code>#include</code>s in one include file.</p>
+</blockquote>
+<p>This is the antithesis of self-containment.</p>
+<h4 id="modern-rules">Modern rules</h4>
+<p>However, since then, opinion has tended in the opposite direction.
+If a source file needs to use the facilities declared by a header
+<code>header.h</code>, the programmer should be able to write:</p>
+<pre><code>#include &quot;header.h&quot;
+</code></pre>
+<p>and (subject only to having the correct search paths set on the command
+line), any necessary pre-requisite headers will be included by
+<code>header.h</code> without needing any further headers added to the source file.</p>
+<p>This provides better modularity for the source code.
+It also protects the source from the &quot;guess why this header was added&quot; conundrum that arises after the code has been modified and hacked for a decade or two.</p>
+<p>The <a href="http://stackoverflow.com/questions/1804486/should-i-use-include-in-headers">NASA Goddard Space Flight Center (GSFC) coding standards for
+C</a>
+is one of the more modern standards — but is now a little hard to
+track down.
+It states that headers should be self-contained.
+It also provides a simple way to ensure that headers are self-contained:
+the implementation file for the header should include the header as the first
+header.
+If it is not self-contained, that code will not compile.</p>
+<p>The rationale given by GSFC includes:</p>
+<blockquote>
+<p>§2.1.1 Header include rationale</p>
+</blockquote>
+<blockquote>
+<p>This standard requires a unit’s header to contain <code>#include</code>
+statements for all other headers required by the unit header.
+Placing <code>#include</code> for the unit header first in the unit body allows
+the compiler to verify that the header contains all required
+<code>#include</code> statements.</p>
+</blockquote>
+<blockquote>
+<p>An alternate design, not permitted by this standard, allows no
+<code>#include</code> statements in headers; all <code>#includes</code> are done in the body
+files.
+Unit header files then must contain #ifdef statements that check that
+the required headers are included in the proper order.</p>
+</blockquote>
+<blockquote>
+<p>One advantage of the alternate design is that the <code>#include</code> list in
+the body file is exactly the dependency list needed in a makefile, and
+this list is checked by the compiler.
+With the standard design, a tool must be used to generate the
+dependency list.
+However, all of the branch recommended development environments
+provide such a tool.</p>
+</blockquote>
+<blockquote>
+<p>A major disadvantage of the alternate design is that if a unit’s
+required header list changes, each file that uses that unit must be
+edited to update the <code>#include</code> statement list.
+Also, the required header list for a compiler library unit may be
+different on different targets.</p>
+</blockquote>
+<blockquote>
+<p>Another disadvantage of the alternate design is that compiler library
+header files, and other third party files, must be modified to add the
+required <code>#ifdef</code> statements.</p>
+</blockquote>
+<p>Thus, self-containment means that:</p>
+<ul>
+<li>If a header <code>header.h</code> needs a new nested header <code>extra.h</code>, you do not
+have to check every source file that uses <code>header.h</code> to see whether
+you need to add <code>extra.h</code>.</li>
+<li>If a header <code>header.h</code> no longer needs to include a specific header
+<code>notneeded.h</code>, you do not have to check every source file that uses
+<code>header.h</code> to see whether you can safely remove <code>notneeded.h</code> (but see <a class='doc-link' href="http://www.riptutorial.com/c/example/21641/include-what-you-use--iwyu-">Include what you use</a>.</li>
+<li>You do not have to establish the correct sequence for including the
+pre-requisite headers (which requires a topological sort to do the job
+properly).</li>
+</ul>
+<h4 id="checking-self-containment">Checking self-containment</h4>
+<p>See <a href="http://stackoverflow.com/questions/4507896">Linking against a static
+library</a> for a script
+<code>chkhdr</code> that can be used to test idempotence and self-containment of
+a header file.</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../7397/constraints.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../309/data-types.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-09-12</div>
+        <div itemprop="datePublished">2016-09-12</div>
+        <div itemprop="dateModified">2017-06-25</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=6257" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1499530292" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#idempotence">
+                    Idempotence
+                </a>
+            
+
+
+<ul id="accordion_-17116661" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#header-guards">
+                    Header guards
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-sharppragma-once-directive">
+                    The #pragma once Directive
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#include-what-you-use-iwyu-">
+                    Include What You Use (IWYU)
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#minimality">
+                    Minimality
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#notation-and-miscellany">
+                    Notation and Miscellany
+                </a>
+            
+
+
+<ul id="accordion_987381757" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#cross-references">
+                    Cross-references
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#self-containment">
+                    Self-containment
+                </a>
+            
+
+
+<ul id="accordion_-974287374" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#recommendation-header-files-should-be-self-contained-">
+                    Recommendation: Header files should be self-contained.
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/6257/create-and-include-header-files by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

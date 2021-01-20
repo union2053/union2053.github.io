@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/fundamental_types.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Fundamental Datatypes</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Fundamental Datatypes</H1>
+<H2>Integer numbers</H2>
+<UL>
+<LI>required by ANSI C to use a binary representation
+<LI>typically use two's complement arithmetic
+<LI><CODE>char</CODE>
+<UL>
+<LI><STRONG>usually</STRONG> the smallest chunk of memory that can be
+operated on, typically an 8 bit byte
+<LI><CODE>unsigned char</CODE> uses all available bits to represent the value
+<LI><CODE>signed char</CODE> reserves one bit for a sign flag (to switch
+between positive and negative values)
+<LI>on a machine with 8 bit bytes and two's complement arithmetic,
+<UL>
+<LI><CODE>unsigned char</CODE> can hold values between 0 and 255
+<LI><CODE>signed char</CODE> can hold values between -127 and 127
+</UL>
+<LI>without a <CODE>signed</CODE> or <CODE>unsigned</CODE>
+qualifier, <CODE>char</CODE> may use whichever representation is more
+efficient on the target machine
+<LI>Example declarations:
+<UL>
+<LI><CODE>unsigned char a</CODE>
+<LI><CODE>signed char b</CODE>
+<LI><CODE>char ch</CODE>
+</UL>
+</UL>
+<LI><CODE>int</CODE>
+<UL>
+<LI>minimum of 16 bits wide (usually 2 bytes)
+<LI>just as with <CODE>char</CODE>, an <CODE>int</CODE> can be
+<CODE>signed</CODE> or <CODE>unsigned</CODE>
+<LI>the <CODE>signed</CODE> qualifier is the default on all 
+<CODE>int</CODE> types (that is, <CODE>int</CODE> and <CODE>signed int</CODE>
+mean the same thing, making the <CODE>signed</CODE> qualifier optional)
+<LI>three sizes of <CODE>int</CODE> - <CODE>short int</CODE>,
+<CODE>int</CODE>, and <CODE>long int</CODE>
+<UL>
+<LI><CODE>int</CODE> is usually the most efficient fundamental datatype because
+it is normally the same size as a machine word
+<LI>in the mid '90s, most common Unix workstations have 32 bit words and
+thus use 32 bit <CODE>int</CODE>s
+<LI><CODE>short int</CODE> is smaller than or the same size as <CODE>int</CODE>
+<LI><CODE>long int</CODE> is larger than or the same size as <CODE>int</CODE>
+<LI>for <CODE>short int</CODE> and <CODE>long int</CODE>, the <CODE>int</CODE>
+is optional.
+</UL>
+<LI>Example declarations:
+<UL>
+<LI><CODE>int i</CODE>
+<LI><CODE>signed i</CODE> <EM>(same as <CODE>int i</CODE>)</EM>
+<LI><CODE>unsigned j</CODE>
+<LI><CODE>short smaller</CODE>
+<LI><CODE>unsigned short small</CODE>
+<LI><CODE>long large</CODE>
+<LI><CODE>unsigned long largest</CODE>
+</UL>
+</UL>
+</UL>
+<H2>&lt;limits.h&gt;</H2>
+<UL>
+<LI>machine dependent ranges for the <CODE>char</CODE> and <CODE>int</CODE>
+types are defined in the <CODE>&lt;limits.h&gt;</CODE> file
+<LI>minimum ranges as defined by ANSI C:
+<PRE>
+  CHAR_BIT	          8	/* number of bits in a 'char' */
+  SCHAR_MIN	       -127	/* minimum value for 'signed char' */
+  SCHAR_MAX	        127	/* maximum value for 'signed char' */
+  UCHAR_MAX	        255	/* maximum value for 'unsigned char' */
+  SHRT_MIN	     -32767	/* minimum value for '(signed) short (int)' */
+  SHRT_MAX	      32767	/* maximum value for '(signed) short (int)' */
+  USHRT_MAX	      65535	/* maximum value for 'unsigned short' */
+  INT_MIN	     -32767	/* minimum value for '(signed) int' */
+  INT_MAX	      32767	/* maximum value for '(signed) int' */
+  UINT_MAX	      65535	/* maximum value for 'unsigned int' */
+  LONG_MIN	-2147483647	/* minimum value for '(signed) long (int)' */
+  LONG_MAX	 2147483647	/* maximum value for '(signed) long (int)' */
+  ULONG_MAX	 4294967295	/* maximum value for 'unsigned long (int)' */
+</PRE>
+<LI>if <CODE>char</CODE> is an unsigned value, these values are also defined:
+<PRE>
+  CHAR_MIN	          0
+  CHAR_MAX	          UCHAR_MAX
+</PRE>
+<LI>otherwise (if <CODE>char</CODE> is signed):
+<PRE>
+  CHAR_MIN	          SCHAR_MIN
+  CHAR_MAX	          SCHAR_MAX
+</PRE>
+</UL>
+<H2>Real numbers</H2>
+<UL>
+<LI><CODE>float</CODE>, <CODE>double</CODE> and <CODE>long double</CODE>
+have the same relation to each other that the integer <CODE>short</CODE>,
+<CODE>int</CODE> and <CODE>long</CODE> types have
+<UL>
+<LI><CODE>double</CODE> is usually the most efficient real number representation
+<LI><CODE>float</CODE> is smaller than or the same size as <CODE>double</CODE>
+<LI><CODE>long double</CODE> (which is an ANSI C invention) is larger than or
+the same size as <CODE>double</CODE>
+</UL>
+<LI>due to rounding problems, it's generally true that <CODE>(a / b) * b</CODE>
+will almost never yield the original value of <CODE>a</CODE>
+<LI>Example declarations:
+<UL>
+<LI><CODE>float f</CODE>
+<LI><CODE>double dbl</CODE>
+<LI><CODE>long double huge</CODE>
+</UL>
+</UL>
+<H2>&lt;float.h&gt;</H2>
+<UL>
+<LI>machine dependent characteristics for the <CODE>float</CODE> and
+<CODE>double</CODE> types are defined in the <CODE>&lt;float.h&gt;</CODE>
+file
+</UL>
+<A HREF="preprocessor.html">Previous</A>, 
+<A HREF="promo_conv.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/fundamental_types.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/4547/initialization by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Initialization | C Language Tutorial">
+        <meta name="description" property="og:description" content="Initialization | C Language Tutorial">
+        <title>Initialization | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="initialization">Initialization</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+
+
+            <h2 id="initialization-of-variables-in-c">Initialization of Variables in C</h2>
+            <div>
+                <p>In the absence of explicit initialization, external and <code>static</code> variables are guaranteed to be initialized to zero; automatic variables (including <code>register</code> variables) have <em>indeterminate</em><sup>1</sup> (i.e., garbage) initial values.</p>
+<p>Scalar variables may be initialized when they are defined by following the name with an equals sign and an expression:</p>
+<pre><code>int x = 1;
+char squota = '\'';
+long day = 1000L * 60L * 60L * 24L; /* milliseconds/day */
+</code></pre>
+<p>For external and <code>static</code> variables, the initializer must be a <em>constant expression</em><sup>2</sup>; the initialization is done once, conceptually before the program begins execution.</p>
+<p>For automatic and <code>register</code> variables, the initializer is not restricted to being a constant: it may be any expression involving previously defined values, even function calls.</p>
+<p>For example, see the code snippet below</p>
+<pre><code>int binsearch(int x, int v[], int n)
+{
+   int low = 0;
+   int high = n - 1;
+   int mid;
+   ...
+}
+</code></pre>
+<p>instead of</p>
+<pre><code>   int low, high, mid;
+
+   low = 0;
+   high = n - 1;
+</code></pre>
+<p>In effect, initialization of automatic variables are just shorthand for assignment statements. Which form to prefer is largely a matter of taste. We generally use explicit assignments, because initializers in declarations are harder to see and further away from the point of use.  On the other hand, variables should only be declared when they're about to be used whenever possible.</p>
+<p><strong>Initializing an array:</strong></p>
+<p>An array may be initialized by following its declaration with a list of initializers enclosed in braces and separated by commas.</p>
+<p>For example, to initialize an array days with the number of days in each month:</p>
+<pre><code>int days_of_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+</code></pre>
+<p>(Note that January is encoded as month zero in this structure.)</p>
+<p>When the size of the array is omitted, the compiler will compute the length by counting the initializers, of which there are 12 in this case.</p>
+<p>If there are fewer initializers for an array than the specified size, the others will be zero for all types of variables.</p>
+<p>It is an error to have too many initializers. There is no standard way to specify repetition of an initializer — but GCC has an <a href="https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html#Designated-Inits" rel="nofollow">extension</a> to do so.</p>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;LessThan&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-lessthan'>C99</span></span></span><div class='version-specific-content'>
+<p>In C89/C90 or earlier versions of C, there was no way to initialize an element in the middle of an array without supplying all the preceding values as well.</p>
+</div></div>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<p>With C99 and above, <a class='doc-link' href="http://www.riptutorial.com/c/example/18609/using-designated-initializers">designated initializers</a> allow you to initialize arbitrary elements of an array, leaving any uninitialized values as zeros.</p>
+</div></div>
+<p><strong>Initializing Character arrays:</strong></p>
+<p>Character arrays are a special case of initialization; a string may be used instead of the braces and commas notation:</p>
+<pre><code>char chr_array[] = &quot;hello&quot;;
+</code></pre>
+<p>is a shorthand for the longer but equivalent:</p>
+<pre><code>char chr_array[] = { 'h', 'e', 'l', 'l', 'o', '\0' };
+</code></pre>
+<p>In this case, the array size is six (five characters plus the terminating <code>'\0'</code>).</p>
+<p><sup>1</sup> <a href="http://stackoverflow.com/questions/1597405/what-happens-to-a-declared-uninitialized-variable-in-c-does-it-have-a-value">What happens to a declared, uninitialized variable in C? Does it have a value?</a></p>
+<p><sup>2</sup> Note that a <em>constant expression</em> is defined as something that can be evaluated at compile-time. So, <code>int global_var = f();</code> is invalid. Another common misconception is thinking of a <code>const</code> qualified variable as a <em>constant expression</em>. In C, <code>const</code> means &quot;read-only&quot;, not &quot;compile time constant&quot;. So, global definitions like <code>const int SIZE = 10; int global_arr[SIZE];</code> and <code>const int SIZE = 10; int global_var = SIZE;</code>  are not legal in C.</p>
+
+
+            </div>
+            <h2 id="initializing-structures-and-arrays-of-structures">Initializing structures and arrays of structures</h2>
+            <div>
+                <p>Structures and arrays of structures can be initialized by a series of values enclosed in braces, one value per member of the structure.</p>
+<pre><code>struct Date
+{
+    int year;
+    int month;
+    int day;
+};
+
+struct Date us_independence_day = { 1776, 7, 4 };
+
+struct Date uk_battles[] =
+{
+    { 1066, 10, 14 },    // Battle of Hastings
+    { 1815,  6, 18 },    // Battle of Waterloo
+    { 1805, 10, 21 },    // Battle of Trafalgar
+};
+</code></pre>
+<p>Note that the array initialization could be written without the interior braces, and in times past (before 1990, say) often would have been written without them:</p>
+<pre><code>struct Date uk_battles[] =
+{
+    1066, 10, 14,    // Battle of Hastings
+    1815,  6, 18,    // Battle of Waterloo
+    1805, 10, 21,    // Battle of Trafalgar
+};
+</code></pre>
+<p>Although this works, it is not good modern style — you should not attempt to use this notation in new code and should fix the compiler warnings it usually yields.</p>
+<p>See also <a class='doc-link' href="http://www.riptutorial.com/c/example/18609/using-designated-initializers">designated initializers</a>.</p>
+
+
+            </div>
+            <h2 id="using-designated-initializers">Using designated initializers</h2>
+            <div>
+                <div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<p>C99 introduced the concept of <em>designated initializers.</em>  These allow you to specify which elements of an array, structure or union are to be initialized by the values following.</p>
+<h4 id="designated-initializers-for-array-elements">Designated initializers for array elements</h4>
+<p>For a simple type like plain <code>int</code>:</p>
+<pre><code>int array[] = { [4] = 29, [5] = 31, [17] = 101, [18] = 103, [19] = 107, [20] = 109 };
+</code></pre>
+<p>The term in square brackets, which can be any constant integer expression, specifies which element of the array is to be initialized by the value of the term after the <code>=</code> sign.  Unspecified elements are default initialized, which means zeros are defined.  The example shows the designated initializers in order; they do not have to be in order.  The example shows gaps; those are legitimate.  The example doesn't show two different initializations for the same element; that too is allowed (ISO/IEC 9899:2011, §6.7.9 Initialization, ¶19 <em>The initialization shall occur in initializer list order, each initializer provided for a
+particular subobject overriding any previously listed initializer for the same subobject</em>).</p>
+<p>In this example, the size of the array is not defined explicitly, so the maximum index specified in the designated initializers dictates the size of the array — which would be 21 elements in the example.  If the size was defined, initializing an entry beyond the end of the array would be an error, as usual.</p>
+<h4 id="designated-initializers-for-structures">Designated initializers for structures</h4>
+<p>You can specify which elements of a structure are initialized by using the <code>.</code><em><code>element</code></em> notation:</p>
+<pre><code>struct Date
+{
+    int year;
+    int month;
+    int day;
+};
+
+struct Date us_independence_day = { .day = 4, .month = 7, .year = 1776 };
+</code></pre>
+<p>If elements are not listed, they are default initialized (zeroed).</p>
+<h4 id="designated-initializer-for-unions">Designated initializer for unions</h4>
+<p>You can specify which element of a union is initialize with a designated initializer.</p>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;Equal&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C89&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-equal'>C89</span></span></span><div class='version-specific-content'>
+<p>Prior to the C standard, there was no way to initialize a <code>union</code>.  The C89/C90 standard allows you to initialize the first member of a <code>union</code> — so the choice of which member is listed first matters.</p>
+</div></div>
+<pre><code>struct discriminated_union
+{
+    enum { DU_INT, DU_DOUBLE } discriminant;
+    union
+    {
+        int     du_int;
+        double  du_double;
+    } du;
+};
+
+struct discriminated_union du1 = { .discriminant = DU_INT, .du = { .du_int = 1 } };
+struct discriminated_union du2 = { .discriminant = DU_DOUBLE, .du = { .du_double = 3.14159 } };
+</code></pre>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C11&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C11</span></span></span><div class='version-specific-content'>
+<p>Note that C11 allows you to use anonymous union members inside a structure, so that you don't need the <code>du</code> name in the previous example:</p>
+<pre><code>struct discriminated_union
+{
+    enum { DU_INT, DU_DOUBLE } discriminant;
+    union
+    {
+        int     du_int;
+        double  du_double;
+    };
+};
+
+struct discriminated_union du1 = { .discriminant = DU_INT, .du_int = 1 };
+struct discriminated_union du2 = { .discriminant = DU_DOUBLE, .du_double = 3.14159 };
+</code></pre>
+</div></div>
+<h4 id="designated-initializers-for-arrays-of-structures-etc">Designated initializers for arrays of structures, etc</h4>
+<p>These constructs can be combined for arrays of structures containing elements that are arrays, etc.  Using full sets of braces ensures that the notation is unambiguous.</p>
+<pre><code>typedef struct Date Date;  // See earlier in this example
+
+struct date_range
+{
+    Date    dr_from;
+    Date    dr_to;
+    char    dr_what[80];
+};
+
+struct date_range ranges[] =
+{
+    [3] = { .dr_from = { .year = 1066, .month = 10, .day = 14 },
+            .dr_to   = { .year = 1066, .month = 12, .day = 25 },
+            .dr_what = &quot;Battle of Hastings to Coronation of William the Conqueror&quot;,
+          },
+    [2] = { .dr_from = { .month = 7, .day =  4, .year = 1776 },
+            .dr_to   = { .month = 5, .day = 14, .year = 1787 },
+            .dr_what = &quot;US Declaration of Independence to Constitutional Convention&quot;,
+          }
+ };
+</code></pre>
+<h4 id="specifying-ranges-in-array-initializers">Specifying ranges in array initializers</h4>
+<p>GCC provides an <a href="https://gcc.gnu.org/onlinedocs/gcc-6.1.0/gcc/Designated-Inits.html#Designated-Inits" rel="nofollow">extension</a> that allows you to specify a range of elements in an array that should be given the same initializer:</p>
+<pre><code>int array[] = { [3 ... 7] = 29, 19 = 107 };
+</code></pre>
+<p>The triple dots need to be separate from the numbers lest one of the dots be interpreted as part of a floating point number (<a href="https://en.wikipedia.org/wiki/Maximal_munch" rel="nofollow"><em>maximimal munch</em></a> rule).</p>
+</div></div>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../2529/implicit-and-explicit-conversions.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../4263/inline-assembly.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-29</div>
+        <div itemprop="datePublished">2016-07-29</div>
+        <div itemprop="dateModified">2016-08-10</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=4547" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1888781583" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#initialization-of-variables-in-c">
+                    Initialization of Variables in C
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#initializing-structures-and-arrays-of-structures">
+                    Initializing structures and arrays of structures
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-designated-initializers">
+                    Using designated initializers
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/4547/initialization by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

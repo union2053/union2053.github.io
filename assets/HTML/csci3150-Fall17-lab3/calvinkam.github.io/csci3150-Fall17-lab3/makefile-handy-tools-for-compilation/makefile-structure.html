@@ -1,0 +1,537 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    
+<!-- Mirrored from calvinkam.github.io/csci3150-Fall17-lab3/makefile-handy-tools-for-compilation/makefile-structure.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Jan 2021 15:19:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Makefile Structure · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../other-system-tools.html" />
+    
+    
+    <link rel="prev" href="../makefile-handy-tools-for-compilation.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../index.html">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../building-a-program.html">
+            
+                <a href="../building-a-program.html">
+            
+                    
+                    Building a program
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../pre-processor.html">
+            
+                <a href="../pre-processor.html">
+            
+                    
+                    Pre-processor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../compiler-and-optimizer.html">
+            
+                <a href="../compiler-and-optimizer.html">
+            
+                    
+                    Compiler and Optimizer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../assembler-and-linker.html">
+            
+                <a href="../assembler-and-linker.html">
+            
+                    
+                    Assembler and Linker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../gcc.html">
+            
+                <a href="../gcc.html">
+            
+                    
+                    gcc
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../organizing-a-c-project.html">
+            
+                <a href="../organizing-a-c-project.html">
+            
+                    
+                    Organizing a C Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../makefile-handy-tools-for-compilation.html">
+            
+                <a href="../makefile-handy-tools-for-compilation.html">
+            
+                    
+                    Makefile - Handy tools for compilation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="makefile-structure.html">
+            
+                <a href="makefile-structure.html">
+            
+                    
+                    Makefile Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../other-system-tools.html">
+            
+                <a href="../other-system-tools.html">
+            
+                    
+                    Other System Tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../executable-and-linkable-formatelf.html">
+            
+                <a href="../executable-and-linkable-formatelf.html">
+            
+                    
+                    Executable and Linkable Format（ELF)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../readelf.html">
+            
+                <a href="../readelf.html">
+            
+                    
+                    readelf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../objdump.html">
+            
+                <a href="../objdump.html">
+            
+                    
+                    objdump
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../strace.html">
+            
+                <a href="../strace.html">
+            
+                    
+                    Strace
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../index.html" >Makefile Structure</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="makefile-structure">Makefile Structure</h1>
+<p>It is just a plain text file named &quot;Makefile&quot; under a folder.</p>
+<p>Bascially the structure is as follows:</p>
+<pre><code>target: dependencies
+[tab] system command
+</code></pre><p>For example, to compile all files,</p>
+<pre><code class="lang-makefile"><span class="hljs-section">all: </span>
+    gcc -o main main.c add_int.c multi_int.c
+</code></pre>
+<p>Then you can type <code>make</code> in the terminal and <code>main</code> executable will be produced.</p>
+<pre><code class="lang-shell">make
+</code></pre>
+<p>You can see calling <code>make</code> will invoke the target &quot;all&quot;. <code>make</code> will run the first target as <strong>default</strong>.</p>
+<hr>
+<h2 id="dependencies">Dependencies</h2>
+<p>By spliting the targets, modifying a single file will not recompile everything in the project. What you need to do is to specify the dependencies:</p>
+<pre><code class="lang-makefile">
+all: main
+
+main: add_int.o multi_int.o main.o
+    gcc add_int.o multi_int.o main.o -o main
+
+add_int.o: add_int.c
+    gcc -c add_int.c
+
+multi_int.o: multi_int.c
+    gcc -c multi_int.c
+
+main.o: main.c
+    gcc -c main.c
+
+<span class="hljs-section">clean:</span>
+    rm *.o main
+</code></pre>
+<p>Now you can see that the target <code>all</code> contains only a dependency. In order to fulfill the target <code>all</code>, it will go through the another dependency <code>main</code> and so on and finally all dependencies are fulfilled and compilation can take place.</p>
+<p>The last target <code>clean</code> is a target to call <code>rm</code> to delete all compiled file.</p>
+<hr>
+<h2 id="phony-target">PHONY Target</h2>
+<p>In the last example you can see a new target <code>clean</code>. Actually it is not a file target, instead it is a name that user wants to execute a particular command, like <code>rm</code>.</p>
+<p>However, in rare case if the directory has a file called <code>clean</code>, <code>make</code> will be confused. As the file called <code>clean</code> exists, the target dependency is fulfilled and nothing will be run.</p>
+<pre><code>make: &apos;clean&apos; is up to date.
+</code></pre><p>In order to tell <code>make</code> clean is not a file target, you can explicitly declare the target to be &quot;phony&quot;</p>
+<pre><code class="lang-makefile"><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: clean</span>
+all: main
+
+main: add_int.o multi_int.o main.o
+    gcc add_int.o multi_int.o main.o -o main
+
+add_int.o: add_int.c
+    gcc -c add_int.c
+
+multi_int.o: multi_int.c
+    gcc -c multi_int.c
+
+main.o: main.c
+    gcc -c main.c
+
+<span class="hljs-section">clean:</span>
+    rm *.o main
+</code></pre>
+<p>You can try, now <code>make clean</code> can be run successfully even if the file <code>clean</code> is here.</p>
+<hr>
+<h2 id="variables">Variables</h2>
+<p>You can use variables in the Makefile to save time and get rid of repeated statements.</p>
+<pre><code class="lang-makefile">CC=gcc
+CFLAGS=-Wall -c
+
+all: main
+
+main: add_int.o multi_int.o main.o
+    $(CC) add_int.o multi_int.o main.o -o main
+
+add_int.o: add_int.c
+   $(CC) $(CFLAGS) add_int.c
+
+multi_int.o: multi_int.c
+    $(CC) $(CFLAGS) multi_int.c
+
+main.o: main.c
+    $(CC) $(CFLAGS) main.c
+
+<span class="hljs-section">clean:</span>
+    rm *.o main
+</code></pre>
+<p>In this case, we can specify the options for the compiler more easily.</p>
+<hr>
+<h2 id="implicit-rule">Implicit Rule</h2>
+<p>In some cases, you can omit the command elements in the Makefile, and the <code>make</code> can automagically do the action for you.</p>
+<pre><code class="lang-makefile">
+CC=gcc
+CFLAGS=-Wall
+
+EXE=main
+OBJ=add_int.o multi_int.o main.o
+
+all: $(EXE)
+
+main: $(OBJ)
+
+<span class="hljs-section">clean:</span>
+        rm -f $(OBJ) $(EXE)
+</code></pre>
+<p>In the target <code>main</code>, you can see only dependencies are declared. However, <code>make</code> can do all the compilation jobs. It is because there are <strong>implicit rules</strong>.</p>
+<p>From the manual, it states:</p>
+<blockquote>
+<p>n.o is made automatically from n.c with a recipe of the form &#x2018;$(CC) $(CPPFLAGS) $(CFLAGS) -c&#x2019;.</p>
+</blockquote>
+<p>Therefore, <code>add_int.o</code> is made by using the above-mentioned rule automatically.</p>
+<hr>
+<p>The brief introduction of Makefile stops here. Of course there are even more advanced features, please always refer to the <a href="https://www.gnu.org/software/make/manual/make.html" target="_blank">Make documentation</a> for more information.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../makefile-handy-tools-for-compilation.html" class="navigation navigation-prev " aria-label="Previous page: Makefile - Handy tools for compilation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../other-system-tools.html" class="navigation navigation-next " aria-label="Next page: Other System Tools">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Makefile Structure","level":"1.4.1","depth":2,"next":{"title":"Other System Tools","level":"1.5","depth":1,"path":"other-system-tools.md","ref":"other-system-tools.md","articles":[{"title":"Executable and Linkable Format（ELF)","level":"1.5.1","depth":2,"path":"executable-and-linkable-formatelf.md","ref":"executable-and-linkable-formatelf.md","articles":[]},{"title":"readelf","level":"1.5.2","depth":2,"path":"readelf.md","ref":"readelf.md","articles":[]},{"title":"objdump","level":"1.5.3","depth":2,"path":"objdump.md","ref":"objdump.md","articles":[]},{"title":"Strace","level":"1.5.4","depth":2,"path":"strace.md","ref":"strace.md","articles":[]}]},"previous":{"title":"Makefile - Handy tools for compilation","level":"1.4","depth":1,"path":"makefile-handy-tools-for-compilation.md","ref":"makefile-handy-tools-for-compilation.md","articles":[{"title":"Makefile Structure","level":"1.4.1","depth":2,"path":"makefile-handy-tools-for-compilation/makefile-structure.md","ref":"makefile-handy-tools-for-compilation/makefile-structure.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"makefile-handy-tools-for-compilation/makefile-structure.md","mtime":"2017-09-20T09:20:42.346Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-09-20T09:21:00.624Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+
+<!-- Mirrored from calvinkam.github.io/csci3150-Fall17-lab3/makefile-handy-tools-for-compilation/makefile-structure.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Jan 2021 15:19:49 GMT -->
+</html>
+

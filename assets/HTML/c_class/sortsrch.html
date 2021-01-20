@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/sortsrch.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Sorting and Searching Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Sorting and Searching Functions</H1>
+<H2><CODE>void qsort(void *base, size_t nelem, size_t size, int (*compar)(const void *, const void *))</CODE></H2>
+<UL>
+<LI><CODE>qsort</CODE> sorts an array of <CODE>nelem</CODE> objects,
+each <CODE>size</CODE> bytes long and the first of which is pointed
+to by <CODE>base</CODE>, using the comparison function pointed to
+by <CODE>compar</CODE>.
+<LI><CODE>compar</CODE> should return:
+<UL>
+<LI>-1 if its first argument is to be considered
+less than the second argument
+<LI>0 if both arguments are to be considered equal
+<LI>1 if its first argument is to be considered
+greater than the second argument
+</UL>
+<LI>The array is sorted in ascending order.
+<LI><CODE>qsort</CODE> is not a stable sort, meaning that "equal" items
+can change order across sorts.
+</UL>
+<H2><CODE>qsort</CODE> Example</H2>
+<UL>
+<LI>Source code:
+<PRE>
+#include &lt;stdlib.h&gt
+
+int ilist[] = { 17, 5, 31, 32, 7, 5, 1 };
+size_t ilsiz = sizeof(ilist)/sizeof(ilist[0]);
+
+const char *slist[] = {
+  "abc",
+  "def",
+  "alpha",
+  "bet",
+  "alfa",
+  "romeo"
+};
+size_t slsiz = sizeof(slist)/sizeof(slist[0]);
+
+int
+lo2hi(const void *vp0, const void *vp1)
+{
+  const int *ip0 = (const int *)vp0;
+  const int *ip1 = (const int *)vp1;
+
+  printf("lo2hi: Compare %d and %d returns %d\n", *ip0, *ip1, *ip0 - *ip1);
+  return(*ip0 - *ip1);
+}
+
+int
+hi2lo(const void *vp0, const void *vp1)
+{
+  const int *ip0 = (const int *)vp0;
+  const int *ip1 = (const int *)vp1;
+
+  return(*ip1 - *ip0);
+}
+
+int
+firstchar(const void *vp0, const void *vp1)
+{
+  const char **cpp0 = (const char **)vp0;
+  const char **cpp1 = (const char **)vp1;
+
+  return(**cpp0 - **cpp1);
+}
+int
+main(void)
+{
+  int i;
+
+  qsort(ilist, ilsiz, sizeof(ilist[0]), lo2hi);
+  printf("\nSorted Low to High\n-----------\n");
+  for (i = 0; i &lt ilsiz; i++) {
+    printf("%d: %d\n", i, ilist[i]);
+  }
+
+  qsort(ilist, ilsiz, sizeof(ilist[0]), hi2lo);
+  printf("\nSorted High to Low\n-----------\n");
+  for (i = 0; i &lt ilsiz; i++) {
+    printf("%d: %d\n", i, ilist[i]);
+  }
+
+  qsort(slist, slsiz, sizeof(slist[0]), firstchar);
+  printf("\nSorted by First Character\n-----------\n");
+  for (i = 0; i &lt slsiz; i++) {
+    printf("%d: %s\n", i, slist[i]);
+  }
+
+  return(0);
+}
+</PRE>
+<LI>Output:
+<PRE>
+lo2hi: Compare 17 and 32 returns -15
+lo2hi: Compare 5 and 32 returns -27
+lo2hi: Compare 31 and 32 returns -1
+lo2hi: Compare 32 and 1 returns 31
+lo2hi: Compare 32 and 7 returns 25
+lo2hi: Compare 32 and 5 returns 27
+lo2hi: Compare 17 and 1 returns 16
+lo2hi: Compare 1 and 5 returns -4
+lo2hi: Compare 1 and 7 returns -6
+lo2hi: Compare 31 and 1 returns 30
+lo2hi: Compare 5 and 1 returns 4
+lo2hi: Compare 5 and 17 returns -12
+lo2hi: Compare 31 and 17 returns 14
+lo2hi: Compare 17 and 5 returns 12
+lo2hi: Compare 17 and 7 returns 10
+lo2hi: Compare 5 and 5 returns 0
+lo2hi: Compare 5 and 7 returns -2
+
+Sorted Low to High
+-----------
+0: 1
+1: 5
+2: 5
+3: 7
+4: 17
+5: 31
+6: 32
+
+Sorted High to Low
+-----------
+0: 32
+1: 31
+2: 17
+3: 7
+4: 5
+5: 5
+6: 1
+
+Sorted by First Character
+-----------
+0: abc
+1: alfa
+2: alpha
+3: bet
+4: def
+5: romeo
+</PRE>
+</UL>
+<H2><CODE>void *bsearch(const void *key, const void *base, size_t nelem, size_t size, int (*compar)(const void *, const void *))</CODE></H2>
+<UL>
+<LI><CODE>bsearch</CODE> searches an array of <CODE>nelem</CODE> objects,
+each <CODE>size</CODE> bytes long and the first of which is pointed
+to by <CODE>base</CODE>, for an element that matches the object
+pointed to by <CODE>key</CODE> using the comparison function pointed to
+by <CODE>compar</CODE>.
+<LI>The array should be sorted in ascending order.
+<LI><CODE>compar</CODE> takes two arguments, a pointer to <CODE>key</CODE>
+and a pointer to an array element, and returns:
+<UL>
+<LI>-1 if <CODE>key</CODE> is found to be less than the array element
+<LI>0 if <CODE>key</CODE> is equal to the array element
+<LI>1 if <CODE>key</CODE> is found to be greater than the array element
+</UL>
+<LI><CODE>bsearch</CODE> returns a pointer to the first matching element, or
+a null pointer if no matching elements were found.
+<UL>
+<LI>If more than one element could be matched by <CODE>key</CODE>,
+the element matched is unspecified.
+</UL>
+</UL>
+<A HREF="stdio.html">Previous</A>, 
+<A HREF="index.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/sortsrch.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+</HTML>

@@ -1,0 +1,384 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/strmemfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - String and Memory Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>String and Memory Functions</H1>
+<H2>Header file</H2>
+<UL>
+<LI><CODE>string.h</CODE> contains the function prototypes and any
+other definitions that are needed
+</UL>
+<H2>String Length - <CODE>strlen</CODE></H2>
+<UL>
+<LI><CODE>size_t strlen(const char *str)</CODE>
+<UL>
+<LI><CODE>strlen</CODE> returns the number of characters in <CODE>str</CODE>
+that preceed the terminating null (<CODE>'\0'</CODE>) character
+</UL>
+</UL>
+<H2>Copying - <CODE>strcpy</CODE> and <CODE>strncpy</CODE></H2>
+<UL>
+<LI><CODE>char *strcpy(char *dst, const char *src)</CODE><BR>
+<UL>
+<LI>Copy characters from <CODE>src</CODE> to <CODE>dst</CODE> (up to
+and including the terminating null character (<CODE>'\0'</CODE>)
+of <CODE>src</CODE>)
+</UL>
+<LI><CODE>char *strncpy(char *dst, const char *src, size_t len)</CODE>
+<UL>
+<LI>Copy up to <CODE>len</CODE> characters from <CODE>src</CODE>
+to <CODE>dst</CODE>
+<LI>If <CODE>src</CODE> is shorter than <CODE>len</CODE>,
+<CODE>dst</CODE> is filled to <CODE>len</CODE> characters with
+null characters
+<LI>If <CODE>src</CODE> is longer than <CODE>len</CODE> characters,
+the string in <CODE>dst</CODE> is <STRONG>not</STRONG> terminated
+with a null character
+</UL>
+<LI><CODE>strcpy</CODE> and <CODE>strncpy</CODE> return a pointer
+to <CODE>dst</CODE> 
+<LI>If <CODE>src</CODE> and <CODE>dst</CODE> are overlapping string,
+the results of <CODE>strcpy</CODE> and <CODE>strncpy</CODE> are undefined
+</UL>
+<H2>Catenation - <CODE>strcat</CODE> and <CODE>strncat</CODE></H2>
+<UL>
+<LI><CODE>char *strcat(char *dst, const char *src)</CODE><BR>
+<UL>
+<LI>Append (catenate) the string <CODE>src</CODE> onto the end
+of <CODE>dst</CODE>, beginning by overwriting the terminating
+null in <CODE>dst</CODE> and continuing until the
+terminating null character of <CODE>src</CODE> is
+copied to <CODE>dst</CODE>
+</UL>
+<LI><CODE>char *strncat(char *dst, const char *src, size_t len)</CODE>
+<UL>
+<LI>Copy up to <CODE>len</CODE> characters from <CODE>src</CODE>
+to <CODE>dst</CODE>
+<LI>If <CODE>src</CODE> is longer than <CODE>len</CODE> characters,
+<CODE>len</CODE> characters are copied to <CODE>dst</CODE>
+followed by a null character (in other words,
+<CODE>len+1</CODE> characters may be copied)
+</UL>
+<LI><CODE>strcat</CODE> and <CODE>strncat</CODE> return a pointer
+to <CODE>dst</CODE> 
+<LI>If <CODE>src</CODE> and <CODE>dst</CODE> are overlapping string,
+the results of <CODE>strcat</CODE> and <CODE>strncat</CODE> are undefined
+<LI>In most cases, assigning <CODE>'\0'</CODE> to <CODE>dst[0]</CODE>
+and then calling <CODE>strncat</CODE> is probably preferable to
+<CODE>strncpy</CODE>
+</UL>
+<H2>Comparison - <CODE>strcmp</CODE>, <CODE>strncmp</CODE>,
+<CODE>strxfrm</CODE> and <CODE>strcoll</CODE></H2>
+<UL>
+<LI><CODE>int strcmp(const char *str1, const char *str2)</CODE>
+<UL>
+<LI>Compare each character in <CODE>str1</CODE> to the corresponding
+character in <CODE>str2</CODE> until either a dissimilar character or a
+null terminator (<CODE>'\0'</CODE> character) is found
+<LI>If both strings are identical up to and including the terminating
+<CODE>'\0'</CODE>, 0 is returned
+<LI>If <CODE>str1[<VAR>n</VAR>]</CODE> &lt <CODE>str2[<VAR>n</VAR>]</CODE>,
+-1 is returned
+<LI>If <CODE>str1[<VAR>n</VAR>]</CODE> &gt <CODE>str2[<VAR>n</VAR>]</CODE>, 1 is returned
+<LI>If <CODE>str1</CODE> is shorter than <CODE>str2</CODE>
+(for example, <CODE>str1</CODE> points to <CODE>"abc"</CODE> and
+<CODE>str2</CODE> points to <CODE>"abcdefg"</CODE>), -1 is returned
+<LI>Likewise, if <CODE>str1</CODE> is longer than <CODE>str2</CODE>,
+1 is returned
+</UL>
+<LI><CODE>int strncmp(const char *str1, const char *str2, size_t len)</CODE>
+<UL>
+<LI><CODE>strncat</CODE> behaves exactly like <CODE>strcat</CODE>, except
+that only the first <CODE>len</CODE> characters are compared if both
+strings contain more than <CODE>len</CODE> characters
+<LI>If <CODE>len</CODE> is 0 or negative, both strings are assumed to be
+equal (even though no comparison is actually performed) and 0 is returned
+</UL>
+<LI><CODE>size_t strxfrm(char *dst, const char *src, size_t len)</CODE>
+<UL>
+<LI><CODE>strxfrm</CODE> transforms <CODE>src</CODE> in a locale-specific
+manner so that, when compared to another <CODE>strxfrm</CODE>ed string
+using <CODE>strcmp</CODE> the results appropriate for that locale.
+<LI>Up to <CODE>len-1</CODE> characters of the transformed string are copied
+into <CODE>dst</CODE> (which is null terminated) and the length of
+the newly created string in <CODE>dst</CODE> is returned.
+<LI>If <CODE>dst</CODE> is a null pointer and <CODE>len</CODE> is 0,
+<CODE>strxfrm</CODE> simply returns the length of the string that
+would have been created.
+</UL>
+<LI><CODE>int strcoll(const char *str1, const char *str2)</CODE>
+<UL>
+<LI><CODE>strcoll</CODE> behaves exactly like <CODE>strcmp</CODE>, except
+that the comparison is done in a locale-specific manner
+<UL>
+<LI><CODE>strcoll</CODE> may need to perform the equivalent of
+<CODE>strxfrm</CODE> internally on <CODE>str1</CODE> and <CODE>str2</CODE>
+before comparing them
+</UL>
+</UL>
+</UL>
+<H2>Character Search - <CODE>strchr</CODE> and <CODE>strrchr</CODE></H2>
+<UL>
+<LI><CODE>char *strchr(const char *str, int ch)</CODE>
+<UL>
+<LI><CODE>strchr</CODE> finds the first occurrence of the character
+<CODE>ch</CODE> in the string <CODE>str</CODE> and returns a pointer
+to it.
+<LI>If <CODE>ch</CODE> is not found, a null pointer is returned.
+<LI>The null terminator is considered part of the
+string and <CODE>strchr(str,'\0');</CODE> will always return a pointer
+to the terminating null character.
+</UL>
+<LI><CODE>char *strrchr(const char *str, int ch)</CODE>
+<UL>
+<LI><CODE>strrchr</CODE> is similar to <CODE>strchr</CODE> except
+that a pointer to the last occurence of <CODE>ch</CODE> is found
+(i.e. the search begins on the `right' side of the string)
+</UL>
+</UL>
+<H2>Character Set Search - <CODE>strspn</CODE>, <CODE>strcspn</CODE> and
+<CODE>strpbrk</CODE></H2>
+<UL>
+<LI><CODE>size_t strspn(const char *str, const char *charset)</CODE>
+<UL>
+<LI><CODE>strspn</CODE> counts (or `spans') the characters from
+<CODE>str</CODE> which match a character in <CODE>charset</CODE>,
+stopping when a character not in <CODE>charset</CODE> is found.
+<LI><CODE>strspn</CODE> returns the number of matching characters spanned.
+</UL>
+<LI><CODE>size_t strcspn(const char *str, const char *charset)</CODE>
+<UL>
+<LI><CODE>strcspn</CODE> is similar to <CODE>strspn</CODE>, except that
+<CODE>strcspn</CODE> spans the characters from <CODE>str</CODE> which
+do <EM>not</EM> match any character in <CODE>charset</CODE> and
+stops when a character in <CODE>charset</CODE> is matched.
+<LI><CODE>strcspn</CODE> returns the number of non-matching characters spanned.
+</UL>
+<LI><CODE>char *strpbrk(const char *str, const char *charset)</CODE>
+<UL>
+<LI><CODE>strpbrk</CODE> is similar to <CODE>strcspn</CODE>, except that
+<CODE>strpbrk</CODE> returns a pointer to the first character in
+<CODE>str</CODE> which matches a character in <CODE>charset</CODE>, 
+or a null pointer if no matching characters are found.
+</UL>
+</UL>
+<H2>String Tokens - <CODE>strtok</CODE></H2>
+<UL>
+<LI><CODE>char *strtok(char *str, const char *charset)</CODE>
+<UL>
+<LI><CODE>strtok</CODE> is used to break <CODE>str</CODE> into tokens
+separated by characters from <CODE>charset</CODE>, by the following
+method:
+<UL>
+<LI>The first time <CODE>strtok</CODE> is called, <CODE>str</CODE>
+is specified as the first argument. <CODE>strtok</CODE> will first span
+any characters in <CODE>str</CODE> which match a character in
+<CODE>charset</CODE>.  It will then remember the location of the first
+character which does not match a character in <CODE>charset</CODE> and
+span sequential characters which are not found in <CODE>charset</CODE>
+until a character matches one in <CODE>charset</CODE>.  If a second
+matching character is found, it is replaced with a <CODE>'\0'</CODE> and
+the remembered pointer to the first non-matching character is returned.
+<LI>On subsequent calls, a null pointer is passed as the first argument
+and <CODE>strtok</CODE> begins searching from the character immediately
+following the previously set <CODE>'\0'</CODE> character
+</UL>
+<LI>For example:
+<PRE>
+{
+  char str[] = "The rain, in Spain, falls *mainly* in the plain.";
+  char *tok;
+
+  while (tok = strtok(str, " ,*S"))
+	printf("%s ", tok);
+}
+</PRE>
+would print <CODE>"The rain in pain falls mainly in the plain."</CODE>
+and leave <CODE>str</CODE> set to:<BR>
+<CODE>The\0rain\0 in\0 Spain\0 falls\0*mainly\0 in\0the\0plain.</CODE>
+</UL>
+</UL>
+<H2>Substring Search - <CODE>strstr</CODE></H2>
+<UL>
+<LI><CODE>char *strstr(const char *str, const char *substr);</CODE>
+<UL>
+<LI><CODE>strstr</CODE> finds the first occurence of <CODE>substr</CODE>
+in <CODE>str</CODE> and returns a pointer to the first character of
+the substring in <CODE>str</CODE>
+<LI>If <CODE>substr</CODE> is not found in <CODE>str</CODE>, a null
+pointer is returned.
+<LI>If <CODE>substr</CODE> is the empty string (that is, if the first
+character in <CODE>substr</CODE> is a null character) a pointer
+to the first character in <CODE>str</CODE> is returned.
+</UL>
+</UL>
+<H2>Memory Functions</H2>
+<UL>
+<LI><CODE>void *memchr(const void *ptr, int ch, size_t len)</CODE>
+<UL>
+<LI><CODE>memchr</CODE> finds the first occurence of <CODE>ch</CODE> in
+<CODE>ptr</CODE> and returns a pointer to it (or a null pointer if
+<CODE>ch</CODE> was not found in the first <CODE>len</CODE> bytes
+</UL>
+<LI><CODE>int memcmp(const void *ptr1, const void *ptr2, size_t len)</CODE>
+<UL>
+<LI><CODE>memcmp</CODE> is similar to <CODE>strcmp</CODE>, except that
+bytes equal to 0 are not treated as comparison terminators.
+</UL>
+<LI><CODE>void *memcpy(void *dst, const void *src, size_t len)</CODE>
+<UL>
+<LI><CODE>memcpy</CODE> copies <CODE>len</CODE> characters from
+<CODE>src</CODE> to <CODE>dst</CODE> and returns the original
+value of <CODE>dst</CODE>
+<LI>The result of <CODE>memcpy</CODE> is undefined if <CODE>src</CODE>
+and <CODE>dst</CODE> point to overlapping areas of memory
+</UL>
+<LI><CODE>void *memmove(void *dst, const void *src, size_t len)</CODE>
+<UL>
+<LI><CODE>memmove</CODE> is just like <CODE>memcpy</CODE> except that
+<CODE>memmove</CODE> is guaranteed to work even if the memory areas
+overlap
+</UL>
+<LI><CODE>void *memset(void *ptr, int byteval, size_t len)</CODE>
+<UL>
+<LI><CODE>memset</CODE> sets the first <CODE>len</CODE> bytes of the
+memory area pointed to by <CODE>ptr</CODE> to the value specified
+by <CODE>byteval</CODE>
+</UL>
+</UL>
+<H2>Numeric Translation - <CODE>strtol</CODE>, <CODE>strtoul</CODE> and
+<CODE>strtod</CODE></H2>
+<UL>
+<LI><CODE>long strtol(const char *str, char **ptr, int base)</CODE>
+<UL>
+<LI><CODE>strtol</CODE> converts the string pointed to by <CODE>str</CODE>
+into a <CODE>long</CODE> value.
+<LI>The conversion is done according to the
+number system represented by <CODE>base</CODE>
+<UL>
+<LI><CODE>base</CODE> must either be the special value 0 or must be
+greater than or equal to 2 and less than or equal to 36
+<LI>If <CODE>base</CODE> is greater than 10, the letter 'A' (or 'a')
+represents 10, 'B' or 'b' represents 11, ... 'Z' or 'z' represents 35
+</UL>
+<LI>Conversion stops at the first character which is not a valid digit
+in the given base
+<LI>If <CODE>ptr</CODE> is non-null, <CODE>*ptr</CODE> is set to the
+address of the first unrecognized character
+<LI>If the first character is unrecognized, <CODE>*ptr</CODE> is set to
+<CODE>str</CODE> and 0 is returned
+<LI>Conversion proceeds like this:
+<UL>
+<LI>Leading whitespace is skipped.
+<LI>There may be an initial <CODE>+</CODE> or <CODE>-</CODE> sign
+<LI>If <CODE>base</CODE> is 16, any leading <CODE>0x</CODE> or <CODE>0X</CODE>
+is skipped
+<LI>If <CODE>base</CODE> is non-zero:
+<UL>
+<LI>Any leading <CODE>0</CODE>s are skipped
+<LI>Successive valid digits are converted until an unrecognized character is
+found
+<LI><CODE>ptr</CODE> is set to the address of the unrecognized character
+<LI>The converted value is returned
+</UL>
+<LI>If <CODE>base</CODE> is zero, the string itself determines the base
+into which the number is converted:
+<UL>
+<LI>If the first character is a <CODE>0</CODE>:
+<UL>
+<LI>If the second character is <CODE>x</CODE> or <CODE>X</CODE>,
+<CODE>base</CODE> is assumed to be 16
+<LI>Otherwise, <CODE>base</CODE> is assumed to be 8
+</UL>
+<LI>Otherwise (if the first digit is not <CODE>0</CODE>), 
+<CODE>base</CODE> is assumed to be 10
+<LI>After <CODE>base</CODE> has been determined, conversion proceeds
+as before
+</UL>
+</UL>
+<LI>If the conversion results in overflow, <CODE>strtol</CODE>
+returns <STRONG>LONG_MAX</STRONG>.
+<LI>If the conversion results in underflow, <CODE>strtol</CODE>
+returns <STRONG>LONG_MIN</STRONG>.
+<LI>If either underflow or overflow occurs, <CODE>errno</CODE> is
+set to <STRONG>ERANGE</STRONG>
+</UL>
+<LI><CODE>unsigned long strtoul(const char *str, char **ptr, int base)</CODE>
+<UL>
+<LI><CODE>strtoul</CODE> is virtually identical to <CODE>strtol</CODE>,
+except that:
+<UL>
+<LI><CODE>-1</CODE> gets converted to <STRONG>ULONG_MAX</STRONG>
+(or something close to it)
+<LI>It is impossible to underflow an <CODE>unsigned long</CODE>
+<LI>On overflow,
+returns <STRONG>ULONG_MAX</STRONG>
+and sets <CODE>errno</CODE> to <STRONG>ERANGE</STRONG>.
+</UL>
+</UL>
+<LI><CODE>double strtod(const char *str, char **ptr)</CODE>
+<UL>
+<LI><CODE>strtod</CODE> converts the string pointed to by <CODE>str</CODE>
+into a <CODE>double</CODE> value.
+<LI>Conversion stops at the first unrecognized character.
+<LI>If <CODE>ptr</CODE> is non-null, <CODE>*ptr</CODE> is set to the
+address of the first unrecognized character
+<LI>If the first character is unrecognized, <CODE>*ptr</CODE> is set to
+<CODE>str</CODE> and 0.0 is returned.
+<LI>Conversion proceeds like this:
+<UL>
+<LI>Leading whitespace is skipped.
+<LI>There may be an initial <CODE>+</CODE> or <CODE>-</CODE> sign
+<LI>Successive decimal digits (as well as an optional radix character)
+are converted
+<UL>
+<LI>The radix character is locale-specific, but is a period by default.
+</UL>
+<LI>This may be optionally followed by:
+<UL>
+<LI>A <CODE>e</CODE> or <CODE>E</CODE>
+<LI>An optional <CODE>+</CODE> or <CODE>-</CODE> sign
+<LI>An integer representing the expontent
+</UL>
+<LI><CODE>ptr</CODE> is set to the address of the unrecognized character
+<LI>The converted value is returned
+</UL>
+<LI>If the conversion results in overflow, <CODE>strtod</CODE>
+returns either <STRONG>+HUGE_MAX</STRONG> or <STRONG>-HUGE_MAX</STRONG>
+(depending on the sign of the value).
+<LI>If the conversion results in underflow, <CODE>strtod</CODE>
+returns <CODE>0</CODE>.
+<LI>If either underflow or overflow occurs, <CODE>errno</CODE> is
+set to <STRONG>ERANGE</STRONG>
+</UL>
+</UL>
+<H2>Old Conversion Functions - <CODE>atoi</CODE>, <CODE>atol</CODE> and
+<CODE>atof</CODE></H2>
+<UL>
+<LI>These routines are still available but their use is discouraged;
+use <CODE>strtol</CODE>, <CODE>strtoul</CODE> and <CODE>strtod</CODE> instead
+<LI><CODE>int atoi(const char *str)</CODE>
+<UL>
+<LI>Similar to <CODE>(int) strtol(str, (char **)NULL, 10)</CODE>
+</UL>
+<LI><CODE>long atol(const char *str)</CODE>
+<UL>
+<LI>Similar to <CODE>strtol(str, (char **)NULL, 10)</CODE>
+</UL>
+<LI><CODE>double atof(const char *str)</CODE>
+<UL>
+<LI>Similar to <CODE>strtod(str, (char **)NULL)</CODE>
+</UL>
+</UL>
+<A HREF="errfunc.html">Previous</A>, 
+<A HREF="printf.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/strmemfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

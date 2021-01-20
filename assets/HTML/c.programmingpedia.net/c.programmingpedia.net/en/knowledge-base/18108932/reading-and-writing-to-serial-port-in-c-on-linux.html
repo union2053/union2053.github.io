@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/18108932/reading-and-writing-to-serial-port-in-c-on-linux by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Reading and writing to serial port in C on Linux | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Reading and writing to serial port in C on Linux | C Language Knowledge Base">
+        <title>[SOLVED] Reading and writing to serial port in C on Linux | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="reading-and-writing-to-serial-port-in-c-on-linux">Reading and writing to serial port in C on Linux</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/serial-port.html">serial-port</a></span>
+                        <span class="tag-item"><a href="../tag/tty.html">tty</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to <strong>send/receive data over an USB Port using FTDI</strong>, so I need to handle serial communication using C/C++. I'm working on <strong>Linux</strong> (Ubuntu).</p>
+
+<p>Basically, I am connected to a device which is listening for incoming commands. I need to send those commands and read device's response. Both commands and response are <strong>ASCII characters</strong>.</p>
+
+<p>Everything works fine using GtkTerm but, when I switch to C programming, I encounter problems.</p>
+
+<p>Here's my code:</p>
+
+<pre><code>#include &lt;stdio.h&gt;      // standard input / output functions
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;     // string function definitions
+#include &lt;unistd.h&gt;     // UNIX standard function definitions
+#include &lt;fcntl.h&gt;      // File control definitions
+#include &lt;errno.h&gt;      // Error number definitions
+#include &lt;termios.h&gt;    // POSIX terminal control definitions
+
+/* Open File Descriptor */
+int USB = open( "/dev/ttyUSB0", O_RDWR| O_NONBLOCK | O_NDELAY );
+
+/* Error Handling */
+if ( USB &lt; 0 )
+{
+cout &lt;&lt; "Error " &lt;&lt; errno &lt;&lt; " opening " &lt;&lt; "/dev/ttyUSB0" &lt;&lt; ": " &lt;&lt; strerror (errno) &lt;&lt; endl;
+}
+
+/* *** Configure Port *** */
+struct termios tty;
+memset (&amp;tty, 0, sizeof tty);
+
+/* Error Handling */
+if ( tcgetattr ( USB, &amp;tty ) != 0 )
+{
+cout &lt;&lt; "Error " &lt;&lt; errno &lt;&lt; " from tcgetattr: " &lt;&lt; strerror(errno) &lt;&lt; endl;
+}
+
+/* Set Baud Rate */
+cfsetospeed (&amp;tty, B9600);
+cfsetispeed (&amp;tty, B9600);
+
+/* Setting other Port Stuff */
+tty.c_cflag     &amp;=  ~PARENB;        // Make 8n1
+tty.c_cflag     &amp;=  ~CSTOPB;
+tty.c_cflag     &amp;=  ~CSIZE;
+tty.c_cflag     |=  CS8;
+tty.c_cflag     &amp;=  ~CRTSCTS;       // no flow control
+tty.c_lflag     =   0;          // no signaling chars, no echo, no canonical processing
+tty.c_oflag     =   0;                  // no remapping, no delays
+tty.c_cc[VMIN]      =   0;                  // read doesn't block
+tty.c_cc[VTIME]     =   5;                  // 0.5 seconds read timeout
+
+tty.c_cflag     |=  CREAD | CLOCAL;     // turn on READ &amp; ignore ctrl lines
+tty.c_iflag     &amp;=  ~(IXON | IXOFF | IXANY);// turn off s/w flow ctrl
+tty.c_lflag     &amp;=  ~(ICANON | ECHO | ECHOE | ISIG); // make raw
+tty.c_oflag     &amp;=  ~OPOST;              // make raw
+
+/* Flush Port, then applies attributes */
+tcflush( USB, TCIFLUSH );
+
+if ( tcsetattr ( USB, TCSANOW, &amp;tty ) != 0)
+{
+cout &lt;&lt; "Error " &lt;&lt; errno &lt;&lt; " from tcsetattr" &lt;&lt; endl;
+}
+
+/* *** WRITE *** */
+
+unsigned char cmd[] = {'I', 'N', 'I', 'T', ' ', '\r', '\0'};
+int n_written = write( USB, cmd, sizeof(cmd) -1 );
+
+/* Allocate memory for read buffer */
+char buf [256];
+memset (&amp;buf, '\0', sizeof buf);
+
+/* *** READ *** */
+int n = read( USB, &amp;buf , sizeof buf );
+
+/* Error Handling */
+if (n &lt; 0)
+{
+     cout &lt;&lt; "Error reading: " &lt;&lt; strerror(errno) &lt;&lt; endl;
+}
+
+/* Print what I read... */
+cout &lt;&lt; "Read: " &lt;&lt; buf &lt;&lt; endl;
+
+close(USB);
+</code></pre>
+
+<p>What happens is that <code>read()</code> returns 0 (no bytes read at all) or block until timeout (<code>VTIME</code>). I'm assuming this happens because <code>write()</code> does not send anything. In that case, device wouldn't receive command and I cannot receive response. In fact, turning off the device while my program is blocked on reading actually succeded in getting a response (device sends something while shutting down).</p>
+
+<p>Strange thing is that adding this </p>
+
+<pre><code>cout &lt;&lt; "I've written: " &lt;&lt; n_written &lt;&lt; "bytes" &lt;&lt; endl; 
+</code></pre>
+
+<p>right after <code>write()</code> call, I receive:</p>
+
+<pre><code>I've written 6 bytes
+</code></pre>
+
+<p>which is exactly what I expect. Only my program doesn't work as it should, like <strong>my device cannot receive what I'm actually writing</strong> on port.</p>
+
+<p>I've tried different things and solution, also regarding data types (I've tried using std::string, such as <code>cmd = "INIT \r"</code> or <code>const char</code>) but nothing really worked.</p>
+
+<p>Can someone tell me where I'm wrong?</p>
+
+<p>Thank you in advance.</p>
+
+<p><strong>EDIT:</strong>
+Previously version of this code used </p>
+
+<p><code>unsigned char cmd[] = "INIT \n"</code></p>
+
+<p>and also <code>cmd[] = "INIT \r\n"</code>. I changed it because command sintax for my device is reported as </p>
+
+<p><code>&lt;command&gt;&lt;SPACE&gt;&lt;CR&gt;</code>. </p>
+
+<p>I've also tried avoiding the <code>O_NONBLOCK</code> flag on reading, but then I only block until forever. I've tried using <code>select()</code> but nothing happens. Just for a try, I've created a waiting loop until data is avaliable, but my code never exit the loop. Btw, waiting or <code>usleep()</code> is something I need to avoid. Reported one is only an excerpt of my code. <strong>Complete code needs to work in a real-time environment</strong> (specifically OROCOS) so I don't really want sleep-like function.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2661242/lunatic999" target="_blank"><span itemprop="name">Lunatic999</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">40</div>
+                                    <div itemprop="dateCreated">3/17/2019 11:46:58 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>I've solved my problems, so I post here the correct code in case someone needs similar stuff.</p>
+
+<p><strong>Open Port</strong></p>
+
+<pre><code>int USB = open( "/dev/ttyUSB0", O_RDWR| O_NOCTTY );
+</code></pre>
+
+<p><strong>Set parameters</strong></p>
+
+<pre><code>struct termios tty;
+struct termios tty_old;
+memset (&amp;tty, 0, sizeof tty);
+
+/* Error Handling */
+if ( tcgetattr ( USB, &amp;tty ) != 0 ) {
+   std::cout &lt;&lt; "Error " &lt;&lt; errno &lt;&lt; " from tcgetattr: " &lt;&lt; strerror(errno) &lt;&lt; std::endl;
+}
+
+/* Save old tty parameters */
+tty_old = tty;
+
+/* Set Baud Rate */
+cfsetospeed (&amp;tty, (speed_t)B9600);
+cfsetispeed (&amp;tty, (speed_t)B9600);
+
+/* Setting other Port Stuff */
+tty.c_cflag     &amp;=  ~PARENB;            // Make 8n1
+tty.c_cflag     &amp;=  ~CSTOPB;
+tty.c_cflag     &amp;=  ~CSIZE;
+tty.c_cflag     |=  CS8;
+
+tty.c_cflag     &amp;=  ~CRTSCTS;           // no flow control
+tty.c_cc[VMIN]   =  1;                  // read doesn't block
+tty.c_cc[VTIME]  =  5;                  // 0.5 seconds read timeout
+tty.c_cflag     |=  CREAD | CLOCAL;     // turn on READ &amp; ignore ctrl lines
+
+/* Make raw */
+cfmakeraw(&amp;tty);
+
+/* Flush Port, then applies attributes */
+tcflush( USB, TCIFLUSH );
+if ( tcsetattr ( USB, TCSANOW, &amp;tty ) != 0) {
+   std::cout &lt;&lt; "Error " &lt;&lt; errno &lt;&lt; " from tcsetattr" &lt;&lt; std::endl;
+}
+</code></pre>
+
+<p><strong>Write</strong></p>
+
+<pre><code>unsigned char cmd[] = "INIT \r";
+int n_written = 0,
+    spot = 0;
+
+do {
+    n_written = write( USB, &amp;cmd[spot], 1 );
+    spot += n_written;
+} while (cmd[spot-1] != '\r' &amp;&amp; n_written &gt; 0);
+</code></pre>
+
+<p>It was definitely not necessary to write byte per byte, also <code>int n_written = write( USB, cmd, sizeof(cmd) -1)</code> worked fine.</p>
+
+<p>At last, <strong>read</strong>:</p>
+
+<pre><code>int n = 0,
+    spot = 0;
+char buf = '\0';
+
+/* Whole response*/
+char response[1024];
+memset(response, '\0', sizeof response);
+
+do {
+    n = read( USB, &amp;buf, 1 );
+    sprintf( &amp;response[spot], "%c", buf );
+    spot += n;
+} while( buf != '\r' &amp;&amp; n &gt; 0);
+
+if (n &lt; 0) {
+    std::cout &lt;&lt; "Error reading: " &lt;&lt; strerror(errno) &lt;&lt; std::endl;
+}
+else if (n == 0) {
+    std::cout &lt;&lt; "Read nothing!" &lt;&lt; std::endl;
+}
+else {
+    std::cout &lt;&lt; "Response: " &lt;&lt; response &lt;&lt; std::endl;
+}
+</code></pre>
+
+<p>This one worked for me. Thank you all!</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/2661242/lunatic999" target="_blank"><span itemprop="name">Lunatic999</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/18108932/reading-and-writing-to-serial-port-in-c-on-linux#answer-0</div>
+                                            <div itemprop="upvoteCount">66</div>
+                                            <div itemprop="dateCreated">6/24/2015 4:54:07 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>1) I'd add a /n after init.  i.e. <em>write( USB, "init\n", 5);</em></p>
+
+<p>2) Double check the serial port configuration.  Odds are something is incorrect in there.  Just because you don't use ^Q/^S or hardware flow control doesn't mean the other side isn't expecting it.</p>
+
+<p>3) <strong><em>Most likely:</em></strong>  Add a <em>"usleep(100000);</em> after the <em>write()</em>.  The file-descriptor is set not to block or wait, right?  How long does it take to get a response back before you can call read?  (It has to be received and buffered by the kernel, through system hardware interrupts, before you can <em>read()</em> it.)  Have you considered using <em>select()</em> to wait for something to <em>read()</em>?  Perhaps with a timeout?</p>
+
+<p><strong>Edited to Add:</strong></p>
+
+<p>Do you need the DTR/RTS lines?  Hardware flow control that tells the other side to send the computer data?  e.g.</p>
+
+<pre><code>int tmp, serialLines;
+
+cout &lt;&lt; "Dropping Reading DTR and RTS\n";
+ioctl ( readFd, TIOCMGET, &amp; serialLines );
+serialLines &amp;= ~TIOCM_DTR;
+serialLines &amp;= ~TIOCM_RTS;
+ioctl ( readFd, TIOCMSET, &amp; serialLines );
+usleep(100000);
+ioctl ( readFd, TIOCMGET, &amp; tmp );
+cout &lt;&lt; "Reading DTR status: " &lt;&lt; (tmp &amp; TIOCM_DTR) &lt;&lt; endl;
+sleep (2);
+
+cout &lt;&lt; "Setting Reading DTR and RTS\n";
+serialLines |= TIOCM_DTR;
+serialLines |= TIOCM_RTS;
+ioctl ( readFd, TIOCMSET, &amp; serialLines );
+ioctl ( readFd, TIOCMGET, &amp; tmp );
+cout &lt;&lt; "Reading DTR status: " &lt;&lt; (tmp &amp; TIOCM_DTR) &lt;&lt; endl;
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/2662022/guest" target="_blank">guest</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/18108932" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/18108932/reading-and-writing-to-serial-port-in-c-on-linux by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:28 GMT -->
+</html>

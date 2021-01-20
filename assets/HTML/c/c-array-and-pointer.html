@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-array-and-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Array and Pointer</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Array and Pointer'>C Array and Pointer</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Array and Pointer</h1>
+<a class ='btn btn-outline-dark' href=c-arrays-and-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-and-multidimensional-arrays.html>Next</a><p>An array name by itself refers to an address: 
+</p><div class='myCodeDiv'><button id='HUTDO' class='myCopyButton' data-clipboard-target='#PCRUE'>Copy</button><pre  id='PCRUE' style='font-size:18px;' class='code'><span class='c'>//Arrays and pointers </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+ <span class='r'>int</span> main(<span class='r'>void</span>) 
+ { 
+
+      <span class='r'>char</span> my_array[] = <span class='q'>"My string"</span>; 
+    
+      <span class='r'>char</span> *p = &amp;my_array[0]; 
+      printf(<span class='q'>"The address of the first array element   : %p\n"</span>, p); 
+    
+      p = my_array; 
+      printf(<span class='q'>"The address obtained from the array name: %p\n"</span>, my_array); 
+      <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HUTDO');clipboard.on('success', function(e) {$('#HUTDO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HUTDO').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>From the address we can see that the expression <i style='color:blue'>&amp;my_array[0]</i> produces the same value as the
+expression <i style='color:blue'>my_array</i>. 
+
+</p><p>Because <i style='color:blue'>my_array</i> evaluates to the address of the first byte of the array and 
+<i style='color:blue'>&amp;my_array[0]</i> evaluates to the first byte of the first element of the array. 
+
+</p><p>They should be the same.
+
+</p><p>If you set <i style='color:blue'>p</i> to <i style='color:blue'>my_array</i>, which has the same value as &amp;my_array[0], 
+what does p + 1 correspond to? 
+
+</p><p>Incrementing a pointer to an array of integers 
+</p><div class='myCodeDiv'><button id='OHEYY' class='myCopyButton' data-clipboard-target='#GWRHR'>Copy</button><pre  id='GWRHR' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>long</span> my_array[] = {15L, 25L, 35L, 45L}; 
+  <span class='r'>long</span> *p = my_array; 
+
+  <span class='r'>for</span>(<span class='r'>int</span> i = 0 ; i &lt; <span class='r'>sizeof</span>(my_array)/<span class='r'>sizeof</span>(my_array[0]) ; ++i) 
+    printf(<span class='q'>"address p+%d (&amp;my_array[%d]): %llu        *(p+%d)   value: %d\n"</span>, 
+                              i, i, (<span class='r'>unsigned</span> <span class='r'>long</span> <span class='r'>long</span>)(p+i),  i,  *(p+i)); 
+
+  printf(<span class='q'>"\n    Type long occupies: %d bytes\n"</span>, (<span class='r'>int</span>)<span class='r'>sizeof</span>(<span class='r'>long</span>)); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OHEYY');clipboard.on('success', function(e) {$('#OHEYY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OHEYY').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>The pointer, p, is set to the address that results from my_array, where my_array is an array of
+elements of type long. 
+
+</p><p>The pointer will initially contain the address of the first byte in the array, which
+is also the first byte of the element my_array[0]. 
+
+</p><p>This time the addresses are displayed using the <i style='color:blue'>%llu</i> conversion specification after casting them to type unsigned long long so they will be decimal values.
+
+</p><p>The compiler presumes that when you add 1 to an address value, you actually want to do is access the next
+variable of that type. 
+
+</p><p>On a computer that stores type long in 8 bytes, incrementing a pointer to
+long by 1 will increase the address value by 8.
+
+</p><p>Note that you could use the array name directly in this example. 
+
+</p><p>You could write the for loop as
+</p><div class='myCodeDiv'><button id='XRGIW' class='myCopyButton' data-clipboard-target='#WEJHG'>Copy</button><pre  id='WEJHG' style='font-size:18px;' class='code'><span class='r'>for</span>(<span class='r'>int</span> i = 0 ; i &lt; <span class='r'>sizeof</span>(my_array)/<span class='r'>sizeof</span>(my_array[0]) ; ++i) 
+    printf(<span class='q'>"address p+%d (&amp;my_array[%d]): %llu        *(p+%d)   value: %d\n"</span>, 
+             i, i, (<span class='r'>unsigned</span> <span class='r'>long</span> <span class='r'>long</span>)(my_array+i),  i,  *(my_array+i));
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XRGIW');clipboard.on('success', function(e) {$('#XRGIW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XRGIW').text('error');});</script></div><p>This works because the expressions my_array and my_array+i both evaluate to an address. 
+
+</p><p>We output the values of these addresses and output the value at these addresses by using the * operator. 
+
+</p><p>The arithmetic with addresses works the same here as it did with the pointer p. 
+
+</p><p>Incrementing my_array by 1 results in the address of the next element in the array, which is 8 bytes further along in memory.  
+
+</p><p>An array name refers to a fixed address and is not a pointer. 
+
+</p><p>You can use an  
+array name and thus the address it references in an expression, but you cannot modify it. 
+</p><a class ='btn btn-outline-dark' href=c-arrays-and-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointers-and-multidimensional-arrays.html>Next</a><h2>Related</h2><UL><LI><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Using A Pointer When Receiving Input from scanf</a></LI><LI><a href='c-pointers-to-constants.html'>C Pointers to Constants</a></LI><LI><a href='c-arrays-and-pointers.html'>C Arrays and Pointers</a></LI><LI><a href='c-pointers-and-multidimensional-arrays.html'>C Pointers and Multidimensional Arrays</a></LI><LI><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to Multidimensional Arrays</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-array-and-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

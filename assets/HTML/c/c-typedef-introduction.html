@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-typedef-introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C typedef introduction</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C typedef introduction'>C typedef introduction</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-introduction-keywords.html'>C Data Type Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bits-bytes-and-words.html'>C Bits, Bytes, and Words
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>int
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-versus-floating-point-types.html'>C Integer vs Floating-Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-type.html'>C int Type
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-decimal-octal-and-hexadecimal.html'>C Int Octal Hexadecimal
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-other-integer-types-via-int-modifier.html'>C Int modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-literal-suffix.html'>C Int Literal Suffix
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-integer-overflow.html'>C Int Overflow
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-int-print-via-printf-for-short-long-unsigned-int.html'>C int print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integer-types.html'>C Signed Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-unsigned-integer-types.html'>C Unsigned Integer Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-generating-pseudo-random-integers.html'>C Random Int
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>char
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-type-char.html'>C Character Type char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-escape-sequence.html'>C char escape sequence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-char-print-via-printf-function.html'>C char print and read
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-ascii-character-code-definitions.html'>C ASCII Code
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-output-the-printable-characters-for-character-code-values-from-0-to.html'>C char example 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-arithmetic-operations-on-type-char.html'>C Char as int value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-strings.html'>C Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-strlen-function-to-get-char-string-length.html'>C strlen() Function
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>bool
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bool-type.html'>C _Bool Type
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>floating
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-float-double-and-long-double.html'>C float double long double
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printing-floating-point-values.html'>C floating point print
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-floating-point-round-off-errors.html'>C floating Round-off Errors
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-using-floating-point-values.html'>C Floating-Point Division
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-control-number-of-decimal-places-output-for-floating-point-value.html'>C floating value width ctrl
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-the-circumference-and-area-of-a-circular-table-for-its-d.html'>C circumference and area
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Constant
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-constants-and-preprocessor.html'>C Constants and Preprocessor
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-modifier.html'>C const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-example-defining-named-constants.html'>C Named Constants Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>enum
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-enumerated-types.html'>C Enumerated Types
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-constants.html'>C enum Constants
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-enum-usage.html'>C enum Usage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Binary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-numbers-bits-and-bytes.html'>C Binary, Bits, and Bytes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-signed-integers-binary-representation.html'>C Signe Int in binary
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-floating-point-in-binary-form.html'>C Binary Floating Point
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-octal-and-hexadecimal-in-binary-form.html'>C Octal and Hexadecimal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Size and Limit
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-value-limitations.html'>C Data type value Limit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-for-data-type.html'>C data type sizeof 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-choosing-the-correct-data-type-for-the-calculation.html'>C Data Type Selection
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Convert
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-explicit-data-type-conversion.html'>C Data Type Conversion
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-automatic-conversions.html'>C Data Type Auto Conversions
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Union
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-unions.html'>C Unions
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Type Define
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C typedef introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-sizes.html'>C Data Type Sizes
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-range.html'>C Data Type Range
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-review-question-for-data-type-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-exercise-data-type-1.html'>C Data Type Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-exercise-2.html'>C Data Type Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C typedef introduction</h1>
+<a class ='btn btn-outline-dark' href=c-unions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-data-type-sizes.html>Next</a><p>The <i style='color:blue'>typedef</i> enables you to create your own name for a type. 
+
+</p><p>It is similar to #define in that respect.
+
+</p><p>Unlike #define, typedef is limited to giving symbolic names to types only and not to values.
+
+</p><p>The <i style='color:blue'>typedef</i> interpretation is performed by the compiler, not the preprocessor.
+
+</p><p><i style='color:blue'>typedef</i> is more flexible than #define.
+
+</p><h3>Example
+
+</h3><p>Suppose you want to use the term <b>BYTE</b> for one-byte numbers.
+
+</p><p>You simply define <b>BYTE</b> as if it were a char variable and precede the definition by the keyword
+<i style='color:blue'>typedef</i>, like so:
+</p><div class='myCodeDiv'><button id='IKZIC' class='myCopyButton' data-clipboard-target='#ZFFXL'>Copy</button><pre  id='ZFFXL' style='font-size:18px;' class='code'><span class='r'>typedef</span> <span class='r'>unsigned</span> <span class='r'>char</span> BYTE;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IKZIC');clipboard.on('success', function(e) {$('#IKZIC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IKZIC').text('error');});</script></div><p>From then on, you can use BYTE to define variables:
+</p><div class='myCodeDiv'><button id='VTXYP' class='myCopyButton' data-clipboard-target='#BFGFW'>Copy</button><pre  id='BFGFW' style='font-size:18px;' class='code'>BYTE x, y[10], * z;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VTXYP');clipboard.on('success', function(e) {$('#VTXYP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VTXYP').text('error');});</script></div><p>The scope of this definition depends on the location of the <i style='color:blue'>typedef</i> statement.
+
+</p><p>If the definition is inside a function, the scope is local, confined to that function.
+
+</p><p>If the definition is outside a function, the scope is global.
+
+</p><p>Often, uppercase letters are used for these definitions to remind the user that the type name is
+really a symbolic abbreviation, but you can use lowercase, too:
+</p><div class='myCodeDiv'><button id='CXEBH' class='myCopyButton' data-clipboard-target='#FXWIQ'>Copy</button><pre  id='FXWIQ' style='font-size:18px;' class='code'><span class='r'>typedef</span> <span class='r'>unsigned</span> <span class='r'>char</span> byte;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CXEBH');clipboard.on('success', function(e) {$('#CXEBH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CXEBH').text('error');});</script></div><p>The same rules that govern the valid names of variables govern the name used for a <i style='color:blue'>typedef</i>.
+</p><h3>Why
+</h3><p>Using BYTE instead of unsigned char helps document that you plan
+to use BYTE variables to represent numbers rather than character codes.
+
+</p><p>Using <i style='color:blue'>typedef</i> also helps increase portability.
+
+</p><p>For example, the <i style='color:blue'>size_t</i> type, which represents
+the type returned by the sizeof operator, and the time_t type, which represents the type of
+value returned by the <i style='color:blue'>time</i>() function.
+
+</p><p>The C standard says sizeof and <i style='color:blue'>time</i>() return integer types but leaves it up to the implementation to determine which type.
+
+</p><p>C standards committee feels that no one choice is likely to be the best
+choice for every computer platform.
+
+</p><p>So they make up a new type name, such as time_t, and
+let the implementation use a typedef to set that name to some specific type.
+
+</p><p>That way, they can provide a general prototype such as the following:
+</p><div class='myCodeDiv'><button id='INPQA' class='myCopyButton' data-clipboard-target='#ZMILB'>Copy</button><pre  id='ZMILB' style='font-size:18px;' class='code'>time_t time(time_t *);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#INPQA');clipboard.on('success', function(e) {$('#INPQA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#INPQA').text('error');});</script></div><p>On one system, time_t can be unsigned long; on another, it can be unsigned long long.
+</p><p>As long as you include the time.h header file, your program can access the appropriate 
+definition, and you can declare time_t variables in your code.
+
+</p><p>Some features of typedef can be duplicated with a #define. For example,
+</p><div class='myCodeDiv'><button id='BSBYH' class='myCopyButton' data-clipboard-target='#OPNDE'>Copy</button><pre  id='OPNDE' style='font-size:18px;' class='code'>#define BYTE <span class='r'>unsigned</span> <span class='r'>char</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BSBYH');clipboard.on('success', function(e) {$('#BSBYH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BSBYH').text('error');});</script></div><p>causes the preprocessor to replace BYTE with unsigned char. 
+Here is one that can't be duplicated with a #define:
+</p><div class='myCodeDiv'><button id='ZEUGM' class='myCopyButton' data-clipboard-target='#QPIGQ'>Copy</button><pre  id='QPIGQ' style='font-size:18px;' class='code'><span class='r'>typedef</span> <span class='r'>char</span> * STRING;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZEUGM');clipboard.on('success', function(e) {$('#ZEUGM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZEUGM').text('error');});</script></div><p>Without the keyword <i style='color:blue'>typedef</i>, this example would identify STRING itself as a pointer-to-char.
+
+</p><p>With the keyword, it makes STRING an identifier for pointers-to-char. Therefore,
+</p><div class='myCodeDiv'><button id='UMVXO' class='myCopyButton' data-clipboard-target='#PABDZ'>Copy</button><pre  id='PABDZ' style='font-size:18px;' class='code'>STRING name, sign;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UMVXO');clipboard.on('success', function(e) {$('#UMVXO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UMVXO').text('error');});</script></div><p>means
+</p><div class='myCodeDiv'><button id='VMZYP' class='myCopyButton' data-clipboard-target='#HQQYP'>Copy</button><pre  id='HQQYP' style='font-size:18px;' class='code'><span class='r'>char</span> * name, * sign;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VMZYP');clipboard.on('success', function(e) {$('#VMZYP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VMZYP').text('error');});</script></div><p>Suppose, instead, you did this:
+</p><div class='myCodeDiv'><button id='KACMQ' class='myCopyButton' data-clipboard-target='#JADOY'>Copy</button><pre  id='JADOY' style='font-size:18px;' class='code'>#define STRING <span class='r'>char</span> *
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KACMQ');clipboard.on('success', function(e) {$('#KACMQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KACMQ').text('error');});</script></div><p>Then
+</p><div class='myCodeDiv'><button id='COJBQ' class='myCopyButton' data-clipboard-target='#TVETK'>Copy</button><pre  id='TVETK' style='font-size:18px;' class='code'>STRING name, sign;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#COJBQ');clipboard.on('success', function(e) {$('#COJBQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#COJBQ').text('error');});</script></div><p>would translate to the following:
+</p><div class='myCodeDiv'><button id='LICRO' class='myCopyButton' data-clipboard-target='#IFMFM'>Copy</button><pre  id='IFMFM' style='font-size:18px;' class='code'><span class='r'>char</span> * name, sign;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LICRO');clipboard.on('success', function(e) {$('#LICRO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LICRO').text('error');});</script></div><p>In this case, only name would be a pointer.
+
+</p><p>You can use typedef with structures, too:
+</p><div class='myCodeDiv'><button id='EZMZU' class='myCopyButton' data-clipboard-target='#MLRDH'>Copy</button><pre  id='MLRDH' style='font-size:18px;' class='code'><span class='r'>typedef</span> <span class='r'>struct</span> complex {
+        <span class='r'>float</span> real;
+        <span class='r'>float</span> imag;
+} COMPLEX;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EZMZU');clipboard.on('success', function(e) {$('#EZMZU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EZMZU').text('error');});</script></div><p>You can then use the type COMPLEX instead of the struct called complex to represent complex
+numbers. 
+
+</p><p>One reason to use <i style='color:blue'>typedef</i> is to create convenient, recognizable names for types that
+turn up often. 
+
+</p><p>For instance, many people prefer to use STRING or its equivalent, as in the earlier example.
+
+</p><p>You can omit a tag when using typedef to name a structure type:
+</p><div class='myCodeDiv'><button id='QWOYE' class='myCopyButton' data-clipboard-target='#BGDPZ'>Copy</button><pre  id='BGDPZ' style='font-size:18px;' class='code'><span class='r'>typedef</span> <span class='r'>struct</span> {<span class='r'>double</span> x; <span class='r'>double</span> y;} rect;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QWOYE');clipboard.on('success', function(e) {$('#QWOYE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QWOYE').text('error');});</script></div><p>Suppose you use the typedef like this:
+</p><div class='myCodeDiv'><button id='ECJGT' class='myCopyButton' data-clipboard-target='#DXGKP'>Copy</button><pre  id='DXGKP' style='font-size:18px;' class='code'>rect r1 = {3.0, 6.0};
+rect r2;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ECJGT');clipboard.on('success', function(e) {$('#ECJGT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ECJGT').text('error');});</script></div><p>This is translated to
+</p><div class='myCodeDiv'><button id='IWFYJ' class='myCopyButton' data-clipboard-target='#ACDSL'>Copy</button><pre  id='ACDSL' style='font-size:18px;' class='code'><span class='r'>struct</span> {<span class='r'>double</span> x; <span class='r'>double</span> y;} r1= {3.0, 6.0};
+<span class='r'>struct</span> {<span class='r'>double</span> x; <span class='r'>double</span> y;} r2;
+r2 = r1;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IWFYJ');clipboard.on('success', function(e) {$('#IWFYJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IWFYJ').text('error');});</script></div><p>If two structures are declared without a tag but with identical members (with both member
+names and types matching), C considers the two structures to be of the same type, so assigning
+r1 to r2 is a valid operation.
+
+</p><p><i style='color:blue'>typedef</i> names are often used for complicated types.
+</p><a class ='btn btn-outline-dark' href=c-unions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-data-type-sizes.html>Next</a><h2>Related</h2><UL><LI><a href='c-explicit-data-type-conversion.html'>C Explicit Data Type Conversion</a></LI><LI><a href='c-data-type-automatic-conversions.html'>C Data Type Automatic Conversions</a></LI><LI><a href='c-unions.html'>C Unions</a></LI><LI><a href='c-data-type-sizes.html'>C Data Type Sizes</a></LI><LI><a href='c-data-type-range.html'>C Data Type Range</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-typedef-introduction.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

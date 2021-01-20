@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<!-- Mirrored from www.c-programming-simple-steps.com/merge-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:34:00 GMT -->
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Merge sort</title><meta name="description" content="Merge sort is a &quot;divide and conquer&quot; algorithm. It is very efficient, running in O(n*log(n)). Here we explain the algorithm and give examples."><meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link href="sd/support-files/A.style.css.pagespeed.cf.J7qGLGG26B.css" rel="stylesheet" type="text/css">
+<!-- start: tool_blocks.sbi_html_head -->
+<link rel="canonical" href="merge-sort.html"/>
+<meta property="og:site_name" content="C Programming Simple Steps"/>
+<meta property="og:title" content="Merge sort"/>
+<meta property="og:description" content="Merge sort is a &quot;divide and conquer&quot; algorithm. It is very efficient, running in O(n*log(n)). Here we explain the algorithm and give examples."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="merge-sort.html"/>
+<meta property="og:image" content="images/merge-sort-visual.png"/>
+<meta property="og:image" content="images/merge-flow-chart.png"/>
+<meta property="og:image" content="c-programming-fb.png"/>
+<meta property="og:image" content="images/merge-sort-flow-chart.png"/>
+<script type="text/javascript" language="JavaScript">var https_page=0</script>
+
+
+    <script src="sd/support-files/eucookie.js.pagespeed.jm.ksMg6Nudeq.js" async defer type="text/javascript"></script><!-- end: tool_blocks.sbi_html_head -->
+<!-- start: shared_blocks.2087538#end-of-head -->
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');ga('create','UA-70996381-1','auto');ga('send','pageview');</script>
+
+<!-- end: shared_blocks.2087538#end-of-head -->
+    
+    <script type="text/javascript">var FIX=FIX||{};</script>
+    
+</head>
+<body class="responsive">
+
+    <div id="PageWrapper" class="modern">
+
+      <div id="HeaderWrapper">
+        <div id="Header">
+          <div class="Liner">
+            <div class="WebsiteName">
+              <a href="index.html"> </a>
+            </div><div class="Tagline"> </div>
+<!-- start: shared_blocks.2087525#top-of-header -->
+
+<!-- start: tool_blocks.navbar.horizontal.left --><div class="ResponsiveNavWrapper"> 
+ 		        <div class="ResponsiveNavButton"><span>Menu</span></div><div class="HorizontalNavBarLeft HorizontalNavBar HorizontalNavBarCSS ResponsiveNav"> 
+ 	
+                <ul class="root"><li class="li1"><a href="index.html">Home</a></li><li class="li1"><a href="online-computer-programming-courses.html">Courses</a></li><li class="li1 submenu">
+                            <span class="navheader">Tutorials</span><ul><li class="li2"><a href="programming-for-beginners.html">Beginners</a></li><li class="li2"><a href="c-programming-tutorial.html">C Tutorial</a></li><li class="li2"><a href="number-systems.html">Number Systems</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">C</span><ul><li class="li2"><a href="c-language-programming.html">C Language</a></li><li class="li2"><a href="c-keywords.html">C Keywords</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">Algorithms</span><ul><li class="li2"><a href="algorithms.html">Algorithms</a></li><li class="li2"><a href="sorting-algorithms.html">Sorting algorithms</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">General</span><ul><li class="li2"><a href="computer-programming.html">Computer Programming</a></li><li class="li2"><a href="c-programming-examples.html">Examples Download</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">About</span><ul><li class="li2"><a href="contact-me.html">Contact me</a></li><li class="li2"><a href="privacy-policy.html">Privacy Policy</a></li></ul></li></ul>
+            </div></div><!-- end: tool_blocks.navbar.horizontal.left -->
+<div id="google_custom_search">
+<script>(function(){var cx='004800009253881390622:5z6xrveedtw';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src='https://cse.google.com/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script>
+<gcse:search></gcse:search>
+</div>
+
+<!-- end: shared_blocks.2087525#top-of-header -->
+<!-- start: shared_blocks.2087491#bottom-of-header -->
+
+
+<!-- end: shared_blocks.2087491#bottom-of-header -->
+</div><!-- end Liner -->
+        </div><!-- end Header -->
+      </div><!-- end HeaderWrapper -->
+
+      <div id="ContentWrapper">
+        <div id="ContentColumn">
+          <div class="Liner">
+<!-- start: shared_blocks.2087484#above-h1 -->
+
+
+<!-- end: shared_blocks.2087484#above-h1 -->
+<h1>Merge sort</h1>
+<!-- start: shared_blocks.2087549#below-h1 -->
+
+
+<!-- end: shared_blocks.2087549#below-h1 -->
+<h2>Background</h2>
+<p>&#xa0; &#xa0; Merge sort belongs to the group of "divide and conquer" algorithms. It is very efficient and makes low number of compares. One disadvantage is the amount of extra space that it requires. Normally this sorting is stable, meaning that it preserves the order of equal elements. The basic implementation is not adaptive, but adaptation could be added. We will discuss if and when that is necessary and good.</p>
+<!-- start: shared_blocks.2087535#below-paragraph-1 -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087535#below-paragraph-1 -->
+<h2>Divide and conquere</h2>
+<p>&#xa0; &#xa0; In programming, "Divide and conquer" is the principle of dividing a complex problem to sub-problems. The sub-problems are then divided to even simpler problems. This process continues until the problem is automatically solved or its solution is trivial. This leads to some of the most efficient algorithms that are used today.</p>
+<h2>The idea of merge sort</h2>
+<p>&#xa0; &#xa0; So we want to sort an array and we have the divide and conquer idea. Here is how it is applied in this case:</p><ol><li>We take the array and split it in half. Then we repeat the same with each half until each half is of size 1 or 0. This is done through a recursion, but we will talk about that a little later.</li><li>An array of size 1 is trivially sorted.</li><li>The rest is a simple routine of combing two sorted arrays into one bigger. We continue to combine, until we combine all elements and our array is sorted.</li></ol><p>&#xa0; &#xa0; That's it. It is that simple, yet super fast. As always, of course we will visualize the idea for better understanding.</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/merge-sort-visual.png" width="352" alt="Merge sort visualization" title="Merge sort visualization" data-pin-media="images/merge-sort-visual.png"></div>
+<h2>The merge routine</h2>
+<p>&#xa0; &#xa0; Dividing the array in two sub-arrays is a trivial task, so we will not go much into details there. The merging is where the actual work is done. It takes two arrays and combines them in the most efficient way.</p><p>&#xa0; &#xa0; The first key point is that the two arrays must be sorted before they are combined. The first time this procedure is called is with the arrays of size 1 and we know that a single element is always sorted. After that the arrays to be combined are already sorted, because they are merged into sorted arrays by the same function.</p><p>Let's take a look how the merging is done.<br/>For the example we have the two arrays named "left" and "right".</p><p>left = 0, 2, 5, 10<br/>right = -6, 2, 7, 20</p><p>We create two variables that point the current position in "left" and "right";</p><p>leftIndex = 0;<br/>rightIndex = 0;</p><p>Now we can compare the values behind the two indices and take the smaller value.<br/>In this case -6 is smaller so we take that value and write it in the result array.</p><p>result[0] = -6.</p><p>Once we took the value of -6 from "right", it is time to move the right index to the next number:</p><p>rightIndex++;</p><p>We continue with the next pair of numbers from left and right. In this case the value in "left" is smaller, so:</p><p>result[1] = 0;<br/>leftIndex++;</p><p>These steps will continue until all the numbers are filled in the "result" array.<br/>Here is a flow chart for the merging:</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/merge-flow-chart.png" width="591" alt="Flowchart of the merge routine" title="Flowchart of the merge routine" data-pin-media="images/merge-flow-chart.png"></div>
+<h2>Merge sort</h2>
+<p>&#xa0; &#xa0; Merge sort is a recursive algorithm. As we said earlier it divides the array recursively until all sub-arrays are of size 1 or 0. Then it merges them by pairs into small sorted arrays and continues the process until all sub arrays are merged into one sorted array.</p><p>&#xa0; &#xa0; If you don't know what a recursion is this might seem really confusing. Recursion is a function which calls itself. Every recursion must have a base case which interrupts the calls and returns a result for the previous call. In our case the base is when the sub arrays are small enough so that they are trivially sorted(size 1 or 0).</p><p>&#xa0; &#xa0; The flow chart below describes the procedure. You can see that it consists of several major parts:</p><ol><li>Divide the array in two sub arrays - left and right</li><li>Make a recursive call for the left array</li><li>Make a recursive call for the right array</li><li>Merge the arrays.</li></ol>
+<div class="ImageBlock ImageBlockCenter"><img src="images/merge-sort-flow-chart.png" width="539" alt="Merge sort flowchart" title="Merge sort flowchart" data-pin-media="images/merge-sort-flow-chart.png"></div>
+<h2>Space complexity analysis</h2>
+<p>&#xa0; &#xa0; You probably noticed that the speed of this algorithm comes at the price of the extra space taken.</p><p>&#xa0; &#xa0; This is the space that we need to create the extra left and right arrays. Since they are half the size of the original array, we will need 2 * N/2 extra space.</p><p>&#xa0; &#xa0; Also it uses several index variables to work with these arrays. Note that when we work with large arrays these will be insignificant. In other words merge sort uses N extra space for the left and right.</p><p>&#xa0; &#xa0; This is a lot, compared to most of its rivals. For that reason people invented implementations that use N/2 or even in-place O(1) extra space. Anyway, the in-place version worsens the time complexity and it is not used much in practice.</p>
+<h2>Time complexity analysis</h2>
+<p>&#xa0; &#xa0; This analysis is more complex and need some visualization. Consider the first picture above where we sorted the array with 8 elements. The upper half of the graph only splits the array. Note that the actual work is done in the merging routine. It is called only in the bottom half of the graph. Therefore the major part of the time is spend in that half. For that reason we can ignore the split time(the upper half of the picture) in the asymptotic calculations.</p><p>&#xa0; &#xa0; A question: How many levels does the second half has? The answer is log(n). That is because with each subsequent level the number of arrays to be merged is cut in half.</p><p>&#xa0; &#xa0; A second question: How much work is done in each merge level? The answer is n. In fact it is closer to n/2, but in asymptotic calculations the constant factors are ignored. We will come back later to this.</p><p>&#xa0; &#xa0; So, if the tree has log(n) levels and each level does O(n) work, what is the complexity of the algorithm? That's right - O(n*log(n)).</p>
+<h2>Optimizations</h2>
+<p>&#xa0; &#xa0; As we said a number of optimizations are made in order to reduce the space complexity. This is more important when the algorithm is used to sort large amount of data such as files, or tapes in the past.</p><p>&#xa0; &#xa0; Another interesting optimization is to make merge sort adaptive. The idea is to check if the array is already sorted. If that is the case the recursion is interrupted and the sorted array is returned immediately. Although it seems "a must" it adds many additional compares even when they are not necessary.</p><p>&#xa0; &#xa0; Our test showed that this reduces the gain for random data and small structures(n &lt; 100 000). The adaptation is much more useful if the data is at least partially sorted(the gain could be over 30% on average) or the number of elements is big. With random data and small volumes(n &lt; 100 000) the adaptation actually slows the sort by 1-5%.</p>
+<h2>Advantages and Usage</h2>
+<p>&#xa0; &#xa0; Most other algorithms will perform terribly bad with sequential data structures such as files and linked lists. In these structures accessing a random element takes linear time, instead of the regular constant time. The nature of merge sort makes it fast for such data structures.</p><p>&#xa0; &#xa0; One of the best features of this sorting is its low number of compares. It makes O(n * log(n)) number of compares, but the constant factor is very good, compared to qucksort. This makes it very useful when the compare function is a very slow operation.</p><p>&#xa0; &#xa0; The divide-and-conquer nature of merge sort makes it very convenient for parallel processing. Both the split and merge routines could be optimized for parallel execution.</p><p>&#xa0; &#xa0; In many implementations the algorithm switches to <a href="insertion-sort.html" onclick="return FIX.track(this);">insertion sort</a> when the sub-arrays are small(below 10 elements).</p>
+<!-- start: shared_blocks.2087532#above-socialize-it -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087532#above-socialize-it -->
+<h2>Summary</h2>
+<ul><li>Uses a divide-and-conquer technique</li><li>Time complexity: O(n*log(n))</li><li>Space complexity O(n).</li><li>Stable</li><li>Adaptive implementation is possible.</li><li>Low number of compares</li><li>Works fast with sequential access data.</li><li>Convenient for parallel implementation</li><li>Finds many applications in practice</li></ul>
+<br>
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="index.html" itemprop="url">
+<span itemprop="title">C Programming</span></a>
+
+</span>
+
+ ›
+
+<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="sorting-algorithms.html" itemprop="url">
+<span itemprop="title">Sorting Algorithms</span></a>
+</span>
+
+ › Merge sort
+<!-- start: shared_blocks.2087488#socialize-it -->
+
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 100%; box-sizing: border-box">
+<div class="desktopOnly"><div class="" style="width: 50%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 53%;vertical-align:top;">
+<p>Did this help? Support me with your vote ;-)</p>
+</td><td class="column_1" style="width: 22.42%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/merge-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 24.29%;vertical-align:top;">
+
+<div class="" style="margin-left: auto; margin-right: auto; padding-top: 13px; float: none; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/merge-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div></div>
+
+<div class="mobileOnly"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 39.991%;vertical-align:top;">
+<p>Did this help?<br/></p>
+</td><td class="column_1" style="width: 29.989%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/merge-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 30%;vertical-align:top;">
+
+<div class="" style="padding-top: 13px; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/merge-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div>
+</div>
+
+<!-- end: shared_blocks.2087488#socialize-it -->
+<!-- start: shared_blocks.2087520#below-socialize-it -->
+
+<div id="disqus_thread"></div>
+<script>(function(){var d=document,s=d.createElement('script');s.src='http://c-programming-simple-steps.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<!-- end: shared_blocks.2087520#below-socialize-it -->
+</div><!-- end Liner -->
+        </div><!-- end ContentColumn -->
+      </div><!-- end ContentWrapper -->
+
+      <div id="FooterWrapper">
+        <div id="Footer">
+          <div class="Liner">
+<!-- start: shared_blocks.2087493#above-bottom-nav -->
+
+<!-- Share Desktop -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+<!-- Share Mobile -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+
+<!-- end: shared_blocks.2087493#above-bottom-nav -->
+<!-- start: shared_blocks.2087504#bottom-navigation -->
+
+
+<!-- end: shared_blocks.2087504#bottom-navigation -->
+<!-- start: shared_blocks.2087486#below-bottom-nav -->
+
+
+<!-- end: shared_blocks.2087486#below-bottom-nav -->
+<!-- start: shared_blocks.2087501#footer -->
+
+<p><a href="index.html">© Copyright 2008-2016 c-programming-simple-steps.com</a><br/></p>
+
+<!-- end: shared_blocks.2087501#footer -->
+</div><!-- end Liner -->
+        </div><!-- end Footer -->
+      </div><!-- end FooterWrapper -->
+
+    </div><!-- end PageWrapper -->
+
+    
+    <script type="text/javascript" src="sd/support-files/fix.js.pagespeed.jm.3phKUrh9Pj.js"></script>
+    
+    <script type="text/javascript">FIX.doEndOfBody();</script>
+    <script type="text/javascript" src="sd/support-files/design.js.pagespeed.jm.IGpaLo39T1.js"></script>
+<!-- start: tool_blocks.sbi_html_body_end -->
+    <script>var SS_PARAMS={pinterest_enabled:false,googleplus1_on_page:true,socializeit_onpage:false};</script>            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&autoLogAppEvents=1"></script><style>.g-recaptcha{display:inline-block}.recaptcha_wrapper{text-align:center}</style>
+	    <script>if(typeof recaptcha_callbackings!=="undefined"){SS_PARAMS.recaptcha_callbackings=recaptcha_callbackings||[]};</script>
+	    
+  <script>(function(d,id){if(d.getElementById(id)){return;}var s=d.createElement('script');s.async=true;s.defer=true;s.src="ssjs/ldr.js";s.id=id;d.getElementsByTagName('head')[0].appendChild(s);})(document,'_ss_ldr_script');</script><!-- end: tool_blocks.sbi_html_body_end -->
+  
+<!-- Generated at 13:14:34 07-Nov-2019 -->
+
+</body>
+
+<!-- Mirrored from www.c-programming-simple-steps.com/merge-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:34:03 GMT -->
+</html>

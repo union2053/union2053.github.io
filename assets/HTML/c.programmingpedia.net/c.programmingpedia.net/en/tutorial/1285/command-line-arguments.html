@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1285/command-line-arguments by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Command-line arguments | C Language Tutorial">
+        <meta name="description" property="og:description" content="Command-line arguments | C Language Tutorial">
+        <title>Command-line arguments | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="command-line-arguments">Command-line arguments</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>int main(int argc, char *argv[])</li>
+</ul>
+
+
+            </div>
+
+            <h2 id="parameters">Parameters</h2>
+            <div>
+                <table><thead><tr><th>Parameter</th><th>Details</th></tr></thead><tbody><tr><td>argc</td><td>argument count - initialized to the number of space-separated arguments given to the program from the command-line as well as the program name itself.</td></tr><tr><td>argv</td><td>argument vector - initialized to an array of <code>char</code>-pointers (strings) containing the arguments (and the program name) that was given on the command-line.</td></tr></tbody></table>
+
+            </div>
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>A C program running in a 'hosted environment' (the normal type — as opposed to a 'freestanding environment') must have a <code>main</code> function. It is traditionally defined as:</p>
+<pre><code>int main(int argc, char *argv[])
+</code></pre>
+<p>Note that <code>argv</code> can also be, and very often is, defined as <code>char **argv</code>; the behavior is the same.  Also, the parameter names can be changed because they're just local variables within the function, but <code>argc</code> and <code>argv</code> are conventional and you should use those names.</p>
+<p>For <code>main</code> functions where the code does not use any arguments, use <code>int main(void)</code>.</p>
+<p>Both parameters are initialized when the program starts:</p>
+<ul>
+<li><code>argc</code> is initialized to the number of space-separated arguments given to the program from the command-line as well as the program name itself.</li>
+<li><code>argv</code> is an array of <code>char</code>-pointers (strings) containing the arguments (and the program name) that was given on the command-line.</li>
+<li>some systems expand command-line arguments &quot;in the shell&quot;, others do not. On Unix if the user types  <code>myprogram *.txt</code> the program will receive a list of text files; on Windows it will receive the string &quot;<code>*.txt</code>&quot;.</li>
+</ul>
+<p>Note: Before using <code>argv</code>, you might need to check the value of <code>argc</code>.  In theory, <code>argc</code> could be <code>0</code>, and if <code>argc</code> is zero, then there are no arguments and <code>argv[0]</code> (equivalent to <code>argv[argc]</code>) is a null pointer.
+It would be an unusual system with a hosted environment if you ran into this problem.
+Similarly, it is possible, though very unusual, for there to be no information about the program name.
+In that case, <code>argv[0][0] == '\0'</code> — the program name may be empty.</p>
+<p>Suppose we start the program like this:</p>
+<pre><code>./some_program abba banana mamajam
+</code></pre>
+<p>Then <code>argc</code> is equal to <code>4</code>, and the command-line arguments:</p>
+<ul>
+<li><code>argv[0]</code> points to <code>&quot;./some_program&quot;</code> (the program name) if the program name is available from the host environment. Otherwise an empty string <code>&quot;&quot;</code>.</li>
+<li><code>argv[1]</code> points to <code>&quot;abba&quot;</code>,</li>
+<li><code>argv[2]</code> points to <code>&quot;banana&quot;</code>,</li>
+<li><code>argv[3]</code> points to <code>&quot;mamajam&quot;</code>,</li>
+<li><code>argv[4]</code> contains the value <code>NULL</code>.</li>
+</ul>
+<p>See also <a href="http://stackoverflow.com/questions/204476/">What should <code>main()</code> return in C and C++</a> for complete quotes from the standard.</p>
+
+
+            </div>
+
+
+            <h2 id="print-the-arguments-to-a-program-and-convert-to-integer-values">Print the arguments to a program and convert to integer values</h2>
+            <div>
+                <p>The following code will print the arguments to the program, and
+the code will attempt to convert each argument into a number (to a
+<code>long</code>):</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;limits.h&gt;
+
+int main(int argc, char* argv[]) {
+
+    for (int i = 1; i &lt; argc; i++) {
+        printf(&quot;Argument %d is: %s\n&quot;, i, argv[i]);
+
+        errno = 0;
+        char *p;
+        long argument_numValue = strtol(argv[i], &amp;p, 10);
+
+        if (p == argv[i]) {
+            fprintf(stderr, &quot;Argument %d is not a number.\n&quot;, i);
+        }
+        else if ((argument_numValue == LONG_MIN || argument_numValue == LONG_MAX) &amp;&amp; errno == ERANGE) {
+            fprintf(stderr, &quot;Argument %d is out of range.\n&quot;, i);
+        }
+        else {
+            printf(&quot;Argument %d is a number, and the value is: %ld\n&quot;,
+                   i, argument_numValue);
+        }
+    }
+    return 0;
+}
+</code></pre>
+<p>REFERENCES:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/5493235/strtol-returns-an-incorrect-value">strtol() returns an incorrect value</a></li>
+<li><a href="http://stackoverflow.com/questions/14176123/correct-usage-of-strtol">Correct usage of strtol</a></li>
+</ul>
+
+
+            </div>
+            <h2 id="printing-the-command-line-arguments">Printing the command line arguments</h2>
+            <div>
+                <p>After receiving the arguments, you can print them as follows:</p>
+<pre><code>int main(int argc, char **argv)
+{
+    for (int i = 1; i &lt; argc; i++)
+    {
+        printf(&quot;Argument %d: [%s]\n&quot;, i, argv[i]); 
+    }
+}
+</code></pre>
+<p><strong>Notes</strong></p>
+<ol>
+<li>The <code>argv</code> parameter can be also defined as <code>char *argv[]</code>.</li>
+<li><code>argv[0]</code> <em>may</em> contain the program name itself (depending on how the program was executed). The first &quot;real&quot; command line argument is at <code>argv[1]</code>, and this is the reason why the loop variable <code>i</code> is initialized to 1.</li>
+<li>In the print statement, you can use <code>*(argv + i)</code> instead of <code>argv[i]</code> - it evaluates to the same thing, but is more verbose.</li>
+<li>The square brackets around the argument value help identify the start and end.  This can be invaluable if there are trailing blanks, newlines, carriage returns, or other oddball characters in the argument.  Some variant on this program is a useful tool for debugging shell scripts where you need to understand what the argument list actually contains (although there are simple shell alternatives that are almost equivalent).</li>
+</ol>
+
+
+            </div>
+            <h2 id="using-gnu-getopt-tools">Using GNU getopt tools</h2>
+            <div>
+                <p>Command-line options for applications are not treated any differently from command-line arguments by the C language. They are just arguments which, in a Linux or Unix environment, traditionally begin with a dash (<code>-</code>).</p>
+<p>With glibc in a Linux or Unix environment you can use the <a href="https://www.gnu.org/software/libc/manual/html_node/Getopt.html" rel="nofollow noreferrer">getopt tools</a> to easily define, validate, and parse command-line options from the rest of your arguments.</p>
+<p>These tools expect your options to be formatted according to the <a href="https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html" rel="nofollow noreferrer">GNU Coding Standards</a>, which is an extension of what POSIX specifies for the format of command-line options.</p>
+<p>The example below demonstrates handling command-line options with the GNU getopt tools.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;getopt.h&gt;
+#include &lt;string.h&gt;
+
+/* print a description of all supported options */
+void usage (FILE *fp, const char *path)
+{
+    /* take only the last portion of the path */
+    const char *basename = strrchr(path, '/');
+    basename = basename ? basename + 1 : path;
+
+    fprintf (fp, &quot;usage: %s [OPTION]\n&quot;, basename);
+    fprintf (fp, &quot;  -h, --help\t\t&quot;
+                 &quot;Print this help and exit.\n&quot;);
+    fprintf (fp, &quot;  -f, --file[=FILENAME]\t&quot;
+                 &quot;Write all output to a file (defaults to out.txt).\n&quot;);
+    fprintf (fp, &quot;  -m, --msg=STRING\t&quot;
+                 &quot;Output a particular message rather than 'Hello world'.\n&quot;);
+}
+
+/* parse command-line options and print message */
+int main(int argc, char *argv[])
+{
+    /* for code brevity this example just uses fixed buffer sizes for strings */
+    char filename[256] = { 0 };
+    char message[256] = &quot;Hello world&quot;;
+    FILE *fp;
+    int help_flag = 0;
+    int opt;
+
+    /* table of all supported options in their long form.
+     * fields: name, has_arg, flag, val
+     * `has_arg` specifies whether the associated long-form option can (or, in
+     * some cases, must) have an argument. the valid values for `has_arg` are
+     * `no_argument`, `optional_argument`, and `required_argument`.
+     * if `flag` points to a variable, then the variable will be given a value
+     * of `val` when the associated long-form option is present at the command
+     * line.
+     * if `flag` is NULL, then `val` is returned by `getopt_long` (see below)
+     * when the associated long-form option is found amongst the command-line
+     * arguments.
+     */
+    struct option longopts[] = {
+        { &quot;help&quot;, no_argument, &amp;help_flag, 1 },
+        { &quot;file&quot;, optional_argument, NULL, 'f' },
+        { &quot;msg&quot;, required_argument, NULL, 'm' },
+        { 0 }
+    };
+
+    /* infinite loop, to be broken when we are done parsing options */
+    while (1) {
+        /* getopt_long supports GNU-style full-word &quot;long&quot; options in addition
+         * to the single-character &quot;short&quot; options which are supported by
+         * getopt.
+         * the third argument is a collection of supported short-form options.
+         * these do not necessarily have to correlate to the long-form options.
+         * one colon after an option indicates that it has an argument, two
+         * indicates that the argument is optional. order is unimportant.
+         */
+        opt = getopt_long (argc, argv, &quot;hf::m:&quot;, longopts, 0);
+
+        if (opt == -1) {
+            /* a return value of -1 indicates that there are no more options */
+            break;
+        }
+
+        switch (opt) {
+        case 'h':
+            /* the help_flag and value are specified in the longopts table,
+             * which means that when the --help option is specified (in its long
+             * form), the help_flag variable will be automatically set.
+             * however, the parser for short-form options does not support the
+             * automatic setting of flags, so we still need this code to set the
+             * help_flag manually when the -h option is specified.
+             */
+            help_flag = 1;
+            break;
+        case 'f':
+            /* optarg is a global variable in getopt.h. it contains the argument
+             * for this option. it is null if there was no argument.
+             */
+            printf (&quot;outarg: '%s'\n&quot;, optarg);
+            strncpy (filename, optarg ? optarg : &quot;out.txt&quot;, sizeof (filename));
+            /* strncpy does not fully guarantee null-termination */
+            filename[sizeof (filename) - 1] = '\0';
+            break;
+        case 'm':
+            /* since the argument for this option is required, getopt guarantees
+             * that aptarg is non-null.
+             */
+            strncpy (message, optarg, sizeof (message));
+            message[sizeof (message) - 1] = '\0';
+            break;
+        case '?':
+            /* a return value of '?' indicates that an option was malformed.
+             * this could mean that an unrecognized option was given, or that an
+             * option which requires an argument did not include an argument.
+             */
+            usage (stderr, argv[0]);
+            return 1;
+        default:
+            break;
+        }
+    }
+
+    if (help_flag) {
+        usage (stdout, argv[0]);
+        return 0;
+    }
+
+    if (filename[0]) {
+        fp = fopen (filename, &quot;w&quot;);
+    } else {
+        fp = stdout;
+    }
+
+    if (!fp) {
+        fprintf(stderr, &quot;Failed to open file.\n&quot;);
+        return 1;
+    }
+
+    fprintf (fp, &quot;%s\n&quot;, message);
+
+    fclose (fp);
+    return 0;
+}
+</code></pre>
+<p>It can be compiled with <code>gcc</code>:</p>
+<pre><code>gcc example.c -o example
+</code></pre>
+<p>It supports three command-line options (<code>--help</code>, <code>--file</code>, and <code>--msg</code>). All have a &quot;short form&quot; as well (<code>-h</code>, <code>-f</code>, and <code>-m</code>). The &quot;file&quot; and &quot;msg&quot; options both accept arguments. If you specify the &quot;msg&quot; option, its argument is required.</p>
+<p>Arguments for options are formatted as:</p>
+<ul>
+<li><code>--option=value</code> (for long-form options)</li>
+<li><code>-ovalue</code> or <code>-o&quot;value&quot;</code> (for short-form options)</li>
+</ul>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../3336/boolean.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../10670/comments.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-21</div>
+        <div itemprop="datePublished">2016-07-21</div>
+        <div itemprop="dateModified">2017-06-05</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=1285" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-386141973" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#parameters">
+                    Parameters
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#print-the-arguments-to-a-program-and-convert-to-integer-values">
+                    Print the arguments to a program and convert to integer values
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#printing-the-command-line-arguments">
+                    Printing the command line arguments
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#using-gnu-getopt-tools">
+                    Using GNU getopt tools
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/1285/command-line-arguments by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:35 GMT -->
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/38372030/arduino-esp8266-softwareserial-not-enough-buffer-size-for-http-get-request by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Arduino ESP8266 Softwareserial not enough buffer size for HTTP get request | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Arduino ESP8266 Softwareserial not enough buffer size for HTTP get request | C Language Knowledge Base">
+        <title>[SOLVED] Arduino ESP8266 Softwareserial not enough buffer size for HTTP get request | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="arduino-esp8266-softwareserial-not-enough-buffer-size-for-http-get-request">Arduino ESP8266 Softwareserial not enough buffer size for HTTP get request</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/arduino.html">arduino</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/esp8266.html">esp8266</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I am working on a project in which I use arduino uno and ESP8266ex as wifi module on it. The connections of wires:</p>
+
+<p>Arduino 5V --> 3.3V Regulator --> ESP: CH_PD (with 10k resistor) and VCC   Arduino GND --> 3.3V Regulator --> ESP: GND and RST (reset is connected via a button and resistance)   Arduino RX --> ESP TX   Arduino TX --> Voltage divider (2k 1k resistors) --> ESP RX   5uF Capacitor --> Voltage regulator to prevent ESP to reset itself.</p>
+
+<p>Now let me explain the problem I am having. I have two codes working on which I use ESP8266 as wifi module for arduino uno. In my first program I sent commands by hand:</p>
+
+<pre><code>#define ard_rx_esp_tx 2
+#define ard_tx_esp_rx 3
+
+#include &lt;SoftwareSerial.h&gt;
+
+SoftwareSerial ESPserial(ard_rx_esp_tx, ard_tx_esp_rx); // RX | TX
+
+void setup()
+{
+  int i = 0;
+  Serial.begin(9600);     // communication with the host computer
+  while (!Serial);
+
+  // Start the software serial for communication with the ESP8266
+  ESPserial.begin(9600);
+  Serial.println("");
+  Serial.println(F("Remember to to set Both NL &amp; CR in the serial monitor."));
+  Serial.println(F("Ready"));
+  Serial.println(F(""));
+  Serial.println(F("start"));
+  delay(1000);
+}
+void loop()
+{
+
+  if ( ESPserial.available() )   {
+    char c = ESPserial.read();
+    Serial.print(c);
+  }
+
+  if ( Serial.available() )    {
+    ESPserial.write( Serial.read() );
+  }
+}
+</code></pre>
+
+<p>I succeeded to open TCP connection with a server, to send a GET request which has a long (over 600 chars) and handle all the long response via SoftwareSerial read() function and print them all to the serial monitor. In short, this code can handle 600+ char response of a server which is: </p>
+
+<p><img src="https://i.stack.imgur.com/fqLWS.png" alt="enter image description here"></p>
+
+<p>The aim is to send these AT commands via "SoftwareSerial.print()" and put the whole response in a character array to parse its API-KEY. The code I have written for this so far:</p>
+
+<pre><code>#define ard_rx_esp_tx 2
+#define ard_tx_esp_rx 3
+char response[625];
+#include &lt;SoftwareSerial.h&gt;
+SoftwareSerial ESPserial(ard_rx_esp_tx, ard_tx_esp_rx); // RX | TX
+int i;
+
+void setup() 
+{
+
+    Serial.begin(9600);     // communication with the host computer
+    while (!Serial);
+
+    // Start the software serial for communication with the ESP8266
+    ESPserial.begin(9600);  
+
+    Serial.println("");
+    Serial.println(F("Remember to to set Both NL &amp; CR in the serial monitor."));
+    Serial.println(F("Ready"));
+    Serial.println(F(""));
+    Serial.println(F("start"));
+    delay(1000);
+
+    ESPserial.println("AT+CIPSTART=\"TCP\",\"domainname\",80");
+    delay(5000);
+
+    i = 0;
+    while ( ESPserial.available() ) {
+      response[i] = ESPserial.read();
+      i++;
+    }
+    response[i++] = '\0';
+    Serial.println(response);
+    for (i = 0; i &lt; 625; i++) {
+      response[i] = '\0';
+    }
+
+    ESPserial.println("AT+CIPSEND=107");
+    delay(5000);
+
+    i = 0;
+    while ( ESPserial.available() ) {
+      response[i] = ESPserial.read();
+      i++;
+    }
+    response[i++] = '\0';
+    Serial.println(response);
+    for (i = 0; i &lt; 625; i++) {
+      response[i] = '\0';
+    }
+
+    ESPserial.println("GET request to the server which has length 107 as indicated");
+    delay(5000);
+
+    i = 0;
+    while ( ESPserial.available() ) {
+      response[i] = ESPserial.read();
+      i++;
+    }
+    response[i++] = '\0';
+    Serial.println(response);
+    for (i = 0; i &lt; 625; i++) {
+      response[i] = '\0';
+    }
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+</code></pre>
+
+<p>Which prints the response before at the end of the "setup()" scope. Let me also put the photo of the output:</p>
+
+<p><img src="https://i.stack.imgur.com/Pegcx.png" alt="enter image description here"></p>
+
+<p>In conclusion the problem is that: SoftwareSerial has 64 byte buffer which can be increased up to 256 bytes and when I increase it the program is able to print 256 chars this time, however, in my first code, in which I sent AT commands manually, it can handle whole response in spite of its 64 bytes buffer and is able to print it to the serial monitor. In the second one I could not handle and store the whole response into a char array.</p>
+
+<p>I hope I could explain my problem and pointed out at where exactly I am on my process with details. </p>
+
+<p>What do you suggest me to do. What can I do while handling this big response and putting it into a character array? How can I handle whole response which stays on ESP8266ex' buffer initially and read by Arduino RX pin via SoftwareSerial class in which the function read() has 64 bytes array and can be increased up to 256 but no more?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/6187549/4jaodeka" target="_blank"><span itemprop="name">4JaoDeka</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">2</div>
+                                    <div itemprop="dateCreated">7/14/2016 7:04:12 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>So, the problem here is all about timing. You know that you have a limit on your buffer size for the software serial (Which is also true for any hardware UART, too), which is 256 bytes, at a baud rate of 9600 bits per second. </p>
+
+<p>Since there is a start bit, 8 data bits, and a stop bit (Assuming you use 9600 8N1 here as it's the most common), you will be receiving a byte of data every (1 / 9600) * 10 - seconds, or 1.04 milliseconds. Therefore, to receive 256 bytes, it should take about 266 milliseconds. This means after 266 milliseconds, your buffer will be completely full, and anything you receive afterwards will start removing previously received data. </p>
+
+<p>And there in lies the crux of your problem - You are sending a command to the ESP to receive data from a server, and then going to sleep for 5 seconds, meaning nothing is pulling data from the buffer, so it wraps around, leading to data loss. The point of a serial buffer isn't to hold the entire dataset you will receive at a single point, but, to hold it just long enough until you can read it out, which is why they're generally quite small. </p>
+
+<p>What you need to do is send the command, and have your Arduino immediately run code to retrieve data as fast as it can from the buffer until it finds an expected end or times out.</p>
+
+<p>Something basic like this would get you going:</p>
+
+<pre><code>char espBuffer[1024] = {0};
+int readCount = 0;
+long startTime = millis();
+
+ESPserial.println("AT+CIPSTART=\"TCP\",\"domainname\",80");
+
+while (millis() - startTime &lt; 5000) { // Run for at least 5 seconds 
+  // Check to make sure we don't exceed espBuffer's boundaries
+  if (ESPserial.available() &gt; readCount + sizeof espBuffer - 1) 
+    break;
+  readCount += ESPserial.readBytes(espBuffer + readCount, ESPserial.available());
+}
+
+Serial.println(espBuffer);
+</code></pre>
+
+<p>Now, you'd want to modify this code to end when it has received all the data it expects. Additionally, this simple setup limits you to a maximum size of 1023 bytes for the response, which isn't too helpful either. Ideally you'd keep reading until you find, say, the HTTP body, and discard everything else, meaning the buffer to find the data is small, and the buffer to actually store the body can be much larger. </p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/5552095/dawn-minion" target="_blank"><span itemprop="name">Dawn Minion</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/38372030/arduino-esp8266-softwareserial-not-enough-buffer-size-for-http-get-request#answer-0</div>
+                                            <div itemprop="upvoteCount">5</div>
+                                            <div itemprop="dateCreated">7/14/2016 7:36:29 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/38372030" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/38372030/arduino-esp8266-softwareserial-not-enough-buffer-size-for-http-get-request by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:31 GMT -->
+</html>

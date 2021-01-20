@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-conditional-compilation-ifndef.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C preprocessor Conditional Compilation #ifndef</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C preprocessor Conditional Compilation #ifndef'>C preprocessor Conditional Compilation #ifndef</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor.html'>C Preprocessor
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-manifest-constants-define.html'>C #define
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-arguments-with-define.html'>C #define with arguments 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Macro
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C # Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-glue-the-operator.html'>C ## Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-variadic-macros-and-va-args.html'>C Variadic Macros
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#include
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-file-inclusion-include.html'>C #include
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-uses-for-header-files.html'>C Header Files
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Flag
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-undef-directive.html'>C #undef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifdef-else-and-endif.html'>C #ifdef, #else, and #endif
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C #ifndef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-if-and-elif-directives.html'>C #if #elif
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Predefined
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-predefined-macros.html'>C Predefined Macros
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-line-error.html'>C #line #error
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-pragma.html'>C #pragma
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C preprocessor Conditional Compilation #ifndef</h1>
+<a class ='btn btn-outline-dark' href=c-preprocessor-conditional-compilation-ifdef-else-and-endif.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-if-and-elif-directives.html>Next</a><p>The <i style='color:blue'>#ifndef</i> directive can be used with #else and #endif in the same way that #ifdef is.
+
+</p><p>The #ifndef asks whether the following identifier is not defined; #ifndef is the 
+negative of #ifdef. 
+</p><h3>Usage 1
+</h3><p>This directive is often used to define a constant if it is not already defined. Here's an
+example:
+</p><div class='myCodeDiv'><button id='JQUKQ' class='myCopyButton' data-clipboard-target='#INOVB'>Copy</button><pre  id='INOVB' style='font-size:18px;' class='code'><span class='c'>/* arrays.h */</span>
+#ifndef SIZE
+   #define SIZE 100
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JQUKQ');clipboard.on('success', function(e) {$('#JQUKQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JQUKQ').text('error');});</script></div><p>Typically, this idiom is used to prevent multiple definitions of the same macro when you
+include several header files, each of which may contain a definition. 
+
+</p><p>In this case, the definition in the first header file included becomes the active definition and subsequent definitions in
+other header files are ignored.
+
+</p><h3>Usage 2
+
+</h3><p>Here's another use. Suppose we place the line
+</p><div class='myCodeDiv'><button id='ULYMF' class='myCopyButton' data-clipboard-target='#UVRMN'>Copy</button><pre  id='UVRMN' style='font-size:18px;' class='code'>#<span class='r'>include</span> <span class='q'>"arrays.h"</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ULYMF');clipboard.on('success', function(e) {$('#ULYMF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ULYMF').text('error');});</script></div><p>at the head of a file. This results in SIZE being defined as 100. But placing
+</p><div class='myCodeDiv'><button id='JSOJE' class='myCopyButton' data-clipboard-target='#JQJCW'>Copy</button><pre  id='JQJCW' style='font-size:18px;' class='code'>#define SIZE 10
+<span class='r'>#</span><span class='r'>include</span> <span class='q'>"arrays.h"</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JSOJE');clipboard.on('success', function(e) {$('#JSOJE').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JSOJE').text('error');});</script></div><p>at the head sets SIZE to 10. Here, SIZE is defined by the time the lines in arrays.h are
+processed, so the #define SIZE 100 line is skipped. 
+
+</p><p>You might do this, for example, to test a program using a smaller array size. 
+
+</p><p>When it works to your satisfaction, you can remove the
+#define SIZE 10 statement and recompile. That way, you never have to worry about 
+modifying the header array itself.
+
+</p><h3>Usage 3
+</h3><p>The #ifndef directive is commonly used to prevent multiple inclusions of a file. That is,
+header files usually are set up along the following lines:
+</p><div class='myCodeDiv'><button id='GZZIH' class='myCopyButton' data-clipboard-target='#IYKRM'>Copy</button><pre  id='IYKRM' style='font-size:18px;' class='code'><span class='c'>/* things.h */</span>
+#ifndef THINGS_H_
+     #define THINGS_H_
+     <span class='c'>/* rest of include file */</span>
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GZZIH');clipboard.on('success', function(e) {$('#GZZIH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GZZIH').text('error');});</script></div><p>Suppose this file somehow got included several times. The first time the preprocessor 
+encounters this include file, THINGS_H_ is undefined, so the program proceeds to define 
+THINGS_H_ and to process the rest of the file. The next time the preprocessor encounters this file,
+THINGS_H_ is defined, so the preprocessor skips the rest of the file.
+
+</p><h3>Why 
+</h3><p>Many include files include other files, so you may include a file explicitly that another include file has already
+included. 
+
+</p><p>Some items that appear in include files, such as declarations of structure types, can 
+appear only once in a file. 
+
+</p><p>The standard C header files use the #ifndef technique to avoid multiple inclusions. 
+
+</p><p>One problem is to make sure the identifier you are testing hasn't been defined else where. 
+
+</p><p>Vendors typically solve this by using the filename as the identifier, using uppercase, replacing periods with an underscore, 
+and using an underscore (or two underscores) as a prefix and a suffix. 
+
+</p><p>If you check your stdio.h header file, for example, you'll probably find something similar to this:
+</p><div class='myCodeDiv'><button id='ISHWJ' class='myCopyButton' data-clipboard-target='#WUSAR'>Copy</button><pre  id='WUSAR' style='font-size:18px;' class='code'>#ifndef _STDIO_H
+#define _STDIO_H
+<span class='c'>// contents of file</span>
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ISHWJ');clipboard.on('success', function(e) {$('#ISHWJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ISHWJ').text('error');});</script></div><p>You can do something similar. However, you should avoid using the underscore as a prefix
+because the standard says such usage is reserved. 
+
+</p><p>You wouldn't want to accidentally define a macro that conflicts with something in the standard header files. 
+
+</p><h3>Example
+
+</h3><p>The following code uses <i style='color:blue'>#ifndef</i> to provide multiple-inclusion protection for the header file.
+
+</p><p>The names.h Header File
+</p><div class='myCodeDiv'><button id='VJQAJ' class='myCopyButton' data-clipboard-target='#MAYOU'>Copy</button><pre  id='MAYOU' style='font-size:18px;' class='code'><span class='c'>// names.h --revised with include protection</span>
+
+#ifndef NAMES_H_
+#define NAMES_H_
+
+<span class='c'>// constants</span>
+#define SLEN 32
+
+<span class='c'>// structure declarations</span>
+<span class='r'>struct</span> names_st
+{
+    <span class='r'>char</span> first[SLEN];
+    <span class='r'>char</span> last[SLEN];
+};
+
+<span class='c'>// typedefs</span>
+<span class='r'>typedef</span> <span class='r'>struct</span> names_st names;
+
+<span class='c'>// function prototypes</span>
+<span class='r'>void</span> get_names(names *);
+<span class='r'>void</span> show_names(<span class='r'>const</span> names *);
+<span class='r'>char</span> * s_gets(<span class='r'>char</span> * st, <span class='r'>int</span> n);
+
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VJQAJ');clipboard.on('success', function(e) {$('#VJQAJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VJQAJ').text('error');});</script></div><p>You can test this header file with the program shown in the following. 
+
+</p><p>This program should work correctly when using the header file, 
+and it should fail to compile if you remove the #ifndef protection from the code above.
+
+</p><div class='myCodeDiv'><button id='LDUWT' class='myCopyButton' data-clipboard-target='#BVUSP'>Copy</button><pre  id='BVUSP' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> <span class='q'>"names.h"</span>
+<span class='r'>#</span><span class='r'>include</span> <span class='q'>"names.h"</span>   <span class='c'>// accidental second inclusion</span>
+
+<span class='r'>int</span> main()
+{
+    names winner = {<span class='q'>"Less"</span>, <span class='q'>"Ismoor"</span>};
+    printf(<span class='q'>"The winner is %s %s.\n"</span>, winner.first,
+            winner.last);
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LDUWT');clipboard.on('success', function(e) {$('#LDUWT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LDUWT').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-preprocessor-conditional-compilation-ifdef-else-and-endif.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-preprocessor-if-and-elif-directives.html>Next</a><h2>Related</h2><UL><LI><a href='c-uses-for-header-files.html'>C Uses for Header Files</a></LI><LI><a href='c-preprocessor-undef-directive.html'>C preprocessor #undef Directive</a></LI><LI><a href='c-preprocessor-conditional-compilation-ifdef-else-and-endif.html'>C preprocessor Conditional Compilation #ifdef, #else, and #endif</a></LI><LI><a href='c-preprocessor-if-and-elif-directives.html'>C preprocessor #if and #elif Directives</a></LI><LI><a href='c-predefined-macros.html'>C Predefined Macros</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-preprocessor-conditional-compilation-ifndef.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-use-bitwise-operator-to-do-encryption.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Use Bitwise Operator to do encryption</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Use Bitwise Operator to do encryption'>C Use Bitwise Operator to do encryption</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operators.html'>C Bitwise Operators
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-negation.html'>C Bitwise Negation
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-and.html'>C Bitwise AND: &amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-or.html'>C Bitwise OR: |
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-exclusive-or.html'>C Bitwise EXCLUSIVE OR: ^
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-left-shift-operator.html'>C Left Shift: &lt;&lt;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-right-shift-operator.html'>C Right Shift: >>
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-shift-operators-usage.html'>C Bit Shift Usage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-fields.html'>C Bit Fields
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-masks.html'>C Bit Masks
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operators-as-mask.html'>C Bitwise mask
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Bitwise Mask Multiple
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-on-setting-bits.html'>C Set Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-off-clearing-bits.html'>C Clear Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-toggling-bits.html'>C Toggling Bits
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-the-value-of-a-bit.html'>C Check Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-convert-numbers-to-a-binary-representation-using-bitwise-operator.html'>C Convert to binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-invert-bit.html'>C Invert Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-convert-letter-to-lowercase.html'>C Bitwise on char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html'>C Bitwise Swap
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Bitwise encryption
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Use Bitwise Operator to do encryption</h1>
+<a class ='btn btn-outline-dark' href=c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bitwise-operator-review-question-1.html>Next</a><p>Switching bits can be obtained by using the XOR operator (^). 
+
+</p><p>Bit switch if <b>XORing</b> with 1 (mask), and keeps its value if the mask is 0. 
+
+</p><p>This way, with bit 1 mask, we switch values without worrying about what the first bit's value is. 
+
+</p><p>Therefore, if we apply a mask to a string <b>XORing</b> then will become a different (hidden)  
+string, and later we can reverse their values by using the very same mask. 
+
+</p><p>It is a basic cipher to encrypt text: 
+
+</p><div class='myCodeDiv'><button id='XJNJA' class='myCopyButton' data-clipboard-target='#DFXQB'>Copy</button><pre  id='DFXQB' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+    <span class='r'>char</span> key = <span class='q'>'C'</span>; 
+    <span class='r'>char</span> sentence[] = <span class='q'>"This is a test from demo2s.com"</span>; 
+    <span class='c'>//function included in string.h, String's length </span>
+    <span class='r'>int</span> len = strlen(sentence);    
+
+    <span class='c'>//encoding message (switching bits con XOR) </span>
+    printf(<span class='q'>"encoded message:\n"</span>); 
+    <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; len; i++) 
+    { 
+        sentence[i] = sentence[i] ^ key; 
+        printf(<span class='q'>"%c"</span>, sentence[i]); 
+    } 
+    printf(<span class='q'>"\n\n"</span>); 
+
+    <span class='c'>//decoding message </span>
+    printf(<span class='q'>"decoded message:\n"</span>); 
+    <span class='r'>for</span> (<span class='r'>int</span> i = 0; i &lt; len; i++) 
+    { 
+        sentence[i] = sentence[i] ^ key; 
+        printf(<span class='q'>"%c"</span>, sentence[i]); 
+    } 
+
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XJNJA');clipboard.on('success', function(e) {$('#XJNJA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XJNJA').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-bitwise-operator-review-question-1.html>Next</a><h2>Related</h2><UL><LI><a href='c-use-bitwise-operator-to-invert-bit.html'>C Use bitwise operator to invert bit</a></LI><LI><a href='c-use-bitwise-operator-to-convert-letter-to-lowercase.html'>C Use Bitwise Operator to convert letter to lowercase</a></LI><LI><a href='c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html'>C Use bitwise operator to swap two value without using a third value</a></LI><LI><a href='c-bitwise-operator-review-question-1.html'>C Bitwise operator review question 1</a></LI><LI><a href='c-bitwise-operator-exercise-1.html'>C Bitwise Operator Exercise 1</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-use-bitwise-operator-to-do-encryption.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

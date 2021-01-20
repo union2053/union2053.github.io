@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/5905822/function-to-find-the-nth-digit-of-pi by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Function to find the nth digit of Pi | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Function to find the nth digit of Pi | C Language Knowledge Base">
+        <title>[SOLVED] Function to find the nth digit of Pi | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="function-to-find-the-nth-digit-of-pi">Function to find the nth digit of Pi</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/pi.html">pi</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have always wanted to find an algorithm that did this. I do not care how slow it is, just as long as it can return the nth digit of Pi:</p>
+
+<p>ex:</p>
+
+<pre><code>size_t piAt(long long int n)
+{
+}
+</code></pre>
+
+<p>Preferably, not using an infinite series.</p>
+
+<p>If anyone has a function or class that does this, in C or C++ I'd really be interested in seeing it. </p>
+
+<p>Thanks</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/146780/jmasterx" target="_blank"><span itemprop="name">jmasterx</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">4</div>
+                                    <div itemprop="dateCreated">5/6/2011 1:13:36 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><a href="http://www.math.hmc.edu/funfacts/ffiles/20010.5.shtml" rel="noreferrer">This remarkable solution</a> shows  how to compute the N<sup>th</sup> digit of π in O(N) time and O(log·N) space, and to do so without having to compute all the digits leading up to it.</p>
+
+<p>Oh, and it’s in hex.  </p>
+
+<p>If you don’t want to do that, you can do this from the shell easily enough:</p>
+
+<pre><code>% perl -Mbignum=bpi -wle 'print bpi(20)'
+3.1415926535897932385
+
+% perl -Mbignum=bpi -wle 'print bpi(50)'
+3.1415926535897932384626433832795028841971693993751
+
+% perl -Mbignum=bpi -wle 'print bpi(200)'
+3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303820
+
+% perl -Mbignum=bpi -wle 'print bpi(1000)'
+3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587006606315588174881520920962829254091715364367892590360011330530548820466521384146951941511609433057270365759591953092186117381932611793105118548074462379962749567351885752724891227938183011949129833673362440656643086021394946395224737190702179860943702770539217176293176752384674818467669405132000568127145263560827785771342757789609173637178721468440901224953430146549585371050792279689258923542019956112129021960864034418159813629774771309960518707211349999998372978049951059731732816096318595024459455346908302642522308253344685035261931188171010003137838752886587533208381420617177669147303598253490428755468731159562863882353787593751957781857780532171226806613001927876611195909216420199
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/471272/tchrist" target="_blank"><span itemprop="name">tchrist</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/5905822/function-to-find-the-nth-digit-of-pi#answer-0</div>
+                                            <div itemprop="upvoteCount">9</div>
+                                            <div itemprop="dateCreated">5/6/2011 1:44:20 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Here is a solution of Simon Plouffe coded by Fabrice Bellard:</p>
+
+<pre><code>   /*
+     * Computation of the n'th decimal digit of \pi with very little memory.
+     * Written by Fabrice Bellard on January 8, 1997.
+     * 
+     * We use a slightly modified version of the method described by Simon
+     * Plouffe in "On the Computation of the n'th decimal digit of various
+     * transcendental numbers" (November 1996). We have modified the algorithm
+     * to get a running time of O(n^2) instead of O(n^3log(n)^3).
+     * 
+     * This program uses mostly integer arithmetic. It may be slow on some
+     * hardwares where integer multiplications and divisons must be done
+     * by software. We have supposed that 'int' has a size of 32 bits. If
+     * your compiler supports 'long long' integers of 64 bits, you may use
+     * the integer version of 'mul_mod' (see HAS_LONG_LONG).  
+     */
+
+    #include &lt;stdlib.h&gt;
+    #include &lt;stdio.h&gt;
+    #include &lt;math.h&gt;
+
+/* uncomment the following line to use 'long long' integers */
+/* #define HAS_LONG_LONG */
+
+#ifdef HAS_LONG_LONG
+#define mul_mod(a,b,m) (( (long long) (a) * (long long) (b) ) % (m))
+#else
+#define mul_mod(a,b,m) fmod( (double) a * (double) b, m)
+#endif
+
+/* return the inverse of x mod y */
+int inv_mod(int x, int y)
+{
+    int q, u, v, a, c, t;
+
+    u = x;
+    v = y;
+    c = 1;
+    a = 0;
+    do {
+    q = v / u;
+
+    t = c;
+    c = a - q * c;
+    a = t;
+
+    t = u;
+    u = v - q * u;
+    v = t;
+    } while (u != 0);
+    a = a % y;
+    if (a &lt; 0)
+    a = y + a;
+    return a;
+}
+
+/* return (a^b) mod m */
+int pow_mod(int a, int b, int m)
+{
+    int r, aa;
+
+    r = 1;
+    aa = a;
+    while (1) {
+    if (b &amp; 1)
+        r = mul_mod(r, aa, m);
+    b = b &gt;&gt; 1;
+    if (b == 0)
+        break;
+    aa = mul_mod(aa, aa, m);
+    }
+    return r;
+}
+
+/* return true if n is prime */
+int is_prime(int n)
+{
+    int r, i;
+    if ((n % 2) == 0)
+    return 0;
+
+    r = (int) (sqrt(n));
+    for (i = 3; i &lt;= r; i += 2)
+    if ((n % i) == 0)
+        return 0;
+    return 1;
+}
+
+/* return the prime number immediatly after n */
+int next_prime(int n)
+{
+    do {
+    n++;
+    } while (!is_prime(n));
+    return n;
+}
+
+int main(int argc, char *argv[])
+{
+    int av, a, vmax, N, n, num, den, k, kq, kq2, t, v, s, i;
+    double sum;
+
+    if (argc &lt; 2 || (n = atoi(argv[1])) &lt;= 0) {
+    printf("This program computes the n'th decimal digit of \\pi\n"
+           "usage: pi n , where n is the digit you want\n");
+    exit(1);
+    }
+
+    N = (int) ((n + 20) * log(10) / log(2));
+
+    sum = 0;
+
+    for (a = 3; a &lt;= (2 * N); a = next_prime(a)) {
+
+    vmax = (int) (log(2 * N) / log(a));
+    av = 1;
+    for (i = 0; i &lt; vmax; i++)
+        av = av * a;
+
+    s = 0;
+    num = 1;
+    den = 1;
+    v = 0;
+    kq = 1;
+    kq2 = 1;
+
+    for (k = 1; k &lt;= N; k++) {
+
+        t = k;
+        if (kq &gt;= a) {
+        do {
+            t = t / a;
+            v--;
+        } while ((t % a) == 0);
+        kq = 0;
+        }
+        kq++;
+        num = mul_mod(num, t, av);
+
+        t = (2 * k - 1);
+        if (kq2 &gt;= a) {
+        if (kq2 == a) {
+            do {
+            t = t / a;
+            v++;
+            } while ((t % a) == 0);
+        }
+        kq2 -= a;
+        }
+        den = mul_mod(den, t, av);
+        kq2 += 2;
+
+        if (v &gt; 0) {
+        t = inv_mod(den, av);
+        t = mul_mod(t, num, av);
+        t = mul_mod(t, k, av);
+        for (i = v; i &lt; vmax; i++)
+            t = mul_mod(t, a, av);
+        s += t;
+        if (s &gt;= av)
+            s -= av;
+        }
+
+    }
+
+    t = pow_mod(10, n - 1, av);
+    s = mul_mod(s, t, av);
+    sum = fmod(sum + (double) s / (double) av, 1.0);
+    }
+    printf("Decimal digits of pi at position %d: %09d\n", n,
+       (int) (sum * 1e9));
+    return 0;
+}
+</code></pre>
+
+<p>And it works:</p>
+
+<pre><code>C:\tcc&gt;tcc -I libtcc libtcc/libtcc.def -run examples/pi.c 1
+Decimal digits of pi at position 1: 141592653
+
+C:\tcc&gt;tcc -I libtcc libtcc/libtcc.def -run examples/pi.c 1000
+Decimal digits of pi at position 1000: 938095257
+</code></pre>
+
+<p><a href="http://bellard.org/pi/pi_n2/pi_n2.html" rel="noreferrer">http://bellard.org/pi/pi_n2/pi_n2.html</a></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/3969596/lehs" target="_blank">Lehs</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/5905822" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/5905822/function-to-find-the-nth-digit-of-pi by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:47 GMT -->
+</html>

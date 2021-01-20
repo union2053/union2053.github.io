@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1083142/what-s-the-correct-way-to-use-printf-to-print-a-clock-t- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:38:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What’s the correct way to use printf to print a clock_t? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What’s the correct way to use printf to print a clock_t? | C Language Knowledge Base">
+        <title>[SOLVED] What’s the correct way to use printf to print a clock_t? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-s-the-correct-way-to-use-printf-to-print-a-clock-t-">What’s the correct way to use printf to print a clock_t?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/clock.html">clock</a></span>
+                        <span class="tag-item"><a href="../tag/io.html">io</a></span>
+                        <span class="tag-item"><a href="../tag/printf.html">printf</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm currently using a explicit cast to <code>unsigned long long</code> and using <code>%llu</code> to print it, but since <code>size_t</code> has the <code>%z</code> specifier, why doesn't <code>clock_t</code> have one?</p>
+
+<p>There isn't even a macro for it. Maybe I can assume that on an x64 system (OS and CPU) <code>size_t</code> is 8 bytes in length (and even in this case, they have provided <code>%z</code>), but what about <code>clock_t</code>?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/131326/spidey" target="_blank"><span itemprop="name">Spidey</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">29</div>
+                                    <div itemprop="dateCreated">12/15/2012 5:30:53 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There seems to be no perfect way. The root of the problem is that <code>clock_t</code> can be either integer or floating point.</p>
+
+<p><strong>clock_t can be a floating point type</strong></p>
+
+<p>As <a href="https://stackoverflow.com/a/1083153/895245">Bastien Léonard mentions</a> for POSIX (go upvote him), <a href="http://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf" rel="noreferrer">C99 N1256 draft</a> 7.23.1/3 also says that:</p>
+
+<blockquote>
+  <p>[clock_t is] arithmetic types capable of representing times</p>
+</blockquote>
+
+<p>and 6.2.5/18:</p>
+
+<blockquote>
+  <p>Integer and floating types are collectively called arithmetic types.</p>
+</blockquote>
+
+<p>and the standard defines arithmetic type as either integers or floating point types.</p>
+
+<p><strong>If you will divide by CLOCKS_PER_SEC, use long double</strong></p>
+
+<p>The return value of <code>clock()</code> is implementation defined, and the only way to get standard meaning out of it is to divide by <code>CLOCKS_PER_SEC</code> to find the number of seconds:</p>
+
+<pre><code>clock_t t0 = clock();
+/* Work. */
+clock_t t1 = clock();
+printf("%Lf", (long double)(t1 - t0));
+</code></pre>
+
+<p>This is good enough, although not perfect, for the two following reasons:</p>
+
+<ul>
+<li><p>there seems to be no analogue to <code>intmax_t</code> for floating point types: <a href="https://stackoverflow.com/questions/17189423/how-to-get-the-largest-precision-floating-point-data-type-of-implemenation-and-i">How to get the largest precision floating point data type of implemenation and its printf specifier?</a> So if a larger floating point type comes out tomorrow, it could be used and break your implementation.</p></li>
+<li><p>if <code>clock_t</code> is an integer, the cast to float is well defined to use the nearest float possible. You may lose precision, but it would not matter much compared to the absolute value, and would only happen for huge amounts of time, e.g. <code>long int</code> in x86 is the 80-bit float with 64-bit significant, which is millions of years in seconds.</p></li>
+</ul>
+
+<p><a href="https://stackoverflow.com/a/1083150/895245">Go upvote lemonad</a> who said something similar.</p>
+
+<p><strong>If you suppose it is an integer, use %ju and uintmax_t</strong></p>
+
+<p>Although <code>unsigned long long</code> is currently the largest standard integer type possible:</p>
+
+<ul>
+<li>a larger one could come out in the future</li>
+<li>the standard already <a href="https://stackoverflow.com/a/30322474/895245">explicitly allows larger implementation defined types</a> (kudos to @FUZxxl) and <code>clock_t</code> could be one of them</li>
+</ul>
+
+<p>so it is best to typecast to the largest unsigned integer type possible:</p>
+
+<pre><code>#include &lt;stdint.h&gt;
+
+printf("%ju", (uintmax_t)(clock_t)1);
+</code></pre>
+
+<p><code>uintmax_t</code> is guaranteed to have the size of the largest possible integer size on the machine.</p>
+
+<p><code>uintmax_t</code> and its printf specifier <code>%ju</code> were introduced in c99 and gcc for example implements them.</p>
+
+<p>As a bonus, this solves once and for all the question of how to reliably <code>printf</code> integer types (which is unfortunately not the necessarily the case for <code>clock_t</code>).</p>
+
+<p>What could go wrong if it was a double:</p>
+
+<ul>
+<li>if too large to fit into the integer, undefined behavior</li>
+<li>much smaller than 1, will get rounded to 0 and you won't see anything</li>
+</ul>
+
+<p>Since those consequences are much harsher than the integer to float conversion, using float is likely a better idea.</p>
+
+<p><strong>On glibc 2.21 it is an integer</strong></p>
+
+<p>The manual says that using <code>double</code> is a better idea:</p>
+
+<blockquote>
+  <p>On GNU/Linux and GNU/Hurd systems, clock_t is equivalent to long int and CLOCKS_PER_SEC is an integer value. But in other systems, both clock_t and the macro CLOCKS_PER_SEC can be either integer or floating-point types. Casting CPU time values to double, as in the example above, makes sure that operations such as arithmetic and printing work properly and consistently no matter what the underlying representation is. </p>
+</blockquote>
+
+<p>In glibc 2.21:</p>
+
+<ul>
+<li><p><code>clock_t</code> is <code>long int</code>:</p>
+
+<ul>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=time/time.h;h=87b9ba1596871eb45452cc04cf061cd4de4cc743;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l59" rel="noreferrer">time/time.h</a> sets it to <code>__clock_t</code></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=bits/types.h;h=b1c7ebca39e7b855719086a4b366e2d056efc0e3;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l135" rel="noreferrer">bits/types.h</a> sets it to <code>__CLOCK_T_TYPE</code></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=bits/typesizes.h;h=0c1e39c6a093e0482765815be9faddeb13c92ebb;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l49" rel="noreferrer">bits/typesizes.h</a> sets it to <code>__SLONGWORD_TYPE</code></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=bits/types.h;h=b1c7ebca39e7b855719086a4b366e2d056efc0e3;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l93" rel="noreferrer">bits/types.h</a> sets it to <code>long int</code></li>
+</ul></li>
+<li><p><code>clock()</code> in Linux is implemented with <code>sys_clock_gettime</code>:</p>
+
+<ul>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/sysv/linux/clock.c;h=e568bf354316a5299ad7a3292befc38dede10fbf;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l34" rel="noreferrer">sysdeps/unix/sysv/linux/clock.c</a> calls <code>__clock_gettime</code></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/clock_gettime.c;h=29753687dd97ab5a41572bf45343cf37eb7a485a;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l115" rel="noreferrer">sysdeps/unix/clock_gettime.c</a> calls <code>SYSDEP_GETTIME_CPU</code></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/unix/sysv/linux/clock_gettime.c;h=57db8ee4d53cd437b3f121b7896f7eb8da0d32dd;hb=4e42b5b8f89f0e288e68be7ad70f9525aebc2cff#l55" rel="noreferrer">sysdeps/unix/sysv/linux/clock_gettime.c</a> calls <code>SYSCALL_GETTIME</code> which finally makes an inline system call</li>
+</ul>
+
+<p><code>man clock_gettime</code>, tells us that it returns a <code>struct timespec</code> which in GCC contains <code>long int</code> fields.</p>
+
+<p>So the underlying implementation really returns integers.</p></li>
+</ul>
+
+<p><strong>See also</strong></p>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/24844970/printing-type-of-unknown-size">How to print types of unknown size like ino_t?</a></li>
+<li><a href="https://stackoverflow.com/questions/1401526/how-to-use-printf-to-display-off-t-nlink-t-size-t-and-typdedefs">How to use printf to display off_t, nlink_t, size_t and other special types?</a></li>
+</ul>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/895245/ciro-santilli-------996icu----" target="_blank"><span itemprop="name">Ciro Santilli 新疆改造中心996ICU六四事件</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1083142/what-s-the-correct-way-to-use-printf-to-print-a-clock-t-#answer-0</div>
+                                            <div itemprop="upvoteCount">26</div>
+                                            <div itemprop="dateCreated">5/23/2017 12:02:22 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>As far as I know, the way you're doing is the best. Except that <code>clock_t</code> may be a real type:</p>
+
+<blockquote>
+  <p><code>time_t</code> and <code>clock_t</code> shall be integer or real-floating types.</p>
+</blockquote>
+
+<p><a href="http://www.opengroup.org/onlinepubs/009695399/basedefs/sys/types.h.html" rel="noreferrer">http://www.opengroup.org/onlinepubs/009695399/basedefs/sys/types.h.html</a></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/88851/bastien-leonard" target="_blank">Bastien Léonard</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1083142" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1083142/what-s-the-correct-way-to-use-printf-to-print-a-clock-t- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:38:24 GMT -->
+</html>

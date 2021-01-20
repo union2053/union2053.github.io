@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-function-example-converts-an-integer-to-a-string.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C function example, Converts an integer to a string</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C function example, Converts an integer to a string'>C function example, Converts an integer to a string</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-syntax.html'>C function syntax
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-finds-the-lesser-of-two-values.html'>C function intro demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-prototype-declaration.html'>C prototype declaration
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-block-variable-shadow-example.html'>C Variable shadow example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-keeping-track-within-a-function.html'>C function Static Variables 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sharing-variables-between-functions-using-global-variables.html'>C function global variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-name.html'>C function name
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-the-return-value-type-for-function.html'>C function return
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Parameter
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameters.html'>C Function Parameters 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-value-mechanism.html'>C Parameter Pass by Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-address-mechanism.html'>C Parameter Pass by Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-protecting-array-contents-with-const.html'>C Parameter Protecting
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-const-parameters.html'>C Parameter const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-declaring-array-parameters.html'>C Parameter Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-using-pointer-parameters.html'>C Parameter Pointer 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-and-multidimensional-arrays.html'>C Parameter Array 2D
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-with-a-variable-number-of-arguments.html'>C function variable argument length
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Recursion
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion.html'>C function recursion
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-to-calculate-factorials.html'>C function recursion factorial
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-prints-the-binary-equivalent-of-an-integer.html'>C function recursion binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursive-to-calculate-power.html'>C function recursion power
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-a-pointer-to-a-function.html'>C function pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-pointers-to-functions.html'>C Pointer Function Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-functions-as-arguments.html'>C Function Pointer Argument
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-function-as-parameter.html'>C function as parameter
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-to-raise-a-number-to-an-integer-power.html'>C Raise to Power
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-an-average-using-functions.html'>C function calculate average
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C convert int to string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-split-string-into-a-list-of-words.html'>C split string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-main-function.html'>C function  main() 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-3.html'>C exercise 3
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C function example, Converts an integer to a string</h1>
+<a class ='btn btn-outline-dark' href=c-calculating-an-average-using-functions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-split-string-into-a-list-of-words.html>Next</a><p>The following code defines a function that will return a string representation of an integer that is  
+passed as the argument. 
+
+</p><p>For example, if the argument is 25, the function will return "25". 
+
+</p><p>If the argument is -98, the function will return  "-98". 
+
+</p><div class='myCodeDiv'><button id='OXJBV' class='myCopyButton' data-clipboard-target='#XLHEA'>Copy</button><pre  id='XLHEA' style='font-size:18px;' class='code'><span class='c'>// A function to return a string representation of an integer</span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;stdbool.h&gt;
+
+#define STR_LEN 6         <span class='c'>// Length of string to store value string</span>
+
+<span class='c'>// Converts an integer to a string. Caller must allocate string array.    </span>
+<span class='c'>// Function returns the string to allow use of the function in an expression.</span>
+<span class='r'>char</span>* itoa(<span class='r'>int</span> n, <span class='r'>char</span> str[], size_t size)
+{
+  size_t i = 0;           <span class='c'>// character count</span>
+  <span class='r'>bool</span> negative = n &lt; 0;  <span class='c'>// Indicates negative integer </span>
+  <span class='r'>int</span> length = 0;         <span class='c'>// Length of string</span>
+  <span class='r'>char</span> temp = <span class='q'>'0'</span>;        <span class='c'>// Temporary storage</span>
+
+  <span class='r'>if</span>(negative)             <span class='c'>// If it's negative...</span>
+    n = -n;                <span class='c'>// ...make it positive</span>
+
+  <span class='c'>// Generate digit characters in reverse order</span>
+  <span class='r'>do</span><span style='color:#b9a9aa'>/</span><span style='color:#9a99ba'>*</span><span style='color:#9bb99a'>f</span><span style='color:#9a9aaa'>r</span><span style='color:#abab99'>o</span><span style='color:#9b999a'>m</span><span style='color:#aabbab'> </span><span style='color:#99a9aa'>w</span><span style='color:#bb9abb'> </span><span style='color:#a9baba'>w</span><span style='color:#b9ab99'> </span><span style='color:#aaa99b'> </span><span style='color:#a9bbaa'>w</span><span style='color:#9aba9b'> </span><span style='color:#b9b999'> </span><span style='color:#a9b9ba'>.</span><span style='color:#b9bb9a'> </span><span style='color:#b99b9a'> </span><span style='color:#a9999b'>d</span><span style='color:#abbbab'> </span><span style='color:#999a99'>e</span><span style='color:#9ab9b9'>m</span><span style='color:#bbbbab'>o</span><span style='color:#9b9ba9'>2</span><span style='color:#bbaba9'>s</span><span style='color:#a9b99a'> </span><span style='color:#9aa9ba'> </span><span style='color:#aa999b'>.</span><span style='color:#a9abba'> </span><span style='color:#ba9bb9'> </span><span style='color:#9b9aaa'>c</span><span style='color:#9ba9ba'> </span><span style='color:#99a9aa'> </span><span style='color:#a99bba'>o</span><span style='color:#a9baa9'> </span><span style='color:#bb9a9a'> </span><span style='color:#bbb99b'>m</span><span style='color:#babbba'>*</span><span style='color:#bbabab'>/</span>
+  {
+    <span class='r'>if</span>(size == i + 1 + (negative ? 1 : 0))
+    {
+      printf(<span class='q'>"String not long enough.\n"</span>);
+      <span class='r'>return</span> NULL;
+    }
+    str[i++] = <span class='q'>'0'</span> + n%10;<span class='c'>// Create a rightmost digit</span>
+    n /= 10;              <span class='c'>// Remove the digit</span>
+  }<span class='r'>while</span>(n &gt; 0);          <span class='c'>// Go again if there's more digits</span>
+
+  <span class='r'>if</span>(negative)            <span class='c'>// If it was negative...</span>
+    str[i++] = <span class='q'>'-'</span>;       <span class='c'>// ...append minus</span>
+
+  str[i] = <span class='q'>'\0'</span>;          <span class='c'>// Append terminator</span>
+  length = i;             <span class='c'>// Save the length including null character</span>
+
+  <span class='c'>// Now reverse the string in place by switching first and last,</span>
+  <span class='c'>// second and last but one, third and last but two, etc.</span>
+  <span class='r'>for</span>(i = 0 ; i &lt; length/2 ; ++i)
+  {
+    temp = str[i];
+    str[i] = str[length - i - 1];
+    str[length - i - 1] = temp;
+  }
+  <span class='r'>return</span> str;                                    <span class='c'>// Return the string</span>
+}
+
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+   <span class='r'>char</span> str[STR_LEN];     <span class='c'>// Stores string representation of an integer</span>
+   <span class='r'>long</span> testdata[] = { 3320L, -9L, 120L, -1321L, 9299L, -345L, 12345L};
+
+   <span class='r'>for</span> (<span class='r'>int</span> i = 0 ; i &lt; <span class='r'>sizeof</span> testdata/<span class='r'>sizeof</span>(<span class='r'>long</span>) ; ++i)
+   {
+     <span class='r'>if</span>(itoa(testdata[i],str, <span class='r'>sizeof</span>(str)))
+       printf(<span class='q'>"Integer value is %d, string is %s\n"</span>, testdata[i], str);
+   }
+
+   <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OXJBV');clipboard.on('success', function(e) {$('#OXJBV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OXJBV').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-calculating-an-average-using-functions.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-split-string-into-a-list-of-words.html>Next</a><h2>Related</h2><UL><LI><a href='c-use-function-as-parameter.html'>C Use function as parameter</a></LI><LI><a href='c-function-to-raise-a-number-to-an-integer-power.html'>C Function to raise a number to an integer power</a></LI><LI><a href='c-calculating-an-average-using-functions.html'>C Calculating an average using functions</a></LI><LI><a href='c-function-split-string-into-a-list-of-words.html'>C function split string into a list of words</a></LI><LI><a href='c-main-function.html'>C main() Function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-function-example-converts-an-integer-to-a-string.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

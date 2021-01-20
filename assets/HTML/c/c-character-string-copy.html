@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-copy.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Character String copy</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Character String copy'>C Character String copy</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-char-string-introduction.html'>C Char String Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-literals.html'>C Character String Literals
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-arrays-and-initialization.html'>C String Initialization
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-character-strings.html'>C Arrays of Character Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-strings.html'>C Pointers and Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-null-pointer-vs-null-character.html'>C NULL vs Null
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-strings.html'>C String Arrays   
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-count-strings-in-a-two-dimensional-array-and-the-length-of-each-stri.html'>C Array String Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Input Output
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets.html'>C gets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-fgets.html'>C fgets()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-via-gets-s.html'>C gets_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-your-own-string-reading-function.html'>C Your own String input
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-read-character-string-from-keyboard-using-scanf-function.html'>C scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-puts-function.html'>C puts()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-fputs-function.html'>C fputs()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-output-with-printf-function.html'>C printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-create-function-to-print-output-string.html'>C Your own String output
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operation
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-out-the-length-of-a-string-excluding-the-null-character.html'>C String Length
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-shorten-character-string.html'>C shorten string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-two-string-with-strcat-function.html'>C Join String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compare-character-string.html'>C Compare String
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Copy String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-format-with-sprintf-function.html'>C sprintf() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Sort String
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-convert-to-upper-case.html'>C Uppercase
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-count-punctuation-characters.html'>C punctuation characters
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-command-line-arguments.html'>C Command-Line Arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-string-to-number-conversions.html'>C String Convert to Number
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-character.html'>C String search char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-searching-a-string-for-a-substring.html'>C String search String
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-1.html'>C exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-3.html'>C exercise 3
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-character-string-exercise-4.html'>C exercise 4
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Secure functions
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-for-c11-c17-support-for-secure-string-processing-functions.html'>C Secure String function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-length-of-a-string-using-strnlen-s-function.html'>C strnlen_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-copying-strings-with-strcpy-s.html'>C strcpy_s
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-concatenating-strings-using-strcat-s.html'>C strcat_s()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-join-four-strings-into-a-single-string-using-strnlen-s-and-strncat.html'>C strncat_s() Example
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Character String copy</h1>
+<a class ='btn btn-outline-dark' href=c-compare-character-string.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-string-format-with-sprintf-function.html>Next</a><h3>strcpy() and strncpy() Functions
+
+</h3><p>If <i style='color:blue'>pts1</i> and <i style='color:blue'>pts2</i> are both pointers to strings, the expression 
+</p><div class='myCodeDiv'><button id='ARMVZ' class='myCopyButton' data-clipboard-target='#XWSVP'>Copy</button><pre  id='XWSVP' style='font-size:18px;' class='code'>pts2 = pts1;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ARMVZ');clipboard.on('success', function(e) {$('#ARMVZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ARMVZ').text('error');});</script></div><p>copies only the address of a string, not the string itself. 
+
+</p><p>To copy a string, use the <i style='color:blue'>strcpy</i>() function. 
+
+</p><p>The <i style='color:blue'>strcpy</i>() function is the string equivalent of the assignment operator.
+</p><div class='myCodeDiv'><button id='DVMTL' class='myCopyButton' data-clipboard-target='#WDLOC'>Copy</button><pre  id='WDLOC' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt; <span class='c'>// declares strcpy()</span>
+#define SIZE 40
+#define LIM 5
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> qwords[LIM][SIZE];
+    <span class='r'>char</span> temp[SIZE] = <span class='q'>"test test test"</span>;
+    <span class='r'>int</span> i = 0;
+
+    strcpy(qwords[0], temp);
+    strcpy(qwords[1], temp);
+    strcpy(qwords[2], temp);
+    strcpy(qwords[3], temp);
+    strcpy(qwords[4], temp);
+    
+    <span class='r'>for</span> (i = 0; i &lt; LIM; i++){
+        puts(qwords[i]);
+    }
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DVMTL');clipboard.on('success', function(e) {$('#DVMTL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DVMTL').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p><i style='color:blue'>strcpy</i>() function is type char *. 
+
+</p><p>It returns the value of its first argument-the address of a character. 
+
+</p><p>The first argument need not point to the beginning of an array; this lets you copy 
+just part of an array. 
+
+</p><div class='myCodeDiv'><button id='JIEDY' class='myCopyButton' data-clipboard-target='#EWGVQ'>Copy</button><pre  id='EWGVQ' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt;    <span class='c'>// declares strcpy()</span>
+#define WORDS <span class='q'>"demo"</span>
+#define SIZE 40
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>const</span> <span class='r'>char</span> * orig = WORDS;
+    <span class='r'>char</span> copy[SIZE] = <span class='q'>"This is a test from demo2s.com"</span>;
+    <span class='r'>char</span> * ps;
+
+    puts(orig);
+    puts(copy);
+    ps = strcpy(copy + 7, orig);
+    puts(copy);
+    puts(ps);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JIEDY');clipboard.on('success', function(e) {$('#JIEDY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JIEDY').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><p><i style='color:blue'>strcpy</i>() copies the null character from the source string. 
+
+</p><h3>strncpy()
+
+</h3><p><i style='color:blue'>strcpy</i>() function does not check to see whether the source string actually fits in the 
+target string. 
+
+</p><p>The safer way to copy strings is to use <i style='color:blue'>strncpy</i>().
+
+</p><p>It takes a third argument, which is the maximum number of characters to copy. 
+
+</p><p>The following code uses <i style='color:blue'>strncpy</i>() instead of <i style='color:blue'>strcpy</i>(). 
+
+</p><div class='myCodeDiv'><button id='FOLAS' class='myCopyButton' data-clipboard-target='#UOSQS'>Copy</button><pre  id='UOSQS' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>#</span><span class='r'>include</span> &lt;string.h&gt; <span class='c'>/* declares strncpy() */</span>
+#define SIZE 40
+#define TARGSIZE 7
+#define LIM 5
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>char</span> qwords[LIM][TARGSIZE];
+    <span class='r'>char</span> temp[SIZE]=<span class='q'>"this is a test from demo2s.com"</span>;
+    <span class='r'>int</span> i = 0;
+
+    strncpy(qwords[0], temp, TARGSIZE - 1);
+    strncpy(qwords[1], temp, TARGSIZE - 1);
+    strncpy(qwords[2], temp, TARGSIZE - 1);
+    strncpy(qwords[3], temp, TARGSIZE - 1);
+    strncpy(qwords[4], temp, TARGSIZE - 1);
+    
+    qwords[i][TARGSIZE - 1] = <span class='q'>'\0'</span>;
+
+    <span class='r'>for</span> (i = 0; i &lt; LIM; i++)
+        puts(qwords[i]);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FOLAS');clipboard.on('success', function(e) {$('#FOLAS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FOLAS').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-compare-character-string.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-character-string-format-with-sprintf-function.html>Next</a><h2>Related</h2><UL><LI><a href='c-shorten-character-string.html'>C shorten character string</a></LI><LI><a href='c-join-two-string-with-strcat-function.html'>C Join two string with strcat() Function</a></LI><LI><a href='c-compare-character-string.html'>C Compare character string</a></LI><LI><a href='c-character-string-format-with-sprintf-function.html'>C Character String format with sprintf() Function</a></LI><LI><a href='c-character-string-sort-using-selection-sort-algorithm.html'>C Character String sort using selection sort algorithm</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-character-string-copy.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

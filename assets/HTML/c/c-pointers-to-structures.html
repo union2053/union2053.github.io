@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-to-structures.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Pointers to Structures</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Pointers to Structures'>C Pointers to Structures</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-definition.html'>C Structure Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-defining-a-structure-variable.html'>C Structure Variable
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-structure.html'>C Structure Initialize 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-gaining-access-to-structure-members.html'>C Structure Members
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializers-for-structures.html'>C Structure Initializers 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-structures.html'>C Structure Array
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-nested-structures.html'>C Nested Structures
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Structure Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-passing-structure-members-to-a-function.html'>C Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-structures-by-using-pointers.html'>C struct update via pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-returns-structures-from-a-function.html'>C return structure
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compound-literals-and-structures-c99.html'>C Structure Compound Literal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-anonymous-structures-c11.html'>C Anonymous Structures
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-using-an-array-of-structures.html'>C Array Structure Parameter
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-saving-the-structure-contents-in-a-file.html'>C Save Structure 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-structure-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Pointers to Structures</h1>
+<a class ='btn btn-outline-dark' href=c-nested-structures.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-passing-structure-members-to-a-function.html>Next</a><p>We can use pointers on structures. 
+
+</p><p>The pointers to structures are often easier to manipulate than structures themselves. 
+
+</p><p>Passing a pointer to structure often is more efficient than passing structure itself. 
+
+</p><h3>Example
+
+</h3><p>The next short example shows how to define a pointer to a structure and how to use it to 
+access the members of a structure.
+
+</p><div class='myCodeDiv'><button id='GBKDW' class='myCopyButton' data-clipboard-target='#LLBPG'>Copy</button><pre  id='LLBPG' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define LEN 20
+
+<span class='r'>struct</span> names {
+    <span class='r'>char</span> first[LEN];
+    <span class='r'>char</span> last[LEN];
+};
+
+<span class='r'>struct</span> guy {
+    <span class='r'>struct</span> names handle;
+    <span class='r'>char</span> favfood[LEN];
+    <span class='r'>char</span> job[LEN];
+    <span class='r'>float</span> income;
+};
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>struct</span> guy fellow[2] = {
+        {{ <span class='q'>"F1"</span>, <span class='q'>"F2"</span>},
+          <span class='q'>"F3"</span>,
+          <span class='q'>"F4"</span>,
+          6.00
+        },
+        {{<span class='q'>"A1"</span>, <span class='q'>"A2"</span>},
+          <span class='q'>"A3"</span>,
+          <span class='q'>"A4"</span>,
+          2.00
+        }
+    };
+    <span class='r'>struct</span> guy * him;     <span class='c'>/* here is a pointer to a structure */</span>
+
+    printf(<span class='q'>"address #1: %p #2: %p\n"</span>, &amp;fellow[0], &amp;fellow[1]);
+    him = &amp;fellow[0];    <span class='c'>/* tell the pointer where to point */</span>
+    printf(<span class='q'>"pointer #1: %p #2: %p\n"</span>, him, him + 1);
+    printf(<span class='q'>"him-&gt;income is $%.2f: (*him).income is $%.2f\n"</span>,
+         him-&gt;income, (*him).income);
+    him++;               <span class='c'>/* point to the next structure      */</span>
+    printf(<span class='q'>"him-&gt;favfood is %s: him-&gt;handle.last is %s\n"</span>,
+         him-&gt;favfood, him-&gt;handle.last);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GBKDW');clipboard.on('success', function(e) {$('#GBKDW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GBKDW').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAB8CAIAAAC0UNK7AAAMmklEQVR42u3d25asKBYF0PqI8/9fWe92j+rRObI0hA0bCC9zPp0TaYQ3lCWi/LUBANzEXzYBACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4T/PnzZ/cPUOQAbhxc/vwjM8Gta5EFa/fn/zLf/S0yZccEQ0pL8kfKC1ld+ODaRRZgUpHL7wJF7l5FLl8mQXApnWq7J7hjavk5U8yuQjKb8eOZ9Ft7cODm6liL8pbcnffLFUlkAbpr/fgKTip4itx1ily+TILgIrgsXbtgHTD7/Dt2vl+pRTqq/PIsIrsmU+uPqv4VufsWueAvuLeI4PKvq4FIE27hYuJsgt8/W21ijbTQdixDfPUjSxL5qeG1yPGXI83OkTVtmmCL3b8I3nTrK3KRtRhScc4LLk1FrrqQitwDilxreBVceHVwaQr+1SP27LyznTeEth7AfcuwpsVlXi3ScXLsy175K8umJvGOIte6kH0bqtryP7XFpWlvKnIPKHKtnwguvL3FpfsUEDy8WxswWttdxzYOX/lWUdOZa3gtEt/dTZuro0RtjR0OOnpbXyq4LOjgoshdrcgJLggu9UaCjy3Do4JLfO7VtuJJjyTcpY9L8F5Y09Vh68V9vM08srNm1CK7pojk5e93g4si94YiV/2FNZ214QbBpSPUDw8uQ064mZ8d2MdlTS3S3R9i9nXzlu4NMLAWyazyjD4N3Xl93jlCkbtOkcuXSRBcXhRcbnT5u+vmfMFaJLNSk2qRTA+SL7a4LKiWFLkbFbn1xQPuEVw6+r3GO+d2n2iGdyGcF1zyr88aUlnOOyfO2LnDe0q21kDJZ462Ce9xaapNFbmHFbl87oEnB5ft03OAhSbKjgkizZtNHVw6JsinlmA77ZBXqQZfyllejMjuHrK1g+VqXpGrfr118eKTzetTFb99qcg9o8g1PRXvVhFvDy5s3o6AIgcguAAACC4AgOACACC4AAAILgCA4AIAILgAAFwiuDzgdRRerYEiByC4PKcWWfC2yuTLWONDRc4ebXvU5upei/ibTPMLMKnIrXlHqiJ3nSKXL5MguLwo9ESqkNmLmhz+JjPkzfDdMXBzdaxFdQie4KYurMXUsYq29gGVFLm7F7l8mQTBRXBZuqhDhoq8SC0y9g5Ix+A4ratTnsX60aHXjBetyF2nyAV/wb1F3h5cdiOK9Y3+FflrYbLgYHLBuWxd7d7xAe22maNDl2uRphHvypd9wbHi+vZF8PTaVKhaF7KjPl4cXJqKXHUhFbkHFLnW8Cq48N4Wl8gI733XHPFZtDZyFI7nTLv3kBaXebVIfrsNufyN74v4lWv1v8nL374NVW35n9ri0np8KXJ3L3KtnwguvDq4tJ5PW89NyZN+cBnyvdVucauo6cw1vBaJ74umzdVa67Tupmpfy46lWhxcFnRwUeSuVuQEFwSXGweXYGPyqJP4xfu4BLvmdbSNxS/u423mkedHZtQiu6aI5OXvd4OLIveGIlf9hTWdtUFwmdXiMvbkPrCPy5papLs/xOzr5i3dG2BgLZJZ5Rl9Gvri+LKn2BS57xa5fJkEweVFweVGl7+7PsgXrEWSe39GLZLpQfLFFpcF1ZIid6Mit754wHWDy4LOua2frGmonxFc8q/PGrLW886JwzshRkpgphYZ8oqU9e9xaapNFbmHFbl87oHnt7iMehw68vxk5oHnyHf7TuJNz1JGljOTn4Iv5SwvRvX3uzdmcFPHn24tPyJbnaD69dbF6yiWw4Ny/PalIveMItf0VLxbRQgueDsCihyA4AIAMCq4aG8EAG4TXAAABBcAAMEFYIm//2E7gOACcIPIcv3g8ve/2XEILgBvjy93SS2yC4LLB1d4+OglD0B95V3vOC5s6t+zuHIUOC6b7MJbgkvTs9BO0M9YzfhbhpNvIg7++He3Z+Edpgt21qjVd1zMOC7OcsDXj4uzdCK78IrgcoVTnhfJfHdr52vucqGaNMrPqNpu/Rjg78wcdzwujiHgIsdFIZoILggu4ssbr1mTO6J1BM0FV9KRy+vWYRcFl8cfF7sQcIvjQnDhRcElPjjZx7Tx+6+jBqoNLsNxMYJjmMXXNL6aycHPOm7ftM4oM0jv4hP0qHtJmRaXBcfFkMERv3hc/Lea/PnH7w9/O95/+dil9Ozzwtd/vrib5n+LGu+1+nH63TLswsHZL5+t0c8vHD85m8XPVk0Gl+Pmav3B8jasTnO2TZrmguBSaupoajw/OzVnsktrj4QtNk79qOnPVnPgJXtwFyTHwS7/NT/O9hWCS2RlgzfL5h0X88LZmuPidzr5+fynEtrVx8f6O1717uLFx9ixW4tgXbiLER/D07FYFoLXMd8cs9Eul+zW4vdmjFfnwSDVkYEiO6uaSJoCK4JLfzVTPUGX//3nRF98iS9b/nZyddW22gC/M1qehpSMcmvBluuDcqlbRcEQHFmkscfFsuCy4Lg4th/8TjPHarWcKs4+LHzxWOUXKvJCfb87Lo7B5WzdC80bZ80nH4PL2c2pprRR3pjxJBdcr8x3q7kHweU7wWVZi0vr+XfIqiXzWV91m//91lacphndJbhc57i4VHDpWLVycCkcF6OCS+G4CFbSH1fzeLvqONNgdX7McD9fP/tvR3Bp2pgd2+S4pk2hJ960pvIWXO4UXLp7YFwhuHyluh1e5+VrVsHlbcHlWDF/bHHJXJ0fZ13+4k+i6mhaOAsuxzsay4JLsEav9m4JCs4r/nCT4MIzg0uw/UBwSdZ5ffdEBBfBpTW4bJ86jgQv4juCy+6LrcHlLFXEg8XXg0v15S5NHWUEFwSXAZElc4LumKDw3/gqL+jj0hcQq4+ZRPZ7YccNeV/FmqeKvn5cBPt7jXobzaTj4iy47HrjtuaP4Bd/qvxMcDkeF+Xg0nRcFO6mnYWbY/egclCIrGZ3BxfBhQsFl+NhVvjkWNt9/G9HHOmoboPLXPiR8lwKW6mwmskOKJGXi4zq41KtCKvRJPkC0GWv1h3yetN5x0UmuFz/uPgYCwp11e5Jk+3wqPPHYHH2147WhXKo6j4ujot6VrtHtlJrajnGF8GFe7e48E7vee/Zxdf0MTvid9Qof/j1Lxbq8nJwKTxHk6+km6JAR2qJZ5fImgouCC6oL9+4sk/aC4UYEazkln3xmsGlo1mlOnGwQ3QwuMSTlqeKEFyAO2WX1qpo/Rer9XTTh6Mq6daX8lW3SXLDRta0O5AJLggugOBSbwkoNEIUXvNamHJsJR1/vrqg6dfi2yS5tIILggsguIwJLh9jSqRGr6afLfCe+3JiCEaKs+ASnF1wm1QXJpIIO7YJggsAgOACACC4AACCS5tXPUB7cfaF7YDyAG8MLkNet7/4xDR2bOSvzKJj419tX8zbPrcok7PLRnCmCwrqmmPhGcHlXtsK7hpcrlMFXmRRF2+Nq53ggiMZ5YcBf0CZ/MpCNo2XdKOdcv23Gw8Z4Qt4SHC5VFXx8uCyW7BvBcpblEnB5T3BpXpcTBr0GwSXyqF4djFR/dM2bnjF6tBlHaPBRcaHC84iPsRacILM2M7BafqGGGw6+XYMH/2MMpkpErvlDBbpjuAy6v5FZlTOwlr8OfHU4wIYE1yCjZzVGwe7fw+/zK2eOpvOMq0XSdWt1DHBpNo0OYumE3T38NF3L5ORhSxPUP2F+N6Ml4cZwSW/FqPq+OsfF8CwFpdMJVH+d98VVf7s1nQyHbvuyfA08ASd//HqJeyMgnuLMtlRPpuCTlOBGRLNR9XEHWlpcXCZelxILXD74LKyxaVQD70kuGzpp6Ja6+M1nXMvWCaDn8TL5Izgkr8L01HkqtthfXBZeVxILfCu4NJdRzbVKx09Lm8UXJKz6GuKeHBwic967M3ESS0uCxozOgrMguCy4LjwIDS8K7gkK0jBZeAJOl8PPSO4tD5VJLg8O7i07k3gscFlyHtcgp3vqvN6WOfcLdcxKLJnJ3XOvX6ZHN4Vd5vfOXdLPALW3e+14y7b7Y4Lj0PDuuASeXi40Eb68b/5Wrm8qMFHZDvacr/yOHTrCbTabaL7Xn51reOrmQkutyiTrU/dnz2hnfmFrf0Z/o6U2fGagOpC9h07Vz4uxnYnAsEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAEFwAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQAg6z8f2vwAlXUsYwAAAABJRU5ErkJggg=='><h3>Declaring and Initializing a Structure Pointer
+
+</h3><p>Declaration is as easy as can be:
+</p><div class='myCodeDiv'><button id='VFNPU' class='myCopyButton' data-clipboard-target='#HOVHV'>Copy</button><pre  id='HOVHV' style='font-size:18px;' class='code'><span class='r'>struct</span> guy * him;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VFNPU');clipboard.on('success', function(e) {$('#VFNPU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VFNPU').text('error');});</script></div><p>First is the keyword <i style='color:blue'>struct</i>, then the structure tag <i style='color:blue'>guy</i>, and then an asterisk (*) followed by
+the pointer name. 
+
+</p><p>The syntax is the same as for the other pointer declarations you have seen.
+
+</p><p>This declaration does not create a new structure, but the pointer him can now be made to point
+to any existing structure of the guy type. 
+
+</p><p>For instance, if jack is a structure of the guy type, you could do this:
+</p><div class='myCodeDiv'><button id='SVMSY' class='myCopyButton' data-clipboard-target='#PSNXL'>Copy</button><pre  id='PSNXL' style='font-size:18px;' class='code'>him = &amp;jack;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SVMSY');clipboard.on('success', function(e) {$('#SVMSY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SVMSY').text('error');});</script></div><h3>Member Access by Pointer
+
+</h3><p>The pointer <i style='color:blue'>him</i> is pointing to the structure fellow[0]. 
+
+</p><p>How can you use <i style='color:blue'>him</i> to get a value of a member of fellow[0]? 
+
+</p><p>The first method, and the most common, uses a new operator, ->. 
+
+</p><p>A structure pointer followed by the -> operator works the same way as a structure name 
+followed by the . (dot) operator. 
+
+</p><p><i style='color:blue'>him</i> is a pointer, but him->income is a member of the pointed-to structure. 
+
+</p><p>So in this case, him->income is a float variable.
+
+</p><p>In summary, if <i style='color:blue'>him</i> is a pointer to a type <i style='color:blue'>guy</i> structure named <i style='color:blue'>jack</i>, the following are all
+equivalent:
+</p><div class='myCodeDiv'><button id='PKIGR' class='myCopyButton' data-clipboard-target='#XWEZZ'>Copy</button><pre  id='XWEZZ' style='font-size:18px;' class='code'>jack.income == (*him).income == him-&gt;income         <span class='c'>// assuming him == &amp;jack</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PKIGR');clipboard.on('success', function(e) {$('#PKIGR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PKIGR').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-nested-structures.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-passing-structure-members-to-a-function.html>Next</a><h2>Related</h2><UL><LI><a href='c-initializers-for-structures.html'>C Initializers for Structures</a></LI><LI><a href='c-arrays-of-structures.html'>C Arrays of Structures</a></LI><LI><a href='c-nested-structures.html'>C Nested Structures</a></LI><LI><a href='c-passing-structure-members-to-a-function.html'>C Passing Structure Members to a function</a></LI><LI><a href='c-update-structures-by-using-pointers.html'>C Update structures by using pointers</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-pointers-to-structures.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

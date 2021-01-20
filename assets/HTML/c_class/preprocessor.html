@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/preprocessor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Preprocessor</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Preprocessor</H1>
+preprocessing is conceptually separate from compiling (but may be done
+in the same pass as compilation)
+<H2>#include</H2>
+<UL>
+<LI><CODE>#include "<VAR>filename</VAR>"</CODE> searches current directory and
+system-dependent directories (on Unix, the system-dependent directory is
+<CODE>/usr/include</CODE>)
+<LI><CODE>#include &lt;<VAR>filename</VAR>&gt;</CODE> searches only
+system-dependent directories (<STRONG>not</STRONG> the current directory)
+<LI><CODE><VAR>filename</VAR></CODE> can be a relative path (like
+<CODE>#include &lt;subdir/file.h&gt;</CODE>)
+<LI><CODE><VAR>filename</VAR></CODE> can also be an absolute path (like
+<CODE>#include &lt;/home/chicken/egg.h&gt;</CODE>, but this is non-portable
+and therefore not recommended
+<UL>
+<LI>the same result can be achieved using the
+<STRONG>-I<VAR>directory</VAR></STRONG> argument to cc
+</UL>
+<LI>search order for directories is:
+<OL>
+<LI>current directory (if using <CODE>#include "<VAR>filename</VAR>"</CODE> form)
+<LI>any directories specified using the <STRONG>-I<VAR>directory</VAR></STRONG>
+argument
+<LI>system-dependent directories (i.e <CODE>/usr/include</CODE>)
+</OL>
+<LI><CODE>#include</CODE>d files can include other files (which can include
+other files...)
+<UL>
+<LI>without taking special precautions, can accidentally include a file in
+itself, causing an infinite loop...
+</UL>
+</UL>
+<H2>#define</H2>
+<UL>
+<LI><CODE>#define <VAR>name</VAR></CODE> defines an empty macro in the
+preprocessor
+<UL>
+<LI><CODE>#define DEBUG</CODE>
+<LI><CODE>#define SILLY</CODE>
+</UL>
+<LI><CODE>#define <VAR>name</VAR>  <VAR>token(s)</VAR></CODE> defines a macro
+which, when used later in the code, is replaced the symbol(s) in the token list
+<UL>
+<LI>after <CODE>#define PI  3.141593</CODE>, a statement like
+<CODE>PI + PI</CODE> would be replaced by the preprocessor with
+<CODE>3.141593 + 3.141593</CODE>
+<LI>only replaces exact matches, so something like <CODE>PIE - PI</CODE>
+would be replaced with <CODE>PIE - 3.141593</CODE>
+</UL>
+<LI><CODE>#define <VAR>name</VAR>(<VAR>args</VAR>)  <VAR>token(s)</VAR></CODE>
+<UL>
+<LI><CODE>#define SQUARE(x)    ((x) * (x))</CODE> defines a macro which
+replaces <CODE>SQUARE(value)</CODE> with <CODE>((value) * (value))</CODE>
+<UL>
+<LI>note that the parentheses are necessary to prevent unintended expansion
+<LI>if SQUARE was defined as <CODE>#define SQUARE(x)    x * x</CODE>,
+something like <CODE>4 / SQUARE(2)</CODE> would get expanded to
+<CODE>4 / 2 * 2</CODE> which would be evaluated from left to right as
+<CODE>"4 / 2 * 2"</CODE> <STRONG>-&gt;</STRONG>
+<CODE>"2 * 2"</CODE> <STRONG>-&gt;</STRONG>
+<CODE>"4"</CODE>
+instead of the intended
+<CODE>"4 / (2 * 2)"</CODE> <STRONG>-&gt;</STRONG>
+<CODE>"4 / 4"</CODE> <STRONG>-&gt;</STRONG>
+<CODE>"1"</CODE>
+</UL>
+</UL>
+<LI>previously defined macros can be included in later macros:
+<PRE>
+	#define PI	3.141593
+	#define PI2	PI * 2
+	#define SQR(z)	((z) * (z))
+	#define PI2SQ	SQR(PI2)
+</PRE>
+<LI>a statement like <CODE>12 * PI2SQ</CODE> is expanded as follows:
+<UL>
+<LI>the preprocessor sees the <CODE>PI2SQ</CODE> and expands the
+statement to <CODE>12 * SQR(PI2)</CODE>
+<LI>after it has processed the entire line, it starts again at the front
+and replace the <CODE>SQR</CODE>, leaving <CODE>12 * ((PI2) * (PI2))</CODE>
+<LI>it scans this new line and replaces the two references to
+<CODE>PI2</CODE>, leaving <CODE>12 * ((PI * 2) * (PI * 2))</CODE>
+<LI>the penultimate scan replaces the two <CODE>PI</CODE> references,
+leaving <CODE>12 * ((3.141593 * 2) * (3.141593 * 2))</CODE>
+<LI>one last scan is done and the preprocessor discovers there's nothing
+left to do so it moves onto the next line
+</UL>
+</UL>
+<H2>\ (continuation character)</H2>
+<UL>
+<LI>expressions can span multiple lines using <CODE>\</CODE> as the
+<STRONG>last</STRONG> character on a line
+<PRE>
+	#define SPLIT_EXPR	((12.3456789 * 9.87654) + \
+				 (54321 - 12345))
+
+	#define NOT_LESS_THAN(a, b)	\
+					if ((a) &gt; (b)) \
+						(a) = (b)
+</PRE>
+</UL>
+<H2>#undef <VAR>name</VAR></H2>
+<UL>
+<LI>tells the preprocessor to forget about <VAR>name</VAR>
+<LI>useful for localizing macros
+<PRE>
+	#define TEMPORARY(a, b)		(((a) * (b)) / 12345.678)
+	val = TEMPORARY(exp, sect);
+	#undef TEMPORARY
+</PRE>
+</UL>
+<H2>Predefined symbols</H2>
+<UL>
+<LI>In ANSI C, the preprocessor automatically predefines the following
+macros:
+<UL>
+<LI><CODE>__DATE__</CODE> - string containing current date (like <CODE>"Jan 1 2000"</CODE>)
+<LI><CODE>__TIME__</CODE> - string containing current time (like <CODE>"12:34:56</CODE>)
+<LI><CODE>__FILE__</CODE> - string containing source file name (like <CODE>"file.c"</CODE>)
+<LI><CODE>__LINE__</CODE> - current line number in source file,
+expressed as an integer (like <CODE>7</CODE>)
+<LI><CODE>__STDC__</CODE> - non-zero integer in an ANSI C preprocessor,
+implementation-defined elsewhere (could be set to 0, could be undefined)
+</UL>
+</UL>
+<H2>Conditional directives</H2>
+<UL>
+<LI><CODE>#ifdef <VAR>name</VAR></CODE> - if <VAR>name</VAR> has been defined
+as a preprocessor macro, process the following code
+<LI><CODE>#ifndef <VAR>name</VAR></CODE> - if <VAR>name</VAR> has
+<STRONG>not</STRONG> been defined, process the following code
+<LI><CODE>#endif</CODE> - turn off the previous conditional directive
+<LI><CODE>#else</CODE> - reverse the meaning of the previous conditional
+directive
+<LI>For example, with:
+<PRE>
+	#ifdef __STDC_
+	#define CC_TYPE		"standard C"
+	#else
+	#define CC_TYPE		"nonstandard C"
+	#endif
+</PRE>
+<UL>
+<LI>when built with an ANSI C compiler, will define the CC_TYPE macro
+as "standard C"
+<LI>when built with an older compiler, will define the CC_TYPE macro
+as "nonstandard C"
+</UL>
+<LI><CODE>defined(<VAR>name</VAR>)</CODE> - evaluates to 1 if <VAR>name</VAR> has
+been defined
+<LI><CODE>#if defined(DEBUG)</CODE> is the same as <CODE>#ifdef DEBUG</CODE>
+<LI><CODE>#if <VAR>expression</VAR></CODE> - if <VAR>expression</VAR> evaluates
+to a non-zero value, process the following code
+<UL>
+<LI><VAR>expression</VAR> may be as simple as:
+<PRE>
+	#if 0
+	<EM>code which should not be compiled</EM>
+	#endif
+</PRE>
+or as complicated as:
+<PRE>
+	#if defined(UNIX) || \
+		(defined(MYSYS) && \
+		 (defined(SYS_VERSION) && (
+		  (SYS_VERSION &gt; 17.2)))
+	<EM>special code</EM>
+	#endif
+</PRE>
+</UL>
+<LI><CODE>#elif <VAR>expression</VAR></CODE> - ANSI C addition which allows:
+<PRE>
+	#ifdef <VAR>expression-1</VAR>
+	<EM>blah blah blah</EM>
+	#else
+	# if <VAR>expression-2</VAR>
+	<EM>blech blech blech</EM>
+	# endif
+	#endif
+</PRE>
+to be written as:
+<PRE>
+	#ifdef <VAR>expression-1</VAR>
+	<EM>blah blah blah</EM>
+	#elif <VAR>expression-2</VAR>
+	<EM>blech blech blech</EM>
+	#endif
+</PRE>
+</UL>
+<H2>##</H2> - argument catenation
+<H2>#</H2> - make a string
+<H2>#pragma</H2>
+<UL>
+<LI>non-portable implementation-defined directive
+<LI>created by ANSI C committee
+<LI>when <CODE>#pragma</CODE> was first proposed in ANSI, the GNU C
+compiler implementer (who didn't like <CODE>#pragma</CODE> took
+"implementation-defined" to heart.  If a <CODE>#pragma</CODE> was encountered
+by GCC, the compiler would
+<UL>
+<LI>attempt to run <CODE>/usr/games/hack</CODE> (a Unix game)
+<LI>attempt to run <CODE>/usr/games/rogue</CODE> (another Unix game)
+<LI>attempt to run a "Tower of Hanoi" program using Emacs
+<LI>die with a message saying <CODE>"You are in a maze of twisty compiler
+features, all different</CODE>
+</UL>
+</UL>
+<H2>#error <VAR>string</VAR></H2>
+<H2>#line</H2>
+<A HREF="names.html">Previous</A>, 
+<A HREF="fundamental_types.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/preprocessor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

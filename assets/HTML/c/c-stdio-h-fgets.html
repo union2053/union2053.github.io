@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-stdio-h-fgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C stdio.h fgets</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C stdio.h fgets'>C stdio.h fgets</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-header-file-introduction.html'>C stdio.h introduction
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function and Macro List
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-bufsiz.html'>C BUFSIZ
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fclose.html'>C stdio.h fclose
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fflush.html'>C stdio.h fflush
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fgetc.html'>C stdio.h fgetc
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C stdio.h fgets
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-filename-max.html'>C stdio.h FILENAME_MAX
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fopen-max.html'>C stdio.h FOPEN_MAX
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fpos-t.html'>C stdio.h fpos_t
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fprintf.html'>C stdio.h fprintf
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fputc.html'>C stdio.h fputc
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fputs.html'>C stdio.h fputs
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fread.html'>C stdio.h fread
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-stdio-h-fscanf.html'>C stdio.h fscanf
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C stdio.h fgets</h1>
+<a class ='btn btn-outline-dark' href=c-stdio-h-fgetc.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-stdio-h-filename-max.html>Next</a><h3>Example
+</h3><p>The following code gets the first 100 letters or the first line of the text
+from main.c text file.
+</p><div class='myCodeDiv'><button id='SXVIA' class='myCopyButton' data-clipboard-target='#RVRTN'>Copy</button><pre  id='RVRTN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> main()
+{
+   FILE * pFile;
+   <span class='r'>char</span> mystring [100];
+
+   pFile = fopen (<span class='q'>"main.c"</span> , <span class='q'>"r"</span>);
+   <span class='r'>if</span> (pFile == NULL)
+       perror (<span class='q'>"Error opening file"</span>);
+   <span class='r'>else</span> {
+     <span class='r'>if</span> ( fgets (mystring , 100 , pFile) != NULL )
+       puts (mystring);
+     fclose (pFile);
+   }
+   <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SXVIA');clipboard.on('success', function(e) {$('#SXVIA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SXVIA').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAAEPElEQVR42u3dQXLbMAxA0R7C9z9jF927i850OolFAyAoU+r7k0UdKZQAJcU3KFo/ngCA/fj16+efrxuH9vLLpceYH1IAAMTls3FxFxAXACAum8Y1jpe7gLgAAHHZ2lq+u4tfABAXACAuW4vL89Z39oC4AABxETWICwCsKUUvJwKCS0vG61A2HHAmS6kSHj/u+JbYyXC6FgfFA/merpbfz/ZIl6aduADAGfpSLh5HPrHngKnM1I4VOf+jMp91tXgILQI3LwEzmZ+P9IS0ExcAOMldam+1B7Vh2wELtTNYj4M/9bIQjmt/qpZHynZLQiJRzx8oIiKRH1mdduICABuJS7xU7z9guUhH2j+NJhHc2nImje2WoO4UIjpKYHm03rQTFwA4VVxqpa7wtv7jA5aLdK2CPgMTRjNO2RVCud3S1e7KBjt5sXrTDuICYLumS7ws7T9grQwTlxOs8TTLJC7EBcANxeXtmp2LDliuSZE7beMP/WmvoNnlP40mN1nOazpVi5S4EBcAt3WXv7coZrVg/wFXiEtvtV4kLtnd4lHMFPUV4lLLEnEhLgDuKS7lKZVNBiQuXeLSoi/EhbgAQKVsfFk+Ovj/utCl32pA4pL9ZLyl7kJciAsAzBbRgRakZhC2HfDG4lJrX81Yy5G+rBaX9utFXIgLgEuKS+qDuS46YLu49PZ4PiUuLYU5m5P4mROXy4vL4/H48o/BPvg4rgWu4i7jRaTZarTtgNnaOSku+y+HLkzxtDRRZh6nkD0B4vJfi8vjHxoHvIGdHEWxKLp75A1XEZda/3/PAbuqfqHurhaX8tryrHu1iMsz/yHI5UiJyyfFJWItl2sknBBLocyv3n913pgNuipHeyn67ICp8VPPtY44waIKWuup1G7XXXRxGxPYqybEhbicXfLL9fvq4kJf0NJyWPSkm5MHjD/86O1TgiM7FJ4R2CUutacSdoUwE3LwmcwzJ0ZczhaXxwFH+wxqWGS3f3eOV82jU8oeomtCajybdnQOkVS/jSISwmSYkau5ieZif3Gpbb3KgPH5oJcPE071XeI7N259Dh+PnNWF+JnMdzsigjgT6eq0E5e2jsvANr7X1/HL7K0bLwt86hDjly2NlqBdxTM8n6hCmG9Tp/WCuBmUt15iwOxHgAQr4qD0xkUhUrxrDYkV1vI8WOYz37HIKsJkpL1pJy5rxWXwnaMmypmHSJ1DuUIHJ1lSm7Ktqfm+SFa26AsA4P7icrIbBadp5vXl7fg3ExfKAgA4VVxSFf3S4tKY1vhoWQm4lrhQFgDA2eLypQLduOPSm9lgp+Gu4qLRAgC4rbi0vIkv3HtbPoeyvgRLfurloptzU5NZ3yfd/GkBAD4mLm+tZTyXFPnO893NH7V1wuOlwtlzmCc+45ZaN/72Zp3U+GNxCV5NAAD2FRcAAIBdxAUAAIC4AAAAEBcAAHBHfgMJolr8QwB2lgAAAABJRU5ErkJggg=='><h3>Prototype
+
+</h3><div class='myCodeDiv'><button id='BRGPL' class='myCopyButton' data-clipboard-target='#BEOCH'>Copy</button><pre  id='BEOCH' style='font-size:18px;' class='code'><span class='r'>char</span> * fgets ( <span class='r'>char</span> * str, <span class='r'>int</span> num, FILE * stream );
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BRGPL');clipboard.on('success', function(e) {$('#BRGPL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BRGPL').text('error');});</script></div><h3>Description
+
+</h3><p><i style='color:blue'>fgets</i>() reads string from stream into <i style='color:blue'>str</i> until (num-1) characters have been 
+read or either a newline or the end-of-file is reached, which ever happens first. 
+
+</p><p>A new line character makes <i style='color:blue'>fgets</i>() stop reading, but it is considered a valid 
+character by the function and included in the string copied to <i style='color:blue'>str</i>. 
+
+</p><p>A terminating null character is appended after the characters copied to <i style='color:blue'>str</i>. 
+
+</p><h3>Parameters
+</h3><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>str<br/></td><td>   Pointer to an array of chars where the string read is copied.<br/></td></tr><tr><td>num<br/>   <br/></td><td>      Maximum number of characters to be copied into <i style='color:blue'>str</i><br/>   including the terminating null-character.              <br/></td></tr><tr><td>stream<br/>      <br/></td><td>       Pointer to a FILE object that identifies an input stream.   <br/>   <i style='color:blue'>stdin</i> can be used as argument to read from the standard input.<br/></td></tr></tbody></table><h3>Return Value
+
+</h3><p>On success, the function returns <i style='color:blue'>str</i>. 
+
+</p><p>If the end-of-file is encountered while reading, 
+the eof indicator is set. And you can use <i style='color:blue'>feof</i>() to check. 
+
+</p><p>If a read error occurs, the error indicator (ferror) is set and a null pointer is 
+also returned.
+
+</p><a class ='btn btn-outline-dark' href=c-stdio-h-fgetc.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-stdio-h-filename-max.html>Next</a><h2>Related</h2><UL><LI><a href='c-stdio-h-fclose.html'>C stdio.h fclose</a></LI><LI><a href='c-stdio-h-fflush.html'>C stdio.h fflush</a></LI><LI><a href='c-stdio-h-fgetc.html'>C stdio.h fgetc</a></LI><LI><a href='c-stdio-h-filename-max.html'>C stdio.h FILENAME_MAX</a></LI><LI><a href='c-stdio-h-fopen-max.html'>C stdio.h FOPEN_MAX</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-stdio-h-fgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

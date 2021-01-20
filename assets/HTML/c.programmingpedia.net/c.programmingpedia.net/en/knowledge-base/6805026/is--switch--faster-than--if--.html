@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6805026/is--switch--faster-than--if-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Is &#39;switch&#39; faster than &#39;if&#39;? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Is &#39;switch&#39; faster than &#39;if&#39;? | C Language Knowledge Base">
+        <title>[SOLVED] Is &#39;switch&#39; faster than &#39;if&#39;? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="is-switch-faster-than-if-">Is 'switch' faster than 'if'?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/assembly.html">assembly</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/jump-table.html">jump-table</a></span>
+                        <span class="tag-item"><a href="../tag/performance.html">performance</a></span>
+                        <span class="tag-item"><a href="../tag/switch-statement.html">switch-statement</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Is a <code>switch</code> statement <em>actually</em> faster than an <code>if</code> statement?</p>
+
+<p>I ran the code below on Visual Studio 2010's x64 C++ compiler with the <code>/Ox</code> flag:</p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define MAX_COUNT (1 &lt;&lt; 29)
+size_t counter = 0;
+
+size_t testSwitch()
+{
+    clock_t start = clock();
+    size_t i;
+    for (i = 0; i &lt; MAX_COUNT; i++)
+    {
+        switch (counter % 4 + 1)
+        {
+            case 1: counter += 4; break;
+            case 2: counter += 3; break;
+            case 3: counter += 2; break;
+            case 4: counter += 1; break;
+        }
+    }
+    return 1000 * (clock() - start) / CLOCKS_PER_SEC;
+}
+
+size_t testIf()
+{
+    clock_t start = clock();
+    size_t i;
+    for (i = 0; i &lt; MAX_COUNT; i++)
+    {
+        const size_t c = counter % 4 + 1;
+        if (c == 1) { counter += 4; }
+        else if (c == 2) { counter += 3; }
+        else if (c == 3) { counter += 2; }
+        else if (c == 4) { counter += 1; }
+    }
+    return 1000 * (clock() - start) / CLOCKS_PER_SEC;
+}
+
+int main()
+{
+    printf("Starting...\n");
+    printf("Switch statement: %u ms\n", testSwitch());
+    printf("If     statement: %u ms\n", testIf());
+}
+</code></pre>
+
+<p>and got these results:</p>
+
+<blockquote>
+  <p>Switch statement: 5261 ms<br>
+  If     statement: 5196 ms</p>
+</blockquote>
+
+<p>From what I've learned, <code>switch</code> statements apparently use jump tables to optimize the branching.</p>
+
+<h2 id="questions-">Questions:</h2>
+
+<ol>
+<li><p>What would a basic jump table look like, in x86 or x64?</p></li>
+<li><p>Is this code using a jump table?</p></li>
+<li><p>Why is there no performance difference in this example? Is there any situation in which there <em>is</em> a significant performance difference?</p></li>
+</ol>
+
+<hr>
+
+<p>Disassembly of the code:</p>
+
+<pre><code>testIf:
+
+13FE81B10 sub  rsp,48h 
+13FE81B14 call qword ptr [__imp_clock (13FE81128h)] 
+13FE81B1A mov  dword ptr [start],eax 
+13FE81B1E mov  qword ptr [i],0 
+13FE81B27 jmp  testIf+26h (13FE81B36h) 
+13FE81B29 mov  rax,qword ptr [i] 
+13FE81B2E inc  rax  
+13FE81B31 mov  qword ptr [i],rax 
+13FE81B36 cmp  qword ptr [i],20000000h 
+13FE81B3F jae  testIf+0C3h (13FE81BD3h) 
+13FE81B45 xor  edx,edx 
+13FE81B47 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81B4E mov  ecx,4 
+13FE81B53 div  rax,rcx 
+13FE81B56 mov  rax,rdx 
+13FE81B59 inc  rax  
+13FE81B5C mov  qword ptr [c],rax 
+13FE81B61 cmp  qword ptr [c],1 
+13FE81B67 jne  testIf+6Dh (13FE81B7Dh) 
+13FE81B69 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81B70 add  rax,4 
+13FE81B74 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81B7B jmp  testIf+0BEh (13FE81BCEh) 
+13FE81B7D cmp  qword ptr [c],2 
+13FE81B83 jne  testIf+89h (13FE81B99h) 
+13FE81B85 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81B8C add  rax,3 
+13FE81B90 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81B97 jmp  testIf+0BEh (13FE81BCEh) 
+13FE81B99 cmp  qword ptr [c],3 
+13FE81B9F jne  testIf+0A5h (13FE81BB5h) 
+13FE81BA1 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81BA8 add  rax,2 
+13FE81BAC mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81BB3 jmp  testIf+0BEh (13FE81BCEh) 
+13FE81BB5 cmp  qword ptr [c],4 
+13FE81BBB jne  testIf+0BEh (13FE81BCEh) 
+13FE81BBD mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81BC4 inc  rax  
+13FE81BC7 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81BCE jmp  testIf+19h (13FE81B29h) 
+13FE81BD3 call qword ptr [__imp_clock (13FE81128h)] 
+13FE81BD9 sub  eax,dword ptr [start] 
+13FE81BDD imul eax,eax,3E8h 
+13FE81BE3 cdq       
+13FE81BE4 mov  ecx,3E8h 
+13FE81BE9 idiv eax,ecx 
+13FE81BEB cdqe      
+13FE81BED add  rsp,48h 
+13FE81BF1 ret       
+</code></pre>
+
+<hr>
+
+<pre><code>testSwitch:
+
+13FE81C00 sub  rsp,48h 
+13FE81C04 call qword ptr [__imp_clock (13FE81128h)] 
+13FE81C0A mov  dword ptr [start],eax 
+13FE81C0E mov  qword ptr [i],0 
+13FE81C17 jmp  testSwitch+26h (13FE81C26h) 
+13FE81C19 mov  rax,qword ptr [i] 
+13FE81C1E inc  rax  
+13FE81C21 mov  qword ptr [i],rax 
+13FE81C26 cmp  qword ptr [i],20000000h 
+13FE81C2F jae  testSwitch+0C5h (13FE81CC5h) 
+13FE81C35 xor  edx,edx 
+13FE81C37 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81C3E mov  ecx,4 
+13FE81C43 div  rax,rcx 
+13FE81C46 mov  rax,rdx 
+13FE81C49 inc  rax  
+13FE81C4C mov  qword ptr [rsp+30h],rax 
+13FE81C51 cmp  qword ptr [rsp+30h],1 
+13FE81C57 je   testSwitch+73h (13FE81C73h) 
+13FE81C59 cmp  qword ptr [rsp+30h],2 
+13FE81C5F je   testSwitch+87h (13FE81C87h) 
+13FE81C61 cmp  qword ptr [rsp+30h],3 
+13FE81C67 je   testSwitch+9Bh (13FE81C9Bh) 
+13FE81C69 cmp  qword ptr [rsp+30h],4 
+13FE81C6F je   testSwitch+0AFh (13FE81CAFh) 
+13FE81C71 jmp  testSwitch+0C0h (13FE81CC0h) 
+13FE81C73 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81C7A add  rax,4 
+13FE81C7E mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81C85 jmp  testSwitch+0C0h (13FE81CC0h) 
+13FE81C87 mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81C8E add  rax,3 
+13FE81C92 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81C99 jmp  testSwitch+0C0h (13FE81CC0h) 
+13FE81C9B mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81CA2 add  rax,2 
+13FE81CA6 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81CAD jmp  testSwitch+0C0h (13FE81CC0h) 
+13FE81CAF mov  rax,qword ptr [counter (13FE835D0h)] 
+13FE81CB6 inc  rax  
+13FE81CB9 mov  qword ptr [counter (13FE835D0h)],rax 
+13FE81CC0 jmp  testSwitch+19h (13FE81C19h) 
+13FE81CC5 call qword ptr [__imp_clock (13FE81128h)] 
+13FE81CCB sub  eax,dword ptr [start] 
+13FE81CCF imul eax,eax,3E8h 
+13FE81CD5 cdq       
+13FE81CD6 mov  ecx,3E8h 
+13FE81CDB idiv eax,ecx 
+13FE81CDD cdqe      
+13FE81CDF add  rsp,48h 
+13FE81CE3 ret       
+</code></pre>
+
+<hr>
+
+<h3 id="update-">Update:</h3>
+
+<p>Interesting results <a href="https://www.ideone.com/GXKX3j" rel="noreferrer">here</a>. Not sure why one is faster and one is slower, though.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/541686/mehrdad" target="_blank"><span itemprop="name">Mehrdad</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">232</div>
+                                    <div itemprop="dateCreated">1/27/2018 9:01:55 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>There are several optimizations a compiler <em>can</em> make on a switch. I don't think the oft-mentioned "jump-table" is a very useful one though, as it only works when the input can be bounded some way.</p>
+
+<p>C Pseudocode for a "jump table" would be something like <a href="http://en.wikipedia.org/wiki/Branch_table#Jump_table_example_in_C">this</a> -- note that the compiler in practice would need to insert some form of if test around the table to ensure that the input was valid in the table. Note also that it only works in the specific case that the input is a run of consecutive numbers.</p>
+
+<p>If the number of branches in a switch is extremely large, a compiler can do things like using binary search on the values of the switch, which (in my mind) would be a much more useful optimization, as it does significantly increase performance in some scenarios, is as general as a switch is, and does not result in greater generated code size. But to see that, your test code would need a LOT more branches to see any difference.</p>
+
+<p>To answer your specific questions:</p>
+
+<ol>
+<li><p>Clang generates one that looks like <a href="http://gcc.godbolt.org/#%7B%22version%22%3A3%2C%22filterAsm%22%3A%7B%22labels%22%3Atrue%2C%22directives%22%3Atrue%2C%22commentOnly%22%3Atrue%7D%2C%22compilers%22%3A%5B%7B%22sourcez%22%3A%22C4UwtgDgNghqA8BXAdgZwJYHNkgCYD4AoANwHt1cACAYxiigAoBKAbkJPKtFWAH1UA7umDUAFgzEwATjSaUA3oQCQg4WMoS5ipbVQhKABgBcynXSjwD%2BZmyVKARlJAwA1rd36AjCbu168T2tWU0dnN2UPSgAmHzN%2FKKDbBydXdxg9SgBmWL8LTMSQlPCzDIAWHPN4UoK7UNSI9P0AVgr%2FJprksLSMgDZWix6OuuLIgHZ%2B%2BFGhou79AA4JuemuhoyATgm15fqSr2NTXICrG0KV3cpPbwPKy%2B2RxouY6%2F9PBJPamdWvbOeLT3z3p0dpFPOVfgFqoDhrMLi1wZ52lDPudPH14YMkWcQeN4VNMcCHp4FvClvj7hlPBt4VsybYAL6EBkcCiUbh8dAAMwkomksgUyk5GmolAAvCLDFpwcdgko6ZQQFAMoKJKLxZ5Jb4bjU5QqlRyharohq4hY3jKdYr9MrhWKssbDgDzfLLZRrYbSvbKpCnbqrfqVbamp62trnXqDbaesGBqHfa7%2FTbxaNo5NYy63ba5inST70wnDWsUzTc%2BGA2qDCnPNL6WG%2FRG1er%2BZqXoF3hbS4nHpWzTW4xm1ZlK47e3n6xcPU2TRC0x3DQjK4iS3Wyxco5PDqiZ8vO55k%2Bubnil%2FGx0TKzmR7PbZTK8X6YzCEAAA%3D%22%2C%22compiler%22%3A%22clang371%22%2C%22options%22%3A%22%20-std%3Dc%2B%2B14%20-O3%20-Wall%20-Wextra%22%7D%5D%7D">this</a>:</p>
+
+<pre><code>test_switch(char):                       # @test_switch(char)
+        movl    %edi, %eax
+        cmpl    $19, %edi
+        jbe     .LBB0_1
+        retq
+.LBB0_1:
+        jmpq    *.LJTI0_0(,%rax,8)
+        jmp     void call&lt;0u&gt;()         # TAILCALL
+        jmp     void call&lt;1u&gt;()         # TAILCALL
+        jmp     void call&lt;2u&gt;()         # TAILCALL
+        jmp     void call&lt;3u&gt;()         # TAILCALL
+        jmp     void call&lt;4u&gt;()         # TAILCALL
+        jmp     void call&lt;5u&gt;()         # TAILCALL
+        jmp     void call&lt;6u&gt;()         # TAILCALL
+        jmp     void call&lt;7u&gt;()         # TAILCALL
+        jmp     void call&lt;8u&gt;()         # TAILCALL
+        jmp     void call&lt;9u&gt;()         # TAILCALL
+        jmp     void call&lt;10u&gt;()        # TAILCALL
+        jmp     void call&lt;11u&gt;()        # TAILCALL
+        jmp     void call&lt;12u&gt;()        # TAILCALL
+        jmp     void call&lt;13u&gt;()        # TAILCALL
+        jmp     void call&lt;14u&gt;()        # TAILCALL
+        jmp     void call&lt;15u&gt;()        # TAILCALL
+        jmp     void call&lt;16u&gt;()        # TAILCALL
+        jmp     void call&lt;17u&gt;()        # TAILCALL
+        jmp     void call&lt;18u&gt;()        # TAILCALL
+        jmp     void call&lt;19u&gt;()        # TAILCALL
+.LJTI0_0:
+        .quad   .LBB0_2
+        .quad   .LBB0_3
+        .quad   .LBB0_4
+        .quad   .LBB0_5
+        .quad   .LBB0_6
+        .quad   .LBB0_7
+        .quad   .LBB0_8
+        .quad   .LBB0_9
+        .quad   .LBB0_10
+        .quad   .LBB0_11
+        .quad   .LBB0_12
+        .quad   .LBB0_13
+        .quad   .LBB0_14
+        .quad   .LBB0_15
+        .quad   .LBB0_16
+        .quad   .LBB0_17
+        .quad   .LBB0_18
+        .quad   .LBB0_19
+        .quad   .LBB0_20
+        .quad   .LBB0_21
+</code></pre></li>
+<li><p>I can say that it is not using a jump table -- 4 comparison instructions are clearly visible:</p>
+
+<pre><code>13FE81C51 cmp  qword ptr [rsp+30h],1 
+13FE81C57 je   testSwitch+73h (13FE81C73h) 
+13FE81C59 cmp  qword ptr [rsp+30h],2 
+13FE81C5F je   testSwitch+87h (13FE81C87h) 
+13FE81C61 cmp  qword ptr [rsp+30h],3 
+13FE81C67 je   testSwitch+9Bh (13FE81C9Bh) 
+13FE81C69 cmp  qword ptr [rsp+30h],4 
+13FE81C6F je   testSwitch+0AFh (13FE81CAFh) 
+</code></pre>
+
+<p>A jump table based solution does not use comparison at all.</p></li>
+<li>Either not enough branches to cause the compiler to generate a jump table, or your compiler simply doesn't generate them. I'm not sure which.</li>
+</ol>
+
+<p><strong>EDIT 2014</strong>: There has been some discussion elsewhere from people familiar with the LLVM optimizer saying that the jump table optimization can be important in many scenarios; e.g. in cases where there is an enumeration with many values and many cases against values in said enumeration. That said, I stand by what I said above in 2011 -- too often I see people thinking "if I make it a switch, it'll be the same time no matter how many cases I have" -- and that's completely false. Even with a jump table you get the indirect jump cost and you pay for entries in the table for each case; and memory bandwidth is a Big Deal on modern hardware.</p>
+
+<p>Write code for readability. <a href="http://gcc.godbolt.org/#%7B%22version%22%3A3%2C%22filterAsm%22%3A%7B%22labels%22%3Atrue%2C%22directives%22%3Atrue%2C%22commentOnly%22%3Atrue%7D%2C%22compilers%22%3A%5B%7B%22sourcez%22%3A%22C4UwtgDgNghqA8BXAdgZwJYHNkgCYD4AoANwHt1cACAYxiigAoBKAbkJPKtFWAH1UA7umDUAFgzEwATjSaUA3oQCQg4WMoS5ipbVQhKABgBcynXSjwD%2BZmyVKARlJAwA1rd36AjCbu168T2tWU0dnN2UPSgAmHzN%2FKKDbBydXdxg9SgBmWL8LTMSQlPCzDIAWHPN4UoK7UNSI9P0AVgr%2FJprksLSMgDZWix6OuuLIgHZ%2B%2BFGhou79AA4JuemuhoyATgm15fqSr2NTXICrG0KV3cpPbwPKy%2B2RxouY6%2F9PBJPamdWvbOeLT3z3p0dpFPOVfgFqoDhrMLi1wZ52lDPudPH14YMkWcQeN4VNMcCHp4FvClvj7hlPBt4VsybYAL6EBkcCiUbh8dAAMwkomksgUyk5GmolAAvCLDFpwcdgko6ZQQFAMoKJKLxZ5Jb4bjU5QqlRyharohq4hY3jKdYr9MrhWKssbDgDzfLLZRrYbSvbKpCnbqrfqVbamp62trnXqDbaesGBqHfa7%2FTbxaNo5NYy63ba5inST70wnDWsUzTc%2BGA2qDCnPNL6WG%2FRG1er%2BZqXoF3hbS4nHpWzTW4xm1ZlK47e3n6xcPU2TRC0x3DQjK4iS3Wyxco5PDqiZ8vO55k%2Bubnil%2FGx0TKzmR7PbZTK8X6YzCEAAA%3D%22%2C%22compiler%22%3A%22clang371%22%2C%22options%22%3A%22%20-std%3Dc%2B%2B14%20-O3%20-Wall%20-Wextra%22%7D%5D%7D">Any compiler worth its salt is going to see an if / else if ladder and transform it into equivalent switch or vice versa if it would be faster to do so.</a></p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/82320/billy-oneal" target="_blank"><span itemprop="name">Billy ONeal</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/6805026/is--switch--faster-than--if--#answer-0</div>
+                                            <div itemprop="upvoteCount">117</div>
+                                            <div itemprop="dateCreated">5/2/2016 12:34:52 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>To your question:</p>
+
+<p><strong>1.What would a basic jump table look like, in x86 or x64?</strong></p>
+
+<p>Jump table is memory address that holds pointer to the labels in something like array structure. following example will help you understand how jump tables are laid out</p>
+
+<pre><code>00B14538  D8 09 AB 00 D8 09 AB 00 D8 09 AB 00 D8 09 AB 00  Ø.«.Ø.«.Ø.«.Ø.«.
+00B14548  D8 09 AB 00 D8 09 AB 00 D8 09 AB 00 00 00 00 00  Ø.«.Ø.«.Ø.«.....
+00B14558  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00B14568  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+</code></pre>
+
+<p><a href="https://i.stack.imgur.com/RTTwM.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/RTTwM.png" alt="enter image description here"></a></p>
+
+<p>Where <strong>00B14538</strong> is the pointer to the Jump table , and value like <strong>D8 09 AB 00</strong> represents label pointer.</p>
+
+<p><strong>2.Is this code using a jump table?</strong>
+No in this case.</p>
+
+<p><strong>3.Why is there no performance difference in this example?</strong> </p>
+
+<p>There is no performance difference because instruction for both case looks same, no jump table.</p>
+
+<p><strong>4.Is there any situation in which there is a significant performance difference?</strong></p>
+
+<p>If you have very long sequence of <strong>if</strong> check, in that case using a jump table improves performance (branching/jmp instructions are <strong>expensive</strong> if they don't predict near-perfectly) but comes with the cost of memory.</p>
+
+<p>The code for all the compare instructions has some size, too, so especially with 32-bit pointers or offsets, a single jump table lookup might not cost a lot more size in an executable.</p>
+
+<p>Conclusion: Compiler is smart enough handle such case and generate appropriate instructions :)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/106986/crypted" target="_blank">crypted</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/6805026" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/6805026/is--switch--faster-than--if-- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:13:42 GMT -->
+</html>

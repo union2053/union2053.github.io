@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/odds_n_ends.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Odds'n'Ends</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Odds'n'Ends</H1>
+<H2>Enumeration</H2>
+<UL>
+<LI><CODE>enum</CODE> is a way of creating a user-defined integral type which
+can be assigned a limited number of constant values
+<UL>
+<LI><CODE>enum <VAR>enum-name</VAR> {
+<VAR>const-list</VAR>} <VAR>variable-name</VAR>;</CODE><BR>
+(where
+<VAR>enum-name</VAR> and <VAR>variable-name</VAR> are optional and
+<VAR>const-list</VAR> is a list of one or more constant names)
+</UL>
+<LI>For example, to create a user-defined datatype named
+<CODE>enum shapetype</CODE> and associate three constant values
+(<CODE>circle</CODE>, <CODE>triangle</CODE>,
+<CODE>square</CODE>) with it:
+<PRE>
+{
+	enum shapetype {circle, triangle, square} s1, s2;
+
+	s1 = circle;
+	s2 = s1 + 1;
+	if (s2 != triangle)
+		return 0;
+	return 1;
+}
+</PRE>
+<LI><CODE>enum <VAR>name</VAR></CODE> is usually just an alias for
+<CODE>int</CODE>
+and the enumerated values are just aliases for integral constants
+(in the <CODE>enum shapetype</CODE> above,
+<CODE>triangle == 0</CODE>,
+<CODE>circle == 1</CODE> and
+<CODE>square == 2</CODE>)
+<UL>
+<LI>The first enumerated value is assigned 0 by default and each succeeding
+value is computed by adding one to the previous value, but arbitrary integral
+values may be assigned to enumerated values:
+<PRE>
+enum wierdtype {first = 5, min = first, second, third,
+		fourth = 28, fifth = fourth - 6, sixth,
+		seventh = 1, max = seventh};
+</PRE>is almost the same as<PRE>
+#define first		5
+#define min		5
+#define second		6
+#define third		7
+#define fourth		28
+#define fifth		22
+#define sixth		23
+#define seventh		1
+#define max		1
+</PRE>
+</UL>
+<LI>The range of values assigned to an <CODE>enum</CODE> variable
+is not strictly limited to the values associated with that
+<CODE>enum</CODE> and an enumerated value may be assigned to variables other
+than those declared with the <CODE>enum</CODE>
+associated with that enumerated value
+<UL>
+<LI>For example, the following:
+<PRE>
+{
+	enum dwarf {happy, sleepy, sneezy, dopey,
+		    doc, grumpy, bashful} d;
+	enum {anonymous, unnamed, hidden};
+	int i;
+	enum dwarf x;
+
+	d = 17;
+	i = happy;
+	x = hidden;
+}
+</PRE>
+are all legal, though they may cause the compiler to issue a warning
+<LI>In other words, an <CODE>enum <VAR>name</VAR></CODE> is merely
+a suggestion that an "<CODE>int</CODE>-like" variable use the associated
+constants; the compiler does nothing to enforce it or to restrict the values
+to those specified by the <CODE>enum</CODE>
+</UL>
+<LI>Enumerated value namespace is shared with variable namespace
+<UL>
+<LI>If you do <CODE>enum vowel {a, e, i, o, u};</CODE>, you cannot
+use <CODE>i</CODE> as a variable name later
+</UL>
+<LI>Why use <CODE>enum</CODE> instead of <CODE>const int</CODE>?
+<UL>
+<LI>Compilers usually treat a <CODE>const int</CODE> as a variable, meaning
+its value must be fetched from memory before being used
+<LI><CODE>enum</CODE> values are usually treated just like integral constants
+and are thus immediately accessible
+</UL>
+<LI>Why use <CODE>enum</CODE> instead of <CODE>#define</CODE>?
+<UL>
+<LI><CODE>#define</CODE>d values are replaced with integral constants
+by the preprocessor, so the compiler never sees them
+<LI><CODE>enum</CODE> values are handled by the compiler and thus can have
+entries in the symbol table which could be used by a debugger
+</UL>
+</UL>
+<HR>
+<H2>struct</H2>
+<UL>
+<LI><CODE>struct</CODE> is a way of encapsulating a group of related values
+in a single object
+<LI>For example:
+<PRE>
+{
+	struct timestamp {
+		int hour;
+		int minute;
+		int second;
+	} t;
+
+	t.hour = 9;
+	t.minute = 45;
+	t.second = 32;
+}
+</PRE>
+<LI>The <CODE>-&gt</CODE> operator may be used to access the members of a
+structure via a pointer:
+<PRE>
+{
+	struct timestamp *tp = &t;
+
+	tp-&gt;hour += 1;
+	tp-&gt;second = 0;
+}
+</PRE>
+<LI>Structure initialization is similar to array initialization:
+<PRE>
+{
+	struct timestamp t2 = { 12, 0, 0 };
+	struct datestamp {
+		int year;
+		char month[4];
+		int day;
+	} d = { 1996, "Jan", 24 };
+}
+</PRE>
+<LI>Structures may include other structures:
+<PRE>
+{
+	struct stamp {
+		struct timestamp ts;
+		struct datestamp ds;
+	} dt = { { 1, 2, 3 }, { 1492, "Feb", 28 } };
+
+	dt.ts.hour = dt.ts.minute = dt.ts.second = 0;
+	dt.ds.year = 1776;
+	dt.ds.day = 4;
+}
+</PRE>
+<LI>Structures may even include pointers to themselves:
+<PRE>
+	struct list {
+		int ival;
+		double dval;
+		struct list *next;
+	};
+</PRE>
+<LI>Structure members are placed in memory in the same order in which they
+are declared
+<LI>There may be unused areas of memory between structure members in
+order to ensure that members are properly aligned
+<UL>
+<LI>The following two structures are actually different sizes:
+<PRE>
+	struct small {
+		char c1, c2, c3;
+		int i1, i2, i3;
+	};
+	struct big {
+		char c1;
+		int i1;
+		char c2;
+		int i2;
+		char c3;
+		int i3;
+	};
+</PRE>
+</UL>
+</UL>
+<H2>bitfield</H2>
+<UL>
+<LI>Bitfields may be used inside a structure to pack several members into
+a single word of memory:
+<PRE>
+	struct smaller {
+		unsigned sevenbits : 7;
+		unsigned fourvals : 2;
+	} s;
+</PRE>
+creates a structure with two members: <CODE>sevenbits</CODE> which
+can hold values between 0 (binary 0000000) and 127 (binary 1111111),
+and <CODE>fourvals</CODE> which can hold values between 0 (binary 00)
+and 3 (binary 11)
+<UL>
+<LI>The bitfield length <EM>may</EM> be a constant expression, similar
+to an array length specifier
+</UL>
+<LI>Bitfields are addressed just like other structure members:
+<PRE>
+	s.sevenbits = 32;
+	s.fourvals /= 2;
+</PRE>
+<LI>Bitfields can be either <CODE>signed</CODE> or <CODE>unsigned</CODE>
+(though pre-ANSI compilers may only allow <CODE>unsigned</CODE>)
+<LI>Bitfields may be unnamed, to act as padding between named fields:
+<PRE>
+	struct holey {
+		unsigned sea : 3;
+		unsigned     : 3;
+		unsigned see : 3;
+	};
+</PRE>
+<LI>The <CODE>&</CODE> operator cannot be applied to a bitfield,
+since a bitfield is only a subset of the bits in a word and thus
+has no address
+<LI>Bitfields may be mixed in with other types in a structure
+<LI>Some machine-level details of bitfields are implementation-defined:
+<UL>
+<LI>Bitfields may be stored left to right (big-endian) or
+right to left (little-endian), depending on the machine architecture
+<LI>Some compilers will allow bitfields to overlap a word boundary,
+others will silently add padding bits
+<LI>The maximum size of a bitfield is implementation-defined
+</UL>
+<LI>These implementation-defined aspects make data created with
+bitfields inherently nonportable between dissimilar machines
+</UL>
+<H2>union</H2>
+<UL>
+<LI>A <CODE>union</CODE> is a way of defining two or more variables
+which share the same memory:
+<PRE>
+	union manytypes {
+		char c;
+		int i;
+		double d;
+		unsigned *up;
+	} u;
+</PRE>
+<LI>Since memory is shared, assigning a value to <CODE>u.i</CODE>
+and then assigning a value to <CODE>u.c</CODE> will cause some part of
+the value of <CODE>u.i</CODE> to be overwritten
+<LI>Attempting to use <CODE>union</CODE>s to manipulate datatypes
+behind the compiler's back will void your warantee
+<LI>References to a <CODE>union</CODE> look just like <CODE>struct</CODE>
+references (though the effect is totally different):
+<PRE>
+{
+	union manytypes mt, *mtp;
+
+	mtp = &mt;
+	mt.d = 1.2345;
+	mtp-&gt;i = 3;
+}
+</PRE>
+sets <CODE>mt.d</CODE> to <CODE>1.2345</CODE>, then sets <CODE>mt.i</CODE>
+to <CODE>3</CODE> (which destroys the <CODE>mt.d</CODE> value, since the
+two share the same memory)
+</UL>
+<H2>typedef</H2>
+<UL>
+<LI><CODE>typedef</CODE> is used to create an alias for another type:
+<PRE>
+	typedef char *string;
+</PRE>
+creates a keyword named <CODE>string</CODE>
+which can be used as
+an alias for "pointer to character":
+<PRE>
+	string str;
+	char *cp;
+</PRE>
+both create pointers to <CODE>char</CODE>
+<LI><CODE>typedef</CODE> is a bit more flexible than <CODE>#define</CODE>
+because, since <CODE>typedef</CODE> is handled by the compiler, more
+complex types can be handled with <CODE>typedef</CODE> than could be dealt
+with by the textual manipulations available to the preprocessor
+<UL>
+<LI>There is no easy way to do something like:
+<PRE>
+	typedef int (*CmpFunc)(const char *, const char *);
+	CmpFunc strcmp, numcmp;
+</PRE>
+using only the preprocessor
+</UL>
+</UL>
+<A HREF="array_ptr.html">Previous</A>, 
+<A HREF="index.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/odds_n_ends.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

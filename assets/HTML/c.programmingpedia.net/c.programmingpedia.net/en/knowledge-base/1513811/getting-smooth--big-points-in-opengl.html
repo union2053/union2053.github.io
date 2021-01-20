@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1513811/getting-smooth--big-points-in-opengl by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Getting smooth, big points in OpenGL | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Getting smooth, big points in OpenGL | C Language Knowledge Base">
+        <title>[SOLVED] Getting smooth, big points in OpenGL | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="getting-smooth-big-points-in-opengl">Getting smooth, big points in OpenGL</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/glut.html">glut</a></span>
+                        <span class="tag-item"><a href="../tag/opengl.html">opengl</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I started playing around with OpenGL and GLUT. I would like to draw some points, but the problem is that they turn out to be squares, and I would like them to be round dots (filled circles).</p>
+
+<p>This is what I do:</p>
+
+<pre><code>void onInitialization( ) 
+{ 
+    glEnable( GL_POINT_SMOOTH );
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    glPointSize( 6.0 );
+}    
+
+void onDisplay()
+{
+    glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glBegin( GL_POINTS );
+        glColor3f( 0.95f, 0.207, 0.031f );
+    for ( int i = 0; i &lt; g_numPoints; ++i )
+    {
+        glVertex2f( g_points[i].X, g_points[i].Y );
+    }
+    glEnd();
+    glFinish();
+    glutSwapBuffers();
+}
+</code></pre>
+
+<p>This is the result:
+<img src="https://dl.getdropbox.com/u/1470243/Screenshot-5.jpg" alt="Result of the above code"></p>
+
+<p>The points show up where expected, only their shape is wrong.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/140367/tamas-szelei" target="_blank"><span itemprop="name">Tamás Szelei</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">27</div>
+                                    <div itemprop="dateCreated">4/27/2019 6:00:52 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Unlike what was said previously, this is possible with the fixed-function pipeline, even with the <code>GL_POINTS</code> primitive type, as long as you have support for OpenGL 1.4 or the <code>GL_ARB_point_sprite</code> extension. Consult this document, or the OpenGL core specification of your choice : <a href="http://www.opengl.org/registry/specs/ARB/point_sprite.txt" rel="nofollow noreferrer">http://www.opengl.org/registry/specs/ARB/point_sprite.txt</a></p>
+
+<p><code>GL_ARB_point_sprite</code> converts points into "quads", i.e a polygon with the form of a plane. The exact primitive type it gets converted to is not defined by the specification, though it is not important. What is important is that <code>GL_COORD_REPLACE</code> auto-generates texture coordinates for the surface when enabled, so you can texture-map them with a sphere-shaped RGBA-texture.</p>
+
+<p><strong>EDIT: It seems like you (the poster) is right.</strong> Anti-aliased points get rounded with respect to their radius. (I've used OpenGL since 2003, and I didn't know this. [/shame])
+So enabling <code>GL_POINT_SMOOTH</code> while you have a <code>multisample-able</code> visual/pixelformat, you get rounded points. Still, multisampling can be slow, so I'd implement both. Textured quads are cheap.</p>
+
+<p><strong>To request a visual with multisampling with XLib</strong>, use these two attributes in the list to glXChooseFBConfig():</p>
+
+<p><code>GLX_SAMPLE_BUFFERS</code> - its value should be <code>True</code>. This is an on/off toggle.<br/>
+<code>GLX_SAMPLES</code> - the number of samples.</p>
+
+<p><strong>To request a pixelformat with Win32</strong>, use these two attributes in the list to ChoosePixelFormat() or wglChoosePixelFormatARB():</p>
+
+<p><code>WGL_SAMPLE_BUFFERS_ARB</code> Same as above, a toggle.<br/>
+<code>WGL_SAMPLES_ARB</code> Same as above, the number of samples.</p>
+
+<p><strong>It seem that you can OR in the flag <code>GLUT_MULTISAMPLE</code> to <code>glutInitDisplayMode</code> to get multisampling in GLUT</strong>, but you can't request the number of sample buffers.</p>
+
+<p>Here is how alpha-blended quads could be implemented using your test case.</p>
+
+<pre><code>void onInitialization( ) 
+{
+    glEnable( GL_POINT_SPRITE ); // GL_POINT_SPRITE_ARB if you're
+                                 // using the functionality as an extension.
+
+    glEnable( GL_POINT_SMOOTH );
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    glPointSize( 6.0 );
+
+    /* assuming you have setup a 32-bit RGBA texture with a legal name */
+    glActiveTexture(GL_TEXTURE0);
+    glEnable( GL_TEXTURE_2D );
+    glTexEnv(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+    glTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glBindTexture(GL_TEXTURE_2D, texture_name);
+}    
+
+void onDisplay()
+{
+    glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glBegin( GL_POINTS );
+        glColor4f( 0.95f, 0.207, 0.031f, 1.0f );
+    for ( int i = 0; i &lt; g_numPoints; ++i )
+    {
+        glVertex2f( g_points[i].X, g_points[i].Y );
+    }
+    glEnd();
+    glFinish();
+    glutSwapBuffers();
+}
+</code></pre>
+
+<p>Image of rounded points using per-fragment alpha blending + textures: <a href="https://i.stack.imgur.com/xwjEF.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/xwjEF.png" width="320" height="240"/></a><br>
+<sub>(source: <a href="http://www.mechcore.net/images/gfx/sprite0.png" rel="nofollow noreferrer">mechcore.net</a>)</sub>  <br/>
+Image of rounded points by using <code>GL_POINT_SMOOTH</code> and multisampling: <a href="https://i.stack.imgur.com/mXxXW.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/mXxXW.png" width="320" height="240"/></a><br>
+<sub>(source: <a href="http://www.mechcore.net/images/gfx/sprite1.png" rel="nofollow noreferrer">mechcore.net</a>)</sub>  <br/>
+A little sample I made which shows both techniques. Requires libSDL and libGLEW to compile: </p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;exception&gt;
+#include &lt;memory&gt;
+#include &lt;SDL/SDL.h&gt; 
+#include &lt;cmath&gt;
+#include &lt;GL/glew.h&gt;
+#include &lt;GL/glu.h&gt;
+
+#define ENABLE_TEXTURE
+#define ENABLE_MULTISAMPLE
+
+int Width = 800;
+int Height = 600;
+
+void Draw(void);
+void Init(void);
+
+inline float maxf(float a, float b)
+{
+    if(a &lt; b)
+        return b;
+    return a;
+}
+
+inline float minf(float a, float b)
+{
+    if(a &gt; b)
+        return b;
+    return a;
+}
+
+GLuint texture_name;
+
+int main(void)
+{
+    try {
+        SDL_Init(SDL_INIT_VIDEO);
+        SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+        SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+        SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+        SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+        SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+        SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        #ifdef ENABLE_MULTISAMPLE
+            SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+            SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+        #endif
+        SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, 1);
+        SDL_SetVideoMode(Width, Height, 32, SDL_OPENGL);
+
+        glewInit();
+        Init();
+
+        SDL_Event event;
+        bool running = true;
+
+        while(running){
+            while(SDL_PollEvent(&amp;event)){
+                switch(event.type)
+                {
+                    case SDL_KEYDOWN:
+                        if(event.key.keysym.sym == SDLK_ESCAPE)
+                            running = false;
+                    break;
+                    case SDL_QUIT:
+                        running = false;
+                    break;
+                }
+            }
+            Draw();
+            SDL_GL_SwapBuffers();
+        }
+        SDL_Quit();
+    }
+    catch(std::bad_alloc&amp; e)
+    {
+        std::cout &lt;&lt; "Out of memory. " &lt;&lt; e.what() &lt;&lt; std::endl;
+        exit(-1);
+    }
+    catch(std::exception&amp; e)
+    {
+        std::cout &lt;&lt; "Runtime exception: " &lt;&lt; e.what() &lt;&lt; std::endl;
+        exit(-1);
+    }
+    catch(...)
+    {
+        std::cout &lt;&lt; "Runtime exception of unknown type." &lt;&lt; std::endl;
+        exit(-1);
+    }
+    return 0;
+}
+
+void Init(void)
+{
+    const GLint texWidth = 256;
+    const GLint texHeight = 256;
+    const float texHalfWidth = 128.0f;
+    const float texHalfHeight = 128.0f;
+    printf("INIT: \n");
+
+    unsigned char* pData = new unsigned char[texWidth*texHeight*4];
+    for(int y=0; y&lt;texHeight; ++y){
+        for(int x=0; x&lt;texWidth; ++x){
+            int offs = (x + y*texWidth) * 4;
+            float xoffs = ((float)x - texHalfWidth) / texHalfWidth;
+            float yoffs = ((float)y - texHalfWidth) / texHalfHeight;
+            float alpha = 1.0f - std::sqrt(xoffs*xoffs + yoffs*yoffs);
+            if(alpha &lt; 0.0f)
+                alpha = 0.0f;
+            pData[offs + 0] = 255; //r
+            pData[offs + 1] = 0; //g
+            pData[offs + 2] = 0; //b
+            pData[offs + 3] = 255.0f * alpha; // * 
+            //printf("alpha: %f\n", pData[x + y*texWidth + 3]);
+        }
+    }
+
+    #ifdef ENABLE_TEXTURE
+    glGenTextures(1, &amp;texture_name);
+    glActiveTexture(GL_TEXTURE0);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture_name);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texWidth, texHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pData);
+    glEnable(GL_POINT_SPRITE);
+    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    #endif
+
+    glPointSize(32.0f);
+
+    glMatrixMode(GL_PROJECTION);
+    glOrtho(0, Width, 0, Height, -1.0f, 1.0f);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisable(GL_DEPTH_TEST);
+
+    #ifdef ENABLE_MULTISAMPLE
+        glEnable(GL_POINT_SMOOTH);
+    #endif
+
+    GLenum e;
+    do{
+        e = glGetError();
+        printf("%s\n",gluErrorString(e));
+    } while(e != GL_NO_ERROR);
+
+    delete [] pData;
+}
+
+void Draw(void)
+{
+    const int gridWidth = 1024;
+    const int gridHeight = 1024;
+    float t1, t2;
+
+    t1 = t2 = (float)SDL_GetTicks() * 0.001f;
+    t1 = fmod(t1, 10.0f) / 10.0f;
+    t2 = fmod(t2, 4.0f) / 4.0f;
+    float scale = 0.5f + (-sin(t2 * 2.0 * M_PI) + 1.0f) * 1.2f;
+    //glColor4f(0.4f, 0.5f, 0.9f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+
+    glTranslatef((Width&gt;&gt;1), (Height&gt;&gt;1), 0.0f);
+    glScalef(scale,scale,scale);
+    glRotatef(t1 * 360.0f, 0.0f, 0.0f, 1.0f);
+
+    glBegin(GL_POINTS);
+    for(int j=0; j&lt;gridHeight; j+=64){
+        for(int i=0; i&lt;gridWidth; i+=64){ 
+            glVertex2i(i-(gridWidth&gt;&gt;1),j-(gridHeight&gt;&gt;1));
+        }
+    }
+    glEnd();
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/0/mads-elvheim" target="_blank"><span itemprop="name">Mads Elvheim</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/1513811/getting-smooth--big-points-in-opengl#answer-0</div>
+                                            <div itemprop="upvoteCount">39</div>
+                                            <div itemprop="dateCreated">4/28/2019 7:06:40 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Mads' answer provides everything you need if you go for the fixed function pipeline. However, if you have a system that does not provide the <code>ARB_point_sprite</code> extension or with a broken implementation (some ATI drivers), you can solve this part also with geometry shaders. The <a href="http://www.opengl.org/registry/specs/ARB/geometry_shader4.txt" rel="nofollow noreferrer"><code>ARB_geometry_shader4</code></a>
+ extension allows you to convert a point primitive to two triangles, which can be used as the quad created by the <code>ARB_point_sprite</code> extension. On OpenGL 3.2, geometry shaders are already supported in core, no extension needed. The OpenGL wiki has <a href="http://www.opengl.org/wiki/Geometry_Shaders#Short_Example" rel="nofollow noreferrer">two examples</a>.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/127183/malte-clasen" target="_blank">Malte Clasen</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/1513811" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/1513811/getting-smooth--big-points-in-opengl by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:14:33 GMT -->
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-length-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Variable-Length Arrays</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Variable-Length Arrays'>C Variable-Length Arrays</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Variable-Length Arrays</h1>
+<a class ='btn btn-outline-dark' href=c-finding-the-size-of-an-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-multidimensional-arrays.html>Next</a><p>You can define arrays where the dimensions are determined at runtime, when you execute the program. 
+
+</p><p>Here's an example: 
+</p><div class='myCodeDiv'><button id='XZGGL' class='myCopyButton' data-clipboard-target='#AJDAK'>Copy</button><pre  id='AJDAK' style='font-size:18px;' class='code'>size_t size = 0; 
+printf(<span class='q'>"Enter the number of elements you want to store: "</span>); 
+scanf(<span class='q'>"%zd"</span>, &amp;size); 
+<span class='r'>float</span> values[size];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XZGGL');clipboard.on('success', function(e) {$('#XZGGL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XZGGL').text('error');});</script></div><p>In this fragment, you read a value from the keyboard into size. 
+
+</p><p>The value of size is then used to specify the dimension for the values array. 
+
+</p><p>Because <i style='color:blue'>size_t</i> is an implementation-defined integer type, you may get compiler errors if you 
+try to read such a value using %d. 
+
+</p><p>The z in %zd tells the compiler that it applies to size_t. 
+
+</p><p>You can also define arrays with two or more dimensions with any or all of the dimensions determined at  
+execution time, for example: 
+</p><div class='myCodeDiv'><button id='UYMOW' class='myCopyButton' data-clipboard-target='#AWRDA'>Copy</button><pre  id='AWRDA' style='font-size:18px;' class='code'>size_t rows = 0; 
+size_t columns = 0; 
+printf(<span class='q'>"Enter the number of rows you want to store: "</span>); 
+scanf(<span class='q'>"%zd"</span>, &amp;rows); 
+printf(<span class='q'>"Enter the number of columns in a row: "</span>); 
+scanf(<span class='q'>"%zd"</span>, &amp;columns); 
+<span class='r'>float</span> beans[rows][columns];
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UYMOW');clipboard.on('success', function(e) {$('#UYMOW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UYMOW').text('error');});</script></div><p>Here you read both dimensions for a two-dimensional array from the keyboard. Both array dimensions  
+are determined at execution time. 
+
+</p><p>A C11-conforming compiler does not have to implement support for variable-length arrays (<b>VLAs</b>)  
+because it is an optional feature. 
+
+</p><p>If it does not, the symbol <i style='color:blue'>__STDC_NO_VLA__</i> must be defined as 1. 
+
+</p><p>You can check for support for variable-length arrays using this code: 
+</p><div class='myCodeDiv'><button id='JPOZS' class='myCopyButton' data-clipboard-target='#SAVQX'>Copy</button><pre  id='SAVQX' style='font-size:18px;' class='code'>#ifdef   __STDC_NO_VLA__ 
+  printf(<span class='q'>"Variable length arrays are not supported.\n"</span>); 
+  exit(1); 
+#endif
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JPOZS');clipboard.on('success', function(e) {$('#JPOZS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JPOZS').text('error');});</script></div><p>The <i style='color:blue'>printf</i>() statement and the following <i style='color:blue'>exit</i>() statement will be included in the program if the 
+symbol <i style='color:blue'>__STDC_NO_VLA__</i> is defined.  
+
+</p><p>Despite the fact that  
+constant <i style='color:blue'>__STDC_NO_VLA__</i> is 1 in Visual Studio 2019, this compiler does not support VLA. 
+
+</p><p>You can see a variable-length, one-dimensional array working in the following code:
+
+</p><p>This program calculates an average grade, but this time allocates an array that accommodates the
+exact number of grades to be entered:
+
+</p><div class='myCodeDiv'><button id='VVPEO' class='myCopyButton' data-clipboard-target='#FXTKR'>Copy</button><pre  id='FXTKR' style='font-size:18px;' class='code'>#define _CRT_SECURE_NO_WARNINGS
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    size_t nGrades = 0;                           <span class='c'>// Number of grades</span>
+    printf(<span class='q'>"Enter the number of grades: "</span>);
+    scanf(<span class='q'>"%zd"</span>, &amp;nGrades);
+    <span class='r'>int</span> grades[nGrades];                          <span class='c'>// Array storing nGrades values</span>
+    <span class='r'>long</span> sum = 0L;                                <span class='c'>// Sum of the numbers</span>
+    <span class='r'>float</span> average = 0.0f;                         <span class='c'>// Average of the numbers</span>
+    
+    printf(<span class='q'>"\nEnter the %zd grades:\n"</span>, nGrades); <span class='c'>// Prompt for the input</span>
+    
+    <span class='c'>// Read the ten numbers to be averaged</span>
+    <span class='r'>for</span>(size_t i = 0 ; i &lt; nGrades ; ++i)
+    {
+      printf(<span class='q'>"%2zd&gt; "</span>,i + 1);
+      scanf(<span class='q'>"%d"</span>, &amp;grades[i]);                    <span class='c'>// Read a grade</span>
+      sum += grades[i];                           <span class='c'>// Add it to sum</span>
+    }
+    
+    printf(<span class='q'>"The grades you entered are:\n"</span>);
+    <span class='r'>for</span>(size_t i = 0 ; i &lt; nGrades ; ++i)
+    {
+        printf(<span class='q'>"Grade[%2zd] = %3d  "</span>, i + 1, grades[i]);
+        
+        <span class='r'>if</span>((i+1) % 5 == 0)                          <span class='c'>// After 5 values</span>
+        printf(<span class='q'>"\n"</span>);                             <span class='c'>// Go to a new line</span>
+    }
+    
+    average = (<span class='r'>float</span>)sum/nGrades;                 <span class='c'>// Calculate the average</span>
+    
+    printf(<span class='q'>"\nAverage of the %zd grades entered is: %.2f\n"</span>, nGrades, average);
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VVPEO');clipboard.on('success', function(e) {$('#VVPEO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VVPEO').text('error');});</script></div><p>here is some typical output:
+</p><img src='data:image/png;base64,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cIHnB5dKTKmcMStVSpwU4iUcfKlo6Kp54pv09LPzit2daIcVuynRD432oEMfnCkNNT24LCW4gOAyIanEh8Qj/ejXEoLfI4vXcW4RXIqbWd+ceHCZuLtz7VBppfh1vUpwKX5wuiUcE1y2ZffZVUZ9BBd4eHCJnz3Tn725Iw3HXDG5xYjL0m+xi4JLcWAp1w71IJtoikoPuqgPPuB26HX9cWQeT3fGj+ACzx9xEVwEF8FFcLlycFndaIILXCi4xL+XDH2Jqc9SLE7O3coXQY6ZnJuYXHnMZgZLaE/OnbK7t9Q02OkNtc2Y4zL3YlNujQfMcTnrrqIDgkt8OMdzXGBJcOlODoif8oZmGwRvf23chh25XTl3WozfWTp9LV/nKHTvs12xmfEStt6NyvXdHVkgV4ehhsrtrG3wHvtiS+aaeqgRIjd+J7r8Yh3iH670AsGt8ORcWD7iclM+9vYFAILLbXpKnaV9AYDgcvUOUjdpXwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgC8x38BMvDegbjSpjAAAAAASUVORK5CYII='><h3>Note
+
+</h3><p>You define a variable, <i style='color:blue'>nGrades</i>, that will store the number of grades to be entered and read the value
+from the keyboard:
+</p><div class='myCodeDiv'><button id='PVSNT' class='myCopyButton' data-clipboard-target='#JNQIJ'>Copy</button><pre  id='JNQIJ' style='font-size:18px;' class='code'>size_t nGrades = 0;                           <span class='c'>// Number of grades</span>
+printf(<span class='q'>"Enter the number of grades: "</span>);
+scanf(<span class='q'>"%zd"</span>, &amp;nGrades);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PVSNT');clipboard.on('success', function(e) {$('#PVSNT').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PVSNT').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-finding-the-size-of-an-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-multidimensional-arrays.html>Next</a><h2>Related</h2><UL><LI><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds</a></LI><LI><a href='c-specifying-an-array-size.html'>C Specifying an Array Size</a></LI><LI><a href='c-finding-the-size-of-an-array.html'>C Finding the Size of an Array</a></LI><LI><a href='c-multidimensional-arrays.html'>C Multidimensional Arrays</a></LI><LI><a href='c-initializing-a-two-dimensional-array.html'>C Initializing a Two-Dimensional Array</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-length-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

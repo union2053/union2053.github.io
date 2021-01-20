@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-function-format.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C printf() function format</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C printf() function format'>C printf() function format</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>printf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-conversion-specifications.html'>C printf conversion spec
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C printf function format
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-escape.html'>C printf escape %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conversion-specification-modifiers-for-printf.html'>C printf Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-flags.html'>C printf() Flags
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-integer.html'>C printf int width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-floating-point-value.html'>C printf floating width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-string-options.html'>C printf string options
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-return-value-of-printf.html'>C Return Value of printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-printf.html'>C printf * Modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-print-columns-of-data.html'>C printf() align column
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>printf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-output.html'>C printf int
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() octal hexadecimal
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-outputting-floating-point-values.html'>C printf() floating point 
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-character-output.html'>C printf() char
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-function.html'>C scanf() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-format-specifier.html'>C scanf format specifier
+
+The most general form of a format specifier is shown in the follows:
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-specification-characters.html'>C scanf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-scanf.html'>C scanf() * Modifier
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-reading-characters-and-string-using-scanf-with-filter.html'>C scanf() string %[]
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-2.html'>C Exercise 2
+
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C printf() function format</h1>
+<a class ='btn btn-outline-dark' href=c-printf-function-conversion-specifications.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-function-escape.html>Next</a><p>The prototype of the <i style='color:blue'>printf</i>() function is 
+</p><div class='myCodeDiv'><button id='AASZF' class='myCopyButton' data-clipboard-target='#JESCU'>Copy</button><pre  id='JESCU' style='font-size:18px;' class='code'><span class='r'>int</span> printf(Control-string, item1, item2,...);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AASZF');clipboard.on('success', function(e) {$('#AASZF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AASZF').text('error');});</script></div><p>Item1, item2, and so on, are the items to be printed.
+
+</p><p>They can be variables or constants, or expressions that are evaluated first before the value is printed.
+
+</p><p>Control-string is a character string describing how the items are to be printed.
+
+</p><p>The control string should contain a conversion specifier for each item to be printed.
+
+</p><p>For example, consider the following statement:
+
+</p><div class='myCodeDiv'><button id='MWKWX' class='myCopyButton' data-clipboard-target='#GOJJZ'>Copy</button><pre  id='GOJJZ' style='font-size:18px;' class='code'>printf(<span class='q'>"The %d ate %f pies.\n"</span>, number, pies);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MWKWX');clipboard.on('success', function(e) {$('#MWKWX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MWKWX').text('error');});</script></div><p>Control-string is the phrase enclosed in double quotes.
+
+</p><p>This particular control string contains two conversion specifiers corresponding to
+number and pies-the two items to be displayed.
+
+</p><p>Here is another line from the example:
+</p><div class='myCodeDiv'><button id='KKCMO' class='myCopyButton' data-clipboard-target='#FVATN'>Copy</button><pre  id='FVATN' style='font-size:18px;' class='code'>printf(<span class='q'>"The value of pi is %f.\n"</span>, PI);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KKCMO');clipboard.on('success', function(e) {$('#KKCMO').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KKCMO').text('error');});</script></div><p>This time, the list of items has just one member-the symbolic constant PI.
+
+</p><p>Control-string contains two distinct forms of information:
+</p><UL style='font-size:19px;'><LI>Characters that are actually printed</LI><LI>Conversion specifications</LI></UL><p>Don't forget to use one conversion specification for each item in the list following
+Control-string.
+
+</p><p>If you want to print only a phrase, you don't need any conversion specifications.
+
+</p><p>If you just want to print data, you can remove the wordings.
+
+
+</p><p>The general form of an output format specifier is shown in the following:
+
+</p><center><img alt='c-printf-format.png' src='data:image/png;base64,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'/></center><br/><table class='table table-hover'><thead><tr><th>Item</th><th>  Meaning</th></tr></thead><tbody><tr><td>%</td><td> Start of format specification</td></tr><tr><td>flags</td><td>   Flags affecting the output (Optional)</td></tr><tr><td>field_width</td><td> Minimum number of characters in the output field  (Optional)</td></tr><tr><td>precision</td><td>Precision  specification (Optional) </td></tr><tr><td>size_flag</td><td>  Size flag that modifies the conversion type (Optional) </td></tr><tr><td>conversion_character</td><td>  Specifies type of  output conversion to  be used </td></tr></tbody></table><h3>Flags
+
+</h3><p>Effects of the Optional Flag Characters in an Output Specification 
+</p><table class='table table-hover'><thead><tr><th>Character<br/></th><th>   Use<br/></th></tr></thead><tbody><tr><td>+<br/> <br/></td><td>   Ensures there's always a plus or minus sign preceding a signed output value.<br/>   Only negative values have a sign by default                                 <br/></td></tr><tr><td>-<br/> <br/></td><td>   Specifies that the output value is left justified in the output field and padded with blanks on the right.<br/>   The default positioning of the output is right justified                                                  <br/></td></tr><tr><td>0<br/></td><td>   Specifies that integer or floating-point values should be padded with zeros instead of spaces to fill out the field width to the left<br/></td></tr><tr><td>#<br/> <br/> <br/> <br/> <br/></td><td>   Ensures that                                                                       <br/>   0 is to precede an octal output value.                                             <br/>   0x or 0X is to precede a hexadecimal output value.                                 <br/>   A floating-point output value will contain a decimal point.                        <br/>   For g or G floating-point conversion characters, trailing zeros will not be omitted<br/></td></tr><tr><td>Space<br/></td><td>   Specifies that positive or zero values are preceded by a space rather than a plus sign<br/></td></tr></tbody></table><h3>Field width
+
+</h3><p>The optional field_width specifies the minimum field width for the output value. 
+
+</p><p>If the value requires more characters, the field is simply expanded. 
+
+</p><p>If it requires less than the minimum specified, it is padded with blanks, unless the field width is preceded by the 0 flag, as in 09, for example, where it would be filled on  
+the left with zeros. 
+
+</p><h3>Precision specifier
+
+</h3><p>The optional precision specifier is generally used with floating-point output values and consists of a  
+period followed by an integer. 
+
+</p><p>A specifier of  .n indicates that n decimal places are to be output for a floating-point value. 
+
+</p><p>If the value to be output has more than n significant digits, it's rounded. 
+
+</p><p>If you use it for integer conversions, it specifies the minimum number of digits to appear in the output. 
+
+</p><p>The optional size flags are shown in the following table. 
+</p><table class='table table-hover'><thead><tr><th>Flag<br/></th><th>   Effect<br/></th></tr></thead><tbody><tr><td>h<br/></td><td>   integer conversion specifier applies to a  short or unsigned short argument<br/></td></tr><tr><td>hh<br/></td><td>   integer conversion specifier applies to a  signed char or unsigned char argument<br/></td></tr><tr><td>l (lowercase L)<br/>               <br/></td><td>   integer conversion specifier applies to a  long or unsigned long argument.                                              <br/>   This also specifies that a c specifier applies to a <i style='color:blue'>wint_t</i> argument and an s specifier applies to a <i style='color:blue'>wchar_t</i> argument<br/></td></tr><tr><td>ll (lowercase LL)<br/></td><td>   integer conversion specifier applies to a  long long or unsigned long  long argument<br/></td></tr><tr><td>j<br/></td><td>   integer conversion specifier applies to an  <i style='color:blue'>intmax_t</i> or <i style='color:blue'>uintmax_t</i> argument<br/></td></tr><tr><td>z<br/> <br/></td><td>   integer conversion specifier applies to a  size_t argument.                                                         <br/>   This flag avoids potential compiler warnings that can arise because size_t is an implementation-defined integer type<br/></td></tr><tr><td>t<br/></td><td>   integer conversion specifier applies to a  <i style='color:blue'>ptrdiff_t</i> argument<br/></td></tr><tr><td>L<br/></td><td>   floating-point conversion specifier applies to a  long double argument<br/></td></tr></tbody></table><h3>Conversion character
+
+</h3><p>The conversion character that you use defines how the output is to be converted for a particular type of  
+value. Conversion characters are defined in the following table. 
+
+</p><p>Applicable to integers:  
+
+</p><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>d or  i<br/></td><td>   Signed decimal integer<br/></td></tr><tr><td>o<br/></td><td>   Unsigned octal integer<br/></td></tr><tr><td>u<br/></td><td>   Unsigned decimal integer<br/></td></tr><tr><td>x<br/></td><td>   Unsigned hexadecimal integer with lowercase hexadecimal digits  a, b, c, d, e, f<br/></td></tr><tr><td>X<br/></td><td>   As x but with uppercase hexadecimal digits A, B, C, D, E, F<br/></td></tr></tbody></table><p>Applicable to floating point:
+</p><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>f or  F<br/></td><td>   Signed decimal value<br/></td></tr><tr><td>e<br/></td><td>   Signed decimal value with exponent<br/></td></tr><tr><td>E<br/></td><td>   As e but with  E for exponent instead of e<br/></td></tr><tr><td>g<br/></td><td>   As e or f depending on size of value and precision<br/></td></tr><tr><td>G<br/></td><td>   As g but with  E for exponent values<br/></td></tr><tr><td>a or A<br/>      <br/>      <br/></td><td>   Presents a double value in hexadecimal form with the hexadecimal  <br/>   mantissa value preceded by 0x or 0X and any exponent prefixed with<br/>   p or  P, thus <i style='color:blue'>0xh.hhhhp+/-d</i> where h is a hexadecimal digit      <br/></td></tr></tbody></table><p>Applicable to pointers: 
+</p><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>p<br/> <br/></td><td>   Outputs the value of the argument as a pointer and the value is presented in an implementation-defined way.<br/>   The argument should be of type void*                                                                       <br/></td></tr></tbody></table><p>Applicable to characters: 
+
+</p><table class='table table-hover'><thead><tr><th>Item<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>c<br/></td><td>   Single character or precision characters<br/></td></tr><tr><td>s<br/></td><td>   All characters until '\0' is reached or precision characters have been output<br/></td></tr></tbody></table><p>The %n specifier only works with <i style='color:blue'>printf</i>(). 
+
+</p><p>The corresponding argument must be of type int*, and the effect of %n is to store the number of characters written to stdout so far. 
+
+</p><h3> Escape Sequences 
+
+</h3><p>You can include whitespace characters in the format control string for  <i style='color:blue'>printf</i>(). 
+
+P;Whitespace characters are the newline, carriage return, form-feed, space, and tab. Some of these are represented by escape  
+sequences, and these are shown in the following table. 
+
+</p><table class='table table-hover'><thead><tr><th>Escape sequence<br/></th><th>   Description<br/></th></tr></thead><tbody><tr><td>\b<br/></td><td>   Backspace<br/></td></tr><tr><td>\f<br/></td><td>   Form-feed or page eject<br/></td></tr><tr><td>\n<br/></td><td>   Newline<br/></td></tr><tr><td>\r<br/>  <br/></td><td>   Carriage return (for printers) or move to the beginning of the<br/>   current line for output to the screen                         <br/></td></tr><tr><td>\t<br/></td><td>   Horizontal tab<br/></td></tr></tbody></table><p>You use the escape sequence  \\ in a format control string to output the backslash character, \. 
+
+</p><p>If this weren't the case, it would be impossible to output a backslash, because it would always be assumed that a  
+backslash was the start of an escape sequence. 
+
+</p><p>To write a % character to stdout, you use %%. 
+
+</p><p>You can't use % by itself because this would be interpreted as the start of a format specification. 
+</p><a class ='btn btn-outline-dark' href=c-printf-function-conversion-specifications.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-function-escape.html>Next</a><h2>Related</h2><UL><LI><a href='c-bitwise-operator-review-question-1.html'>C Bitwise operator review question 1</a></LI><LI><a href='c-bitwise-operator-exercise-1.html'>C Bitwise Operator Exercise 1</a></LI><LI><a href='c-printf-function-conversion-specifications.html'>C printf() Function conversion specifications</a></LI><LI><a href='c-printf-function-escape.html'>C printf() function escape %</a></LI><LI><a href='c-conversion-specification-modifiers-for-printf.html'>C Conversion Specification Modifiers for printf()</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-function-format.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

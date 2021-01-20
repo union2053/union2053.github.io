@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/3750/formatted-input-output by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Formatted Input/Output | C Language Tutorial">
+        <meta name="description" property="og:description" content="Formatted Input/Output | C Language Tutorial">
+        <title>Formatted Input/Output | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="formatted-input-output">Formatted Input/Output</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+
+
+            <h2 id="conversion-specifiers-for-printing">Conversion Specifiers for printing</h2>
+            <div>
+                <table><thead><tr><th>Conversion Specifier</th><th>Type of Argument</th><th>Description</th></tr></thead><tbody><tr><td><code>i</code>, <code>d</code></td><td>int</td><td>prints decimal</td></tr><tr><td><code>u</code></td><td>unsigned int</td><td>prints decimal</td></tr><tr><td><code>o</code></td><td>unsigned int</td><td>prints octal</td></tr><tr><td><code>x</code></td><td>unsigned int</td><td>prints hexadecimal, lower-case</td></tr><tr><td><code>X</code></td><td>unsigned int</td><td>prints hexadecimal, upper-case</td></tr><tr><td><code>f</code></td><td>double</td><td>prints float with a default precision of 6, if no precision is given (lower-case used for special numbers <code>nan</code> and <code>inf</code> or <code>infinity</code>)</td></tr><tr><td><code>F</code></td><td>double</td><td>prints float with a default precision of 6, if no precision is given (upper-case used for special numbers <code>NAN</code> and <code>INF</code> or <code>INFINITY</code>)</td></tr><tr><td><code>e</code></td><td>double</td><td>prints float with a default precision of 6, if no precision is given, using scientific notation using mantissa/exponent; lower-case exponent and special numbers</td></tr><tr><td><code>E</code></td><td>double</td><td>prints float with a default precision of 6, if no precision is given, using scientific notation using mantissa/exponent; upper-case exponent and special numbers</td></tr><tr><td><code>g</code></td><td>double</td><td>uses either <code>f</code> or <code>e</code> <em>[see below]</em></td></tr><tr><td><code>G</code></td><td>double</td><td>uses either <code>F</code> or <code>E</code> <em>[see below]</em></td></tr><tr><td><code>a</code></td><td>double</td><td>prints hexadecimal, lower-case</td></tr><tr><td><code>A</code></td><td>double</td><td>prints hexadecimal, upper-case</td></tr><tr><td><code>c</code></td><td>char</td><td>prints single character</td></tr><tr><td><code>s</code></td><td>char*</td><td>prints string of characters up to a <code>NUL</code> terminator, or truncated to length given by precision, if specified</td></tr><tr><td><code>p</code></td><td>void*</td><td>prints <code>void</code>-pointer value; a non<code>void</code>-pointer should be explicitly converted (&quot;cast&quot;) to <code>void*</code>; pointer to object only, <strong>not</strong> a function-pointer</td></tr><tr><td><code>%</code></td><td>n/a</td><td>prints the <code>%</code> character</td></tr><tr><td><code>n</code></td><td>int *</td><td><strong><em>write</em></strong> the number of bytes printed so far into the <code>int</code> pointed at.</td></tr></tbody></table>
+<p>Note that length modifiers can be applied to <code>%n</code> (e.g. <code>%hhn</code> indicates that <em>a following <code>n</code> conversion specifier applies to a pointer to a <code>signed char</code>
+argument</em>, according to the ISO/IEC 9899:2011 §7.21.6.1 ¶7).</p>
+<p>Note that the floating point conversions apply to types <code>float</code> and <code>double</code> because of default promotion rules — §6.5.2.2 Function calls, ¶7 <em>The ellipsis notation in a function prototype declarator causes
+argument type conversion to stop after the last declared parameter. The default argument
+promotions are performed on trailing arguments.</em>)  Thus, functions such as <code>printf()</code> are only ever passed <code>double</code> values, even if the variable referenced is of type <code>float</code>.</p>
+<p>With the <code>g</code> and <code>G</code> formats, the choice between <code>e</code> and <code>f</code> (or <code>E</code> and <code>F</code>) notation is documented in the C standard and in the POSIX specification for <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html" rel="nofollow noreferrer"><code>printf()</code></a>:</p>
+<blockquote>
+<p>The double argument representing a floating-point number shall be converted in the style <code>f</code> or <code>e</code> (or in the style <code>F</code> or <code>E</code> in the case of a <code>G</code> conversion specifier), depending on the value converted and the precision. Let <code>P</code> equal the precision if non-zero, 6 if the precision is omitted, or 1 if the precision is zero. Then, if a conversion with style <code>E</code> would have an exponent of <code>X</code>:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>If P &gt; X &gt;= -4, the conversion shall be with style <code>f</code> (or <code>F</code>) and precision <code>P - (X+1)</code>.</li>
+<li>Otherwise, the conversion shall be with style <code>e</code> (or <code>E</code>) and precision <code>P - 1</code>.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Finally, unless the '#' flag is used, any trailing zeros shall be removed from the fractional portion of the result and the decimal-point character shall be removed if there is no fractional portion remaining.</p>
+</blockquote>
+
+
+            </div>
+            <h2 id="length-modifiers">Length modifiers</h2>
+            <div>
+                <p>The C99 and C11 standards specify the following length modifiers for <code>printf()</code>; their meanings are:</p>
+<table><thead><tr><th>Modifier</th><th>Modifies</th><th>Applies to</th></tr></thead><tbody><tr><td>hh</td><td>d, i, o, u, x, or X</td><td><code>char</code>, <code>signed char</code> or <code>unsigned char</code></td></tr><tr><td>h</td><td>d, i, o, u, x, or X</td><td><code>short int</code> or <code>unsigned short int</code></td></tr><tr><td>l</td><td>d, i, o, u, x, or X</td><td><code>long int</code> or <code>unsigned long int</code></td></tr><tr><td>l</td><td>a, A, e, E, f, F, g, or G</td><td><code>double</code> (for compatibility with <code>scanf()</code>; undefined in C90)</td></tr><tr><td>ll</td><td>d, i, o, u, x, or X</td><td><code>long long int</code> or <code>unsigned long long int</code></td></tr><tr><td>j</td><td>d, i, o, u, x, or X</td><td><code>intmax_t</code> or <code>uintmax_t</code></td></tr><tr><td>z</td><td>d, i, o, u, x, or X</td><td><code>size_t</code> or the corresponding signed type (<code>ssize_t</code> in POSIX)</td></tr><tr><td>t</td><td>d, i, o, u, x, or X</td><td><code>ptrdiff_t</code> or the corresponding unsigned integer type</td></tr><tr><td>L</td><td>a, A, e, E, f, F, g, or G</td><td><code>long double</code></td></tr></tbody></table>
+<p>If a length modifier appears with any conversion specifier other than as specified above, the behavior is undefined.</p>
+<p><a href="https://msdn.microsoft.com/en-us/library/tcxf1dw6.aspx" rel="nofollow noreferrer">Microsoft</a> specifies some different length modifiers, and explicitly does not support <code>hh</code>, <code>j</code>, <code>z</code>, or <code>t</code>.</p>
+<table><thead><tr><th>Modifier</th><th>Modifies</th><th>Applies to</th></tr></thead><tbody><tr><td>I32</td><td>d, i, o, x, or X</td><td><code>__int32</code></td></tr><tr><td>I32</td><td>o, u, x, or X</td><td><code>unsigned __int32</code></td></tr><tr><td>I64</td><td>d, i, o, x, or X</td><td><code>__int64</code></td></tr><tr><td>I64</td><td>o, u, x, or X</td><td><code>unsigned __int64</code></td></tr><tr><td>I</td><td>d, i, o, x, or X</td><td><code>ptrdiff_t</code> (that is, <code>__int32</code> on 32-bit platforms, <code>__int64</code> on 64-bit platforms)</td></tr><tr><td>I</td><td>o, u, x, or X</td><td><code>size_t</code> (that is, <code>unsigned __int32</code> on 32-bit platforms, <code>unsigned __int64</code> on 64-bit platforms)</td></tr><tr><td>l or L</td><td>a, A, e, E, f, g, or G</td><td><code>long double</code> (In Visual C++, although <code>long double</code> is a distinct type, it has the same internal representation as <code>double</code>.)</td></tr><tr><td>l or w</td><td>c or C</td><td>Wide character with <code>printf</code> and <code>wprintf</code> functions. (An <code>lc</code>, <code>lC</code>, <code>wc</code> or <code>wC</code> type specifier is synonymous with <code>C</code> in <code>printf</code> functions and with <code>c</code> in <code>wprintf</code> functions.)</td></tr><tr><td>l or w</td><td>s, S, or Z</td><td>Wide-character string with <code>printf</code> and <code>wprintf</code> functions. (An <code>ls</code>, <code>lS</code>, <code>ws</code> or <code>wS</code> type specifier is synonymous with <code>S</code> in <code>printf</code> functions and with <code>s</code> in <code>wprintf</code> functions.)</td></tr></tbody></table>
+<p>Note that the <code>C</code>, <code>S</code>, and <code>Z</code> conversion specifiers and the <code>I</code>, <code>I32</code>, <code>I64</code>, and <code>w</code> length modifiers are Microsoft extensions.  Treating <code>l</code> as a modifier for <code>long double</code> rather than <code>double</code> is different from the standard, though you'll be hard-pressed to spot the difference unless <code>long double</code> has a different representation from <code>double</code>.</p>
+
+
+            </div>
+            <h2 id="printing-format-flags">Printing format flags</h2>
+            <div>
+                <p>The C standard (C11, and C99 too) defines the following flags for <code>printf()</code>:</p>
+<table><thead><tr><th>Flag</th><th>Conversions</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-</code></td><td>all</td><td>The result of the conversion shall be left-justified within the field. The conversion is right-justified if this flag is not specified.</td></tr><tr><td><code>+</code></td><td>signed numeric</td><td>The result of a signed conversion shall always begin with a sign ( '+' or '-' ). The conversion shall begin with a sign only when a negative value is converted if this flag is not specified.</td></tr><tr><td><code>&lt;space&gt;</code></td><td>signed numeric</td><td>If the first character of a signed conversion is not a sign or if a signed conversion results in no characters, a <code>&lt;space&gt;</code> shall be prefixed to the result. This means that if the <code>&lt;space&gt;</code> and '<code>+</code>' flags both appear, the <code>&lt;space&gt;</code> flag shall be ignored.</td></tr><tr><td><code>#</code></td><td>all</td><td>Specifies that the value is to be converted to an alternative form. For <code>o</code> conversion, it shall increase the precision, if and only if necessary, to force the first digit of the result to be a zero (if the value and precision are both 0, a single 0 is printed). For <code>x</code> or <code>X</code> conversion specifiers, a non-zero result shall have <code>0x</code> (or <code>0X</code>) prefixed to it. For <code>a</code>, <code>A</code>, <code>e</code>, <code>E</code>, <code>f</code>, <code>F</code>, <code>g</code>, and <code>G</code> conversion specifiers, the result shall always contain a radix character, even if no digits follow the radix character. Without this flag, a radix character appears in the result of these conversions only if a digit follows it. For <code>g</code> and <code>G</code> conversion specifiers, trailing zeros shall not be removed from the result as they normally are. For other conversion specifiers, the behavior is undefined.</td></tr><tr><td><code>0</code></td><td>numeric</td><td>For d, i, o, u, x, X, a, A, e, E, f, F, g, and G conversion specifiers, leading zeros (following any indication of sign or base) are used to pad to the field width rather than performing space padding, except when converting an infinity or NaN. If the '0' and '-' flags both appear, the '0' flag is ignored. For d, i, o, u, x, and X conversion specifiers, if a precision is specified, the '0' flag shall be ignored. ⌦ If the '0' and <code>&lt;apostrophe&gt;</code> flags both appear, the grouping characters are inserted before zero padding. For other conversions, the behavior is undefined. ⌫</td></tr></tbody></table>
+<p>These flags are also supported by <a href="https://msdn.microsoft.com/en-us/library/8aky45ct.aspx" rel="nofollow noreferrer">Microsoft</a> with the same meanings.</p>
+<p>The POSIX specification for <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html" rel="nofollow noreferrer"><code>printf()</code></a> adds:</p>
+<table><thead><tr><th>Flag</th><th>Conversions</th><th>Meaning</th></tr></thead><tbody><tr><td><code>'</code></td><td>i, d, u, f, F, g, G</td><td>The integer portion of the result of a decimal conversion shall be formatted with thousands' grouping characters. For other conversions the behavior is undefined. The non-monetary grouping character is used.</td></tr></tbody></table>
+
+            </div>
+            <h2 id="printing-the-difference-of-the-values-of-two-pointers-to-an-object">Printing the Difference of the Values of two Pointers to an Object</h2>
+            <div>
+                <p><a class='doc-link' href="http://www.riptutorial.com/c/example/2205/pointer-arithmetic">Subtracting the values of two pointers</a> to an object results in a signed integer <sup>*1</sup>. So it would be printed using <em>at least</em> the <code>d</code> conversion specifier.</p>
+<p>To make sure there is a type being wide enough to hold such a &quot;pointer-difference&quot;, since C99 <code>&lt;stddef.h&gt;</code> defines the type <code>ptrdiff_t</code>. To print a <code>ptrdiff_t</code> use the <code>t</code> length modifier.</p>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<pre><code>#include &lt;stdlib.h&gt; /* for EXIT_SUCCESS */
+#include &lt;stdio.h&gt; /* for printf() */
+#include &lt;stddef.h&gt; /* for ptrdiff_t */
+
+
+int main(void)
+{
+  int a[2];
+  int * p1 = &amp;a[0], * p2 = &amp;a[1];
+  ptrdiff_t pd = p2 - p1;
+
+  printf(&quot;p1 = %p\n&quot;, (void*) p1);
+  printf(&quot;p2 = %p\n&quot;, (void*) p2);
+  printf(&quot;p2 - p1 = %td\n&quot;, pd);
+
+  return EXIT_SUCCESS;
+}
+</code></pre>
+<p>The result might look like this:</p>
+<pre><code>p1 = 0x7fff6679f430
+p2 = 0x7fff6679f434
+p2 - p1 = 1
+</code></pre>
+<p>Please note that the resulting value of the difference is scaled by the size of the type the pointers subtracted point to, an <code>int</code> here. The size of an <code>int</code> for this example is 4.</p>
+<hr />
+<p><sup>*1</sup>If the two pointers to be subtracted do not point to the same object the behaviour is undefined.</p>
+</div></div>
+
+
+            </div>
+            <h2 id="printing-the-value-of-a-pointer-to-an-object">Printing the Value of a Pointer to an Object</h2>
+            <div>
+                <p>To print the value of a pointer to an object (as opposed to a function pointer) use the <code>p</code> conversion specifier. It is defined to print <code>void</code>-pointers only, so to print out the value of a non <code>void</code>-pointer it needs to be explicitly converted (&quot;casted*&quot;) to <code>void*</code>.</p>
+<pre><code>#include &lt;stdlib.h&gt; /* for EXIT_SUCCESS */
+#include &lt;stdio.h&gt;  /* for printf() */
+
+int main(void)
+{
+  int i;
+  int * p = &amp;i;
+
+  printf(&quot;The address of i is %p.\n&quot;, (void*) p);
+
+  return EXIT_SUCCESS;
+}
+</code></pre>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C99&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C99</span></span></span><div class='version-specific-content'>
+<h4 id="using-lt-inttypes-h-gt-and-uintptr-t">Using <code>&lt;inttypes.h&gt;</code> and <code>uintptr_t</code></h4>
+<p>Another way to print pointers in C99 or later uses the <code>uintptr_t</code> type and the macros from <code>&lt;inttypes.h&gt;</code>:</p>
+<pre><code>#include &lt;inttypes.h&gt; /* for uintptr_t and PRIXPTR */
+#include &lt;stdio.h&gt;    /* for printf() */
+
+int main(void)
+{
+  int  i;
+  int *p = &amp;i;
+
+  printf(&quot;The address of i is 0x%&quot; PRIXPTR &quot;.\n&quot;, (uintptr_t)p);
+
+  return 0;
+}
+</code></pre>
+<p>In theory, there might not be an integer type that can hold any pointer converted to an integer (so the type <code>uintptr_t</code> might not exist).  In practice, it does exist.  Pointers to functions need not be convertible to the <code>uintptr_t</code> type — though again they most often are convertible.</p>
+<p>If the <code>uintptr_t</code> type exists, so does the <code>intptr_t</code> type.  It is not clear why you'd ever want to treat addresses as signed integers, though.</p>
+</div></div>
+<div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;Equal&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;K&amp;R&quot;},{&quot;Type&quot;:&quot;LessThan&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C89&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-equal'>K&amp;R</span></span><span class='version'><span class='version-constraint version-kind-lessthan'>C89</span></span></span><div class='version-specific-content'>
+<h3 id="pre-standard-history-">Pre-Standard History:</h3>
+<p>Prior to C89 during K&amp;R-C times there was no type <code>void*</code> (nor header <code>&lt;stdlib.h&gt;</code>, nor prototypes, and hence no <code>int main(void)</code> notation), so the pointer was cast to <code>long unsigned int</code> and printed using the <code>lx</code> length modifier/conversion specifier.</p>
+<p><strong>The example below is just for informational purpose. Nowadays this is invalid code, which very well might provoke the infamous <a class='doc-link' href="http://www.riptutorial.com/c/topic/364/undefined-behavior">Undefined Behaviour</a>.</strong></p>
+<pre><code>#include &lt;stdio.h&gt; /* optional in pre-standard C - for printf() */
+
+int main()
+{
+  int  i;
+  int *p = &amp;i;
+
+  printf(&quot;The address of i is 0x%lx.\n&quot;, (long unsigned) p);
+
+  return 0;
+}
+</code></pre>
+</div></div>
+
+
+            </div>
+            <h2 id="the-printf-function">The printf() Function</h2>
+            <div>
+                <p>Accessed through including <code>&lt;stdio.h&gt;</code>, the function <code>printf()</code> is the primary tool used for printing text to the console in C.</p>
+<pre><code>printf(&quot;Hello world!&quot;);
+// Hello world!
+</code></pre>
+<p>Normal, unformatted character arrays can be printed by themselves by placing them directly in between the parentheses.</p>
+<pre><code>printf(&quot;%d is the answer to life, the universe, and everything.&quot;, 42);
+// 42 is the answer to life, the universe, and everything.
+
+int x = 3;
+char y = 'Z';
+char* z = &quot;Example&quot;;
+printf(&quot;Int: %d, Char: %c, String: %s&quot;, x, y, z);
+// Int: 3, Char: Z, String: Example
+</code></pre>
+<p>Alternatively, integers, floating-point numbers, characters, and more can be printed using the escape character <code>%</code>, followed by a character or sequence of characters denoting the format, known as the <em>format specifier</em>.</p>
+<p>All additional arguments to the function <code>printf()</code> are separated by commas, and these arguments should be in the same order as the format specifiers. Additional arguments are ignored, while incorrectly typed arguments or a lack of arguments will cause errors or undefined behavior. Each argument can be either a literal value or a variable.</p>
+<p>After successful execution, the number of characters printed is returned with type <code>int</code>. Otherwise, a failure returns a negative value.</p>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../507/files-and-i-o-streams.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../1006/function-parameters.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-07-25</div>
+        <div itemprop="datePublished">2016-07-25</div>
+        <div itemprop="dateModified">2017-05-31</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=3750" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_-1870441016" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#conversion-specifiers-for-printing">
+                    Conversion Specifiers for printing
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#length-modifiers">
+                    Length modifiers
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#printing-format-flags">
+                    Printing format flags
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#printing-the-difference-of-the-values-of-two-pointers-to-an-object">
+                    Printing the Difference of the Values of two Pointers to an Object
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#printing-the-value-of-a-pointer-to-an-object">
+                    Printing the Value of a Pointer to an Object
+                </a>
+            
+
+
+<ul id="accordion_-366355752" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#pre-standard-history-">
+                    Pre-Standard History:
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#the-printf-function">
+                    The printf() Function
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/3750/formatted-input-output by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

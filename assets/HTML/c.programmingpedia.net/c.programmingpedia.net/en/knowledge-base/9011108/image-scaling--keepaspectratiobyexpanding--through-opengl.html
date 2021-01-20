@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9011108/image-scaling--keepaspectratiobyexpanding--through-opengl by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:11:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Image scaling (KeepAspectRatioByExpanding) through OpenGL | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Image scaling (KeepAspectRatioByExpanding) through OpenGL | C Language Knowledge Base">
+        <title>[SOLVED] Image scaling (KeepAspectRatioByExpanding) through OpenGL | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="image-scaling-keepaspectratiobyexpanding-through-opengl">Image scaling (KeepAspectRatioByExpanding) through OpenGL</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/image-scaling.html">image-scaling</a></span>
+                        <span class="tag-item"><a href="../tag/opengl.html">opengl</a></span>
+                        <span class="tag-item"><a href="../tag/qt.html">qt</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to implement <strong>image scaling in OpenGL using only <code>glTexCoord2f()</code> and <code>glVertex2f()</code></strong>.</p>
+
+<p>Let me explain: after loading a <code>QImage</code> and sending it to the gpu with <code>glTexImage2D()</code> I have to <strong>perform image scaling operations based on Qt's specification</strong>. Qt defines these 3 operations (see image below):</p>
+
+<p><img src="https://i.stack.imgur.com/nd6st.png" alt="enter image description here"></p>
+
+<p>I think this is the only way to do it since my application is a Qt plugin and this task needs to be done inside the <code>paint()</code> method of the class. The <code>IgnoreAspectRatio</code> operation is pretty straight forward and it's working right now. The <code>KeepAspectRatio</code> gave me some trouble initially but now it's also working. Unfortunally, <strong><code>KeepAspectRatioByExpanding</code> is giving me headaches</strong>.</p>
+
+<p>I'm sharing what I've done so far and I appreciate your help on this issue:</p>
+
+<p><strong>main.cpp:</strong></p>
+
+<pre><code>#include "oglWindow.h"
+#include &lt;QtGui/QApplication&gt;
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    oglWindow w;
+    w.show();
+    return a.exec();
+}
+</code></pre>
+
+<p><strong>oglWindow.cpp:</strong></p>
+
+<pre><code>#include "oglWindow.h"
+#include "glwidget.h"
+
+#include &lt;QGridLayout&gt;
+
+oglWindow::oglWindow(QWidget *parent, Qt::WFlags flags)
+    : QMainWindow(parent, flags)
+{
+    ui.setupUi(this);
+    GLWidget *openGL = new GLWidget(this);
+
+    QGridLayout *layout = new QGridLayout;
+    setLayout(layout);
+}
+
+oglWindow::~oglWindow()
+{
+}
+</code></pre>
+
+<p><strong>oglWindow.h:</strong></p>
+
+<pre><code>#ifndef oglWindow_H
+#define oglWindow_H
+
+#include &lt;QtGui/QMainWindow&gt;
+#include "ui_yuv_to_rgb.h"
+
+class oglWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    oglWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
+    ~oglWindow();
+
+private:
+    Ui::oglWindowClass ui;
+};
+
+#endif // oglWindow_H
+</code></pre>
+
+<p><strong>glwidget.cpp:</strong></p>
+
+<pre><code>#ifdef _MSC_VER
+    #include &lt;windows.h&gt;
+    #include &lt;GL/glew.h&gt;
+    #include &lt;GL/gl.h&gt;  
+#else
+    #include &lt;GL/gl.h&gt;
+#endif
+
+#include "glwidget.h"
+
+#include &lt;QDebug&gt;
+
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;assert.h&gt;
+
+
+static const char *p_s_fragment_shader =
+    "#extension GL_ARB_texture_rectangle : enable\n"
+    "uniform sampler2DRect tex;"
+    "uniform float ImgHeight, chromaHeight_Half, chromaWidth;"
+    "void main()"
+    "{"
+    "    vec2 t = gl_TexCoord[0].xy;" // get texcoord from fixed-function pipeline
+    "    float CbY = ImgHeight + floor(t.y / 4.0);"
+    "    float CrY = ImgHeight + chromaHeight_Half + floor(t.y / 4.0);"
+    "    float CbCrX = floor(t.x / 2.0) + chromaWidth * floor(mod(t.y, 2.0));"
+    "    float Cb = texture2DRect(tex, vec2(CbCrX, CbY)).x - .5;"
+    "    float Cr = texture2DRect(tex, vec2(CbCrX, CrY)).x - .5;"
+    "    float y = texture2DRect(tex, t).x;" // redundant texture read optimized away by texture cache
+    "    float r = y + 1.28033 * Cr;"
+    "    float g = y - .21482 * Cb - .38059 * Cr;"
+    "    float b = y + 2.12798 * Cb;"
+    "    gl_FragColor = vec4(r, g, b, 1.0);"
+    "}";
+
+
+GLWidget::GLWidget(QWidget *parent)
+: QGLWidget(QGLFormat(QGL::SampleBuffers), parent), _frame(NULL)
+{
+    setAutoFillBackground(false);
+    setMinimumSize(640, 480);
+
+    /* Load 1280x768 YV12 frame from the disk */
+
+    _frame = new QImage(1280, 768, QImage::Format_RGB888);  
+    if (!_frame)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::GLWidget !!! Failed to create _frame";
+        return;
+    }
+
+    std::ifstream yuv_file("bloco.yv12", std::ios::in | std::ios::binary | std::ios::ate);
+    if (!yuv_file.is_open())
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::GLWidget !!! Failed to load yuv file";
+        return;
+    }
+    int yuv_file_sz = yuv_file.tellg();
+
+    unsigned char* memblock = new unsigned char[yuv_file_sz];
+    if (!memblock)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::GLWidget !!! Failed to allocate memblock";
+        return;
+    }
+
+    yuv_file.seekg(0, std::ios::beg);
+    yuv_file.read((char*)memblock, yuv_file_sz);
+    yuv_file.close();
+
+    qMemCopy(_frame-&gt;scanLine(0), memblock, yuv_file_sz);
+
+    delete[] memblock;
+}
+
+GLWidget::~GLWidget()
+{
+    if (_frame)
+        delete _frame;
+}
+
+void GLWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    qDebug() &lt;&lt; "&gt; GLWidget::paintEvent OpenGL:"  &lt;&lt; ((painter.paintEngine()-&gt;type() != QPaintEngine::OpenGL &amp;&amp;
+                                       painter.paintEngine()-&gt;type() != QPaintEngine::OpenGL2) ? "disabled" : "enabled");   
+
+    QGLContext* context = const_cast&lt;QGLContext *&gt;(QGLContext::currentContext());
+    if (!context)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! Unable to retrieve OGL context";
+        return;
+    }
+    context-&gt;makeCurrent();
+
+    painter.fillRect(QRectF(QPoint(0, 0), QSize(1280, 768)), Qt::black);
+
+    painter.beginNativePainting();
+
+    /* Initialize GL extensions */
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! glewInit failed with: " &lt;&lt; err;
+        return;
+    }
+    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! System doesn't support GLEW_VERSION_2_1";
+        return;
+    }
+
+    /* Setting up texture and transfering data to the GPU */
+
+    static GLuint texture = 0;
+    if (texture != 0)
+    {
+        context-&gt;deleteTexture(texture);
+    }
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glBindTexture(GL_TEXTURE_RECTANGLE_ARB, texture);
+
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0,
+            GL_LUMINANCE, _frame-&gt;width(), _frame-&gt;height() + _frame-&gt;height() / 2, 0,
+            GL_LUMINANCE, GL_UNSIGNED_BYTE, _frame-&gt;bits());
+
+    assert(glGetError() == GL_NO_ERROR);
+
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glEnable(GL_TEXTURE_RECTANGLE_ARB);
+
+    glClearColor(0.3, 0.3, 0.4, 1.0);
+
+    int img_width = _frame-&gt;width();
+    int img_height = _frame-&gt;height();
+    int offset_x = 0;
+    int offset_y = 0;
+
+    GLfloat gl_width = width(); // GL context size
+    GLfloat gl_height = height();
+
+    /* Initialize shaders and execute them */   
+    _init_shaders();
+
+    qDebug() &lt;&lt; "paint(): gl_width:" &lt;&lt; gl_width &lt;&lt; " gl_height:" &lt;&lt; gl_height &lt;&lt;  
+        " img:" &lt;&lt; _frame-&gt;width() &lt;&lt; "x" &lt;&lt; _frame-&gt;height();
+
+    int fill_mode = 1;
+    switch (fill_mode)
+    {
+        case 0: // KeepAspectRatioByExpanding
+        {
+            // need help!
+        }
+        break;
+
+        case 1: // IgnoreAspectRatio
+        {
+            // Nothing special needs to be done for this operation.
+        }
+        break;
+
+        case 2: // KeepAspectRatio
+        default:
+        {
+          // Compute aspect ratio and offset Y for widescreen borders
+            double ratiox = img_width/gl_width;
+            double ratioy = img_height/gl_height;
+
+            if (ratiox &gt; ratioy)
+            {
+                gl_height = qRound(img_height / ratiox);
+                offset_y = qRound((height() - gl_height) / 2);
+                gl_height += offset_y * 2;
+            }
+            else
+            {
+                gl_width = qRound(img_width / ratioy);
+                offset_x = qRound((width() - gl_width) / 2);
+                gl_width += offset_x * 2;
+            }
+        }
+        break;
+    }
+
+
+    // Mirroring texture coordinates to flip the image vertically
+    glBegin(GL_QUADS);  
+    glTexCoord2f(0.0f, img_height);                  glVertex2f(offset_x, gl_height - offset_y);
+    glTexCoord2f(img_width, img_height);             glVertex2f(gl_width - offset_x, gl_height - offset_y);
+    glTexCoord2f(img_width, 0.0f);                   glVertex2f(gl_width - offset_x, offset_y);
+    glTexCoord2f(0.0f, 0.0f);                        glVertex2f(offset_x, offset_y);
+    glEnd();
+
+    painter.endNativePainting();
+}
+
+void GLWidget::_init_shaders()
+{       
+    int f = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(f, 1, &amp;p_s_fragment_shader, 0);
+    glCompileShader(f);
+
+    _shader_program = glCreateProgram();
+    glAttachShader(_shader_program, f);
+    glLinkProgram(_shader_program);
+
+    glUseProgram(_shader_program);
+
+    glUniform1i(glGetUniformLocation(_shader_program, "tex"), 0);
+    glUniform1f(glGetUniformLocation(_shader_program, "ImgHeight"), _frame-&gt;height());
+    glUniform1f(glGetUniformLocation(_shader_program, "chromaHeight_Half"), (_frame-&gt;height() / 2) / 2);
+    glUniform1f(glGetUniformLocation(_shader_program, "chromaWidth"), _frame-&gt;width() / 2);   
+}
+</code></pre>
+
+<p><strong>glwidget.h</strong>:</p>
+
+<pre><code>#include &lt;QtOpenGL/QGLWidget&gt;
+#include &lt;QtGui/QImage&gt;
+#include &lt;QPainter&gt;
+
+class GLWidget : public QGLWidget
+{
+    Q_OBJECT
+
+public:
+    GLWidget(QWidget *parent = 0);
+    ~GLWidget();
+
+    void paintEvent(QPaintEvent *event);    
+
+private:
+    void _init_shaders();
+    bool _checkShader(int n_shader_object);
+
+    QImage* _frame;
+    int _shader_program;
+};
+</code></pre>
+
+<p><strong>And here you can <a href="http://www.mediafire.com/?jqymgthd2vab8ub" rel="noreferrer">download the data file</a></strong>.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/176769/karlphillip" target="_blank"><span itemprop="name">karlphillip</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">17</div>
+                                    <div itemprop="dateCreated">1/26/2012 4:04:31 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>You can simply copy "keep aspect ratio" branch (provided that it is working), and just flip the ratio comparison sign, i.e.:</p>
+
+<pre><code>if (ratiox &gt; ratioy)
+</code></pre>
+
+<p>becomes</p>
+
+<pre><code>if (ratiox &lt;= ratioy)
+</code></pre>
+
+<p>But i'm not sure it is actually working (ratio calculations had always bugged me - and yours is tricky), and don't have Qt atm so I can't try. But that should do it. Note that the image will be centered (not left-aligned as on your image), but that can be fixed pretty easily.</p>
+
+<p><strong>EDIT</strong>:</p>
+
+<p>Here is source code that works in GLUT application (no QT, sorry):</p>
+
+<pre><code>static void DrawObject(void)
+{ 
+    int img_width = 1280;//_frame-&gt;width();
+    int img_height = 720;//_frame-&gt;height();
+    GLfloat offset_x = -1;
+    GLfloat offset_y = -1;
+
+    int p_viewport[4];
+    glGetIntegerv(GL_VIEWPORT, p_viewport); // don't have QT :'(
+
+    GLfloat gl_width = p_viewport[2];//width(); // GL context size
+    GLfloat gl_height = p_viewport[3];//height();
+
+    int n_mode = 0;
+    switch(n_mode) {
+    case 0: // KeepAspectRatioByExpanding
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            if(ratioImg &lt; ratioScreen) {
+                gl_width = 2;
+                gl_height = 2 * ratioScreen / ratioImg;
+            } else {
+                gl_height = 2;
+                gl_width = 2 / ratioScreen * ratioImg;
+            }
+            // calculate image size
+        }
+        break;
+
+    case 1: // IgnoreAspectRatio
+        gl_width = 2;
+        gl_height = 2;
+        // OpenGL normalized coordinates are -1 to +1 .. hence width (or height) = +1 - (-1) = 2
+        break;
+
+    case 2: // KeepAspectRatio
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            if(ratioImg &gt; ratioScreen) {
+                gl_width = 2;
+                gl_height = 2 * ratioScreen / ratioImg;
+            } else {
+                gl_height = 2;
+                gl_width = 2 / ratioScreen * ratioImg;
+            }
+            // calculate image size
+
+            offset_x = -1 + (2 - gl_width) * .5f;
+            offset_y = -1 + (2 - gl_height) * .5f;
+            // center on screen
+        }
+        break;
+    }
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    // just simple ortho view, no fancy transform ...
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(offset_x, offset_y);
+
+        glTexCoord2f(ImgWidth, 0);
+        glVertex2f(offset_x + gl_width, offset_y);
+
+        glTexCoord2f(ImgWidth, ImgHeight);
+        glVertex2f(offset_x + gl_width, offset_y + gl_height);
+
+        glTexCoord2f(0, ImgHeight);
+        glVertex2f(offset_x, offset_y + gl_height);
+    glEnd();
+    // draw a single quad
+}
+</code></pre>
+
+<p>This works by comparing <strong>screen</strong> aspect ratio to <strong>image</strong> aspect ratio. You are actually comparing ratios of image width to screen width with image height to screen height. That is suspicious at least, not to say wrong.</p>
+
+<p>Also, <em>normalized</em> OpenGL coordinates (provided a simple orthogonal view) are in range (-1, -1) for lower-left corner to (1, 1) for upper right. That means <em>normalized</em> width and height are both 2, and offset is (-1, -1). The rest of the code should be self-explanatory. In case texture is flipped (I tested with kind of generic texture, not sure if it was upright), just change texture coordinates in the respective direction (swap 0s for ImgWidth (or height) and vice versa).</p>
+
+<p><strong>EDIT2</strong>:</p>
+
+<p>Using pixel coordinates (not using normalized OpenGL coordinates) is even simpler. You can use:</p>
+
+<pre><code>static void DrawObject(void)
+{ 
+    int img_width = 1280;//_frame-&gt;width();
+    int img_height = 720;//_frame-&gt;height();
+    GLfloat offset_x = 0;
+    GLfloat offset_y = 0;
+
+    int p_viewport[4];
+    glGetIntegerv(GL_VIEWPORT, p_viewport);
+
+    GLfloat gl_width = p_viewport[2];//width(); // GL context size
+    GLfloat gl_height = p_viewport[3];//height();
+
+    int n_mode = 0;
+    switch(n_mode) {
+    case 0: // KeepAspectRatioByExpanding
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            if(ratioImg &lt; ratioScreen)
+                gl_height = gl_width / ratioImg;
+            else
+                gl_width = gl_height * ratioImg;
+            // calculate image size
+        }
+        break;
+
+    case 1: // IgnoreAspectRatio
+        break;
+
+    case 2: // KeepAspectRatio
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            GLfloat orig_width = gl_width;
+            GLfloat orig_height = gl_height;
+            // remember those to be able to center the quad on screen
+
+            if(ratioImg &gt; ratioScreen)
+                gl_height = gl_width / ratioImg;
+            else
+                gl_width = gl_height * ratioImg;
+            // calculate image size
+
+            offset_x = 0 + (orig_width - gl_width) * .5f;
+            offset_y = 0 + (orig_height - gl_height) * .5f;
+            // center on screen
+        }
+        break;
+    }
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(-1, -1, 0);
+    glScalef(2.0f / p_viewport[2], 2.0f / p_viewport[3], 1.0);
+    // just simple ortho view for vertex coordinate to pixel matching
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(offset_x, offset_y);
+
+        glTexCoord2f(img_width, 0);
+        glVertex2f(offset_x + gl_width, offset_y);
+
+        glTexCoord2f(img_width, img_height);
+        glVertex2f(offset_x + gl_width, offset_y + gl_height);
+
+        glTexCoord2f(0, img_height);
+        glVertex2f(offset_x, offset_y + gl_height);
+    glEnd();
+    // draw a single quad
+}
+</code></pre>
+
+<p>Note that both versions of the code do use NPOT textures. To adapt the code to fit into your object, one would do something like this:</p>
+
+<pre><code>void GLWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    qDebug() &lt;&lt; "&gt; GLWidget::paintEvent OpenGL:"  &lt;&lt; ((painter.paintEngine()-&gt;type() != QPaintEngine::OpenGL &amp;&amp;
+                                       painter.paintEngine()-&gt;type() != QPaintEngine::OpenGL2) ? "disabled" : "enabled");   
+
+    QGLContext* context = const_cast&lt;QGLContext *&gt;(QGLContext::currentContext());
+    if (!context)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! Unable to retrieve OGL context";
+        return;
+    }
+    context-&gt;makeCurrent();
+
+    painter.fillRect(QRectF(QPoint(0, 0), QSize(1280, 768)), Qt::black);
+
+    painter.beginNativePainting();
+
+    /* Initialize GL extensions */
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! glewInit failed with: " &lt;&lt; err;
+        return;
+    }
+    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+    {
+        qDebug() &lt;&lt; "&gt; GLWidget::paintEvent !!! System doesn't support GLEW_VERSION_2_1";
+        return;
+    }
+
+    /* Setting up texture and transfering data to the GPU */
+
+    static GLuint texture = 0;
+    if (texture != 0)
+    {
+        context-&gt;deleteTexture(texture);
+    }
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glBindTexture(GL_TEXTURE_RECTANGLE_ARB, texture);
+
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0,
+            GL_LUMINANCE, _frame-&gt;width(), _frame-&gt;height() + _frame-&gt;height() / 2, 0,
+            GL_LUMINANCE, GL_UNSIGNED_BYTE, _frame-&gt;bits());
+
+    assert(glGetError() == GL_NO_ERROR);
+
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glEnable(GL_TEXTURE_RECTANGLE_ARB);
+
+    glClearColor(0.3, 0.3, 0.4, 1.0);
+
+    /* Initialize shaders and execute them */   
+    _init_shaders();
+
+    int img_width = _frame-&gt;width();
+    int img_height = _frame-&gt;height();
+    GLfloat offset_x = 0;
+    GLfloat offset_y = 0;
+    GLfloat gl_width = width(); // GL context size
+    GLfloat gl_height = height();
+
+    qDebug() &lt;&lt; "paint(): gl_width:" &lt;&lt; gl_width &lt;&lt; " gl_height:" &lt;&lt; gl_height &lt;&lt;  
+        " img:" &lt;&lt; _frame-&gt;width() &lt;&lt; "x" &lt;&lt; _frame-&gt;height();
+
+    int fill_mode = 0;
+    switch(fill_mode) {
+    case 0: // KeepAspectRatioByExpanding
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            if(ratioImg &lt; ratioScreen)
+                gl_height = gl_width / ratioImg;
+            else
+                gl_width = gl_height * ratioImg;
+            // calculate image size
+        }
+        break;
+
+    case 1: // IgnoreAspectRatio
+        break;
+
+    case 2: // KeepAspectRatio
+        {
+            float ratioImg = float(img_width) / img_height;
+            float ratioScreen = gl_width / gl_height;
+
+            GLfloat orig_width = gl_width;
+            GLfloat orig_height = gl_height;
+            // remember those to be able to center the quad on screen
+
+            if(ratioImg &gt; ratioScreen)
+                gl_height = gl_width / ratioImg;
+            else
+                gl_width = gl_height * ratioImg;
+            // calculate image size
+
+            offset_x = 0 + (orig_width - gl_width) * .5f;
+            offset_y = 0 + (orig_height - gl_height) * .5f;
+            // center on screen
+        }
+        break;
+    }
+
+    glDisable(GL_CULL_FACE); // might cause problems if enabled
+    glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(offset_x, offset_y);
+
+        glTexCoord2f(img_width, 0);
+        glVertex2f(offset_x + gl_width, offset_y);
+
+        glTexCoord2f(img_width, img_height);
+        glVertex2f(offset_x + gl_width, offset_y + gl_height);
+
+        glTexCoord2f(0, img_height);
+        glVertex2f(offset_x, offset_y + gl_height);
+    glEnd();
+    // draw a single quad
+
+    painter.endNativePainting();
+}
+</code></pre>
+
+<p>Can't guarantee this last code snippet is error-free since I don't have QT. But in case there are any typos, it should be rather straightforward to fix them.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1140976/the-swine" target="_blank"><span itemprop="name">the swine</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/9011108/image-scaling--keepaspectratiobyexpanding--through-opengl#answer-0</div>
+                                            <div itemprop="upvoteCount">5</div>
+                                            <div itemprop="dateCreated">2/6/2012 8:14:41 AM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Simply do the same math you did with KeepAspectRatio, but this time keep the height instead of the width. You'll get a width bigger than 1, so you'll have to use the inverse of it for your texture coordinate.</p>
+
+<hr>
+
+<p>Normalized coordinates yes/no won't matter, you just have to add these factors for the texture coordinates. For this to work I assume the image fills the whole texture (from (0,0) to (1,1); this makes it easy to multiply the values with your width/height). Texture wrapping has to be off.</p>
+
+<p>Default texture coordinates:</p>
+
+<pre><code>(0,0)-(1,0)
+|     |
+(0,1)-(1,1)
+</code></pre>
+
+<p>Aspect ratios:</p>
+
+<pre><code>tex_ar = tex_width / tex_height; // aspect ratio for the texture being used
+scr_ar = scr_width / scr_height; // aspect ratio for the quad being drawn
+</code></pre>
+
+<p>KeepAspectRatio (touch from the inside):</p>
+
+<pre><code>(0, 0)-----------------------(max(1, scr_ar / tex_ar), 0)
+|                            |
+(0, max(1, tex_ar / scr_ar))-(max(1, scr_ / tex_ar), max(1, tex_ar / scr_ar))
+</code></pre>
+
+<p>KeepAspectRatioByExpanding (touch from outside; just replace <code>max()</code> with <code>min()</code>):</p>
+
+<pre><code>(0, 0)-----------------------(min(1, scr_ar / tex_ar), 0)
+|                            |
+(0, min(1, tex_ar / scr_ar))-(min(1, scr_ / tex_ar), min(1, tex_ar / scr_ar))
+</code></pre>
+
+<p>For your case you'd just have to multiply the resulting texture coordinates with your width/height.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/409744/mario" target="_blank">Mario</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/9011108" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/9011108/image-scaling--keepaspectratiobyexpanding--through-opengl by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:11:20 GMT -->
+</html>

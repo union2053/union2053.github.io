@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" >
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/posix by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:31:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="C Language Knowledge Base">
+        <meta name="description" property="og:description" content="C Language Knowledge Base">
+        <title>C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+<div class="kb-search">
+    <div class="search-container d-flex justify-content-center">
+        <form action="https://c.programmingpedia.net/en/knowledge-base/" method="get" class="form-inline">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn-only my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+    </div>
+
+    <h2 id="itemcount-result-for-search-term">
+        ItemCount Result For: <span class="query-searched">Search Term</span>
+    </h2>
+
+
+    <div class="kb-search-box">
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-is-the-purpose-of-fork-"><a href="../985051/what-is-the-purpose-of-fork---.html">What is the purpose of fork()?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In many programs and man pages of Linux, I have seen code using fork(). Why do we need to use fork() and what is its purpose?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="fork.html">fork</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/0/kar" target="_blank">kar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="when-should-i-use-mmap-for-file-access-"><a href="../258091/when-should-i-use-mmap-for-file-access-.html">When should I use mmap for file access?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        POSIX environments provide at least two ways of accessing files.  There&#39;s the standard system calls open(), read(), write(), and friends, but there&#39;s also the option of using mmap() to map the file into virtual memory.
+
+When is it preferable to use one ov...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="file-io.html">file-io</a></span>
+                                <span class="tag-item"><a href="mmap.html">mmap</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/101/peter-burns" target="_blank">Peter Burns</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-there-an-equivalent-to-winapi-s-max-path-under-linux-unix-"><a href="../833291/is-there-an-equivalent-to-winapi-s-max-path-under-linux-unix-.html">Is there an equivalent to WinAPI&#39;s MAX_PATH under linux/unix?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        If I want to allocate a char array (in C) that is guaranteed to be large enough to hold any valid absolute path+filename, how big does it need to be. 
+
+On Win32, there is the MAX_PATH define. What is the equivalent for Unix/linux?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/2994/andrewr" target="_blank">AndrewR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-i-find-the-current-machine-s-full-hostname-in-c-hostname-and-domain-information-"><a href="../504810/how-do-i-find-the-current-machine-s-full-hostname-in-c--hostname-and-domain-information--.html">How do I find the current machine&#39;s full hostname in C (hostname and domain information)?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In a C project (POSIX), how do I get the fully qualified name for the current system?
+
+For example, I can get just the hostname of my machine by doing
+gethostname() from unistd.h. This might give me machine3 in return, but I&#39;m actually looking for machine...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="environment.html">environment</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="sockets.html">sockets</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/4924/zxaos" target="_blank">Zxaos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-there-a-way-to-flush-a-posix-socket-"><a href="../855544/is-there-a-way-to-flush-a-posix-socket-.html">Is there a way to flush a POSIX socket?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Is there a standard call for flushing the transmit side of a POSIX socket all the way through to the remote end or does this need to be implemented as part of the user level protocol? I looked around the usual headers but couldn&#39;t find anything.
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="sockets.html">sockets</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/10471/gordon-wrigley" target="_blank">Gordon Wrigley</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-is-the-difference-between-sigaction-and-signal-"><a href="../231912/what-is-the-difference-between-sigaction-and-signal-.html">What is the difference between sigaction and signal?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I was about to add an extra signal handler to an app we have here and I noticed that the author had used sigaction() to set up the other signal handlers. I was going to use signal(). To follow convention I should use sigaction() but if I was writing from ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="signals.html">signals</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/20889/matthew-smith" target="_blank">Matthew Smith</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="recursive-mkdir-system-call-on-unix"><a href="../2336242/recursive-mkdir---system-call-on-unix.html">Recursive mkdir() system call on Unix</a></h3>
+                     
+                    <div class="kb-search-body">
+                        After reading the mkdir(2) man page for the Unix system call with that name, it appears that the call doesn&#39;t create intermediate directories in a path, only the last directory in the path. Is there any way (or other function) to create all the directorie...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="mkdir.html">mkdir</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/32232/alex-marshall" target="_blank">Alex Marshall</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-can-i-convert-a-file-pointer-file-fp-to-a-file-descriptor-int-fd-"><a href="../3167298/how-can-i-convert-a-file-pointer---file--fp---to-a-file-descriptor--int-fd--.html">How can I convert a file pointer ( FILE* fp ) to a file descriptor (int fd)?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have a FILE *, returned by a call to fopen(). I need to get a file descriptor from it, to make calls like fsync(fd) on it. What&#39;s the function to get a file descriptor from a file pointer?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="file.html">file</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/90002/phil-miller" target="_blank">Phil Miller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-is-the-difference-between-read-and-recv-and-between-send-and-write-"><a href="../1790750/what-is-the-difference-between-read---and-recv-----and-between-send---and-write---.html">What is the Difference Between read() and recv() , and Between send() and write()?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        what is the difference between read() and recv() , and between send() and write() in socket programming ? performance and speed and other behavior.
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="network-programming.html">network-programming</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="sockets.html">sockets</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/140934/sajad-bahmani" target="_blank">Sajad Bahmani</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="kill-thread-in-pthread-library"><a href="../2084830/kill-thread-in-pthread-library.html">Kill Thread in Pthread Library</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I use pthread_create(&amp;amp;thread1, &amp;amp;attrs, //... , //...); and need if some condition occured need to kill this thread how to kill this ?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/140934/sajad-bahmani" target="_blank">Sajad Bahmani</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="checking-if-a-file-is-a-directory-or-just-a-file"><a href="../4553012/checking-if-a-file-is-a-directory-or-just-a-file.html">Checking if a file is a directory or just a file</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m writing a program to check if something is a file or is a directory. Is there a better way to do it than this?
+
+#include &amp;lt;stdio.h&amp;gt;
+
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;dirent.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+
+int isFile(const char* name)
+{
+ ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/292831/jookia" target="_blank">Jookia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-does-eagain-mean-"><a href="../4058368/what-does-eagain-mean-.html">What does EAGAIN mean?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        As in the title what does EAGAIN mean?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="sockets.html">sockets</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/297201/mrdavenz" target="_blank">mrdavenz</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="correct-use-of-stat-on-c"><a href="../3138600/correct-use-of-stat-on-c.html">Correct use of Stat on C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Why does this work :
+
+char *fd = &quot;myfile.txt&quot;;
+struct stat buf;          
+
+stat(fd, &amp;amp;buf);
+int size = buf.st_size;
+
+printf(&quot;%d&quot;,size);
+
+
+
+
+But this does not work:
+
+char *fd = &quot;myfile.txt&quot;;
+struct stat *buf;          
+
+stat(fd, buf);
+int size = buf-&amp;gt...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="file.html">file</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/378733/necronet" target="_blank">necronet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-does-sharpdefine-gnu-source-imply-"><a href="../5582211/what-does--sharpdefine--gnu-source--imply-.html">What does &quot;#define _GNU_SOURCE&quot; imply?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Today I had to use the basename() function, and the man 3 basename (here) gave me some strange message:
+
+
+  Notes
+  
+  There are two different versions of basename() - the POSIX version described above, and the GNU version, which one gets after  
+  
+  #de...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="gnu.html">gnu</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/389405/gui13" target="_blank">Gui13</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-get-the-current-time-in-milliseconds-from-c-in-linux-"><a href="../3756323/how-to-get-the-current-time-in-milliseconds-from-c-in-linux-.html">How to get the current time in milliseconds from C in Linux?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How do I get the current time on Linux in milliseconds?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/420656/lll" target="_blank">LLL</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-get-the-current-time-in-milliseconds-from-c-in-linux-"><a href="../3756323/how-to-get-the-current-time-in-milliseconds-from-c-in-linux-.html">How to get the current time in milliseconds from C in Linux?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How do I get the current time on Linux in milliseconds?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/420656/lll" target="_blank">LLL</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-are-header-files-and-library-files-"><a href="../6407975/what-are-header-files-and-library-files-.html">What are Header Files and Library Files?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        
+  Possible Duplicate:
+  What&amp;#39;s the difference between a header file and a library?  
+
+
+
+
+Can anyone tell me what&#39;s the actual meaning of a header file and a library file and their difference?
+
+For example we include header file with .h extension in o...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="gcc.html">gcc</a></span>
+                                <span class="tag-item"><a href="makefile.html">makefile</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/800833/karthik" target="_blank">karthik</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-use-nanosleep-in-c-what-are-tim-tv-sec-and-tim-tv-nsec-"><a href="../7684359/how-to-use-nanosleep---in-c--what-are--tim-tv-sec--and--tim-tv-nsec--.html">How to use nanosleep() in C? What are `tim.tv_sec` and `tim.tv_nsec`?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        What is the use of tim.tv_sec and tim.tv_nsec in the following?
+
+How can I sleep execution for 500000 microseconds?
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+int main()
+{
+   struct timespec tim, tim2;
+   tim.tv_sec = 1;
+   tim.tv_nsec = 500;
+
+   ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="sleep.html">sleep</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/870565/pnizzle" target="_blank">pnizzle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="connecting-n-commands-with-pipes-in-a-shell-"><a href="../8082932/connecting-n-commands-with-pipes-in-a-shell-.html">Connecting n commands with pipes in a shell?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I am trying to implement a shell in C. I can execute simple commands just fine with a simple execvp() but one of the requirements is to manage commands like this: &quot;ls -l | head | tail -4&quot; with a &#39;for&#39; loop and only one &#39;pipe()&#39; statement redirecting stdin...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pipe.html">pipe</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="shell.html">shell</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/1031296/user1031296" target="_blank">user1031296</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-get-the-username-in-c-cplusplus-in-linux-"><a href="../8953424/how-to-get-the-username-in-c-cplusplus-in-linux-.html">How to get the username in C/C++ in Linux?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How can I get the actual &quot;username&quot; without using the environment (getenv, ...) in a program?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="username.html">username</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/1162308/zat42" target="_blank">Zat42</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    Page 1 of 2
+
+    <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="../searchfa9d.html?q=&amp;page=2">2</a></li><li class="PagedList-skipToNext"><a href="../searchfa9d.html?q=&amp;page=2" rel="next">»</a></li></ul></div>
+    </div>
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/posix by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:31:49 GMT -->
+</html>

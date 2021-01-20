@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/11515399/implementing-shell-in-c-and-need-help-handling-input-output-redirection by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Implementing shell in C and need help handling input/output redirection | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Implementing shell in C and need help handling input/output redirection | C Language Knowledge Base">
+        <title>[SOLVED] Implementing shell in C and need help handling input/output redirection | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="implementing-shell-in-c-and-need-help-handling-input-output-redirection">Implementing shell in C and need help handling input/output redirection</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/linux.html">linux</a></span>
+                        <span class="tag-item"><a href="../tag/shell.html">shell</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <h3 id="round-2">Round 2</h3>
+
+<p>After reading some of the answers, my revised code is:</p>
+
+<pre><code>int pid = fork();
+
+if (pid == -1) {
+    perror("fork");
+} else if (pid == 0) {   
+
+    if (in) { //if '&lt;' char was found in string inputted by user
+        int fd0 = open(input, O_RDONLY, 0);
+        dup2(fd0, STDIN_FILENO);
+        close(fd0);
+        in = 0;
+    }
+
+    if (out) { //if '&gt;' was found in string inputted by user
+        int fd1 = creat(output, 0644);
+        dup2(fd1, STDOUT_FILENO);
+        close(fd1);
+        out = 0;
+    }   
+
+    execvp(res[0], res);
+    perror("execvp");
+    _exit(1);
+} else {
+    waitpid(pid, 0, 0);
+    free(res);
+}
+</code></pre>
+
+<p>It works, but seems the standard output isn't being reconnected or something to that effect. Here is execution: </p>
+
+<pre><code>SHELL$ cat &gt; file
+hello, world
+this is a test
+SHELL$ cat &lt; file //no output
+SHELL$ ls //no output
+</code></pre>
+
+<p>'&lt;' and '>' both work, but after they are executed there is no output. </p>
+
+<hr>
+
+<h3 id="round-1">Round 1</h3>
+
+<p>I have been working on a relatively simple shell in C for a while now, but I am having trouble implementing input (&lt;) and output (>) redirection. Help me find the issues in the following code: </p>
+
+<pre><code>int fd;
+int pid = fork();
+int current_out;
+
+if (in) { //if '&lt;' char was found in string inputted by user
+    fd = open(input, O_RDONLY, 0);
+    dup2(fd, STDIN_FILENO);
+    in = 0;
+    current_out = dup(0);
+}
+
+if (out) { //if '&gt;' was found in string inputted by user
+    fd = creat(output, 0644);
+    dup2(fd, STDOUT_FILENO);
+    out = 0;
+    current_out = dup(1);
+}
+
+if (pid == -1) {
+    perror("fork");
+} else if (pid == 0) {       
+    execvp(res[0], res);
+    perror("execvp");
+    _exit(1);
+} else {
+    waitpid(pid, 0, 0);
+    dup2(current_out, 1);
+    free(res);
+}
+</code></pre>
+
+<p>I may have some unnecessary material in there because I have been trying different things to get it to work. I am not sure what is going wrong. </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/1427146/jordan" target="_blank"><span itemprop="name">Jordan</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">12</div>
+                                    <div itemprop="dateCreated">7/17/2012 12:01:55 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>You have way too many file descriptors open after your redirection.  Let's dissect the two paragraphs:</p>
+
+<pre><code>if (in) { //if '&lt;' char was found in string inputted by user
+    fd = open(input, O_RDONLY, 0);
+    dup2(fd, STDIN_FILENO);
+    in = 0;
+    current_in = dup(0);  // Fix for symmetry with second paragraph
+}
+
+if (out) { //if '&gt;' was found in string inputted by user
+    fd = creat(output, 0644);
+    dup2(fd, STDOUT_FILENO);
+    out = 0;
+    current_out = dup(1);
+}
+</code></pre>
+
+<p>I'm going to be charitable and ignore the fact that you are ignoring errors.  However, you will need to error check your system calls.</p>
+
+<p>In the first paragraph, you open a file and capture the file descriptor (it might well be 3) in the variable <code>fd</code>.  You then duplicate the file descriptor over standard input (<code>STDIN_FILENO</code>).  Note, though, that file descriptor 3 is still open.  Then you do a <code>dup(0)</code> (which, for consistency, should be <code>STDIN_FILENO</code>), getting another file descriptor, perhaps 4.  So you have file descriptors 0, 3 and 4 pointing at the same file (and, indeed, the same open file description &mdash; noting that an open file description is different from an open file descriptor).  If your intention with <code>current_in</code> was to preserve the (parent) shell's standard input, you have to do that <code>dup()</code> before you do the <code>dup2()</code> that overwrites the output.  However, you would be better off not altering the parent shell's file descriptors; it is less overhead than re-duplicating the file descriptors.</p>
+
+<p>Then you more or less repeat the process in the second paragraph, first overwriting the only record of file descriptor 3 being open with the <code>fd = creat(...)</code> call but obtaining a new descriptor, perhaps 5, then duplicating that over standard output.  You then do a <code>dup(1)</code>, yielding another file descriptor, perhaps 6.</p>
+
+<p>So, you have stdin and stdout of the main shell redirected to the files (and no way of reinstating those to the original values).  Your first problem, therefore, is that you are doing the redirection before you <code>fork()</code>; you should be doing it after the <code>fork()</code> &mdash; though when you get to piping between processes, you will need to create pipes before forking.</p>
+
+<p>Your second problem is that you need to close a plethora of file descriptors, one of which you no longer have a reference for.</p>
+
+<p>So, you might need:</p>
+
+<pre><code>if ((pid = fork()) &lt; 0)
+    ...error...
+else if (pid == 0)
+{
+    /* Be childish */
+    if (in)
+    {
+        int fd0 = open(input, O_RDONLY);
+        dup2(fd0, STDIN_FILENO);
+        close(fd0);
+    }
+
+    if (out)
+    {
+        int fd1 = creat(output , 0644) ;
+        dup2(fd1, STDOUT_FILENO);
+        close(fd1);
+    }
+    ...now the child has stdin coming from the input file, 
+    ...stdout going to the output file, and no extra files open.
+    ...it is safe to execute the command to be executed.
+    execve(cmd[0], cmd, env);   // Or your preferred alternative
+    fprintf(stderr, "Failed to exec %s\n", cmd[0]);
+    exit(1);
+}
+else
+{
+    /* Be parental */
+    ...wait for child to die, etc...
+}
+</code></pre>
+
+<p>Before you do any of this, you should ensure that you've already flushed the shell's standard I/O channels, probably by using <code>fflush(0)</code>, so that if the forked child writes to standard error because of a problem, there is no extraneous duplicated output.</p>
+
+<p>Also note that the various <code>open()</code> calls should be error-checked.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/15168/jonathan-leffler" target="_blank"><span itemprop="name">Jonathan Leffler</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/11515399/implementing-shell-in-c-and-need-help-handling-input-output-redirection#answer-0</div>
+                                            <div itemprop="upvoteCount">15</div>
+                                            <div itemprop="dateCreated">9/21/2015 4:51:11 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>You have way too many file descriptors open after your redirection. The code which you need is this.</p>
+
+<pre><code>    if (pid == 0)
+{          /* for the child process:         */
+
+    // function for redirection ( '&lt;' , '&gt;' )
+
+    int fd0,fd1,i,in=0,out=0;
+    char input[64],output[64];
+
+    // finds where '&lt;' or '&gt;' occurs and make that argv[i] = NULL , to ensure that command wont't read that
+
+    for(i=0;argv[i]!='\0';i++)
+    {
+        if(strcmp(argv[i],"&lt;")==0)
+        {        
+            argv[i]=NULL;
+            strcpy(input,argv[i+1]);
+            in=2;           
+        }               
+
+        if(strcmp(argv[i],"&gt;")==0)
+        {      
+            argv[i]=NULL;
+            strcpy(output,argv[i+1]);
+            out=2;
+        }         
+    }
+
+    //if '&lt;' char was found in string inputted by user
+    if(in)
+    {   
+
+        // fdo is file-descriptor
+        int fd0;
+        if ((fd0 = open(input, O_RDONLY, 0)) &lt; 0) {
+            perror("Couldn't open input file");
+            exit(0);
+        }           
+        // dup2() copies content of fdo in input of preceeding file
+        dup2(fd0, 0); // STDIN_FILENO here can be replaced by 0 
+
+        close(fd0); // necessary
+    }
+
+    //if '&gt;' char was found in string inputted by user 
+    if (out)
+    {
+
+        int fd1 ;
+        if ((fd1 = creat(output , 0644)) &lt; 0) {
+            perror("Couldn't open the output file");
+            exit(0);
+        }           
+
+        dup2(fd1, STDOUT_FILENO); // 1 here can be replaced by STDOUT_FILENO
+        close(fd1);
+    }
+
+    execvp(*argv, argv);
+    perror("execvp");
+    _exit(1);
+
+    // another syntax
+    /*      if (!(execvp(*argv, argv) &gt;= 0)) {     // execute the command  
+            printf("*** ERROR: exec failed\n");
+            exit(1);
+     */ 
+}
+
+
+    else if((pid) &lt; 0)
+    {     
+        printf("fork() failed!\n");
+        exit(1);
+    }
+
+    else {                                  /* for the parent:      */
+
+        while (!(wait(&amp;status) == pid)) ; // good coding to avoid race_conditions(errors) 
+    }
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/5354673/shriyansh-agrawal" target="_blank">Shriyansh Agrawal</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/11515399" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/11515399/implementing-shell-in-c-and-need-help-handling-input-output-redirection by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:24 GMT -->
+</html>

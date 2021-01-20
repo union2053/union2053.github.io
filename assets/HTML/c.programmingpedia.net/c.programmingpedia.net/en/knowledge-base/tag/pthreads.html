@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" >
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/pthreads by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:32:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="C Language Knowledge Base">
+        <meta name="description" property="og:description" content="C Language Knowledge Base">
+        <title>C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+<div class="kb-search">
+    <div class="search-container d-flex justify-content-center">
+        <form action="https://c.programmingpedia.net/en/knowledge-base/" method="get" class="form-inline">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn-only my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+    </div>
+
+    <h2 id="itemcount-result-for-search-term">
+        ItemCount Result For: <span class="query-searched">Search Term</span>
+    </h2>
+
+
+    <div class="kb-search-box">
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="still-reachable-leak-detected-by-valgrind"><a href="../3840582/still-reachable-leak-detected-by-valgrind.html">Still Reachable Leak detected by Valgrind</a></h3>
+                     
+                    <div class="kb-search-body">
+                        All the functions mentioned in this block are library functions. How can I rectify this memory leak? 
+
+It is listed under the &quot;Still reachable&quot; category. (There are 4 more, which are very similar, but of varying sizes)
+
+ 630 bytes in 1 blocks are still re...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                                <span class="tag-item"><a href="valgrind.html">valgrind</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/0/user191776" target="_blank">user191776</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-i-get-a-thread-id-from-an-arbitrary-pthread-t-"><a href="../558469/how-do-i-get-a-thread-id-from-an-arbitrary-pthread-t-.html">How do I get a thread ID from an arbitrary pthread_t?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have a pthread_t, and I&#39;d like to change its CPU affinity. The problem is that I&#39;m using glibc 2.3.2, which doesn&#39;t have pthread_setaffinity_np(). That&#39;s OK, though, because pthread_setaffinity_np() is itself a wrapper of sched_setaffinity(), which can ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                                <span class="tag-item"><a href="system-calls.html">system-calls</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/3218/skrud" target="_blank">Skrud</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="can-i-get-unix-s-pthread-h-to-compile-in-windows-"><a href="../2150938/can-i-get-unix-s-pthread-h-to-compile-in-windows-.html">Can I get Unix&#39;s pthread.h to compile in Windows?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        If I try to compile a program with
+
+#include &amp;lt;pthread.h&amp;gt;
+
+
+in it, I get the error:
+
+pthread.h: No such file or directory
+
+
+Is it possible to get this to compile in a Windows environment?
+
+I am using Vista with the latest MinGW.
+
+I do not want to use...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                                <span class="tag-item"><a href="windows.html">windows</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/14777/naspinski" target="_blank">naspinski</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="why-do-pthreads-condition-variable-functions-require-a-mutex-"><a href="../2763714/why-do-pthreads--condition-variable-functions-require-a-mutex-.html">Why do pthreads’ condition variable functions require a mutex?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I’m reading up on pthread.h; the condition variable related functions (like pthread_cond_wait(3)) require a mutex as an argument. Why? As far as I can tell, I’m going to be creating a mutex just to use as that argument? What is that mutex supposed to do?
+...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="condition-variable.html">condition-variable</a></span>
+                                <span class="tag-item"><a href="mutex.html">mutex</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/31897/elliottcable" target="_blank">ELLIOTTCABLE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="multiple-arguments-to-function-called-by-pthread-create-"><a href="../1352749/multiple-arguments-to-function-called-by-pthread-create---.html">Multiple arguments to function called by pthread_create()?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I need to pass multiple arguments to a function that I would like to call on a separate thread. I&#39;ve read that the typical way to do this is to define a struct, pass the function a pointer to that, and dereference it for the arguments. However, I am unabl...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/49870/michael" target="_blank">Michael</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-you-query-a-pthread-to-see-if-it-is-still-running-"><a href="../2156353/how-do-you-query-a-pthread-to-see-if-it-is-still-running-.html">How do you query a pthread to see if it is still running?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In my destructor I want to destroy a thread cleanly.
+
+My goal is to wait for a thread to finish executing and THEN destroy the thread.
+
+The only thing I found about querying the state of a pthread is pthread_attr_setdetachstate but this only tells you if ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="concurrency.html">concurrency</a></span>
+                                <span class="tag-item"><a href="destructor.html">destructor</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/52074/trevor-boyd-smith" target="_blank">Trevor Boyd Smith</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="why-is-a-while-loop-needed-around-pthread-wait-conditions-"><a href="../1136371/why-is-a-while-loop-needed-around-pthread-wait-conditions-.html">Why is a while loop needed around pthread wait conditions?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m learning pthread and wait conditions. As far as I can tell a typical waiting thread is like this:
+
+pthread_mutex_lock(&amp;amp;m);
+while(!condition)
+     pthread_cond_wait(&amp;amp;cond, &amp;amp;m);
+// Thread stuff here
+pthread_mutex_unlock(&amp;amp;m);
+
+
+What I can...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/62811/emiliano" target="_blank">Emiliano</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="pthread-cond-timedwait-"><a href="../1486833/pthread-cond-timedwait--.html">pthread_cond_timedwait()</a></h3>
+                     
+                    <div class="kb-search-body">
+                        void wait(int timeInMs)
+{
+    struct timespec timeToWait;
+    timeToWait.tv_sec = 5;
+    timeToWait.tv_nsec = timeInMs*1000;
+
+    int rt;
+
+    pthread_mutex_lock(&amp;amp;fakeMutex);
+    rt = pthread_cond_timedwait(&amp;amp;fakeCond, &amp;amp;fakeMutex, &amp;amp;timeToWa...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/68572/ciph3rzer0" target="_blank">Ciph3rzer0</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-print-pthread-t"><a href="../1759794/how-to-print-pthread-t.html">How to print pthread_t</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Searched, but don&#39;t come across a satisfying answer. 
+
+I know there&#39;s no a portable way to print a pthread_t. 
+
+How do you do it in your app?
+
+Update: 
+
+Actually I don&#39;t need pthread_t, but some small numeric id, identifying in debug message different thr...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/135960/dimba" target="_blank">dimba</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="kill-thread-in-pthread-library"><a href="../2084830/kill-thread-in-pthread-library.html">Kill Thread in Pthread Library</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I use pthread_create(&amp;amp;thread1, &amp;amp;attrs, //... , //...); and need if some condition occured need to kill this thread how to kill this ?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="posix.html">posix</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/140934/sajad-bahmani" target="_blank">Sajad Bahmani</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="significance-of-pthread-flag-when-compiling"><a href="../2127797/significance-of--pthread-flag-when-compiling.html">Significance of -pthread flag when compiling</a></h3>
+                     
+                    <div class="kb-search-body">
+                        In various multi threaded C and C++ projects I&#39;ve seen the -pthread flag applied to both the compiling and linking stage while others don&#39;t use it at all and just pass -lpthread to the linking stage.
+
+Is there any danger not compiling and linking with the...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/157404/leeeroy" target="_blank">leeeroy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="undefined-reference-to-pthread-create-in-linux"><a href="../1662909/undefined-reference-to-pthread-create-in-linux.html">Undefined reference to pthread_create in Linux</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I picked up the following demo off the web from https://computing.llnl.gov/tutorials/pthreads/
+
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#define NUM_THREADS     5
+
+void *PrintHello(void *threadid)
+{
+   long tid;
+   tid = (long)threadid;
+   prin...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/187770/ralph" target="_blank">Ralph</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="undefined-reference-to-pthread-create-in-linux"><a href="../1662909/undefined-reference-to-pthread-create-in-linux.html">Undefined reference to pthread_create in Linux</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I picked up the following demo off the web from https://computing.llnl.gov/tutorials/pthreads/
+
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#define NUM_THREADS     5
+
+void *PrintHello(void *threadid)
+{
+   long tid;
+   tid = (long)threadid;
+   prin...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/187770/ralph" target="_blank">Ralph</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-return-a-value-from-pthread-threads-in-c-"><a href="../2251452/how-to-return-a-value-from-pthread-threads-in-c-.html">How to return a value from pthread threads in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;am new to C and would like to play with threads a bit. I would like to return some value from a thread using pthread_exit()
+
+My code is as follows:
+
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+
+void *myThread()
+{
+   int ret = 42;
+   pthread_exit...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/190438/petr-peller" target="_blank">Petr Peller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="pthreads-mutex-vs-semaphore"><a href="../2065747/pthreads-mutex-vs-semaphore.html">pthreads mutex vs semaphore</a></h3>
+                     
+                    <div class="kb-search-body">
+                        What is the difference between semaphores and mutex provided by pthread library ?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="mutex.html">mutex</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                                <span class="tag-item"><a href="synchronization.html">synchronization</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/248132/cppdev" target="_blank">cppdev</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-set-the-name-of-a-thread-in-linux-pthreads-"><a href="../2369738/how-to-set-the-name-of-a-thread-in-linux-pthreads-.html">How to set the name of a thread in Linux pthreads?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Is there any way of setting the name of a thread in Linux?
+
+My main purpose is it would be helpful while debugging, and also nice if that name was exposed through e.g. /proc/$PID/task/$TID/...
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/279260/anonym" target="_blank">Anonym</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="check-to-see-if-a-pthread-mutex-is-locked-or-unlocked-after-a-thread-has-locked-itself-"><a href="../4362459/check-to-see-if-a-pthread-mutex-is-locked-or-unlocked--after-a-thread-has-locked-itself-.html">Check to see if a pthread mutex is locked or unlocked (After a thread has locked itself)</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I need to see if a mutex is locked or unlocked in an if statement so I check it like this...
+
+if(mutex[id] != 2){
+    /* do stuff */
+}
+
+
+but when I check it gcc gives me the following error:
+
+error: invalid operands to binary != (have &#39;ptherad_mutex_t&#39; an...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="deadlock.html">deadlock</a></span>
+                                <span class="tag-item"><a href="mutex.html">mutex</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/288341/ubiquibacon" target="_blank">ubiquibacon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-it-possible-to-determine-the-thread-holding-a-mutex-"><a href="../3483094/is-it-possible-to-determine-the-thread-holding-a-mutex-.html">Is it possible to determine the thread holding a mutex?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        Firstly, I use pthread library to write multithreading C program. Threads always hung by their waited mutexs. When I use the strace utility to find a thread is in FUTEX_WAIT status, I want to know which thread hold that mutex at the time. But I don&#39;t know...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="mutex.html">mutex</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/333280/terry" target="_blank">terry </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="for-pthread-how-to-kill-child-thread-from-the-main-thread"><a href="../3822674/for-pthread--how-to-kill-child-thread-from-the-main-thread.html">For pthread, How to kill child thread from the main thread</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I use pthread_create to create several child threads. At a time, the main thread wants to kill all child threads or there will be segment falut. Which function should I use to finish that? I searched the answer from google and got function like pthread_ki...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="multithreading.html">multithreading</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/333280/terry" target="_blank">terry </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="signal-handling-in-pthreads"><a href="../5282099/signal-handling-in-pthreads.html">Signal handling in pthreads</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have created a pthread, and installed a signal handler inside that, same way as we do in main( ) function. The thread&#39;s signal handler is a separate function. Surprisingly, it is not working, that is the thread&#39;s signal handler is not able to catch sign...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="pthreads.html">pthreads</a></span>
+                                <span class="tag-item"><a href="signals.html">signals</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/575281/kingsmasher1" target="_blank">kingsmasher1</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    Page 1 of 2
+
+    <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="../searchfa9d.html?q=&amp;page=2">2</a></li><li class="PagedList-skipToNext"><a href="../searchfa9d.html?q=&amp;page=2" rel="next">»</a></li></ul></div>
+    </div>
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/pthreads by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:32:51 GMT -->
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-declare-a-variable-and-a-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C declare a variable and a pointer</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C declare a variable and a pointer'>C declare a variable and a pointer</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-update-variable-via-its-pointer.html'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C declare a variable and a pointer</h1>
+<a class ='btn btn-outline-dark' href=c-declaring-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-and-the-value-it-is-pointing-to.html>Next</a><p>The following example is going to declare a variable and a pointer. 
+
+</p><p>You'll then output their addresses and the values they contain: 
+</p><div class='myCodeDiv'><button id='DNAFB' class='myCopyButton' data-clipboard-target='#SEEZO'>Copy</button><pre  id='SEEZO' style='font-size:18px;' class='code'><span class='c'>// A simple program using pointers </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> number = 0;           <span class='c'>// A variable of type int initialized to 0 </span>
+  <span class='r'>int</span> *pnumber = NULL;      <span class='c'>// A pointer that can point to type int </span>
+
+  number = 10; 
+  printf(<span class='q'>"number's address: %p\n"</span>, &amp;number); <span class='c'>// Output the address </span>
+  printf(<span class='q'>"number's value: %d\n\n"</span>, number);  <span class='c'>// Output the value </span>
+
+  pnumber = &amp;number;    <span class='c'>// Store the address of number in pnumber </span>
+
+  printf(<span class='q'>"pnumber's address: %p\n"</span>, (<span class='r'>void</span>*)&amp;pnumber);<span class='c'>// Output the address </span>
+  printf(<span class='q'>"pnumber's size: %zd bytes\n"</span>, <span class='r'>sizeof</span>(pnumber));<span class='c'>// Output the size </span>
+  printf(<span class='q'>"pnumber's value: %p\n"</span>, pnumber);  <span class='c'>// Output the value (an address) </span>
+  printf(<span class='q'>"value pointed to: %d\n"</span>, *pnumber);   <span class='c'>// Value at the address </span>
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DNAFB');clipboard.on('success', function(e) {$('#DNAFB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DNAFB').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>You first declare a variable of type int and a pointer: 
+</p><div class='myCodeDiv'><button id='IJKGZ' class='myCopyButton' data-clipboard-target='#LQYHL'>Copy</button><pre  id='LQYHL' style='font-size:18px;' class='code'><span class='r'>int</span> number = 0;                 <span class='c'>// A variable of type int initialized to 0 </span>
+<span class='r'>int</span> *pnumber = NULL;            <span class='c'>// A pointer that can point to type int</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IJKGZ');clipboard.on('success', function(e) {$('#IJKGZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IJKGZ').text('error');});</script></div><p>The pointer is of type "pointer to int." 
+
+</p><p>After the declarations, you store the value 10 in the variable called number and then output its address  
+and its value with these statements: 
+</p><div class='myCodeDiv'><button id='DZZPN' class='myCopyButton' data-clipboard-target='#VIJEM'>Copy</button><pre  id='VIJEM' style='font-size:18px;' class='code'>number = 10; 
+printf(<span class='q'>"number's address: %p\n"</span>, &amp;number);               <span class='c'>// Output the address </span>
+printf(<span class='q'>"number's value: %d\n\n"</span>, number);                <span class='c'>// Output the value</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DZZPN');clipboard.on('success', function(e) {$('#DZZPN').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DZZPN').text('error');});</script></div><p>To output the address of the variable called number, you use the output format specifier %p. 
+
+</p><p>This outputs a pointer value as a memory address in hexadecimal form. 
+
+</p><p>The next statement obtains the address of the variable number and stores that address in <i style='color:blue'>pnumber</i>,  
+using the address of operator, &amp;: 
+</p><div class='myCodeDiv'><button id='OEWIV' class='myCopyButton' data-clipboard-target='#OSOAO'>Copy</button><pre  id='OSOAO' style='font-size:18px;' class='code'>pnumber = &amp;number;              <span class='c'>// Store the address of number in pnumber</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#OEWIV');clipboard.on('success', function(e) {$('#OEWIV').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#OEWIV').text('error');});</script></div><p>Remember, the only kind of value that you should store in <i style='color:blue'>pnumber</i> is an address. 
+
+</p><p>Next, you have four <i style='color:blue'>printf</i>() statements that output, respectively, 
+</p><OL style='font-size:19px;'><LI>the address of <i style='color:blue'>pnumber</i> which is the first byte of the memory location that <i style='color:blue'>pnumber</i> occupies, </LI><LI>the number of bytes that the pointer occupies, </LI><LI>the value stored in <i style='color:blue'>pnumber</i> which is the address of number, and </LI><LI>the value stored at the address that <i style='color:blue'>pnumber</i> contains which is the value stored in number. </LI></OL><p>The first output statement is as follows: 
+</p><div class='myCodeDiv'><button id='FAOUA' class='myCopyButton' data-clipboard-target='#YJVET'>Copy</button><pre  id='YJVET' style='font-size:18px;' class='code'>printf(<span class='q'>"pnumber's address: %p\n"</span>, (<span class='r'>void</span>*)&amp;pnumber);      <span class='c'>// Output the address</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FAOUA');clipboard.on('success', function(e) {$('#FAOUA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FAOUA').text('error');});</script></div><p>here, you output the address of <i style='color:blue'>pnumber</i>. 
+
+</p><p>Remember a pointer itself has an address, just like any other variable. 
+
+</p><p>You use %p as the conversion specifier to display an address, and you use the &amp; (address of)  
+operator to reference the address that the <i style='color:blue'>pnumber</i> variable occupies. 
+
+</p><p>The cast to void* is to prevent a possible warning from the compiler. 
+
+</p><p>The %p specification expects the value to be some kind of pointer type, but the type of <i style='color:blue'>&amp;pnumber</i> 
+is "pointer to pointer to int." 
+
+</p><p>Next, you output the size of <i style='color:blue'>pnumber</i>: 
+</p><div class='myCodeDiv'><button id='VGCUU' class='myCopyButton' data-clipboard-target='#UVDXW'>Copy</button><pre  id='UVDXW' style='font-size:18px;' class='code'>printf(<span class='q'>"pnumber's size: %d bytes\n"</span>, <span class='r'>sizeof</span>(pnumber));   <span class='c'>// Output the size</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VGCUU');clipboard.on('success', function(e) {$('#VGCUU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VGCUU').text('error');});</script></div><p>You use the sizeof operator to obtain the number of bytes a pointer occupies. 
+
+</p><p>To prevent the warning, you could cast the argument to type int like this: 
+</p><div class='myCodeDiv'><button id='FVYWU' class='myCopyButton' data-clipboard-target='#OPSHX'>Copy</button><pre  id='OPSHX' style='font-size:18px;' class='code'>printf(<span class='q'>"pnumber's size: %d bytes\n"</span>, (<span class='r'>int</span>)<span class='r'>sizeof</span>(pnumber)); <span class='c'>// Output the size</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#FVYWU');clipboard.on('success', function(e) {$('#FVYWU').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#FVYWU').text('error');});</script></div><p>The next statement outputs the value stored in <i style='color:blue'>pnumber</i>:
+</p><div class='myCodeDiv'><button id='HGJKY' class='myCopyButton' data-clipboard-target='#FXGKD'>Copy</button><pre  id='FXGKD' style='font-size:18px;' class='code'>printf(<span class='q'>"pnumber's value: %p\n"</span>, pnumber);  <span class='c'>// Output the value (an address)</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HGJKY');clipboard.on('success', function(e) {$('#HGJKY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HGJKY').text('error');});</script></div><p>The value stored in <i style='color:blue'>pnumber</i> is the address of number. Because this is an address, you use %p to
+display it, and you use the variable name, <i style='color:blue'>pnumber</i>, to access the address value.
+
+</p><p>The last output statement is
+</p><div class='myCodeDiv'><button id='ZEGDX' class='myCopyButton' data-clipboard-target='#RRDAI'>Copy</button><pre  id='RRDAI' style='font-size:18px;' class='code'>printf(<span class='q'>"value pointed to: %d\n"</span>, *pnumber);            <span class='c'>// Value at the address</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZEGDX');clipboard.on('success', function(e) {$('#ZEGDX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZEGDX').text('error');});</script></div><p>Here, you use the pointer to access the value stored in number. 
+
+</p><p>The effect of the * operator is to access the data contained in the address stored at <i style='color:blue'>pnumber</i>. 
+
+</p><p>You use %d because you know it's an integer value. 
+
+</p><p>The variable <i style='color:blue'>pnumber</i> stores the address of number, so you can use that address to access the
+value stored in number. 
+
+</p><p>The * operator is called the indirection operator or sometimes the dereference operator.
+</p><a class ='btn btn-outline-dark' href=c-declaring-pointers.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-pointer-and-the-value-it-is-pointing-to.html>Next</a><h2>Related</h2><UL><LI><a href='c-operator.html'>C &amp; Operator</a></LI><LI><a href='c-pointers-introduction.html'>C Pointers Introduction</a></LI><LI><a href='c-declaring-pointers.html'>C Declaring Pointers</a></LI><LI><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and the value it is pointing to</a></LI><LI><a href='c-update-variable-via-its-pointer.html'>C Update variable via its pointer</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-declare-a-variable-and-a-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

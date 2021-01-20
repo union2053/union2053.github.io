@@ -1,0 +1,767 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node18.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Input and Output (I/O):stdio.h</TITLE>
+<META NAME="description" CONTENT="Input and Output (I/O):stdio.h">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1084"
+ HREF="node18.html#SECTION001810000000000000000">
+Reporting Errors</A>
+<UL>
+<LI><A NAME="tex2html1085"
+ HREF="node18.html#SECTION001811000000000000000">
+<TT>perror()</TT></A>
+<LI><A NAME="tex2html1086"
+ HREF="node18.html#SECTION001812000000000000000">
+errno</A>
+<LI><A NAME="tex2html1087"
+ HREF="node18.html#SECTION001813000000000000000">
+<TT>exit()</TT></A>
+</UL>
+<LI><A NAME="tex2html1088"
+ HREF="node18.html#SECTION001820000000000000000">
+Streams</A>
+<UL>
+<LI><A NAME="tex2html1089"
+ HREF="node18.html#SECTION001821000000000000000">
+Predefined Streams</A>
+<UL>
+<LI><A NAME="tex2html1090"
+ HREF="node18.html#SECTION001821100000000000000">
+Redirection</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html1091"
+ HREF="node18.html#SECTION001830000000000000000">
+Basic I/O</A>
+<LI><A NAME="tex2html1092"
+ HREF="node18.html#SECTION001840000000000000000">
+Formatted I/O</A>
+<UL>
+<LI><A NAME="tex2html1093"
+ HREF="node18.html#SECTION001841000000000000000">
+Printf</A>
+</UL>
+<LI><A NAME="tex2html1094"
+ HREF="node18.html#SECTION001850000000000000000">
+scanf</A>
+<LI><A NAME="tex2html1095"
+ HREF="node18.html#SECTION001860000000000000000">
+Files</A>
+<UL>
+<LI><A NAME="tex2html1096"
+ HREF="node18.html#SECTION001861000000000000000">
+Reading and writing files</A>
+</UL>
+<LI><A NAME="tex2html1097"
+ HREF="node18.html#SECTION001870000000000000000">
+sprintf and sscanf</A>
+<UL>
+<LI><A NAME="tex2html1098"
+ HREF="node18.html#SECTION001871000000000000000">
+Stream Status Enquiries</A>
+</UL>
+<LI><A NAME="tex2html1099"
+ HREF="node18.html#SECTION001880000000000000000">
+Low Level I/O</A>
+<LI><A NAME="tex2html1100"
+ HREF="node18.html#SECTION001890000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001800000000000000000">
+Input and Output (I/O):<TT>stdio.h</TT></A>
+</H1>
+<A NAME="ch:io">&#160;</A>
+This chapter will look at many forms of I/O. We have briefly mentioned some
+forms before will look at these in much more detail here.
+<BR>
+<P>
+Your programs will need to include the standard I/O <EM>header</EM> file so do:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>#include &lt;stdio.h&gt;</TT>
+<P><H1><A NAME="SECTION001810000000000000000">
+Reporting Errors</A>
+</H1>
+<P>
+Many times it is useful to report errors in a C program. The standard library
+<TT>perror()</TT> is an easy to use and convenient function. It is used in
+conjunction with <TT>errno</TT> and frequently on encountering an error you may
+wish to terminate your program early. Whilst not strictly part of the <TT>
+stdio.h</TT> library we introduce the concept of <TT>errno</TT> and the function <TT>
+exit()</TT> here. We will meet these concepts in other parts of the Standard
+Library also.
+<P><H2><A NAME="SECTION001811000000000000000">
+<TT>perror()</TT></A>
+</H2>
+<P>
+The function <TT>perror()</TT>
+ is prototyped by:
+<P><code>void perror(const char *message);</code>
+<P>
+perror() produces a message (on  standard  error  output -- see
+Section&nbsp;<A HREF="node18.html#sec:predstream">17.2.1</A>), describing the last error encountered, returned
+to <TT>errno</TT> (see below)
+     during a call to a system or library function.  The argument
+     string <TT>message</TT>  is  printed first, then a colon and a blank, then
+     the message and a newline.  If <TT>message</TT> is a NULL pointer
+     or  points  to a null string, the colon is not printed.
+<P><H2><A NAME="SECTION001812000000000000000">
+errno</A>
+</H2>
+<P><TT>errno</TT> is a special <U>system</U> variable that is set if a system
+call cannot perform its set task. It is defined in <TT>#include &lt;errno.h&gt;</TT>. 
+<BR>
+<P>
+To use <TT>errno</TT> in a C program it must be declared via:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>extern int errno;</TT>
+<BR>
+<P>
+It can be manually reset within a C program (although this is uncommon practice)
+otherwise it simply retains its last value returned by a system call or library
+function.
+<P><H2><A NAME="SECTION001813000000000000000">
+<TT>exit()</TT></A>
+</H2>
+<P>
+The function <TT>exit()</TT> is prototyped in <code>#include &lt;stdlib&gt;</code> by:
+<P><TT>void exit(int status)</TT>
+<P>
+Exit simply terminates the execution of a program
+and returns the exit <TT>status</TT> value to the operating system. The <TT>
+status</TT> value is used to indicate if the program has terminated properly:
+<P><UL>
+<LI> it
+exist with a <TT>EXIT_SUCCESS</TT> value on successful termination
+<LI> it
+exist with a <TT>EXIT_FAILURE</TT> value on unsuccessful termination.
+</UL>
+<P>
+On encountering an error you may frequently call an <TT>exit(EXIT_FAILURE)</TT>
+to terminate an errant program.
+<P><H1><A NAME="SECTION001820000000000000000">
+Streams</A>
+</H1>
+<P><EM>Streams</EM> are a portable way of reading and writing data. They provide a
+flexible and efficient means of I/O.
+<BR>
+<P>
+A Stream is a file <U>or</U> a physical device (<EM>e.g.</EM> printer or
+monitor) which is manipulated with a <B>pointer</B> to the stream.
+ <BR>
+<P>
+There exists an internal C data structure, <TT>FILE</TT>, which represents all
+streams and is defined in <TT>stdio.h</TT>. We simply need to refer to the <TT>
+FILE</TT> structure in C programs when performing I/O with streams. 
+ <BR>
+<P>
+We just need to declare a variable or pointer of this type in our
+programs. 
+ <BR>
+<P>
+We do not need to know any more specifics about this definition.
+ <BR>
+<P>
+We must <U>open</U> a stream before doing any I/O, 
+ <BR>
+<P>
+then <U>access</U>  it 
+ <BR>
+<P>
+and then <U>close</U> it.
+  <BR>
+<P>
+Stream I/O is <B>BUFFERED</B>: That is to say a fixed "chunk" is read from or
+written to a file via some temporary storage area (the buffer). This is
+illustrated in Fig.&nbsp;<A HREF="node18.html#fig:stream">17.1</A>. NOTE the file pointer actually points to
+this buffer.
+<P><A NAME="fig:stream">&#160;</A><img src= stream.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="#fig:CDE"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/cross_ref_motif.gif"></A> Stream I/O Model</B>
+This leads to efficient I/O but <B>beware</B>: data written to a buffer does not
+appear in a file (or device) until the buffer is flushed or written out.
+(<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">n does this). Any abnormal exit of code can cause problems.
+<P><H2><A NAME="SECTION001821000000000000000">
+Predefined Streams</A>
+</H2>
+<A NAME="sec:predstream">&#160;</A>
+UNIX defines 3 predefined streams (in <TT>stdio.h</TT>):
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>stdin,&nbsp;&nbsp;stdout,&nbsp;&nbsp;stderr</TT>
+<BR>
+<P>
+They all use text a the method of I/O.
+<BR>
+<P><TT>stdin</TT> and <TT>stdout</TT> can be used with files, programs, I/O devices such
+as keyboard, console, <EM>etc.</EM>. <TT>stderr</TT> <U>always</U> goes to the
+console or screen.
+<BR>
+<P>
+The console is the default for <TT>stdout</TT> and <TT>stderr</TT>. The keyboard is
+the default for <TT>stdin</TT>.
+<BR>
+<P>
+Predefined stream are automatically open.
+ <BR>
+<P><H3><A NAME="SECTION001821100000000000000">
+Redirection</A>
+</H3>
+<P>
+This how we override the UNIX default predefined I/O defaults.
+<BR>
+<P>
+This is not part of C but operating system dependent. We will do redirection
+from the command line. 
+<BR>
+<P><B>&gt;</B> -- redirect <TT>stdout</TT> to a file.
+<BR>
+<P>
+So if we have a program, <TT>out</TT>, that usually prints to the screen then
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>out &gt; file1</TT>
+<BR>
+<P>
+will send the output to a file, <TT>file1</TT>.
+ <BR>
+<P><B>&lt;</B> -- redirect <TT>stdin</TT> from a file to a program.
+<BR>
+<P>
+So if we are expecting input from the keyboard for a program, <TT>in</TT> we can
+read similar input from a file
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>in &lt; file2</TT>.
+<BR>
+<P><B>|</B> -- <EM>pipe</EM>: puts <TT>stdout</TT>  from one program to <TT>stdin</TT> of
+another
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>prog1 | prog2</TT>
+<BR>
+<P><EM>e.g.</EM> Sent output (usually to console) of a program direct to printer:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>out | lpr</TT>
+ <BR>
+<P><H1><A NAME="SECTION001830000000000000000">
+Basic I/O</A>
+</H1>
+<P>
+There are a couple of function that provide basic I/O facilities.
+<BR>
+<P>
+probably the most common are: <TT>getchar()</TT> and
+<TT>putchar()</TT>. They are defined and used as follows:
+<P><UL>
+<LI> <TT>int getchar(void)</TT> -- reads a char from <TT>stdin</TT>
+<LI> <TT>int putchar(char ch)</TT> -- writes a char to <TT>stdout</TT>, returns
+character written.
+</UL>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;int ch;
+&nbsp;
+		 ch = getchar();
+		 (void) putchar((char) ch);
+</TT></PRE>
+</TT>
+<BR>
+<P>
+Related Functions:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>int getc(FILE *stream), <BR>
+int putc(char ch,FILE *stream)
+ <BR>
+<P></TT><H1><A NAME="SECTION001840000000000000000">
+Formatted I/O</A>
+</H1>
+<P>
+We have seen examples of how C uses formatted I/O already. Let's look at this
+in more detail.
+<P><H2><A NAME="SECTION001841000000000000000">
+Printf</A>
+</H2>
+<A NAME="sec:printf">&#160;</A>
+The function is defined as follows:
+<BR>
+<P><TT>int printf(char *format, arg list ...)</TT> -- <BR>
+prints to <TT>stdout</TT>
+the list of arguments according specified format string. Returns number of
+characters printed.
+<BR>
+<P>
+The <B>format string</B> has 2 types of object:
+<UL>
+<LI> <EM>ordinary characters</EM> -- these are copied to output.
+<LI> <EM>conversion specifications</EM> -- denoted by % and listed in
+Table&nbsp;<A HREF="node18.html#tab:chars">17.1</A>.
+</UL>
+ <BR>
+<P>
+<BR>
+<DIV ALIGN="CENTER"><A NAME="tab:chars">&#160;</A>
+<A NAME="3064">&#160;</A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+Printf/scanf format characters</CAPTION>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>Format Spec (%)</TD>
+<TD ALIGN="CENTER" NOWRAP>Type</TD>
+<TD ALIGN="LEFT" NOWRAP>Result</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>c</TD>
+<TD ALIGN="CENTER" NOWRAP>char</TD>
+<TD ALIGN="LEFT" NOWRAP>single character</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>i,d</TD>
+<TD ALIGN="CENTER" NOWRAP>int</TD>
+<TD ALIGN="LEFT" NOWRAP>decimal number</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>o</TD>
+<TD ALIGN="CENTER" NOWRAP>int</TD>
+<TD ALIGN="LEFT" NOWRAP>octal number</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>x,X</TD>
+<TD ALIGN="CENTER" NOWRAP>int</TD>
+<TD ALIGN="LEFT" NOWRAP>hexadecimal number</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>lower/uppercase notation</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>u</TD>
+<TD ALIGN="CENTER" NOWRAP>int</TD>
+<TD ALIGN="LEFT" NOWRAP>unsigned int</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>s</TD>
+<TD ALIGN="CENTER" NOWRAP>char *</TD>
+<TD ALIGN="LEFT" NOWRAP>print string</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>terminated by <IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\backslash$">0</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>f</TD>
+<TD ALIGN="CENTER" NOWRAP>double/float</TD>
+<TD ALIGN="LEFT" NOWRAP>format -m.ddd...</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>e,E</TD>
+<TD ALIGN="CENTER" NOWRAP>&quot;</TD>
+<TD ALIGN="LEFT" NOWRAP>Scientific Format</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>-1.23e002</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>g,G</TD>
+<TD ALIGN="CENTER" NOWRAP>&quot;</TD>
+<TD ALIGN="LEFT" NOWRAP>e or f whichever</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>is most compact</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>%</TD>
+<TD ALIGN="CENTER" NOWRAP>-</TD>
+<TD ALIGN="LEFT" NOWRAP>print % character</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+<P>
+Between % and format char we can put:
+<P><DL>
+<DT><STRONG>- (minus sign)</STRONG>
+<DD>-- left justify.
+<DT><STRONG>integer number</STRONG>
+<DD>-- field width.
+<DT><STRONG>m.d</STRONG>
+<DD>-- m = field width, d = precision of number of digits after
+decimal point <U>or</U> number of chars from a string.
+</DL>
+<P>
+<BR>
+<P>
+So:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;%-2.3f<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;,17.23478);
+</TT></PRE>
+</TT>
+<BR>
+<P>
+The output on the screen is:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;17.235
+</PRE>
+</TT>
+<BR>
+<P>
+and:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;VAT=17.5%%<IMG WIDTH="12" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.gif"
+ ALT="$\setminus$">n&quot;);
+</PRE>
+</TT>
+<BR>
+<P>...outputs:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VAT=17.5% 
+</PRE>
+</TT>
+<P></TT></TT></TT><H1><A NAME="SECTION001850000000000000000">
+scanf</A>
+</H1>
+<P>
+This function is defined as follows:
+<BR>
+<P><TT>&nbsp;&nbsp;&nbsp;int scanf(char *format, args....)</TT> -- reads from stdin and puts input
+in address of variables specified in <TT>args</TT> list. Returns number of chars
+read.
+<BR>
+<P>
+Format control string similar to <TT>printf</TT>
+<BR>
+<P>
+Note: The <U>ADDRESS</U> of variable or a pointer to one is required by <TT>
+scanf</TT>.
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>scanf("%d",&amp;i);</TT>
+<BR>
+<P>
+We can just give the name of an array or string to scanf since this corresponds
+to the start address of the array/string.
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;&nbsp;char string[80];
+		 scanf("%s",string);
+</TT></PRE>
+</TT>
+<P><H1><A NAME="SECTION001860000000000000000">
+Files</A>
+</H1>
+<P>
+Files are the most common form of a stream.
+<BR>
+<P>
+The first thing we must do is <EM>open</EM> a file. The function <TT>fopen()</TT>
+does this:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>FILE *fopen(char *name, char *mode)</TT>
+<BR>
+<P><TT>fopen</TT> returns a pointer to a FILE. The <TT>name</TT> string is the name of
+the file on disc that we wish to access. The <TT>mode</TT> string controls our
+type of access. If a file cannot be accessed for any reason a <TT>NULL</TT>
+pointer is returned.
+<BR>
+<P><PRE><TT>
+Modes include: "r" -- read,
+		 "w" -- write and
+		 "a" -- append.
+</TT></PRE>
+<P>
+To open a file we must have a stream (file pointer) that <EM>points</EM> to a <TT>
+FILE</TT> structure.
+<BR>
+<P>
+So to open a file, called <EM>myfile.dat</EM> for reading we would do:
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;FILE *stream, *fopen();
+		 /* declare a stream and prototype fopen */ 
+&nbsp;
+		 stream = fopen("myfile.dat","r");
+&nbsp;
+<P>
+it is good practice to to check file is opened 
+correctly:
+&nbsp;
+		 if ( (stream = fopen( "myfile.dat",
+						"r")) == NULL)
+				 {&nbsp; printf("Can't open %s\n"",
+						 "myfile.dat");
+				&nbsp; exit(1);
+				 }
+		 ......
+</TT></PRE>
+</TT>
+ <BR>
+<P><H2><A NAME="SECTION001861000000000000000">
+Reading and writing files</A>
+</H2>
+<P>
+The functions <TT>fprintf</TT> and <TT>fscanf</TT> a commonly used to access files.
+ <BR>
+<P> <TT>
+<PRE><TT>
+int fprintf(FILE *stream, char *format, args..)
+		 int fscanf(FILE *stream, char *format, args..)
+</TT></PRE>
+</TT>
+<BR>
+<P>
+These are similar to <TT>printf and <TT>scanf</TT> except that data is read from
+the <EM>stream</EM> that must have been opened with <TT>fopen()</TT>.
+<BR>
+<P>
+The <TT>stream</TT> pointer is automatically incremented with <U>ALL</U> file
+read/write functions. We <B>do not</B> have to worry about doing this.
+<BR>
+<P><TT>
+<PRE><TT>
+&nbsp;&nbsp;char *string[80]
+		 FILE *stream, *fopen();
+&nbsp;
+		 if ( (stream = fopen(...)) != NULL)
+				 fscanf(stream,"%s", string);
+</TT></PRE>
+</TT>
+ <BR>
+<P>
+Other functions for files:
+<BR>
+<P><TT>int getc(FILE *stream), int fgetc(FILE *stream)
+<P><TT>int putc(char ch, FILE *s), int fputc(char ch, FILE *s)</TT>
+<BR>
+<P>
+These are like <TT>getchar</TT>, <TT>putchar</TT>.
+<BR>
+<P>
+getc is defined as preprocessor MACRO in <TT>stdio.h</TT>. fgetc is a C library
+function. Both achieve the same result!!
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>fflush(FILE *stream)</TT> -- flushes a stream.
+<P>&nbsp;&nbsp;&nbsp;<TT>fclose(FILE *stream)</TT> -- closes a stream.
+<BR>
+<P>
+We can access predefined streams with <TT>fprintf</TT> <EM>etc.</EM>
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>fprintf(stderr,"Cannot Compute!!\n");
+<P>&nbsp;&nbsp;&nbsp; fscanf(stdin,"%s",string);</TT>
+<BR>
+<P></TT></TT><H1><A NAME="SECTION001870000000000000000">
+sprintf and sscanf</A>
+</H1>
+<P>
+These are like <TT>fprintf</TT> and <TT>fscanf</TT> except they read/write to a
+string.
+<BR>
+<P><TT>int sprintf(char *string, char *format, args..)
+<P>
+int sscanf(char *string, char *format, args..)</TT>
+ <BR>
+<P>
+For Example:
+<P><PRE><TT>
+&nbsp;&nbsp;float full_tank = 47.0; /* litres */
+		 float miles = 300;
+		 char miles_per_litre[80];
+&nbsp;
+		 sprintf( miles_per_litre,"Miles per litre
+				 = %2.3f", miles/full_tank);
+</TT></PRE><H2><A NAME="SECTION001871000000000000000">
+Stream Status Enquiries</A>
+</H2>
+<P>
+There are a few useful stream enquiry functions, prototyped as follows:
+<P> <PRE>
+ int feof(FILE *stream);
+ int ferror(FILE *stream);
+ void clearerr(FILE *stream);
+ int fileno(FILE *stream);
+</PRE>
+<P>
+Their use is relatively simple:
+<P> <DL>
+<DT><STRONG><TT>feof()</TT></STRONG>
+<DD>-- returns  true if the stream is currently at the end of
+the file. So to read a stream,<TT>fp</TT>, line by line you could do:
+<PRE>
+while ( !feof(fp) )
+  fscanf(fp,&quot;%s&quot;,line);
+</PRE>
+<P><DT><STRONG><TT>ferror()</TT></STRONG>
+<DD>-- reports on the error state of the stream and returns
+true if an error has occurred.
+<P><DT><STRONG><TT>clearerr()</TT></STRONG>
+<DD>-- resets the error indication for a given stream.
+<P><DT><STRONG><TT>fileno()</TT></STRONG>
+<DD>-- returns the integer file descriptor associated with
+     the named stream.
+</DL><H1><A NAME="SECTION001880000000000000000">
+Low Level I/O</A>
+</H1>
+<P>
+This form of I/O is <U>UNBUFFERED</U> -- each read/write request results
+in accessing disk (or device) directly to fetch/put a specific number of <B>
+bytes</B>.
+<BR>
+<P>
+There are no formatting facilities -- we are dealing with bytes of information.
+<BR>
+<P>
+This means we are now using binary (and <U>not</U> text) files.
+<BR>
+<P>
+Instead of file pointers we use <EM>low level</EM> <TT>file handle or file
+descriptors</TT> which give a unique integer number to identify each file.
+ <BR>
+<P>
+To Open a file use:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>int open(char *filename, int flag, int perms)</TT> -- this returns a file
+descriptor or -1 for a <B>fail</B>.
+<BR>
+<P>
+The <TT>flag</TT> controls file access and has the following predefined in <TT>
+fcntl.h</TT>:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>O_APPEND, O_CREAT, O_EXCL, O_RDONLY, O_RDWR, O_WRONLY</TT> + others
+see online <TT>man</TT> pages or reference manuals.
+<BR>
+<P><TT>perms</TT> -- best set to 0 for most of our applications.
+<BR>
+<P>
+The function:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>creat(char *filename, int perms)</TT>
+<BR>
+<P>
+can also be used to create a file.
+<BR>
+<P><TT>int close(int handle)</TT> -- close a file
+ <BR>
+<P><TT>int read(int handle, char *buffer, <BR>
+unsigned length)
+<BR>
+<P>
+int write(int handle, char *buffer, unsigned length)</TT>
+<BR>
+<P>
+are used to read/write a specific number of bytes from/to a file (handle)
+stored or to be put in the memory location specified by <TT>buffer</TT>.
+<BR>
+<P>
+The <TT>sizeof()</TT> function is commonly used to specify the <TT>length</TT>.
+<BR>
+<P>
+read and write return the number of bytes read/written or -1 if they fail.
+ <BR>
+<P><PRE><TT>
+/* program to  read a list of floats from a binary file */
+/* first byte of file is an integer saying how many  */
+/* floats in file. Floats follow after it, File name got from */
+/* command line */
+&nbsp;
+#include&lt;stdio.h&gt;
+#include&lt;fcntl.h&gt;
+&nbsp;
+float bigbuff[1000];
+&nbsp;
+main(int argc, char **argv)
+&nbsp;
+{&nbsp; int fd;
+		 int bytes_read;
+		 int file_length;
+&nbsp;
+		 if ( (fd = open(argv[1],O_RDONLY)) = -1)
+				 { /* error file not open */....
+						 perror(&quot;Datafile&quot;);
+						 exit(1);
+				 }
+		 if ( (bytes_read = read(fd,&amp;file_length,
+						 sizeof(int))) == -1)
+				 { /* error reading file */...
+						 exit(1);
+				 }
+		 if ( file_length &gt; 999 )  {/* file too big */ ....}
+		 if ( (bytes_read = read(fd,bigbuff,
+						file_length*sizeof(float))) == -1)
+				 { /* error reading open */...
+						 exit(1);
+				 }
+}
+</TT></PRE>
+<P><H1><A NAME="SECTION001890000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12573</B></P>
+<P>
+Write a program to copy one named file into another named file. The two file
+names are given as the first two arguments to the program.
+<P>
+Copy the file a block (512 bytes) at a time.
+<PRE>
+Check: 	that the program has two arguments
+      		  or print &quot;Program need two arguments&quot;
+    		that the first name file is readable
+      		  or print &quot;Cannot open file .... for reading&quot;
+   		 that the second file is writable
+     		   or print &quot;Cannot open file .... for writing&quot;
+</PRE>
+<P></P>
+<P>
+<P>
+<B>Exercise 12577</B></P>
+<P>
+Write a program last that prints the last <I>n</I> lines of a  text file, by <I>n</I> and
+the file name should be specified form command line input. By default <I>n</I> should
+be 5, but your program should allow an optional argument so that
+<P><PRE>
+			last -n file.txt
+</PRE>
+<P>
+prints out the last n lines, where n is any integer. Your program should make
+the best use of available storage. 
+</P>
+<P>
+<P><P>
+<B>Exercise 12578</B></P>
+<P>
+Write a program to compare two files and print out the lines where they
+differ. Hint: look up appropriate string and file handling library routines.
+This should not be a very long program.
+<P> </P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node18.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:17 GMT -->
+</HTML>

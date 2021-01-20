@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10403588/adding-opencv-processing-to-gstreamer-application by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Adding opencv processing to gstreamer application | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Adding opencv processing to gstreamer application | C Language Knowledge Base">
+        <title>[SOLVED] Adding opencv processing to gstreamer application | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="adding-opencv-processing-to-gstreamer-application">Adding opencv processing to gstreamer application</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/fifo.html">fifo</a></span>
+                        <span class="tag-item"><a href="../tag/gstreamer.html">gstreamer</a></span>
+                        <span class="tag-item"><a href="../tag/opencv.html">opencv</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I'm trying to do the following: receive video stream using gstreamer and process it with opencv. I've found few solutions, and one of them is to write video into (from gstreamer) fifo and then read it using opencv. (OPTION3 here <a href="https://stackoverflow.com/questions/6022423/mjpeg-streaming-and-decoding">MJPEG streaming and decoding</a>). The problem is I cant open pipe. cvCreateFileCapture just never returns. Here is a part code I wrote:</p>
+
+<pre><code>if(mkfifo("fifo.avi", S_IRUSR| S_IWUSR) == -1)
+{
+    cout&lt;&lt;"Cant create fifo"&lt;&lt;endl;
+    cout&lt;&lt;errno&lt;&lt;endl;
+}
+
+loop = g_main_loop_new(NULL, false);
+
+fsink = gst_element_factory_make("filesink", "fsink");
+g_object_set(G_OBJECT(fsink), "location", "fifo.avi", NULL);
+
+playbin = gst_element_factory_make("playbin2", "play");    
+g_object_set(G_OBJECT(playbin), "uri", uri.c_str(), NULL);
+g_object_set(G_OBJECT(playbin), "video-sink", fsink, NULL);
+
+bus = gst_pipeline_get_bus(GST_PIPELINE(playbin));
+gst_bus_add_signal_watch(bus);
+
+g_signal_connect(bus, "message::buffering", G_CALLBACK(&amp;set_playbin_state), playbin);
+gst_object_unref(bus);
+
+cvNamedWindow("output", CV_WINDOW_AUTOSIZE);
+capture = cvCreateFileCapture("fifo.avi");
+</code></pre>
+
+<p>The program stacks in the last line. 
+PS: I'm using opencv 2.3.1. </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2629072/roman" target="_blank"><span itemprop="name">Roman</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">13</div>
+                                    <div itemprop="dateCreated">5/23/2017 12:26:15 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>So. After searching a while, I've found a solution, which involves retrieving data from buffer. So the idea is to create playbin and set appsink as "video-sink". Here is code sample:</p>
+
+<pre><code>cout&lt;&lt;"Creating appsink"&lt;&lt;endl;
+appsink = gst_element_factory_make("appsink", "asink");
+gst_app_sink_set_emit_signals((GstAppSink*)appsink, true);
+gst_app_sink_set_drop((GstAppSink*)appsink, true);
+gst_app_sink_set_max_buffers((GstAppSink*)appsink, 1);
+
+//creating and initialising pipeline
+
+g_object_set(G_OBJECT(playbin), "video-sink", appsink, NULL);
+
+g_signal_connect(appsink, "new-buffer", G_CALLBACK(DisplayFrame), (gpointer) mark);
+
+//callback function looks like this
+
+gboolean Core::DisplayFrame(GstAppSink *fks, gpointer mark)
+{
+static bool init = false;
+static IplImage *frame;
+GstBuffer* buf;
+Mark* mk = (Mark*) mark;
+
+if(!init)
+{
+    init = true;
+    frame = cvCreateImage(cvSize(mk-&gt;frame_w, mk-&gt;frame_h), IPL_DEPTH_8U, 1);
+}
+buf = gst_app_sink_pull_buffer(fks);
+frame-&gt;imageData = (char*)GST_BUFFER_DATA(buf);
+
+ProcessFrame(frame);
+gst_buffer_unref(buf);
+return true;
+}
+</code></pre>
+
+<p>this works. 
+PS. There's a lot of info about this method, but I spent a lot of time searching for it. So I decided to post it here in order to provide at least some keywords to search.</p>
+
+<p>UPDATE. 
+And a bit more information about connecting gstreamer and opencv. It's about converting buffer to iplimage now.
+First of all, we need to receive rgb buffer, to make conversion as easy, as possible. In order to do this we'll replace appsinks with appsink, connected to ffmpegcolorspace</p>
+
+<pre><code>cout&lt;&lt;"Creating appsink"&lt;&lt;endl;
+appsink = gst_element_factory_make("appsink", "asink");
+gst_app_sink_set_emit_signals((GstAppSink*)appsink, true);
+gst_app_sink_set_drop((GstAppSink*)appsink, true);
+gst_app_sink_set_max_buffers((GstAppSink*)appsink, 1);
+csp = gst_element_factory_make("ffmpegcolorspace", "csp");
+sinkpipe = gst_pipeline_new("sinkp");
+gst_bin_add_many(GST_BIN(sinkpipe), csp, appsink, NULL);
+gst_element_link_filtered(csp, appsink, gst_caps_new_simple("video/x-raw-rgb", NULL));
+pad = gst_element_get_static_pad(csp, "sink");
+gst_element_add_pad(sinkpipe, gst_ghost_pad_new("ghost", pad));
+g_object_unref(pad);
+
+//...
+
+g_object_set(G_OBJECT(playbin), "video-sink", sinkpipe, NULL);
+
+//...
+
+g_signal_connect(appsink, "new-buffer", G_CALLBACK(GetFrame), (gpointer) mark);
+
+//...
+
+//caps_struct can be retrieved via writing data probe
+//search for it in streamer manual
+
+cout&lt;&lt;"Getting frame resolution"&lt;&lt;endl;
+gst_structure_get_int(caps_struct, "width", &amp;(mark-&gt;frame_w));
+gst_structure_get_int(caps_struct, "height", &amp;(mark-&gt;frame_h));
+gst_structure_get_int(caps_struct, "depth", &amp;depth);
+
+mark-&gt;GeneratePoints();
+frame = cvCreateImage(cvSize(mark-&gt;frame_w, mark-&gt;frame_h), depth/3, 3);
+
+
+//callback function
+
+gboolean Core::GetFrame(GstAppSink *fks, gpointer frame)
+{
+
+IplImage* frame_temp = frame
+IplImage* frame_temp_two = cvCloneImage(frame_temp);
+
+GstBuffer* buf;
+buf = gst_app_sink_pull_buffer(fks);
+frame_temp_two-&gt;imageData = (char*) GST_BUFFER_DATA(buf);
+cvConvertImage(frame_temp_two, frame_temp, CV_CVTIMG_SWAP_RB);
+ProcessFrame(frame_temp);
+gst_buffer_unref(buf);
+return true;
+}
+</code></pre>
+
+<p>I hope this will help somebody.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/2629072/roman" target="_blank"><span itemprop="name">Roman</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/10403588/adding-opencv-processing-to-gstreamer-application#answer-0</div>
+                                            <div itemprop="upvoteCount">11</div>
+                                            <div itemprop="dateCreated">5/13/2012 4:58:11 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Here is my complete source code solution for Gstreamer 1.4.0 and OpenCV 2.4.9. </p>
+
+<p>It uses <code>gst_parse_launch()</code> to parse normal command line that you would give to <code>gst-launch</code>. Gstreamer pipeline converts frames to RGB888 format before feeding them to OpenCV so that conversion is as easy as possible.</p>
+
+<p>OpenCV frame processing is not done in <code>new_sample()</code> callback but it only grabs the frame from gstreamer and push it to queue which then will be consumed in main thread. This way we mat call e.g. imshow() from OpenCV to actually render image to screen.</p>
+
+<p>~150 lines... by removing debug prints etc. could be reduced to &lt;100 lines of code.</p>
+
+<p>Probably one should add there thread synchronization around deque read / write</p>
+
+<pre><code>#include &lt;gst/gst.h&gt;
+#include &lt;gst/app/gstappsink.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include "opencv2/opencv.hpp"
+using namespace cv;
+
+// TODO: use synchronized deque
+std::deque&lt;Mat&gt; frameQueue;
+
+GstFlowReturn
+new_preroll(GstAppSink *appsink, gpointer data) {
+  g_print ("Got preroll!\n");
+  return GST_FLOW_OK;
+}
+
+GstFlowReturn
+new_sample(GstAppSink *appsink, gpointer data) {
+  static int framecount = 0;
+  framecount++;
+
+  GstSample *sample = gst_app_sink_pull_sample(appsink);
+  GstCaps *caps = gst_sample_get_caps(sample);
+  GstBuffer *buffer = gst_sample_get_buffer(sample);
+  const GstStructure *info = gst_sample_get_info(sample);
+
+  // ---- Read frame and convert to opencv format ---------------
+
+  GstMapInfo map;
+  gst_buffer_map (buffer, &amp;map, GST_MAP_READ);
+
+  // convert gstreamer data to OpenCV Mat, you could actually
+  // resolve height / width from caps...
+  Mat frame(Size(320, 240), CV_8UC3, (char*)map.data, Mat::AUTO_STEP);
+  int frameSize = map.size;
+
+  // TODO: synchronize this....
+  frameQueue.push_back(frame);
+
+  gst_buffer_unmap(buffer, &amp;map);
+
+  // ------------------------------------------------------------
+
+  // print dot every 30 frames
+  if (framecount%30 == 0) {
+    g_print (".");
+  }
+
+  // show caps on first frame
+  if (framecount == 1) {
+    g_print ("%s\n", gst_caps_to_string(caps));
+  }
+
+  gst_sample_unref (sample);
+  return GST_FLOW_OK;
+}
+
+static gboolean
+my_bus_callback (GstBus *bus, GstMessage *message, gpointer data) {
+  g_print ("Got %s message\n", GST_MESSAGE_TYPE_NAME (message));
+  switch (GST_MESSAGE_TYPE (message)) {
+    case GST_MESSAGE_ERROR: {
+      GError *err;
+      gchar *debug;
+
+      gst_message_parse_error (message, &amp;err, &amp;debug);
+      g_print ("Error: %s\n", err-&gt;message);
+      g_error_free (err);
+      g_free (debug);    
+      break;
+    }
+    case GST_MESSAGE_EOS:
+      /* end-of-stream */
+      break;
+    default:
+      /* unhandled message */
+      break;
+  }
+  /* we want to be notified again the next time there is a message
+   * on the bus, so returning TRUE (FALSE means we want to stop watching
+   * for messages on the bus and our callback should not be called again)
+   */
+  return TRUE;
+}
+
+int
+main (int argc, char *argv[])
+{
+  GError *error = NULL;
+
+  gst_init (&amp;argc, &amp;argv);
+
+  gchar *descr = g_strdup(
+    "videotestsrc  pattern=ball ! "
+    "video/x-raw,format=RGB ! "
+    "videoconvert ! "
+    "appsink name=sink sync=true"
+  );
+  GstElement *pipeline = gst_parse_launch (descr, &amp;error);
+
+  if (error != NULL) {
+    g_print ("could not construct pipeline: %s\n", error-&gt;message);
+    g_error_free (error);
+    exit (-1);
+  }
+
+  /* get sink */
+  GstElement *sink = gst_bin_get_by_name (GST_BIN (pipeline), "sink");
+
+  gst_app_sink_set_emit_signals((GstAppSink*)sink, true);
+  gst_app_sink_set_drop((GstAppSink*)sink, true);
+  gst_app_sink_set_max_buffers((GstAppSink*)sink, 1);
+  GstAppSinkCallbacks callbacks = { NULL, new_preroll, new_sample };
+  gst_app_sink_set_callbacks (GST_APP_SINK(sink), &amp;callbacks, NULL, NULL);
+
+  GstBus *bus;
+  guint bus_watch_id;
+  bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+  bus_watch_id = gst_bus_add_watch (bus, my_bus_callback, NULL);
+  gst_object_unref (bus);
+
+  gst_element_set_state (GST_ELEMENT (pipeline), GST_STATE_PLAYING);
+
+  namedWindow("edges",1);
+  while(1) {
+    g_main_iteration(false);
+
+      // TODO: synchronize...
+    if (frameQueue.size() &gt; 0) {
+      // this lags pretty badly even when grabbing frames from webcam
+      Mat frame = frameQueue.front();
+      Mat edges;
+      cvtColor(frame, edges, CV_RGB2GRAY);
+      GaussianBlur(edges, edges, Size(7,7), 1.5, 1.5);
+      Canny(edges, edges, 0, 30, 3);
+      imshow("edges", edges);
+      cv::waitKey(30);
+      frameQueue.clear();
+    }
+  }  
+
+  gst_element_set_state (GST_ELEMENT (pipeline), GST_STATE_NULL);
+  gst_object_unref (GST_OBJECT (pipeline));
+
+  return 0;  
+}
+</code></pre>
+
+<p>To compile on OSX / Linux make file like this should do:</p>
+
+<pre><code>GST_FLAGS=$(shell pkg-config --cflags --libs gstreamer-gl-1.0 gstreamer-tag-1.0 gstreamer-net-1.0 gstreamer-sdp-1.0 \
+  gstreamer-1.0 gstreamer-allocators-1.0 gstreamer-insertbin-1.0 gstreamer-plugins-base-1.0 \
+  gstreamer-codecparsers-1.0 gstreamer-base-1.0 gstreamer-app-1.0 gstreamer-check-1.0 \
+  gstreamer-controller-1.0 gstreamer-video-1.0 gstreamer-fft-1.0 gstreamer-mpegts-1.0 \
+  gstreamer-pbutils-1.0 gstreamer-rtp-1.0 gstreamer-rtsp-1.0 \
+  gstreamer-riff-1.0 gstreamer-audio-1.0 gstreamer-plugins-bad-1.0 opencv)
+
+OPENCV_FLAGS=$(shell pkg-config --cflags --libs opencv)
+
+all: gst_opencv
+
+gst_opencv: gst_opencv
+    g++ $(GST_FLAGS) $(OPENCV_FLAGS) gst_opencv -o gst_opencv
+
+clean:
+    rm -f gst_opencv
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/360060/mikael-lepisto" target="_blank">Mikael Lepistö</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/10403588" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/10403588/adding-opencv-processing-to-gstreamer-application by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:16:27 GMT -->
+</html>

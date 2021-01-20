@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-scope-hide-or-shadow.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Variable Scope Hide or Shadow</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Variable Scope Hide or Shadow'>C Variable Scope Hide or Shadow</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Storage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-storage-classes.html'>C Storage Classes
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Scope
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-block-scope.html'>C Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-block-scope-without-braces.html'>C Block Scope Without Braces
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C function/prototype Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-identifier-variable-file-scope.html'>C file Scope
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Variable Scope Hide 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Linkage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-linkage.html'>C Variable Linkage
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Duration
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-duration.html'>C Storage Duration
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Summary
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-summary-syntax-for-storage-class-storage-duration-scope-linkage.html'>C Summary
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Auto
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initialization-of-automatic-variables.html'>C Automatic Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Register
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-register-variables.html'>C Register Variables
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>static
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-block-scope.html'>C Static Variables with Block Scope
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-with-external-linkage.html'>C Static Variables with External Linkage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-external-variable-example.html'>C External Variable Example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Memory
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-malloc-function-to-allocate-more-memory.html'>C malloc() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calloc-function-to-allocate-memory.html'>C calloc() Function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-malloc-function-to-allocate-memory-for-different-type-variable.html'>C malloc() function example
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-storage-scope-linkage-exercise-2.html'>C Exercise 2
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Variable Scope Hide or Shadow</h1>
+<a class ='btn btn-outline-dark' href=c-identifier-variable-file-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-linkage.html>Next</a><p>When you declare a variable in an inner block that has the same name as one in the outer block,
+the name defined inside the block hides the outer definition.
+
+</p><p>When execution exits the inner block, the outer variable comes back into scope.
+
+</p><div class='myCodeDiv'><button id='SCGNF' class='myCopyButton' data-clipboard-target='#RMQCH'>Copy</button><pre  id='RMQCH' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+<span class='r'>int</span> main()
+{
+      <span class='r'>int</span> x = 3;      <span class='c'>// original x</span>
+
+      printf(<span class='q'>"x in outer block: %d at %p\n"</span>, x, &amp;x);
+      {
+          <span class='r'>int</span> x = 7; <span class='c'>// new x, hides first x</span>
+          printf(<span class='q'>"x in inner block: %d at %p\n"</span>, x, &amp;x);
+      }
+      printf(<span class='q'>"x in outer block: %d at %p\n"</span>, x, &amp;x);
+      <span class='r'>while</span> (x++ &lt; 10) <span class='c'>// original x</span>
+      {
+          <span class='r'>int</span> x = 10; <span class='c'>// new x, hides first x</span>
+          x++;
+          printf(<span class='q'>"x in while loop: %d at %p\n"</span>, x, &amp;x);
+      }
+      printf(<span class='q'>"x in outer block: %d at %p\n"</span>, x, &amp;x);
+
+      <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SCGNF');clipboard.on('success', function(e) {$('#SCGNF').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SCGNF').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAFOCAIAAABblX+pAAAcf0lEQVR42u3dDc6rOJoG0F7E3f8ipxeQaU1JPVdJMO+PDQTOUalU+ooYMAE/mBj/6wUA8CP+pQoAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQBAcAEABBcAAMEFAEBwAQAEFwAAwQUAQHABAAQXAADBBQDgesHlz58/Kh0AEFx+3p//E1kmsuTSzZi4oot/JTob+eebyJKFBQbHLvjZ8dGP10NkC8fbGa/SX/xGAT8WXK4fHX5lA5Zu6up6eGtdFq2uX2xzI7+2rIXtTK06uNJyCcHsUgg0u6vYzTRukEBwEVwElx+u+WaZ/QQQb9GvHFwKBWY/srvG3UJWHCzgV4PLZ+9roT820g3+aj8H2e1DHt/0Rzr2gzvyqvZaxz9e643/usDgon9Yt/zcIx48ms2Oh+x5sfsQJ7gj5aMZrMZCcMmWkI0dkYoSXEBwWXJRGDelB98mrrgv/Lxw1xJe+e4zWw9bbWE8Hp2YWpY2XZGq63x/pvS4BI/mOPdkz8TxAoMSgttQ65ryqAgElyUXhfi1u9k9PivKZK+kzbY8fr2u/TG+F8dc/Zf22RzwqCh1XkwPLv0HT/0TJ17C+FOffVeF4HLAT9eBnwkusxqznw4uwX776fWzOrgszRNLe1wOPhbBPrZmr8ktg0vqeZMeF2BacOm3ZzfrcZnVBl8wuBx89Z/7A5SDg0twmPGTg0snhdTqUHaBpweXt6fUgssTgsuRV/8fDS7x8+LJwWXWuSa4AK9L/Th3bkvW/FHqiugT3Ivm0NDpP1LeHZrU/xr0X5FSOJrZtXSOfjnTZBvs3e9P/7xYcWZNSXgeFYHgstk+NYdDRwosj1/NDgOuDXiODEwtb/8rNgi5PGY7uBe7RTUfHfZ/R9k/mqm1dM6L1G+nOgu8tkf+zzovVhyL+EuBg6enKzs8vccFAEBwAQAQXAAAwQUAQHABABBcAADBBQBAcAEAuExwOWbCYccVAAQXwWX5lkfe/r769aAHvHs08v7fSx2UWfNX195lHFlgcOxS9dx/KW38BbiFVfzEdwa4VXBhVupaetU+ILgcsMZ+mc3pb+LzS0/ckenTfhXqYRB9OlUtqQCCi+ByTnA5Zo0HzA49ZZMuHlwKBWY/0pxYFBBcvtwnTZxkcXAr1ukEbq4iuA3Btbwa80QGP17rjf+6wKCZWTfJ4pQGaXw0+3NejnsFsudFYcrMwpyatZwxKCE4LXaqhGzQmVIPwIN6XCbeeo6b0nNXEVkgePdcfsTwtTnM7mahSRgEl/imHhxc+h0D/da0068wpccleDTH7X32TCyfR8FtKHRNReoBeFBwebUf9heu3SuCS6cdCl5Jm1fM+PW69sf4Xhx5z7oo/RzwqCh1XkwPLv0HT5ES+udFJM1/9l2trgfg5sFlVmP208El2F89vX5WB5et3pSLp5bjj0Wwj63Za3LL4JJ63pTdNRkFBJedduKxweWAzoPrBJfD2oMpz4nO6nGJnxcPDy7Z7RRcgG5weXtKLbg8Ibi8LvzenYsEl/h58eTgkj06zd91AYLLJVLF6cHlsMayOTR0yjYHfx28rgcu+8Hgz047a+kc/XKmybbx2R+YF2qyX0I5xmVHbLm+w0ODy/Th0JECj19FcBviAzJr4293h2QXxoXu1tUgPK0eDt3svXv7VUShKgrf/8KXNjh2vfal2q2HwvD47OFuHov4S4HjFeXiDo/ucQEAEFwAAAQXAEBwAQAQXAAABBcAQHABABBcAAAuE1y8GAoAEFzuIDhX3+p3gx724tGfeMlpZyMjrzn+umRhgcGxS71SdncDmt+f5ruYgy/PdTEBweVB0eFXNmDppq6uh8+X5V9zL5obGZ9feuKO9Gft6c82Oog+naqOT/kku4DgIrgILr9X8wfMDj1lky4eXAoFZj/SnFj0ZZJFEFw+75MmzoA4uBVrPgcJThy4ddPfn79wPGtjqs2IPBSo1fbr25R4u5uxult+7hEPHs1mx0P2vChMmVn4TtZyxqCE4LTYqRKysSNSUYILCC5LLgrjpvTg28QV94WfF+5awivffWbrYastjMejE1PL0qYrUnWd78+UHpfg0RznnuyZOF5gUEJwG2pdUx4VgeCy5KIQv3Y3u8dnRZnslbTZlsev17U/xvfimKv/0j6bAx4Vpc6L6cGl/+Cpf+LESxh/6rPvqhBcDvjpOvAzwWVWY/bTwSXYbz+9flYHl6V5YmmPy8HHItjH1uw1uWVwST1v0uMCTAsu/fbsZj0us9rgCwaXg6/+c3+AcnBwCQ4zfnJw6aSQWh3KLvD04PL2lFpweUJwOfLq/6PBJX5ePDm4zDrXBBfgdakf585tyZo/Sl0RfYJ70RwaOv1HyrtDk/pfg/4rUgpHM7uWztEvZ5psg737/emfFyvOrCkJz6MiEFw226fmcOhIgeXxq9lhwLUBz5GBqeXtf8UGIZfHbAf3Yreo5qPD/u8o+0cztZbOeZH67VRngdf2yP9Z58WKYxF/KXDw9HRlh6f3uAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACXCS4/8W4oL7ACAMHlzEyQep9m8PWg67bzHm//jEzfc/3dbM5sEHyZcvydsJHXy9Y+Oz4o8XqIvwC3sIrOm6kBweX32tEfil8/fVH++9XvtQUuUofN6W/i80tP3JHp034V6mEQfTpVLakAgovgcvJeXDm4rJhw+BeDS6HA7EeaE4sCgsuX+6SJkyyO7787hY//npq/sNyQzOrH7qwiMoFivJArB5etvfizYW7HQ/a8KEyZWZhTs5YzBiUEp8VOlZANOlPqAXhQj8vEW8/dZwez7jK3WpopN3bBD3YuneVVRBaIbOf1g0u/Y6Dfmnb6FabU0tcGfhyPsiVk62FQQnAbCl1TkXoAHhRcXu2H/YVrdzm4RP57RUNSewowdxWRT83dznN7XM4NLtnzYnVQLpRW+8LUSoifjIOu2Yn1ANw8uHy9+lwnuLzd1TXvj8vBpf94QnBJFZ7qS1iUhILnReoR0v2CS+p5U3bXZBQQXHbaiSsHl89/n9vjMreiBJdyd8jS4NL/XdQTelxS2ym4AN3g8vaUWnARXASX1Hnx5OCSPTrZE1NwAcFlfqp4QnA5paIe++PcwsOI5otYOo1xOdNk2/jdg1v4cW62HprHYtb/kmbgucFl+nDoSIH98atbwykjf5k1NrXWUmaHfY4LGSS8dcOhp9Rkai2vwICackIKvuZ1t86DddVZYCu7pL4whdfaNo9F/KXA60494FY9LtyJazoAgguCCwAILsxOLTrSARBcAAAEFwAAwQUAEFwAAAQXAEBwOXh9PzGexaAbABBczswEqTHAtTfSTtzOe4xYjkzfc/3dXPoG4a0lCwsMqjT1StndDWge98irb+NV6goOgsudTbzMHXDF/OmL8t+vfq8tcJE63J1NMLsB/WkRZ620XEIwuxQCTeTOwSUbEFwElzP34srBZcW8fb8YXAoFZj8SnIJRcAFep0yyOL7/7hQ+/vvuKlLd6bU9ndLodiZZjFf1xWeHHu/pnw1zOx6y50VkAsXmvJ7lnDEoITgtdqqEbNCZUg/Ag3pcJt567j47mHWXudXSTLmxC36wc+ksryKyQGQ7rx9c+h0D/da0068wpZa+NvDjeJQtIVsPgxKC21DomorUA/Cg4PJqP+wvXLvLwSXy3ysaktpTgLmriHxq7nae2+NybnDJnherg3KhtNoXplZC/GQcdM1OrAfg5sHl69XnOsHl7a6ueX9cDi79xxOCS6rwVF/CoiQUPC9Sj5DuF1xSz5uyuyajgOCy005cObh8/vvcHpe5FSW4lLtDlgaX/u+intDjktpOwQXoBpe3p9SCi+AiuKTOiycHl+zRyZ6YggsILvNTxROCyykV9dgf5xYeRjRfxNJpjMuZJtvG7x7cwo9zs/XQPBaz/pc0A88NLtOHQ0cK7I9f3RpOGfnLrLGptZYyO+xzXMgg4a0bDj2lJlNreQUG1JQTUvA1r7t1HqyrzgJb2SX1hSm81rZ5LOIvBV536gG36nHhTlzTARBcEFwAQHBhdmrRkQ6A4AIAILgAAAguAIDgAgAguAAAgsvB6/uJ8SwG3QCA4HJmJkiNAa69kXbidt5jxHJk+p7r7+bSNwhvLVlYYFClqVfK7m5A87hHXn0br1JXcBBc7mziZe6AK+ZPX5T/fvV7bYGL1OHubILZDehPizhrpeUSgtmlEGgidw4u2YDgIricuRdXDi4r5u37xeBSKDD7keAUjIIL8DplksXx/Xen8PHfd1eR6k6v7emURrczyWK8qi8+O/R4T/9smNvxkD0vIhMoNuf1LOeMQQnBabFTJWSDzpR6AB7U4zLx1nP32cGsu8ytlmbKjV3wg51LZ3kVkQUi23n94NLvGOi3pp1+hSm19LWBH8ejbAnZehiUENyGQtdUpB6ABwWXV/thf+HaXQ4ukf9e0ZDUngLMXUXkU3O389wel3ODS/a8WB2UC6XVvjC1EuIn46BrdmI9ADcPLl+vPtcJLm93dc3743Jw6T+eEFxShaf6EhYloeB5kXqEdL/gknrelN01GQUEl5124srB5fPf5/a4zK0owaXcHbI0uPR/F/WEHpfUdgouQDe4vD2lFlwEF8EldV48Obhkj072xBRcQHCZnyqeEFxOqajH/ji38DCi+SKWTmNczjTZNn734BZ+nJuth+axmPW/pBl4bnCZPhw6UmB//OrWcMrIX2aNTa21lNlhn+NCBglv3XDoKTWZWssrMKCmnJCCr3ndrfNgXXUW2MouqS9M4bW2zWMRfynwulMPuFWPC3fimg6A4ILgAgCCC7NTi450AAQXAADBBQBAcAEABBcAAMEFABBcDl7fT4xnMegGAASXMzNBagxw7Y20E7fzHiOWI9P3XH83l75BeGvJwgKDKk29UnZ3A5rHPfLq23iVuoKD4HJnEy9zB1wxf/qi/Per32sLXKQOd2cTzG5Af1rEWSstlxDMLoVAE7lzcMkGBBfB5cy9uHJwWTFv3y8Gl0KB2Y8Ep2AUXIDXKZMsju+/O4WP/767ilR3em1PpzS6nUkW41V98dmhx3v6Z8PcjofseRGZQLE5r2c5ZwxKCE6LnSohG3Sm1APwoB6Xibeeu88OZt1lbrU0U27sgh/sXDrLq4gsENnO6weXfsdAvzXt9CtMqaWvDfw4HmVLyNbDoITgNhS6piL1ADwouLzaD/sL1+5ycIn894qGpPYUYO4qIp+au53n9ricG1yy58XqoFworfaFqZUQPxkHXbMT6wG4eXD5evW5TnB5u6tr3h+Xg0v/8YTgkio81ZewKAkFz4vUI6T7BZfU86bsrskoILjstBNXDi6f/z63x2VuRQku5e6QpcGl/7uoJ/S4pLZTcAG6weXtKbXgIrgILqnz4snBJXt0siem4AKCy/xU8YTgckpFPfbHuYWHEc0XsXQa43Kmybbxuwe38OPcbD00j8Ws/yXNwHODy/Th0JEC++NXt4ZTRv4ya2xqraXMDvscFzJIeOuGQ0+pydRaXoEBNeWEFHzN626dB+uqs8BWdkl9YQqvtW0ei/hLgdedesCtely4E9d0AAQXBBcAEFyYnVp0pAMguAAACC4AAIILACC4AAAILgCA4HLw+n5iPItBNwAguJyZCVJjgGtvpJ24nfcYsRyZvuf6u7n0DcJbSxYWGFRp6pWyuxvQPO6RV9/Gq9QVHASXO5t4mTvgivnTF+W/X/1eW+Aidbg7m2B2A/rTIs5aabmEYHYpBJrInYNLNiC4CC5n7sWVg8uKeft+MbgUCsx+JDgFo+ACvE6ZZHF8/90pfPz33VWkutNrezql0e1Mshiv6ovPDj3e0z8b5nY8ZM+LyASKzXk9yzljUEJwWuxUCdmgM6UeZvmff//7P/9oPODSPS4Tbz13nx3Musvcammm3NgFP9i5dJZXEVkgsp3XDy79joF+a9rpV5hSS18b+HE8ypaQrYdBCcFtKHRNRephVmS5WnC55lbBycHl1X7YX7h2l4NL5L9XNCS1pwBzVxH51NztPLfH5dzgkj0vVgflQmm1L0ythPjJOOianVgPN+hx+TuyyC4ILptXh0W34BMfzH/+x2HBpf94QnBJFZ7qS1iUhILnReoR0v2CS+p5U3bXDv7ty6WCy9cco2FDcPlyWblscPn897k9LnMrSnApd4csDS7930U9occltZ2CSza1XC1UwfnB5e0pteAiuAguqfPiycHl77/8t1fgP3/5p4n9fNLxz//6/GfrI/8U/vUj/y3z6/OU+BOWz6K2Ftj6X1udIuMNGBe7G1w+KyEYy7Y2KfJ/a3sKk4PLMT/O/fXgckpFPfbHuYWHEc0XsXSiUjnTZEPP7sEt/Dg3Ww/BY/H1McdbxHlb4K2Qv1vB/2aXt1VsrWXc/A8iwtfW97PB/mzmIxEqu97d6FD4eLCuBhGwsKcwObhMHw4dKbA/fnVrOGXkL7PGptZayuywz3Ehg4S3bjj0lJpMreUVGFBTTkjB17zu1nmwrjoLbGWX1Bem8Frb7LF4a72+buFb8/ZZD4NC/u6DaQaXQiFfexqaZQab/Lf1Rjpp4ntRq5ndv8CSHhfuxFu8ON1We/a1t+DIj0SyQjaXFJrzyLOYbPIY7+9uyfEnU4ILgguCCzfPLp+/HYn8hGLRR2rBZTAs+dzgEgwKgguCC9dNLWanQ3BZ2uMS7PiZG1x2f0ub3UjBBcEF4EsD9vmzzfEQm9Uf+cXgEtmAWjQRXBBcAN4b1MFfTvlIP7gc+ago2AcjuCC4ANw8uMRDxqD9njj6JviXrS6lVC3txq9X7OfAgguCC3Cr4JJq1VZ/JDIQafwiu1kx5Wse2kob460KBpHIXqwYIA2CC/BL2SXeK3DARyJvxY2/OTf4ut5IXIinlq8/Ro736NTe5NvfU7hucPmJ8SwG3QCA4HJmJkiNAa69kXbidt5jxHJk+p7r7+bSNwhvLVlYYFClqTcU725A87hHXgEcr1JXcBBc7mziZe6AK+ZPX5T/fvV7bYGL1OHubILZDehPizhrpeUSgtmlEGgidw4u2YDgIricuRdXDi7Tp5v+0eBSKDD7keB0mIIL8DplksXx/Xen8PHfd1eR6k6v7emURrczyWK8qi8+O/R4T/9smNvxkD0vIhMoNuf1LOeMQQnBabFTJWSDzpR6AB7U4zLx1nP32cGsu8ytlmbKjV3wg51LZ3kVkQUi23n94NLvGOi3pp1+hSm19LWBH8ejbAnZehiUENyGQtdUpB6ABwWXV/thf+HaXQ4ukf9e0ZDUngLMXUXkU3O389wel3ODS/a8WB2UC6XVvjC1EuIn46BrdmI9ADcPLl+vPtcJLm93dc3743Jw6T+eEFxShaf6EhYloeB5kXqEdL/gknrelN01GQUEl5124srB5fPf5/a4zK0owaXcHbI0uPR/F/WEHpfUdgouQDe4vD2lFlwEF8EldV48Obhkj072xBRcQHCZnyqeEFxOqajH/ji38DCi+SKWTmNczjTZNn734BZ+nJuth+axmPW/pBl4bnCZPhw6UmB//OrWcMrIX2aNTa21lNlhn+NCBglv3XDoKTWZWssrMKCmnJCCr3ndrfNgXXUW2MouqS9M4bW2zWMRfynwulMPuFWPC3fimg6A4ILgAgCCC7NTi450AAQXAADBBQBAcAEABBcAAMEFABBcDl7fT4xnMegGAASXMzNBagxw7Y20E7fzHiOWI9P3XH83l75BeGvJwgKDKk29UnZ3A5rHPfLq23iVuoKD4HJnEy9zB1wxf/qi/Per32sLXKQOd2cTzG5Af1rEWSstlxDMLoVAE7lzcMkGBBfB5cy9uHJwWTFv3y8Gl0KB2Y8Ep2AUXIDXKZMsju+/O4WP/767ilR3em1PpzS6nUkW41V98dmhx3v6Z8PcjofseRGZQLE5r2c5ZwxKCE6LnSohG3Sm1APwoB6Xibeeu88OZt1lbrU0U27sgh/sXDrLq4gsENnO6weXfsdAvzXt9CtMqaWvDfw4HmVLyNbDoITgNhS6piL1ADwouLzaD/sL1+5ycIn894qGpPYUYO4qIp+au53n9ricG1yy58XqoFworfaFqZUQPxkHXbMT6wG4eXD5evW5TnB5u6tr3h+Xg0v/8YTgkio81ZewKAkFz4vUI6T7BZfU86bsrskoILjstBNXDi6f/z63x2VuRQku5e6QpcGl/7uoJ/S4pLZTcAG6weXtKbXgIrgILqnz4snBJXt0siem4AKCy/xU8YTgckpFPfbHuYWHEc0XsXQa43Kmybbxuwe38OPcbD00j8Ws/yXNwHODy/Th0JEC++NXt4ZTRv4ya2xqraXMDvscFzJIeOuGQ0+pydRaXoEBNeWEFHzN626dB+uqs8BWdkl9YQqvtW0ei/hLgdedesCtely4E9d0AAQXBBcAEFyYnVp0pAMguAAACC4AAIILACC4AAAILgCA4HLw+oxnAQAElzsIztW3ekjzYeOlI/P7XP8Ls/QVw1tLFhYYVGnqnbO7G9A87pF348ardOLBAh4aXK7fCP3KBizd1NX18Pe74WsLXGQ3d6cbzG5Af97EWSstlxDMLoVAs7uK+JxQsgsILoKL4LJkRVfezRUT+/1icCkUmP1IcI5GszCC4PL/t0ETJ1kc317P6njfvZmLzLCYnQ3u778354mM9PnXavv1bUq83c1Y1Ou+OrikZnmc3vGQPXEiMyw2J/4s54xBCcF5s1MlZGNHpKIEF3hQj8vEc3730cCRd4Erbvs+r8u1hFe+uczWw1ZTF49Hlw0uq5uuSN12vmBTail4uMe5J3uqjhcYlBDchlrXlEdF8KDgMvGcj1+am73fs6JM9kLZbMvjl+PaH+N7cczF/chHRccHl+yJMz249B889c+seAnjT332XRWCywG/bQeuElxmNWY/HVyC3fLT62d1cNna2QO+f6t7XA4+WMFOuGavyS2DS+p5kx4XEFxyzcBjg8uUlvhXgsuv97j0nwxODC7BYcZPDi6dFFKrQ9kFbh5c3h5CCy5PCC6vQ8ZF3zu4xE+cJweXWSej4AKCy/xzflFwec3+UeqK6BPci+bIz+k/Ut4dmvQTwaVwuLNr6Xw9ypkm22DvfsH6J86KU29KwvOoCJ4SXKYPh44UWB6emh0GXBvwHBl3Wt7+V2wQcnnMdnAvdota+sbY/ljlKYc7tZbOiZP6cVVngdf2qwFmnTgrjkX8pcDB89elH27e4wIAILgAAAguAIDgAgAguAAACC4AgOACACC4AAAILgCA4AIAILgAAAguAIDgAgAguAAACC4AgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIAILgAAIILAIDgAgAguAAAggsAgOACACC4AACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILAIDgAgAILgAAggsAgOACAAguAACCCwCA4AIACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgAAggsAILgAAAguAACCCwAguAAACC4AAIILACC4AAAILgDAo/0vVSESJEExOysAAAAASUVORK5CYII='><p>First, the program creates an x variable with the value 3, as the first <i style='color:blue'>printf</i>() statement
+shows.
+
+</p><p>Then it defines a new x variable with the value 7, as the second <i style='color:blue'>printf</i>() statement
+shows.
+
+</p><p>That it is a new variable hiding the first x is shown by the address and also by the third
+<i style='color:blue'>printf</i>() statement.
+
+</p><p>It is located after the first inner block, and it displays the original x value,
+showing that the original x variable never went away and never got changed.
+
+</p><p>Perhaps the most intriguing part of the program is the while loop.
+
+</p><p>The while loop test uses the original x:
+</p><div class='myCodeDiv'><button id='HVGXS' class='myCopyButton' data-clipboard-target='#LNHIA'>Copy</button><pre  id='LNHIA' style='font-size:18px;' class='code'><span class='r'>while</span>(x++ &lt; 10)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HVGXS');clipboard.on('success', function(e) {$('#HVGXS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HVGXS').text('error');});</script></div><p>Inside the loop, however, the program sees a third x variable, one defined just inside the while
+loop block.
+
+</p><p>So when the code uses x++ in the body of the loop, it is the new x that is incremented to 10 
+and then displayed.
+
+</p><p>When each loop cycle is completed, that new x disappears.
+
+</p><p>Then the loop test condition uses and increments the original x, the loop block is entered
+again, and the new x is created again.
+
+</p><p>In this example, that x is created and destroyed three times.
+</p><a class ='btn btn-outline-dark' href=c-identifier-variable-file-scope.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-variable-linkage.html>Next</a><h2>Related</h2><UL><LI><a href='c-variable-block-scope-without-braces.html'>C Variable Block Scope Without Braces</a></LI><LI><a href='c-identifier-variable-function-scope-and-function-prototype-scope.html'>C Identifier Variable function Scope and Function prototype scope</a></LI><LI><a href='c-identifier-variable-file-scope.html'>C Identifier Variable file scope</a></LI><LI><a href='c-variable-linkage.html'>C Variable Linkage</a></LI><LI><a href='c-storage-duration.html'>C Storage Duration</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-variable-scope-hide-or-shadow.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

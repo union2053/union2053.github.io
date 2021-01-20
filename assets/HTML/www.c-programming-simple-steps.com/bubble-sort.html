@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<!-- Mirrored from www.c-programming-simple-steps.com/bubble-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:33:56 GMT -->
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Bubble sort</title><meta name="description" content="Bubble sort algorithm – explained using examples and analysis."><meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link href="sd/support-files/A.style.css.pagespeed.cf.J7qGLGG26B.css" rel="stylesheet" type="text/css">
+<!-- start: tool_blocks.sbi_html_head -->
+<link rel="canonical" href="bubble-sort.html"/>
+<meta property="og:site_name" content="C Programming Simple Steps"/>
+<meta property="og:title" content="Bubble sort"/>
+<meta property="og:description" content="Bubble sort algorithm – explained using examples and analysis."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="bubble-sort.html"/>
+<meta property="og:image" content="images/bubble-sort.png"/>
+<meta property="og:image" content="c-programming-fb.png"/>
+<script type="text/javascript" language="JavaScript">var https_page=0</script>
+
+
+    <script src="sd/support-files/eucookie.js.pagespeed.jm.ksMg6Nudeq.js" async defer type="text/javascript"></script><!-- end: tool_blocks.sbi_html_head -->
+<!-- start: shared_blocks.2087538#end-of-head -->
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');ga('create','UA-70996381-1','auto');ga('send','pageview');</script>
+
+<!-- end: shared_blocks.2087538#end-of-head -->
+    
+    <script type="text/javascript">var FIX=FIX||{};</script>
+    
+</head>
+<body class="responsive">
+
+    <div id="PageWrapper" class="modern">
+
+      <div id="HeaderWrapper">
+        <div id="Header">
+          <div class="Liner">
+            <div class="WebsiteName">
+              <a href="index.html"> </a>
+            </div><div class="Tagline"> </div>
+<!-- start: shared_blocks.2087525#top-of-header -->
+
+<!-- start: tool_blocks.navbar.horizontal.left --><div class="ResponsiveNavWrapper"> 
+ 		        <div class="ResponsiveNavButton"><span>Menu</span></div><div class="HorizontalNavBarLeft HorizontalNavBar HorizontalNavBarCSS ResponsiveNav"> 
+ 	
+                <ul class="root"><li class="li1"><a href="index.html">Home</a></li><li class="li1"><a href="online-computer-programming-courses.html">Courses</a></li><li class="li1 submenu">
+                            <span class="navheader">Tutorials</span><ul><li class="li2"><a href="programming-for-beginners.html">Beginners</a></li><li class="li2"><a href="c-programming-tutorial.html">C Tutorial</a></li><li class="li2"><a href="number-systems.html">Number Systems</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">C</span><ul><li class="li2"><a href="c-language-programming.html">C Language</a></li><li class="li2"><a href="c-keywords.html">C Keywords</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">Algorithms</span><ul><li class="li2"><a href="algorithms.html">Algorithms</a></li><li class="li2"><a href="sorting-algorithms.html">Sorting algorithms</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">General</span><ul><li class="li2"><a href="computer-programming.html">Computer Programming</a></li><li class="li2"><a href="c-programming-examples.html">Examples Download</a></li></ul></li><li class="li1 submenu">
+                            <span class="navheader">About</span><ul><li class="li2"><a href="contact-me.html">Contact me</a></li><li class="li2"><a href="privacy-policy.html">Privacy Policy</a></li></ul></li></ul>
+            </div></div><!-- end: tool_blocks.navbar.horizontal.left -->
+<div id="google_custom_search">
+<script>(function(){var cx='004800009253881390622:5z6xrveedtw';var gcse=document.createElement('script');gcse.type='text/javascript';gcse.async=true;gcse.src='https://cse.google.com/cse.js?cx='+cx;var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse,s);})();</script>
+<gcse:search></gcse:search>
+</div>
+
+<!-- end: shared_blocks.2087525#top-of-header -->
+<!-- start: shared_blocks.2087491#bottom-of-header -->
+
+
+<!-- end: shared_blocks.2087491#bottom-of-header -->
+</div><!-- end Liner -->
+        </div><!-- end Header -->
+      </div><!-- end HeaderWrapper -->
+
+      <div id="ContentWrapper">
+        <div id="ContentColumn">
+          <div class="Liner">
+<!-- start: shared_blocks.2087484#above-h1 -->
+
+
+<!-- end: shared_blocks.2087484#above-h1 -->
+<h1>Bubble sort</h1>
+<!-- start: shared_blocks.2087549#below-h1 -->
+
+
+<!-- end: shared_blocks.2087549#below-h1 -->
+<h3>Background</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;Bubble sort is a stable comparison algorithm. It has an average complexity of O(n<sup>2</sup>), where 'n' is the number of elements to be sorted. It has a best case of O(n) when the input array is already sorted or nearly sorted. It is relatively easy to implement, but is too slow to be used in practice.
+<!-- start: shared_blocks.2087535#below-paragraph-1 -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087535#below-paragraph-1 -->
+<p>&#xa0; &#xa0; If you need to sort a small amount of data and want to avoid the overhead and the complex code of the advanced algorithms, go for the <a href="insertion-sort.html" onclick="return FIX.track(this);">insertion sort</a>.</p><p>&#xa0; &#xa0; Despite being useless in practice, bubble sort offers some
+interesting problems and optimizations that are useful for studying
+purpose.</p>
+<h3>Algorithm</h3>
+<p>&#xa0;&#xa0;&#xa0; The bubble sort makes n - 1 passes through the array. Each pass
+starts from the beginning of the array and goes towards the end. Each
+step of the pass compares the current element to its right neighbour.
+If the compared elements are in the wrong order, they swap their
+places. This way the larger “bubbles” make their way to the top.</p><p>As usual, we will follow one example step by step: Sort the array: 
+7, 8, 0, 3, 5</p>
+<p>Pass 1: 7, 8, 0, 3, 5<br/>&#xa0;1. Compare 7 and 8. Are they in the wrong order? No. Continue
+with the next two numbers.<br/>&#xa0;2. Compare 8 and 0. Are they in the
+wrong order? Yes. Swap them: 7, <b>0, 8</b>, 3, 5<br/>&#xa0;3. Compare 8
+and 3 in the modified array. 8 &gt; 3? -Yes =&gt; Swap: 7, 0, <b>3, 8</b>,
+5<br/>&#xa0;4. Compare 8 and 5. 8 &gt; 5? -Yes =&gt; Swap: 7, 0, 3, <b>5,
+8</b><br/>With this we reached the end of the array and the first pass is
+over. You may notice that the biggest number in the array 8 moved to
+the last position. 
+</p>
+<p>Pass 2: 7, 0, 3, <span style="font-weight: normal;">5,
+8</span><br/>&#xa0;1. 7 &gt; 0? -Yes. =&gt; Swap: <b>0, 7</b>, 3, 5, 8<br/>&#xa0;2. 7
+&gt; 3? -Yes =&gt; Swap: 0, <b>3, 7</b>, 5, 8<br/>&#xa0;3. 7 &gt; 5? -Yes =&gt;
+Swap: 0, 3, <b>5, 7</b>, 8<br/>&#xa0;4. 7 &gt; 8? -No.<br/>Pass two is over. Notice
+that the array is already sorted, but the algorithm needs to do two more passes to complete.</p><p>Pass 3: 0, 3, <span style="font-weight: normal;">5, 7</span>, 8<br/>&#xa0;1. 0 &gt; 3? No<br/>&#xa0;2. 3 &gt;
+5? No<br/>&#xa0;3. 5 &gt; 7? No<br/>&#xa0;4. 7 &gt; 8? No</p>
+<p>Pass 4: 0, 3, <span style="font-weight: normal;">5, 7</span>, 8<br/>&#xa0;1. 0 &gt; 3? No<br/>&#xa0;2. 3 &gt; 5? No<br/>&#xa0;3. 5 &gt; 7?
+No<br/>&#xa0;4. 7 &gt; 8? No</p>
+<div class="ImageBlock ImageBlockCenter"><img src="images/bubble-sort.png.pagespeed.ce.UhkC4ReCPQ.png" width="451" alt="Bubble sort flow chart" title="Bubble sort flow chart" data-pin-media="images/bubble-sort.png"></div>
+<h3>Limit the number of comparisons in each pass</h3>
+<p>&#xa0;&#xa0;&#xa0; As you can see the algorithm does many unnecessary comparisons.
+Also it does many swaps of elements and this is a problem. It is a
+problem, because the swapping is generally slower operation than the
+comparison.</p><p>&#xa0;&#xa0;&#xa0; Can we improve the efficiency of the original bubble
+sort?Do you remember that after the first pass the biggest number took
+its final place? It is easy to notice that after the second pass the
+second greatest number will take its place, too. And after the third?
+Yes, this repeats for each pass. So what? Well, after each pass we
+know that we don't need to swap those elements. Therefore we can
+limit the range of every pass after the first. This will look like
+this:</p>
+
+<p>Pass 1: 7, 8, 0, 3, 5<br/>&#xa0;1. 7 &gt; 8? No<br/>&#xa0; 2. 8 &gt; 0? Yes =&gt; swap: 7, <b>0, 8</b>, 3, 5<br/>&#xa0;
+3. 8 &gt; 3? Yes =&gt; swap: 7, 0, <b>3, 8</b>, 5<br/>&#xa0; 4. 8 &gt; 5? Yes =&gt;
+swap: 7, 0, 3, <b>5, 8</b></p>
+<p>Pass 2: 7, 0, 3, 5, 8<br/>&#xa0; 1. 7 &gt; 0? -Yes. =&gt; Swap: <b>0, 7</b>, 3, 5, 8<br/>&#xa0; 2. 7
+&gt; 3? -Yes =&gt; Swap: 0, <b>3, 7</b>, 5, 8<br/>&#xa0; 3. 7 &gt; 5? -Yes =&gt;
+Swap: 0, 3, <b>5, 7</b>, 8<br/>We know 8 is in place so pass 2 has only 3
+steps.</p><p>Pass 3: 0, 3, 5, 7, 8<br/>&#xa0; 1. 0 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 5? No<br/>We know that 7 and 8 are in sorted, so pass 3 is over.</p>
+<p>Pass 4: 0, 3, 5, 7, 8<br/>&#xa0;1. 0 &gt; 3? No</p>
+<p>&#xa0;&#xa0;&#xa0; Good optimization, don't you think? Yes, it is good, but for large
+arrays it is still too slow. Can we optimize the bubble sort even more? Sure.. 
+</p>
+<p>&#xa0;&#xa0;&#xa0; We can remember the position of the last swap. If there were no
+swaps after that index, the rest of the array is already sorted and
+there is no need to check further in the next passes. This limits
+further the number of unnecessary comparisons.</p>
+<h3>Limit the number of passes</h3>
+<p>&#xa0;&#xa0;&#xa0; Looking at the last example we notice that the array was sorted in the second pass. The third and fourth
+passes did not do any swaps. Think for a minute how to optimize
+this...</p>
+<p>&#xa0;&#xa0;&#xa0; To cut the unnecessary passes we add a boolean variable. This variable remembers if a swap was made in the last pass. If a swap was made,
+the array is still not sorted and the bubble sort continues with the
+next pass. If the variable is false, then it is “job done” and we
+save some CPU time. In the example above we will not do the 4th
+pass. In larger arrays this will save more steps.. eventually.</p><p>Pass 1: 7, 8, 0, 3, 5<br/>&#xa0; 1. 7 &gt; 8? No<br/>&#xa0; 2.
+8 &gt; 0? Yes =&gt; swap: 7, 0, 8, 3, 5<br/>&#xa0; 3. 8 &gt; 3? Yes =&gt;
+swap: 7, 0, 3, 8, 5<br/>&#xa0; 4. 8 &gt; 5? Yes =&gt; swap: 7, 0, 3, 5,
+8<br/>Pass 2:<br/>&#xa0; 1. 7 &gt; 0? Yes =&gt; swap: 0, 7, 3, 5, 8<br/>&#xa0; 2. 7
+&gt; 3? Yes =&gt; swap: 0, 3, 7, 5, 8<br/>&#xa0; 3. 7 &gt; 5? Yes =&gt;
+swap: 0, 3, 5, 7, 8<br/>Pass 3: <br/>&#xa0; 1. 0 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 5?
+No</p>
+<h3>Rabbits and turtles</h3>
+<p>&#xa0;&#xa0;&#xa0; Let's consider the following two arrays: 6, 1, 2, 3, 4, 5 and&#xa0;
+2, 3, 4, 5, 6, 1</p>
+<p><b>Case 1</b>: 6, 1, 2, 3, 4, 5<br/>Pass1: 6, 1, 2, 3, 4, 5<br/>&#xa0;1. 6 &gt; 1? Yes =&gt; <b>1, 6</b>, 2, 3, 4, 5<br/>&#xa0;2. 6 &gt; 2? Yes =&gt; 1, <b>2, 6</b>, 3, 4, 5<br/>&#xa0;3. 6 &gt; 3? Yes =&gt;
+1, 2, <b>3, 6</b>, 4, 5<br/>&#xa0;4. 6 &gt; 4? Yes =&gt; 1, 2, 3, <b>4, 6</b>, 5<br/>&#xa0;5. 6
+&gt; 5? Yes =&gt; 1, 2, 3, 4, <b>5, 6</b></p><p>Pass2: 1, 2, 3, 4, 5, 6<br/>&#xa0; 1. 1 &gt; 2? No<br/>&#xa0;
+2. 2 &gt; 3? No<br/>&#xa0; 3. 3 &gt; 4? No<br/>&#xa0; 4. 4 &gt; 5? No<br/>No swaps
+were made, so the algorithm recognizes the sorted array and stops. 
+</p>
+<p><b>Case 2</b>: 2, 3, 4, 5, 6, 1<br/>Pass 1:<br/>&#xa0; 1. 2 &gt; 3? No<br/>&#xa0; 2. 3 &gt;
+4? No<br/>&#xa0; 3. 4 &gt; 5? No<br/>&#xa0; 4. 5 &gt; 6? No<br/>&#xa0; 5. 6 &gt; 1? Yes:
+2, 3, 4, 5, <b>1, 6</b><br/>Pass 2:<br/>&#xa0;1. 2 &gt; 3? No<br/>&#xa0;2. 3 &gt; 4? No<br/>&#xa0;
+3. 4 &gt; 5? No<br/>&#xa0; 4. 5 &gt; 1? Yes: 2, 3, 4, <b>1, 5</b>, 6<br/>Pass 3:<br/>&#xa0;
+1. 2 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 4? No<br/>&#xa0; 3. 4 &gt; 1? Yes: 2, 3, <b>1, 4</b>,
+5, 6<br/>Pass 4:<br/>&#xa0;1. 2 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 1? Yes: 2, <b>1, 3</b>, 4,
+5, 6<br/>Pass 5:<br/>&#xa0;1. 2 &gt; 1? Yes: <b>1, 2</b>, 3, 4, 5, 6</p>
+<p>&#xa0;&#xa0;&#xa0; Isn't this second case ridiculous? All that work to sort one number.</p><p>&#xa0;&#xa0;&#xa0; In case 1 the unsorted number “6”
+got to its place in one pass. This is rather quick for bubble sort.
+These big elements that find their place rather quickly are called
+“rabbits”.</p><p>&#xa0;&#xa0;&#xa0; In case 2, the unsorted number “1” needed 5
+passes to reach that first spot. Such small elements, that are far from their place are called
+“turtles”. The turtles are a problem that can be solved using the
+modification called “Shaker sort”.</p>
+<h3>Shaker/Cocktail sort</h3>
+<p>&#xa0;&#xa0;&#xa0; Shaker sort is a modification of bubble sort. It alternates the
+directions of the passes. The first  goes from the first element
+towards the last and pushes the biggest bubble to the top. The
+second pass goes from top to bottom and pushes the smallest element to
+first position. This solves the turtle problem.</p><p>&#xa0;&#xa0;&#xa0; Let's take a look
+at case 2 again using the shaker:<br/>Case 2: 2, 3, 4, 5, 6, 1<br/>Pass
+1:<br/>&#xa0; 1. 2 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 4? No<br/>&#xa0; 3. 4 &gt; 5? No<br/>&#xa0; 4.
+5 &gt; 6? No<br/>&#xa0; 5. 6 &gt; 1? Yes: 2, 3, 4, 5, 1, 6</p><p>Pass 2:<br/>&#xa0; 1.
+1 &lt; 5? Yes: 2, 3, 4, 1, 5, 6<br/>&#xa0; 2. 1 &lt; 4? Yes: 2, 3, 1, 4, 5,
+6<br/>&#xa0; 3. 1 &lt; 3? Yes: 2, 1, 3, 4, 5, 6<br/>&#xa0; 4. 1 &lt; 2? Yes: 1, 2,
+3, 4, 5, 6</p><p>Pass 3:<br/>&#xa0; 1. 2 &gt; 3? No<br/>&#xa0; 2. 3 &gt; 4? No<br/>&#xa0; 3.
+4 &gt; 5? No<br/>No swaps were made, so the array is sorted. In this
+case, two passes are saved.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;Although we did some interesting improvements to the basic bubble sort it is still quite inefficient algorithm. Its average and worst complexity is still O(n<sup>2</sup>).
+<p>&#xa0; &#xa0; Its high number of swaps and comparisons make it worse than the other sorting algorithms with quadratic complexity (for ex. <a href="insertion-sort.html" onclick="return FIX.track(this);">insertion sort</a>, <a href="selection-sort.html" onclick="return FIX.track(this);">selection sort</a>). Its optimized version is not easier to implement, so there is really no reason to use bubble sort in practice.</p><p>Want more creative stuff? Go to our <a href="algorithms.html" onclick="return FIX.track(this);">algorithms</a> page!</p>
+<!-- start: shared_blocks.2087532#above-socialize-it -->
+
+<!-- start: shared_blocks.203349160#Course CFB regular -->
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 80%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 50%;vertical-align:top;">
+<h4>Do you learn better from video?<br/></h4>
+<p style="text-align: left;">Learn faster with deeper understanding!<br/> The "Computer programming for beginners" course is the perfect place to begin with programming.</p><p style="text-align: left;"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"> Start now!</a><br/></p>
+</td><td class="column_1" style="width: 50%;vertical-align:top;">
+<div class="ImageBlock ImageBlockCenter"><a href="https://www.udemy.com/course/computer-programming-for-beginners-understand-how-it-works/?referralCode=9BDA1D56B5E98D9C04F0" onclick="return FIX.track(this);"><img src="images/345xNxcourse-programming-for-beginners.png.pagespeed.ic.Ie6U_Nc1V2.png" width="345" data-pin-media="images/course-programming-for-beginners.png"></a></div>
+</td></tr></table>
+</div>
+</div>
+<!-- end: shared_blocks.203349160#Course CFB regular -->
+
+<!-- end: shared_blocks.2087532#above-socialize-it -->
+<br>
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="index.html" itemprop="url">
+<span itemprop="title">C Programming</span></a>
+
+</span>
+
+ ›
+
+<span itemprop="child" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+ <a href="sorting-algorithms.html" itemprop="url">
+<span itemprop="title">Sorting Algorithms</span></a>
+</span>
+
+ › Bubble sort
+<!-- start: shared_blocks.2087488#socialize-it -->
+
+
+<div class="" style="border-color: #000000; border-width: 1px 0 1px 0; border-style: solid; width: 100%; box-sizing: border-box">
+<div class="desktopOnly"><div class="" style="width: 50%; box-sizing: border-box"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 53%;vertical-align:top;">
+<p>Did this help? Support me with your vote ;-)</p>
+</td><td class="column_1" style="width: 22.42%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/bubble-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 24.29%;vertical-align:top;">
+
+<div class="" style="margin-left: auto; margin-right: auto; padding-top: 13px; float: none; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/bubble-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div></div>
+
+<div class="mobileOnly"><div style="overflow-x: auto;">
+    <table class="columns_block grid_block" border="0" style="width: 100%;"><tr><td class="column_0" style="width: 39.991%;vertical-align:top;">
+<p>Did this help?<br/></p>
+</td><td class="column_1" style="width: 29.989%;vertical-align:top;">
+
+<div class="" style="padding-top: 5px; box-sizing: border-box"><!-- start: tool_blocks.faceit_like.1 --><div class="fb-like" data-href="http://www.c-programming-simple-steps.com/bubble-sort.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div><!-- end: tool_blocks.faceit_like.1 -->
+</div>
+</td><td class="column_2" style="width: 30%;vertical-align:top;">
+
+<div class="" style="padding-top: 13px; box-sizing: border-box"><!-- start: tool_blocks.googleplus1 -->
+        <div class="googlePlusOne" style="text-align:center">
+          <div class="g-plusone" data-size="standard" data-annotation="bubble" data-href="http://www.c-programming-simple-steps.com/bubble-sort.html" data-callback="plusone_vote">
+          </div>
+        </div>
+        <!-- end: tool_blocks.googleplus1 -->
+</div>
+</td></tr></table>
+</div>
+</div>
+</div>
+
+<!-- end: shared_blocks.2087488#socialize-it -->
+<!-- start: shared_blocks.2087520#below-socialize-it -->
+
+<div id="disqus_thread"></div>
+<script>(function(){var d=document,s=d.createElement('script');s.src='http://c-programming-simple-steps.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<!-- end: shared_blocks.2087520#below-socialize-it -->
+</div><!-- end Liner -->
+        </div><!-- end ContentColumn -->
+      </div><!-- end ContentWrapper -->
+
+      <div id="FooterWrapper">
+        <div id="Footer">
+          <div class="Liner">
+<!-- start: shared_blocks.2087493#above-bottom-nav -->
+
+<!-- Share Desktop -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+<!-- Share Mobile -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-564f710f0b9c248f" async="async"></script>
+
+<!-- end: shared_blocks.2087493#above-bottom-nav -->
+<!-- start: shared_blocks.2087504#bottom-navigation -->
+
+
+<!-- end: shared_blocks.2087504#bottom-navigation -->
+<!-- start: shared_blocks.2087486#below-bottom-nav -->
+
+
+<!-- end: shared_blocks.2087486#below-bottom-nav -->
+<!-- start: shared_blocks.2087501#footer -->
+
+<p><a href="index.html">© Copyright 2008-2016 c-programming-simple-steps.com</a><br/></p>
+
+<!-- end: shared_blocks.2087501#footer -->
+</div><!-- end Liner -->
+        </div><!-- end Footer -->
+      </div><!-- end FooterWrapper -->
+
+    </div><!-- end PageWrapper -->
+
+    
+    <script type="text/javascript" src="sd/support-files/fix.js.pagespeed.jm.3phKUrh9Pj.js"></script>
+    
+    <script type="text/javascript">FIX.doEndOfBody();</script>
+    <script type="text/javascript" src="sd/support-files/design.js.pagespeed.jm.IGpaLo39T1.js"></script>
+<!-- start: tool_blocks.sbi_html_body_end -->
+    <script>var SS_PARAMS={pinterest_enabled:false,googleplus1_on_page:true,socializeit_onpage:false};</script>            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&autoLogAppEvents=1"></script><style>.g-recaptcha{display:inline-block}.recaptcha_wrapper{text-align:center}</style>
+	    <script>if(typeof recaptcha_callbackings!=="undefined"){SS_PARAMS.recaptcha_callbackings=recaptcha_callbackings||[]};</script>
+	    
+  <script>(function(d,id){if(d.getElementById(id)){return;}var s=d.createElement('script');s.async=true;s.defer=true;s.src="ssjs/ldr.js";s.id=id;d.getElementsByTagName('head')[0].appendChild(s);})(document,'_ss_ldr_script');</script><!-- end: tool_blocks.sbi_html_body_end -->
+  
+<!-- Generated at 13:14:29 07-Nov-2019 -->
+
+</body>
+
+<!-- Mirrored from www.c-programming-simple-steps.com/bubble-sort.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 14:33:58 GMT -->
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_10.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:45 GMT -->
+<head>
+	<title>C Programlama Ders: X</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, C Programlama, Pointer, işaretçiler, Call by Reference, Call by Value, Pass by Reference, Pass by Value, Pointer to Pointer, Fonksiyon Prototipleri, Function Prototypes, Recursive Functions, Rekürsif Fonksiyonlar, Faktoriyel Hesabı, Yinelemeli, Tekrarlamalı, Fibonacci, Çağatay ÇEBİ">
+	<meta name="robots" content="index,follow">
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">19 Ekim 2006</font></div>
+	<h2>C Programlama Dersi - X</h2>
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+	<div class="note">
+		<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+		<h3>Bu yazıda öğrenecekleriniz:</h3>
+		</a>	
+		<div id="content_div" style="display:none">
+			<p>- Bazı aritmetik fonksiyonlar</p>
+			<p>- Bellek yapısı ve adresler</p>
+			<p>- Pointer mekanizması</p>
+			<p>- Pointer tutan Pointer'lar</p>
+			<p>- Referans yoluyla argüman aktarımı</p>
+			<p>- Fonksiyon prototipleri</p>
+			<p>- Rekürsif Fonksiyonlar</p>
+			<p>- Konuyla ilgili örnek sorular </p>
+		</div>
+	</div>
+	<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	
+	<h3>Bazı Aritmetik Fonksiyonlar</h3>
+	<p>
+		Geçen dersimizde, fonksiyonları ve bunları nasıl kullanılacağını görmüştük. Ayrıca 
+		kütüphanelerin hazır fonksiyonlar içerdiğinden bahsetmiştik. Bazı matematiksel 
+		işlemlerin kullanımı sıkça gerekebileceği için bunları bir liste hâlinde vermenin 
+		uygun olduğuna inanıyorum. Böylece var olan aritmetik fonksiyonları tekrar tekrar 
+		tanımlayarak zaman kaybetmezsiniz.     
+	</p>
+	<ul>
+		<li>
+			double <b>ceil</b>(&nbsp;<i>double n</i>&nbsp;)&nbsp;: Virgüllü n sayısını, 
+			kendisinden	büyük olan ilk	tam sayıya tamamlar. Örneğin ceil(51.4) işlemi, 
+			52 sonucunu	verir.   
+		</li>
+		<li>
+			double <b>floor</b>(&nbsp;<i>double n</i>&nbsp;)&nbsp;: Virgüllü n sayısının, 
+			virgülden sonrasını atarak, bir tam sayıya çevirir. floor(51.4) işlemi, 51 
+			sayısını döndürür.
+		</li>
+		<li>
+			double <b>fabs</b>(&nbsp;<i>double n</i>&nbsp;)&nbsp;: Verilen n sayısının mutlak 
+			değerini	döndürür. fabs(-23.5), 23.5 değerini verir.    
+		</li>
+		<li>
+			double <b>fmod</b>(&nbsp;<i>double a</i>, <i>double b</i>&nbsp;)&nbsp;: a 
+			sayısının b sayısına bölümünden kalanı verir. (Daha önce gördüğümüz modül 
+			(%) operatörü, sadece tam sayılarda kullanılırken, fmod fonksiyonu virgüllü 
+			sayılarda da çalışır.)  
+		</li>
+		<li>
+			double <b>pow</b>(&nbsp;<i>double a</i>, <i>double b</i>&nbsp;)&nbsp;: Üstel 
+			değer hesaplamak için kullanılır; a<sup>b</sup>	değerini verir.
+		</li>
+		<li>
+			double <b>sqrt</b>(&nbsp;<i>double a</i>&nbsp;)&nbsp;: a'nın karekökünü hesaplar. 
+		</li>
+	</ul>
+	<p>
+		Yukarda verilmiş fonksiyonlar, matematik kütüphanesi (&nbsp;math.h&nbsp;) altındadır. 
+		Bu fonksiyonlardan herhangi birini kullacağınız zaman, program kodununun başına 
+		#include&lt;math.h&gt; yazmalısınız. Ayrıca derleyici olarak gcc'yle çalışıyorsanız, 
+		derlemek için -lm parametresini eklemeniz gerekir. (Örneğin: "<i>gcc test.c -lm</i>" 
+		gibi...)     
+	</p>
+	<h3>Bellek Yapısı ve Adresler</h3>
+	<p>
+		Şimdiye kadar değişken tanımlamayı gördük. Bir değişken tanımlandığında, arka 
+		plânda gerçekleşen olaylara ise değinmedik. Hafızayı küçük hücrelerden oluşmuş 
+		bir blok olarak düşünebilirsiniz. Bir değişken tanımladığınızda, bellek bloğundan 
+		gerekli miktarda hücre, ilgili değişkene ayrılır. Gereken hücre adedi, değişken 
+		tipine göre değişir. Şimdi aşağıdaki kod parçasına bakalım:    
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// Degiskenler tanımlanıyor:
+	int num1, num2;
+	float num3, num4;
+	char i1, i2;
+	
+	// Degiskenlere atama yapiliyor:
+	num1 = 5;
+	num2 = 12;
+	num3 = 67.09;
+	num4 = 1.71;
+	i1 = 'H';
+	i2 = 'p';
+	
+	return 0;
+}
+</pre>
+	<p>
+		Yukarda bahsettiğimiz hücrelerden oluşan bellek yapısını, bu kod parçası için 
+		uygulayalım. Değişken tiplerinden int'in 2 byte, float'un 4 byte ve char'ın 1 byte 
+		yer kapladığını kabul edelim. Her bir hücre 1 byte'lık alanı temsil etsin. 
+		Değişkenler için ayrılan hafıza alanı, 4300 adresinden başlasın. Şimdi bunları 
+		temsili bir şekle dökelim:
+	</p>
+		<div class="notcolorful" align="center">
+			<a href="c_operands/memory_structure.png" target="_blank">
+		 		<img src="c_operands/sm_memory_structure.png" alt="[Sample Memory Structure]" border="0"/>			
+		 	</a>			
+		 </div>
+	<p>
+		Bir değişken tanımladığımızda, bellekte gereken alan onun adına rezerve edilir. 
+		Örneğin 'int num1' yazılması, bellekte uygun bir yer bulunup, 2 byte'ın, 
+		<i>num1</i> değişkeni adına tutulmasını sağlıyor. Daha sonra <i>num1</i> 
+		değişkenine değer atarsak, ayrılan hafıza alanına 5 sayısı yazılıyor. 
+		Aslında, <i>num1</i> ile ilgili yapacağınız bütün işlemler, 4300 adresiyle	4302 
+		adresi arasındaki bellek hücrelerinin değişmesiyle alakalıdır. Değişken dediğimiz; 
+		uygun bir bellek alanının, bir isme revize edilip, kullanılmasından ibarettir.      
+	</p>
+	<p>
+		Bir parantez açıp, küçük bir uyarı da bulunalım. Şeklimizin temsili olduğunu 
+		unutmamak gerekiyor. Değişkenlerin bellekteki yerleşimi bu kadar 'uniform' 
+		olmayabilir. Ayrıca başlangıç adresini 4300 olarak belirlememiz keyfiydi. 
+		Sayılar ve tutulan alanlar değişebilir. Ancak belleğin yapısının, aşağı yukarı  
+		böyle olduğunu kabul edebilirsiniz. 
+	</p>
+	
+	<h3>Pointer Mekanizması</h3>
+	<p>
+		Bir değişkene değer atadığımızda, aslında bellek hücrelerini değiştirdiğimizi 
+		söylemiştik. Bu doğru bir tanım ama eksik bir noktası var. Bellek hücrelerini 
+		değiştermemize rağmen, bunu direkt yapamaz; değişkenleri kullanırız. Bellek 
+		hücrelerine direkt müdahâle Pointer'lar sayesinde gerçekleşir.
+	</p>
+	<p>
+		Pointer, birçok Türkçe kaynakta 'işaretçi' olarak geçiyor. Direkt çevirirseniz  
+		mantıklı. Ancak terimlerin özünde olduğu gibi öğrenilmesinin daha yararlı olduğunu 
+		düşünüyorum ve ben Pointer olarak anlatacağım. Bazı yerlerde işaretçi tanımı 
+		görürseniz, bunun pointer ile aynı olduğunu bilin. Şimdi gelelim Pointer'in ne 
+		olduğuna...   
+	</p>
+	<p>
+		Değişkenler bildiğiniz gibi değer (sayı, karakter, vs...) tutar. Pointer'lar ise 
+		adres tutan değişkenlerdir. Bellekten bahsetmiştik; küçük hücrelerin oluşturduğu 
+		hafıza bloğunun adreslere ayrıldığını ve değişkenlerin bellek hücrelerine 
+		yerleştiğini gördük. İşte pointer'lar bu bellek adreslerini tutarlar.
+	</p>
+	<p>
+		Pointer tanımlamak oldukça basittir. Sadece değişken adının önüne '*' işareti 
+		getiririz. Dikkat edilmesi gereken tek nokta; pointer'ı işaret edeceği değişken 
+		tipine uygun tanımlamaktır. Yani float bir değişkeni, int bir pointer ile 
+		işaretlemeğe çalışmak yanlıştır! Aşağıdaki örneğe bakalım: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	// int tipinde değişken 
+	// tanımlıyoruz:
+	int xyz = 10, k;
+	// int tipinde pointer
+	// tanımlıyoruz:  
+	<b>int *p;</b>
+
+	// xyz değişkeninin adresini 
+	// pointer'a atıyoruz. 
+	// Bir değişken adresini '&amp;'
+	// işaretiyle alırız.
+	<b>p = &amp;xyz;</b>
+	
+	// k değişkenine xyz'nin değeri 
+	// atanır. Pointer'lar değer tutmaz.
+	// değer tutan değişkenleri işaret 
+	// eder. Başına '*' koyulduğunda, 
+	// işaret ettiği değişkenin değerini 
+	// gösterir. 
+	<b>k = *p;</b>
+	
+	return 0;
+}
+</pre>
+	<p>
+		Kod parçasındaki yorumları okuduğunuzda, pointer ile ilgili fikriniz olacaktır. 
+		Pointer adres tutan değişkenlerdir. Şimdiye kadar gördüğümüz değişkeninlerin 
+		saklayabildiği	değerleri tutamazlar. Sadece değişkenleri işaret edebilirler. 
+		Herhangi bir değişkenin adresini pointer içersine atamak isterseniz, değişken 
+		adının önüne '&amp;' getirmeniz gerekir. Bundan sonra o pointer, ilgili değişkeni 
+		işaret eder. Eğer bahsettiğimiz değişkenin	sahip olduğu değeri pointer ile 
+		göstermek veya	değişken değerini değiştirmek	isterseniz, pointer başına '*' 
+		getirerek işlemlerinizi yapabilirsiniz. Pointer başına '*' getirerek yapacağınız 
+		her atama işlemi, değişkeni de etkileyecektir. Daha kapsamlı bir örnek yapalım:      
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int x, y, z;
+	int *int_addr;
+	x = 41;
+	y = 12;
+	// int_addr x degiskenini 
+	// isaret ediyor.
+	<b>int_addr = &x;</b>
+	// int_addr'in isaret ettigi 
+	// degiskenin sakladigi deger 
+	// aliniyor. (yani x'in degeri)
+	<b>z = *int_addr;</b>
+	printf( "z: %d\n", z );
+	// int_addr, artik y degiskenini 
+	// isaret ediyor.
+	<b>int_addr = &y;</b>
+	// int_addr'in isaret ettigi 
+	// degiskenin sakladigi deger 
+	// aliniyor. (yani y'nin degeri)
+	<b>z = *int_addr;</b>
+	printf( "z: %d\n" ,z );
+
+	return 0;
+}
+</pre>
+	<p>
+		Bir pointer'in işaret ettiği değişkeni program boyunca sürekli değiştirebilirsiniz. 
+		Yukardaki örnekte, int_addr pointer'i, önce x'i ve ardından y'yi işaret etmiştir. 
+		Bu yüzden, z değişkenine int_addr kullanarak yaptığımız atamalar, her seferinde 
+		farklı sonuçlar doğurmuştur. Pointer kullanarak, değişkenlerin sakladığı değerleri 
+		de değiştirebiliriz. Şimdi bununla ilgili bir örnek inceleyelim: 	   
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int x, y;
+	int *int_addr;
+	x = 41;
+	y = 12;
+	// int_addr x degiskenini 
+	// isaret ediyor
+	<b>int_addr = &x;</b>
+	// int_addr'in isaret ettigi 
+	// degiskenin degerini 
+	// degistiriyoruz
+	<b>*int_addr = 479;</b>
+	printf( "x: %d y: %d\n", x, y );
+	int_addr = &y;
+
+	return 0;
+}
+</pre>
+	<p>
+		Kodu derleyip, çalıştırdığınızda, x'in değerinin değiştiğini göreceksiniz. 
+		Pointer başına '*' getirip, pointer'a bir değer atarsanız; aslında 
+		işaret ettiği değişkene değer atamış olursunuz. Pointer ise hiç değişmeden, aynı 
+		adres bilgisini tutmaya devam edecektir.   
+	</p>
+	
+	<h3>Pointer tutan Pointer'lar</h3>
+	<p>
+		Pointer'lar, gördüğümüz gibi değişkenleri işaret ederler. Pointer'da bir 
+		değişkendir ve onu da işaret edecek bir pointer yapısı kullanılabilir. Geçen 
+		sefer ki bildirimden	farkı, pointer değişkenini işaret edecek bir değişken 
+		tanımlıyorsanız; başına '**' getirmeniz gerekmesidir. Buradaki yıldız sayısı 
+		değişebilir. Eğer, pointer işaret eden	bir pointer'i işaret edecek bir pointer 
+		tanımlamak istiyorsanız, üç defa yıldız (&nbsp;***&nbsp;) yazmanız gerekir. Evet, 
+		cümle biraz karmaşık, ama kullanım oldukça basit! Pointer işaret eden pointer'ları 
+		aşağıdaki örnekte bulabilirsiniz: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	int r = 50;
+	int *p;
+	int **k;
+	int ***m;
+	printf( "r: %d\n", r );
+	p = &r;
+	k = &p;
+	m = &k;
+	***m = 100;
+	printf( "r: %d\n", r );
+	
+	return 0;
+}
+</pre>
+	<p>
+		Yazmış olduğumuz kod içersinde kimin neyi gösterdiğini grafikle daha iyi 
+		anlayabiliriz:   
+	</p>
+		<div class="notcolorful" align="center">
+			<a href="c_operands/pointer_to_pointer.png" target="_blank">
+		 		<img src="c_operands/sm_pointer_to_pointer.png" alt="[Pointer to Pointer Structure]" border="0"/>			
+		 	</a>			
+		 </div>
+	<p>
+		Birbirini gösteren Pointer'ları ilerki derslerimizde, özellikle dinamik bellek 
+		tahsis ederken çok ihtiyaç duyacağımız bir yapı. O yüzden iyice öğrenmek gerekiyor. 
+	</p>
+	<h3>Referansla Argüman Aktarımı</h3>
+	<p>
+		Fonksiyonlara nasıl argüman aktaracağımızı biliyoruz. Hatırlayacağınız gibi 
+		parametrelere değer atıyorduk. Bu yöntemde, kullandığınız argümanların değeri 
+		değişmiyordu. Fonksiyona parametre olarak yollanan argüman hep aynı kalıyordu. 
+		Fonksiyon içinde yapılan işlemlerin hiçbiri argüman değişkeni etkilemiyordu. 
+		Sadece değişken değerinin aktarıldığı ve argümanın etkilenmediği bu duruma, 
+		"<i>call by value</i>" veya "<i>pass by value</i>" adı verilir. Bu isimleri 
+		bilmiyor olsanız dahi, şu ana kadar ki fonksiyon çalışmaları böyleydi. 
+	</p>
+	<p>
+		Geriye birden çok değer dönmesi gereken veya fonksiyonun içersinde yapacağınız 
+		değişikliklerin, argüman değişkene yansıması gereken durumlar olabilir. İşte bu 
+		gibi zamanlarda, "<i>call by reference</i>" veya "<i>pass by reference</i>" olarak 
+		isimlendirilen yöntem kullanılır. Argüman değer olarak aktarılmaz; argüman olan  
+		değişkenin adres bilgisi fonksiyona aktarılır. Bu sayede fonksiyon içersinde 
+		yapacağınız her türlü değişiklik argüman değişkene de yansır. 
+	</p>
+	<p>
+		Söylediklerimizi uygulamaya dökelim ve kendisine verilen iki sayının yerlerini 
+		değiştiren bir fonksiyon yazalım. Yani kendisine a ve b adında iki değişken 
+		yollanıyorsa, a'nın değerini b; b'nin değeriniyse a yapsın. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+// Kendisine verilen iki degiskenin 
+// degerlerini degistirir.
+// Parametreleri tanimlarken baslarina 
+// '*' koyuyoruz.
+void swap( <b>int *x</b>, <b>int *y</b> )
+{
+	int temp;
+	temp = *x;
+	*x = *y;
+	*y = temp;
+}
+int main( void )
+{
+	int a, b;
+	a = 12;
+	b = 27;
+	printf( "a: %d b: %d\n", a, b );
+	// Argumanları aktarırken, baslarina 
+	// '&' koyuyoruz. 
+	swap(<b>&a</b>, <b>&b</b>);
+	printf( "a: %d b: %d\n", a, b );
+	
+	return 0;	
+}
+</pre>
+	<p>
+		Referans yoluyla aktarım olmasaydı, iki değişkenin değerlerini fonksiyon 
+		kullanarak değiştiremezdik. Eğer yazdığınız fonksiyon birden çok değer döndürmek 
+		zorundaysa, referans yoluyla aktarım zorunlu hâle geliyor. Çünkü daha önce 
+		işlediğimiz	return ifadesiyle sadece tek bir değer döndürebiliriz. Örneğin bir 
+		bölme işlemi yapıp, bölüm sonucunu ve kalanı söyleyen bir fonksiyon yazacağımızı 
+		düşünelim. Bu durumda, bölünen ve bölen fonksiyona gidecek argümanlar olurken; 
+		kalan ve bölüm geriye dönmelidir. return ifadesi geriye tek bir değer vereceğinden, 
+		ikinci değeri alabilmek için referans yöntemi kullanmamız gerekir.  
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int bolme_islemi( int bolunen, int bolen, int *kalan )
+{
+	*kalan = bolunen % bolen;
+	return bolunen / bolen;
+}
+int main( void )
+{
+	int bolunen, bolen;
+	int bolum, kalan;
+	bolunen = 13;
+	bolen = 4; 
+	bolum = bolme_islemi( bolunen, bolen, &kalan );
+	printf( "Bölüm: %d Kalan: %d\n", bolum, kalan );
+	
+	return 0;
+}
+</pre>
+	<h3>Fonksiyon Prototipleri</h3>
+	<p>
+		Bildiğiniz gibi fonksiyonlarımızı, main(&nbsp;&nbsp;) üzerine yazıyoruz. Tek kısa 
+		bir fonksiyon için bu durum rahatsız etmez; ama uzun uzun 20 adet fonksiyon 
+		olduğunu düşünün. main(&nbsp;&nbsp;) fonksiyonu sayfalar dolusu kodun altında 
+		kalacak ve okunması güçleşecektir. Fonksiyon prototipleri burada devreye girer.
+	</p>
+	<p>
+		Bir üstte yazdığımız programı tekrar yazalım. Ama bu sefer, fonksiyon prototipi 
+		yapısına uygun olarak bunu yapalım: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int bolme_islemi( int, int, int * );
+int main( void )
+{
+	int bolunen, bolen;
+	int bolum, kalan;
+	bolunen = 13;
+	bolen = 4; 
+	bolum = bolme_islemi( bolunen, bolen, &kalan );
+	printf( "Bölüm: %d Kalan: %d\n", bolum, kalan );
+	
+	return 0;
+}
+int bolme_islemi( int bolunen, int bolen, int *kalan )
+{
+	*kalan = bolunen % bolen;
+	return bolunen / bolen;
+}
+</pre>
+	<p>
+		bolme_islemi(&nbsp;&nbsp;) fonksiyonunu, main(&nbsp;&nbsp;) fonksiyonundan önce 
+		yazmadık. Sadece böyle bir fonksiyon olduğunu ve alacağı parametre tiplerini  
+		bildirdik. (&nbsp;İsteseydik parametre adlarını da yazabilirdik ama buna gerek 
+		yok.&nbsp;)	Daha sonra main(&nbsp;&nbsp;) fonksiyonu altına inip, fonksiyonu yazdık.	  		 
+	</p>
+	<p>
+		Öğrendiklerimizi pekiştirmek için yeni bir program yazalım. Fonksiyonumuz, kendisine 
+		argüman olarak gönderilen bir pointer'i alıp; bu pointer'in bellekteki adresini, 
+		işaret ettiği değişkenin değerini ve bu değişkenin adresini göstersin. 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void pointer_detayi_goster( int * );
+int main( void )
+{
+	int sayi = 15;
+	int *pointer;
+	// Degisken isaret ediliyor. 
+	pointer = &sayi;
+	// Zaten pointer oldugu icin '&' 
+	// isaretine gerek yoktur. Eger 
+	// bir degisken olsaydi, basina '&' 
+	// koymamiz gerekirdi.
+	pointer_detayi_goster( pointer );
+	
+	return 0;
+}
+void pointer_detayi_goster( int *p )
+{
+	// %p, bellek adreslerini gostermek icindir. 
+	// 16 tabaninda (Hexadecimal) sayilar icin kullanilir. 
+	// %p yerine, %x kullanmaniz mumkundur. 
+	printf( "Pointer adresi\t\t\t: %p\n", &p );
+	printf( "İşaret ettiği değişkenin adresi\t: %p\n", p );
+	printf( "İşaret ettiği değişkenin değeri\t: %d\n", *p );
+}
+</pre>
+	<p>
+		Fonksiyon prototipi, "<i>Function Prototype</i>"dan geliyor. Bunun güzel bir çeviri 
+		olduğunu düşünmüyorum. Ama aklıma daha uygun bir şey gelmedi. Öneriniz varsa  
+		değiştirebiliriz. 
+	</p>
+	<h3>Rekürsif Fonksiyonlar</h3>
+	<p>
+		Bir fonksiyon içersinden, bir diğerini çağırabiliriz. Rekürsif fonksiyonlar, 
+		fonksiyon içersinden fonksiyon çağırmanın özel bir hâlidir. Rekürsif fonksiyon bir 
+		başka fonksiyon yerine kendisini çağırır ve şartlar uygun olduğu sürece bu 
+		tekrarlanır. Rekürsif, Recursive kelimesinden geliyor ve tekrarlamalı, yinelemeli 
+		anlamını taşıyor. Kelimenin anlamıyla, yaptığı iş örtüşmekte.     
+	</p>
+	<p>	    
+		Rekürsif fonksiyonları aklımızdan çıkartıp, bildiğimiz yöntemle 1, 5, 9, 13 serisini 
+		oluşturan bir fonksiyon yazalım:  
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void seri_olustur( int );
+int main( void )
+{
+	seri_olustur( 1 );
+}
+void seri_olustur( int sayi )
+{
+	while( sayi <= 13 ) {
+		printf("%d ", sayi );
+		sayi += 4;
+	}
+}
+</pre>
+	<p>
+		Bu fonksiyonu yazmak oldukça basitti. Şimdi aynı işi yapan rekürsif bir fonksiyon 
+		yazalım:
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+void seri_olustur( int );
+int main( void )
+{
+	seri_olustur( 1 );
+}
+void seri_olustur( int sayi )
+{
+	if( sayi <= 13 ) {
+		printf("%d ", sayi );
+		sayi += 4;
+		seri_olustur( sayi );
+	}
+}
+</pre>
+
+	<p>
+		Son yazdığımız programla, bir önce yazdığımız program aynı çıktıları üretir. 
+		Ama birbirlerinden farklı çalışırlar. İkinci programın farkını akış diyagramına 
+		bakarak sizler de görebilirsiniz. Rekürsif kullanım, fonksiyonun tekrar tekrar 
+		çağrılmasını sağlamıştır.  		
+	</p>
+	
+		<div class="notcolorful" align="center">
+			<a href="c_operands/recursive_sample_1.png" target="_blank">
+		 		<img src="c_operands/sm_recursive_sample_1.png" alt="[Recursive Sample 1]" border="0"/>			
+		 	</a>			
+		 </div>
+	<p>
+		Daha önce faktöriyel hesabı yapan program yazmıştık. Şimdi faktöriyel hesaplayan 
+		fonksiyonu, rekürsif olarak yazalım: 
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int faktoriyel( int );
+int main( void )
+{
+	printf( "%d\n", faktoriyel(5) );
+}
+int faktoriyel( int sayi )
+{
+	if( sayi > 1 )
+		return sayi * faktoriyel( sayi-1 );
+	return 1;
+}
+</pre>
+	<p>
+		Yukardaki programın detaylı bir şekilde akış diyagramını vermeyeceğim. Ancak
+		faktöriyel hesaplaması yapılırken, adımları görmenizi istiyorum. Adım olarak geçen 
+		her kutu, fonksiyonun bir kez çağrılmasını temsil ediyor. Başlangıç kısmını 
+		geçerseniz fonksiyon toplamda 5 kere çağrılıyor.  	
+	</p> 
+		<div class="notcolorful" align="center">
+			<a href="c_operands/recursive_sample_2.png" target="_blank">
+		 		<img src="c_operands/sm_recursive_sample_2.png" alt="[Recursive Sample 2]" border="0"/>			
+		 	</a>			
+		 </div>
+	<p>
+		Rekürsif yapılar, oldukça karmaşık olabilir. Fakat kullanışlı oldukları kesin. 
+		Örneğin silme komutları rekürsif yapılardan yararlanır. Bir klasörü 
+		altında bulunan her şeyle birlikte silmeniz gerekiyorsa, rekürsif fonksiyon 
+		kaçınılmazdır. Ya da bazı matematiksel işlemlerde veya arama (&nbsp;search&nbsp;) 
+		yöntemlerinde yine rekürsif fonksiyonlara başvururuz. Bunların dışında rekürsif 
+		fonksiyonlar, normal fonksiyonlara göre daha az kod kullanılarak yazılır. Bunlar 
+		rekürsif fonksiyonların olumlu yönleri... Ancak hiçbir şey mükemmel değildir.    		   
+	</p>
+	<p>
+		Rekürsif fonksiyon kullanmanın bilgisayarınıza bindereceği yük daha fazladır. 
+		Faktoriyel örneğine bakın; tam 5 kez aynı fonksiyonu çağırıyoruz ve bu sırada 
+		bütün değerler bellekte tutuluyor. Eğer çok sayıda iterasyondan söz ediyorsak, 
+		belleğiniz hızla tükenecektir. Rekürsif yapılar, bellekte ekstra yer kapladığı gibi, 
+		normal fonksiyonlara göre daha yavaştır. Üstelik kısa kod yazımına karşın, 
+		rekürsif fonksiyonların daha karmaşık olduklarını söyleyebiliriz. Anlamak 
+		zaman	zaman sorun olabiliyor. Kısacası bir programda gerçekten rekürsif	yapıya 
+		ihtiyacınız olmadığı sürece, ondan kaçınmanız daha iyi! 
+	</p>
+	<h3>Örnek Sorular</h3>
+	
+	<p><b>Soru 1:</b> Aşağıdaki programa göre, a, b ve c'nin değerleri nedir?  
+	</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	float a, b, c;
+	float *p;
+	a = 15.4; 
+	b = 48.6; 
+	p = &a;
+	c = b = *p = 151.52;
+	printf( "a: %f, b: %f, c: %f\n", a, b, c );
+	return 0;
+}
+</pre>
+	<p>
+	<a href="#soru1" name="soru1" onMouseDown="change_display_of_object('Cevap1')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap1" style="display:none;">
+<pre>
+a: 151.52, b: 151.52, c: 151.52
+</pre>
+</div>
+	
+	<p><b>Soru 2:</b> Fibonnacci serisinde herhangi bir seri elemanın değerini bulmak için 
+	f(&nbsp;n&nbsp;) = f(&nbsp;n&nbsp;-&nbsp;1&nbsp;) + f(&nbsp;n&nbsp;-&nbsp;2&nbsp;) 
+	fonksiyonu kullanılır. Başlangıç değeri olarak f(&nbsp;0&nbsp;) = 0 ve 
+	f(&nbsp;1&nbsp;) = 1'dir. Bu bilgiler ışığında, verilen n sayısına göre, seride 
+	karşılık düşen değeri bulan fonksiyonu rekürsif olarak yazınız.
+	</p>
+	<p>
+	<a href="#soru2" name="soru2" onMouseDown="change_display_of_object('Cevap2')">
+	Cevap için tıklayınız...</a></p>
+	<div id="Cevap2" style="display:none;">
+<pre>
+#include&lt;stdio.h&gt;
+int fibonacci( int );
+int main( void )
+{
+	int i;
+	// Fibonacci serisinin ilk 10 elemani
+	// yazilacaktir.
+	for( i = 0; i < 10; i++ ) {
+		printf( "f(%d)= %d\n", i, fibonacci( i ) );
+	}
+	return 0;
+}
+int fibonacci( int eleman_no )
+{
+	if( eleman_no > 1 ) {
+	return fibonacci( eleman_no - 1 ) + 
+		fibonacci( eleman_no - 2 ) ;
+	}
+	else if( eleman_no == 1 )
+		return 1;
+	else
+		return 0;
+}
+</pre>
+	</div>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="c_programming_9.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_11.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_10.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:55 GMT -->
+</html>

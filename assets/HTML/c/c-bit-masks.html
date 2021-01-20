@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-bit-masks.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Bit Masks</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Bit Masks'>C Bit Masks</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operators.html'>C Bitwise Operators
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-negation.html'>C Bitwise Negation
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-and.html'>C Bitwise AND: &amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-or.html'>C Bitwise OR: |
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-exclusive-or.html'>C Bitwise EXCLUSIVE OR: ^
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-left-shift-operator.html'>C Left Shift: &lt;&lt;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-binary-right-shift-operator.html'>C Right Shift: >>
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-shift-operators-usage.html'>C Bit Shift Usage
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bit-fields.html'>C Bit Fields
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Bit Masks
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operators-as-mask.html'>C Bitwise mask
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Bitwise Mask Multiple
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-on-setting-bits.html'>C Set Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-turning-bits-off-clearing-bits.html'>C Clear Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-toggling-bits.html'>C Toggling Bits
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-checking-the-value-of-a-bit.html'>C Check Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-convert-numbers-to-a-binary-representation-using-bitwise-operator.html'>C Convert to binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-invert-bit.html'>C Invert Bit
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-convert-letter-to-lowercase.html'>C Bitwise on char
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-swap-two-value-without-using-a-third-value.html'>C Bitwise Swap
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-bitwise-operator-to-do-encryption.html'>C Bitwise encryption
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-bitwise-operator-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Bit Masks</h1>
+<a class ='btn btn-outline-dark' href=c-bit-fields.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-bitwise-operators-as-mask.html>Next</a><p>The bitwise AND operator is often used with a mask. 
+
+</p><p>A mask is a bit pattern with some bits set to on (1) and some bits to off (0). 
+
+</p><p>For example, suppose you define the symbolic constant MASK as 2 (that is, binary 00000010), with only bit number 1 being nonzero.
+
+</p><p>Then the statement
+</p><div class='myCodeDiv'><button id='EHRGM' class='myCopyButton' data-clipboard-target='#GWFSK'>Copy</button><pre  id='GWFSK' style='font-size:18px;' class='code'>flags = flags &amp; MASK;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#EHRGM');clipboard.on('success', function(e) {$('#EHRGM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#EHRGM').text('error');});</script></div><p>would cause all the bits of flags (except bit 1) to be set to 0 because any bit combined with 0
+using the &amp; operator yields 0. 
+
+</p><p>Bit number 1 will be left unchanged. 
+
+</p><p>If the bit is 1, 1 &amp; 1 is 1; if the bit is 0, 0 &amp; 1 is 0. 
+
+</p><p>This process is called "using a mask" because the zeros in the mask hide the corresponding bits in flags.
+
+</p><p>You can think of the 0s in the mask as being opaque and the 1s as being transparent. 
+
+</p><p>The expression flags &amp; MASK is like covering the flags bit pattern with
+the mask; only the bits under MASK's 1s are visible.
+
+</p><center><img alt='c-bit-mask.png' src='data:image/png;base64,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'/></center><br/><p>You can shorten the code by using the AND-assignment operator, as shown here:
+</p><div class='myCodeDiv'><button id='JXPWQ' class='myCopyButton' data-clipboard-target='#SWLRB'>Copy</button><pre  id='SWLRB' style='font-size:18px;' class='code'>flags &amp;= MASK;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#JXPWQ');clipboard.on('success', function(e) {$('#JXPWQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#JXPWQ').text('error');});</script></div><p>One common C usage is this statement:
+</p><div class='myCodeDiv'><button id='PXRWQ' class='myCopyButton' data-clipboard-target='#DSTTT'>Copy</button><pre  id='DSTTT' style='font-size:18px;' class='code'>ch &amp;= 0xff;    <span class='c'>/* or ch &amp;= 0377; */</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#PXRWQ');clipboard.on('success', function(e) {$('#PXRWQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#PXRWQ').text('error');});</script></div><p>The value <i style='color:blue'>0xff</i>, is 11111111 in binary, as is the value 0377. 
+
+</p><p>This mask leaves the final 8 bits of ch alone and sets the rest to 0. 
+
+</p><p>Regardless of whether the original ch is 8 bits, 16 bits, or more, the final value is 
+trimmed to something that fits into a single 8-bit byte. In this case, the
+mask is 8 bits wide.
+</p><a class ='btn btn-outline-dark' href=c-bit-fields.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-use-bitwise-operators-as-mask.html>Next</a><h2>Related</h2><UL><LI><a href='c-binary-right-shift-operator.html'>C Binary Right Shift Operator: >></a></LI><LI><a href='c-bitwise-shift-operators-usage.html'>C Bitwise Shift Operators Usage</a></LI><LI><a href='c-bit-fields.html'>C Bit Fields</a></LI><LI><a href='c-use-bitwise-operators-as-mask.html'>C Use Bitwise Operators as mask</a></LI><LI><a href='c-use-bitwise-operator-and-mask-to-select-multiple-bits.html'>C Use bitwise operator and mask to select multiple bits</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-bit-masks.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

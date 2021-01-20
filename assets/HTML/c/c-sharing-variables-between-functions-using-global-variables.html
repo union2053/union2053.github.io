@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-sharing-variables-between-functions-using-global-variables.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Sharing Variables Between Functions using global variables</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Sharing Variables Between Functions using global variables'>C Sharing Variables Between Functions using global variables</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-syntax.html'>C function syntax
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-finds-the-lesser-of-two-values.html'>C function intro demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-prototype-declaration.html'>C prototype declaration
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-block-variable-shadow-example.html'>C Variable shadow example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-keeping-track-within-a-function.html'>C function Static Variables 
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C function global variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-name.html'>C function name
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-the-return-value-type-for-function.html'>C function return
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Parameter
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameters.html'>C Function Parameters 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-value-mechanism.html'>C Parameter Pass by Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-address-mechanism.html'>C Parameter Pass by Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-protecting-array-contents-with-const.html'>C Parameter Protecting
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-const-parameters.html'>C Parameter const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-declaring-array-parameters.html'>C Parameter Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-using-pointer-parameters.html'>C Parameter Pointer 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-and-multidimensional-arrays.html'>C Parameter Array 2D
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-with-a-variable-number-of-arguments.html'>C function variable argument length
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Recursion
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion.html'>C function recursion
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-to-calculate-factorials.html'>C function recursion factorial
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-prints-the-binary-equivalent-of-an-integer.html'>C function recursion binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursive-to-calculate-power.html'>C function recursion power
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function Pointer
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-a-pointer-to-a-function.html'>C function pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-pointers-to-functions.html'>C Pointer Function Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-functions-as-arguments.html'>C Function Pointer Argument
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-function-as-parameter.html'>C function as parameter
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-to-raise-a-number-to-an-integer-power.html'>C Raise to Power
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-an-average-using-functions.html'>C function calculate average
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-converts-an-integer-to-a-string.html'>C convert int to string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-split-string-into-a-list-of-words.html'>C split string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-main-function.html'>C function  main() 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-3.html'>C exercise 3
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Sharing Variables Between Functions using global variables</h1>
+<a class ='btn btn-outline-dark' href=c-static-variables-keeping-track-within-a-function.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-name.html>Next</a><p>The global variables are accessible anywhere. 
+
+</p><p>Global variables are declared in the normal way.
+
+</p><p>It's the position of the declaration determines whether they're global.
+
+</p><h3>Using Global Variables
+
+</h3><p>The following code shares the <i style='color:blue'>count</i> variable between the functions:
+</p><div class='myCodeDiv'><button id='ACGCY' class='myCopyButton' data-clipboard-target='#UNGSM'>Copy</button><pre  id='UNGSM' style='font-size:18px;' class='code'><span class='c'>// Global variables </span>
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> count = 0;                         <span class='c'>// Declare a global variable </span>
+
+<span class='c'>// Function prototypes </span>
+<span class='r'>void</span> test1(<span class='r'>void</span>); 
+<span class='r'>void</span> test2(<span class='r'>void</span>); 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> count = 0;                      <span class='c'>// This hides the global count </span>
+
+  <span class='r'>for</span>( ; count &lt; 5 ; ++count) 
+  { 
+    test1(); 
+    test2(); 
+  } 
+  <span class='r'>return</span> 0; 
+} 
+
+<span class='c'>// Function test1 using the global variable </span>
+<span class='r'>void</span> test1(<span class='r'>void</span>) 
+{ 
+  printf(<span class='q'>"test1   count = %d\n"</span>, ++count); 
+} 
+
+<span class='c'>// Function test2 using a static variable </span>
+<span class='r'>void</span> test2(<span class='r'>void</span>) 
+{ 
+  <span class='r'>static</span> <span class='r'>int</span> count;                   <span class='c'>// This hides the global count </span>
+  printf(<span class='q'>"test2   count = %d\n"</span>, ++count); 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ACGCY');clipboard.on('success', function(e) {$('#ACGCY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ACGCY').text('error');});</script></div><p>the output will be this: 
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>This example has three separate variables called <i style='color:blue'>count</i>. 
+
+</p><p>The first is the global variable <i style='color:blue'>count</i> that's declared at the beginning of the file:
+</p><div class='myCodeDiv'><button id='HNCFP' class='myCopyButton' data-clipboard-target='#RMCLM'>Copy</button><pre  id='RMCLM' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+
+<span class='r'>int</span> count = 0;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HNCFP');clipboard.on('success', function(e) {$('#HNCFP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HNCFP').text('error');});</script></div><p>This isn't a static variable, but because it is global, it will be initialized by default to 0 if you don't initialize it. 
+
+</p><p>It's potentially accessible in any function from the point where it's declared to the end of the file.
+
+</p><p>
+</p><div class='myCodeDiv'><button id='MPJAH' class='myCopyButton' data-clipboard-target='#CVIGD'>Copy</button><pre  id='CVIGD' style='font-size:18px;' class='code'><span class='r'>int</span> count = 0;    <span class='c'>// This hides the global count</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MPJAH');clipboard.on('success', function(e) {$('#MPJAH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MPJAH').text('error');});</script></div><p>Because it has the same name as the global variable, the global variable count can't be accessed from
+<i style='color:blue'>main</i>(). 
+
+</p><p>Any use of the name count in <i style='color:blue'>main</i>() will refer to the variable declared within the body of
+<i style='color:blue'>main</i>(). 
+
+</p><p>The local variable count hides the global variable.
+
+</p><p>
+</p><div class='myCodeDiv'><button id='UWFHQ' class='myCopyButton' data-clipboard-target='#WHVOC'>Copy</button><pre  id='WHVOC' style='font-size:18px;' class='code'><span class='r'>static</span> <span class='r'>int</span> count;   <span class='c'>// This hides the global count</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UWFHQ');clipboard.on('success', function(e) {$('#UWFHQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UWFHQ').text('error');});</script></div><p>Because this is a static variable, it will be initialized to 0 by default. 
+
+</p><p>This variable also hides the global variable of the same name.
+
+</p><p>The function test1() works using the global count. 
+
+</p><p>The functions <i style='color:blue'>main</i>() and test2() use their local
+versions of count, because the local declaration hides the global variable of the same name.
+</p><a class ='btn btn-outline-dark' href=c-static-variables-keeping-track-within-a-function.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-function-name.html>Next</a><h2>Related</h2><UL><LI><a href='c-function-prototype-declaration.html'>C function prototype declaration</a></LI><LI><a href='c-block-variable-shadow-example.html'>C Block variable shadow example</a></LI><LI><a href='c-static-variables-keeping-track-within-a-function.html'>C Static Variables: Keeping Track Within a Function</a></LI><LI><a href='c-function-name.html'>C function name</a></LI><LI><a href='c-specifying-the-return-value-type-for-function.html'>C Specifying the Return Value Type for function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-sharing-variables-between-functions-using-global-variables.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

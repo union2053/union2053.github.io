@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4052940/how-to-make-an-opengl-rendering-context-with-transparent-background- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:02:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How to make an OpenGL rendering context with transparent background? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How to make an OpenGL rendering context with transparent background? | C Language Knowledge Base">
+        <title>[SOLVED] How to make an OpenGL rendering context with transparent background? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-to-make-an-opengl-rendering-context-with-transparent-background-">How to make an OpenGL rendering context with transparent background?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/opengl.html">opengl</a></span>
+                        <span class="tag-item"><a href="../tag/transparency.html">transparency</a></span>
+                        <span class="tag-item"><a href="../tag/winapi.html">winapi</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>Rendering contexts usually have a solid color on the background (black or whatever, see the image below):</p>
+
+<p><img src="https://i.stack.imgur.com/YxAXx.gif" alt="alt text"></p>
+
+<p>I'm wondering if it's possible to setup a window, with no decorations AND with the transparent background, while allowing me to render OpenGL stuff on it.</p>
+
+<p>This would give the illusion that the triangle is floating on the screen. The transparent background should allow you to see the desktop or other applications that might be behind it.</p>
+
+<p>Could you please exemplify with source code?</p>
+
+<p>Platform: Windows (win32 only)</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/176769/karlphillip" target="_blank"><span itemprop="name">karlphillip</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">93</div>
+                                    <div itemprop="dateCreated">11/19/2012 2:45:01 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>After spending some reputation on a unsuccessful bounty to get <em>some help</em> on this issue, I finally realized how complex was the problem I was interested in. </p>
+
+<p>The few individuals that have accomplished this task <a href="https://web.archive.org/web/20120615071641/http://coreytabaka.com/programming/cube-demo/" rel="noreferrer">don't share much</a>. During my research I found different ways to achieve what I was looking for. One of the most interesting ones is <strong>AeroGL</strong>, and it shows <a href="http://www.jose.it-berater.org/smfforum/index.php?topic=2844.0" rel="noreferrer">snippets of code</a> using a technique that was not mentioned so far, which is rendering the graphics to a <a href="http://msdn.microsoft.com/en-us/library/dd183494(VS.85).aspx" rel="noreferrer">device-independent bitmap</a> (DIB).</p>
+
+<p>To close this thread permanently, the <strong>source code below</strong> implements that technique. The code itself is a slight modification of an application presented <a href="http://www.rsdn.ru/article/opengl/layeredopengl.xml" rel="noreferrer">here</a> (big thanks to <em>Andrei Sapronov Y.</em>).</p>
+
+<p>The end result can be seen in the image below:</p>
+
+<p><img src="https://i.stack.imgur.com/iTwMo.png" alt="enter image description here"></p>
+
+<p>The code has been tested on Windows XP (32-bits) and Windows 8.1 (32-bits).
+<strong>Enjoy!</strong></p>
+
+<pre><code>#define _WIN32_WINNT 0x0500
+
+#include &lt;windows.h&gt;
+#include &lt;windowsx.h&gt;
+#include &lt;GL/gl.h&gt;
+#include &lt;GL/glu.h&gt;
+
+#pragma comment (lib, "opengl32.lib")
+#pragma comment (lib, "glu32.lib")
+
+#include &lt;assert.h&gt;
+#include &lt;tchar.h&gt;
+
+#ifdef  assert
+#define verify(expr) if(!expr) assert(0)
+#else verify(expr) expr
+#endif
+
+const TCHAR szAppName[]=_T("TransparentGL");
+const TCHAR wcWndName[]=_T("WS_EX_LAYERED OpenGL");
+
+HDC hDC;            
+HGLRC m_hrc;        
+int w(240);
+int h(240); 
+
+HDC pdcDIB;                 
+HBITMAP hbmpDIB;            
+void *bmp_cnt(NULL);        
+int cxDIB(0); 
+int cyDIB(0);   
+BITMAPINFOHEADER BIH;       
+
+
+BOOL initSC()
+{
+    glEnable(GL_ALPHA_TEST);        
+    glEnable(GL_DEPTH_TEST);        
+    glEnable(GL_COLOR_MATERIAL);
+
+    glEnable(GL_LIGHTING);          
+    glEnable(GL_LIGHT0);            
+
+    glEnable(GL_BLEND);             
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glClearColor(0, 0, 0, 0);
+
+    return 0;
+}
+
+void resizeSC(int width,int height)
+{
+    glViewport(0,0,width,height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    glMatrixMode(GL_MODELVIEW );
+    glLoadIdentity();
+}
+
+BOOL renderSC()
+{   
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glPushMatrix();
+
+    glColor3f(0, 1, 1);
+    glBegin(GL_TRIANGLES);                              // Drawing Using Triangles
+        glColor3f(1.0f,0.0f,0.0f);                      // Set The Color To Red
+        glVertex3f( 0.0f, 1.0f, 0.0f);                  // Top
+        glColor3f(0.0f,1.0f,0.0f);                      // Set The Color To Green
+        glVertex3f(-1.0f,-1.0f, 0.0f);                  // Bottom Left
+        glColor3f(0.0f,0.0f,1.0f);                      // Set The Color To Blue
+        glVertex3f( 1.0f,-1.0f, 0.0f);                  // Bottom Right
+    glEnd();
+
+    glPopMatrix();
+    glFlush();
+
+    return 0;
+}
+
+// DIB -&gt; hDC
+void draw(HDC pdcDest)
+{
+    assert(pdcDIB);
+
+    verify(BitBlt(pdcDest, 0, 0, w, h, pdcDIB, 0, 0, SRCCOPY));
+}
+
+void CreateDIB(int cx, int cy)
+{
+    assert(cx &gt; 0); 
+    assert(cy &gt; 0);
+
+    cxDIB = cx ;
+    cyDIB = cy ;
+
+    int iSize = sizeof(BITMAPINFOHEADER);   
+    memset(&amp;BIH, 0, iSize);
+
+    BIH.biSize = iSize;
+    BIH.biWidth = cx;   
+    BIH.biHeight = cy;  
+    BIH.biPlanes = 1;   
+    BIH.biBitCount = 24;    
+    BIH.biCompression = BI_RGB;
+
+    if(pdcDIB) 
+        verify(DeleteDC(pdcDIB));
+
+    pdcDIB = CreateCompatibleDC(NULL);
+    assert(pdcDIB);
+
+    if(hbmpDIB) 
+        verify(DeleteObject(hbmpDIB));
+
+    hbmpDIB = CreateDIBSection(
+        pdcDIB,         
+        (BITMAPINFO*)&amp;BIH,  
+        DIB_RGB_COLORS,     
+        &amp;bmp_cnt,       
+        NULL,
+        0);
+
+    assert(hbmpDIB);
+    assert(bmp_cnt);
+
+    if(hbmpDIB)
+        SelectObject(pdcDIB, hbmpDIB);
+}
+
+BOOL CreateHGLRC()
+{
+    DWORD dwFlags = PFD_SUPPORT_OPENGL | PFD_DRAW_TO_BITMAP;
+
+    PIXELFORMATDESCRIPTOR pfd ;
+    memset(&amp;pfd,0, sizeof(PIXELFORMATDESCRIPTOR)) ;
+    pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR); 
+    pfd.nVersion = 1;                       
+    pfd.dwFlags =  dwFlags ;                
+    pfd.iPixelType = PFD_TYPE_RGBA ;        
+    pfd.cColorBits = 24 ;                   
+    pfd.cDepthBits = 32 ;                   
+    pfd.iLayerType = PFD_MAIN_PLANE ;       
+
+   int PixelFormat = ChoosePixelFormat(pdcDIB, &amp;pfd);
+   if (PixelFormat == 0){
+      assert(0);
+      return FALSE ;
+   }
+
+   BOOL bResult = SetPixelFormat(pdcDIB, PixelFormat, &amp;pfd);
+   if (bResult==FALSE){
+      assert(0);
+      return FALSE ;
+   }
+
+   m_hrc = wglCreateContext(pdcDIB);
+   if (!m_hrc){
+      assert(0);
+      return FALSE;
+   }
+
+   return TRUE;
+}
+
+LRESULT CALLBACK WindowFunc(HWND hWnd,UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    PAINTSTRUCT ps;
+
+    switch(msg) 
+    {
+        case WM_ERASEBKGND:
+            return 0;
+        break;
+
+        case WM_CREATE:
+        break;
+
+        case WM_DESTROY:
+            if(m_hrc)
+            {
+                wglMakeCurrent(NULL, NULL);
+                wglDeleteContext(m_hrc) ;
+            }
+            PostQuitMessage(0) ;
+        break;
+
+        case WM_PAINT:
+            hDC = BeginPaint(hWnd, &amp;ps);
+            renderSC(); // OpenGL -&gt; DIB
+            draw(hDC);  // DIB -&gt; hDC
+            EndPaint(hWnd, &amp;ps);
+        break;
+
+        case WM_SIZE:
+            w = LOWORD(lParam); h = HIWORD(lParam);         
+            wglMakeCurrent(NULL, NULL);
+            wglDeleteContext(m_hrc);
+
+            CreateDIB(w, h);
+            CreateHGLRC();
+            verify(wglMakeCurrent(pdcDIB, m_hrc));
+
+            initSC();
+            resizeSC(w, h);
+            renderSC();
+        break;
+
+        default: 
+            return DefWindowProc(hWnd,msg,wParam,lParam);
+    }
+
+    return 0;
+}
+
+int WINAPI _tWinMain(HINSTANCE hThisInst, HINSTANCE hPrevInst, LPSTR str,int nWinMode)
+{   
+    WNDCLASSEX wc;
+    memset(&amp;wc, 0, sizeof(wc));
+    wc.cbSize = sizeof(WNDCLASSEX);
+    wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+    wc.style = CS_HREDRAW | CS_VREDRAW;
+    wc.lpfnWndProc = (WNDPROC)WindowFunc;
+    wc.cbClsExtra  = 0;
+    wc.cbWndExtra  = 0;
+    wc.hInstance = hThisInst;
+    wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.hbrBackground = (HBRUSH) (COLOR_WINDOW);
+    wc.lpszClassName = szAppName;
+
+    if(!RegisterClassEx(&amp;wc))
+    {
+        MessageBox(NULL, _T("RegisterClassEx - failed"), _T("Error"), MB_OK | MB_ICONERROR);
+        return FALSE;
+    }
+
+    HWND hWnd = CreateWindowEx(WS_EX_LAYERED, szAppName, wcWndName,
+                    WS_VISIBLE | WS_POPUP, 200, 150, w, h,
+                    NULL, NULL, hThisInst, NULL);
+    if(!hWnd){
+        MessageBox(NULL, _T("CreateWindowEx - failed"), _T("Error"), MB_OK | MB_ICONERROR);
+        return FALSE;
+    }
+
+    verify(SetLayeredWindowAttributes(hWnd, 0x0, 0, LWA_COLORKEY));
+
+    MSG msg;
+    while(1) 
+    {
+        while (PeekMessage(&amp;msg,NULL,0,0,PM_NOREMOVE)){
+            if (GetMessage(&amp;msg, NULL, 0, 0))
+            {
+                TranslateMessage(&amp;msg);
+                DispatchMessage(&amp;msg);
+            }
+            else return 0;
+        }
+    } 
+
+    return (FALSE); 
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/176769/karlphillip" target="_blank"><span itemprop="name">karlphillip</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/4052940/how-to-make-an-opengl-rendering-context-with-transparent-background-#answer-0</div>
+                                            <div itemprop="upvoteCount">91</div>
+                                            <div itemprop="dateCreated">3/27/2014 5:31:58 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>Since all the answers given so far target Windows only, but there's surely also a demand doing this on X11 with a composited window manager, for reference I post my example code here (also to be found at <a href="https://github.com/datenwolf/codesamples/blob/master/samples/OpenGL/x11argb_opengl/x11argb_opengl.c" rel="noreferrer">https://github.com/datenwolf/codesamples/blob/master/samples/OpenGL/x11argb_opengl/x11argb_opengl.c</a></p>
+
+<pre><code>/*------------------------------------------------------------------------
+ * A demonstration of OpenGL in a  ARGB window 
+ *    =&gt; support for composited window transparency
+ *
+ * (c) 2011 by Wolfgang 'datenwolf' Draxinger
+ *     See me at comp.graphics.api.opengl and StackOverflow.com
+
+ * License agreement: This source code is provided "as is". You
+ * can use this source code however you want for your own personal
+ * use. If you give this source code to anybody else then you must
+ * leave this message in it.
+ *
+ * This program is based on the simplest possible 
+ * Linux OpenGL program by FTB (see info below)
+
+  The simplest possible Linux OpenGL program? Maybe...
+
+  (c) 2002 by FTB. See me in comp.graphics.api.opengl
+
+  --
+  &lt;\___/&gt;
+  / O O \
+  \_____/  FTB.
+
+------------------------------------------------------------------------*/
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+#include &lt;GL/gl.h&gt;
+#include &lt;GL/glx.h&gt;
+#include &lt;GL/glxext.h&gt;
+#include &lt;X11/Xatom.h&gt;
+#include &lt;X11/extensions/Xrender.h&gt;
+#include &lt;X11/Xutil.h&gt;
+
+#define USE_CHOOSE_FBCONFIG
+
+static void fatalError(const char *why)
+{
+    fprintf(stderr, "%s", why);
+    exit(0x666);
+}
+
+static int Xscreen;
+static Atom del_atom;
+static Colormap cmap;
+static Display *Xdisplay;
+static XVisualInfo *visual;
+static XRenderPictFormat *pict_format;
+static GLXFBConfig *fbconfigs, fbconfig;
+static int numfbconfigs;
+static GLXContext render_context;
+static Window Xroot, window_handle;
+static GLXWindow glX_window_handle;
+static int width, height;
+
+static int VisData[] = {
+GLX_RENDER_TYPE, GLX_RGBA_BIT,
+GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+GLX_DOUBLEBUFFER, True,
+GLX_RED_SIZE, 8,
+GLX_GREEN_SIZE, 8,
+GLX_BLUE_SIZE, 8,
+GLX_ALPHA_SIZE, 8,
+GLX_DEPTH_SIZE, 16,
+None
+};
+
+static int isExtensionSupported(const char *extList, const char *extension)
+{
+
+  const char *start;
+  const char *where, *terminator;
+
+  /* Extension names should not have spaces. */
+  where = strchr(extension, ' ');
+  if ( where || *extension == '\0' )
+    return 0;
+
+  /* It takes a bit of care to be fool-proof about parsing the
+     OpenGL extensions string. Don't be fooled by sub-strings,
+     etc. */
+  for ( start = extList; ; ) {
+    where = strstr( start, extension );
+
+    if ( !where )
+      break;
+
+    terminator = where + strlen( extension );
+
+    if ( where == start || *(where - 1) == ' ' )
+      if ( *terminator == ' ' || *terminator == '\0' )
+        return 1;
+
+    start = terminator;
+  }
+  return 0;
+}
+
+static Bool WaitForMapNotify(Display *d, XEvent *e, char *arg)
+{    
+    return d &amp;&amp; e &amp;&amp; arg &amp;&amp; (e-&gt;type == MapNotify) &amp;&amp; (e-&gt;xmap.window == *(Window*)arg);
+}
+
+static void describe_fbconfig(GLXFBConfig fbconfig)
+{
+    int doublebuffer;
+    int red_bits, green_bits, blue_bits, alpha_bits, depth_bits;
+
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_DOUBLEBUFFER, &amp;doublebuffer);
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_RED_SIZE, &amp;red_bits);
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_GREEN_SIZE, &amp;green_bits);
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_BLUE_SIZE, &amp;blue_bits);
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_ALPHA_SIZE, &amp;alpha_bits);
+    glXGetFBConfigAttrib(Xdisplay, fbconfig, GLX_DEPTH_SIZE, &amp;depth_bits);
+
+    fprintf(stderr, "FBConfig selected:\n"
+        "Doublebuffer: %s\n"
+        "Red Bits: %d, Green Bits: %d, Blue Bits: %d, Alpha Bits: %d, Depth Bits: %d\n",
+        doublebuffer == True ? "Yes" : "No", 
+        red_bits, green_bits, blue_bits, alpha_bits, depth_bits);
+}
+
+static void createTheWindow()
+{
+    XEvent event;
+    int x,y, attr_mask;
+    XSizeHints hints;
+    XWMHints *startup_state;
+    XTextProperty textprop;
+    XSetWindowAttributes attr = {0,};
+    static char *title = "FTB's little OpenGL example - ARGB extension by WXD";
+
+    Xdisplay = XOpenDisplay(NULL);
+    if (!Xdisplay) {
+        fatalError("Couldn't connect to X server\n");
+    }
+    Xscreen = DefaultScreen(Xdisplay);
+    Xroot = RootWindow(Xdisplay, Xscreen);
+
+    fbconfigs = glXChooseFBConfig(Xdisplay, Xscreen, VisData, &amp;numfbconfigs);
+    fbconfig = 0;
+    for(int i = 0; i&lt;numfbconfigs; i++) {
+        visual = (XVisualInfo*) glXGetVisualFromFBConfig(Xdisplay, fbconfigs[i]);
+        if(!visual)
+            continue;
+
+        pict_format = XRenderFindVisualFormat(Xdisplay, visual-&gt;visual);
+        if(!pict_format)
+            continue;
+
+        fbconfig = fbconfigs[i];
+        if(pict_format-&gt;direct.alphaMask &gt; 0) {
+            break;
+        }
+    }
+
+    if(!fbconfig) {
+        fatalError("No matching FB config found");
+    }
+
+    describe_fbconfig(fbconfig);
+
+    /* Create a colormap - only needed on some X clients, eg. IRIX */
+    cmap = XCreateColormap(Xdisplay, Xroot, visual-&gt;visual, AllocNone);
+
+    attr.colormap = cmap;
+    attr.background_pixmap = None;
+    attr.border_pixmap = None;
+    attr.border_pixel = 0;
+    attr.event_mask =
+        StructureNotifyMask |
+        EnterWindowMask |
+        LeaveWindowMask |
+        ExposureMask |
+        ButtonPressMask |
+        ButtonReleaseMask |
+        OwnerGrabButtonMask |
+        KeyPressMask |
+        KeyReleaseMask;
+
+    attr_mask = 
+        CWBackPixmap|
+        CWColormap|
+        CWBorderPixel|
+        CWEventMask;
+
+    width = DisplayWidth(Xdisplay, DefaultScreen(Xdisplay))/2;
+    height = DisplayHeight(Xdisplay, DefaultScreen(Xdisplay))/2;
+    x=width/2, y=height/2;
+
+    window_handle = XCreateWindow(  Xdisplay,
+                    Xroot,
+                    x, y, width, height,
+                    0,
+                    visual-&gt;depth,
+                    InputOutput,
+                    visual-&gt;visual,
+                    attr_mask, &amp;attr);
+
+    if( !window_handle ) {
+        fatalError("Couldn't create the window\n");
+    }
+
+#if USE_GLX_CREATE_WINDOW
+    int glXattr[] = { None };
+    glX_window_handle = glXCreateWindow(Xdisplay, fbconfig, window_handle, glXattr);
+    if( !glX_window_handle ) {
+        fatalError("Couldn't create the GLX window\n");
+    }
+#else
+    glX_window_handle = window_handle;
+#endif
+
+    textprop.value = (unsigned char*)title;
+    textprop.encoding = XA_STRING;
+    textprop.format = 8;
+    textprop.nitems = strlen(title);
+
+    hints.x = x;
+    hints.y = y;
+    hints.width = width;
+    hints.height = height;
+    hints.flags = USPosition|USSize;
+
+    startup_state = XAllocWMHints();
+    startup_state-&gt;initial_state = NormalState;
+    startup_state-&gt;flags = StateHint;
+
+    XSetWMProperties(Xdisplay, window_handle,&amp;textprop, &amp;textprop,
+            NULL, 0,
+            &amp;hints,
+            startup_state,
+            NULL);
+
+    XFree(startup_state);
+
+    XMapWindow(Xdisplay, window_handle);
+    XIfEvent(Xdisplay, &amp;event, WaitForMapNotify, (char*)&amp;window_handle);
+
+    if ((del_atom = XInternAtom(Xdisplay, "WM_DELETE_WINDOW", 0)) != None) {
+        XSetWMProtocols(Xdisplay, window_handle, &amp;del_atom, 1);
+    }
+}
+
+static int ctxErrorHandler( Display *dpy, XErrorEvent *ev )
+{
+    fputs("Error at context creation", stderr);
+    return 0;
+}
+
+static void createTheRenderContext()
+{
+    int dummy;
+    if (!glXQueryExtension(Xdisplay, &amp;dummy, &amp;dummy)) {
+        fatalError("OpenGL not supported by X server\n");
+    }
+
+#if USE_GLX_CREATE_CONTEXT_ATTRIB
+    #define GLX_CONTEXT_MAJOR_VERSION_ARB       0x2091
+    #define GLX_CONTEXT_MINOR_VERSION_ARB       0x2092
+    render_context = NULL;
+    if( isExtensionSupported( glXQueryExtensionsString(Xdisplay, DefaultScreen(Xdisplay)), "GLX_ARB_create_context" ) ) {
+        typedef GLXContext (*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
+        glXCreateContextAttribsARBProc glXCreateContextAttribsARB = (glXCreateContextAttribsARBProc)glXGetProcAddressARB( (const GLubyte *) "glXCreateContextAttribsARB" );
+        if( glXCreateContextAttribsARB ) {
+            int context_attribs[] =
+            {
+                GLX_CONTEXT_MAJOR_VERSION_ARB, 3,
+                GLX_CONTEXT_MINOR_VERSION_ARB, 0,
+                //GLX_CONTEXT_FLAGS_ARB        , GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+                None
+            };
+
+            int (*oldHandler)(Display*, XErrorEvent*) = XSetErrorHandler(&amp;ctxErrorHandler);
+
+            render_context = glXCreateContextAttribsARB( Xdisplay, fbconfig, 0, True, context_attribs );
+
+            XSync( Xdisplay, False );
+            XSetErrorHandler( oldHandler );
+
+            fputs("glXCreateContextAttribsARB failed", stderr);
+        } else {
+            fputs("glXCreateContextAttribsARB could not be retrieved", stderr);
+        }
+    } else {
+            fputs("glXCreateContextAttribsARB not supported", stderr);
+    }
+
+    if(!render_context)
+    {
+#else
+    {
+#endif
+        render_context = glXCreateNewContext(Xdisplay, fbconfig, GLX_RGBA_TYPE, 0, True);
+        if (!render_context) {
+            fatalError("Failed to create a GL context\n");
+        }
+    }
+
+    if (!glXMakeContextCurrent(Xdisplay, glX_window_handle, glX_window_handle, render_context)) {
+        fatalError("glXMakeCurrent failed for window\n");
+    }
+}
+
+static int updateTheMessageQueue()
+{
+    XEvent event;
+    XConfigureEvent *xc;
+
+    while (XPending(Xdisplay))
+    {
+        XNextEvent(Xdisplay, &amp;event);
+        switch (event.type)
+        {
+        case ClientMessage:
+            if (event.xclient.data.l[0] == del_atom)
+            {
+                return 0;
+            }
+        break;
+
+        case ConfigureNotify:
+            xc = &amp;(event.xconfigure);
+            width = xc-&gt;width;
+            height = xc-&gt;height;
+            break;
+        }
+    }
+    return 1;
+}
+
+/*  6----7
+   /|   /|
+  3----2 |
+  | 5--|-4
+  |/   |/
+  0----1
+
+*/
+
+GLfloat cube_vertices[][8] =  {
+    /*  X     Y     Z   Nx   Ny   Nz    S    T */
+    {-1.0, -1.0,  1.0, 0.0, 0.0, 1.0, 0.0, 0.0}, // 0
+    { 1.0, -1.0,  1.0, 0.0, 0.0, 1.0, 1.0, 0.0}, // 1
+    { 1.0,  1.0,  1.0, 0.0, 0.0, 1.0, 1.0, 1.0}, // 2
+    {-1.0,  1.0,  1.0, 0.0, 0.0, 1.0, 0.0, 1.0}, // 3
+
+    { 1.0, -1.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0}, // 4
+    {-1.0, -1.0, -1.0, 0.0, 0.0, -1.0, 1.0, 0.0}, // 5
+    {-1.0,  1.0, -1.0, 0.0, 0.0, -1.0, 1.0, 1.0}, // 6
+    { 1.0,  1.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0}, // 7
+
+    {-1.0, -1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0}, // 5
+    {-1.0, -1.0,  1.0, -1.0, 0.0, 0.0, 1.0, 0.0}, // 0
+    {-1.0,  1.0,  1.0, -1.0, 0.0, 0.0, 1.0, 1.0}, // 3
+    {-1.0,  1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 1.0}, // 6
+
+    { 1.0, -1.0,  1.0,  1.0, 0.0, 0.0, 0.0, 0.0}, // 1
+    { 1.0, -1.0, -1.0,  1.0, 0.0, 0.0, 1.0, 0.0}, // 4
+    { 1.0,  1.0, -1.0,  1.0, 0.0, 0.0, 1.0, 1.0}, // 7
+    { 1.0,  1.0,  1.0,  1.0, 0.0, 0.0, 0.0, 1.0}, // 2
+
+    {-1.0, -1.0, -1.0,  0.0, -1.0, 0.0, 0.0, 0.0}, // 5
+    { 1.0, -1.0, -1.0,  0.0, -1.0, 0.0, 1.0, 0.0}, // 4
+    { 1.0, -1.0,  1.0,  0.0, -1.0, 0.0, 1.0, 1.0}, // 1
+    {-1.0, -1.0,  1.0,  0.0, -1.0, 0.0, 0.0, 1.0}, // 0
+
+    {-1.0, 1.0,  1.0,  0.0,  1.0, 0.0, 0.0, 0.0}, // 3
+    { 1.0, 1.0,  1.0,  0.0,  1.0, 0.0, 1.0, 0.0}, // 2
+    { 1.0, 1.0, -1.0,  0.0,  1.0, 0.0, 1.0, 1.0}, // 7
+    {-1.0, 1.0, -1.0,  0.0,  1.0, 0.0, 0.0, 1.0}, // 6
+};
+
+static void draw_cube(void)
+{
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    glVertexPointer(3, GL_FLOAT, sizeof(GLfloat) * 8, &amp;cube_vertices[0][0]);
+    glNormalPointer(GL_FLOAT, sizeof(GLfloat) * 8, &amp;cube_vertices[0][3]);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(GLfloat) * 8, &amp;cube_vertices[0][6]);
+
+    glDrawArrays(GL_QUADS, 0, 24);
+}
+
+float const light0_dir[]={0,1,0,0};
+float const light0_color[]={78./255., 80./255., 184./255.,1};
+
+float const light1_dir[]={-1,1,1,0};
+float const light1_color[]={255./255., 220./255., 97./255.,1};
+
+float const light2_dir[]={0,-1,0,0};
+float const light2_color[]={31./255., 75./255., 16./255.,1};
+
+static void redrawTheWindow()
+{
+    float const aspect = (float)width / (float)height;
+
+    static float a=0;
+    static float b=0;
+    static float c=0;
+
+    glDrawBuffer(GL_BACK);
+
+    glViewport(0, 0, width, height);
+
+    // Clear with alpha = 0.0, i.e. full transparency
+        glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glFrustum(-aspect, aspect, -1, 1, 2.5, 10);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_dir);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_color);
+
+    glLightfv(GL_LIGHT1, GL_POSITION, light1_dir);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_color);
+
+    glLightfv(GL_LIGHT2, GL_POSITION, light2_dir);
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2_color);
+
+    glTranslatef(0., 0., -5.);
+
+    glRotatef(a, 1, 0, 0);
+    glRotatef(b, 0, 1, 0);
+    glRotatef(c, 0, 0, 1);
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHTING);
+
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+    glColor4f(1., 1., 1., 0.5);
+
+    glCullFace(GL_FRONT);
+    draw_cube();
+    glCullFace(GL_BACK);
+    draw_cube();
+
+    a = fmod(a+0.1, 360.);
+    b = fmod(b+0.5, 360.);
+    c = fmod(c+0.25, 360.);
+
+    glXSwapBuffers(Xdisplay, glX_window_handle);
+}
+
+int main(int argc, char *argv[])
+{
+    createTheWindow();
+    createTheRenderContext();
+
+    while (updateTheMessageQueue()) {
+        redrawTheWindow();
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>The main trick is getting the right FBConfig. You need to ask for a alpha channel <strong>and</strong> test the associated <code>XRenderPictFormat</code> for the presence of an alpha mask.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/524368/datenwolf" target="_blank">datenwolf</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/4052940" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4052940/how-to-make-an-opengl-rendering-context-with-transparent-background- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:02:02 GMT -->
+</html>

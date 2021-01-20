@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-update-variable-via-its-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Update variable via its pointer</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Update variable via its pointer'>C Update variable via its pointer</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator.html'>C &amp; Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-introduction.html'>C Pointers Introduction
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declaring-pointers.html'>C Pointer variable Declare
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-declare-a-variable-and-a-pointer.html'>C Variable Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and Address
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Pointer Dereference
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-testing-for-a-null-pointer.html'>C Pointer NULL 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-operations.html'>C Pointer Operations
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-dereferencing-an-uninitialized-pointer.html'>C Uninitialized Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-const-pointer.html'>C const pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-compatibility.html'>C Pointer Compatibility
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-pointers.html'>C Function Pointers
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-a-pointer-when-receiving-input-from-scanf.html'>C Pointer and scanf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-constants.html'>C Pointer to Constants 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Array Address
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-and-pointers.html'>C Arrays and Pointers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-and-pointer.html'>C Array and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-and-multidimensional-arrays.html'>C Pointer and 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-multidimensional-arrays.html'>C Pointers to 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-two-dimensional-arrays-and-pointers.html'>C Array 2D and Pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-pointer-to-access-two-dimensional-array.html'>C Array 2D and Pointer 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-using-pointers-to-as-function-arguments.html'>C Pointer as Functions arguments
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-calculate-average-using-pointer-and-realloc.html'>C pointer memory realloc()
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-review-question-3.html'>C review question 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-2.html'>C Pointer Exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-3.html'>C Exercise 3
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointer-exercise-4.html'>C Exercise 4
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Update variable via its pointer</h1>
+<a class ='btn btn-outline-dark' href=c-pointer-and-the-value-it-is-pointing-to.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-testing-for-a-null-pointer.html>Next</a><p>Consider the following code:
+</p><div class='myCodeDiv'><button id='YJEPW' class='myCopyButton' data-clipboard-target='#GKDCM'>Copy</button><pre  id='GKDCM' style='font-size:18px;' class='code'><span class='r'>int</span> number = 0;           <span class='c'>// A variable of type int initialized to 0 </span>
+<span class='r'>int</span> *pnumber = NULL;      <span class='c'>// A pointer that can point to type int</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#YJEPW');clipboard.on('success', function(e) {$('#YJEPW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#YJEPW').text('error');});</script></div><p>Because you can access the contents of number through the pointer <i style='color:blue'>pnumber</i>, 
+you can use a dereferenced  
+pointer to a numerical type in arithmetic statements, for example: 
+</p><div class='myCodeDiv'><button id='ZCPHD' class='myCopyButton' data-clipboard-target='#JKJAE'>Copy</button><pre  id='JKJAE' style='font-size:18px;' class='code'>*pnumber += 25;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZCPHD');clipboard.on('success', function(e) {$('#ZCPHD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZCPHD').text('error');});</script></div><p>This statement increments the value of whatever variable <i style='color:blue'>pnumber</i> currently addresses by 25. 
+
+</p><p>The * indicates you're accessing the contents to which the variable called <i style='color:blue'>pnumber</i> is pointing. 
+
+</p><p>In this case, it's the contents of the variable called <i style='color:blue'>number</i>. 
+
+</p><p>The variable <i style='color:blue'>pnumber</i> can store the address of any variable of type  int. 
+
+</p><p>This means you can change the variable that  <i style='color:blue'>pnumber</i> points to like this: 
+</p><div class='myCodeDiv'><button id='BAEWL' class='myCopyButton' data-clipboard-target='#BKUKJ'>Copy</button><pre  id='BKUKJ' style='font-size:18px;' class='code'><span class='r'>int</span> value = 999; 
+pnumber = &amp;value;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#BAEWL');clipboard.on('success', function(e) {$('#BAEWL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#BAEWL').text('error');});</script></div><p>Suppose you repeat the same statement that you used previously: 
+</p><div class='myCodeDiv'><button id='QVHMY' class='myCopyButton' data-clipboard-target='#EECBL'>Copy</button><pre  id='EECBL' style='font-size:18px;' class='code'>*pnumber +=  25;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QVHMY');clipboard.on('success', function(e) {$('#QVHMY').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QVHMY').text('error');});</script></div><p>The statement will operate with the new variable, <i style='color:blue'>value</i>, so the new contents of value will be 1024. 
+
+</p><p>A pointer can contain the address of any variable of the appropriate type, 
+so you can use one pointer variable to change the values of many different variables, as long as they're of a type compatible with the pointer type. 
+
+</p><h3>Example
+
+</h3><p>The following example uses pointers to modify values stored in some other variables: 
+
+</p><div class='myCodeDiv'><button id='WDFTD' class='myCopyButton' data-clipboard-target='#MLQEN'>Copy</button><pre  id='MLQEN' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>long</span> num1 = 0L; 
+  <span class='r'>long</span> num2 = 0L; 
+  <span class='r'>long</span> *pnum = NULL; 
+
+  pnum = &amp;num1;          <span class='c'>// Get address of num1 </span>
+  *pnum = 2L;            <span class='c'>// Set num1 to 2 </span>
+  ++num2;                <span class='c'>// Increment num2 </span>
+  num2 += *pnum;         <span class='c'>// Add num1 to num2 </span>
+
+  pnum = &amp;num2;          <span class='c'>// Get address of num2 </span>
+  ++*pnum;               <span class='c'>// Increment num2 indirectly </span>
+
+  printf(<span class='q'>"num1 = %ld  num2 = %ld  *pnum = %ld  *pnum + num2 = %ld\n"</span>, 
+                           num1, num2, *pnum, *pnum + num2); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WDFTD');clipboard.on('success', function(e) {$('#WDFTD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WDFTD').text('error');});</script></div><p>When you run this program, you should get the following output: 
+</p><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAAiCAIAAACC1Ls8AAADmklEQVR42u3dXW6jMBhG4S4i+1/jjDT3maqVIguMbRzjn/AczUWHBrBfAj75MOnXEwAAYBG+RAAAAIgLAAAAcQEAAMQFAACAuAAAABAXAABAXAAAAIgLACzJn7//vv/JASAuALCAsswmLnO2CiAuADCRKMymLNwFxAUAMLu4RD3GMQJxAQDMJS7RNhAXEBcAaD/qh7WB6J2O6E2QS1cpbPaRHCQ2Fd1jdMvpuCrEZR/CqQNU99u6ngLEBcBKRYvokv6rZGsb0dF3P2AfuVRaoc7uN6sOFasXZpW1xlM9BYgLAOLSRlze32/hFrINqzCPkiJNeS/qkskuAYgLgFXFJVot6LlKiSuc9ZKK4bzkXsxZ80j3N7vl8jtTxAXEBcCHu8t+7kjJFIqLVqkTl8RjyWPFpVAUiAuICwDcSFxObeQKccnOpT3bSOIC4nKaxw/DGzC8GZ/Ui6ubsfSRulvU+0ddsg+/9FllHnHZn7wJgcg2oE5NwmsIcQFxyV9zB45Dm10vOiJO1YsOx5S4rBV1xROzbVfJ9qJaXN6/VRQ9ecufi34WTHkp+W24331cxAXEZZZxKLrf5QbFqXrx2u8VDXjEuLm1LBH1/OJSXh1JjN8Vw/l3w/av+V2YtZZESelUSpu3UDQxTxVhAXEJayHRy1Z6yWb1o1XmdIW2jemc5GeLS9bVCqPufCxEXRf16x5KYdSJsTNbQnjGHkTaNOP139CHNkN+RS/2JnHU2qN5wVGjKulpVOyiS85KHnHBmIpL9MqSvqKFS47O1YblgccxU9V+eiZZ14tWSW6afelQmh5QE1F3PhaiDgf1N6PO1k6Oag8l4vKMff9stJvha8I7LJshP1Sf0GN+lx/JRLm1hJtNvKMKv/93E/7RdJnCLyb29yAxTFzSS7LXnfKL7CQVl4ua0TPJ5zQThjqEmQ22YpW2x0LUA6Nu4oi3OnndgQVxWUxcrv7Y+vFJzjBB+CbiIupuZ/d9LoNjRRy4i7g0rLp3niVwRZLv9KLVZ9PhM2fvUwYQ9SeJywwn74QfJgEVl96Flp5JTniVUQYQNXFZ5eQlLripuGwcfwlx6dOYq5Oc8+7bqNH0nbm3bd/Vop4n6m7isu7J61YRlheXfbEx8Uzj/jHRzYvTPw+seDd/KGlIkh16UZ3qkItv+hHcq9/Vov6YqO928pqZi+UrLsByuOaKGgBxAYymEDUA4gK0HkoVukUNgLgAAACM5D//b8slIHsFQgAAAABJRU5ErkJggg=='><h3>Note
+
+</h3><p>You set out with initial values for the two variables, num1 and num2, at 0. 
+
+</p><p>The third statement declares an integer pointer, <i style='color:blue'>pnum</i>, which is initialized with NULL. 
+
+</p><p>You should always initialize pointers when you declare them. 
+
+</p><p>Using a pointer that isn't initialized to store an item of data is dangerous. 
+
+</p><p>The next statement is an assignment:
+</p><div class='myCodeDiv'><button id='XSZLD' class='myCopyButton' data-clipboard-target='#ODZIT'>Copy</button><pre  id='ODZIT' style='font-size:18px;' class='code'>pnum = &amp;num1;  <span class='c'>// Get address of num1</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XSZLD');clipboard.on('success', function(e) {$('#XSZLD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XSZLD').text('error');});</script></div><p>The pointer <i style='color:blue'>pnum</i> is set to point to num1 here, because you take the address of num1 using the &amp;
+operator.
+
+</p><p>The next two statements are
+</p><div class='myCodeDiv'><button id='QVCLA' class='myCopyButton' data-clipboard-target='#QKUAK'>Copy</button><pre  id='QKUAK' style='font-size:18px;' class='code'>*pnum = 2L;                                   <span class='c'>// Set num1 to 2</span>
+++num2;                                       <span class='c'>// Increment num2</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QVCLA');clipboard.on('success', function(e) {$('#QVCLA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QVCLA').text('error');});</script></div><p>The first statement uses the pointer to set the value of <i style='color:blue'>num1</i> to 2 indirectly
+by dereferencing <i style='color:blue'>pnum</i>. Then, <i style='color:blue'>num2</i> gets incremented by 1 in the normal way, using the increment
+operator.
+
+</p><p>The next statement is
+</p><div class='myCodeDiv'><button id='KZQXQ' class='myCopyButton' data-clipboard-target='#JKDVR'>Copy</button><pre  id='JKDVR' style='font-size:18px;' class='code'>num2 += *pnum;                                <span class='c'>// Add num1 to num2</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KZQXQ');clipboard.on('success', function(e) {$('#KZQXQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KZQXQ').text('error');});</script></div><p>This adds the contents of the variable pointed to by <i style='color:blue'>pnum</i> to num2. 
+
+</p><p>Because <i style='color:blue'>pnum</i> still points to num1, num2 is being increased by the value of num1.
+</p><p>The next two statements are
+</p><div class='myCodeDiv'><button id='CDFSS' class='myCopyButton' data-clipboard-target='#XFMCA'>Copy</button><pre  id='XFMCA' style='font-size:18px;' class='code'>pnum = &amp;num2;                                 <span class='c'>// Get address of num2</span>
+++*pnum;                                      <span class='c'>// Increment num2 indirectly</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CDFSS');clipboard.on('success', function(e) {$('#CDFSS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CDFSS').text('error');});</script></div><p>First, <i style='color:blue'>pnum</i> is reassigned to point to num2. 
+
+</p><p>The variable num2 is then incremented indirectly through <i style='color:blue'>pnum</i>.
+
+</p><p>You can see that the expression ++*pnum increments the value pointed to by <i style='color:blue'>pnum</i>.
+
+</p><p>However, to use the postfix increment operator, you would have to write the expression as  (*pnum)++. 
+
+</p><p>If you omit them, the address contained in <i style='color:blue'>pnum</i> would be incremented, and the result
+is dereferenced. 
+
+</p><p>This is because the operators ++ and unary * (and unary &amp; for that matter) share the
+same precedence level and are evaluated from right to left. 
+</p><a class ='btn btn-outline-dark' href=c-pointer-and-the-value-it-is-pointing-to.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-testing-for-a-null-pointer.html>Next</a><h2>Related</h2><UL><LI><a href='c-declaring-pointers.html'>C Declaring Pointers</a></LI><LI><a href='c-declare-a-variable-and-a-pointer.html'>C declare a variable and a pointer</a></LI><LI><a href='c-pointer-and-the-value-it-is-pointing-to.html'>C Pointer and the value it is pointing to</a></LI><LI><a href='c-testing-for-a-null-pointer.html'>C Testing for a NULL Pointer</a></LI><LI><a href='c-pointer-operations.html'>C Pointer Operations</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-update-variable-via-its-pointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/256/operators by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Operators | C Language Tutorial">
+        <meta name="description" property="og:description" content="Operators | C Language Tutorial">
+        <title>Operators | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="../4832/implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="operators">Operators</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+            <h2 id="introduction">Introduction</h2>
+            <div>
+                <p>An operator in a programming language is a symbol that tells the compiler or interpreter to perform a specific mathematical, relational or logical operation and produce a final result.</p>
+<p>C has many powerful operators.
+Many C operators are binary operators, which means they have two operands. For example, in <code>a / b</code>, <code>/</code> is a binary operator that accepts two operands (<code>a</code>, <code>b</code>).
+There are some unary operators which take one operand (for example: <code>~</code>, <code>++</code>),
+and only one ternary operator <code>? :</code>.</p>
+
+
+            </div>
+
+            <h2 id="syntax">Syntax</h2>
+            <div>
+                <ul>
+<li>expr1 operator</li>
+<li>operator expr2</li>
+<li>expr1 operator expr2</li>
+<li>expr1 ? expr2 : expr3</li>
+</ul>
+
+
+            </div>
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <p>Operators have an <em>arity</em>, a <em>precedence</em> and an <em>associativity</em>.</p>
+<ul>
+<li>
+<p><em>Arity</em> indicates the number of operands. In C, three different operator arities exist:</p>
+<ul>
+<li>Unary (1 operand)</li>
+<li>Binary (2 operands)</li>
+<li>Ternary (3 operands)</li>
+</ul>
+</li>
+<li>
+<p><em>Precedence</em> indicates which operators &quot;bind&quot; first to their operands. That is, which operator has priority to operate on its operands. For instance, the C language obeys the convention that multiplication and division have precedence over addition and subtraction:</p>
+<pre><code>a * b + c
+</code></pre>
+<p>Gives the same result as</p>
+<pre><code>(a * b) + c
+</code></pre>
+<p>If this is not what was wanted, precedence can be forced using parentheses, because they have the <em>highest</em> precedence of all operators.</p>
+<pre><code>a * (b + c)
+</code></pre>
+<p>This new expression will produce a result that differs from the previous two expressions.</p>
+<p>The C language has many precedence levels; A table is given below of all operators, in descending order of precedence.</p>
+<p><strong>Precedence Table</strong></p>
+<table><thead><tr><th>Operators</th><th>Associativity</th></tr></thead><tbody><tr><td><code>()</code> <code>[]</code> <code>-&gt;</code> <code>.</code></td><td>left to right</td></tr><tr><td><code>!</code> <code>~</code> <code>++</code> <code>--</code> <code>+</code> <code>-</code> <code>*</code> (dereference) <code>(type)</code> <code>sizeof</code></td><td>right to left</td></tr><tr><td><code>*</code> (multiplication) <code>/</code> <code>%</code></td><td>left to right</td></tr><tr><td><code>+</code> <code>-</code></td><td>left to right</td></tr><tr><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>left to right</td></tr><tr><td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></td><td>left to right</td></tr><tr><td><code>==</code> <code>!=</code></td><td>left to right</td></tr><tr><td><code>&amp;</code></td><td>left to right</td></tr><tr><td><code>^</code></td><td>left to right</td></tr><tr><td><code>|</code></td><td>left to right</td></tr><tr><td><code>&amp;&amp;</code></td><td>left to right</td></tr><tr><td><code>||</code></td><td>left to right</td></tr><tr><td><code>?:</code></td><td>right to left</td></tr><tr><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <code>&amp;=</code> <code>^=</code> <code>|=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td><td>right to left</td></tr><tr><td><code>,</code></td><td>left to right</td></tr></tbody></table></li>
+<li>
+<p><em>Associativity</em> indicates how equal-precedence operators binds by default, and there are two kinds: <em>Left-to-Right</em> and <em>Right-to-Left</em>. An example of <em>Left-to-Right</em> binding is the subtraction operator (<code>-</code>). The expression</p>
+<pre><code>a - b - c - d
+</code></pre>
+<p>has three identical-precedence subtractions, but gives the same result as</p>
+<pre><code>((a - b) - c) - d
+</code></pre>
+<p>because the left-most <code>-</code> binds first to its two operands.</p>
+<p>An example of <em>Right-to-Left</em> associativity are the dereference <code>*</code> and post-increment <code>++</code> operators. Both have equal precedence, so if they are used in an expression such as</p>
+<pre><code>* ptr ++
+</code></pre>
+<p>, this is equivalent to</p>
+<pre><code>* (ptr ++)
+</code></pre>
+<p>because the rightmost, unary operator (<code>++</code>) binds first to its single operand.</p>
+</li>
+</ul>
+
+
+            </div>
+
+
+            <h2 id="-alignof">_Alignof</h2>
+            <div>
+                <div class='version-specific' data-version-json='[{&quot;Type&quot;:&quot;GreaterThanOrEqual&quot;,&quot;GroupName&quot;:null,&quot;VersionName&quot;:&quot;C11&quot;}]'><span class='version-row'><span class='version'><span class='version-constraint version-kind-greaterthanorequal'>C11</span></span></span><div class='version-specific-content'>
+<p>Queries the alignment requirement for the specified type. The alignment requirement is a positive integral power of 2 representing the number of bytes between which two objects of the type may be allocated. In C, the alignment requirement is measured in <code>size_t</code>.</p>
+<p>The type name may not be an incomplete type nor a function type. If an array is used as the type, the type of the array element is used.</p>
+<p>This operator is often accessed through the convenience macro <code>alignof</code> from <code>&lt;stdalign.h&gt;</code>.</p>
+<pre><code>int main(void)
+{
+    printf(&quot;Alignment of char = %zu\n&quot;, alignof(char));
+    printf(&quot;Alignment of max_align_t = %zu\n&quot;, alignof(max_align_t));
+    printf(&quot;alignof(float[10]) = %zu\n&quot;, alignof(float[10]));
+    printf(&quot;alignof(struct{char c; int n;}) = %zu\n&quot;,
+            alignof(struct {char c; int n;}));    
+}
+</code></pre>
+<p>Possible Output:</p>
+<pre><code>Alignment of char = 1
+Alignment of max_align_t = 16
+alignof(float[10]) = 4
+alignof(struct{char c; int n;}) = 4
+</code></pre>
+<p><a href="http://en.cppreference.com/w/c/language/_Alignof" rel="nofollow">http://en.cppreference.com/w/c/language/_Alignof</a></p>
+</div></div>
+
+
+            </div>
+            <h2 id="access-operators">Access Operators</h2>
+            <div>
+                <p>The member access operators (dot <code>.</code> and arrow <code>-&gt;</code>) are used to access a member of a <code>struct</code>.</p>
+<h3 id="member-of-object">Member of object</h3>
+<p>Evaluates into the lvalue denoting the object that is a member of the accessed object.</p>
+<pre><code>struct MyStruct
+{
+    int x;
+    int y;
+};
+
+struct MyStruct myObject;
+myObject.x = 42;
+myObject.y = 123;
+
+printf(&quot;.x = %i, .y = %i\n&quot;, myObject.x, myObject.y); /* Outputs &quot;.x = 42, .y = 123&quot;. */
+</code></pre>
+<h3 id="member-of-pointed-to-object">Member of pointed-to object</h3>
+<p>Syntactic sugar for dereferencing followed by member access. Effectively, an expression of the form <code>x-&gt;y</code> is shorthand for <code>(*x).y</code> — but the arrow operator is much clearer, especially if the structure pointers are nested.</p>
+<pre><code>struct MyStruct
+{
+    int x;
+    int y;
+};
+
+struct MyStruct myObject;
+struct MyStruct *p = &amp;myObject;
+
+p-&gt;x = 42;
+p-&gt;y = 123;
+
+printf(&quot;.x = %i, .y = %i\n&quot;, p-&gt;x, p-&gt;y); /* Outputs &quot;.x = 42, .y = 123&quot;. */
+printf(&quot;.x = %i, .y = %i\n&quot;, myObject.x, myObject.y); /* Also outputs &quot;.x = 42, .y = 123&quot;. */
+</code></pre>
+<h3 id="address-of">Address-of</h3>
+<p>The unary <code>&amp;</code> operator is the address of operator.  It evaluates the given expression, where the resulting object must be an lvalue. Then, it evaluates into an object whose type is a pointer to the resulting object's type, and contains the address of the resulting object.</p>
+<pre><code>int x = 3;
+int *p = &amp;x;
+printf(&quot;%p = %p\n&quot;, （void *)&amp;x, (void *)p); /* Outputs &quot;A = A&quot;, for some implementation-defined A. */
+</code></pre>
+<h3 id="dereference">Dereference</h3>
+<p>The unary <code>*</code> operator dereferences a pointer.  It evaluates into the lvalue resulting from dereferencing the pointer that results from evaluating the given expression.</p>
+<pre><code>int x = 42;
+int *p = &amp;x;
+printf(&quot;x = %d, *p = %d\n&quot;, x, *p); /* Outputs &quot;x = 42, *p = 42&quot;. */
+
+*p = 123;
+printf(&quot;x = %d, *p = %d\n&quot;, x, *p); /* Outputs &quot;x = 123, *p = 123&quot;. */
+</code></pre>
+<h3 id="indexing">Indexing</h3>
+<p>Indexing is syntactic sugar for pointer addition followed by dereferencing. Effectively, an expression of the form <code>a[i]</code> is equivalent to <code>*(a + i)</code> — but the explicit subscript notation is preferred.</p>
+<pre><code>int arr[] = { 1, 2, 3, 4, 5 };
+printf(&quot;arr[2] = %i\n&quot;, arr[2]); /* Outputs &quot;arr[2] = 3&quot;. */
+</code></pre>
+<h3 id="interchangeability-of-indexing">Interchangeability of indexing</h3>
+<p>Adding a pointer to an integer is a commutative operation (i.e. the order of the operands does not change the result) so <code>pointer + integer == integer + pointer</code>.</p>
+<p>A consequence of this is that <code>arr[3]</code> and <code>3[arr]</code> are equivalent.</p>
+<pre><code>printf(&quot;3[arr] = %i\n&quot;, 3[arr]); /* Outputs &quot;3[arr] = 4&quot;. */
+</code></pre>
+<p>Usage of an expression <code>3[arr]</code> instead of <code>arr[3]</code> is generally not recommended, as it affects code readability.  It tends to be a popular in obfuscated programming contests.</p>
+
+
+            </div>
+            <h2 id="arithmetic-operators">Arithmetic Operators</h2>
+            <div>
+                <h3 id="basic-arithmetic">Basic Arithmetic</h3>
+<p>Return a value that is the result of applying the left hand operand to the right hand operand, using the associated mathematical operation. Normal mathematical rules of commutation apply (i.e. addition and multiplication are commutative, subtraction, division and modulus are not).</p>
+<h3 id="addition-operator">Addition Operator</h3>
+<p>The addition operator (<code>+</code>) is used to add two operands together. Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int a = 5;
+    int b = 7;
+
+    int c = a + b; /* c now holds the value 12 */
+
+    printf(&quot;%d + %d = %d&quot;,a,b,c); /* will output &quot;5 + 7 = 12&quot; */
+
+    return 0;
+}
+</code></pre>
+<h3 id="subtraction-operator">Subtraction Operator</h3>
+<p>The subtraction operator (<code>-</code>) is used to subtract the second operand from the first. Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int a = 10;
+    int b = 7;
+
+    int c = a - b; /* c now holds the value 3 */
+
+    printf(&quot;%d - %d = %d&quot;,a,b,c); /* will output &quot;10 - 7 = 3&quot; */
+
+    return 0;
+}
+</code></pre>
+<h3 id="multiplication-operator">Multiplication Operator</h3>
+<p>The multiplication operator (<code>*</code>) is used to multiply both operands. Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{    
+    int a = 5;
+    int b = 7;
+
+    int c = a * b; /* c now holds the value 35 */
+
+    printf(&quot;%d * %d = %d&quot;,a,b,c); /* will output &quot;5 * 7 = 35&quot; */
+
+    return 0;
+}
+</code></pre>
+<p><em>Not to be confused with the <code>*</code> dereference operator.</em></p>
+<h3 id="division-operator">Division Operator</h3>
+<p>The division operator (<code>/</code>) divides the first operand by the second. If both operands of the division are integers, it will return an integer value and discard the remainder (use the modulo operator <code>%</code> for calculating and acquiring the remainder).</p>
+<p>If one of the operands is a floating point value, the result is an approximation of the fraction.</p>
+<p>Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main (void)
+{
+    int a = 19 / 2 ; /* a holds value 9   */
+    int b = 18 / 2 ; /* b holds value 9   */
+    int c = 255 / 2; /* c holds value 127 */
+    int d = 44 / 4 ; /* d holds value 11  */
+    double e = 19 / 2.0 ; /* e holds value 9.5   */
+    double f = 18.0 / 2 ; /* f holds value 9.0   */
+    double g = 255 / 2.0; /* g holds value 127.5 */
+    double h = 45.0 / 4 ; /* h holds value 11.25 */
+
+    printf(&quot;19 / 2 = %d\n&quot;, a);    /* Will output &quot;19 / 2 = 9&quot;    */
+    printf(&quot;18 / 2 = %d\n&quot;, b);    /* Will output &quot;18 / 2 = 9&quot;    */
+    printf(&quot;255 / 2 = %d\n&quot;, c);   /* Will output &quot;255 / 2 = 127&quot; */
+    printf(&quot;44 / 4 = %d\n&quot;, d);    /* Will output &quot;44 / 4 = 11&quot;   */
+    printf(&quot;19 / 2.0 = %g\n&quot;, e);  /* Will output &quot;19 / 2.0 = 9.5&quot;    */
+    printf(&quot;18.0 / 2 = %g\n&quot;, f);  /* Will output &quot;18.0 / 2 = 9&quot;      */
+    printf(&quot;255 / 2.0 = %g\n&quot;, g); /* Will output &quot;255 / 2.0 = 127.5&quot; */
+    printf(&quot;45.0 / 4 = %g\n&quot;, h);  /* Will output &quot;45.0 / 4 = 11.25&quot;  */
+
+    return 0;
+}
+</code></pre>
+<h3 id="modulo-operator">Modulo Operator</h3>
+<p>The modulo operator (<code>%</code>) receives integer operands only, and  is used to calculate the remainder after the first operand is divided by the second. Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main (void) {
+    int a = 25 % 2;    /* a holds value 1  */
+    int b = 24 % 2;    /* b holds value 0  */
+    int c = 155 % 5;   /* c holds value 0  */
+    int d = 49 % 25;   /* d holds value 24 */
+
+    printf(&quot;25 % 2 = %d\n&quot;, a);     /* Will output &quot;25 % 2 = 1&quot;    */
+    printf(&quot;24 % 2 = %d\n&quot;, b);     /* Will output &quot;24 % 2 = 0&quot;    */
+    printf(&quot;155 % 5 = %d\n&quot;, c);    /* Will output &quot;155 % 5 = 0&quot;   */
+    printf(&quot;49 % 25 = %d\n&quot;, d);    /* Will output &quot;49 % 25 = 24&quot;  */
+
+    return 0;
+}
+</code></pre>
+<h3 id="increment-decrement-operators">Increment / Decrement Operators</h3>
+<p>The increment (<code>a++</code>) and decrement (<code>a--</code>) operators are different in that they change the value of the variable you apply them to without an assignment operator. You can use increment and decrement operators either before or after the variable. The placement of the operator changes the timing of the incrementation/decrementation of the value to before or after assigning it to the variable. Example:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int a = 1;
+    int b = 4;
+    int c = 1;
+    int d = 4;
+
+    a++;
+    printf(&quot;a = %d\n&quot;,a);    /* Will output &quot;a = 2&quot; */
+    b--;
+    printf(&quot;b = %d\n&quot;,b);    /* Will output &quot;b = 3&quot; */
+
+    if (++c &gt; 1) { /* c is incremented by 1 before being compared in the condition */
+        printf(&quot;This will print\n&quot;);    /* This is printed */
+    } else {
+        printf(&quot;This will never print\n&quot;);    /* This is not printed */
+    }
+
+    if (d-- &lt; 4) {  /* d is decremented after being compared */
+        printf(&quot;This will never print\n&quot;);    /* This is not printed */
+    } else {
+        printf(&quot;This will print\n&quot;);    /* This is printed */
+    }
+}
+</code></pre>
+<p>As the example for <code>c</code> and <code>d</code> shows, both operators have two forms, as prefix notation and postfix notation. Both have the same effect in incrementing (<code>++</code>) or decrementing (<code>--</code>) the variable, but differ by the value they return: prefix operations do the operation first and then return the value, whereas postfix operations first determine the value that is to be returned, and then do the operation.</p>
+<p>Because of this potentially counter-intuitive behaviour, the use of increment/decrement operators inside expressions is controversial.</p>
+
+
+            </div>
+            <h2 id="assignment-operators">Assignment Operators</h2>
+            <div>
+                <p>Assigns the value of the right-hand operand to the storage location named by the left-hand operand, and returns the value.</p>
+<pre><code>int x = 5;      /* Variable x holds the value 5. Returns 5. */ 
+char y = 'c';   /* Variable y holds the value 99. Returns 99 
+                 * (as the character 'c' is represented in the ASCII table with 99).
+                 */
+float z = 1.5;  /* variable z holds the value 1.5. Returns 1.5. */
+char const* s = &quot;foo&quot;; /* Variable s holds the address of the first character of the string 'foo'. */
+</code></pre>
+<p>Several arithmetical operations have a <em>compound assignment</em> operator.</p>
+<pre><code>a += b  /* equal to: a = a + b */
+a -= b  /* equal to: a = a - b */
+a *= b  /* equal to: a = a * b */
+a /= b  /* equal to: a = a / b */
+a %= b  /* equal to: a = a % b */
+a &amp;= b  /* equal to: a = a &amp; b */
+a |= b  /* equal to: a = a | b */
+a ^= b  /* equal to: a = a ^ b */
+a &lt;&lt;= b /* equal to: a = a &lt;&lt; b */
+a &gt;&gt;= b /* equal to: a = a &gt;&gt; b */
+</code></pre>
+<p>One important feature of these compound assignments is that the expression on the left hand side (<code>a</code>) is only evaluated once. E.g if <code>p</code> is a pointer</p>
+<pre><code>*p += 27;
+</code></pre>
+<p>dereferences <code>p</code> only once, whereas the following does so twice.</p>
+<pre><code>*p = *p + 27;
+</code></pre>
+<p>It should also be noted that the result of an assignment such as <code>a = b</code> is what is known as an <em>rvalue</em>. Thus, the assignment actually has a value which can then be assigned to another variable. This allows the chaining of assignments to set multiple variables in a single statement.</p>
+<p>This <em>rvalue</em> can be used in the controlling expressions of <code>if</code> statements (or loops or <code>switch</code> statements) that guard some code on the result of another expression or function call. For example:</p>
+<pre><code>char *buffer;
+if ((buffer = malloc(1024)) != NULL)
+{
+    /* do something with buffer */
+    free(buffer);
+}
+else
+{
+    /* report allocation failure */
+}
+</code></pre>
+<p>Because of this, care must be taken to avoid a common typo which can lead to mysterious bugs.</p>
+<pre><code>int a = 2;
+/* ... */
+if (a = 1)
+    /* Delete all files on my hard drive */
+</code></pre>
+<p>This will have disastrous results, as <code>a = 1</code> will always evaluate to <code>1</code> and thus the controlling expression of the <code>if</code> statement will always be true (read more about this common pitfall <a class='doc-link' href="http://www.riptutorial.com/c/example/7886/mistakenly-writing---instead-of----when-comparing">here</a>). The author almost certainly meant to use the equality operator (<code>==</code>) as shown below:</p>
+<pre><code>int a = 2;
+/* ... */
+if (a == 1)
+    /* Delete all files on my hard drive */
+</code></pre>
+<p><strong>Operator Associativity</strong></p>
+<pre><code>int a, b = 1, c = 2;
+a = b = c;
+</code></pre>
+<p>This assigns <code>c</code> to <code>b</code>, which returns <code>b</code>, which is than assigned to <code>a</code>. This happens because all assignment-operators have right associativity, that means the rightmost operation in the expression is evaluated first, and proceeds from right to left.</p>
+
+
+            </div>
+            <h2 id="bitwise-operators">Bitwise Operators</h2>
+            <div>
+                <p>Bitwise operators can be used to perform bit level operation on variables.<br />
+Below is a list of all six bitwise operators supported in C:</p>
+<table><thead><tr><th>Symbol</th><th>Operator</th></tr></thead><tbody><tr><td>&amp;</td><td>bitwise AND</td></tr><tr><td>|</td><td>bitwise inclusive OR</td></tr><tr><td>^</td><td>bitwise exclusive OR (XOR)</td></tr><tr><td>~</td><td>bitwise not (one's complement)</td></tr><tr><td>&lt;&lt;</td><td>logical left shift</td></tr><tr><td>&gt;&gt;</td><td>logical right shift</td></tr></tbody></table>
+<p>Following program illustrates the use of all bitwise operators:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+   unsigned int a = 29;    /* 29 = 0001 1101 */  
+   unsigned int b = 48;    /* 48 = 0011 0000 */
+   int c = 0;           
+
+   c = a &amp; b;              /* 32 = 0001 0000 */ 
+   printf(&quot;%d &amp; %d = %d\n&quot;, a, b, c );
+
+   c = a | b;              /* 61 = 0011 1101 */
+   printf(&quot;%d | %d = %d\n&quot;, a, b, c );
+
+   c = a ^ b;              /* 45 = 0010 1101 */
+   printf(&quot;%d ^ %d = %d\n&quot;, a, b, c );
+
+   c = ~a;                 /* -30 = 1110 0010 */
+   printf(&quot;~%d = %d\n&quot;, a, c );
+
+   c = a &lt;&lt; 2;             /* 116 = 0111 0100 */
+   printf(&quot;%d &lt;&lt; 2 = %d\n&quot;, a, c );
+
+   c = a &gt;&gt; 2;             /* 7 = 0000 0111 */
+   printf(&quot;%d &gt;&gt; 2 = %d\n&quot;, a, c );
+
+   return 0;
+}
+</code></pre>
+<p>Bitwise operations with signed types should be avoided because the sign bit of such a bit representation has a particular meaning. Particular restrictions apply to the shift operators:</p>
+<ul>
+<li>
+<p>Left shifting a 1 bit into the signed bit is erroneous and leads to undefined behavior.</p>
+</li>
+<li>
+<p>Right shifting a negative value (with sign bit 1) is implementation defined and therefore not portable.</p>
+</li>
+<li>
+<p>If the value of the right operand of a shift operator is negative or is greater than or equal to the width of the promoted left operand, the behavior is undefined.</p>
+</li>
+</ul>
+<p><strong>Masking:</strong></p>
+<p>Masking refers to the process of extracting the desired bits from (or transforming the desired bits in) a variable by using logical bitwise operations. The operand (a constant or variable) that is used to perform masking is called a <em>mask</em>.</p>
+<p>Masking is used in many different ways:</p>
+<ul>
+<li>To decide the bit pattern of an integer variable.</li>
+<li>To copy a portion of a given bit pattern to a new variable, while the remainder of the new variable is filled with 0s (using bitwise AND)</li>
+<li>To copy a portion of a given bit pattern to a new variable, while the remainder of the new variable is filled with 1s (using bitwise OR).</li>
+<li>To copy a portion of a given bit pattern to a new variable, while the remainder of the original bit pattern is inverted within the new variable (using bitwise exclusive OR).</li>
+</ul>
+<p>The following function uses a mask to display the bit pattern of a variable:</p>
+<pre><code>#include &lt;limits.h&gt;
+void bit_pattern(int u)
+{
+    int i, x, word;
+    unsigned mask = 1;
+    word = CHAR_BIT * sizeof(int);
+    mask = mask &lt;&lt; (word - 1);    /* shift 1 to the leftmost position */
+    for(i = 1; i &lt;= word; i++)
+    {
+        x = (u &amp; mask) ? 1 : 0;  /* identify the bit */
+        printf(&quot;%d&quot;, x);         /* print bit value */
+        mask &gt;&gt;= 1;              /* shift mask to the right by 1 bit */
+    }
+}
+</code></pre>
+
+
+            </div>
+            <h2 id="cast-operator">Cast Operator</h2>
+            <div>
+                <p>Performs an <em>explicit</em> conversion into the given type from the value resulting from evaluating the given expression.</p>
+<pre><code>int x = 3;
+int y = 4;
+printf(&quot;%f\n&quot;, (double)x / y); /* Outputs &quot;0.750000&quot;. */
+</code></pre>
+<p>Here the value of <code>x</code> is converted to a <code>double</code>, the division promotes the value of <code>y</code> to <code>double</code>, too, and the result of the division, a <code>double</code> is passed to <code>printf</code> for printing.</p>
+
+
+            </div>
+            <h2 id="comma-operator">Comma Operator</h2>
+            <div>
+                <p>Evaluates its left operand, discards the resulting value, and then evaluates its rights operand and result yields the value of its rightmost operand.</p>
+<pre><code>int x = 42, y = 42;
+printf(&quot;%i\n&quot;, (x *= 2, y)); /* Outputs &quot;42&quot;. */
+</code></pre>
+<p>The comma operator introduces a <a class='doc-link' href="http://www.riptutorial.com/c/topic/1275/sequence-points">sequence point</a> between its operands.</p>
+<p>Note that the <em>comma</em> used in functions calls that separate arguments is NOT the <em>comma operator</em>, rather it's called a <em>separator</em> which is different from the <em>comma operator</em>. Hence, it doesn't have the properties of the <em>comma operator</em>.</p>
+<p>The above <code>printf()</code> call contains both the <em>comma operator</em> and the <em>separator</em>.</p>
+<pre><code>printf(&quot;%i\n&quot;, (x *= 2, y)); /* Outputs &quot;42&quot;. */
+/*           ^        ^ this is a comma operator */
+/*           this is a separator */
+</code></pre>
+<p>The comma operator is often used in the initialization section as well as in the updating section of a <code>for</code> loop. For example:</p>
+<pre><code>for(k = 1; k &lt; 10; printf(&quot;\%d\\n&quot;, k), k += 2);   /*outputs the odd numbers below 9/*
+
+/* outputs sum to first 9 natural numbers */
+for(sumk = 1, k = 1; k &lt; 10; k++, sumk += k)
+    printf(&quot;\%5d\%5d\\n&quot;, k, sumk);
+</code></pre>
+
+
+            </div>
+            <h2 id="conditional-operator-ternary-operator">Conditional Operator/Ternary Operator</h2>
+            <div>
+                <p>Evaluates its first operand, and, if the resulting value is not equal to zero, evaluates its second operand. Otherwise, it evaluates its third operand, as shown in the following example:</p>
+<pre><code>a = b ? c : d;
+</code></pre>
+<p>is equivalent to:</p>
+<pre><code>if (b)
+    a = c;
+else 
+    a = d;
+</code></pre>
+<p>This pseudo-code represents it : <code>condition ? value_if_true : value_if_false</code>. Each value can be the result of an evaluated expression.</p>
+<pre><code>int x = 5;
+int y = 42;
+printf(&quot;%i, %i\n&quot;, 1 ? x : y, 0 ? x : y); /* Outputs &quot;5, 42&quot; */
+</code></pre>
+<p>The conditional operator can be nested. For example, the following code determines the bigger of three numbers:</p>
+<pre><code>big= a &gt; b ? (a &gt; c ? a : c)
+           : (b &gt; c ? b : c);
+</code></pre>
+<p>The following example writes even integers to one file and odd integers to another file:</p>
+<pre><code>#include&lt;stdio.h&gt;
+
+int main()
+{
+    FILE *even, *odds;
+    int n = 10;
+    size_t k = 0;
+
+    even = fopen(&quot;even.txt&quot;, &quot;w&quot;);
+    odds = fopen(&quot;odds.txt&quot;, &quot;w&quot;);
+
+    for(k = 1; k &lt; n + 1; k++)
+    {
+        k%2==0 ? fprintf(even, &quot;\t%5d\n&quot;, k)
+               : fprintf(odds, &quot;\t%5d\n&quot;, k);
+    }
+    fclose(even);
+    fclose(odds);
+
+    return 0;
+}
+</code></pre>
+<p>The conditional operator associates from right to left. Consider the following:</p>
+<pre><code>exp1 ? exp2 : exp3 ? exp4 : exp5
+</code></pre>
+<p>As the association is from right to left, the above expression
+is evaluated as</p>
+<pre><code>exp1 ? exp2 : ( exp3 ? exp4 : exp5 )
+</code></pre>
+
+
+            </div>
+            <h2 id="function-call-operator">Function Call Operator</h2>
+            <div>
+                <p>The first operand must be a function pointer (a function designator is also acceptable because it will be converted to a pointer to the function), identifying the function to call, and all other operands, if any, are collectively known as the function call's arguments. Evaluates into the return value resulting from calling the appropriate function with the respective arguments.</p>
+<pre><code>int myFunction(int x, int y)
+{
+    return x * 2 + y;
+}
+
+int (*fn)(int, int) = &amp;myFunction;
+int x = 42;
+int y = 123;
+
+printf(&quot;(*fn)(%i, %i) = %i\n&quot;, x, y, (*fn)(x, y)); /* Outputs &quot;fn(42, 123) = 207&quot;. */
+printf(&quot;fn(%i, %i) = %i\n&quot;, x, y, fn(x, y)); /* Another form: you don't need to dereference explicitly */
+</code></pre>
+
+
+            </div>
+            <h2 id="increment-decrement">Increment / Decrement</h2>
+            <div>
+                <p>The increment and decrement operators exist in <em>prefix</em> and <em>postfix</em> form.</p>
+<pre><code>int a = 1;
+int b = 1;
+int tmp = 0;
+
+tmp = ++a;        /* increments a by one, and returns new value; a == 2, tmp == 2  */
+tmp = a++;        /* increments a by one, but returns old value; a == 3, tmp == 2 */
+tmp = --b;        /* decrements b by one, and returns new value; b == 0, tmp == 0 */
+tmp = b--;        /* decrements b by one, but returns old value; b == -1, tmp == 0 */
+</code></pre>
+<p>Note that arithmetic operations do not introduce <a href="http://c-faq.com/expr/seqpoints.html" rel="nofollow noreferrer">sequence points</a>, so certain expressions with <code>++</code> or <code>--</code> operators may introduce <a class='doc-link' href="http://www.riptutorial.com/c/example/1231/modifying-any-object-more-than-once-between-two-sequence-points">undefined behaviour</a>.</p>
+
+
+            </div>
+            <h2 id="logical-operators">Logical Operators</h2>
+            <div>
+                <h3 id="logical-and">Logical AND</h3>
+<p>Performs a logical boolean AND-ing of the two operands returning 1 if both of the operands are non-zero. The logical AND operator is of type <code>int</code>.</p>
+<pre><code>0 &amp;&amp; 0  /* Returns 0. */
+0 &amp;&amp; 1  /* Returns 0. */
+2 &amp;&amp; 0  /* Returns 0. */
+2 &amp;&amp; 3  /* Returns 1. */
+</code></pre>
+<h3 id="logical-or">Logical OR</h3>
+<p>Performs a logical boolean OR-ing of the two operands returning 1 if any of the operands are non-zero. The logical OR operator is of type <code>int</code>.</p>
+<pre><code>0 || 0  /* Returns 0. */
+0 || 1  /* Returns 1.  */
+2 || 0  /* Returns 1.  */
+2 || 3  /* Returns 1.  */
+</code></pre>
+<h3 id="logical-not">Logical NOT</h3>
+<p>Performs a logical negation. The logical NOT operator is of type <code>int</code>. The NOT operator checks if at least one bit is equal to 1, if so it returns 0. Else it returns 1;</p>
+<pre><code>!1 /* Returns 0. */
+!5 /* Returns 0. */
+!0 /* Returns 1. */
+</code></pre>
+<h3 id="short-circuit-evaluation">Short-Circuit Evaluation</h3>
+<p>There are some crucial properties common to both <code>&amp;&amp;</code> and <code>||</code>:</p>
+<ul>
+<li>the left-hand operand (LHS) is fully evaluated before the right-hand operand (RHS) is evaluated at all,</li>
+<li>there is a sequence point between the evaluation of the left-hand operand and the right-hand operand,</li>
+<li>and, most importantly, the right-hand operand is not evaluated at all if the result of the left-hand operand determines the overall result.</li>
+</ul>
+<p>This means that:</p>
+<ul>
+<li>if the LHS evaluates to 'true' (non-zero), the RHS of <code>||</code> will not be evaluated (because the result of 'true OR anything' is 'true'),</li>
+<li>if the LHS evaluates to 'false' (zero), the RHS of <code>&amp;&amp;</code> will not be evaluated (because the result of 'false AND anything' is 'false').</li>
+</ul>
+<p>This is important as it permits you to write code such as:</p>
+<pre><code>const char *name_for_value(int value)
+{
+    static const char *names[] = { &quot;zero&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, };
+    enum { NUM_NAMES = sizeof(names) / sizeof(names[0]) };
+    return (value &gt;= 0 &amp;&amp; value &lt; NUM_NAMES) ? names[value] : &quot;infinity&quot;;
+}
+</code></pre>
+<p>If a negative value is passed to the function, the <code>value &gt;= 0</code> term evaluates to false and the <code>value &lt; NUM_NAMES</code> term is not evaluated.</p>
+
+
+            </div>
+            <h2 id="pointer-arithmetic">Pointer Arithmetic</h2>
+            <div>
+                <h3 id="pointer-addition">Pointer addition</h3>
+<p>Given a pointer and a scalar type <code>N</code>, evaluates into a pointer to the <code>N</code>th element of the pointed-to type that directly succeeds the pointed-to object in memory.</p>
+<pre><code>int arr[] = {1, 2, 3, 4, 5};
+printf(&quot;*(arr + 3) = %i\n&quot;, *(arr + 3)); /* Outputs &quot;4&quot;, arr's fourth element. */
+</code></pre>
+<p>It does not matter if the pointer is used as the operand value or the scalar value. This means that things such as <code>3 + arr</code> are valid. If <code>arr[k]</code> is the <code>k+1</code> member of an array, then <code>arr+k</code> is a pointer to <code>arr[k]</code>. In other words, <code>arr</code> or <code>arr+0</code> is a pointer to <code>arr[0]</code>, <code>arr+1</code> is a pointer to <code>arr[2]</code>, and so on. In general, <code>*(arr+k)</code> is same as <code>arr[k]</code>.</p>
+<p>Unlike the usual arithmetic, addition of <code>1</code> to a pointer to an <code>int</code> will add <code>4</code> bytes to the current address value. As array names are constant pointers, <code>+</code> is the only operator we can use to access the members of an array via pointer notation using the array name. However, by defining a pointer to an array, we can get more flexibility to process the data in an array. For example, we can print the members of an array as follows:</p>
+<pre><code>#include&lt;stdio.h&gt;
+static const size_t N = 5
+    
+int main()
+{
+    size_t k = 0;
+    int arr[] = {1, 2, 3, 4, 5};
+    for(k = 0; k &lt; N; k++)
+    {
+        printf(&quot;\n\t%d&quot;, *(arr + k));
+    }
+    return 0;
+}
+</code></pre>
+<p>By defining a pointer to the array, the above program is equivalent to the following:</p>
+<pre><code>#include&lt;stdio.h&gt;
+static const size_t N = 5
+    
+int main()
+{
+    size_t k = 0;
+    int arr[] = {1, 2, 3, 4, 5};
+    int *ptr = arr; /* or int *ptr = &amp;arr[0]; */
+    for(k = 0; k &lt; N; k++)
+    {
+        printf(&quot;\n\t%d&quot;, ptr[k]);
+        /* or   printf(&quot;\n\t%d&quot;, *(ptr + k)); */
+        /* or   printf(&quot;\n\t%d&quot;, *ptr++); */
+    }
+    return 0;
+}
+</code></pre>
+<p>See that the members of the array <code>arr</code> are accessed using the operators <code>+</code> and <code>++</code>. The other operators that can be used with the pointer <code>ptr</code> are <code>-</code> and <code>--</code>.</p>
+<h3 id="pointer-subtraction">Pointer subtraction</h3>
+<p>Given two pointers to the same type, evaluates into an object of type <code>ptrdiff_t</code> that holds the scalar value that must be added to the second pointer in order to obtain the value of the first pointer.</p>
+<pre><code>int arr[] = {1, 2, 3, 4, 5};
+int *p = &amp;arr[2];
+int *q = &amp;arr[3];
+ptrdiff_t diff = q - p;
+
+printf(&quot;q - p = %ti\n&quot;, diff); /* Outputs &quot;1&quot;. */
+printf(&quot;*(p + (q - p)) = %d\n&quot;, *(p + diff)); /* Outputs &quot;4&quot;. */
+</code></pre>
+
+
+            </div>
+            <h2 id="relational-operators">Relational Operators</h2>
+            <div>
+                <p>Relational operators check if a specific relation between two operands is true. The result is evaluated to 1 (which means <em>true</em>) or 0 (which means <em>false</em>). This result is often used to affect control flow (via <code>if</code>, <code>while</code>, <code>for</code>), but can also be stored in variables.</p>
+<h3 id="equals-">Equals &quot;==&quot;</h3>
+<p>Checks whether the supplied operands are equal.</p>
+<pre><code>1 == 0;         /* evaluates to 0. */
+1 == 1;         /* evaluates to 1. */
+
+int x = 5;
+int y = 5;
+int *xptr = &amp;x, *yptr = &amp;y;
+xptr == yptr;   /* evaluates to 0, the operands hold different location addresses. */
+*xptr == *yptr; /* evaluates to 1, the operands point at locations that hold the same value. */
+</code></pre>
+<p>Attention: This operator should not be confused with the assignment operator (<code>=</code>)!</p>
+<h3 id="not-equals-">Not equals &quot;!=&quot;</h3>
+<p>Checks whether the supplied operands are not equal.</p>
+<pre><code>1 != 0;         /* evaluates to 1. */
+1 != 1;         /* evaluates to 0. */
+
+int x = 5;
+int y = 5;
+int *xptr = &amp;x, *yptr = &amp;y;
+xptr != yptr;   /* evaluates to 1, the operands hold different location addresses. */
+*xptr != *yptr; /* evaluates to 0, the operands point at locations that hold the same value. */
+</code></pre>
+<p>This operator effectively returns the opposite result to that of the equals (<code>==</code>) operator.</p>
+<h3 id="not-">Not &quot;!&quot;</h3>
+<p>Check whether an object is equal to <code>0</code>.</p>
+<p>The <code>!</code> can also be used directly with a variable as follows:</p>
+<pre><code>!someVal
+</code></pre>
+<p>This has the same effect as:</p>
+<pre><code>someVal == 0
+</code></pre>
+<h3 id="greater-than-gt-">Greater than &quot;&gt;&quot;</h3>
+<p>Checks whether the left hand operand has a greater value than the right hand operand</p>
+<pre><code>5 &gt; 4      /* evaluates to 1. */
+4 &gt; 5      /* evaluates to 0. */
+4 &gt; 4      /* evaluates to 0. */
+</code></pre>
+<h3 id="less-than-lt-">Less than &quot;&lt;&quot;</h3>
+<p>Checks whether the left hand operand has a smaller value than the right hand operand</p>
+<pre><code>5 &lt; 4      /* evaluates to 0. */
+4 &lt; 5      /* evaluates to 1. */
+4 &lt; 4      /* evaluates to 0. */
+</code></pre>
+<h3 id="greater-than-or-equal-gt-">Greater than or equal &quot;&gt;=&quot;</h3>
+<p>Checks whether the left hand operand has a greater or equal value to the right operand.</p>
+<pre><code>5 &gt;= 4      /* evaluates to 1. */
+4 &gt;= 5      /* evaluates to 0. */
+4 &gt;= 4      /* evaluates to 1. */
+</code></pre>
+<h3 id="less-than-or-equal-lt-">Less than or equal &quot;&lt;=&quot;</h3>
+<p>Checks whether the left hand operand has a smaller or equal value to the right operand.</p>
+<pre><code>5 &lt;= 4      /* evaluates to 0. */
+4 &lt;= 5      /* evaluates to 1. */
+4 &lt;= 4      /* evaluates to 1. */
+</code></pre>
+
+
+            </div>
+            <h2 id="short-circuit-behavior-of-logical-operators">Short circuit behavior of logical operators</h2>
+            <div>
+                <p>Short circuiting is a functionality that skips evaluating parts of a (if/while/...) condition when able.
+In case of a logical operation on two operands, the first operand is evaluated (to true or false) and if there is a verdict (i.e first operand is false when using &amp;&amp;, first operand is true when using ||) the second operand is not evaluated.</p>
+<p>Example:</p>
+<pre><code>#include &lt;stdio.h&gt;
+ 
+int main(void) {
+  int a = 20;
+  int b = -5;
+ 
+  /* here 'b == -5' is not evaluated,
+     since a 'a != 20' is false. */
+  if (a != 20 &amp;&amp; b == -5) {
+    printf(&quot;I won't be printed!\n&quot;);
+  }
+   
+  return 0;
+}
+</code></pre>
+<p>Check it out yourself:</p>
+<pre><code>#include &lt;stdio.h&gt;
+ 
+int print(int i) {
+  printf(&quot;print function %d\n&quot;, i);
+  return i;
+}
+ 
+int main(void) {
+  int a = 20;
+ 
+  /* here 'print(a)' is not called,
+     since a 'a != 20' is false. */
+  if (a != 20 &amp;&amp; print(a)) {
+    printf(&quot;I won't be printed!\n&quot;);
+  }
+
+  /* here 'print(a)' is called,
+     since a 'a == 20' is true. */
+  if (a == 20 &amp;&amp; print(a)) {
+    printf(&quot;I will be printed!\n&quot;);
+  }
+
+  return 0;
+}
+</code></pre>
+<p>Output:</p>
+<pre><code>$ ./a.out
+print function 20
+I will be printed!
+</code></pre>
+<hr />
+<p>Short circuiting is important, when you want to avoid evaluating terms that are (computationally) costly. Moreover, it can heavily affect the flow of your program like in this case: <a href="http://stackoverflow.com/questions/26716255/why-does-this-program-print-forked-4-times">Why does this program print &quot;forked!&quot; 4 times?</a></p>
+
+
+            </div>
+            <h2 id="sizeof-operator">sizeof Operator</h2>
+            <div>
+                <h3 id="with-a-type-as-operand">With a type as operand</h3>
+<p>Evaluates into the size in bytes, of type <code>size_t</code>, of objects of the given type. Requires parentheses around the type.</p>
+<pre><code>printf(&quot;%zu\n&quot;, sizeof(int)); /* Valid, outputs the size of an int object, which is platform-dependent. */
+printf(&quot;%zu\n&quot;, sizeof int); /* Invalid, types as arguments need to be surrounded by parentheses! */
+</code></pre>
+<h3 id="with-an-expression-as-operand">With an expression as operand</h3>
+<p>Evaluates into the size in bytes, of type <code>size_t</code>, of objects of the type of the given expression. The expression itself is not evaluated. Parentheses are not required; however, because the given expression must be unary, it's considered best practice to always use them.</p>
+<pre><code>char ch = 'a';
+printf(&quot;%zu\n&quot;, sizeof(ch)); /* Valid, will output the size of a char object, which is always 1 for all platforms. */
+printf(&quot;%zu\n&quot;, sizeof ch);  /* Valid, will output the size of a char object, which is always 1 for all platforms. */
+</code></pre>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../10489/multithreading.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../6862/pass-2d-arrays-to-functions.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-03-25</div>
+        <div itemprop="datePublished">2016-03-25</div>
+        <div itemprop="dateModified">2017-06-15</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=256" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1464340275" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#introduction">
+                    Introduction
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#syntax">
+                    Syntax
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#-alignof">
+                    _Alignof
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#access-operators">
+                    Access Operators
+                </a>
+            
+
+
+<ul id="accordion_-733292579" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#member-of-object">
+                    Member of object
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#member-of-pointed-to-object">
+                    Member of pointed-to object
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#address-of">
+                    Address-of
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#dereference">
+                    Dereference
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#indexing">
+                    Indexing
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#interchangeability-of-indexing">
+                    Interchangeability of indexing
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#arithmetic-operators">
+                    Arithmetic Operators
+                </a>
+            
+
+
+<ul id="accordion_-163248186" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#basic-arithmetic">
+                    Basic Arithmetic
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#addition-operator">
+                    Addition Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#subtraction-operator">
+                    Subtraction Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#multiplication-operator">
+                    Multiplication Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#division-operator">
+                    Division Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#modulo-operator">
+                    Modulo Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#increment-decrement-operators">
+                    Increment / Decrement Operators
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#assignment-operators">
+                    Assignment Operators
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#bitwise-operators">
+                    Bitwise Operators
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#cast-operator">
+                    Cast Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#comma-operator">
+                    Comma Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#conditional-operator-ternary-operator">
+                    Conditional Operator/Ternary Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#function-call-operator">
+                    Function Call Operator
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#increment-decrement">
+                    Increment / Decrement
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#logical-operators">
+                    Logical Operators
+                </a>
+            
+
+
+<ul id="accordion_1256086950" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#logical-and">
+                    Logical AND
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#logical-or">
+                    Logical OR
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#logical-not">
+                    Logical NOT
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#short-circuit-evaluation">
+                    Short-Circuit Evaluation
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#pointer-arithmetic">
+                    Pointer Arithmetic
+                </a>
+            
+
+
+<ul id="accordion_-1587371024" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#pointer-addition">
+                    Pointer addition
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#pointer-subtraction">
+                    Pointer subtraction
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#relational-operators">
+                    Relational Operators
+                </a>
+            
+
+
+<ul id="accordion_292188264" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#equals-">
+                    Equals &amp;quot;==&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#not-equals-">
+                    Not equals &amp;quot;!=&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#not-">
+                    Not &amp;quot;!&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#greater-than-gt-">
+                    Greater than &amp;quot;&amp;gt;&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#less-than-lt-">
+                    Less than &amp;quot;&amp;lt;&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#greater-than-or-equal-gt-">
+                    Greater than or equal &amp;quot;&amp;gt;=&amp;quot;
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#less-than-or-equal-lt-">
+                    Less than or equal &amp;quot;&amp;lt;=&amp;quot;
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#short-circuit-behavior-of-logical-operators">
+                    Short circuit behavior of logical operators
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#sizeof-operator">
+                    sizeof Operator
+                </a>
+            
+
+
+<ul id="accordion_295459406" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#with-a-type-as-operand">
+                    With a type as operand
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#with-an-expression-as-operand">
+                    With an expression as operand
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/256/operators by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

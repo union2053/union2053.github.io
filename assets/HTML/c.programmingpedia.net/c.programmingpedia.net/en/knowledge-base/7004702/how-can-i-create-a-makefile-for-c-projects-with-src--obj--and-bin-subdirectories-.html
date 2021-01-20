@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7004702/how-can-i-create-a-makefile-for-c-projects-with-src--obj--and-bin-subdirectories- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:47:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] How can I create a Makefile for C projects with SRC, OBJ, and BIN subdirectories? | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] How can I create a Makefile for C projects with SRC, OBJ, and BIN subdirectories? | C Language Knowledge Base">
+        <title>[SOLVED] How can I create a Makefile for C projects with SRC, OBJ, and BIN subdirectories? | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="how-can-i-create-a-makefile-for-c-projects-with-src-obj-and-bin-subdirectories-">How can I create a Makefile for C projects with SRC, OBJ, and BIN subdirectories?</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/makefile.html">makefile</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>A few months ago, I came up with the following generic <code>Makefile</code> for school assignments:</p>
+
+<pre><code># ------------------------------------------------
+# Generic Makefile
+#
+# Author: yanick.rochon@gmail.com
+# Date  : 2010-11-05
+#
+# Changelog :
+#   0.01 - first version
+# ------------------------------------------------
+
+# project name (generate executable with this name)
+TARGET   = projectname
+
+CC       = gcc -std=c99 -c
+# compiling flags here
+CFLAGS   = -Wall -I.
+
+LINKER   = gcc -o
+# linking flags here
+LFLAGS   = -Wall
+
+SOURCES  := $(wildcard *.c)
+INCLUDES := $(wildcard *.h)
+OBJECTS  := $(SOURCES:.c=*.o)
+rm       = rm -f
+
+$(TARGET): obj
+    @$(LINKER) $(TARGET) $(LFLAGS) $(OBJECTS)
+    @echo "Linking complete!"
+
+obj: $(SOURCES) $(INCLUDES)
+    @$(CC) $(CFLAGS) $(SOURCES)
+    @echo "Compilation complete!"
+
+clean:
+    @$(rm) $(TARGET) $(OBJECTS)
+    @echo "Cleanup complete!"
+</code></pre>
+
+<p>This will basically compile every <code>.c</code> and <code>.h</code> file to generate <code>.o</code> files and the executable <code>projectname</code> all in the same folder.</p>
+
+<p>Now, I'd like to push this a little. <strong>How can I write a Makefile to compile a C project with the following directory structure?</strong></p>
+
+<pre><code> ./
+ ./Makefile
+ ./src/*.c;*.h
+ ./obj/*.o
+ ./bin/&lt;executable&gt;
+</code></pre>
+
+<p>In other words, I'd like to have a Makefile that compiles C sources from <code>./src/</code> into <code>./obj/</code> and then link everything to create the executable in <code>./bin/</code>.</p>
+
+<p>I've tried to read different Makefiles, but I simply can't make them work for the project structure above; instead, the project fails to compile with all sorts of errors. Sure, I could use full blown IDE (Monodevelop, Anjuta, etc.), but I honestly prefer to stick with gEdit and the good ol' terminal.</p>
+
+<p>Is there a guru who can give me a working solution, or clear information about how this can be done? Thank you!</p>
+
+<p>** <strong>UPDATE (v4)</strong> **</p>
+
+<p>The final solution :</p>
+
+<pre><code># ------------------------------------------------
+# Generic Makefile
+#
+# Author: yanick.rochon@gmail.com
+# Date  : 2011-08-10
+#
+# Changelog :
+#   2010-11-05 - first version
+#   2011-08-10 - added structure : sources, objects, binaries
+#                thanks to http://stackoverflow.com/users/128940/beta
+#   2017-04-24 - changed order of linker params
+# ------------------------------------------------
+
+# project name (generate executable with this name)
+TARGET   = projectname
+
+CC       = gcc
+# compiling flags here
+CFLAGS   = -std=c99 -Wall -I.
+
+LINKER   = gcc
+# linking flags here
+LFLAGS   = -Wall -I. -lm
+
+# change these to proper directories where each file should be
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
+
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+rm       = rm -f
+
+
+$(BINDIR)/$(TARGET): $(OBJECTS)
+    @$(LINKER) $(OBJECTS) $(LFLAGS) -o $@
+    @echo "Linking complete!"
+
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+    @$(CC) $(CFLAGS) -c $&lt; -o $@
+    @echo "Compiled "$&lt;" successfully!"
+
+.PHONY: clean
+clean:
+    @$(rm) $(OBJECTS)
+    @echo "Cleanup complete!"
+
+.PHONY: remove
+remove: clean
+    @$(rm) $(BINDIR)/$(TARGET)
+    @echo "Executable removed!"
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/320700/yanick-rochon" target="_blank"><span itemprop="name">Yanick Rochon</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">77</div>
+                                    <div itemprop="dateCreated">4/25/2017 4:25:56 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>First, your <code>$(OBJECTS)</code> rule is problematic, because:</p>
+
+<ol>
+<li>it's kind of indiscriminate, making <em>all</em> sources prerequisites of every object, </li>
+<li>it often uses <em>the wrong source</em> (as you discovered with <code>file1.o</code> and <code>file2.o</code>) </li>
+<li>it tries to build executables instead of stopping at objects, and </li>
+<li>the name of the target (<code>foo.o</code>) is not what the rule will actually produce (<code>obj/foo.o</code>).</li>
+</ol>
+
+<p>I suggest the following:</p>
+
+<pre><code>OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+    $(CC) $(CFLAGS) -c $&lt; -o $@
+    @echo "Compiled "$&lt;" successfully!"
+</code></pre>
+
+<p>The <code>$(TARGET)</code> rule has the same problem that the target name does not actually describe what the rule builds. For that reason, if you type <code>make</code> several times, Make will rebuild the target each time, even though there is no reason to. A small change fixes that:</p>
+
+<pre><code>$(BINDIR)/$(TARGET): $(OBJECTS)
+    $(LINKER) $@ $(LFLAGS) $(OBJECTS)
+    @echo "Linking complete!"
+</code></pre>
+
+<p>Once that's all in order, you might consider more sophisticated dependency handling; if you modify one of the header files, this makefile will not know which objects/executables must be rebuilt. But that can wait for another day.</p>
+
+<p><b>EDIT:</b><br>
+Sorry, I omitted part of the <code>$(OBJECTS)</code> rule above; I've corrected it. (I wish I could use "strike" inside a code sample.)</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/128940/beta" target="_blank"><span itemprop="name">Beta</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7004702/how-can-i-create-a-makefile-for-c-projects-with-src--obj--and-bin-subdirectories-#answer-0</div>
+                                            <div itemprop="upvoteCount">28</div>
+                                            <div itemprop="dateCreated">11/7/2017 4:02:57 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>You can add the <code>-I</code> flag to the compiler flags (CFLAGS) to indicate where the compiler should look for source files , and the -o flag to indicate where the binary should be left:</p>
+
+<pre><code>CFLAGS   = -Wall -I./src
+TARGETPATH = ./bin
+
+$(TARGET): obj
+    @$(LINKER) $(TARGETPATH)/$(TARGET) $(LFLAGS) $(OBJECTS)
+    @echo "Linking complete!"
+</code></pre>
+
+<p>In order to drop the object files into the <code>obj</code> directory, use the <code>-o</code> option when compiling. Also, look at the <code>$@</code> and <code>$&lt;</code> <a href="http://www.gnu.org/s/hello/manual/make/Automatic-Variables.html" rel="nofollow">automatic variables</a>.</p>
+
+<p>For example, consider this simple Makefile</p>
+
+<pre><code>CFLAGS= -g -Wall -O3                                                            
+OBJDIR= ./obj
+
+SRCS=$(wildcard *.c)
+OBJS=$(SRCS:.c=.o )
+all:$(OBJS)
+
+%.o: %.c 
+   $(CC) $(CFLAGS) -c $&lt; -o $(OBJDIR)/$@
+</code></pre>
+
+<p>Update></p>
+
+<p>By looking at your makefile, I realize you are using the <code>-o</code> flag. Good. Continue using it, but add a target directory variable to indicate where the output file should be written.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/63309/tom" target="_blank">Tom</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7004702" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7004702/how-can-i-create-a-makefile-for-c-projects-with-src--obj--and-bin-subdirectories- by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:47:12 GMT -->
+</html>

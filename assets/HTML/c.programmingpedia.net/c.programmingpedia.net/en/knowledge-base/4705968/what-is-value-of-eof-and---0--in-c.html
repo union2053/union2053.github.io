@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4705968/what-is-value-of-eof-and---0--in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:58:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] What is value of EOF and &#39;\0&#39; in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] What is value of EOF and &#39;\0&#39; in C | C Language Knowledge Base">
+        <title>[SOLVED] What is value of EOF and &#39;\0&#39; in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="what-is-value-of-eof-and-0-in-c">What is value of EOF and '\0' in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/cplusplus.html">c++</a></span>
+                        <span class="tag-item"><a href="../tag/eof.html">eof</a></span>
+                        <span class="tag-item"><a href="../tag/null.html">null</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I know that <code>EOF</code> and <code>'\0'</code> are of type integers, but if so shouldn't they have a fixed value?</p>
+
+<p>I printed both and got -1 for <code>EOF</code> and 0 for <code>'\0'</code>. But are these values fixed?</p>
+
+<p>I also had this</p>
+
+<pre><code>int a=-1;
+
+printf("%d",a==EOF); //printed 1
+</code></pre>
+
+<p>Are the value for <code>EOF</code> and <code>'\0'</code> fixed integers? </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/441077/thereverseflick" target="_blank"><span itemprop="name">theReverseFlick</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">34</div>
+                                    <div itemprop="dateCreated">6/11/2013 6:36:44 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><code>EOF</code> is a macro which expands to an integer constant expression with type <code>int</code> and an implementation dependent negative value but is very commonly -1.</p>
+
+<p><code>'\0'</code> is a <code>char</code> with value 0 in C++ and an <code>int</code> with the value 0 in C.</p>
+
+<p>The reason why <code>printf("%d",a==EOF);</code> resulted in <code>1</code> was because you didn't assign the value <code>EOF</code> to <code>a</code>. Instead you checked if <code>a</code> was equal to <code>EOF</code> and since that was true (<code>a == -1 == EOF</code>) it printed <code>1</code>. </p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/19563/cb-bailey" target="_blank"><span itemprop="name">CB Bailey</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/4705968/what-is-value-of-eof-and---0--in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">49</div>
+                                            <div itemprop="dateCreated">7/13/2015 5:20:13 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p><code>NULL</code> and <code>'\0'</code> are guaranteed to evaluate to 0, so (with appropriate casts) they can be considered identical in value; notice however that they represent two very different things: <code>NULL</code> is a null (always invalid) <em>pointer</em>, while <code>'\0'</code> is the string terminator. <code>EOF</code> instead is a negative integer constant that indicates the end of a stream; often it's -1, but the standard doesn't say anything about its actual value.</p>
+
+<p>C &amp; C++ differ in the type of <code>NULL</code> and <code>'\0'</code>:</p>
+
+<ul>
+<li>in C++ <code>'\0'</code> is a <code>char</code>, while in C it's an <code>int</code>; this because in C all character literals are considered <code>int</code>s.</li>
+<li><p>in C++ <code>NULL</code> is "just" an integral 0, while in C it can be defined as a 0 casted to <code>void *</code>; this cannot be done in C++ (and it's explicitly forbidden in a note) because, being C++ more strict in pointer conversions, a <code>void *</code> is not implicitly convertible to any other pointer type, so, if <code>NULL</code> was a <code>void *</code>, it would be necessary to cast it to the target pointer type on assignment:</p>
+
+<pre><code>int * ptr = (void *) 0; /* valid C, invalid C++ */
+</code></pre></li>
+</ul>
+
+<p>Relevant standard quotations:</p>
+
+<h1 id="cplusplus98-03">C++98/03</h1>
+
+<h2 id="null"><code>NULL</code></h2>
+
+<p><code>NULL</code> is an integer type guaranteed to evaluate to 0:</p>
+
+<blockquote>
+  <p><em><strong>4.10 Pointer conversions</em></strong></p>
+  
+  <p>A null pointer constant is an integral constant expression (5.19) rvalue of integer type that evaluates to zero. A null pointer constant can be converted to a pointer type; the result is the null pointer value of that type and is distinguishable from every other value of pointer to object or pointer to function type. Two null pointer values of the same type shall compare equal. The conversion of a null pointer constant to a pointer
+  to cv-qualified type is a single conversion, and not the sequence of a pointer conversion followed by a qualification conversion (4.4).</p>
+  
+  <p><em><strong>18.1 Types</em></strong></p>
+  
+  <p>[...] The macro NULL is an implementation-defined C++ null pointer constant in this international Standard (4.10). (<em>Possible definitions include <code>0</code> and <code>0L</code>, but not <code>(void*)0</code></em>).</p>
+</blockquote>
+
+<h2 id="-0-"><code>'\0'</code></h2>
+
+<p>A 0-value char must exist:</p>
+
+<blockquote>
+  <p><em><strong>2.2 Character sets</em></strong></p>
+  
+  <p>The basic execution character set and the basic execution wide-character set shall each contain [...] a null character (respectively, null wide character), whose representation has all zero bits.</p>
+</blockquote>
+
+<p><code>'\0'</code> is a <code>char</code> literal:</p>
+
+<blockquote>
+  <p><em><strong>2.13.2 Character literals</em></strong></p>
+  
+  <p>A character literal is one or more characters enclosed in single quotes, as in <code>'x'</code>, optionally preceded by the letter L, as in L’x’. A character literal that does not begin with L is an ordinary character literal, also referred to as a narrow-character literal. An ordinary character literal that contains a single <em>c-char</em> has type <code>char</code>, with value equal to the numerical value of the encoding of the <em>c-char</em> in the execution character set.</p>
+</blockquote>
+
+<p>and it's value is 0, since that escape sequence specifies its value:</p>
+
+<blockquote>
+  <p>The escape <code>\ooo</code> consists of the backslash followed by one, two, or three octal digits that are taken to specify the value of the desired character.</p>
+</blockquote>
+
+<p><code>'\0'</code> is used to terminate strings literals:</p>
+
+<blockquote>
+  <p><em><strong>2.13.4 String literals</em></strong></p>
+  
+  <p>After any necessary concatenation, in translation phase 7 (2.1), <code>'\0'</code> is appended to every string literal so that programs that scan a string can find its end.</p>
+</blockquote>
+
+<h2 id="eof"><code>EOF</code></h2>
+
+<p>The definition of <code>EOF</code> is delegated to the C89 standard (as stated in §27.8.2 "C Library files"), where it is defined as an implementation specific negative integer.</p>
+
+<h1 id="c99">C99</h1>
+
+<h2 id="null"><code>NULL</code></h2>
+
+<p>A null pointer is a 0 integer, optionally casted to <code>void *</code>; <code>NULL</code> is a null pointer.</p>
+
+<blockquote>
+  <p><em><strong>6.3.2.3 Pointers</em></strong></p>
+  
+  <p>[...] An integer constant expression with the value 0, or such an expression cast to type
+  <code>void *</code>, is called a null pointer constant. (The macro <code>NULL</code> is defined in <code>&lt;stddef.h&gt;</code> (and other headers) as a null pointer constant; see 7.17.) If a null pointer constant is converted to a pointer type, the resulting pointer, called a null pointer, is guaranteed to compare unequal to a pointer to any object or function.</p>
+  
+  <p><em><strong>7.17 Common definitions <code>&lt;stddef.h&gt;</code></em></strong></p>
+  
+  <p>[...] The macros are</p>
+  
+  <p><strong><code>NULL</code></strong></p>
+  
+  <p>which expands to an implementation-defined null pointer constant; [...]</p>
+</blockquote>
+
+<h2 id="-0-"><code>'\0'</code></h2>
+
+<p><code>'\0'</code> is an integer with value 0, and is used to terminate strings:</p>
+
+<blockquote>
+  <p><em><strong>5.2.1 Character sets</em></strong></p>
+  
+  <p>[...] A byte with all bits set to 0, called the <em>null character</em>, shall exist in the basic execution character set; it is used to terminate a character string.</p>
+  
+  <p><em><strong>6.4.4.4 Character constants</em></strong></p>
+  
+  <p>An integer character constant is a sequence of one or more multibyte characters enclosed
+  in single-quotes, as in <code>'x'</code>. [...]</p>
+  
+  <p>The octal digits that follow the backslash in an octal escape sequence are taken to be part of the construction of a single character for an integer character constant or of a single wide character for a wide character constant. The numerical value of the octal integer so formed specifies the value of the desired character or wide character. [...]</p>
+  
+  <p>An integer character constant has type <code>int</code>.</p>
+</blockquote>
+
+<h2 id="eof"><code>EOF</code></h2>
+
+<p><code>EOF</code> is an implementation-defined negative integer</p>
+
+<blockquote>
+  <p><em><strong>7.19 Input/output <code>&lt;stdio.h&gt;</code></em></strong></p>
+  
+  <p><em><strong>7.19.1 Introduction</em></strong></p>
+  
+  <p><strong><code>EOF</code></strong></p>
+  
+  <p>which expands to an integer constant expression, with type <code>int</code> and a negative value, that is returned by several functions to indicate end-of-file, that is, no more input from a
+  stream</p>
+</blockquote>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/214671/matteo-italia" target="_blank">Matteo Italia</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/4705968" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/4705968/what-is-value-of-eof-and---0--in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:58:22 GMT -->
+</html>

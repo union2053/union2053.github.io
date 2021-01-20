@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/746171/efficient-algorithm-for-bit-reversal--from-msb--lsb-to-lsb--msb--in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:45:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] Efficient Algorithm for Bit Reversal (from MSB-&gt;LSB to LSB-&gt;MSB) in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] Efficient Algorithm for Bit Reversal (from MSB-&gt;LSB to LSB-&gt;MSB) in C | C Language Knowledge Base">
+        <title>[SOLVED] Efficient Algorithm for Bit Reversal (from MSB-&gt;LSB to LSB-&gt;MSB) in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="efficient-algorithm-for-bit-reversal-from-msb-lsb-to-lsb-msb-in-c">Efficient Algorithm for Bit Reversal (from MSB->LSB to LSB->MSB) in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/bit-manipulation.html">bit-manipulation</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>What is the best algorithm to achieve the following:</p>
+
+<p><code>0010 0000 =&gt; 0000 0100</code></p>
+
+<p>The conversion is from MSB->LSB to LSB->MSB.  All bits must be reversed; that is, this is <em>not</em> endianness-swapping.</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/17329/green-t" target="_blank"><span itemprop="name">green_t</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">233</div>
+                                    <div itemprop="dateCreated">5/27/2019 7:10:46 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p><strong>NOTE</strong>: All algorithms below are in C, but should be portable to your language of choice (just don't look at me when they're not as fast :)</p>
+
+<h2 id="options">Options</h2>
+
+<p><strong>Low Memory (32-bit <code>int</code>, 32-bit machine)(from <a href="http://aggregate.org/MAGIC/#Bit%20Reversal" rel="noreferrer">here</a>):</strong></p>
+
+<pre><code>unsigned int
+reverse(register unsigned int x)
+{
+    x = (((x &amp; 0xaaaaaaaa) &gt;&gt; 1) | ((x &amp; 0x55555555) &lt;&lt; 1));
+    x = (((x &amp; 0xcccccccc) &gt;&gt; 2) | ((x &amp; 0x33333333) &lt;&lt; 2));
+    x = (((x &amp; 0xf0f0f0f0) &gt;&gt; 4) | ((x &amp; 0x0f0f0f0f) &lt;&lt; 4));
+    x = (((x &amp; 0xff00ff00) &gt;&gt; 8) | ((x &amp; 0x00ff00ff) &lt;&lt; 8));
+    return((x &gt;&gt; 16) | (x &lt;&lt; 16));
+
+}
+</code></pre>
+
+<p>From the famous <a href="http://graphics.stanford.edu/~seander/bithacks.html" rel="noreferrer">Bit Twiddling Hacks page</a>:</p>
+
+<p><strong>Fastest (lookup table)</strong>:</p>
+
+<pre><code>static const unsigned char BitReverseTable256[] = 
+{
+  0x00, 0x80, 0x40, 0xC0, 0x20, 0xA0, 0x60, 0xE0, 0x10, 0x90, 0x50, 0xD0, 0x30, 0xB0, 0x70, 0xF0, 
+  0x08, 0x88, 0x48, 0xC8, 0x28, 0xA8, 0x68, 0xE8, 0x18, 0x98, 0x58, 0xD8, 0x38, 0xB8, 0x78, 0xF8, 
+  0x04, 0x84, 0x44, 0xC4, 0x24, 0xA4, 0x64, 0xE4, 0x14, 0x94, 0x54, 0xD4, 0x34, 0xB4, 0x74, 0xF4, 
+  0x0C, 0x8C, 0x4C, 0xCC, 0x2C, 0xAC, 0x6C, 0xEC, 0x1C, 0x9C, 0x5C, 0xDC, 0x3C, 0xBC, 0x7C, 0xFC, 
+  0x02, 0x82, 0x42, 0xC2, 0x22, 0xA2, 0x62, 0xE2, 0x12, 0x92, 0x52, 0xD2, 0x32, 0xB2, 0x72, 0xF2, 
+  0x0A, 0x8A, 0x4A, 0xCA, 0x2A, 0xAA, 0x6A, 0xEA, 0x1A, 0x9A, 0x5A, 0xDA, 0x3A, 0xBA, 0x7A, 0xFA,
+  0x06, 0x86, 0x46, 0xC6, 0x26, 0xA6, 0x66, 0xE6, 0x16, 0x96, 0x56, 0xD6, 0x36, 0xB6, 0x76, 0xF6, 
+  0x0E, 0x8E, 0x4E, 0xCE, 0x2E, 0xAE, 0x6E, 0xEE, 0x1E, 0x9E, 0x5E, 0xDE, 0x3E, 0xBE, 0x7E, 0xFE,
+  0x01, 0x81, 0x41, 0xC1, 0x21, 0xA1, 0x61, 0xE1, 0x11, 0x91, 0x51, 0xD1, 0x31, 0xB1, 0x71, 0xF1,
+  0x09, 0x89, 0x49, 0xC9, 0x29, 0xA9, 0x69, 0xE9, 0x19, 0x99, 0x59, 0xD9, 0x39, 0xB9, 0x79, 0xF9, 
+  0x05, 0x85, 0x45, 0xC5, 0x25, 0xA5, 0x65, 0xE5, 0x15, 0x95, 0x55, 0xD5, 0x35, 0xB5, 0x75, 0xF5,
+  0x0D, 0x8D, 0x4D, 0xCD, 0x2D, 0xAD, 0x6D, 0xED, 0x1D, 0x9D, 0x5D, 0xDD, 0x3D, 0xBD, 0x7D, 0xFD,
+  0x03, 0x83, 0x43, 0xC3, 0x23, 0xA3, 0x63, 0xE3, 0x13, 0x93, 0x53, 0xD3, 0x33, 0xB3, 0x73, 0xF3, 
+  0x0B, 0x8B, 0x4B, 0xCB, 0x2B, 0xAB, 0x6B, 0xEB, 0x1B, 0x9B, 0x5B, 0xDB, 0x3B, 0xBB, 0x7B, 0xFB,
+  0x07, 0x87, 0x47, 0xC7, 0x27, 0xA7, 0x67, 0xE7, 0x17, 0x97, 0x57, 0xD7, 0x37, 0xB7, 0x77, 0xF7, 
+  0x0F, 0x8F, 0x4F, 0xCF, 0x2F, 0xAF, 0x6F, 0xEF, 0x1F, 0x9F, 0x5F, 0xDF, 0x3F, 0xBF, 0x7F, 0xFF
+};
+
+unsigned int v; // reverse 32-bit value, 8 bits at time
+unsigned int c; // c will get v reversed
+
+// Option 1:
+c = (BitReverseTable256[v &amp; 0xff] &lt;&lt; 24) | 
+    (BitReverseTable256[(v &gt;&gt; 8) &amp; 0xff] &lt;&lt; 16) | 
+    (BitReverseTable256[(v &gt;&gt; 16) &amp; 0xff] &lt;&lt; 8) |
+    (BitReverseTable256[(v &gt;&gt; 24) &amp; 0xff]);
+
+// Option 2:
+unsigned char * p = (unsigned char *) &amp;v;
+unsigned char * q = (unsigned char *) &amp;c;
+q[3] = BitReverseTable256[p[0]]; 
+q[2] = BitReverseTable256[p[1]]; 
+q[1] = BitReverseTable256[p[2]]; 
+q[0] = BitReverseTable256[p[3]];
+</code></pre>
+
+<p>You can extend this idea to 64-bit <code>int</code>s, or trade off memory for speed (assuming your L1 Data Cache is large enough), and reverse 16 bits at a time with a 64K-entry lookup table.</p>
+
+<hr>
+
+<h2 id="others">Others</h2>
+
+<p><strong>Simple</strong></p>
+
+<pre><code>unsigned int v;     // input bits to be reversed
+unsigned int r = v &amp; 1; // r will be reversed bits of v; first get LSB of v
+int s = sizeof(v) * CHAR_BIT - 1; // extra shift needed at end
+
+for (v &gt;&gt;= 1; v; v &gt;&gt;= 1)
+{   
+  r &lt;&lt;= 1;
+  r |= v &amp; 1;
+  s--;
+}
+r &lt;&lt;= s; // shift when v's highest bits are zero
+</code></pre>
+
+<p><strong>Faster (32-bit processor)</strong></p>
+
+<pre><code>unsigned char b = x;
+b = ((b * 0x0802LU &amp; 0x22110LU) | (b * 0x8020LU &amp; 0x88440LU)) * 0x10101LU &gt;&gt; 16; 
+</code></pre>
+
+<p><strong>Faster (64-bit processor)</strong></p>
+
+<pre><code>unsigned char b; // reverse this (8-bit) byte
+b = (b * 0x0202020202ULL &amp; 0x010884422010ULL) % 1023;
+</code></pre>
+
+<p>If you want to do this on a 32-bit <code>int</code>, just reverse the bits in each byte, and reverse the order of the bytes.  That is:</p>
+
+<pre><code>unsigned int toReverse;
+unsigned int reversed;
+unsigned char inByte0 = (toReverse &amp; 0xFF);
+unsigned char inByte1 = (toReverse &amp; 0xFF00) &gt;&gt; 8;
+unsigned char inByte2 = (toReverse &amp; 0xFF0000) &gt;&gt; 16;
+unsigned char inByte3 = (toReverse &amp; 0xFF000000) &gt;&gt; 24;
+reversed = (reverseBits(inByte0) &lt;&lt; 24) | (reverseBits(inByte1) &lt;&lt; 16) | (reverseBits(inByte2) &lt;&lt; 8) | (reverseBits(inByte3);
+</code></pre>
+
+<hr>
+
+<h2 id="results">Results</h2>
+
+<p>I benchmarked the two most promising solutions, the lookup table, and bitwise-AND (the first one).  The test machine is a laptop w/ 4GB of DDR2-800 and a Core 2 Duo T7500 @ 2.4GHz, 4MB L2 Cache; YMMV.  I used <em>gcc</em> 4.3.2 on 64-bit Linux.  OpenMP (and the GCC bindings) were used for high-resolution timers.</p>
+
+<p><strong>reverse.c</strong></p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;omp.h&gt;
+
+unsigned int
+reverse(register unsigned int x)
+{
+    x = (((x &amp; 0xaaaaaaaa) &gt;&gt; 1) | ((x &amp; 0x55555555) &lt;&lt; 1));
+    x = (((x &amp; 0xcccccccc) &gt;&gt; 2) | ((x &amp; 0x33333333) &lt;&lt; 2));
+    x = (((x &amp; 0xf0f0f0f0) &gt;&gt; 4) | ((x &amp; 0x0f0f0f0f) &lt;&lt; 4));
+    x = (((x &amp; 0xff00ff00) &gt;&gt; 8) | ((x &amp; 0x00ff00ff) &lt;&lt; 8));
+    return((x &gt;&gt; 16) | (x &lt;&lt; 16));
+
+}
+
+int main()
+{
+    unsigned int *ints = malloc(100000000*sizeof(unsigned int));
+    unsigned int *ints2 = malloc(100000000*sizeof(unsigned int));
+    for(unsigned int i = 0; i &lt; 100000000; i++)
+      ints[i] = rand();
+
+    unsigned int *inptr = ints;
+    unsigned int *outptr = ints2;
+    unsigned int *endptr = ints + 100000000;
+    // Starting the time measurement
+    double start = omp_get_wtime();
+    // Computations to be measured
+    while(inptr != endptr)
+    {
+      (*outptr) = reverse(*inptr);
+      inptr++;
+      outptr++;
+    }
+    // Measuring the elapsed time
+    double end = omp_get_wtime();
+    // Time calculation (in seconds)
+    printf("Time: %f seconds\n", end-start);
+
+    free(ints);
+    free(ints2);
+
+    return 0;
+}
+</code></pre>
+
+<p><strong>reverse_lookup.c</strong></p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;omp.h&gt;
+
+static const unsigned char BitReverseTable256[] = 
+{
+  0x00, 0x80, 0x40, 0xC0, 0x20, 0xA0, 0x60, 0xE0, 0x10, 0x90, 0x50, 0xD0, 0x30, 0xB0, 0x70, 0xF0, 
+  0x08, 0x88, 0x48, 0xC8, 0x28, 0xA8, 0x68, 0xE8, 0x18, 0x98, 0x58, 0xD8, 0x38, 0xB8, 0x78, 0xF8, 
+  0x04, 0x84, 0x44, 0xC4, 0x24, 0xA4, 0x64, 0xE4, 0x14, 0x94, 0x54, 0xD4, 0x34, 0xB4, 0x74, 0xF4, 
+  0x0C, 0x8C, 0x4C, 0xCC, 0x2C, 0xAC, 0x6C, 0xEC, 0x1C, 0x9C, 0x5C, 0xDC, 0x3C, 0xBC, 0x7C, 0xFC, 
+  0x02, 0x82, 0x42, 0xC2, 0x22, 0xA2, 0x62, 0xE2, 0x12, 0x92, 0x52, 0xD2, 0x32, 0xB2, 0x72, 0xF2, 
+  0x0A, 0x8A, 0x4A, 0xCA, 0x2A, 0xAA, 0x6A, 0xEA, 0x1A, 0x9A, 0x5A, 0xDA, 0x3A, 0xBA, 0x7A, 0xFA,
+  0x06, 0x86, 0x46, 0xC6, 0x26, 0xA6, 0x66, 0xE6, 0x16, 0x96, 0x56, 0xD6, 0x36, 0xB6, 0x76, 0xF6, 
+  0x0E, 0x8E, 0x4E, 0xCE, 0x2E, 0xAE, 0x6E, 0xEE, 0x1E, 0x9E, 0x5E, 0xDE, 0x3E, 0xBE, 0x7E, 0xFE,
+  0x01, 0x81, 0x41, 0xC1, 0x21, 0xA1, 0x61, 0xE1, 0x11, 0x91, 0x51, 0xD1, 0x31, 0xB1, 0x71, 0xF1,
+  0x09, 0x89, 0x49, 0xC9, 0x29, 0xA9, 0x69, 0xE9, 0x19, 0x99, 0x59, 0xD9, 0x39, 0xB9, 0x79, 0xF9, 
+  0x05, 0x85, 0x45, 0xC5, 0x25, 0xA5, 0x65, 0xE5, 0x15, 0x95, 0x55, 0xD5, 0x35, 0xB5, 0x75, 0xF5,
+  0x0D, 0x8D, 0x4D, 0xCD, 0x2D, 0xAD, 0x6D, 0xED, 0x1D, 0x9D, 0x5D, 0xDD, 0x3D, 0xBD, 0x7D, 0xFD,
+  0x03, 0x83, 0x43, 0xC3, 0x23, 0xA3, 0x63, 0xE3, 0x13, 0x93, 0x53, 0xD3, 0x33, 0xB3, 0x73, 0xF3, 
+  0x0B, 0x8B, 0x4B, 0xCB, 0x2B, 0xAB, 0x6B, 0xEB, 0x1B, 0x9B, 0x5B, 0xDB, 0x3B, 0xBB, 0x7B, 0xFB,
+  0x07, 0x87, 0x47, 0xC7, 0x27, 0xA7, 0x67, 0xE7, 0x17, 0x97, 0x57, 0xD7, 0x37, 0xB7, 0x77, 0xF7, 
+  0x0F, 0x8F, 0x4F, 0xCF, 0x2F, 0xAF, 0x6F, 0xEF, 0x1F, 0x9F, 0x5F, 0xDF, 0x3F, 0xBF, 0x7F, 0xFF
+};
+
+int main()
+{
+    unsigned int *ints = malloc(100000000*sizeof(unsigned int));
+    unsigned int *ints2 = malloc(100000000*sizeof(unsigned int));
+    for(unsigned int i = 0; i &lt; 100000000; i++)
+      ints[i] = rand();
+
+    unsigned int *inptr = ints;
+    unsigned int *outptr = ints2;
+    unsigned int *endptr = ints + 100000000;
+    // Starting the time measurement
+    double start = omp_get_wtime();
+    // Computations to be measured
+    while(inptr != endptr)
+    {
+    unsigned int in = *inptr;  
+
+    // Option 1:
+    //*outptr = (BitReverseTable256[in &amp; 0xff] &lt;&lt; 24) | 
+    //    (BitReverseTable256[(in &gt;&gt; 8) &amp; 0xff] &lt;&lt; 16) | 
+    //    (BitReverseTable256[(in &gt;&gt; 16) &amp; 0xff] &lt;&lt; 8) |
+    //    (BitReverseTable256[(in &gt;&gt; 24) &amp; 0xff]);
+
+    // Option 2:
+    unsigned char * p = (unsigned char *) &amp;(*inptr);
+    unsigned char * q = (unsigned char *) &amp;(*outptr);
+    q[3] = BitReverseTable256[p[0]]; 
+    q[2] = BitReverseTable256[p[1]]; 
+    q[1] = BitReverseTable256[p[2]]; 
+    q[0] = BitReverseTable256[p[3]];
+
+      inptr++;
+      outptr++;
+    }
+    // Measuring the elapsed time
+    double end = omp_get_wtime();
+    // Time calculation (in seconds)
+    printf("Time: %f seconds\n", end-start);
+
+    free(ints);
+    free(ints2);
+
+    return 0;
+}
+</code></pre>
+
+<p>I tried both approaches at several different optimizations, ran 3 trials at each level, and each trial reversed 100 million random <code>unsigned ints</code>.  For the lookup table option, I tried both schemes (options 1 and 2) given on the bitwise hacks page.  Results are shown below.</p>
+
+<p><strong>Bitwise AND</strong></p>
+
+<pre><code>mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -o reverse reverse.c
+mrj10@mjlap:~/code$ ./reverse
+Time: 2.000593 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 1.938893 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 1.936365 seconds
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O2 -o reverse reverse.c
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.942709 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.991104 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.947203 seconds
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O3 -o reverse reverse.c
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.922639 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.892372 seconds
+mrj10@mjlap:~/code$ ./reverse
+Time: 0.891688 seconds
+</code></pre>
+
+<p><strong>Lookup Table (option 1)</strong></p>
+
+<pre><code>mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.201127 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.196129 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.235972 seconds              
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O2 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.633042 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.655880 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.633390 seconds              
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O3 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.652322 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.631739 seconds              
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 0.652431 seconds  
+</code></pre>
+
+<p><strong>Lookup Table (option 2)</strong></p>
+
+<pre><code>mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.671537 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.688173 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.664662 seconds
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O2 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.049851 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.048403 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.085086 seconds
+mrj10@mjlap:~/code$ gcc -fopenmp -std=c99 -O3 -o reverse_lookup reverse_lookup.c
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.082223 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.053431 seconds
+mrj10@mjlap:~/code$ ./reverse_lookup
+Time: 1.081224 seconds
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><strong>Use the lookup table, with option 1</strong> (byte addressing is unsurprisingly slow) if you're concerned about performance.  If you need to squeeze every last byte of memory out of your system (and you might, if you care about the performance of bit reversal), the optimized versions of the bitwise-AND approach aren't too shabby either.</p>
+
+<h2 id="caveat">Caveat</h2>
+
+<p>Yes, I know the benchmark code is a complete hack.  Suggestions on how to improve it are more than welcome.  Things I know about:</p>
+
+<ul>
+<li>I don't have access to ICC.  This may be faster (please respond in a comment if you can test this out).</li>
+<li>A 64K lookup table may do well on some modern microarchitectures with large L1D.</li>
+<li>-mtune=native didn't work for -O2/-O3 (<code>ld</code> blew up with some crazy symbol redefinition error), so I don't believe the generated code is tuned for my microarchitecture.</li>
+<li>There may be a way to do this slightly faster with SSE.  I have no idea how, but with fast replication, packed bitwise AND, and swizzling instructions, there's got to be something there.</li>
+<li>I know only enough x86 assembly to be dangerous; here's the code GCC generated on -O3 for option 1, so somebody more knowledgable than myself can check it out:</li>
+</ul>
+
+<p><strong>32-bit</strong></p>
+
+<pre><code>.L3:
+movl    (%r12,%rsi), %ecx
+movzbl  %cl, %eax
+movzbl  BitReverseTable256(%rax), %edx
+movl    %ecx, %eax
+shrl    $24, %eax
+mov     %eax, %eax
+movzbl  BitReverseTable256(%rax), %eax
+sall    $24, %edx
+orl     %eax, %edx
+movzbl  %ch, %eax
+shrl    $16, %ecx
+movzbl  BitReverseTable256(%rax), %eax
+movzbl  %cl, %ecx
+sall    $16, %eax
+orl     %eax, %edx
+movzbl  BitReverseTable256(%rcx), %eax
+sall    $8, %eax
+orl     %eax, %edx
+movl    %edx, (%r13,%rsi)
+addq    $4, %rsi
+cmpq    $400000000, %rsi
+jne     .L3
+</code></pre>
+
+<p>EDIT: I also tried using <code>uint64_t</code> types on my machine to see if there was any performance boost.  Performance was about 10% faster than 32-bit, and was nearly identical whether you were just using 64-bit types to reverse bits on two 32-bit <code>int</code> types at a time, or whether you were actually reversing bits in half as many 64-bit values.  The assembly code is shown below (for the former case, reversing bits for two 32-bit <code>int</code> types at a time):</p>
+
+<pre><code>.L3:
+movq    (%r12,%rsi), %rdx
+movq    %rdx, %rax
+shrq    $24, %rax
+andl    $255, %eax
+movzbl  BitReverseTable256(%rax), %ecx
+movzbq  %dl,%rax
+movzbl  BitReverseTable256(%rax), %eax
+salq    $24, %rax
+orq     %rax, %rcx
+movq    %rdx, %rax
+shrq    $56, %rax
+movzbl  BitReverseTable256(%rax), %eax
+salq    $32, %rax
+orq     %rax, %rcx
+movzbl  %dh, %eax
+shrq    $16, %rdx
+movzbl  BitReverseTable256(%rax), %eax
+salq    $16, %rax
+orq     %rax, %rcx
+movzbq  %dl,%rax
+shrq    $16, %rdx
+movzbl  BitReverseTable256(%rax), %eax
+salq    $8, %rax
+orq     %rax, %rcx
+movzbq  %dl,%rax
+shrq    $8, %rdx
+movzbl  BitReverseTable256(%rax), %eax
+salq    $56, %rax
+orq     %rax, %rcx
+movzbq  %dl,%rax
+shrq    $8, %rdx
+movzbl  BitReverseTable256(%rax), %eax
+andl    $255, %edx
+salq    $48, %rax
+orq     %rax, %rcx
+movzbl  BitReverseTable256(%rdx), %eax
+salq    $40, %rax
+orq     %rax, %rcx
+movq    %rcx, (%r13,%rsi)
+addq    $8, %rsi
+cmpq    $400000000, %rsi
+jne     .L3
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/18528/matt-j" target="_blank"><span itemprop="name">Matt J</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/746171/efficient-algorithm-for-bit-reversal--from-msb--lsb-to-lsb--msb--in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">489</div>
+                                            <div itemprop="dateCreated">10/1/2018 1:00:41 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>This thread caught my attention since it deals with a simple problem that requires a lot of work (CPU cycles) even for a modern CPU. And one day I also stood there with the same ¤#%"#" problem. I had to flip millions of bytes. However I know all my target systems are modern Intel-based so let's start optimizing to the extreme!!!</p>
+
+<p>So I used Matt J's lookup code as the base. the system I'm benchmarking on is a i7 haswell 4700eq.</p>
+
+<p>Matt J's lookup bitflipping 400 000 000 bytes: Around 0.272 seconds.</p>
+
+<p>I then went ahead and tried to see if Intel's ISPC compiler could vectorise the arithmetics in the reverse.c.</p>
+
+<p>I'm not going to bore you with my findings here since I tried a lot to help the compiler find stuff, anyhow I ended up with performance of around 0.15 seconds to bitflip 400 000 000 bytes. It's a great reduction but for my application that's still way way too slow..</p>
+
+<p>So people let me present the fastest Intel based bitflipper in the world. Clocked at:</p>
+
+<p>Time to bitflip 400000000 bytes: 0.050082 seconds !!!!! </p>
+
+<pre><code>// Bitflip using AVX2 - The fastest Intel based bitflip in the world!!
+// Made by Anders Cedronius 2014 (anders.cedronius (you know what) gmail.com)
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;omp.h&gt;
+
+using namespace std;
+
+#define DISPLAY_HEIGHT  4
+#define DISPLAY_WIDTH   32
+#define NUM_DATA_BYTES  400000000
+
+// Constants (first we got the mask, then the high order nibble look up table and last we got the low order nibble lookup table)
+__attribute__ ((aligned(32))) static unsigned char k1[32*3]={
+        0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,0x0f,
+        0x00,0x08,0x04,0x0c,0x02,0x0a,0x06,0x0e,0x01,0x09,0x05,0x0d,0x03,0x0b,0x07,0x0f,0x00,0x08,0x04,0x0c,0x02,0x0a,0x06,0x0e,0x01,0x09,0x05,0x0d,0x03,0x0b,0x07,0x0f,
+        0x00,0x80,0x40,0xc0,0x20,0xa0,0x60,0xe0,0x10,0x90,0x50,0xd0,0x30,0xb0,0x70,0xf0,0x00,0x80,0x40,0xc0,0x20,0xa0,0x60,0xe0,0x10,0x90,0x50,0xd0,0x30,0xb0,0x70,0xf0
+};
+
+// The data to be bitflipped (+32 to avoid the quantization out of memory problem)
+__attribute__ ((aligned(32))) static unsigned char data[NUM_DATA_BYTES+32]={};
+
+extern "C" {
+void bitflipbyte(unsigned char[],unsigned int,unsigned char[]);
+}
+
+int main()
+{
+
+    for(unsigned int i = 0; i &lt; NUM_DATA_BYTES; i++)
+    {
+        data[i] = rand();
+    }
+
+    printf ("\r\nData in(start):\r\n");
+    for (unsigned int j = 0; j &lt; 4; j++)
+    {
+        for (unsigned int i = 0; i &lt; DISPLAY_WIDTH; i++)
+        {
+            printf ("0x%02x,",data[i+(j*DISPLAY_WIDTH)]);
+        }
+        printf ("\r\n");
+    }
+
+    printf ("\r\nNumber of 32-byte chunks to convert: %d\r\n",(unsigned int)ceil(NUM_DATA_BYTES/32.0));
+
+    double start_time = omp_get_wtime();
+    bitflipbyte(data,(unsigned int)ceil(NUM_DATA_BYTES/32.0),k1);
+    double end_time = omp_get_wtime();
+
+    printf ("\r\nData out:\r\n");
+    for (unsigned int j = 0; j &lt; 4; j++)
+    {
+        for (unsigned int i = 0; i &lt; DISPLAY_WIDTH; i++)
+        {
+            printf ("0x%02x,",data[i+(j*DISPLAY_WIDTH)]);
+        }
+        printf ("\r\n");
+    }
+    printf("\r\n\r\nTime to bitflip %d bytes: %f seconds\r\n\r\n",NUM_DATA_BYTES, end_time-start_time);
+
+    // return with no errors
+    return 0;
+}
+</code></pre>
+
+<p>The printf's are for debugging..</p>
+
+<p>Here is the workhorse:</p>
+
+<pre><code>bits 64
+global bitflipbyte
+
+bitflipbyte:    
+        vmovdqa     ymm2, [rdx]
+        add         rdx, 20h
+        vmovdqa     ymm3, [rdx]
+        add         rdx, 20h
+        vmovdqa     ymm4, [rdx]
+bitflipp_loop:
+        vmovdqa     ymm0, [rdi] 
+        vpand       ymm1, ymm2, ymm0 
+        vpandn      ymm0, ymm2, ymm0 
+        vpsrld      ymm0, ymm0, 4h 
+        vpshufb     ymm1, ymm4, ymm1 
+        vpshufb     ymm0, ymm3, ymm0         
+        vpor        ymm0, ymm0, ymm1
+        vmovdqa     [rdi], ymm0
+        add     rdi, 20h
+        dec     rsi
+        jnz     bitflipp_loop
+        ret
+</code></pre>
+
+<p>The code takes 32 bytes then masks out the nibbles. The high nibble gets shifted right by 4. Then I use vpshufb and ymm4 / ymm3 as lookup tables. I could use a single lookup table but then I would have to shift left before ORing the nibbles together again.</p>
+
+<p>There are even faster ways of flipping the bits. But I'm bound to single thread and CPU so this was the fastest I could achieve. Can you make a faster version?</p>
+
+<p>Please make no comments about using the Intel C/C++ Compiler Intrinsic Equivalent commands...</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/2353816/anders-cedronius" target="_blank">Anders Cedronius</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/746171" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/746171/efficient-algorithm-for-bit-reversal--from-msb--lsb-to-lsb--msb--in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:45:54 GMT -->
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/18152913/aes--aes-cbc-128--aes-cbc-192--aes-cbc-256--encryption-decryption-with-openssl-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="[SOLVED] AES (aes-cbc-128, aes-cbc-192, aes-cbc-256) encryption/decryption with openssl C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="[SOLVED] AES (aes-cbc-128, aes-cbc-192, aes-cbc-256) encryption/decryption with openssl C | C Language Knowledge Base">
+        <title>[SOLVED] AES (aes-cbc-128, aes-cbc-192, aes-cbc-256) encryption/decryption with openssl C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="aes-aes-cbc-128-aes-cbc-192-aes-cbc-256-encryption-decryption-with-openssl-c">AES (aes-cbc-128, aes-cbc-192, aes-cbc-256) encryption/decryption with openssl C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/aes.html">aes</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/openssl.html">openssl</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I just want to test AES from openSSL with this 3 modes: with 128,192 and 256 key length but my decrypted text is different from my input and I dont know why. Also, when I pass a huge inputs length (lets say 1024 bytes) my program shows <code>core dumped</code>... My input is always the same but it doesnt matter, at least for now. Heres the code:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/aes.h&gt;
+
+int main(int argc, char **argv)
+{
+    int i;
+    int keylength;
+    printf("Give a key length [only 128 or 192 or 256!]:\n");
+    scanf("%d", &amp;keylength);
+
+    /* generate a key with a given length */
+    unsigned char aes_key[keylength];
+    memset(aes_key, 0, sizeof(aes_key));
+    if (!RAND_bytes(aes_key, keylength))
+    {
+        exit(-1);
+    }
+    aes_key[keylength-1] = '\0';
+
+    int inputslength;
+    printf("Give an input's length:\n");
+    scanf("%d", &amp;inputslength);
+
+    /* generate input with a given length */
+    unsigned char aes_input[inputslength+1];
+    memset(aes_input, '0', sizeof(aes_input));
+    aes_input[inputslength] = '\0';
+
+    /*printf("original:\t");
+    for(i=0; i&lt;inputslength; i++)
+    {
+        printf("%c ", aes_input[i]);
+    }
+    printf("\n");*/
+
+    /* init vector */
+    unsigned char iv[AES_BLOCK_SIZE];
+    if (!RAND_bytes(iv, AES_BLOCK_SIZE))
+    {
+        exit(-1);
+    }
+
+    //printf("AES_BLOCK_SIZE = %d\n", AES_BLOCK_SIZE); // aes block size is 16 bytes = 128 bits
+    AES_KEY enc_key, dec_key;
+    unsigned char enc_out[AES_BLOCK_SIZE];
+    unsigned char dec_out[AES_BLOCK_SIZE];
+
+    // so i can do with this aes-cbc-128 aes-cbc-192 aes-cbc-256
+    AES_set_encrypt_key(aes_key, keylength, &amp;enc_key);
+    AES_cbc_encrypt(aes_input, enc_out, inputslength, &amp;enc_key, iv, AES_ENCRYPT);
+
+    AES_set_decrypt_key(aes_key, keylength, &amp;dec_key);
+    AES_decrypt(enc_out, dec_out, &amp;dec_key);
+
+    printf("original:\t");
+    for(i=0;*(aes_input+i)!=0x00;i++)
+        printf("%X ",*(aes_input+i));
+    printf("\nencrypted:\t");
+
+    for(i=0;*(enc_out+i)!=0x00;i++)
+        printf("%X ",*(enc_out+i));
+
+    printf("\ndecrypted:\t");
+    for(i=0;*(dec_out+i)!=0x00;i++)
+        printf("%X ",*(dec_out+i));
+    printf("\n");
+
+    /*printf("\n\noriginal:\t");
+    for(i=0; i&lt;inputslength; i++)
+    {
+        printf("%x ", dec_out[i]);
+    }
+    printf("\n");*/
+
+
+    return 0;
+}
+</code></pre>
+
+<p><strong>EDIT:</strong></p>
+
+<p>When I changed outputs sizes to <code>inputslength</code> instead of <code>AES_BLOCK_SIZE</code> I got results:</p>
+
+<pre><code>Give a key length [only 128 or 192 or 256!]:
+128
+Give an input's length:
+5
+original:       30 30 30 30 30 
+encrypted:      94 56 50 7E 19 B2 1C CE 20 23 4A E7 10 AF DB E3 30 30 30 30 30 
+decrypted:      E1 5F F4 3D E8 8D 91 19 CD 3E 22 1E AF 1C 8F 5A 94 56 50 7E 19 B2 1C CE 20 23 4A E7 10 AF DB E3 30 30 30 30 30
+</code></pre>
+
+<p>So is it possible that theres an issue with outpus sizes and the size of the iv? What sizes they should have (for AES-CBC-128, AES-CBC-192, AES-CBC-256)?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/2656473/ivy" target="_blank"><span itemprop="name">ivy</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">19</div>
+                                    <div itemprop="dateCreated">8/9/2013 7:58:04 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="accepted-answer">Accepted Answer</h3>
+                                    <div itemprop="text">
+                                        <p>Take a peek at this modified version of your code. Note the following:</p>
+
+<ol>
+<li>Added hex_print (minor)</li>
+<li>Added proper sizing of key buffer (medium).</li>
+<li>Added proper sizing of output encryption buffer (which must be a block-size multiple, and if original source buffer is an exact block-size multiple, you still need one full block of padding (see PKCS 5 padding for more info).</li>
+<li>Same IV used for both encrypt and decrypt.</li>
+<li>Finally, odd as it may seem <code>AES_cbc_encrypt()</code> is used for <em>both</em> encryption and decryption (see the last parameter in the call).</li>
+</ol>
+
+<p><strong>Source Code</strong></p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/aes.h&gt;
+#include &lt;openssl/rand.h&gt;
+
+// a simple hex-print routine. could be modified to print 16 bytes-per-line
+static void hex_print(const void* pv, size_t len)
+{
+    const unsigned char * p = (const unsigned char*)pv;
+    if (NULL == pv)
+        printf("NULL");
+    else
+    {
+        size_t i = 0;
+        for (; i&lt;len;++i)
+            printf("%02X ", *p++);
+    }
+    printf("\n");
+}
+
+// main entrypoint
+int main(int argc, char **argv)
+{
+    int keylength;
+    printf("Give a key length [only 128 or 192 or 256!]:\n");
+    scanf("%d", &amp;keylength);
+
+    /* generate a key with a given length */
+    unsigned char aes_key[keylength/8];
+    memset(aes_key, 0, keylength/8);
+    if (!RAND_bytes(aes_key, keylength/8))
+        exit(-1);
+
+    size_t inputslength = 0;
+    printf("Give an input's length:\n");
+    scanf("%lu", &amp;inputslength);
+
+    /* generate input with a given length */
+    unsigned char aes_input[inputslength];
+    memset(aes_input, 'X', inputslength);
+
+    /* init vector */
+    unsigned char iv_enc[AES_BLOCK_SIZE], iv_dec[AES_BLOCK_SIZE];
+    RAND_bytes(iv_enc, AES_BLOCK_SIZE);
+    memcpy(iv_dec, iv_enc, AES_BLOCK_SIZE);
+
+    // buffers for encryption and decryption
+    const size_t encslength = ((inputslength + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
+    unsigned char enc_out[encslength];
+    unsigned char dec_out[inputslength];
+    memset(enc_out, 0, sizeof(enc_out));
+    memset(dec_out, 0, sizeof(dec_out));
+
+    // so i can do with this aes-cbc-128 aes-cbc-192 aes-cbc-256
+    AES_KEY enc_key, dec_key;
+    AES_set_encrypt_key(aes_key, keylength, &amp;enc_key);
+    AES_cbc_encrypt(aes_input, enc_out, inputslength, &amp;enc_key, iv_enc, AES_ENCRYPT);
+
+    AES_set_decrypt_key(aes_key, keylength, &amp;dec_key);
+    AES_cbc_encrypt(enc_out, dec_out, encslength, &amp;dec_key, iv_dec, AES_DECRYPT);
+
+    printf("original:\t");
+    hex_print(aes_input, sizeof(aes_input));
+
+    printf("encrypt:\t");
+    hex_print(enc_out, sizeof(enc_out));
+
+    printf("decrypt:\t");
+    hex_print(dec_out, sizeof(dec_out));
+
+    return 0;
+}
+</code></pre>
+
+<p><strong>Test Output</strong></p>
+
+<pre><code>Give a key length [only 128 or 192 or 256!]:
+128
+Give an input's length:
+10
+original:   58 58 58 58 58 58 58 58 58 58 
+encrypt:    A9 66 C5 24 A4 02 AB 96 08 65 F7 22 A5 FB BE 26 
+decrypt:    58 58 58 58 58 58 58 58 58 58 
+</code></pre>
+
+<p><strong>Second Test Output</strong></p>
+
+<pre><code>Give a key length [only 128 or 192 or 256!]:
+128
+Give an input's length:
+10
+original:   58 58 58 58 58 58 58 58 58 58 
+encrypt:    C2 47 6D B1 A1 68 29 53 55 74 C5 CC 3F 27 0A 3F 
+decrypt:    58 58 58 58 58 58 58 58 58 58 
+</code></pre>
+
+<p>I sincerely hope this helps.</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/1322972/whozcraig" target="_blank"><span itemprop="name">WhozCraig</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/18152913/aes--aes-cbc-128--aes-cbc-192--aes-cbc-256--encryption-decryption-with-openssl-c#answer-0</div>
+                                            <div itemprop="upvoteCount">28</div>
+                                            <div itemprop="dateCreated">8/16/2013 11:35:10 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="answer-1" class="block-question second-answer" >
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div >
+                                        <p>@WhozCraig: thank you so much for help! It explained a lot to me! But theres just one more issue. I changed static arrays into dynamic ones. When I did it, some erros occured. But they occure only when I give a huge inputs size, take a look at valgrind output: <a href="http://pastie.org/private/bzofrrtgrlzr0doyb3g" rel="nofollow">http://pastie.org/private/bzofrrtgrlzr0doyb3g</a>. Error occurs only when I pass a huge input, when I pass a small size (like in your example, 10) its ok. Everything else is working perfectly.</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/aes.h&gt;
+#include &lt;openssl/rand.h&gt;
+
+// a simple hex-print routine. could be modified to print 16 bytes-per-line
+static void hex_print(const void* pv, size_t len)
+{
+    const unsigned char * p = (const unsigned char*)pv;
+    if (NULL == pv)
+        printf("NULL");
+    else
+    {
+        size_t i = 0;
+        for (; i&lt;len;++i)
+            printf("%02X ", *p++);
+    }
+    printf("\n");
+}
+
+// main entrypoint
+int main(int argc, char **argv)
+{
+    size_t inputslength = 0;
+    printf("Give an input's length:\n");
+    scanf("%lu", &amp;inputslength);
+
+    int keylength;
+    printf("Give a key length [only 128 or 192 or 256!]:\n");
+    scanf("%d", &amp;keylength);
+
+
+    //  generate a key with a given length
+    unsigned char *aes_key = (unsigned char*)malloc(sizeof(unsigned char) * (keylength/8));
+    memset(aes_key, 0, keylength/8);
+    RAND_bytes(aes_key, keylength/8);
+
+    //  generate input with a given length
+    unsigned char *aes_input = (unsigned char*)malloc(sizeof(unsigned char) * (inputslength));
+    memset(aes_input, 'X', sizeof(aes_input));
+
+    // init vectors
+    unsigned char *iv_enc = (unsigned char*)malloc(sizeof(unsigned char) * (AES_BLOCK_SIZE));
+    unsigned char *iv_dec = (unsigned char*)malloc(sizeof(unsigned char) * (AES_BLOCK_SIZE));
+    // iv_dec == iv_enc
+    RAND_bytes(iv_enc, AES_BLOCK_SIZE);
+    memcpy(iv_dec, iv_enc, AES_BLOCK_SIZE);
+
+    // buffers for encryption and decryption
+    const size_t length = (((inputslength + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE);
+    unsigned char *enc_out = (unsigned char*)malloc(sizeof(unsigned char) * (length));
+    unsigned char *dec_out = (unsigned char*)malloc(sizeof(unsigned char) * (inputslength));
+
+    // so i can do with this aes-cbc-128 aes-cbc-192 aes-cbc-256
+    AES_KEY encKey, decKey;
+    AES_set_encrypt_key(aes_key, keylength, &amp;encKey);
+    AES_cbc_encrypt(aes_input, enc_out, inputslength, &amp;encKey, iv_enc, AES_ENCRYPT);
+
+    AES_set_decrypt_key(aes_key, keylength, &amp;decKey);
+    AES_cbc_encrypt(enc_out, dec_out, length, &amp;decKey, iv_dec, AES_DECRYPT);
+
+    printf("original:\t");
+    hex_print(aes_input, sizeof(aes_input));
+
+    printf("encrypt:\t");
+    hex_print(enc_out, sizeof(enc_out));
+
+    printf("decrypt:\t");
+    hex_print(dec_out, sizeof(dec_out));
+
+    free(aes_key);
+    aes_key = NULL;
+    free(aes_input);
+    aes_input = NULL;
+    free(iv_enc);
+    iv_enc = NULL;
+    free(iv_dec);
+    iv_dec = NULL;
+    free(enc_out);
+    enc_out = NULL;
+    free(dec_out);
+    dec_out = NULL;
+
+    return 0;
+}
+</code></pre>
+
+<p><strong>EDIT:</strong></p>
+
+<p>Ok, something was wrong with the prev code I posted, heres a new one, working perfectly, even for a huge inputs. Cheers once again for helping me!:)</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;openssl/aes.h&gt;
+#include &lt;openssl/rand.h&gt;
+
+// a simple hex-print routine. could be modified to print 16 bytes-per-line
+static void hex_print(const void* pv, size_t len)
+{
+    const unsigned char * p = (const unsigned char*)pv;
+    if (NULL == pv)
+        printf("NULL");
+    else
+    {
+        size_t i = 0;
+        for (; i&lt;len;++i)
+            printf("%02X ", *p++);
+    }
+    printf("\n");
+}
+
+// main entrypoint
+int main(int argc, char **argv)
+{
+    int keylength;
+    printf("Give a key length [only 128 or 192 or 256!]:\n");
+    scanf("%d", &amp;keylength);
+
+    /* generate a key with a given length */
+    unsigned char *aes_key = (unsigned char*)malloc(sizeof(unsigned char) * (keylength/8));
+    memset(aes_key, 0, keylength/8);
+    if (!RAND_bytes(aes_key, keylength/8))
+        exit(-1);
+
+    size_t inputslength = 0;
+    printf("Give an input's length:\n");
+    scanf("%lu", &amp;inputslength);
+
+    /* generate input with a given length */
+    unsigned char *aes_input = (unsigned char*)malloc(sizeof(unsigned char) *inputslength);
+    memset(aes_input, 'X', inputslength);
+
+    /* init vector */
+    unsigned char *iv_enc = (unsigned char*)malloc(sizeof(unsigned char) *AES_BLOCK_SIZE), *iv_dec = (unsigned char*)malloc(sizeof(unsigned char) *AES_BLOCK_SIZE);
+    RAND_bytes(iv_enc, AES_BLOCK_SIZE);
+    memcpy(iv_dec, iv_enc, AES_BLOCK_SIZE);
+
+    // buffers for encryption and decryption
+    const size_t encslength = ((inputslength + AES_BLOCK_SIZE) / AES_BLOCK_SIZE) * AES_BLOCK_SIZE;
+    unsigned char *enc_out = (unsigned char*)malloc(sizeof(unsigned char) *encslength);
+    unsigned char *dec_out = (unsigned char*)malloc(sizeof(unsigned char) *inputslength);
+    memset(enc_out, 0, sizeof(enc_out));
+    memset(dec_out, 0, sizeof(dec_out));
+
+    // so i can do with this aes-cbc-128 aes-cbc-192 aes-cbc-256
+    AES_KEY enc_key, dec_key;
+    AES_set_encrypt_key(aes_key, keylength, &amp;enc_key);
+    AES_cbc_encrypt(aes_input, enc_out, inputslength, &amp;enc_key, iv_enc, AES_ENCRYPT);
+
+    AES_set_decrypt_key(aes_key, keylength, &amp;dec_key);
+    AES_cbc_encrypt(enc_out, dec_out, encslength, &amp;dec_key, iv_dec, AES_DECRYPT);
+
+    printf("original:\t");
+    hex_print(aes_input, inputslength);
+
+    printf("encrypt:\t");
+    hex_print(enc_out, encslength);
+
+    printf("decrypt:\t");
+    hex_print(dec_out, inputslength);
+
+    // free memory here
+
+    return 0;
+}
+</code></pre>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name"><a href="https://stackoverflow.com/users/2656473/ivy" target="_blank">ivy</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/18152913" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/18152913/aes--aes-cbc-128--aes-cbc-192--aes-cbc-256--encryption-decryption-with-openssl-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:15:07 GMT -->
+</html>

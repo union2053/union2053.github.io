@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-calculate-averages-with-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Calculate Averages With Arrays</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Calculate Averages With Arrays'>C Calculate Averages With Arrays</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Calculate Averages With Arrays</h1>
+<a class ='btn btn-outline-dark' href=c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-reusing-the-numbers-stored-in-array.html>Next</a><p>You can use an array to store all the scores you want to average. 
+
+</p><p>This means that all the values will be saved and you'll be able to reuse them. 
+</p><div class='myCodeDiv'><button id='RLJNK' class='myCopyButton' data-clipboard-target='#LKPVL'>Copy</button><pre  id='LKPVL' style='font-size:18px;' class='code'><span class='c'>// Averaging ten grades - storing the values the easy way </span>
+#define _CRT_SECURE_NO_WARNINGS 
+<span class='r'>#</span><span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> grades[10];                          <span class='c'>// Array storing 10 values </span>
+  <span class='r'>unsigned</span> <span class='r'>int</span> count = 10;                 <span class='c'>// Number of values to be read </span>
+  <span class='r'>long</span> sum = 0L;                           <span class='c'>// Sum of the numbers </span>
+  <span class='r'>float</span> average = 0.0f;                    <span class='c'>// Average of the numbers </span>
+
+  printf(<span class='q'>"\nEnter the 10 grades:\n"</span>);      <span class='c'>// Prompt for the input </span>
+
+  <span class='c'>// Read the ten numbers to be averaged </span>
+  <span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; count ; ++i) 
+  { 
+    printf(<span class='q'>"%2u&gt; "</span>,i + 1); 
+    scanf(<span class='q'>"%d"</span>, &amp;grades[i]);               <span class='c'>// Read a grade </span>
+    sum += grades[i];                      <span class='c'>// Add it to sum </span>
+  } 
+
+  average = (<span class='r'>float</span>)sum/count;              <span class='c'>// Calculate the average </span>
+  printf(<span class='q'>"\nAverage of the ten grades entered is: %.2f\n"</span>, average); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RLJNK');clipboard.on('success', function(e) {$('#RLJNK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RLJNK').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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AQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIAIFwAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAIQLACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AAMIFABAuAADCBQBAuAAAwgUAQLgAAAgXAEC4AAAIFwAA4QIACBcAAOECACBcAADhAgAgXAAAhAsAIFwAAIQLAIBwAQCECwCAcAEAhAsAgHABABAuAIBwAQAQLgAAwgUAEC4AAMIFAEC4AADCBQBAuAAACBcAQLgAAAgXAADhAgAIFwAA4QIAIFwAAOECACBcAACECwAgXAAAhAsAgHABAIQLAIBwAQAQLgCAcAEAEC4AgHABABAuAADCBQAQLgAAwgUAQLgAAMIFAEC4AAAIFwBAuAAACBcAAOECAAgXAADhAgAgXAAA4QIAIFwAAEr+DUJfEgwQJJFBAAAAAElFTkSuQmCC'><h3>Note
+
+</h3><p>You declare an array of ten integers and then the other variables that you'll need for calculation: 
+</p><div class='myCodeDiv'><button id='LYITZ' class='myCopyButton' data-clipboard-target='#YFNWN'>Copy</button><pre  id='YFNWN' style='font-size:18px;' class='code'><span class='r'>int</span> grades[10];                          <span class='c'>// Array storing 10 values </span>
+<span class='r'>unsigned</span> <span class='r'>int</span> count = 10;                 <span class='c'>// Number of values to be read </span>
+<span class='r'>long</span> sum = 0L;                           <span class='c'>// Sum of the numbers </span>
+<span class='r'>float</span> average = 0.0f;                    <span class='c'>// Average of the numbers</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#LYITZ');clipboard.on('success', function(e) {$('#LYITZ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#LYITZ').text('error');});</script></div><p>The count variable is type unsigned int because it must be nonnegative. 
+
+</p><p>You have a loop to read the values and accumulate the sum: 
+</p><div class='myCodeDiv'><button id='ZVTVX' class='myCopyButton' data-clipboard-target='#QEOOH'>Copy</button><pre  id='QEOOH' style='font-size:18px;' class='code'><span class='r'>for</span>(<span class='r'>unsigned</span> <span class='r'>int</span> i = 0 ; i &lt; count ; ++i) 
+{ 
+    printf(<span class='q'>"%2u&gt; "</span>,i + 1); 
+    scanf(<span class='q'>"%d"</span>, &amp;grades[i]);               <span class='c'>// Read a grade </span>
+    sum += grades[i];                      <span class='c'>// Add it to sum </span>
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZVTVX');clipboard.on('success', function(e) {$('#ZVTVX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZVTVX').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-reusing-the-numbers-stored-in-array.html>Next</a><h2>Related</h2><UL><LI><a href='c-initializing-a-two-dimensional-array.html'>C Initializing a Two-Dimensional Array</a></LI><LI><a href='c-multi-dimensional-array-sum.html'>C Multi dimensional array sum</a></LI><LI><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C game tic tac toe, noughts and crosses via multidimensional array</a></LI><LI><a href='c-reusing-the-numbers-stored-in-array.html'>C Reusing the numbers stored in array</a></LI><LI><a href='c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html'>C Use Address of Operator to get address in memory of its operand</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-calculate-averages-with-arrays.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

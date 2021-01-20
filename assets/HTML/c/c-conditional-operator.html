@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-conditional-operator.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Conditional Operator: ?:</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Conditional Operator: ?:'>C Conditional Operator: ?:</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Operator
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-introduction.html'>C Operator Introduction
+   
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-assignment-operator.html'>C Assignment =
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-compound-assignment-operators.html'>C Compound Assignment
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-addition-operator.html'>C Addition +
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-subtraction-operator.html'>C Subtraction -
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sign-operators.html'>C Sign - +
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multiplication-operator.html'>C Multiplication *
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-division-operator.html'>C Division /
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-precedence.html'>C Operator Precedence
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sizeof-operator-and-the-size-t-type.html'>C sizeof Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modulus-operator.html'>C Modulus %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-increment-and-decrement-operators-and.html'>C Increment Decrement ++ --
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-relational-operators.html'>C Relational Operators
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-truth-value.html'>C Truth value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-misuse-of-will-cause-infinite-loop.html'>C  misuse =
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-precedence-of-relational-operators.html'>C Relational Operators Precedence 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-comma-operator.html'>C Comma ,
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Logic
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-logical-operators.html'>C Logical operators
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-and-operator.html'>C Logic AND &amp;&amp;
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-or-operator.html'>C Logic OR || 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-not-operator.html'>C Logic NOT ! 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-logic-operator-example-to-check-uppercase-letter.html'>C Logic check letter case
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-logical-operators-to-count-characters-words-lines.html'>C Logical count char word line
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Expression
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-expression-value.html'>C Expression Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-expressions-and-statements.html'>C Expressions and Statements
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-type-conversions.html'>C Type Conversions
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-data-type-cast-operator.html'>C Cast Operator
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Conditional Operator ?:
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-using-conditional-operator-to-calculate-multiple-discount-levels.html'>C Conditional Operator Demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-conditional-operator-to-format-message.html'>C Conditional Operator Demo 2
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-review-question-2.html'>C Review Question 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-exercises-1.html'>C Exercises 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-question-exponential-growth.html'>C Exponential Growth
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-operator-convert-fahrenheit-to-celsius.html'>C Fahrenheit to Celsius
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Conditional Operator: ?:</h1>
+<a class ='btn btn-outline-dark' href=c-data-type-cast-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-using-conditional-operator-to-calculate-multiple-discount-levels.html>Next</a><p>C offers a shorthand way to express one form of the if else statement. 
+
+</p><p>It is called a conditional expression and uses the ?: conditional operator. 
+
+</p><p>The following is the general form of the conditional expression:
+</p><div class='myCodeDiv'><button id='USYRK' class='myCopyButton' data-clipboard-target='#AKFUU'>Copy</button><pre  id='AKFUU' style='font-size:18px;' class='code'>expression1 ? expression2 : expression3
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#USYRK');clipboard.on('success', function(e) {$('#USYRK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#USYRK').text('error');});</script></div><p>If expression1 is true (non zero), the whole conditional expression has the 
+same value as expression2. 
+
+</p><p>If expression1 is false (zero), the whole conditional expression has the same
+value as expression3.
+
+</p><h3>Ternary
+
+</h3><p>This operator that has three operands. 
+
+</p><p>The operators with three operands are called ternary operators, and 
+the conditional operator is C's only example in that category.
+
+</p><p>Here is an example that yields the absolute value of a number:
+</p><div class='myCodeDiv'><button id='SHYZW' class='myCopyButton' data-clipboard-target='#SLRCS'>Copy</button><pre  id='SLRCS' style='font-size:18px;' class='code'>x = (y &lt; 0) ? -y : y;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#SHYZW');clipboard.on('success', function(e) {$('#SHYZW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#SHYZW').text('error');});</script></div><p>Everything between the = and the semicolon is the conditional expression. 
+
+</p><p>The meaning of the statement is "If y is less than zero, x = -y; otherwise, x = y." 
+
+</p><p>In if else terms, the meaning can be expressed as follows:
+</p><div class='myCodeDiv'><button id='UFCWB' class='myCopyButton' data-clipboard-target='#YXINM'>Copy</button><pre  id='YXINM' style='font-size:18px;' class='code'><span class='r'>if</span> (y &lt; 0)
+     x = -y;
+<span class='r'>else</span>
+     x = y;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#UFCWB');clipboard.on('success', function(e) {$('#UFCWB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#UFCWB').text('error');});</script></div><p>You can use the conditional expression when you have a variable to which you want to assign
+one of two possible values. 
+
+</p><p>A typical example is setting a variable equal to the maximum of two values:
+</p><div class='myCodeDiv'><button id='ENOHJ' class='myCopyButton' data-clipboard-target='#ZJPYY'>Copy</button><pre  id='ZJPYY' style='font-size:18px;' class='code'>max = (a &gt; b) ? a : b;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ENOHJ');clipboard.on('success', function(e) {$('#ENOHJ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ENOHJ').text('error');});</script></div><p>This sets max to a if it is greater than b, and to b otherwise.
+
+</p><h3>Example
+
+</h3><p>The following program calculates how many cans of paint are needed to paint 
+a given number of square feet. 
+
+</p><p>The basic algorithm is: Divide the square footage by the number of square feet 
+covered per can. 
+
+</p><p>Suppose the answer is 1.7 cans. You would have to buy two cans. 
+
+</p><p>Therefore, the program should round up to the next integer when a fractional paint can
+is involved. 
+
+</p><p>The conditional operator is used to handle that situation, and it's also used to
+print cans or can, as appropriate.
+
+</p><div class='myCodeDiv'><button id='WEFKH' class='myCopyButton' data-clipboard-target='#WERTE'>Copy</button><pre  id='WERTE' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define COVERAGE 350       <span class='c'>// square feet per paint can</span>
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+
+    <span class='r'>int</span> sq_feet;
+    <span class='r'>int</span> cans;
+
+    printf(<span class='q'>"Enter number of square feet to be painted:\n"</span>);
+    <span class='r'>while</span> (scanf(<span class='q'>"%d"</span>, &amp;sq_feet) == 1)
+    {
+        cans = sq_feet / COVERAGE;
+        cans += ((sq_feet % COVERAGE == 0)) ? 0 : 1;
+        printf(<span class='q'>"You need %d %s of paint.\n"</span>, cans,
+                cans == 1 ? <span class='q'>"can"</span> : <span class='q'>"cans"</span>);
+        printf(<span class='q'>"Enter next value (q to quit):\n"</span>);
+    }
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WEFKH');clipboard.on('success', function(e) {$('#WEFKH').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WEFKH').text('error');});</script></div><p>Here's a sample run:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>Because the program is using type int, the division is truncated; 
+that is, 351/350 becomes 1.
+
+</p><p>Therefore, cans is rounded down to the integer part. 
+
+</p><p>If sq_feet % COVERAGE is 0, COVERAGE divides evenly into sq_feet and cans is 
+left unchanged. 
+
+</p><p>Otherwise, there is a remainder, so 1 is added. 
+
+</p><p>This is accomplished with the following statement:
+</p><div class='myCodeDiv'><button id='WSPNB' class='myCopyButton' data-clipboard-target='#YJXCL'>Copy</button><pre  id='YJXCL' style='font-size:18px;' class='code'>cans += ((sq_feet % COVERAGE == 0)) ? 0 : 1;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#WSPNB');clipboard.on('success', function(e) {$('#WSPNB').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#WSPNB').text('error');});</script></div><p>It adds the value of the expression to the right of += to cans. 
+
+</p><p>The expression to the right is a conditional expression having the value 0 or 1, 
+depending on whether COVERAGE divides evenly into sq_feet.
+
+</p><p>The final argument to the <i style='color:blue'>printf</i>() function is also a conditional expression:
+</p><div class='myCodeDiv'><button id='KZCMM' class='myCopyButton' data-clipboard-target='#SGSTI'>Copy</button><pre  id='SGSTI' style='font-size:18px;' class='code'>cans == 1 ? <span class='q'>"can"</span> : <span class='q'>"cans"</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KZCMM');clipboard.on('success', function(e) {$('#KZCMM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KZCMM').text('error');});</script></div><p>If the value of cans is 1, the string "can" is used. Otherwise, "cans" is used. This demonstrates
+that the conditional operator can use strings for its second and third operands.
+</p><a class ='btn btn-outline-dark' href=c-data-type-cast-operator.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-using-conditional-operator-to-calculate-multiple-discount-levels.html>Next</a><h2>Related</h2><UL><LI><a href='c-expressions-and-statements.html'>C Expressions and Statements</a></LI><LI><a href='c-type-conversions.html'>C Type Conversions</a></LI><LI><a href='c-data-type-cast-operator.html'>C Data Type Cast Operator</a></LI><LI><a href='c-using-conditional-operator-to-calculate-multiple-discount-levels.html'>C Using Conditional Operator to calculate Multiple discount levels</a></LI><LI><a href='c-use-conditional-operator-to-format-message.html'>C Use conditional operator to format message</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-conditional-operator.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

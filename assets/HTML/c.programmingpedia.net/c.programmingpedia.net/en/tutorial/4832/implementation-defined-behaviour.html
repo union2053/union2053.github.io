@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope itemtype="http://schema.org/TechArticle">
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/4832/implementation-defined-behaviour by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Implementation-defined behaviour | C Language Tutorial">
+        <meta name="description" property="og:description" content="Implementation-defined behaviour | C Language Tutorial">
+        <title>Implementation-defined behaviour | C Language Tutorial</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+    <ul>
+                    <li><a href="../../../index.html">Getting started with C Language</a></li>
+                <li><a href="../6846/-ctype-h----character-classification---conversion.html">&lt;ctype.h&gt; — character classification &amp; conversion</a></li>
+                <li><a href="../1301/aliasing-and-effective-type.html">Aliasing and effective type</a></li>
+                <li><a href="../322/arrays.html">Arrays</a></li>
+                <li><a href="../555/assertion.html">Assertion</a></li>
+                <li><a href="../4924/atomics.html">Atomics</a></li>
+                <li><a href="../1930/bit-fields.html">Bit-fields</a></li>
+                <li><a href="../3336/boolean.html">Boolean</a></li>
+                <li><a href="../1285/command-line-arguments.html">Command-line arguments</a></li>
+                <li><a href="../10670/comments.html">Comments</a></li>
+                <li><a href="../10543/common-c-programming-idioms-and-developer-practices.html">Common C programming idioms and developer practices</a></li>
+                <li><a href="../2006/common-pitfalls.html">Common pitfalls</a></li>
+                <li><a href="../1337/compilation.html">Compilation</a></li>
+                <li><a href="../4135/compound-literals.html">Compound Literals</a></li>
+                <li><a href="../7397/constraints.html">Constraints</a></li>
+                <li><a href="../6257/create-and-include-header-files.html">Create and include header files</a></li>
+                <li><a href="../309/data-types.html">Data Types</a></li>
+                <li><a href="../3104/declaration-vs-definition.html">Declaration vs Definition</a></li>
+                <li><a href="../3729/declarations.html">Declarations</a></li>
+                <li><a href="../5460/enumerations.html">Enumerations</a></li>
+                <li><a href="../2486/error-handling.html">Error handling</a></li>
+                <li><a href="../507/files-and-i-o-streams.html">Files and I/O streams</a></li>
+                <li><a href="../3750/formatted-input-output.html">Formatted Input/Output</a></li>
+                <li><a href="../1006/function-parameters.html">Function Parameters</a></li>
+                <li><a href="../250/function-pointers.html">Function Pointers</a></li>
+                <li><a href="../571/generic-selection.html">Generic selection</a></li>
+                <li><a href="../1804/identifier-scope.html">Identifier Scope</a></li>
+                <li><a href="implementation-defined-behaviour.html">Implementation-defined behaviour</a></li>
+                <li><a href="../2529/implicit-and-explicit-conversions.html">Implicit and Explicit Conversions</a></li>
+                <li><a href="../4547/initialization.html">Initialization</a></li>
+                <li><a href="../4263/inline-assembly.html">Inline assembly</a></li>
+                <li><a href="../7427/inlining.html">Inlining</a></li>
+                <li><a href="../10564/interprocess-communication--ipc-.html">Interprocess Communication (IPC)</a></li>
+                <li><a href="../5151/iteration-statements-loops--for--while--do-while.html">Iteration Statements/Loops: for, while, do-while</a></li>
+                <li><a href="../5568/jump-statements.html">Jump Statements</a></li>
+                <li><a href="../560/linked-lists.html">Linked lists</a></li>
+                <li><a href="../3455/literals-for-numbers--characters-and-strings.html">Literals for numbers, characters and strings</a></li>
+                <li><a href="../4726/memory-management.html">Memory management</a></li>
+                <li><a href="../7111/multi-character-character-sequence.html">Multi-Character Character Sequence</a></li>
+                <li><a href="../10489/multithreading.html">Multithreading</a></li>
+                <li><a href="../256/operators.html">Operators</a></li>
+                <li><a href="../6862/pass-2d-arrays-to-functions.html">Pass 2D-arrays to functions</a></li>
+                <li><a href="../1108/pointers.html">Pointers</a></li>
+                <li><a href="../447/preprocessor-and-macros.html">Preprocessor and Macros</a></li>
+                <li><a href="../365/random-number-generation.html">Random Number Generation</a></li>
+                <li><a href="../3073/selection-statements.html">Selection Statements</a></li>
+                <li><a href="../1275/sequence-points.html">Sequence points</a></li>
+                <li><a href="../7094/side-effects.html">Side Effects</a></li>
+                <li><a href="../453/signal-handling.html">Signal handling</a></li>
+                <li><a href="../3170/standard-math.html">Standard Math</a></li>
+                <li><a href="../3597/storage-classes.html">Storage Classes</a></li>
+                <li><a href="../1990/strings.html">Strings</a></li>
+                <li><a href="../1119/structs.html">Structs</a></li>
+                <li><a href="../4590/structure-padding-and-packing.html">Structure Padding and Packing</a></li>
+                <li><a href="../6779/testing-frameworks.html">Testing frameworks</a></li>
+                <li><a href="../4432/threads--native-.html">Threads (native)</a></li>
+                <li><a href="../2588/type-qualifiers.html">Type Qualifiers</a></li>
+                <li><a href="../2681/typedef.html">Typedef</a></li>
+                <li><a href="../364/undefined-behavior.html">Undefined behavior</a></li>
+                <li><a href="../7645/unions.html">Unions</a></li>
+                <li><a href="../2674/valgrind.html">Valgrind</a></li>
+                <li><a href="../455/variable-arguments.html">Variable arguments</a></li>
+                <li><a href="../628/x-macros.html">X-macros</a></li>
+    </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div class="page-article" itemprop="mainEntityOfPage">
+
+    <h1 itemprop="headline" id="implementation-defined-behaviour">Implementation-defined behaviour</h1>
+    
+    <div itemprop="articleBody">
+            <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CK7ITK3J&amp;placement=pythonpediacom" id="_carbonads_js"></script>
+
+
+
+
+            <h2 id="remarks">Remarks</h2>
+            <div>
+                <a class="remarks-subsection-anchor" name="remarks-overview-0"></a>
+<h3 id="overview">Overview</h3>
+<p>The C standard describes the language syntax, the functions provided by the standard library, and the behavior of conforming C processors (roughly speaking, compilers) and conforming C programs.  With respect to behavior, the standard for the most part specifies particular behaviors for programs and processors.  On the other hand, some operations have explicit or implicit <em>undefined behavior</em> -- such operations are always to be avoided, as you cannot rely on anything about them.  In between, there are a variety of <em>implementation defined</em> behaviors.  These behaviors may vary between C processors, runtimes, and standard libraries (collectively, <em>implementations</em>), but they are consistent and reliable for any given implementation, and conforming implementations document their behavior in each of these areas.</p>
+<p>It is sometimes reasonable for a program to rely on implementation-defined behavior.  For example, if the program is anyway specific to a particular operating environment then relying on implementation-defined behaviors general to the common processors for that environment is unlikely to be a problem.  Alternatively, one can use conditional compilation directives to select implementation-defined behaviors appropriate for the implementation in use.  In any case, it is essential to know which operations have implementation defined behavior, so as to either avoid them or to make an informed decision about whether and how to use them.</p>
+<p>The balance of these remarks constitute a list of all the implementation-defined behaviors and characteristics specified in the C2011 standard, with references to the standard.  Many of them use <a href="http://port70.net/~nsz/c/c11/n1570.html#3" rel="nofollow">the terminology of the standard</a>.  Some others rely more generally on the context of the standard, such as the eight stages of translating source code into a program, or the difference between hosted and freestanding implementations.  Some that may be particularly surprising or notable are presented in bold typeface.  Not all the behaviors described are supported by earlier C standards, but generally speaking, they have implementation-defined behavior in all versions of the standard that support them.</p>
+<a class="remarks-subsection-anchor" name="remarks-programs-and-processors-1"></a>
+<h3 id="programs-and-processors">Programs and Processors</h3>
+<a class="remarks-subsection-anchor" name="remarks-general-2"></a>
+<h4 id="general">General</h4>
+<ul>
+<li>
+<p><strong>The number of bits in one byte</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#3.6p3" rel="nofollow">3.6/3</a>). At least <code>8</code>, the actual value can be queried with the macro <code>CHAR_BIT</code>.</p>
+</li>
+<li>
+<p>Which output messages are considered &quot;diagnostic messages&quot; (<a href="http://port70.net/~nsz/c/c11/n1570.html#3.10p1" rel="nofollow">3.10/1</a>)</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-source-translation-3"></a>
+<h4 id="source-translation">Source translation</h4>
+<ul>
+<li>
+<p>The manner in which physical source file multibyte characters are mapped to the source character set (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.1.2p1" rel="nofollow">5.1.1.2/1</a>).</p>
+</li>
+<li>
+<p>Whether non-empty sequences of non-newline whitespace are replaced by single spaces during translation phase 3 (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.1.2p1" rel="nofollow">5.1.1.2/1</a>)</p>
+</li>
+<li>
+<p>The execution-set character(s) to which character literals and characters in string constants are converted (during translation phase 5) when there is otherwise no corresponding character (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.1.2p1" rel="nofollow">5.1.1.2/1</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-operating-environment-4"></a>
+<h4 id="operating-environment">Operating environment</h4>
+<ul>
+<li>
+<p>The manner in which the diagnostic messages to be emitted are identified (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.1.3p1" rel="nofollow">5.1.1.3/1</a>).</p>
+</li>
+<li>
+<p>The name and type of the function called at startup in a freestanding implementation (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.1p1" rel="nofollow">5.1.2.1/1</a>).</p>
+</li>
+<li>
+<p>Which library facilities are available in a freestanding implementation, beyond a specified minimal set (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.1p1" rel="nofollow">5.1.2.1/1</a>).</p>
+</li>
+<li>
+<p>The effect of program termination in a freestanding environment (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.1p2" rel="nofollow">5.1.2.1/2</a>).</p>
+</li>
+<li>
+<p>In a hosted environment, any allowed signatures for the <code>main()</code> function other than <code>int main(int argc, char *arg[])</code> and <code>int main(void)</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.2.1p1" rel="nofollow">5.1.2.2.1/1</a>).</p>
+</li>
+<li>
+<p>The manner in which a hosted implementation defines the strings pointed to by the second argument to <code>main()</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.2.1p2" rel="nofollow">5.1.2.2.1/2</a>).</p>
+</li>
+<li>
+<p>What constitutes an &quot;interactive device&quot; for the purpose of sections <a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.3" rel="nofollow">5.1.2.3</a> (Program Execution) and <a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3" rel="nofollow">7.21.3</a> (Files) (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.3p7" rel="nofollow">5.1.2.3/7</a>).</p>
+</li>
+<li>
+<p>Any restrictions on objects referred to by interrupt-handler routines in an optimizing implementation (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.3p10" rel="nofollow">5.1.2.3/10</a>).</p>
+</li>
+<li>
+<p>In a freestanding implementation, whether multiple threads of execution are supported (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.1.2.4p1" rel="nofollow">5.1.2.4/1</a>).</p>
+</li>
+<li>
+<p>The values of the members of the execution character set (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.1p1" rel="nofollow">5.2.1/1</a>).</p>
+</li>
+<li>
+<p>The <code>char</code> values corresponding to the defined alphabetic escape sequences (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.2p3" rel="nofollow">5.2.2/3</a>).</p>
+</li>
+<li>
+<p><strong>The integer and floating-point numeric limits and characteristics</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2p1" rel="nofollow">5.2.4.2/1</a>).</p>
+</li>
+<li>
+<p>The accuracy of floating-point arithmetic operations and of the standard library's conversions from internal floating point representations to string representations (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p6" rel="nofollow">5.2.4.2.2/6</a>).</p>
+</li>
+<li>
+<p>The value of macro <code>FLT_ROUNDS</code>, which encodes the default floating-point rounding mode (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p8" rel="nofollow">5.2.4.2.2/8</a>).</p>
+</li>
+<li>
+<p>The rounding behaviors characterized by supported values of <code>FLT_ROUNDS</code> greater than 3 or less than -1 (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p8" rel="nofollow">5.2.4.2.2/8</a>).</p>
+</li>
+<li>
+<p>The value of macro <code>FLT_EVAL_METHOD</code>, which characterizes floating-point evaluation behavior (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p9" rel="nofollow">5.2.4.2.2/9</a>).</p>
+</li>
+<li>
+<p>The behavior characterized by any supported values of <code>FLT_EVAL_METHOD</code> less than -1 (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p9" rel="nofollow">5.2.4.2.2/9</a>).</p>
+</li>
+<li>
+<p>The values of macros <code>FLT_HAS_SUBNORM</code>, <code>DBL_HAS_SUBNORM</code>, and <code>LDBL_HAS_SUBNORM</code>, characterizing whether the standard floating-point formats support subnormal numbers (<a href="http://port70.net/~nsz/c/c11/n1570.html#5.2.4.2.2p10" rel="nofollow">5.2.4.2.2/10</a>)</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-types-5"></a>
+<h4 id="types">Types</h4>
+<ul>
+<li>
+<p>The result of attempting to (indirectly) access an object with thread storage duration from a thread other than the one with which the object is associated (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.4p4" rel="nofollow">6.2.4/4</a>)</p>
+</li>
+<li>
+<p>The value of a <code>char</code> to which a character outside the basic execution set has been assigned (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.5p3" rel="nofollow">6.2.5/3</a>).</p>
+</li>
+<li>
+<p>The supported extended signed integer types, if any, (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.5p4" rel="nofollow">6.2.5/4</a>), and any extension keywords used to identify them.</p>
+</li>
+<li>
+<p><strong>Whether <code>char</code> has the same representation and behavior as <code>signed char</code> or as <code>unsigned char</code></strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.5p15" rel="nofollow">6.2.5/15</a>). Can be queried with <code>CHAR_MIN</code>, which is either <code>0</code> or <code>SCHAR_MIN</code> if <code>char</code> is unsigned or signed, respectively.</p>
+</li>
+<li>
+<p><strong>The number, order, and encoding of bytes in the representations of objects</strong>, except where explicitly specified by the standard (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.6.1p2" rel="nofollow">6.2.6.1/2</a>).</p>
+</li>
+<li>
+<p><strong>Which of the three recognized forms of integer representation applies in any given situation, and whether certain bit patterns of integer objects are trap representations</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.6.2p2" rel="nofollow">6.2.6.2/2</a>).</p>
+</li>
+<li>
+<p>The alignment requirement of each type (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.8p1" rel="nofollow">6.2.8/1</a>).</p>
+</li>
+<li>
+<p>Whether and in what contexts any extended alignments are supported (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.8p3" rel="nofollow">6.2.8/3</a>).</p>
+</li>
+<li>
+<p>The set of supported extended alignments (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.2.8p4" rel="nofollow">6.2.8/4</a>).</p>
+</li>
+<li>
+<p>The integer conversion ranks of any extended signed integer types relative to each other (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.3.1.1p1" rel="nofollow">6.3.1.1/1</a>).</p>
+</li>
+<li>
+<p><strong>The effect of assigning an out-of-range value to a signed integer</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.3.1.3p3" rel="nofollow">6.3.1.3/3</a>).</p>
+</li>
+<li>
+<p>When an in-range but unrepresentable value is assigned to a floating-point object, how the representable value stored in the object is chosen from between the two nearest representable values (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.3.1.4p2" rel="nofollow">6.3.1.4/2</a>;  <a href="http://port70.net/~nsz/c/c11/n1570.html#6.3.1.5p1" rel="nofollow">6.3.1.5/1</a>; <a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.4.2p3" rel="nofollow">6.4.4.2/3</a>).</p>
+</li>
+<li>
+<p><strong>The result of converting an integer to a pointer type</strong>, except for integer constant expressions with value <code>0</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.3.2.3p5" rel="nofollow">6.3.2.3/5</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-source-form-6"></a>
+<h4 id="source-form">Source form</h4>
+<ul>
+<li>
+<p>The locations within <code>#pragma</code> directives where header name tokens are recognized (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4p4" rel="nofollow">6.4/4</a>).</p>
+</li>
+<li>
+<p>The characters, including multibyte characters, other than underscore, unaccented Latin letters, universal character names, and decimal digits that may appear in identifiers (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.2.1p1" rel="nofollow">6.4.2.1/1</a>).</p>
+</li>
+<li>
+<p><strong>The number of significant characters in an identifier</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.2.1p5" rel="nofollow">6.4.2.1/5</a>).</p>
+</li>
+<li>
+<p>With some exceptions, the manner in which the source characters in an integer character constant are mapped to execution-set characters (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.4.4p2" rel="nofollow">6.4.4.4/2</a>; <a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.4.4p10" rel="nofollow">6.4.4.4/10</a>).</p>
+</li>
+<li>
+<p>The current locale used for computing the value of a wide character constant, and most other aspects of the conversion for many such constants (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.4.4p11" rel="nofollow">6.4.4.4/11</a>).</p>
+</li>
+<li>
+<p>Whether differently-prefixed wide string literal tokens can be concatenated and, if so, the treatment of the resulting multibyte character sequence (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.5p5" rel="nofollow">6.4.5/5</a>)</p>
+</li>
+<li>
+<p>The locale used during translation phase 7 to convert wide string literals to multibyte character sequences, and their value when the result is not representable in the execution character set (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.5p6" rel="nofollow">6.4.5/6</a>).</p>
+</li>
+<li>
+<p>The manner in which header names are mapped to file names (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.4.7p2" rel="nofollow">6.4.7/2</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-evaluation-7"></a>
+<h4 id="evaluation">Evaluation</h4>
+<ul>
+<li>
+<p>Whether and how floating-point expressions are contracted when <code>FP_CONTRACT</code> is not used (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.5p8" rel="nofollow">6.5/8</a>).</p>
+</li>
+<li>
+<p><strong>The values of the results of the <code>sizeof</code> and <code>_Alignof</code> operators</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.5.3.4p5" rel="nofollow">6.5.3.4/5</a>).</p>
+</li>
+<li>
+<p>The size of the result type of pointer subtraction (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.5.6p9" rel="nofollow">6.5.6/9</a>).</p>
+</li>
+<li>
+<p><strong>The result of right-shifting a signed integer with a negative value</strong> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.5.7p5" rel="nofollow">6.5.7/5</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-runtime-behavior-8"></a>
+<h4 id="runtime-behavior">Runtime behavior</h4>
+<ul>
+<li>
+<p>The extent to which the <code>register</code> keyword is effective (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.1p6" rel="nofollow">6.7.1/6</a>).</p>
+</li>
+<li>
+<p>Whether the type of a bitfield declared as <code>int</code> is the same type as <code>unsigned int</code> or as <code>signed int</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.2p5" rel="nofollow">6.7.2/5</a>).</p>
+</li>
+<li>
+<p>What types bitfields may take, other than optionally-qualified <code>_Bool</code>, <code>signed int</code>, and <code>unsigned int</code>; whether bitfields may have atomic types (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.2.1p5" rel="nofollow">6.7.2.1/5</a>).</p>
+</li>
+<li>
+<p>Aspects of how implementations lay out the storage for bitfields (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.2.1p11" rel="nofollow">6.7.2.1/11</a>).</p>
+</li>
+<li>
+<p>The alignment of non-bitfield members of structures and unions (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.2.1p14" rel="nofollow">6.7.2.1/14</a>).</p>
+</li>
+<li>
+<p>The underlying type for each enumerated type (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.2.2p4" rel="nofollow">6.7.2.2/4</a>).</p>
+</li>
+<li>
+<p>What constitutes an &quot;access&quot; to an object of <code>volatile</code>-qualifed type (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.3p7" rel="nofollow">6.7.3/7</a>).</p>
+</li>
+<li>
+<p>The effectiveness of <code>inline</code> function declarations (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.7.4p6" rel="nofollow">6.7.4/6</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-preprocessor-9"></a>
+<h4 id="preprocessor">Preprocessor</h4>
+<ul>
+<li>
+<p>Whether character constants are converted to integer values the same way in preprocessor conditionals as in ordinary expressions, and whether a single-character constant may have a negative value (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.1p4" rel="nofollow">6.10.1/4</a>).</p>
+</li>
+<li>
+<p>The locations searched for files designated in an <code>#include</code> directive (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.2p2" rel="nofollow">6.10.2/2-3</a>).</p>
+</li>
+<li>
+<p>The manner in which a header name is formed from the tokens of a multi-token <code>#include</code> directive (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.2p4" rel="nofollow">6.10.2/4</a>).</p>
+</li>
+<li>
+<p>The limit for <code>#include</code> nesting (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.2p6" rel="nofollow">6.10.2/6</a>).</p>
+</li>
+<li>
+<p>Whether a <code>\</code> character is inserted before the <code>\</code> introducing a universal character name in the result of the preprocessor's <code>#</code> operator (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.3.2p2" rel="nofollow">6.10.3.2/2</a>).</p>
+</li>
+<li>
+<p>The behavior of the <code>#pragma</code> preprocessing directive for pragmas other than <code>STDC</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.6p1" rel="nofollow">6.10.6/1</a>).</p>
+</li>
+<li>
+<p>The value of the <code>__DATE__</code> and <code>__TIME__</code> macros if no translation date or time, respectively, is available (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.8.1p1" rel="nofollow">6.10.8.1/1</a>).</p>
+</li>
+<li>
+<p>The internal character encoding used for <code>wchar_t</code> if macro <code>__STDC_ISO_10646__</code> is not defined (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.8.2p1" rel="nofollow">6.10.8.2/1</a>).</p>
+</li>
+<li>
+<p>The internal character encoding used for <code>char32_t</code> if macro <code>__STDC_UTF_32__</code> is not defined (<a href="http://port70.net/~nsz/c/c11/n1570.html#6.10.8.2p1" rel="nofollow">6.10.8.2/1</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-standard-library-10"></a>
+<h3 id="standard-library">Standard Library</h3>
+<a class="remarks-subsection-anchor" name="remarks-general-11"></a>
+<h4 id="general">General</h4>
+<ul>
+<li>The format of the messages emitted when assertions fail (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.2.1.1p2" rel="nofollow">7.2.1.1/2</a>).</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-floating-point-environment-functions-12"></a>
+<h4 id="floating-point-environment-functions">Floating-point environment functions</h4>
+<ul>
+<li>
+<p>Any additional floating-point exceptions beyond those defined by the standard (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6p6" rel="nofollow">7.6/6</a>).</p>
+</li>
+<li>
+<p>Any additional floating-point rounding modes beyond those defined by the standard (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6p8" rel="nofollow">7.6/8</a>).</p>
+</li>
+<li>
+<p>Any additional floating-point environments beyond those defined by the standard (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6p10" rel="nofollow">7.6/10</a>).</p>
+</li>
+<li>
+<p>The default value of the floating-point environment access switch (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6.1p2" rel="nofollow">7.6.1/2</a>).</p>
+</li>
+<li>
+<p>The representation of the floating-point status flags recorded by <code>fegetexceptflag()</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6.2.2p1" rel="nofollow">7.6.2.2/1</a>).</p>
+</li>
+<li>
+<p>Whether the <code>feraiseexcept()</code> function additionally raises the &quot;inexact&quot; floating-point exception whenever it raises the &quot;overflow&quot; or &quot;underflow&quot; floating-point exception (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.6.2.3p2" rel="nofollow">7.6.2.3/2</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-locale-related-functions-13"></a>
+<h4 id="locale-related-functions">Locale-related functions</h4>
+<ul>
+<li>The locale strings other than <code>&quot;C&quot;</code> supported by <code>setlocale()</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.11.1.1p3" rel="nofollow">7.11.1.1/3</a>).</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-math-functions-14"></a>
+<h4 id="math-functions">Math functions</h4>
+<ul>
+<li>
+<p>The types represented by <code>float_t</code> and <code>double_t</code> when the <code>FLT_EVAL_METHOD</code> macro has a value different from <code>0</code>, <code>1</code>, and <code>2</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12p2" rel="nofollow">7.12/2</a>).</p>
+</li>
+<li>
+<p>Any supported floating-point classifications beyond those defined by the standard (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12p6" rel="nofollow">7.12/6</a>).</p>
+</li>
+<li>
+<p>The value returned by the <code>math.h</code> functions in the event of a domain error (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.1p2" rel="nofollow">7.12.1/2</a>).</p>
+</li>
+<li>
+<p>The value returned by the <code>math.h</code> functions in the event of a pole error (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.1p3" rel="nofollow">7.12.1/3</a>).</p>
+</li>
+<li>
+<p>The value returned by the <code>math.h</code> functions when the result underflows, and aspects of whether <code>errno</code> is set to <code>ERANGE</code> and whether a floating-point exception is raised under those circumstances (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.1p6" rel="nofollow">7.12.1/6</a>).</p>
+</li>
+<li>
+<p>The default value of the FP-contraction switch (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.2p2" rel="nofollow">7.12.2/2</a>).</p>
+</li>
+<li>
+<p>Whether the <code>fmod()</code> functions return 0 or raise a domain error when their second argument is 0 (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.10.1p3" rel="nofollow">7.12.10.1/3</a>).</p>
+</li>
+<li>
+<p>Whether the <code>remainder()</code> functions return 0 or raise a domain error when their second argument is 0 (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.10.2p3" rel="nofollow">7.12.10.2/3</a>).</p>
+</li>
+<li>
+<p>The number of significant bits in the quotient moduli computed by the <code>remquo()</code> functions (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.10.3p2" rel="nofollow">7.12.10.3/2</a>).</p>
+</li>
+<li>
+<p>Whether the <code>remquo()</code> functions return 0 or raise a domain error when their second argument is 0 (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.12.10.3p3" rel="nofollow">7.12.10.3/3</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-signals-15"></a>
+<h4 id="signals">Signals</h4>
+<ul>
+<li>
+<p>The complete set of supported signals, their semantics, and their default handling (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.14p4" rel="nofollow">7.14/4</a>).</p>
+</li>
+<li>
+<p>When a signal is raised and there is a custom handler associated with that signal, which signals, if any, are blocked for the duration of the execution of the handler (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.14.1.1p3" rel="nofollow">7.14.1.1/3</a>).</p>
+</li>
+<li>
+<p>Which signals other than <code>SIGFPE</code>, <code>SIGILL</code>, and <code>SIGSEGV</code> cause the behavior upon returning from a custom signal handler to be undefined (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.14.1.1p3" rel="nofollow">7.14.1.1/3</a>).</p>
+</li>
+<li>
+<p>Which signals are initially configured to be ignored (regardless of their default handling; <a href="http://port70.net/~nsz/c/c11/n1570.html#7.14.1.1p6" rel="nofollow">7.14.1.1/6</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-miscellaneous-16"></a>
+<h4 id="miscellaneous">Miscellaneous</h4>
+<ul>
+<li>The specific null pointer constant to which macro <code>NULL</code> expands (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.19p3" rel="nofollow">7.19/3</a>).</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-file-handling-functions-17"></a>
+<h4 id="file-handling-functions">File-handling functions</h4>
+<ul>
+<li>
+<p>Whether the last line of a text stream requires a terminating newline (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.2p2" rel="nofollow">7.21.2/2</a>).</p>
+</li>
+<li>
+<p>The number of null characters automatically appended to a binary stream (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.2p3" rel="nofollow">7.21.2/3</a>).</p>
+</li>
+<li>
+<p>The initial position of a file opened in append mode (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p1" rel="nofollow">7.21.3/1</a>).</p>
+</li>
+<li>
+<p>Whether a write on a text stream causes the stream to be truncated (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p2" rel="nofollow">7.21.3/2</a>).</p>
+</li>
+<li>
+<p>Support for stream buffering (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p3" rel="nofollow">7.21.3/3</a>).</p>
+</li>
+<li>
+<p>Whether zero-length files actually exist (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p4" rel="nofollow">7.21.3/4</a>).</p>
+</li>
+<li>
+<p>The rules for composing valid file names (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p8" rel="nofollow">7.21.3/8</a>).</p>
+</li>
+<li>
+<p>Whether the same file can simultaneously be open multiple times (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p8" rel="nofollow">7.21.3/8</a>).</p>
+</li>
+<li>
+<p>The nature and choice of encoding for multibyte characters (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.3p10" rel="nofollow">7.21.3/10</a>).</p>
+</li>
+<li>
+<p>The behavior of the <code>remove()</code> function when the target file is open (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.4.1p2" rel="nofollow">7.21.4.1/2</a>).</p>
+</li>
+<li>
+<p>The behavior of the <code>rename()</code> function when the target file already exists (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.4.2p2" rel="nofollow">7.21.4.2/2</a>).</p>
+</li>
+<li>
+<p>Whether files created via the <code>tmpfile()</code> function are removed in the event that the program terminates abnormally (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.4.3p2" rel="nofollow">7.21.4.3/2</a>).</p>
+</li>
+<li>
+<p>Which mode changes under which circumstances are permitted via <code>freopen()</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.5.4p3" rel="nofollow">7.21.5.4/3</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-i/o-functions-18"></a>
+<h4 id="i-o-functions">I/O functions</h4>
+<ul>
+<li>
+<p>Which of the permitted representations of infinite and not-a-number FP values are produced by the printf()-family functions (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.6.1p8" rel="nofollow">7.21.6.1/8</a>).</p>
+</li>
+<li>
+<p>The manner in which pointers are formatted by the <code>printf()</code>-family functions (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.6.1p8" rel="nofollow">7.21.6.1/8</a>).</p>
+</li>
+<li>
+<p>The behavior of <code>scanf()</code>-family functions when the <code>-</code> character appears in an internal position of the scanlist of a <code>[</code> field (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.6.2p12" rel="nofollow">7.21.6.2/12</a>).</p>
+</li>
+<li>
+<p>Most aspects of the <code>scanf()</code>-family functions' handing of <code>p</code> fields (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.6.2p12" rel="nofollow">7.21.6.2/12</a>).</p>
+</li>
+<li>
+<p>The <code>errno</code> value set by <code>fgetpos()</code> on failure (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.9.1p2" rel="nofollow">7.21.9.1/2</a>).</p>
+</li>
+<li>
+<p>The <code>errno</code> value set by <code>fsetpos()</code> on failure (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.9.3p2" rel="nofollow">7.21.9.3/2</a>).</p>
+</li>
+<li>
+<p>The <code>errno</code> value set by <code>ftell()</code> on failure (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.21.9.4p3" rel="nofollow">7.21.9.4/3</a>).</p>
+</li>
+<li>
+<p>The meaning to the <code>strtod()</code>-family functions of some supported aspects of a NaN formatting (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.1.3p4" rel="nofollow">7.22.1.3p4</a>).</p>
+</li>
+<li>
+<p>Whether the <code>strtod()</code>-family functions set <code>errno</code> to <code>ERANGE</code> when the result underflows (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.1.3p10" rel="nofollow">7.22.1.3/10</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-memory-allocation-functions-19"></a>
+<h4 id="memory-allocation-functions">Memory allocation functions</h4>
+<ul>
+<li>The behavior of the memory-allocation functions when the number of bytes requested is 0 (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.3p1" rel="nofollow">7.22.3/1</a>).</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-system-environment-functions-20"></a>
+<h4 id="system-environment-functions">System environment functions</h4>
+<ul>
+<li>
+<p>What cleanups, if any, are performed and what status is returned to the host OS when the <code>abort()</code> function is called (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.4.1p2" rel="nofollow">7.22.4.1/2</a>).</p>
+</li>
+<li>
+<p>What status is returned to the host environment when <code>exit()</code> is called (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.4.4p5" rel="nofollow">7.22.4.4/5</a>).</p>
+</li>
+<li>
+<p>The handling of open streams and what status is returned to the host environment when <code>_Exit()</code> is called (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.4.5p2" rel="nofollow">7.22.4.5/2</a>).</p>
+</li>
+<li>
+<p>The set of environment names accessible via <code>getenv()</code> and the method for altering the environment (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.4.6p2" rel="nofollow">7.22.4.6/2</a>).</p>
+</li>
+<li>
+<p>The return value of the <code>system()</code> function (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.22.4.8p3" rel="nofollow">7.22.4.8/3</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-date-and-time-functions-21"></a>
+<h4 id="date-and-time-functions">Date and time functions</h4>
+<ul>
+<li>
+<p>The local time zone and Daylight Saving time (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.27.1p1" rel="nofollow">7.27.1/1</a>).</p>
+</li>
+<li>
+<p>The range and precision of times representable via types <code>clock_t</code> and <code>time_t</code> (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.27.1p4" rel="nofollow">7.27.1/4</a>).</p>
+</li>
+<li>
+<p>The beginning of the era that serves as the reference for the times returned by the <code>clock()</code> function (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.27.2.1p3" rel="nofollow">7.27.2.1/3</a>).</p>
+</li>
+<li>
+<p>The beginning of the epoch that serves as the reference for the times returned by the <code>timespec_get()</code> function (when the time base is <code>TIME_UTC</code>; <a href="http://port70.net/~nsz/c/c11/n1570.html#7.27.2.5p3" rel="nofollow">7.27.2.5/3</a>).</p>
+</li>
+<li>
+<p>The <code>strftime()</code> replacement for the <code>%Z</code> conversion specifier in the &quot;C&quot; locale (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.27.3.5p7" rel="nofollow">7.27.3.5/7</a>).</p>
+</li>
+</ul>
+<a class="remarks-subsection-anchor" name="remarks-wide-character-i/o-functions-22"></a>
+<h4 id="wide-character-i-o-functions">Wide-character I/O functions</h4>
+<ul>
+<li>
+<p>Which of the permitted representations of infinite and not-a-number FP values are produced by the <code>wprintf()</code>-family functions (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.2.1p8" rel="nofollow">7.29.2.1/8</a>).</p>
+</li>
+<li>
+<p>The manner in which pointers are formatted by the <code>wprintf()</code>-family functions (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.2.1p8" rel="nofollow">7.29.2.1/8</a>).</p>
+</li>
+<li>
+<p>The behavior of <code>wscanf()</code>-family functions when the <code>-</code> character appears in an internal position of the scanlist of a <code>[</code> field (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.2.2p12" rel="nofollow">7.29.2.2/12</a>).</p>
+</li>
+<li>
+<p>Most aspects of the <code>wscanf()</code>-family functions' handing of <code>p</code> fields (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.2.2p12" rel="nofollow">7.29.2.2/12</a>).</p>
+</li>
+<li>
+<p>The meaning to the <code>wstrtod()</code>-family functions of some supported aspects of NaN formatting (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.4.1.1p4" rel="nofollow">7.29.4.1.1/4</a>).</p>
+</li>
+<li>
+<p>Whether the <code>wstrtod()</code>-family functions set <code>errno</code> to <code>ERANGE</code> when the result underflows (<a href="http://port70.net/~nsz/c/c11/n1570.html#7.29.4.1.1p10" rel="nofollow">7.29.4.1.1/10</a>).</p>
+</li>
+</ul>
+
+
+            </div>
+
+
+            <h2 id="allocating-zero-bytes">Allocating zero bytes</h2>
+            <div>
+                <pre><code>// The allocation functions have implementation-defined behavior when the requested size
+// of the allocation is zero.
+void *p = malloc(0);
+</code></pre>
+
+
+            </div>
+            <h2 id="assigning-an-out-of-range-value-to-an-integer">Assigning an out-of-range value to an integer</h2>
+            <div>
+                <pre><code>// Supposing SCHAR_MAX, the maximum value that can be represented by a signed char, is
+// 127, the behavior of this assignment is implementation-defined:
+signed char integer;
+integer = 128;
+</code></pre>
+
+
+            </div>
+            <h2 id="representation-of-signed-integers">Representation of signed integers</h2>
+            <div>
+                <p>Each signed integer type may be represented in any one of three formats; it is implementation-defined which one is used.  The implementation in use for any given signed integer type at least as wide as <code>int</code> can be determined at runtime from the two lowest-order bits of the representation of value <code>-1</code> in that type, like so:</p>
+<pre><code>enum { sign_magnitude = 1, ones_compl = 2, twos_compl = 3, };
+#define SIGN_REP(T) ((T)-1 &amp; (T)3)
+
+switch (SIGN_REP(long)) {
+   case sign_magnitude: { /* do something */ break; }
+   case ones_compl:     { /* do otherwise */ break; }
+   case twos_compl:     { /* do yet else  */ break; }
+   case 0:  { _Static_assert(SIGN_REP(long), &quot;bogus sign representation&quot;); }
+}
+</code></pre>
+<p>The same pattern applies to the representation of narrower types, but they cannot be tested by this technique because the operands of <code>&amp;</code> are subject to &quot;the usual arithmetic conversions&quot; before the result is computed.</p>
+
+
+            </div>
+            <h2 id="right-shift-of-a-negative-integer">Right shift of a negative integer</h2>
+            <div>
+                <pre><code>int signed_integer = -1;
+
+// The right shift operation exhibits implementation-defined behavior:
+int result = signed_integer &gt;&gt; 1;
+</code></pre>
+
+
+            </div>
+    </div>
+   
+    
+    <hr/>
+    <div class="paging">
+        <div class="paging-previous">
+                    <a href="../1804/identifier-scope.html">Previous Topic</a>
+        </div>
+        <div class="paging-next">
+                <a href="../2529/implicit-and-explicit-conversions.html">Next Topic</a>
+        </div>
+    </div>
+    <hr/>
+    
+    <div style="display: none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">SO Community</span></div>
+        <div itemprop="dateCreated">2016-08-01</div>
+        <div itemprop="datePublished">2016-08-01</div>
+        <div itemprop="dateModified">2016-08-03</div>
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <span itemprop="url">http://i.stack.imgur.com/3bQIZ.png</span>
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <span itemprop="name">C Language Pedia</span>
+            <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <span itemprop="url">https://c.programmingpedia.net/favicon.ico</span>
+            </span>
+        </div>
+    </div>
+    <div class="box-copyright">
+        <div>This modified text is an extract of the original Stack Overflow Documentation created by following <a href="https://riptutorial.com/contributor?topicId=4832" target="_blank">contributors</a> and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a></div>
+        <div>This website is not affiliated with <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></div>
+        <div>Email: <a href="mailto: tutorialpedia@outlook.com">tutorialpedia@outlook.com</a></div>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+
+
+<ul id="accordion_1846577747" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#remarks">
+                    Remarks
+                </a>
+            
+
+
+<ul id="accordion_1228518101" class="nav-toc">
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#overview">
+                    Overview
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#programs-and-processors">
+                    Programs and Processors
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#standard-library">
+                    Standard Library
+                </a>
+            
+        </li>
+</ul>
+
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#allocating-zero-bytes">
+                    Allocating zero bytes
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#assigning-an-out-of-range-value-to-an-integer">
+                    Assigning an out-of-range value to an integer
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#representation-of-signed-integers">
+                    Representation of signed integers
+                </a>
+            
+        </li>
+        <li class="nav-toc-item   " >
+                <a class="nav-toc-link" href="#right-shift-of-a-negative-integer">
+                    Right shift of a negative integer
+                </a>
+            
+        </li>
+</ul>
+
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/tutorial/4832/implementation-defined-behaviour by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:03:37 GMT -->
+</html>

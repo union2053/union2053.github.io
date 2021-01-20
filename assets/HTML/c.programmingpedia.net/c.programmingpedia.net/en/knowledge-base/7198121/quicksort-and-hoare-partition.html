@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7198121/quicksort-and-hoare-partition by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="QuickSort and Hoare Partition | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="QuickSort and Hoare Partition | C Language Knowledge Base">
+        <title>QuickSort and Hoare Partition | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="quicksort-and-hoare-partition">QuickSort and Hoare Partition</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/data-partitioning.html">data-partitioning</a></span>
+                        <span class="tag-item"><a href="../tag/quicksort.html">quicksort</a></span>
+                        <span class="tag-item"><a href="../tag/sorting.html">sorting</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I have a hard time translating QuickSort with Hoare partitioning into C code, and can't find out why.  The code I'm using is shown below:</p>
+
+<pre><code>void QuickSort(int a[],int start,int end) {
+    int q=HoarePartition(a,start,end);
+    if (end&lt;=start) return;
+    QuickSort(a,q+1,end);
+    QuickSort(a,start,q);
+}
+
+int HoarePartition (int a[],int p, int r) {
+    int x=a[p],i=p-1,j=r;
+    while (1) {
+        do  j--; while (a[j] &gt; x);
+        do  i++; while (a[i] &lt; x);
+
+        if  (i &lt; j)
+            swap(&amp;a[i],&amp;a[j]);
+        else
+            return j;
+    }
+}
+</code></pre>
+
+<p>Also, I don't really get why <code>HoarePartition</code> works. Can someone explain why it works, or at least link me to an article that does?</p>
+
+<p>I have seen a step-by-step work-through of the partitioning algorithm, but I don't have an intuitive feel for it. In my code, it doesn't even seem to work. For example, given the array</p>
+
+<pre><code>13 19  9  5 12  8  7  4 11  2  6 21
+</code></pre>
+
+<p>It will use pivot 13, but end up with the array</p>
+
+<pre><code> 6  2  9  5 12  8  7  4 11 19 13 21 
+</code></pre>
+
+<p>And will return <code>j</code> which is <code>a[j] = 11</code>. I thought it was supposed to be true that the array starting at that point and going forward should have values that are all larger than the pivot, but that isn't true here because 11 &lt; 13.</p>
+
+<p>Here's pseudocode for Hoare partitioning (from CLRS, second edition), in case this is useful:</p>
+
+<pre><code>Hoare-Partition (A, p, r)
+    x ← A[p]
+    i ← p − 1
+    j ← r + 1
+    while  TRUE
+        repeat   j ←  j − 1
+            until     A[j] ≤ x
+        repeat   i ←  i + 1
+            until     A[i] ≥ x
+        if  i &lt; j
+            exchange  A[i] ↔ A[j]
+        else  return   j 
+</code></pre>
+
+<p>Thanks!</p>
+
+<p>EDIT:</p>
+
+<p>The right C code for this problem will end up being:</p>
+
+<pre><code>void QuickSort(int a[],int start,int end) {
+    int q;
+    if (end-start&lt;2) return;
+    q=HoarePartition(a,start,end);
+    QuickSort(a,start,q);
+    QuickSort(a,q,end);
+}
+
+int HoarePartition (int a[],int p, int r) {
+    int x=a[p],i=p-1,j=r;
+    while (1) {
+        do  j--; while (a[j] &gt; x);
+        do  i++; while (a[i] &lt; x);
+        if  (i &lt; j) 
+            swap(&amp;a[i],&amp;a[j]);
+        else 
+            return j+1;
+    }
+}
+</code></pre>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/891814/ofek-ron" target="_blank"><span itemprop="name">Ofek Ron</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">13</div>
+                                    <div itemprop="dateCreated">5/23/2016 4:03:03 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>To answer the question of "Why does Hoare partitioning work?":</p>
+
+<p>Let's simplify the values in the array to just three kinds:  <em>L</em> values (those less than the pivot value), <em>E</em> values (those equal to the pivot value), and <em>G</em> value (those larger than the pivot value).  </p>
+
+<p>We'll also give a special name to one location in the array; we'll call this location <em>s</em>, and it's the location where the <em>j</em> pointer is when the procedure finishes.  Do we know ahead of time which location <em>s</em> is?  No, but we know that <em>some</em> location will meet that description.</p>
+
+<p>With these terms, we can express the goal of the partitioning procedure in slightly different terms:  it is to split a single array into two smaller sub-arrays which are <em>not mis-sorted</em> with respect to each other.  That "not mis-sorted" requirement is satisfied if the following conditions are true:</p>
+
+<ol>
+<li>The "low" sub-array, that goes from the left end of the array up to and includes <em>s</em>, contains no <em>G</em> values.</li>
+<li>The "high" sub-array, that starts immediately after <em>s</em> and continues to the right end, contains no <em>L</em> values.</li>
+</ol>
+
+<p>That's really all we need to do.  We don't even need to worry where the <em>E</em> values wind up on any given pass.  As long as each pass gets the sub-arrays right with respect to each other, later passes will take care of any disorder that exists inside any sub-array.</p>
+
+<p>So now let's address the question from the other side:  how does the partitioning procedure ensure that there are no <em>G</em> values in <em>s</em> or to the left of it, and no <em>L</em> values to the right of <em>s</em>?</p>
+
+<p>Well, "the set of values to the right of <em>s</em>" is the same as "the set of cells the <em>j</em> pointer moves over before it reaches <em>s</em>".  And "the set of values to the left of and including <em>s</em>" is the same as "the set of values that the <em>i</em> pointer moves over before <em>j</em> reaches <em>s</em>".</p>
+
+<p>That means that any values which <em>are</em> misplaced will, on some iteration of the loop, be under one of our two pointers.  (For convenience, let's say it's the <em>j</em> pointer pointing at a <em>L</em> value, though it works exactly the same for the <em>i</em> pointer pointing at a <em>G</em> value.)  Where will the <em>i</em> pointer be, when the <em>j</em> pointer is on a misplaced value?  We know it will be:</p>
+
+<ol>
+<li>at a location in the "low" subarray, where the <em>L</em> value can go with no problems;</li>
+<li>pointing at a value that's either an <em>E</em> or a <em>G</em> value, which can easily replace the <em>L</em> value under the <em>j</em> pointer.  (If it wasn't on an <em>E</em> or a <em>G</em> value, it wouldn't have stopped there.)</li>
+</ol>
+
+<p>Note that sometimes the <em>i</em> and <em>j</em> pointer will actually both stop on <em>E</em> values.  When this happens, the values will be switched, even though there's no need for it.  This doesn't do any harm, though; we said before that the placement of the <em>E</em> values can't cause mis-sorting between the sub-arrays.</p>
+
+<p>So, to sum up, Hoare partitioning works because:</p>
+
+<ol>
+<li>It separates an array into smaller sub-arrays which are not mis-sorted relative to each other;</li>
+<li>If you keep doing that and recursively sorting the sub-arrays, eventually there will be nothing left of the array that's unsorted.</li>
+</ol>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/33904/afeldspar" target="_blank"><span itemprop="name">afeldspar</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7198121/quicksort-and-hoare-partition#answer-0</div>
+                                            <div itemprop="upvoteCount">7</div>
+                                            <div itemprop="dateCreated">7/26/2014 3:34:41 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7198121" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7198121/quicksort-and-hoare-partition by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+</html>

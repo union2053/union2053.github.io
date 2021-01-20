@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-outputting-floating-point-values.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C printf() Outputting Floating-Point Values</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C printf() Outputting Floating-Point Values'>C printf() Outputting Floating-Point Values</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>printf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-conversion-specifications.html'>C printf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-format.html'>C printf function format
+
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-function-escape.html'>C printf escape %
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-conversion-specification-modifiers-for-printf.html'>C printf Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-flags.html'>C printf() Flags
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-integer.html'>C printf int width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-field-width-for-floating-point-value.html'>C printf floating width
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-string-options.html'>C printf string options
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-return-value-of-printf.html'>C Return Value of printf()
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-printing-long-strings.html'>C printf Printing Long Strings
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-printf.html'>C printf * Modifier
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-print-columns-of-data.html'>C printf() align column
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>printf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-output.html'>C printf int
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() octal hexadecimal
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C printf() floating point 
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-character-output.html'>C printf() char
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-function.html'>C scanf() function
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-format-specifier.html'>C scanf format specifier
+
+The most general form of a format specifier is shown in the follows:
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-specification-characters.html'>C scanf conversion spec
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-scanf-conversion-modifiers.html'>C scanf() Conversion Modifiers
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-modifier-with-scanf.html'>C scanf() * Modifier
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>scanf() usage
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-reading-characters-and-string-using-scanf-with-filter.html'>C scanf() string %[]
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-printf-scanf-exercise-2.html'>C Exercise 2
+
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C printf() Outputting Floating-Point Values</h1>
+<a class ='btn btn-outline-dark' href=c-printf-integer-octal-hexadecimal-and-decimal.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-character-output.html>Next</a><p>Outputting floating-point values 
+</p><div class='myCodeDiv'><button id='IMJUQ' class='myCopyButton' data-clipboard-target='#CVIHV'>Copy</button><pre  id='CVIHV' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>float</span>  fp1 = 345.675f,    fp2 = 1.234E6f; 
+  <span class='r'>double</span> fp3 = 234567898.0, fp4 = 11.22334455e-6; 
+
+  printf(<span class='q'>"%f  %+f  %-10.4f  %6.4f\n"</span>, fp1, fp2, fp1, fp2); 
+  printf(<span class='q'>"%e  %+E\n"</span>, fp1, fp2); 
+  printf(<span class='q'>"%f  %g  %#+f  %8.4f  %10.4g\n"</span>, fp3,fp3, fp3, fp3, fp4); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IMJUQ');clipboard.on('success', function(e) {$('#IMJUQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IMJUQ').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><a class ='btn btn-outline-dark' href=c-printf-integer-octal-hexadecimal-and-decimal.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-printf-character-output.html>Next</a><h2>Related</h2><UL><LI><a href='c-printf-print-columns-of-data.html'>C printf() print columns of data</a></LI><LI><a href='c-printf-integer-output.html'>C printf() Integer Output</a></LI><LI><a href='c-printf-integer-octal-hexadecimal-and-decimal.html'>C printf() Integer, Octal, hexadecimal and decimal</a></LI><LI><a href='c-printf-character-output.html'>C printf() Character Output</a></LI><LI><a href='c-scanf-function.html'>C scanf() function</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-printf-outputting-floating-point-values.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:03 GMT -->
+</html>
+

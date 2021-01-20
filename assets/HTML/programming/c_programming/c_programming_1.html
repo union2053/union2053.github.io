@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:08 GMT -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1254">
+	<meta name="description" content="cagataycebi.com">
+	<meta name="keywords" content="C, Programlama, C Programlama, Algoritma, Derleyici, Compiler, GCC, Bilgisayar">
+	<meta name="robots" content="index,follow">
+	<title>C Programlama Ders: I</title>
+	<style type="text/css">
+		@import "http://cagataycebi.com/design.css";
+	</style>
+	<script language="javascript" type="text/javascript" src="http://cagataycebi.com/general_functions.js">
+	</script>
+</head>
+<body>
+	<h1>C</h1>
+	<div align="right" name="toc"><font size="-2">25 Temmuz 2006</font></div>
+	<h2>C Programlama Dersi - I</h2>
+
+	<!-- İÇİNDEKİLER BAŞLANGIÇ -->
+		<div class="note">
+			<a href="#toc" style="text-decoration:none" onMouseDown="change_display_of_object('content_div')">
+			<h3>Bu yazıda öğrenecekleriniz:</h3>
+			</a>	
+			<div id="content_div" style="display:none">
+				<p>- Bilgisayar ve Programlama nedir?</p>
+ 				<p>- Program yazmak için gerekli araçlar ve temin edebileceğiniz adresler</p>
+	 			<p>- Algoritma geliştirme ve bunun üzerine basit bir örnek</p>
+	 			<p>- printf fonksiyonunun kullanımı ve bununla ilgili örnekler</p>		
+			</div>
+		</div>
+		<!-- İÇİNDEKİLER BİTİŞ -->
+	<br/>
+	<p>Merhaba;</p>
+	<p>Sanırım, C ve C++ adını bilgisayarla az çok haşır neşir olan herkes en az bir kez 
+	duymuştur. Sizde bu isimleri duyanlardansanız ve nedir, ne değildir, 
+	nasıl kullanılır gibi birçok soruya yanıt arıyorsanız, doğru yerdesiniz. 
+	Çünkü bu yazıyla başlayarak C ve C++ ile programlamaya gireceğiz. 
+	Önce C ile yolumuza koyulup, belli bir olgunluğa ulaştıktan sonra C++ ile devam 
+	edeceğiz.</p>
+	<p>Okuyucularımızın genelini düşünerek, konuyu en temelden almayı daha doğru buldum. 
+	Yani hedefimiz, programlamayı hiç bilmeyen bir insanın burada okuduklarıyla belli bir
+	yerlere ulaşması. İleri derece de olanlarsa sıkılmamak için biraz beklemeli. Lafı fazla
+	uzatmadan başlayalım.</p>
+	
+	<h4>Bilgisayar ve Programlama nedir?</h4>
+	<p>Bilgisayar çok basit düşündüğümüzde üç ana görevi yerine getiren bir makinedir. 
+	Girilen bilgiyi alır (INPUT), işler (PROCESSING) ve bu işlenmiş veriden 
+	bir sonuç (OUTPUT) çıkarır. Bilgisayar, sadece donanım olarak çalışmaz. 
+	Çünkü yazılım olmadan, donanım ne yapacağını bilemez. Bilgisayar donanımına ne 
+	yapacağını söyleyecek bir komutlar dizisi gerekir. Yapacağı görevleri, ona anlatan 
+	komutlara program diyebiliriz. Yani donanıma “sen şunu yap, sonra bulduğun sonucu 
+	şöyle şuraya ekle” gibisinden işler yaptırmak programın veya bir başka deyişle 
+	yazılımın işidir. Bir programcı olarak bundan fazlasını bilmek elbette ki avantajdır. 
+	Ama bilgisayarın bütün özelliklerini bilmeniz gerekmez. Yani yazacağınız bir program
+	için o bilgisayarın özelliklerini bilmeseniz de olur.</p>
+	<p>Bilgisayarın anladığı tek dil, Makine Dilidir. Bu 16’lık (Hexadecimal) sistemden 
+	oluşan bir programlama tipidir. Makine dilini anlamak çok zordur ve bu dili kullanmak 
+	için o bilgisayarın donanım özelliklerini mutlaka bilmeniz gerekir. C de ekrana yazı 
+	yazmanızı sağlayan “printf();” gibi çok basit bir fonksiyon, makine dilinde 
+	1A BB 0D BC D5 FF C2 F7... gibi çok daha karmaşık ve hiçbir anlam ifade etmeyen bir 
+	hâle dönüşür. Makine dili programlama dilleri arasında en alt seviyedir.</p>
+	<p>Makine dilinden sonra Assembler Dili gelir. Makine dilini kullanmanın zorluğu ve 
+	karmaşası üzerine geliştirilen Assembler, daha basit bir yapıdadır. Ama yine de C ile 
+	mukayese ederseniz çok daha zordur ve kullandığınız bilgisayarın donanımına dair 
+	hâlen bilgiye gereksinim duyarsınız. Assembler aşağıdaki gibi karmaşık bir 
+	yapıdadır.</p>
+	<pre>
+SEGMENT COM WORD PUBLIC ‘CODE’
+ASSUME CS : COMDS : COM
+      ORG 100H
+ENTRY: MOV DVX,OFFSET MSG
+       MOV AH,g
+          .
+          .
+          .
+</pre>
+	<p>
+	Şuan bunu anlamaya çalışıp, hiç zamanınızı harcamayın. Çünkü öğreneceğimiz dil C, 
+	işlerimizi ve dolayısıyla hayatımızı çok daha kolaylaştırmaktadır. C, orta seviye 
+	bir programlama dilidir. Bunun anlamı, hem yazması kolay, hemde üst seviye dillere 
+	göre daha çok erişim hakkınızın olduğudur. Üst seviye programlama dilleri ise BASIC,
+	PASCAL, gibi dillerdir. Üst seviye dillerde, yazması göreceli olarak daha kolay 
+	olsa da C ile yapabileceklerimiz daha çoktur.
+	</p>
+	<h4>Program yazmak için ne gerekir?</h4>
+	<p>Program yazabilmek için hiçbir şeye ihtiyacınız yoktur. 
+	Program yazmak için Windows’un not defterini veya Linux'da Gedit, Kwrite gibi bir program
+	bile kullanabilirsiniz. Önemli olan yazılan programın derlenmesidir. Derlemeye 
+	“compile” ve derleme işini yapan derleyiciyeyse “compiler” denir. C için internet 
+	üzerinden birçok Compiler bulabilirsiniz. Ben, program uygulamalarını 
+	<a href="http://www.gnu.org/software/gcc/gcc.html" target="_blank"><b>GCC</b></a>  üzerinden 
+	yapacağım. Aynı şekilde bu derleyiciyi kurmanızı tavsiye ederim. GCC gelmiş geçmiş en 
+	iyi derleyicilerden biri olduğu gibi, özgür bir yazılımdır! Richard Stallman 
+	tarafından açık kaynak koduyla sunulmuştur ve arzu ettiğiniz takdirde, sonuna kadar 
+	değişiklik yapma imkanınız vardır.
+	</p>
+	<p>Şayet Windows işletim sisteminiz varsa GCC'yi kurmanız biraz sıkıntılı olabilir.
+	Basit bir Google araştırmasıyla, 
+	<a href="http://www.bloodshed.net/devcpp.html" target="_blank"><b>Bloodshed Dev-C++</b></a> adında bir 
+	program buldum. GCC üzerine kurulmuş bir yapısı varmış. GCC ile uğraşmak istemeyen
+	Windows kullanıcıları, bu programı deneyebilir.
+	</p>
+	<h4>Algoritma Geliştirmek</h4>
+	<p>C dilini ve komutlarını öğrenmek, programlamaya başlamak için şarttır ama algoritma 
+	oluşturamadığımız sürece bir program oluşturmazsınız. Algoritma, mantıktır. Yani neyi, 
+	nasıl yapacağınızı belirtir. Algoritma türetmek için geliştirilmiş bir metot yok. 
+	Her program için o metodu sizin bulmanız gerekiyor. Ama hiç merak etmeyin, yazdığınız 
+	program sayısı arttıkça, algoritma kurmanız daha kolaylaşır. 
+	</p>	
+	<p>
+	Algoritma, programlamanın bel kemiğidir. C dilinde kullanılan komutlar, BASIC veya 
+	FORTRAN gibi başka dillerde işe yaramaz. Fakat programlama mantığını bir kere 
+	oturttursanız, C komutlarının yerine pekâlâ başka dillere ait komutları da 
+	öğrenebilir ve büyük bir zorluk çekmeden diğer dillerde de program yazabilirsiniz.
+	</p>
+	<p>Basit bir örnek üzerinden düşünelim. Bir markete gittiniz, kasada ki görevliye 
+	aldığınız ürünü gösterdiniz, parayı uzattınız, paranın üstünü aldınız. Günlük hayatta 
+	gayet normal olan bu durumu biraz değiştirelim. Karşınızda insan değil, elektronik bir 
+	kasiyer olsun. Ona göre bir algoritma geliştirirsek,
+	</p>
+	&nbsp;&nbsp;1-)&nbsp;<i>Ürüne bak;</i><br/>
+	&nbsp;&nbsp;2-)&nbsp;<i>Ürün Fiyatını bul;</i><br/>
+	&nbsp;&nbsp;3-)&nbsp;<i>Parayı al;</i><br/>
+	&nbsp;&nbsp;4-)&nbsp;<i>Alınan paradan ürün fiyatını çıkar;</i><br/>
+	&nbsp;&nbsp;5-)&nbsp;<i>Kalan parayı ver.</i>
+	<br/>	<br/>
+	<p>
+	İnsan zekasının otomatik hâle getirdiği eylemleri, ne yazık ki bilgisayar bilmez 
+	ve ona biz öğretmek zorundayız. Öğretirken de hata yapma hakkımız yoktur, 
+	çünkü yanlış öğreti yanlış programlamayla sonuçlanır.
+	</p>
+	<h3>C Programlama Dili</h3>
+	<h4>Temel Giriş/Çıkış İşlemleri (BASIC I/O):</h4>
+	<p>C ile ilgili olarak bu ve önümüzdeki yazılarda birçok komut/fonksiyon göreceğiz. Ama hep kullanacağımız ve ilk öğrenmemiz gerekenler temel giriş çıkış fonksiyonlarıdır. C de klavyeden bir değer alabilmek için scanf(); fonksiyonunu kullanırız. Ekrana herhangi bir şey yazdırmak içinse printf(); fonksiyonu kullanılır.</p>
+	Bir örnekle görelim;
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Hello World");
+}
+</pre>
+	<p>
+	Eğer bunu derleyicinizde yazıp derlerseniz ve sonrasında çalıştırırsanız ekrana 
+	Hello World yazılacaktır. #include&lt;stdio.h&gt;, standart giriş çıkış başlık dosyasını, 
+	programa dahil et gibi bir anlam taşır. C'de (ve hemen hemen bütün diğer programlama 
+	dillerinde) bir kütüphaneyi dahil etmek son derece rutin bir iştir. Aksi halde 
+	giriş-çıkış fonksiyonlarını dahi her seferinde bizim baştan tanımlamamız gerekirdi.
+	</p>
+	<p>
+	main( ), bir programdaki ana fonksyiondur. Ondan sonra gelen ayraç standarttır. Bir bloğu temsil eder.
+	İki ayraç işareti arasındaki alan main fonksiyonuna ait bir bloğu oluşturur. printf ise
+	yazdığımız metini, ekrana bastırmaya yarayan, standart bir fonksiyonudur. 
+	Çift tırnak işaretleri içersine yazdığınız herşey printf sayesinde ekrana basılır. 
+	</p>	
+	<p>Dikkat ettiyseniz, her satır sonuna noktalı virgül koyduk. Aslında her satır değil, 
+	her komutan sonra noktalı virgül koyduğumuzu söylemek daha doğru olacak. Çünkü noktalı
+	virgül C dilinde komut ayracı anlamına gelir.</p>	
+	<p>Şimdi yukarıda yazdığımız basit programı, biraz daha geliştirelim:</p>
+	<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Hello World\n");
+	printf("Merhaba Dünya");
+	return 0;
+}
+</pre>
+<p>
+	Birkaç yeni satır görüyorsunuz. Sırayla ne olduklarını açıklayalım. Az evvel yazdığımız 
+	"Hello World" yazısının sonuna "\n" ekledik. "\n" bir alt satıra geç anlamına geliyor. 
+	Eğer "\n" yazmazsak, ekranda "<i>Hello WorldMerhaba Dünya</i>" şeklinde bir yazı çıkar. 
+	"\n" kullanırsak, "<i>Hello World</i>" yazıldıktan sonra, bir alt satıra geçilir ve ikinci 
+	satırda "<i>Merhaba Dünya</i>" yazdırılır. En altta "<i>return 0;</i>" adında 
+	yeni bir komut fark etmişsinizdir. Bunu eklemezseniz, program yine çalışır;  
+	ancak uyarı verir. Çünkü main fonksiyonu, geriye bir tam sayının dönmesini beklemektedir. 
+	Yazmış olduğumuz return ifadesiyle bu uyarılardan kurtulabilirsiniz. Detayına girmek 
+	için henüz erken, return konusuna ileride	değineceğiz.
+</p>
+<p>Yukarıda ki programın aynısını şöyle de yazabilirdik:</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Hello World");
+	printf("\nMerhaba Dünya");
+	return 0;
+}
+</pre>
+<p>
+	Bir önce ve şimdi yazdığımız programların ekran çıktısı aynıdır. Bu örnekle anlatmak 
+	istediğim, printf(&nbsp;&nbsp;) fonksiyonunda '<i>\n</i>' konulan yerden sonrasının 
+	bir alt satıra düşeceğidir.
+</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Hello World\nMerhaba Dünya");
+	return 0;
+}
+</pre>
+<p>Gördüğünüz gibi tek bir printf(&nbsp;&nbsp;); kullanarak aynı işlemi yaptırdık.</p>
+<p>Varsayalım, ekrana çok uzun bir cümle yazmamız gerekti. Örneğin;</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Benim adım Çağatay ÇEBİ ve Yazılım Mühendisiyim.\n");
+	return 0;
+}
+</pre>
+<p>
+	Bu yazdığımız program hata vermemesine karşın, çalışma verimini azaltır. 
+	Çünkü yazacaklarınız editör penceresine sığmazsa, yazılanı okumak 
+	daha zahmetli olur. Önemsiz bir detay gibi gelebilir, ama kod yazma verimini 
+	ciddi oranda düşüreceğinden emin olabilirsiniz.	
+</p>
+<p>Bu programı aşağıdaki gibi yazmamız daha uygundur:</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Benim adım " 
+		"Çağatay ÇEBİ"
+		"ve Yazılım Mühendisiyim.\n");
+	return 0;
+}
+</pre>
+<p>
+	Tek bir printf(&nbsp;&nbsp;); fonksiyonu kullanılmıştır. Ancak alt alta yazarak, metini
+	tek seferde görülebilir hâle getirdik. Programı derleyip çalıştırırsanız, alt alta üç 
+	satır	yazılmaz. Cümle bütün olarak gösterilir ve bir önceki örnekle tamamen aynıdır. 
+	(Satırların	alt alta görünmesini isteseydik; daha önce bahsettiğimiz gibi '<i>\n</i>' 
+	koymamız gerekirdi.)
+</p>
+<p>
+	Ekrana, <i>Ali: "Naber, nasılsın?" dedi.</i> şeklinde bir yazı yazdırmamız gerekiyor diyelim.
+	Bu konuda ufak bir problem yaşayacağız. Çünkü printf(&nbsp;&nbsp;); fonksiyonu gördüğü ilk iki çift 
+	tırnak üzerinden işlem yapar. Böyle bir şeyi ekrana yazdırmak için aşağıdaki gibi bir 
+	program yazmamız gerekir:
+</p>
+<pre>
+#include&lt;stdio.h&gt;
+int main( void )
+{
+	printf("Ali: \"Naber, nasılsın?\" dedi.\n");
+	return 0;
+}
+</pre>
+<p>
+	printf(&nbsp;&nbsp;); fonksiyonunu kullanmayı sanırım iyice anladınız. printf( yazıp, 
+	sonra çift tırnak açıyor, yazmak istediklerimizi yazıyor, çift tırnağı sonra da 
+	parantezi kapatıyor, sonuna noktalı virgül ekliyoruz. Alt satıra geçmek içinse, 
+	yazdıklarımızın sonuna '<i>\n</i>' ekliyoruz. Çift tırnaklı bir şey kullanmak 
+	içinse \“ ... \” kullanıyoruz. Hepsi bu!
+</p>
+<p>
+scanf(); fonksiyonuna gelince, bu başında bahsettiğimiz gibi bizim giriş (Input) 
+fonksiyonumuzdur. Ancak yazımı burada noktalıyorum. Çünkü değişkenler işin içine 
+girmekte ve onları anlatmam uzun sürecek. Gelecek haftaki yazımda kaldığımız yerden 
+devam edeceğiz. Yazdıklarımla ilgili öneri, eleştiri veya sorunuz varsa, bana 
+ulaşabilirsiniz. 
+</p>
+
+<div align="right">
+	<a href="mailto:cagataycebi@gmail.com" style="color: black;font: 16px Times New Roman;">
+		&#199;a&#287;atay &#199;EB&#304;
+	</a>
+</div>
+<br/>
+
+<!-- ILERI ve GERI LINKLERI -->
+<hr>
+<table width="90%" border="0" cellpadding="6" cellspacing="1" align="center">
+	<tr>
+	<td align="left"><a href="../index-2.html"><<&nbsp;Geri</a></td>
+	<td align="center">
+			<div class="bottom_links">
+				<a href="http://www.cagataycebi.com/" target="_blank">
+					cagataycebi.com
+				</a>
+			</div>
+		</td>
+		<td align="right"><a href="c_programming_2.html">İleri&nbsp;>></a></td>
+	</tr>
+</table>
+<hr>
+<!-- ILERI ve GERI LINKLERI -->
+<br/>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-712002-1";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from cagataycebi.com/programming/c_programming/c_programming_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 15:23:09 GMT -->
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" itemscope="" itemtype="http://schema.org/QAPage">
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7168164/sorting-linked-lists-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="Sorting linked lists in C | C Language Knowledge Base">
+        <meta name="description" property="og:description" content="Sorting linked lists in C | C Language Knowledge Base">
+        <title>Sorting linked lists in C | C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+
+
+<div id="knowledge-base" class="kb-details">
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+        </div>
+        <div class="col-lg-9 col-xl-9" itemprop="mainEntity" itemscope itemtype="http://schema.org/Question">
+            <div class="container-h1">
+                <h1 itemprop="name" id="sorting-linked-lists-in-c">Sorting linked lists in C</h1>
+                <div class="tag-list">
+                        <span class="tag-item"><a href="../tag/algorithm.html">algorithm</a></span>
+                        <span class="tag-item"><a href="../tag/c.html">c</a></span>
+                        <span class="tag-item"><a href="../tag/data-structures.html">data-structures</a></span>
+                        <span class="tag-item"><a href="../tag/linked-list.html">linked-list</a></span>
+                        <span class="tag-item"><a href="../tag/sorting.html">sorting</a></span>
+                </div>
+            </div>
+            <br>
+            <div class="search-results-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="block-question">
+                            <div class="container-question">
+                                <i class="fab fa-stack-overflow" style="font-size: 32px; position: absolute; left: -15px; top: -15px;"></i>
+                                <h3 id="question">Question</h3>
+                                <div itemprop="text">
+                                    <p>I was asked to write a function that takes 3 unsorted linked lists and returns one single sorted linked list that combines all three lists. What is the best way you can think of?</p>
+
+<p>I don't really have restrictions of memory, but what would you do with/without memory restrictions?</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="profile-container">
+                                        <div class="profile-details-container d-flex align-items-center">
+                                            <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="https://stackoverflow.com/users/908582/awesomenuts" target="_blank"><span itemprop="name">Awesomenuts</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: none">
+                                    <div itemprop="answerCount">1</div>
+                                    <div itemprop="upvoteCount">6</div>
+                                    <div itemprop="dateCreated">12/22/2017 4:07:51 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <div class="col-sm-6">
+                            <div id="answer-0" class="block-question second-answer" itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                <div class="container-question">
+                                    <h3 id="popular-answer">Popular Answer</h3>
+                                    <div itemprop="text">
+                                        <p>One option would be to use <a href="http://en.wikipedia.org/wiki/Merge_sort" rel="noreferrer">merge sort</a> on all three of the linked lists, then use one final merge step to merge them together into an overall sorted list.</p>
+
+<p>Unlike most O(n log n) sorting algorithms, merge sort can run efficiently on linked lists.  At a high-level, the intuition behind merge sort on a linked list is as follows:</p>
+
+<ol>
+<li>As a base case, if the list has zero or one elements, it's already sorted.</li>
+<li>Otherwise:
+
+<ol>
+<li>Split the list into two lists of roughly equal size, perhaps by moving odd elements into one list and even elements into the other.</li>
+<li>Recursively use merge sort to sort those lists.</li>
+<li>Apply a <a href="http://en.wikipedia.org/wiki/Merge_algorithm" rel="noreferrer">merge</a> step to combine those lists into one sorted list.</li>
+</ol></li>
+</ol>
+
+<p>The merge algorithm on linked lists is really beautiful.  The pseudocode works roughly like this:</p>
+
+<ol>
+<li>Initialize an empty linked list holding the result.</li>
+<li>As long as both lists aren't empty:
+
+<ol>
+<li>If the first element of the first list is less than the first element of the second list, move it to the back of the result list.</li>
+<li>Otherwise, move the first element of the second list to the back of the result list.</li>
+</ol></li>
+<li>Now that exactly one list is empty, move all the elements from the second list to the back of the result list.</li>
+</ol>
+
+<p>This can be made to run in O(n) time, so the overall complexity of the merge sort is O(n log n).</p>
+
+<p>Once you've sorted all three lists independently, you can apply the merge algorithm to combine the three lists into one final sorted list.  Alternatively, you could consider concatenating together all three linked lists, then using a giant merge sort pass to sort all of the lists at the same time.  There's no clear "right way" to do this; it's really up to you.</p>
+
+<p>The above algorithm runs in &Theta;(n log n) time.  It also uses only &Theta;(log n) memory, since it allocates no new linked list cells and just needs space in each stack frame to store pointers to the various lists.  Since the recursion depth is &Theta;(log n), the memory usage is &Theta;(log n) as well.</p>
+
+<hr>
+
+<p>Another O(n log n) sort that you can implement on linked lists is a modification of <a href="http://en.wikipedia.org/wiki/Quicksort" rel="noreferrer">quicksort</a>.  Although the linked list version of quicksort is fast (still O(n log n) expected), it isn't nearly as fast as the in-place version that works on arrays due to the lack of locality effects from array elements being stored contiguously.  However, it's a very beautiful algorithm as applied to lists.</p>
+
+<p>The intuition behind quicksort is as follows:</p>
+
+<ol>
+<li>If you have a zero- or one-element list, the list is sorted.</li>
+<li>Otherwise:
+
+<ol>
+<li>Choose some element of the list to use as a pivot.</li>
+<li>Split the list into three groups - elements less than the pivot, elements equal to the pivot, and elements greater than the pivot.</li>
+<li>Recursively sort the smaller and greater elements.</li>
+<li>Concatenate the three lists as smaller, then equal, then greater to get back the overall sorted list.</li>
+</ol></li>
+</ol>
+
+<p>One of the nice aspects of the linked-list version of quicksort is that the partitioning step is substantially easier than in the array case.  After you've chosen a pivot (details a bit later), you can do the partitioning step by creating three empty lists for the less-than, equal-to, and greater-than lists, then doing a linear scan over the original linked list.  You can then append/prepend each linked list node to the linked list corresponding to the original bucket.</p>
+
+<p>The one challenge in getting this working is picking a good pivot element.  It's well known that quicksort can degenerate to O(n<sup>2</sup>) time if the choice of pivot is bad, but it is also known that if you pick a pivot element at random the runtime is O(n log n) with high probability.  In an array this is easy (just pick a random array index), but in the linked list case is trickier.  The easiest way to do this is to pick a random number between 0 and the length of the list, then choose that element of the list in O(n) time.  Alternatively, there are some pretty cool methods for picking an element at random out of a linked list; <a href="http://keithschwarz.com/interesting/code/?dir=random-sample" rel="noreferrer">one such algorithm</a> is described here.</p>
+
+<hr>
+
+<p>If you want a simpler algorithm that needs only O(1) space, you can also consider using <a href="http://en.wikipedia.org/wiki/Insertion_sort" rel="noreferrer">insertion sort</a> to sort the linked lists.  While insertion sort is easier to implement, it runs in O(n<sup>2</sup>) time in the worst case (though it also has O(n) best-case behavior), so it's probably not a good choice unless you specifically want to avoid merge sort.</p>
+
+<p>The idea behind the insertion sort algorithm is as follows:</p>
+
+<ol>
+<li>Initialize an empty linked list holding the result.</li>
+<li>For each of the three linked lists:
+
+<ol>
+<li>While that linked list isn't empty:
+
+<ol>
+<li>Scan across the result list to find the location where the first element of this linked list belongs.</li>
+<li>Insert the element at that location.</li>
+</ol></li>
+</ol></li>
+</ol>
+
+<hr>
+
+<p>Another O(n<sup>2</sup>) sorting algorithm that can be adapted for linked lists is <a href="http://en.wikipedia.org/wiki/Selection_sort" rel="noreferrer">selection sort</a>.  This can be implemented very easily (assuming you have a doubly-linked list) by using this algorithm:</p>
+
+<ol>
+<li>Initialize an empty list holding the result.</li>
+<li>While the input list is not empty:
+
+<ol>
+<li>Scan across the linked list looking for the smallest remaining element.</li>
+<li>Remove that element from the linked list.</li>
+<li>Append that element to the result list.</li>
+</ol></li>
+</ol>
+
+<p>This also runs in O(n<sup>2</sup>) time and uses only O(1) space, but in practice it's slower than insertion sort; in particular, it always runs in &Theta;(n<sup>2</sup>) time.</p>
+
+<hr>
+
+<p>Depending on how the linked lists are structured, you might be able to get away with some extremely awesome hacks.  In particular, if you are given <strong>doubly</strong>-linked lists, then you have space for two pointers in each of your linked list cells.  Given that, you can reinterpret the meaning of those pointers to do some pretty ridiculous sorting tricks.</p>
+
+<p>As a simple example, let's see how we could implement <a href="http://en.wikipedia.org/wiki/Tree_sort" rel="noreferrer">tree sort</a> using the linked list cells.  The idea is as follows.  When the linked list cells are stored in a linked list, the next and previous pointers have their original meaning.  However, our goal will be to iteratively pull the linked list cells out of the linked list, then reinterpret them as nodes a in binary search tree, where the next pointer means "right subtree" and the previous pointer means "left subtree."  If you're allowed to do this, here's a really cool way to implement tree sort:</p>
+
+<ol>
+<li>Create a new pointer to a linked list cell that will serve as the pointer to the root of the tree.</li>
+<li>For each element of the doubly-linked list:
+
+<ol>
+<li>Remove that cell from the linked list.</li>
+<li>Treating that cell as a BST node, insert the node into the binary search tree.</li>
+</ol></li>
+<li>Do an in-order walk of the BST.  Whenever you visit a node, remove it from the BST and insert it back into the doubly-linked list.</li>
+</ol>
+
+<p>This runs in best-case O(n log n) time and worst-case O(n<sup>2</sup>).  In terms of memory usage, the first two steps require only O(1) memory, since we're recycling space from the older pointers.  The last step can be done in O(1) space as well using some particularly clever algorithms.</p>
+
+<p>You could also consider implementing <a href="http://en.wikipedia.org/wiki/Heap_sort" rel="noreferrer">heap sort</a> this way as well, though it's a bit tricky.</p>
+
+<hr>
+
+<p>Hope this helps!</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="profile-container">
+                                            <div class="profile-details-container d-flex align-items-center">
+                                                    <div class="asker-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                                        <a href="https://stackoverflow.com/users/501557/templatetypedef" target="_blank"><span itemprop="name">templatetypedef</span></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div style="display: none">
+                                            <div itemprop="url">https://c.programmingpedia.net/en/knowledge-base/7168164/sorting-linked-lists-in-c#answer-0</div>
+                                            <div itemprop="upvoteCount">38</div>
+                                            <div itemprop="dateCreated">8/23/2011 11:36:19 PM</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br/>
+                    </div>
+                </div>
+                <div class="text-center mt-5 mb-5">
+                    <a href="https://stackoverflow.com/questions/7168164" class="btn-only d-inline-block stack-overflow-identity" target="_blank"><i class="fab fa-stack-overflow"></i> View more on Stack Overflow</a>
+                </div>
+            </div>
+            
+            <div class="attribution">
+                <div>Licensed under: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC-BY-SA</a> with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" target="_blank">attribution</a></div>
+                <div>Not affiliated with: <a href="https://stackoverflow.com/questions/tagged/dapper" target="_blank">Stack Overflow</a></div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/7168164/sorting-linked-lists-in-c by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 10:04:02 GMT -->
+</html>

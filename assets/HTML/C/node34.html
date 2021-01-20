@@ -1,0 +1,864 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node34.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Protocol Compiling and Lower Level RPC Programming</TITLE>
+<META NAME="description" CONTENT="Protocol Compiling and Lower Level RPC Programming">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1473"
+ HREF="node34.html#SECTION003410000000000000000">
+What is <TT>rpcgen</TT></A>
+<LI><A NAME="tex2html1474"
+ HREF="node34.html#SECTION003420000000000000000">
+An <TT>rpcgen</TT> Tutorial</A>
+<UL>
+<LI><A NAME="tex2html1475"
+ HREF="node34.html#SECTION003421000000000000000">
+Converting Local Procedures to Remote Procedures</A>
+</UL>
+<LI><A NAME="tex2html1476"
+ HREF="node34.html#SECTION003430000000000000000">
+Passing Complex Data Structures</A>
+<LI><A NAME="tex2html1477"
+ HREF="node34.html#SECTION003440000000000000000">
+Preprocessing Directives</A>
+<UL>
+<LI><A NAME="tex2html1478"
+ HREF="node34.html#SECTION003441000000000000000">
+cpp Directives</A>
+<LI><A NAME="tex2html1479"
+ HREF="node34.html#SECTION003442000000000000000">
+Compile-Time Flags</A>
+<LI><A NAME="tex2html1480"
+ HREF="node34.html#SECTION003443000000000000000">
+Client and Server Templates</A>
+<LI><A NAME="tex2html1481"
+ HREF="node34.html#SECTION003444000000000000000">
+Example <TT>rpcgen</TT> compile options/templates</A>
+</UL>
+<LI><A NAME="tex2html1482"
+ HREF="node34.html#SECTION003450000000000000000">
+Recommended Reading</A>
+<LI><A NAME="tex2html1483"
+ HREF="node34.html#SECTION003460000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION003400000000000000000">
+Protocol Compiling and Lower Level RPC Programming</A>
+</H1>
+<A NAME="ch:rpcgen">&#160;</A>
+This chapter introduces the rpcgen tool and provides a tutorial with code examples and usage of
+the available compile-time flags. We also introduce some further RPC programming routines.
+<P><H1><A NAME="SECTION003410000000000000000">
+What is <TT>rpcgen</TT></A>
+</H1>
+<P>
+The <TT>rpcgen</TT> tool generates remote program interface modules. It compiles source code
+written in the RPC Language. RPC Language is similar in syntax and structure to C. <TT>rpcgen</TT>
+produces one or more C language source modules, which are then compiled by a C compiler.
+<P>
+The default output of rpcgen is:
+<P><UL>
+<LI> A header file of definitions common to the server and the client
+<LI> A set of XDR routines that translate each data type defined in the header file
+<LI> A stub program for the server
+<LI> A stub program for the client
+</UL>
+<P><TT>rpcgen</TT> can optionally generate (although we <EM>do not</EM> consider these issues here -- see <TT>
+man</TT> pages or receommended reading):
+<UL>
+<LI> Various transports
+<LI> A time-out for servers
+<LI> Server stubs that are MT safe
+<LI> Server stubs that are not main programs
+<LI> C-style arguments passing ANSI C-compliant code
+<LI> An RPC dispatch table that checks authorizations and invokes service routines
+<P></UL>
+<P><TT>rpcgen</TT> significantly reduces the development time that would otherwise be spent developing
+low-level routines. Handwritten routines link easily with the rpcgen output.
+<P><H1><A NAME="SECTION003420000000000000000">
+An <TT>rpcgen</TT> Tutorial</A>
+</H1>
+<P><TT>rpcgen</TT> provides programmers a simple and direct way to write distributed applications. Server
+procedures may be written in any language that observes procedure-calling conventions. They are linked
+with the server stub produced by rpcgen to form an executable server program. Client procedures are
+written and linked in the same way.
+This section presents some basic rpcgen programming examples. Refer also to the <TT>man rpcgen </TT> online
+manual page.
+<P><H2><A NAME="SECTION003421000000000000000">
+Converting Local Procedures to Remote Procedures</A>
+</H2>
+<P>
+Assume that an application runs on a single computer and you want to convert it to run in a &quot;distributed&quot;
+manner on a network. This example shows the stepwise conversion of this program that writes a message
+to the system console.
+<P>
+Single Process Version of <TT>printmesg.c</TT>:
+<P><PRE>
+/* printmsg.c: print a message on the console */
+#include &lt;stdio.h&gt;
+main(int argc, char *argv[])
+
+{
+   char *message;
+   if (argc != 2) {
+      fprintf(stderr, &quot;usage: %s &lt;message&gt;\n&quot;,argv[0]);
+      exit(1);
+    }
+   message = argv[1];
+   if (!printmessage(message)) {
+     fprintf(stderr,&quot;%s: couldn¹t print your message\n&quot;,argv[0]);
+     exit(1);
+    }
+    printf(&quot;Message Delivered!\n&quot;);
+    exit(0);
+}
+
+/* Print a message to the console.
+* Return a boolean indicating whether
+* the message was actually printed. */
+
+printmessage(char *msg)
+
+{
+   FILE *f;
+   f = fopen(&quot;/dev/console&quot;, &quot;w&quot;);
+   if (f == (FILE *)NULL) {
+     return (0);
+    }
+   fprintf(f, &quot;%s\n&quot;, msg);
+   fclose(f);
+   return(1);
+}
+</PRE>
+<P>
+For local use on a single machine, this program could be compiled and executed as follows:
+<P><PRE>
+$ cc printmsg.c -o printmsg
+$ printmsg &quot;Hello, there.&quot;
+Message delivered!
+$
+</PRE>
+<P>
+If the <TT>printmessage()</TT> function is turned into a <EM>remote procedure</EM>, it can be called from anywhere
+in the network. <TT>rpcgen</TT> makes it easy to do this:
+<P>
+First, determine the data types of all procedure-calling arguments and the result argument. The
+calling argument of <TT>printmessage()</TT> is a string, and the result is an integer. We can write a protocol
+specification in RPC language that describes the remote version of printmessage. The RPC language source
+code for such a specification is:
+<PRE>
+/* msg.x: Remote msg printing protocol */
+program MESSAGEPROG {
+   version PRINTMESSAGEVERS {
+     int PRINTMESSAGE(string) = 1;
+   } = 1;
+} = 0x20000001;
+</PRE>
+<P>
+Remote procedures are always declared as part of remote programs. 
+The code above declares an entire
+remote program that contains the single procedure <TT>PRINTMESSAGE</TT>.
+<P>
+In this example,
+<P><UL>
+<LI> <TT>PRINTMESSAGE</TT> procedure is declared to be:
+<UL>
+<LI> the
+ <TT>procedure 1</TT>,
+<LI> in version 1 of the remote program
+</UL>
+<LI> <TT>MESSAGEPROG,</TT> with the program number 0x20000001. 
+</UL>
+<P>
+Version numbers are incremented
+when functionality is changed in the remote program. Existing procedures can be changed or new ones can
+be added. More than one version of a remote program can be defined and a version can have more than
+one procedure defined.
+<P><B>Note:</B> that the program and procedure names are declared with all capital letters. This is not
+required, but is a good convention to follow.
+Note also that the argument type is string and not char * as it would be in C. This is because a char * in C
+is ambiguous. char usually means an array of characters, but it could also represent a pointer to a single
+character. In RPC language, a null-terminated array of char is called a string.
+<P>
+There are just two more programs to write:
+<P><UL>
+<LI> The remote procedure itself
+<P>
+Th RPC Version of <TT>printmsg.c</TT>:
+<P><PRE>
+/*
+* msg_proc.c: implementation of the
+* remote procedure &quot;printmessage&quot;
+*/
+
+#include &lt;stdio.h&gt;
+#include &quot;msg.h&quot; /* msg.h generated by rpcgen */
+
+int * printmessage_1(char **msg, struct svc_req *req)
+
+{
+   static int result; /* must be static! */
+   FILE *f;
+
+   f = fopen(&quot;/dev/console&quot;, &quot;w&quot;);
+   if (f == (FILE *)NULL) {
+     result = 0;
+     return (&amp;result);
+    }
+   fprintf(f, &quot;%s\n&quot;, *msg);
+   fclose(f);
+   result = 1;
+   return (&amp;result);
+}
+</PRE>
+<P>
+Note that the declaration of the remote procedure <TT>printmessage_1</TT> differs from that of the local
+procedure printmessage in four ways:
+<P><UL>
+<LI> It takes a pointer to the character array instead of the pointer itself. This is true of all remote
+procedures when the <TT>'-' N</TT> option is not used: They always take pointers to their arguments rather
+than the arguments themselves. Without the <TT>'-' N</TT> option, remote procedures are always called with a
+single argument. If more than one argument is required the arguments must be passed in a struct.
+<LI> It is called with two arguments. The second argument contains information on the context of an
+invocation: the program, version, and procedure numbers, raw and canonical credentials, and an
+<TT>SVCXPRT</TT> structure pointer (the <TT>SVCXPRT</TT> structure contains transport information). This
+information is made available in case the invoked procedure requires it to perform the request.
+<LI> It returns a pointer to an integer instead of the integer itself. This is also true of remote
+procedures when the <TT>'-' N</TT> option is not used: They return pointers to the result. The result should be
+declared static unless the <TT>'-' M</TT> (multithread) or <TT>'-' A</TT> (Auto mode) options are used.
+Ordinarily, if the result is declared local to the remote procedure, references to it by the server stub
+are invalid after the 
+remote procedure returns. In the case of <TT>'-' M</TT> and <TT>'-' A</TT> options, a pointer to the result is
+passed as a third argument to the procedure, so the result is not declared in the procedure.
+<LI> An <TT>_1</TT> is appended to its name. In general, all remote procedures calls generated by rpcgen are
+named as follows: the procedure name in the program definition (here <TT>PRINTMESSAGE</TT>) is
+converted to all lowercase letters, an underbar <TT>(_)</TT> is appended to it, and the version number (here
+<TT>1</TT>) is appended. This naming scheme allows multiple versions of the same procedure.
+</UL>
+<LI> The main client program that calls it:
+<P><PRE>
+/*
+* rprintmsg.c: remote version
+* of &quot;printmsg.c&quot;
+*/
+
+#include &lt;stdio.h&gt;
+#include &quot;msg.h&quot; /* msg.h generated by rpcgen */
+
+main(int argc, char **argv)
+
+{
+  CLIENT *clnt;
+  int *result;
+  char *server;
+  char *message;
+
+  if (argc != 3) {
+     fprintf(stderr, &quot;usage: %s host
+     message\n&quot;, argv[0]);
+     exit(1);
+    }
+
+  server = argv[1];
+  message = argv[2];
+
+  /*
+   * Create client &quot;handle&quot; used for
+   * calling MESSAGEPROG on the server
+   * designated on the command line.
+   */
+
+  clnt = clnt_create(server, MESSAGEPROG, PRINTMESSAGEVERS, &quot;visible&quot;);
+
+  if (clnt == (CLIENT *)NULL) {
+   /*
+    * Couldn't establish connection
+    * with server.
+    * Print error message and die.
+    */
+
+   clnt_pcreateerror(server);
+   exit(1);
+   }
+
+  /*
+   * Call the remote procedure
+   * &quot;printmessage&quot; on the server
+   */
+
+   result = printmessage_1(&amp;message, clnt);
+   if (result == (int *)NULL) {
+     /*
+      * An error occurred while calling
+      * the server.
+      * Print error message and die.
+      */
+
+     clnt_perror(clnt, server);
+     exit(1);
+    }
+
+   /* Okay, we successfully called
+    * the remote procedure.
+    */
+
+   if (*result == 0) {
+
+   /*
+    * Server was unable to print
+    * our message.
+    * Print error message and die.
+    */
+
+    fprintf(stderr, &quot;%s: could not print your message\n&quot;,argv[0]);
+    exit(1);
+    }
+
+   /* The message got printed on the
+    * server's console
+    */
+
+    printf(&quot;Message delivered to %s\n&quot;, server);
+    clnt_destroy( clnt );
+    exit(0);
+}
+</PRE>
+<P>
+Note the following about Client Program to Call printmsg.c:
+<UL>
+<LI> First, a client handle is created by the RPC library routine <TT>clnt_create()</TT>. This client handle
+is passed to the stub routine that calls the remote procedure.  If no more calls are to be
+made using the client handle, destroy it with a call to <TT>clnt_destroy()</TT> to conserve system resources.
+<LI> The last parameter to <TT>clnt_create()</TT> is visible, which specifies that any transport noted as
+visible in <TT>/etc/netconfig</TT> can be used.
+<LI> The remote <TT>procedure printmessage_1</TT> is called exactly the same way as it is declared in
+<TT>msg_proc.c</TT>, except for the inserted client handle as the second argument. It also returns a pointer
+to the result instead of the result.
+<LI> The remote procedure call can fail in two ways. The RPC mechanism can fail or there can be an error
+in the execution of the remote procedure. In the former case, the remote <TT>procedure printmessage_1</TT>
+returns a <TT>NULL</TT>. In the latter case, the error reporting is application dependent. Here, the error is
+returned through <TT>*result</TT>.
+</UL></UL>
+<P>
+To compile the remote <TT>rprintmsg</TT> example:
+<P><UL>
+<LI> compile the protocol defined in <TT>msg.x</TT>: <TT>rpcgen msg.x</TT>.
+<P>
+This generates the header files (<TT>msg.h</TT>), client stub (<TT>msg_clnt.c</TT>), and server stub
+(<TT>msg_svc.c</TT>).
+<LI> compile the client executable:
+<P><PRE>
+ cc rprintmsg.c msg_clnt.c -o rprintmsg -lnsl
+</PRE>
+<LI>
+compile the server executable:
+<P><PRE>
+ cc msg_proc.c msg_svc.c -o msg_server -lnsl
+</PRE>
+</UL>
+<P>
+The C object files must be linked with the library <TT>libnsl</TT>, which contains all of the
+networking functions, including those for RPC and XDR.
+<P>
+In this example, no XDR routines were generated because the application uses only the basic types that are
+included in <TT>libnsl</TT>
+.
+Let us consider further what <TT>rpcgen</TT> did with the input file <TT>msg.x</TT>:
+<P><UL>
+<LI> It created a header file called <TT>msg.h</TT> that contained <code>#define</code> statements for
+<TT>MESSAGEPROG, MESSAGEVERS</TT>, and <TT>PRINTMESSAGE</TT> for use in the other modules. This file<B>must</B> be
+included by both the client and server modules.
+<LI> It created the client stub routines in the <TT>msg_clnt.c</TT> file. Here there is only one, the
+<TT>printmessage_1</TT>  routine, that was called from the <TT>rprintmsg</TT> client program. If the name of an
+<TT>rpcgen</TT> input file is <TT>prog.x</TT>, the client stub's output file is called <TT>prog_clnt.c</TT>.
+<LI> It created the server program in <TT>msg_svc.c</TT> that calls <TT>printmessage_1</TT> from
+<TT>msg_proc.c</TT>. The rule for naming the server output file is similar to that of the client: for an input
+file called <TT>prog.x</TT>, the output server file is named <TT>prog_svc.c</TT>.
+</UL>
+<P>
+Once created, the server program is installed on a remote machine and run. (If the machines are
+homogeneous, the server binary can just be copied. If they are not, the server source files must be copied
+to and compiled on the remote machine.)
+<P><H1><A NAME="SECTION003430000000000000000">
+Passing Complex Data Structures</A>
+</H1>
+<P><TT>rpcgen</TT> can also be used to generate XDR routines -- the routines that convert local data
+structures into XDR format and vice versa.
+<P>
+let us consider <TT>dir.x</TT>  a remote directory listing
+service, built using <TT>rpcgen</TT> both to generate stub routines and to generate the XDR routines.
+<P>
+The RPC Protocol Description File: <TT>dir.x</TT> is as follows:
+<P><PRE>
+/*
+* dir.x: Remote directory listing protocol
+*
+* This example demonstrates the functions of rpcgen.
+*/
+
+const MAXNAMELEN = 255; /* max length of directory entry */
+
+typedef string nametype&lt;MAXNAMELEN&gt;; /* director entry */
+
+typedef struct namenode *namelist; /* link in the listing */
+
+/* A node in the directory listing */
+
+struct namenode {
+   nametype name; /* name of directory entry */
+   namelist next; /* next entry */
+  };
+
+/*
+* The result of a READDIR operation
+*
+* a truly portable application would use
+* an agreed upon list of error codes
+* rather than (as this sample program
+* does) rely upon passing UNIX errno's
+* back.
+*
+* In this example: The union is used
+* here to discriminate between successful
+* and unsuccessful remote calls.
+*/
+
+union readdir_res switch (int errno) {
+   case 0:
+     namelist list; /* no error: return directory listing */
+   default:
+     void; /* error occurred: nothing else to return */
+   };
+
+/* The directory program definition */
+
+program DIRPROG {
+   version DIRVERS {
+    readdir_res
+    READDIR(nametype) = 1;
+   } = 1;
+} = 0x20000076;
+</PRE>
+<P>
+You can redefine types (like 
+<TT>readdir_res</TT> in the example above) using the <TT>struct, union</TT>, and <TT>enum</TT> RPC
+language keywords. These keywords are not used in later declarations of variables of those types. For
+example, if you define a <TT>union</TT>, <TT>my_un</TT>, you declare using only <TT>my_un</TT>, and not union <TT>
+my_un</TT>. <TT>rpcgen</TT> compiles RPC unions into C structures. Do not declare C unions using the union
+keyword.
+<P>
+Running <TT>rpcgen</TT> on <TT>dir.x</TT> generates four output files:
+<P><UL>
+<LI> the header file, <TT>dir.h</TT>,
+<LI> the client stub, <TT>dir_clnt.c</TT>,
+<LI> the server skeleton, <TT>dir_svc.c</TT> ,and
+<LI> the XDR routines in the file <TT>dir_xdr.c</TT>. 
+</UL>
+<P>
+This last file
+contains the XDR routines to convert declared data types from the host platform representation into XDR
+format, and vice versa. For each RPCL data type used in the <TT>.x</TT> file, <TT>rpcgen</TT> assumes that
+<TT>libnsl</TT> contains a routine whose name is the name of the data type, prepended by the XDR routine header
+<TT>xdr_ </TT> (for example, <TT>xdr_int</TT>). If a data type is defined in the <TT>.x</TT> file, <TT>rpcgen</TT>
+generates the required <TT>xdr_</TT> routine. If there is no data type definition in the <TT>.x</TT> source file
+(for example, <TT>msg.x</TT>, above), then no <TT>_xdr.c</TT> file is generated. You can write a <TT>.x</TT> source
+file that uses a data type not supported by <TT>libnsl</TT>, and deliberately omit defining the type (in the
+<TT>.x</TT> file). In doing so, you must provide the <TT>xdr_</TT> routine. This is a way to provide your own
+customized <TT>xdr_</TT> routines.
+<P>
+The server-side of the <TT>READDIR procedure</TT>,  <TT>dir_proc.c</TT> is shown below:
+<P><PRE>
+/*
+* dir_proc.c: remote readdir
+* implementation
+*/
+
+#include &lt;dirent.h&gt;
+#include &quot;dir.h&quot; /* Created by rpcgen */
+
+extern int errno;
+
+extern char *malloc();
+extern char *strdup();
+
+readdir_res *
+readdir_1(nametype *dirname, struct svc_req *req)
+
+{
+  DIR *dirp;
+  struct dirent *d;
+  namelist nl;
+  namelist *nlp;
+
+  static readdir_res res; /* must be static! */
+
+  /* Open directory */
+  dirp = opendir(*dirname);
+
+ if (dirp == (DIR *)NULL) {
+    res.errno = errno;
+   return (&amp;res);
+  }
+
+  /* Free previous result */
+  xdr_free(xdr_readdir_res, &amp;res);
+
+  /*
+   * Collect directory entries.
+   * Memory allocated here is free by
+   * xdr_free the next time readdir_1
+   * is called
+   */
+
+   nlp = &amp;res.readdir_res_u.list;
+   while (d = readdir(dirp)) {
+     nl = *nlp = (namenode *)
+     malloc(sizeof(namenode));
+     if (nl == (namenode *) NULL) {
+       res.errno = EAGAIN;
+       closedir(dirp);
+       return(&amp;res);
+      }
+    nl-&gt;name = strdup(d-&gt;d_name);
+    nlp = &amp;nl-&gt;next;
+  }
+
+  *nlp = (namelist)NULL;
+
+  /* Return the result */
+  res.errno = 0;
+  closedir(dirp);
+  return (&amp;res);
+}
+</PRE>
+<P>
+The Client-side Implementation of  implementation of the READDIR
+procedure, <TT>rls.c</TT> is given below:
+<P><PRE>
+/*
+* rls.c: Remote directory listing client
+*/
+
+#include &lt;stdio.h&gt;
+#include &quot;dir.h&quot; /* generated by rpcgen */
+
+extern int errno;
+
+main(int argc, char *argv[])
+
+
+{
+  CLIENT *clnt;
+  char *server;
+  char *dir;
+  readdir_res *result;
+  namelist nl;
+
+  if (argc != 3) {
+     fprintf(stderr, &quot;usage: %s host
+     directory\n&quot;,argv[0]);
+     exit(1);
+   }
+
+  server = argv[1];
+  dir = argv[2];
+
+  /*
+   * Create client &quot;handle&quot; used for
+   * calling MESSAGEPROG on the server
+   * designated on the command line.
+   */
+
+  cl = clnt_create(server, DIRPROG, DIRVERS, &quot;tcp&quot;);
+
+  if (clnt == (CLIENT *)NULL) {
+     clnt_pcreateerror(server);
+     exit(1);
+    }
+
+  result = readdir_1(&amp;dir, clnt);
+
+  if (result == (readdir_res *)NULL) {
+     clnt_perror(clnt, server);
+     exit(1);
+   }
+
+  /* Okay, we successfully called
+   * the remote procedure.
+   */
+
+  if (result-&gt;errno != 0) {
+    /* Remote system error. Print
+     * error message and die.
+     */
+
+    errno = result-&gt;errno;
+    perror(dir);
+    exit(1);
+   }
+
+  /* Successfully got a directory listing.
+   * Print it.
+   */
+
+  for (nl = result-&gt;readdir_res_u.list;
+       nl != NULL;
+       nl = nl-&gt;next) {
+         printf(&quot;%s\n&quot;, nl-&gt;name);
+     }
+
+  xdr_free(xdr_readdir_res, result);
+  clnt_destroy(cl);
+  exit(0);
+}
+</PRE>
+<P>
+As in other examples, execution is on systems named local and remote. The files are compiled and run as
+follows:
+<PRE>
+remote$ rpcgen dir.x
+remote$ cc -c dir_xdr.c
+remote$ cc rls.c dir_clnt.c dir_xdr.o -o rls -lnsl
+remote$ cc dir_svc.c dir_proc.c dir_xdr.o -o dir_svc -lnsl
+remote$ dir_svc
+</PRE>
+<P>
+When you install <TT>rls</TT>  on system local, you can list the contents of <TT>/usr/share/lib</TT> on system
+remote as follows:
+<P><PRE>
+local$ rls remote /usr/share/lib
+ascii
+eqnchar
+greek
+kbd
+marg8
+tabclr
+tabs
+tabs4
+local$
+</PRE>
+<P><TT>rpcgen</TT> generated client code does not release the memory allocated for the results of the RPC call.
+Call <TT>xdr_free()</TT> to release the memory when you are finished with it. It is similar to calling the
+<TT>free()</TT> routine, except that you pass the XDR routine for the result. In this example, after printing
+the list, <TT>xdr_free(xdr_readdir_res, result); </TT> was called.
+<P><B>Note</B> - Use <TT>xdr_free()</TT> to release memory allocated by <TT>malloc()</TT>. Failure to use
+<TT>xdr_free to()</TT> release memory results in memory leaks.
+<P><H1><A NAME="SECTION003440000000000000000">
+Preprocessing Directives</A>
+</H1>
+<P><TT>rpcgen</TT> supports C and other preprocessing features. C preprocessing is performed on <TT>rpcgen</TT> input
+files before they are compiled. All standard C preprocessing directives are allowed in the <TT>.x</TT> source
+files. Depending on the type of output file being generated, five symbols are defined by <TT>rpcgen</TT>.
+<TT>rpcgen</TT> provides an additional preprocessing feature: any line that begins with a percent sign (%) is
+passed directly to the output file, with no action on the line's content. Caution is required because
+<TT>rpcgen</TT> does not always place the lines where you intend. Check the output source file and, if needed,
+edit it.
+<P>
+The following symbols may be used to process file specific output:
+<P><DL>
+<DT><STRONG><TT>RPC_HDR</TT></STRONG>
+<DD>-- Header file output
+<DT><STRONG><TT>RPC_XDR</TT></STRONG>
+<DD>-- XDR routine output
+<DT><STRONG><TT>RPC_SVC</TT></STRONG>
+<DD>-- Server stub output
+<DT><STRONG><TT>RPC_CLNT</TT></STRONG>
+<DD>-- Client stub output
+<DT><STRONG><TT>RPC_TB</TT></STRONG>
+<DD>-- Index table output
+</DL>
+<P>
+The following example illustrates tthe use of <TT>rpcgen</TT>Œs
+pre-processing features.
+<P><PRE>
+/*
+* time.x: Remote time protocol
+*/
+program TIMEPROG {
+   version TIMEVERS {
+     unsigned int TIMEGET() = 1;
+    } = 1;
+} = 0x20000044;
+
+#ifdef RPC_SVC
+%int *
+%timeget_1()
+%{
+% static int thetime;
+%
+% thetime = time(0);
+% return (&amp;thetime);
+%}
+#endif
+</PRE>
+<P><H2><A NAME="SECTION003441000000000000000">
+cpp Directives</A>
+</H2>
+<P><TT>rpcgen</TT> supports C preprocessing features. <TT>rpcgen</TT> defaults to use <TT>/usr/ccs/lib/cpp</TT> as the C
+preprocessor. If that fails, <TT>rpcgen</TT> tries to use 
+<TT>/lib/cpp</TT>. You may specify a library containing a
+different cpp to <TT>rpcgen</TT> with the <TT>'-' Y </TT>flag.
+<P>
+For example, if /usr/local/bin/cpp exists, you can specify it to rpcgen as follows:
+<P><PRE>
+rpcgen -Y /usr/local/bin test.x
+</PRE>
+<P><H2><A NAME="SECTION003442000000000000000">
+Compile-Time Flags</A>
+</H2>
+This section describes the <TT>rpcgen</TT> options available at compile time. The following table summarizes
+the options which are discussed in this section.
+<P><TABLE CELLPADDING=3 BORDER="1">
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>Option</TD>
+<TD ALIGN="LEFT" NOWRAP>Flag</TD>
+<TD ALIGN="LEFT" NOWRAP>Comments</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>C-style</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>'-' N </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Also called Newstyle mode</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>ANSI C</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>'-' C </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Often used with the -N option</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>MT-Safe code</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>'-' M </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>For use in multithreaded environments</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>MT Auto mode</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>'-' A </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>-A also turns on -M option</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>TS-RPC library '</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>-' b </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>TI-RPC library is default</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP><TT>xdr_inline</TT> count</TD>
+<TD ALIGN="LEFT" NOWRAP><TT>'-' i </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Uses 5 packed elements as default,</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP>but other number may be specified</TD>
+</TR>
+</TABLE><H2><A NAME="SECTION003443000000000000000">
+Client and Server Templates</A>
+</H2>
+<TT>rpcgen</TT> generates sample code for the client and server sides. Use these options to generate the
+desired templates.
+<P><TABLE CELLPADDING=3 BORDER="1">
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP>Flag</TD>
+<TD ALIGN="LEFT" NOWRAP>Function</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP><TT>'-' a  </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Generate all template files</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP><TT>'-' Sc  </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Generate client-side template</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP><TT>'-' Ss  </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Generate server-side template</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="LEFT" NOWRAP><TT>'-' Sm  </TT></TD>
+<TD ALIGN="LEFT" NOWRAP>Generate makefile template</TD>
+</TR>
+</TABLE>
+<P>
+The files can be used as guides or by filling in the missing parts. These files are in addition to the stubs
+generated.
+<P><H2><A NAME="SECTION003444000000000000000">
+Example <TT>rpcgen</TT> compile options/templates</A>
+</H2>
+<P>
+A C-style mode server template is generated from the <TT>add.x</TT> source by the command:
+<P><PRE>
+rpcgen -N -Ss -o add_server_template.c add.x
+</PRE>
+The result is stored in the file <code>add_server_template.c</code>.
+<P>
+A C-style mode, client template for the same
+<TT>add.x</TT> source is generated with the command line:
+<P><PRE>
+rpcgen -N -Sc -o add_client_template.c add.x
+</PRE>
+<P>
+The result is stored in the file <code>add_client_template.c</code>.
+<P>
+A make file template for the same <TT>add.x</TT>
+source is generated with the command line:
+<PRE>
+rpcgen -N -Sm -o mkfile_template add.x
+</PRE>
+<P>
+The result is stored in the file <TT>mkfile_template</TT>. It can be used to compile the client and the
+server. If the <TT>'-' a</TT> flag is used as follows:
+<PRE>
+rpcgen -N -a add.x
+</PRE>
+<P><TT>rpcgen</TT> generates all three template files. The client template goes into <TT>add_client.c</TT>, the
+server template to <TT>add_server.c</TT>, and the makefile template to makefile.a. If any of these files
+already exists, <TT>rpcgen</TT> displays an error message and exits.
+<P><B>Note</B> - When you generate template files, give them new names to avoid the files being overwritten the
+next time rpcgen is executed.
+<P><H1><A NAME="SECTION003450000000000000000">
+Recommended Reading</A>
+</H1>
+<P>
+The book <EM>Power Programming with RPC</EM> by John Bloomer, O'Reilly and Associates, 1992, is the most
+comprehensive on the topic and is essential reading for further RPC programming.
+<P><H1><A NAME="SECTION003460000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12834</B></P>
+<P>
+Use <TT>rpcgen</TT> the generate and compile the <TT>rprintmsg</TT> listing example given in this chapter.</P>
+<P><P>
+<B>Exercise 12835</B></P>
+<P>
+Use <TT>rpcgen</TT> the generate and compile the <TT>dir</TT> listing example given in this chapter.</P>
+<P><P>
+<B>Exercise 12836</B></P>
+<P>
+Develop a Remote Procedure Call suite of programs that enables a user to search for specific files or
+filtererd files in a remote directory. That is to say you can search for a named file <EM>e.g. file.c</EM> or
+all files named <TT>*.c</TT> or even <TT>*.x</TT>.</P>
+<P><P>
+<B>Exercise 12837</B></P>
+<P>
+Develop a Remote Procedure Call suite of programs that enables a user to <TT>grep</TT> files remotely. You may
+use code developed previously or unix system calls to implement <TT>grep</TT>.</P>
+<P><P>
+<B>Exercise 12838</B></P>
+<P>
+Develop a Remote Procedure Call suite of programs that enables a user to <EM>list</EM> the contents of a
+named remote files.</P>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node34.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:25 GMT -->
+</HTML>

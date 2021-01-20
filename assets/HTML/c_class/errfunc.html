@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/errfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Error Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Error Functions</H1>
+<H2>Header file</H2>
+<UL>
+<LI><CODE>errno.h</CODE> contains the definition of the <CODE>errno</CODE>
+variable
+<LI><CODE>stdio.h</CODE> contains the function prototype for
+the <CODE>perror</CODE> function
+<LI><CODE>string.h</CODE> contains the function prototype for
+the <CODE>strerror</CODE> function
+</UL>
+<H2>Error Condition - <CODE>errno</CODE></H2>
+<UL>
+<LI><CODE>extern int errno</CODE> or
+<CODE>#define errno <VAR>definition</VAR></CODE>
+is used to hold implementation-defined error codes from standard library
+routines
+<LI>All error codes are positive integers and are traditionally
+defined in <CODE>&lt;errno.h&gt;</CODE>
+<LI><CODE>errno</CODE> contains the last error condition which occurred;
+library functions should never clear <CODE>errno</CODE>, so if
+<CODE>errno</CODE> is to be checked after a library call, it is the
+programmer's responsibility to set it to 0 before calling the
+library routine
+</UL>
+<H2>Error String - <CODE>strerror</CODE></H2>
+<UL>
+<LI><CODE>char *strerror(int errnum)</CODE>
+<UL>
+<LI><CODE>strerror</CODE> returns a pointer to the error message string
+associated with <CODE>errnum</CODE>
+</UL>
+</UL>
+<H2>Print Error String - <CODE>perror</CODE></H2>
+<UL>
+<LI><CODE>void perror(const char *str)</CODE>
+<UL>
+<LI><CODE>perror</CODE> finds the error message string
+associated with the global <CODE>errno</CODE> variable and prints
+it, prepended by the text in <CODE>str</CODE> and a colon if
+<CODE>str</CODE> is non-null, and followed by a newline, to the
+standard error file descriptor.
+</UL>
+</UL>
+<H2>List of Common Error Constants</H2>
+<DL>
+<DT><CODE>EPERM</CODE>
+<DD>Operation not permitted
+<DT><CODE>ENOENT</CODE>
+<DD>No such file or directory
+<DT><CODE>ESRCH</CODE>
+<DD>No such process
+<DT><CODE>EINTR</CODE>
+<DD>Interrupted system call
+<DT><CODE>EIO</CODE>
+<DD>I/O error
+<DT><CODE>ENXIO</CODE>
+<DD>No such device or address
+<DT><CODE>E2BIG</CODE>
+<DD>Argument list too long
+<DT><CODE>ENOEXEC</CODE>
+<DD>Exec format error
+<DT><CODE>EBADF</CODE>
+<DD>Bad file descriptor
+<DT><CODE>ECHILD</CODE>
+<DD>No child processes
+<DT><CODE>ENOMEM</CODE>
+<DD>Not enough core
+<DT><CODE>EACCES</CODE>
+<DD>Permission denied
+<DT><CODE>EFAULT</CODE>
+<DD>Bad address
+<DT><CODE>ENOTBLK</CODE>
+<DD>Block device required
+<DT><CODE>EBUSY</CODE>
+<DD>Resource busy
+<DT><CODE>EEXIST</CODE>
+<DD>File exists
+<DT><CODE>EXDEV</CODE>
+<DD>Cross-device link
+<DT><CODE>ENODEV</CODE>
+<DD>No such device
+<DT><CODE>ENOTDIR</CODE>
+<DD>Not a directory
+<DT><CODE>EISDIR</CODE>
+<DD>Is a directory
+<DT><CODE>EINVAL</CODE>
+<DD>Invalid argument
+<DT><CODE>ENFILE</CODE>
+<DD>Too many open files in system
+<DT><CODE>EMFILE</CODE>
+<DD>Too many open files
+<DT><CODE>ENOTTY</CODE>
+<DD>Inappropriate I/O control operation
+<DT><CODE>ETXTBSY</CODE>
+<DD>Text file busy
+<DT><CODE>EFBIG</CODE>
+<DD>File too large
+<DT><CODE>ENOSPC</CODE>
+<DD>No space left on device
+<DT><CODE>ESPIPE</CODE>
+<DD>Illegal seek
+<DT><CODE>EROFS</CODE>
+<DD>Read-only file system
+<DT><CODE>EMLINK</CODE>
+<DD>Too many links
+<DT><CODE>EPIPE</CODE>
+<DD>Broken pipe
+<DT><CODE>EDOM</CODE>
+<DD>Numerical argument out of domain
+<DT><CODE>ERANGE</CODE>
+<DD>Result too large
+<DT><CODE>ENOMSG</CODE>
+<DD>No message of desired type
+<DT><CODE>EIDRM</CODE>
+<DD>Identifier removed
+<DT><CODE>ECHRNG</CODE>
+<DD>Channel number out of range
+<DT><CODE>ELNRNG</CODE>
+<DD>Link number out of range
+<DT><CODE>EUNATCH</CODE>
+<DD>Protocol driver not attached
+</DL>
+<A HREF="index.html">Previous</A>, 
+<A HREF="strmemfunc.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/errfunc.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

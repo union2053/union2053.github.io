@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/const_vol.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Constant and Volatile Qualifiers</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Constant and Volatile Qualifiers</H1>
+<H2><CODE>const</CODE></H2>
+<UL>
+<LI><CODE>const</CODE> is used with a datatype declaration or definition
+to specify an unchanging value
+<UL>
+<LI>Examples:
+<PRE>
+	const int five = 5;
+	const double pi = 3.141593;
+</PRE>
+</UL>
+<LI><CODE>const</CODE> objects may not be changed
+<UL>
+<LI>The following are illegal:
+<PRE>
+	const int five = 5;
+	const double pi = 3.141593;
+
+	pi = 3.2;
+	five = 6;
+</PRE>
+</UL>
+</UL>
+<H2><CODE>volatile</CODE></H2>
+<UL>
+<LI><CODE>volatile</CODE> specifies a variable whose value may be changed
+by processes outside the current program
+<LI>One example of a <CODE>volatile</CODE> object might be a buffer used
+to exchange data with an external device:
+<PRE>
+int
+check_iobuf(void)
+{
+	volatile int iobuf;
+	int val;
+
+	while (iobuf == 0) {
+	}
+	val = iobuf;
+	iobuf = 0;
+	return(val);
+}
+</PRE>
+if <CODE>iobuf</CODE> had not been declared <CODE>volatile</CODE>,
+the compiler would notice that nothing happens inside the
+loop and thus eliminate the loop
+<LI><CODE>const</CODE> and <CODE>volatile</CODE> can be used together
+<UL>
+<LI>An input-only buffer for an external device could be declared as
+<CODE>const volatile</CODE> (or <CODE>volatile const</CODE>, order is
+not important) to make sure the compiler knows that the variable should
+not be changed (because it is input-only) and that its value may be altered
+by processes other than the current program
+</UL>
+</UL>
+<A HREF="control.html">Previous</A>, 
+<A HREF="array_ptr.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/const_vol.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:04 GMT -->
+</HTML>

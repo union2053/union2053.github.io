@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/stdio.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C Class - Standard Input/Output Functions</TITLE>
+</HEAD>
+<BODY text="#000000" link="#0000ff" bgcolor="#ffffff">
+<H1>Standard Input/Output Functions</H1>
+<H2>Predefined Types and Values - <CODE>FILE</CODE>, <CODE>EOF</CODE>, <CODE>NULL</CODE> and <CODE>size_t</CODE></H2>
+<UL>
+<LI><CODE>FILE</CODE> is a datatype which holds information about an open
+file.
+<LI><CODE>EOF</CODE> is a value returned to indicate end-of-file
+(though is not used exclusively for that purpose) and
+is required by ANSI C to be a negative integral constant
+expression and is traditionally set to <CODE>-1</CODE>.
+<LI><CODE>NULL</CODE> is set to the value of the null pointer constant
+<CODE>0</CODE>
+<LI><CODE>BUFSIZ</CODE> is an integer constant which specifies an "appropriate"
+size for file I/O buffers.
+<LI><CODE>size_t</CODE> is an unsigned integral type which is large enough
+to hold any value returned by <CODE>sizeof</CODE>
+</UL>
+<H2>Preopened File Streams - <CODE>stdin</CODE>, <CODE>stdout</CODE>,
+and <CODE>stderr</CODE></H2>
+<UL>
+<LI><CODE>FILE *stdin</CODE>
+<UL>
+<LI><CODE>stdin</CODE> is associated with a user's standard input stream.
+</UL>
+<LI><CODE>FILE *stdout</CODE>
+<UL>
+<LI><CODE>stdin</CODE> is associated with an output stream used for normal
+program output.
+</UL>
+<LI><CODE>FILE *stderr</CODE>
+<UL>
+<LI><CODE>stdin</CODE> is associated with an output stream used for error
+messages.
+</UL>
+</UL>
+<H2>Open File - <CODE>fopen</CODE> and <CODE>freopen</CODE></H2>
+<UL>
+<LI><CODE>FILE *fopen(const char *path, const char *mode)</CODE>
+<UL>
+<LI><CODE>fopen</CODE> opens the file designated by the character
+string <CODE>path</CODE> and associates it with a stream.
+The <CODE>mode</CODE> string should begin with one of the following sequences:
+<UL>
+<LI><CODE>r</CODE> - open an existing file for reading, starting at the
+beginning of the file.
+<LI><CODE>w</CODE> - truncate an existing file to zero length or create a text
+file for writing, starting at the beginning of the file.
+<LI><CODE>a</CODE> - open or create for writing at end of text file.
+<LI><CODE>r+</CODE> - open an existing file for reading and writing, starting
+at the beginning of the file.
+<LI><CODE>w+</CODE> - truncate an existing file to zero length or
+create a text file for reading and writing, starting at the beginning of
+the file.
+<LI><CODE>a+</CODE> - open for reading and writing at end of file or create for reading and writing.
+</UL>
+<LI>The <CODE>mode</CODE> string may include a <CODE>b</CODE> as either
+the second or third character to indicate a binary file.
+<LI>The <CODE>mode</CODE> string may also contain other characters after
+the above modes, which are used in an implementation-defined manner.
+<LI>If a file is opened for update (the <CODE>+</CODE> mode), an output
+operation may not be followed by an input operation without flushing the
+buffer (<CODE>fflush()</CODE>)) or
+repositioning (<CODE>fseek()</CODE>, <CODE>fsetpos</CODE>, <CODE>rewind</CODE>),
+and an input operation may
+not be followed by an output operation without flushing the buffer or
+repositioning unless the input operation has reached end-of-file.
+<LI>If <CODE>fopen</CODE> succeeds, a <CODE>FILE</CODE> pointer is returned.
+Otherwise, <CODE>NULL</CODE> is returned and <CODE>errno</CODE> is set.
+</UL>
+<LI><CODE>FILE *freopen(const char *pathname, const char *mode, FILE *stream)</CODE>
+<UL>
+<LI><CODE>freopen</CODE> behaves exactly like <CODE>fopen</CODE> except that
+it associates the newly opened file with <CODE>stream</CODE> rather than
+creating a new stream.
+<LI><CODE>freopen</CODE> is primarily used to associate a new file with
+one of the standard text streams (<CODE>stdin</CODE>, <CODE>stdout</CODE>,
+or <CODE>stderr</CODE>).
+</UL>
+</UL>
+<H2>Flush File Buffer - <CODE>fflush</CODE></H2>
+<UL>
+<LI><CODE>int fflush(FILE *stream)</CODE>
+<UL>
+<LI><CODE>fflush</CODE> forces any buffered output to be written,
+but does not close the stream.
+<LI>If <CODE>stream</CODE> is a null pointer, <CODE>fflush</CODE> flushes
+all of a process' open output streams (at least on UNIX systems)
+<LI>If the operation succeeds, <CODE>fflush</CODE> returns 0.
+Otherwise, <CODE>EOF</CODE> is returned and <CODE>errno</CODE> is set.
+</UL>
+</UL>
+<H2>Close File - <CODE>fclose</CODE></H2>
+<UL>
+<LI><CODE>int fclose(FILE *stream)</CODE>
+<UL>
+<LI><CODE>fclose</CODE> causes any buffered output to be written
+(possibly using <CODE>fflush</CODE>)
+and then closes the stream.
+<LI>Subsequent attempts to use <CODE>stream</CODE> in any routine
+other than <CODE>freopen</CODE> will result in errors.
+<LI>If the operation succeeds, <CODE>fclose</CODE> returns 0.
+Otherwise, <CODE>EOF</CODE> is returned and <CODE>errno</CODE> is set.
+</UL>
+</UL>
+<H2>Check or Clear File Status - <CODE>feof</CODE>, <CODE>ferror</CODE> and <CODE>clearerr</CODE></H2>
+<UL>
+<LI><CODE>int feof(FILE *stream)</CODE>
+<UL>
+<LI><CODE>feof</CODE> checks the end-of-file indicator for
+<CODE>stream</CODE> and returns non-zero if it is set.
+<LI>Note that even if the last character in a file has been read, an
+end-of-file condition does not exist until a request is made to read
+the character <EM>after</EM> the last character.
+</UL>
+<LI><CODE>int ferror(FILE *stream)</CODE>
+<UL>
+<LI><CODE>ferror</CODE> checks the error indicator for
+<CODE>stream</CODE> and returns non-zero if it is set.
+</UL>
+<LI><CODE>void clearerr(FILE *stream)</CODE>
+<UL>
+<LI><CODE>clearerr</CODE> clears the end-of-file and error indicators
+for <CODE>stream</CODE>.
+<LI>Once an end-of-file or error indicator has been set, it is not reset
+until <CODE>clearerr</CODE> is called (with the exception that file
+repositioning functions clear the end-of-file indicator.)
+</UL>
+</UL>
+<H2>Read Character from File - <CODE>getc</CODE>, <CODE>fgetc</CODE> and <CODE>getchar</CODE></H2>
+<UL>
+<LI><CODE>int fgetc(FILE *stream)</CODE>
+<UL>
+<LI><CODE>fgetc</CODE> reads the next available character
+from the input stream <CODE>stream</CODE> and
+returns it as an <CODE>int</CODE>
+</UL>
+<LI><CODE>int getc(FILE *stream)</CODE>
+<UL>
+<LI><CODE>getc</CODE> is identical in function to <CODE>fgetc</CODE> but
+is usually implemented as a macro (which means that <CODE>stream</CODE>
+may be evaluated more than once, so it should not be an expression with
+side effects.)
+</UL>
+<LI><CODE>int getchar(void)</CODE>
+<UL>
+<LI><CODE>getchar</CODE> reads the next available character from
+<CODE>stdin</CODE> and is typically implemented as <CODE>getc(stdin)</CODE>
+(which means it is a macro with all the problems of <CODE>getc</CODE>.)
+</UL>
+<LI>Errors and End-Of-File
+<UL>
+<LI>If <CODE>stream</CODE> or <CODE>stdin</CODE> is at end-of-file or a
+read error occurs, these routines return <CODE>EOF</CODE>
+(and <CODE>errno</CODE> is set if an error occurs.)
+<CODE>feof</CODE> or <CODE>ferror</CODE> must therefore be used to
+distinguish between the two conditions.
+</UL>
+</UL>
+<H2>Write Character to File - <CODE>putc</CODE>, <CODE>fputc</CODE> and <CODE>putchar</CODE></H2>
+<UL>
+<LI><CODE>int fputc(int c, FILE *stream)</CODE>
+<UL>
+<LI><CODE>fputc</CODE> writes <CODE>c</CODE> to the output stream
+<CODE>stream</CODE> as an
+<CODE>unsigned char</CODE> and returns the character as an <CODE>int</CODE>.
+If an error occurs, <CODE>EOF</CODE> is returned and <CODE>errno</CODE> is set.
+</UL>
+<LI><CODE>int putc(int c, FILE *stream)</CODE>
+<UL>
+<LI><CODE>putc</CODE> is identical in function to <CODE>fputc</CODE> but
+is usually implemented as a macro (which means that <CODE>stream</CODE>
+and <CODE>c</CODE>
+may be evaluated more than once, so they should not be expressions with
+side effects.)
+</UL>
+<LI><CODE>int putchar(int c)</CODE>
+<UL>
+<LI><CODE>putchar</CODE> writes <CODE>c</CODE> to <CODE>stdout</CODE>
+and is typically implemented as <CODE>putc(stdout)</CODE>
+(which means it is a macro with all the problems of <CODE>putc</CODE>.)
+</UL>
+</UL>
+<H2>Push Character Back into Buffer - <CODE>ungetc</CODE></H2>
+<UL>
+<LI><CODE>int ungetc(int c, FILE *stream)</CODE>
+<UL>
+<LI><CODE>ungetc</CODE> pushes <CODE>c</CODE> back onto the input stream
+<CODE>stream</CODE>, so that it will be returned by a subsequent read
+of <CODE>stream</CODE>.
+<LI>Pushed back characters are read in reverse order.
+<LI>If a file repositioning function
+(<CODE>fseek()</CODE>, <CODE>fsetpos</CODE>, <CODE>rewind</CODE>) is
+used, any pushed back characters are lost.
+<LI><CODE>ungetc</CODE> does not affect the contents of the file pointed
+to by <CODE>stream</CODE>
+<LI>One character of pushback is guaranteed.
+<LI>Attempts to push <CODE>EOF</CODE> have no effect on <CODE>stream</CODE>
+and return <CODE>EOF</CODE>
+</UL>
+</UL>
+<H2>Read String from File - <CODE>fgets</CODE> and <CODE>gets</CODE></H2>
+<UL>
+<LI><CODE>char *fgets(char *s, int n, FILE *stream)</CODE>
+<UL>
+<LI><CODE>fgets</CODE> reads characters from <CODE>stream</CODE> and stores
+them in the string pointed to by <CODE>s</CODE>.
+<LI>Reading stops when a newline character is seen, end-of-file is reached
+or <CODE>n-1</CODE> characters have been read, and 
+<CODE>'\0'</CODE> is appended to <CODE>s</CODE> (after any newline character.)
+<LI>If end-of-file occurs before any characters have been read,
+<CODE>fgets</CODE> returns <CODE>NULL</CODE> and the contents of <CODE>s</CODE>
+are unchanged.
+<LI>If an error occurs at any time during the read operation, 
+<CODE>fgets</CODE> returns <CODE>NULL</CODE> and the contents of <CODE>s</CODE>
+are undefined.
+<LI>Otherwise, <CODE>fgets</CODE> returns <CODE>s</CODE>
+</UL>
+<LI><CODE>char *gets(char *s, FILE *stream)</CODE>
+<UL>
+<LI><CODE>gets</CODE> is similar to <CODE>fgets</CODE>,
+but is much more dangerous.
+<UL>
+<LI><CODE>gets</CODE> does not store a newline character.
+<LI>More importantly, <CODE>gets</CODE> assumes that <CODE>s</CODE>
+is infinitely long, allowing sufficiently knowledgeable programmers
+to worm their way inside the program.
+</UL>
+</UL>
+</UL>
+<H2>Write String to File - <CODE>fputs</CODE> and <CODE>puts</CODE></H2>
+<UL>
+<LI><CODE>int fputs(const char *s, FILE *stream)</CODE>
+<UL>
+<LI><CODE>fputs</CODE> writes the null-terminated string <CODE>s</CODE>
+to the output stream <CODE>stream</CODE>.
+<LI>If an error occurs, <CODE>fputs</CODE> returns <CODE>EOF</CODE>.
+Otherwise, is returns a nonnegative integer.
+</UL>
+<LI><CODE>int puts(const char *s)</CODE>
+<UL>
+<LI><CODE>puts</CODE> writes the null-terminated string <CODE>s</CODE>,
+followed by a newline character,
+to the <CODE>stdout</CODE> output stream.
+</UL>
+</UL>
+<H2>Read Binary Data from File - <CODE>fread</CODE></H2>
+<UL>
+<LI><CODE>size_t fread(void *ptr, size_t siz, size_t num, FILE *stream)</CODE>
+<UL>
+<LI><CODE>fread</CODE> reads up to <CODE>num</CODE> objects,
+each <CODE>siz</CODE> bytes long, from input stream <CODE>stream</CODE>,
+storing them in the memory pointed to by <CODE>ptr</CODE>.
+<LI>The number of objects read is returned.
+<LI>If an error occurs, zero will be returned.
+<LI>If end-of-file is reached,
+the value returned will be less than <CODE>num</CODE> (and may be zero,
+in which case <CODE>feof</CODE> or <CODE>ferror</CODE> should be used to
+distinguish between the two conditions.)
+</UL>
+</UL>
+<H2>Write Binary Data to File - <CODE>fwrite</CODE></H2>
+<UL>
+<LI><CODE>size_t fwrite(const void *ptr, size_t siz, size_t num, FILE *stream)</CODE>
+<UL>
+<LI><CODE>fwrite</CODE> writes up to <CODE>num</CODE> objects,
+each <CODE>siz</CODE> bytes long, from
+the memory pointed to by <CODE>ptr</CODE>
+to the output stream <CODE>stream</CODE>.
+<LI>The number of objects written is returned.
+<LI>If an error occurs, zero will be returned.
+</UL>
+</UL>
+<H2>Read Formatted Input - <CODE>scanf</CODE>, <CODE>fscanf</CODE>, <CODE>sscanf</CODE></H2>
+<UL>
+<LI><CODE>int scanf(const char *format, ...)</CODE>
+<UL>
+<LI>
+</UL>
+<LI><CODE>int fscanf(FILE *stream, const char *format, ...)</CODE>
+<UL>
+<LI>
+</UL>
+<LI><CODE>int sscanf(const char *str, const char *format, ...)</CODE>
+<UL>
+<LI>
+</UL>
+</UL>
+<H2>Write Formatted Output - <CODE>printf</CODE>, <CODE>fprintf</CODE>, <CODE>sprintf</CODE></H2>
+<UL>
+<LI><CODE>int printf(const char *format, ...)</CODE>
+<UL>
+<LI><A HREF="printf.html"><EM>See printf page</EM></A>
+<LI><CODE>printf</CODE> writes to the <CODE>stdout</CODE> output stream.
+<LI>
+</UL>
+<LI><CODE>int fprintf(FILE *stream, const char *format, ...)</CODE>
+<UL>
+<LI><CODE>fprintf</CODE> writes to output stream <CODE>stream</CODE>.
+<LI>
+</UL>
+<LI><CODE>int sprintf(const char *str, const char *format, ...)</CODE>
+<UL>
+<LI><CODE>sprintf</CODE> "writes" its output to the character string
+<CODE>str</CODE> (followed by a terminating <CODE>'\0'</CODE>.)
+</UL>
+<LI>All three functions return the number of characters written (not
+including the terminating <CODE>'\0'</CODE> for <CODE>sprintf</CODE>)
+</UL>
+<H2>File Position - <CODE>fgetpos</CODE>, <CODE>fsetpos</CODE>,
+<CODE>rewind</CODE>, <CODE>fseek</CODE>, and <CODE>ftell</CODE></H2>
+<UL>
+<LI><CODE>int fgetpos(FILE *stream, fpos_t *pos);</CODE>
+<UL>
+<LI><CODE>fgetpos</CODE> stores
+the value of the current file position indicator for <CODE>stream</CODE>
+in <CODE>pos</CODE>.
+<LI><CODE>pos</CODE> is an implementation-defined type which
+may be integral or may be a complex structure.
+<LI>If an error occurs, a non-zero value is returned and
+<CODE>errno</CODE> is set.
+</UL>
+<LI><CODE>int fsetpos(FILE *stream, fpos_t *pos)</CODE>
+<UL>
+<LI><CODE>fsetpos</CODE> sets the file position indicator for
+<CODE>stream</CODE> to the position indicated by <CODE>pos</CODE>.
+<LI>If an error occurs, a non-zero value is returned and
+<CODE>errno</CODE> is set.
+<LI>If <CODE>fsetpos</CODE> succeeds, the end-of-file indicator is cleared.
+</UL>
+<LI><CODE>void rewind(FILE *stream)</CODE>
+<UL>
+<LI><CODE>rewind</CODE> sets the file position indicator for
+<CODE>stream</CODE> to the beginning of the file.
+</UL>
+<LI><CODE>int fseek(FILE *stream, long offset, int whence)</CODE>
+<UL>
+<LI><CODE>fseek</CODE> sets the file position indicator for <CODE>stream</CODE>.
+The new byte position is obtained by adding <CODE>offset</CODE> to
+the position specified by <CODE>whence</CODE>:
+<UL>
+<LI>If <CODE>whence</CODE> is set to <STRONG>SEEK_CUR</STRONG>, the offset
+is computed from the current position in the file.
+<LI>If <CODE>whence</CODE> is set to <STRONG>SEEK_SET</STRONG>, the offset
+is computed from the beginning of the file.
+<LI>If <CODE>whence</CODE> is set to <STRONG>SEEK_END</STRONG>, the offset
+is computed from the end of the file.
+<UL>
+<LI><STRONG>SEEK_CUR</STRONG>, <STRONG>SEEK_SET</STRONG>, and
+<STRONG>SEEK_END</STRONG> are all defined in &lt;stdio.h&gt;.
+</UL>
+</UL>
+<LI><CODE>fseek</CODE> is usually applied to binary files.
+</UL>
+<LI><CODE>long ftell(FILE *stream)</CODE>
+<UL>
+<LI><CODE>ftell</CODE> returns the current file position for
+<CODE>stream</CODE>.
+<LI>For binary files, the value returned is the number of bytes from the
+beginning of the file to the current file position.
+<LI>For text files, the value is implementation-defined, but is guaranteed
+to be useable in <CODE>fseek</CODE> and <CODE>0L</CODE> must represent
+the beginning of the file.
+</UL>
+</UL>
+<H2>Alter File Buffer Size - <CODE>setbuf</CODE> and <CODE>setvbuf</CODE></H2>
+<UL>
+<LI><CODE>void setvbuf(FILE *stream, char *buf, int buftype, size_t bufsize)</CODE>
+<UL>
+<LI><CODE>setvbuf</CODE> sets the type, size and location of the buffer
+for <CODE>stream</CODE>.
+<LI>The three types of buffering available are:
+<UL>
+<LI><STRONG>_IOFBF</STRONG> causes I/O to be block buffered, meaning
+that bytes are saved up and written when <CODE>bufsize</CODE> has been
+reached.
+<LI><STRONG>_IOLBF</STRONG> causes I/O to be line buffered, meaning
+that the buffer is written when either a newline character is saved to
+the buffer or when <CODE>bufsize</CODE> has been reached.
+<LI><STRONG>_IONBF</STRONG> means that no buffering is done; everything
+is immediately written.
+</UL>
+<LI>If <CODE>buf</CODE> is non-null, it is assumed to be at least
+<CODE>bufsize</CODE> bytes long and will be used instead of the
+automatically created buffer.
+<UL>
+<LI>The predefined constant <STRONG>BUFSIZ</STRONG> is the recommended
+value for the buffer size.
+<LI>If <CODE>buf</CODE> is <CODE>NULL</CODE>,
+the stream is completely unbuffered.
+</UL>
+<LI><CODE>setvbuf</CODE> can safely be called after a stream has been
+opened but before any data are read or written.
+<LI><CODE>setvbuf</CODE> returns <CODE>EOF</CODE> on error.
+</UL>
+<LI><CODE>void setbuf(FILE *stream, char *buf)</CODE>
+<UL>
+<LI><CODE>setbuf</CODE> has the same effect as<BR>
+<CODE>setvbuf(stream, buf, buf ? _IOFBF : _IONBF, BUFSIZ);</CODE>
+</UL>
+</UL>
+<H2>Temporary File Functions - <CODE>tmpfile</CODE> and <CODE>tmpnam</CODE></H2>
+<UL>
+<LI><CODE>FILE *tmpfile(void)</CODE>
+<UL>
+<LI><CODE>tmpfile</CODE> attempts to create a new file and open it
+using mode <CODE>wb+</CODE>.
+<LI>If the create and open succeed, a <CODE>FILE</CODE> pointer is
+returned.
+<LI>If the file could not be opened, <CODE>NULL</CODE> is returned.
+<LI>The file is automatically deleted when it is closed or when
+the process terminates.
+<LI>Note that this function may create a file which is publicly readable and
+writable.
+</UL>
+<LI><CODE>char *tmpnam(char *str)</CODE>
+<UL>
+<LI><CODE>tmpnam</CODE> generates a temporary file name
+which was not in use when <CODE>tmpnam</CODE> was called.
+<LI>If <CODE>str</CODE> is non-null, the file name is copied to that buffer.
+<UL>
+<LI><CODE>str</CODE> is expected to be at least
+<CODE>L_tmpnam</CODE>
+characters long.
+</UL>
+<LI>If <CODE>str</CODE> is null, a static buffer is used, meaning that
+subsequent calls to <CODE>tmpnam</CODE> may overwrite the buffer.
+<LI>Temporary file names use the path prefix
+<CODE>P_tmpdir</CODE>.
+<LI>Both <CODE>L_tmpnam</CODE> and <CODE>P_tmpdir</CODE> are
+defined in &lt;stdio.h&gt;.
+<LI><CODE>tmpnam</CODE> is guaranteed to be able to generate at least
+<STRONG>TMP_MAX</STRONG> unique temporary file names, where
+<STRONG>TMP_MAX</STRONG> must be at least 25.
+<LI>Note that there is a race condition between file name selection
+and file creation.
+<LI>Note also that <CODE>tmpnam</CODE> does not create the file and therefore
+does not ensure the file will be deleted after the program is terminated.
+</UL>
+</UL>
+<A HREF="charfunc.html">Previous</A>, 
+<A HREF="sortsrch.html">Next</A>, 
+<A HREF="index.html">Index</A>
+</BODY>
+
+<!-- Mirrored from icecube.wisc.edu/~dglo/c_class/stdio.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Oct 2020 19:00:06 GMT -->
+</HTML>

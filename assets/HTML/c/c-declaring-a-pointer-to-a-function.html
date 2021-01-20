@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-declaring-a-pointer-to-a-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Declaring a Pointer to a Function</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Declaring a Pointer to a Function'>C Declaring a Pointer to a Function</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-syntax.html'>C function syntax
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-finds-the-lesser-of-two-values.html'>C function intro demo
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-prototype-declaration.html'>C prototype declaration
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-block-variable-shadow-example.html'>C Variable shadow example
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-static-variables-keeping-track-within-a-function.html'>C function Static Variables 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-sharing-variables-between-functions-using-global-variables.html'>C function global variables
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-name.html'>C function name
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-the-return-value-type-for-function.html'>C function return
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Parameter
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameters.html'>C Function Parameters 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-value-mechanism.html'>C Parameter Pass by Value
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-parameter-pass-by-address-mechanism.html'>C Parameter Pass by Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-protecting-array-contents-with-const.html'>C Parameter Protecting
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-const-parameters.html'>C Parameter const
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-declaring-array-parameters.html'>C Parameter Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-using-pointer-parameters.html'>C Parameter Pointer 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-and-multidimensional-arrays.html'>C Parameter Array 2D
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-functions-with-a-variable-number-of-arguments.html'>C function variable argument length
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Recursion
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion.html'>C function recursion
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-to-calculate-factorials.html'>C function recursion factorial
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursion-prints-the-binary-equivalent-of-an-integer.html'>C function recursion binary
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-recursive-to-calculate-power.html'>C function recursion power
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Function Pointer
+</LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C function pointer
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-of-pointers-to-functions.html'>C Pointer Function Array 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-pointers-to-functions-as-arguments.html'>C Function Pointer Argument
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-use-function-as-parameter.html'>C function as parameter
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-to-raise-a-number-to-an-integer-power.html'>C Raise to Power
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculating-an-average-using-functions.html'>C function calculate average
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-example-converts-an-integer-to-a-string.html'>C convert int to string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-split-string-into-a-list-of-words.html'>C split string
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-main-function.html'>C function  main() 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Review
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-function-review-question-1.html'>C Review Question 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-1.html'>C Exercise 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-2.html'>C exercise 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-function-exercise-3.html'>C exercise 3
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Declaring a Pointer to a Function</h1>
+<a class ='btn btn-outline-dark' href=c-function-recursive-to-calculate-power.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-arrays-of-pointers-to-functions.html>Next</a><p>The declaration for a pointer to a function looks like the following:
+</p><div class='myCodeDiv'><button id='XIGAM' class='myCopyButton' data-clipboard-target='#MENVU'>Copy</button><pre  id='MENVU' style='font-size:18px;' class='code'><span class='r'>int</span> (*function_pointer) (<span class='r'>int</span>);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#XIGAM');clipboard.on('success', function(e) {$('#XIGAM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#XIGAM').text('error');});</script></div><p>This declares a variable that is a pointer to a function. 
+
+</p><p>It doesn't point to anything yet; this statement just defines the pointer variable. 
+
+</p><p>The name of the pointer is  <i style='color:blue'>function_pointer</i>, and it's intended to point to functions that 
+have one parameter of type int and that return a value of type  int to the calling function.  
+
+</p><p>You can only use this particular pointer to point to functions with these characteristics. 
+
+</p><p>If you want a pointer to functions that accept a float argument and return float values, you need to declare  
+another pointer with the required characteristics. 
+
+</p><p>In this example, the *function_pointer part of the declaration must be between parentheses. 
+
+</p><p>If you omit the parentheses, you'll have a declaration for a function called function_<i style='color:blue'>pointer</i>() that returns 
+a value that's a pointer to  int.  
+
+</p><p>The second pair of parentheses encloses the parameter list in the same way it does with a standard  
+function declaration. 
+
+</p><p>A pointer to a function can point only to functions with a given return type and a given  
+number of parameters of given types. 
+
+</p><p>You can assign whatever name you like, just as with any other pointer variable. 
+
+</p><h3>Calling a Function Through a Function Pointer
+
+</h3><p>Suppose you define a function that has the following prototype:
+</p><div class='myCodeDiv'><button id='DTDVA' class='myCopyButton' data-clipboard-target='#FCTAQ'>Copy</button><pre  id='FCTAQ' style='font-size:18px;' class='code'><span class='r'>int</span> sum(<span class='r'>int</span> a, <span class='r'>int</span> b);                 <span class='c'>// Calculates a+b</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#DTDVA');clipboard.on('success', function(e) {$('#DTDVA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#DTDVA').text('error');});</script></div><p>This function has two parameters of type int and returns a value of type  int, so you could store its
+address in a function pointer that you declare like this:
+</p><div class='myCodeDiv'><button id='NDTAP' class='myCopyButton' data-clipboard-target='#MHLGF'>Copy</button><pre  id='MHLGF' style='font-size:18px;' class='code'><span class='r'>int</span> (*pfun)(<span class='r'>int</span>, <span class='r'>int</span>) = sum;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NDTAP');clipboard.on('success', function(e) {$('#NDTAP').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NDTAP').text('error');});</script></div><p>This declares a function pointer with the name <i style='color:blue'>pfun</i> that will store addresses of functions with two
+parameters of type int and a return value of type  int. 
+
+</p><p>The statement also initializes <i style='color:blue'>pfun</i> with the address of the function <i style='color:blue'>sum</i>(). 
+
+</p><p>To supply an initial value, you just use the name of a function that has the required prototype.
+
+</p><p>You can now call  <i style='color:blue'>sum</i>() through the function pointer like this:
+</p><div class='myCodeDiv'><button id='KADYD' class='myCopyButton' data-clipboard-target='#XKLSW'>Copy</button><pre  id='XKLSW' style='font-size:18px;' class='code'><span class='r'>int</span> result = pfun(45, 55);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#KADYD');clipboard.on('success', function(e) {$('#KADYD').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#KADYD').text('error');});</script></div><p>This statement calls the <i style='color:blue'>sum</i>() function through the <i style='color:blue'>pfun</i> pointer with argument values of 45 and 55.
+
+</p><p>The result is 100.
+
+</p><p>Note that you use the function pointer name just like a function name to call the function that it points to; no
+dereference operator is required.
+
+</p><p>Suppose you define another function that has the following prototype:
+</p><div class='myCodeDiv'><button id='USNXX' class='myCopyButton' data-clipboard-target='#TPGPD'>Copy</button><pre  id='TPGPD' style='font-size:18px;' class='code'><span class='r'>int</span> product(<span class='r'>int</span> a, <span class='r'>int</span> b);             <span class='c'>// Calculates a*b</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#USNXX');clipboard.on('success', function(e) {$('#USNXX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#USNXX').text('error');});</script></div><p>You can store the address of  <i style='color:blue'>product</i>() in <i style='color:blue'>pfun</i> with the following statement:
+</p><div class='myCodeDiv'><button id='IQSRG' class='myCopyButton' data-clipboard-target='#CVUVL'>Copy</button><pre  id='CVUVL' style='font-size:18px;' class='code'>pfun = product;
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IQSRG');clipboard.on('success', function(e) {$('#IQSRG').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IQSRG').text('error');});</script></div><p>With  <i style='color:blue'>pfun</i> containing the address of <i style='color:blue'>product</i>(), you can call <i style='color:blue'>product</i>() through the pointer:
+</p><div class='myCodeDiv'><button id='CPBPC' class='myCopyButton' data-clipboard-target='#LFSBO'>Copy</button><pre  id='LFSBO' style='font-size:18px;' class='code'>result = pfun(5, 12);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#CPBPC');clipboard.on('success', function(e) {$('#CPBPC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#CPBPC').text('error');});</script></div><p>After executing this statement, result will contain the value 60.
+
+Let's try a simple example and see how it works.
+
+</p><h3>Example
+
+</h3><p>In this example, you'll define three functions that have the same parameter and return types and use a
+pointer to a function to call each of them in turn:
+
+</p><div class='myCodeDiv'><button id='HAHPQ' class='myCopyButton' data-clipboard-target='#ZUITL'>Copy</button><pre  id='ZUITL' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt; 
+
+<span class='c'>// Function prototypes </span>
+<span class='r'>int</span> sum(<span class='r'>int</span>, <span class='r'>int</span>); 
+<span class='r'>int</span> product(<span class='r'>int</span>, <span class='r'>int</span>); 
+<span class='r'>int</span> difference(<span class='r'>int</span>, <span class='r'>int</span>); 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='r'>int</span> a = 10;                         <span class='c'>// Initial value for a </span>
+  <span class='r'>int</span> b = 5;                          <span class='c'>// Initial value for b </span>
+  <span class='r'>int</span> result = 0;                     <span class='c'>// Storage for results </span>
+  <span class='r'>int</span> (*pfun)(<span class='r'>int</span>, <span class='r'>int</span>);              <span class='c'>// Function pointer declaration </span>
+
+  pfun = sum;                         <span class='c'>// Points to function sum() </span>
+  result = pfun(a, b);                <span class='c'>// Call sum() through pointer </span>
+  printf(<span class='q'>"pfun = sum             result = %2d\n"</span>, result); 
+
+  pfun = product;                     <span class='c'>// Points to function product() </span>
+  result = pfun(a, b);                <span class='c'>// Call product() through pointer </span>
+  printf(<span class='q'>"pfun = product         result = %2d\n"</span>, result); 
+  pfun = difference;                  <span class='c'>// Points to function difference() </span>
+  result = pfun(a, b);                <span class='c'>// Call difference() through pointer </span>
+  printf(<span class='q'>"pfun = difference      result = %2d\n"</span>, result); 
+  <span class='r'>return</span> 0; 
+} 
+
+<span class='r'>int</span> sum(<span class='r'>int</span> x, <span class='r'>int</span> y) 
+{ 
+  <span class='r'>return</span> x + y; 
+} 
+
+<span class='r'>int</span> product(<span class='r'>int</span> x, <span class='r'>int</span> y) 
+{ 
+  <span class='r'>return</span> x * y; 
+} 
+
+<span class='r'>int</span> difference(<span class='r'>int</span> x, <span class='r'>int</span> y) 
+{ 
+  <span class='r'>return</span> x - y; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HAHPQ');clipboard.on('success', function(e) {$('#HAHPQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HAHPQ').text('error');});</script></div><p>the output from this program looks like this: 
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>You declare and define three different functions to return the sum, the product, and the difference
+between two integer arguments. 
+
+</p><p>Within <i style='color:blue'>main</i>(), you declare a pointer to a function with this statement:
+</p><div class='myCodeDiv'><button id='NSXMQ' class='myCopyButton' data-clipboard-target='#IAHVK'>Copy</button><pre  id='IAHVK' style='font-size:18px;' class='code'><span class='r'>int</span> (*pfun)(<span class='r'>int</span>, <span class='r'>int</span>);             <span class='c'>// Function pointer declaration</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#NSXMQ');clipboard.on('success', function(e) {$('#NSXMQ').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#NSXMQ').text('error');});</script></div><p>this pointer can be assigned to point to any function that accepts two int arguments and also returns a
+value of type int. notice the way you assign a value to the pointer:
+</p><div class='myCodeDiv'><button id='AKZJM' class='myCopyButton' data-clipboard-target='#HICZJ'>Copy</button><pre  id='HICZJ' style='font-size:18px;' class='code'>pfun = sum;                        <span class='c'>// Points to function sum()</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#AKZJM');clipboard.on('success', function(e) {$('#AKZJM').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#AKZJM').text('error');});</script></div><p>You just use a regular assignment statement that has the name of the function.
+
+</p><p>You don't need to put in the parameter list. 
+
+</p><p>If you want the address of a function, you also use the name by itself.
+
+</p><p>In <i style='color:blue'>main</i>(), you assign the address of each function, in turn, to the function pointer <i style='color:blue'>pfun</i>. 
+
+</p><p>You then call each function using the pointer <i style='color:blue'>pfun</i> and display the results. 
+
+</p><p>You can see how to call a function using the pointer in this statement:
+</p><div class='myCodeDiv'><button id='QHOCW' class='myCopyButton' data-clipboard-target='#TLLGS'>Copy</button><pre  id='TLLGS' style='font-size:18px;' class='code'>result = pfun(a, b);               <span class='c'>// Call sum() through pointer</span>
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#QHOCW');clipboard.on('success', function(e) {$('#QHOCW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#QHOCW').text('error');});</script></div><a class ='btn btn-outline-dark' href=c-function-recursive-to-calculate-power.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-arrays-of-pointers-to-functions.html>Next</a><h2>Related</h2><UL><LI><a href='c-function-recursion-to-calculate-factorials.html'>C function recursion to calculate factorials</a></LI><LI><a href='c-function-recursion-prints-the-binary-equivalent-of-an-integer.html'>C function Recursion prints the binary equivalent of an integer</a></LI><LI><a href='c-function-recursive-to-calculate-power.html'>C function recursive to calculate power</a></LI><LI><a href='c-arrays-of-pointers-to-functions.html'>C Arrays of Pointers to Functions</a></LI><LI><a href='c-pointers-to-functions-as-arguments.html'>C Pointers to Functions As Arguments</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-declaring-a-pointer-to-a-function.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

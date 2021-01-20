@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node15.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>C, UNIX and Standard Libraries</TITLE>
+<META NAME="description" CONTENT="C, UNIX and Standard Libraries">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1042"
+ HREF="node15.html#SECTION001510000000000000000">
+Advantages of using UNIX with C</A>
+<LI><A NAME="tex2html1043"
+ HREF="node15.html#SECTION001520000000000000000">
+Using UNIX System Calls and Library Functions</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001500000000000000000">
+C, UNIX and Standard Libraries</A>
+</H1>
+<P>
+There is a very close link between C and
+most operating systems that run our C programs. Almost the whole of the UNIX
+operating system is written in C. This Chapter will look at how C and UNIX
+interface together. <A NAME="tex2html38"
+ HREF="footnode.html#2749"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+ SRC="http://users.cs.cf.ac.uk/opt/LaTeX2html/icons.gif/foot_motif.gif"></SUP></A>
+<BR>
+<P>
+We have to use UNIX to maintain our file space, edit, compile
+and run programs <EM>etc.</EM>. 
+<BR>
+<P>
+However UNIX is much more useful than this:
+<P><H1><A NAME="SECTION001510000000000000000">
+Advantages of using UNIX with C</A>
+</H1>
+<P><UL>
+<LI> <B>Portability</B> -- UNIX, or a variety of UNIX, is available on many
+machines. Programs written in <EM>standard</EM> UNIX and C should run on any of
+them with little difficulty.
+<LI> <B>Multiuser / Multitasking</B> -- many programs can share a machines
+processing power.
+<LI> <B>File handling</B> -- hierarchical file system with many file handling
+routines.
+<LI> <B>Shell Programming</B> -- UNIX provides a powerful command interpreter
+that <BR>
+understands over 200 commands and can also run UNIX and
+user-defined programs.
+</UL>
+<P><UL>
+<LI> <B>Pipe</B> -- where the output of one program can be made the input of
+another. This can done from command line or within a C program.
+<LI> <B>UNIX utilities</B> -- there over 200 utilities that let you accomplish
+many routines without writing new programs. <EM>e.g.</EM> make, grep, diff, awk,
+more ....
+<LI> <B>System calls</B> -- UNIX has about 60 system calls that are at the <EM>
+heart</EM> of the operating system or the <EM>kernel</EM> of UNIX. The calls are
+actually written in C. All of them can be accessed from C programs. Basic I/0,
+system clock access are examples. The function <TT>open()</TT> is an example of a
+system call.
+<LI> <B>Library functions</B> -- additions to the operating system.
+</UL><H1><A NAME="SECTION001520000000000000000">
+Using UNIX System Calls and Library Functions</A>
+</H1>
+<P>
+To use system calls and library functions in a C program we simply call the
+appropriate C function.
+<BR>
+<P>
+Examples of standard library functions we have met include the higher level I/O
+functions -- <TT>fprintf()</TT>, <TT>malloc()</TT> ...
+<BR>
+<P>
+Aritmetic operators, random number generators -- <TT>random(),
+srandom(), lrand48(), drand48() <EM>etc.</EM></TT> and basic C types to string
+conversion are memebers of the <TT>stdlib.h</TT> standard library.
+<P>
+<BR>
+<P>
+All math functions such as <TT>sin(), cos(), sqrt()</TT> are standard math
+library (<TT>math.h</TT>) functions and others follow in a similar fashion.
+<P>
+For most system calls and library functions we have to include an appropriate
+header file. <EM>e.g.</EM> <TT>stdio.h, math.h</TT>
+<P>
+To use a function, ensure that you have made the required <TT>#includes</TT>
+in your C file. Then the function can be called as though you had defined
+it yourself.
+<P>
+It is important to ensure that your arguments have the expected types,
+ otherwise the function will probably produce strange results. <TT>lint</TT>
+is quite good at checking such things.
+<P>
+Some libraries require extra options before the compiler can support their use. For example, to compile a program including functions
+from the <TT>math.h </TT> library the command might be
+<P>&nbsp;&nbsp;&nbsp;<TT>cc mathprog.c -o mathprog -lm</TT>
+<P>
+The final <TT>-lm</TT> is an instruction to link the maths library with the
+program. The manual page for each function will usually inform you if any
+special compiler flags are required.
+<P>
+Information on nearly all system calls and library functions is available in
+manual pages. These are available on line: Simply type <TT>man</TT> function name.
+<BR>
+<P><EM>e.g.</EM>&nbsp;&nbsp;&nbsp;&nbsp;<TT>man drand48</TT>
+<P>
+would give information about this random number generator.
+<P>
+Over the coming chapters we will be investigating in detail many aspects
+of  the C Standard Library and also other UNIX libraries.
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node15.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:14 GMT -->
+</HTML>

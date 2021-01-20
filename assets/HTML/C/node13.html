@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node13.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>Low Level Operators and Bit Fields</TITLE>
+<META NAME="description" CONTENT="Low Level Operators and Bit Fields">
+<META NAME="keywords" CONTENT="C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso_8859_1">
+<LINK REL="STYLESHEET" HREF="C.css">
+</HEAD>
+<BODY >
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><strong>Subsections</strong></A>
+<UL>
+<LI><A NAME="tex2html1008"
+ HREF="node13.html#SECTION001310000000000000000">
+Bitwise Operators</A>
+<LI><A NAME="tex2html1009"
+ HREF="node13.html#SECTION001320000000000000000">
+Bit Fields</A>
+<UL>
+<LI><A NAME="tex2html1010"
+ HREF="node13.html#SECTION001321000000000000000">
+Bit Fields: Practical Example</A>
+<LI><A NAME="tex2html1011"
+ HREF="node13.html#SECTION001322000000000000000">
+A note of caution: Portability</A>
+</UL>
+<LI><A NAME="tex2html1012"
+ HREF="node13.html#SECTION001330000000000000000">
+Exercises</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<H1><A NAME="SECTION001300000000000000000">
+Low Level Operators and Bit Fields</A>
+</H1>
+<A NAME="ch:bits">&#160;</A>
+We have seen how pointers give us control over low level memory operations.
+<P>
+Many programs (<EM>e.g.</EM> systems type applications) must actually operate at
+a low level where individual bytes must be operated on.
+<P><B>NOTE:</B> The combination of pointers and bit-level operators makes C useful
+for many low level applications and can almost replace assembly code. (Only
+about 10 % of UNIX is assembly code the rest is C!!.)
+<P><H1><A NAME="SECTION001310000000000000000">
+Bitwise Operators</A>
+</H1>
+<P>
+The <EM>bitwise</EM> operators of C a summarised in the following table:
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="2414">&#160;</A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Bitwise operators</CAPTION>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&amp;</TD>
+<TD ALIGN="CENTER" NOWRAP>AND</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><IMG WIDTH="8" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.gif"
+ ALT="$\mid$"></TD>
+<TD ALIGN="CENTER" NOWRAP>OR</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><IMG WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.gif"
+ ALT="$\wedge$"></TD>
+<TD ALIGN="CENTER" NOWRAP>XOR</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP><IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.gif"
+ ALT="$\sim$"></TD>
+<TD ALIGN="CENTER" NOWRAP>One's Compliment</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG WIDTH="51" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img18.gif"
+ ALT="$0 \rightarrow 1$"></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&nbsp;</TD>
+<TD ALIGN="CENTER" NOWRAP><IMG WIDTH="51" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img19.gif"
+ ALT="$1 \rightarrow 0$"></TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&lt;&lt;</TD>
+<TD ALIGN="CENTER" NOWRAP>Left shift</TD>
+</TR>
+<TR VALIGN="TOP"><TD ALIGN="CENTER" NOWRAP>&gt;&gt;</TD>
+<TD ALIGN="CENTER" NOWRAP>Right Shift</TD>
+</TR>
+</TABLE></DIV>
+<BR>
+<P><B>DO NOT</B> confuse &amp; with &amp;&amp;: &amp; is bitwise AND, &amp;&amp; <U>logical</U>
+AND. Similarly for <IMG WIDTH="8" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.gif"
+ ALT="$\mid$"> and <IMG WIDTH="13" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img20.gif"
+ ALT="$\mid\mid$">.
+<BR>
+<P><IMG WIDTH="17" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.gif"
+ ALT="$\sim$"> is a unary operator -- it only operates on one argument to right of the
+operator.
+ <BR>
+<P>
+The shift operators perform appropriate shift by operator on the right to the
+operator on the left. The right operator <U>must</U> be positive. The
+vacated bits are filled with zero (<EM>i.e.</EM> There is <B>NO</B> wrap around).
+<P>
+For example: <I>x</I> &lt;&lt; 2 shifts the bits in <I>x</I> by 2 places to the left.
+<BR>
+<P>
+So:
+<BR>
+<P>
+if <I>x</I> = 00000010 (binary) or 2 (decimal)
+<BR>
+<P>
+then: 
+<BR>
+<P><IMG WIDTH="217" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.gif"
+ ALT="$x \gt\gt= 2 \Rightarrow x = 00000000$"> or 0 (decimal)
+<BR>
+<P>
+Also: if <I>x</I> = 00000010 (binary) or 2 (decimal)
+<BR>
+<P><IMG WIDTH="217" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img22.gif"
+ ALT="$x <<= 2 \Rightarrow x = 00001000$"> or 8 (decimal)
+<BR>
+<P>
+Therefore a shift left is equivalent to a  multiplication by 2.
+<BR>
+<P>
+Similarly a shift right is equal to division by 2
+<BR>
+<P><B>NOTE</B>: Shifting is much faster than actual 
+multiplication (*) or division (/) by 2. So if you want fast multiplications or
+division by 2 <EM>use shifts</EM>.
+ <BR>
+<P>
+To illustrate many points of bitwise operators let us write a function,
+<TT>Bitcount</TT>, that counts bits set to 1 in an 8 bit number (<TT>unsigned
+char</TT>) passed as an argument to the function.
+<BR>
+<P><TT>
+<PRE><TT>
+int bitcount(unsigned char x) 
+&nbsp;
+	{&nbsp;int count;
+&nbsp;
+		for (count=0; x != 0; x&gt;&gt;=1)
+			if ( x &amp; 01)
+			   count++;
+		return count;
+	}
+</TT></PRE>
+</TT>
+<P>
+<BR>
+<P>
+This function illustrates many C program points:
+<UL>
+<LI> <TT>for loop <U>not</U> used for simple counting operation
+<LI> <TT>x<IMG WIDTH="85" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img23.gif"
+ ALT="$\gt\gt=1 \Rightarrow$"> x = x &gt;&gt; 1</TT>
+<LI> for loop will repeatedly shift right <TT>x</TT> until <TT>x</TT> becomes 0
+<LI> use expression evaluation of <TT>x &amp; 01</TT> to control <TT>if</TT>
+<LI> <TT>x &amp; 01</TT> <EM>masks</EM> of 1st bit of <TT>x</TT> if this is 1 then <TT>
+count++</TT>
+</UL></TT><H1><A NAME="SECTION001320000000000000000">
+Bit Fields</A>
+</H1>
+<P><EM>Bit Fields</EM> allow the packing of data in a structure. This is especially
+useful when memory or data storage is at a premium. Typical examples:
+<P><UL>
+<LI> Packing several objects into a machine word. <EM>e.g.</EM> 1 bit flags can be
+compacted -- Symbol tables in compilers.
+<LI> Reading external file formats -- non-standard file formats could be read
+in. <EM>E.g.</EM> 9 bit integers.
+</UL>
+<P>
+C lets us do this in a structure definition by putting  :<EM>bit length</EM>
+after the variable. <EM>i.e.</EM>
+<BR>
+<P><TT>
+<PRE><TT>
+struct packed_struct {
+		 unsigned int f1:1;
+		 unsigned int f2:1;
+		 unsigned int f3:1;
+		 unsigned int f4:1;
+		 unsigned int type:4;
+		 unsigned int funny_int:9;
+} pack;
+</TT></PRE>
+</TT>
+<BR>
+<P>
+Here the <TT>packed_struct contains 6 members: Four 1 bit <EM>flags</EM> <TT>
+f1..f3</TT>, a 4 bit <TT>type</TT> and a 9 bit <TT>funny_int</TT>.
+<BR>
+<P>
+C automatically packs the above bit fields as compactly as possible, provided
+that the maximum length of the field is less than or equal to the integer word
+length of the computer. If this is not the case then some compilers may allow
+memory overlap for the fields whilst other would store the next field in the
+next word (see comments on bit fiels portability below).
+ <BR>
+<P>
+Access members as usual via:
+<BR>
+<P>&nbsp;&nbsp;&nbsp;<TT>pack.type = 7;</TT>
+<BR>
+<P><B>NOTE</B>: 
+<UL>
+<LI> Only <I>n</I> lower bits will be assigned to an <I>n</I> bit number. So type
+cannot take values larger than 15 (4 bits long).
+<LI> Bit fields are <U>always</U> converted to integer type for
+computation.
+<LI> You are allowed to mix "normal" types with bit fields.
+<LI> The <TT>unsigned</TT> definition is important - ensures that no bits are used
+as a <IMG WIDTH="17" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="img24.gif"
+ ALT="$\pm$"> flag.
+</UL></TT><H2><A NAME="SECTION001321000000000000000">
+Bit Fields: Practical Example</A>
+</H2>
+<P>
+Frequently device controllers (<EM>e.g.</EM> disk drives) and the operating system
+need to communicate at a low level. Device controllers contain several <EM>
+registers</EM> which may be packed together in one integer (Figure&nbsp;<A HREF="node13.html#fig:drive">12.1</A>).
+<P><A NAME="fig:drive">&#160;</A><img src= drive.gif>
+<P>
+<B>Fig.&nbsp;<A HREF="node13.html#fig:drive">12.1</A> Example Disk Controller Register</B>
+We could define this register easily with bit fields:
+<P><PRE>
+struct DISK_REGISTER  {
+     unsigned ready:1;
+     unsigned error_occured:1;
+     unsigned disk_spinning:1;
+     unsigned write_protect:1;
+     unsigned head_loaded:1;
+     unsigned error_code:8;
+     unsigned track:9;
+     unsigned sector:5;
+     unsigned command:5;
+};
+</PRE>
+<P>
+To access values stored at a particular memory address, <TT>
+DISK_REGISTER_MEMORY</TT> we can assign a pointer of the above structure to
+access the memory via:
+<P><PRE>
+struct DISK_REGISTER *disk_reg = (struct DISK_REGISTER *) DISK_REGISTER_MEMORY;
+</PRE>
+<P>
+The disk driver code to access this is now relatively straightforward:
+<PRE>
+/* Define sector and track to start read */
+
+disk_reg-&gt;sector = new_sector;
+disk_reg-&gt;track = new_track;
+disk_reg-&gt;command = READ;
+
+/* wait until operation done, ready will be true */
+
+while ( ! disk_reg-&gt;ready ) ;
+
+/* check for errors */
+
+if (disk_reg-&gt;error_occured)
+  { /* interrogate disk_reg-&gt;error_code for error type */
+    switch (disk_reg-&gt;error_code)
+    ......
+  }
+</PRE>
+<P><H2><A NAME="SECTION001322000000000000000">
+A note of caution: Portability</A>
+</H2>
+<P>
+Bit fields are a convenient way to express many difficult operations. However,
+bit fields do suffer from a lack of portability between platforms:
+<P><UL>
+<LI> integers may be signed or unsigned
+<LI> Many compilers limit the maximum number of bits in the bit field to the
+size of an <TT>integer</TT> which may be either 16-bit or 32-bit varieties.
+<LI> Some bit field members are stored left to right others are stored right to
+left in memory.
+<LI> If bit fields too large, next bit field may be stored consecutively in
+memory (overlapping the boundary between memory locations) or in the next word
+of memory.
+</UL>
+<P>
+If portability of code is a premium you can use bit shifting and masking to
+achieve the same results but not as easy to express or read. For example:
+<P><PRE>
+unsigned int  *disk_reg = (unsigned int *) DISK_REGISTER_MEMORY;
+
+/* see if disk error occured */
+
+disk_error_occured = (disk_reg &amp; 0x40000000) &gt;&gt; 31;
+</PRE>
+<P><H1><A NAME="SECTION001330000000000000000">
+Exercises</A>
+</H1>
+<P>
+<B>Exercise 12507</B></P>
+<P><A NAME="ex:bin">&#160;</A>Write a function that prints out an 8-bit (unsigned char)
+number in binary format.</P>
+<P> <P>
+<B>Exercise 12514</B></P>
+<P>
+Write a function  
+	setbits(x,p,n,y) that returns x with the n bits that begin at position p set to
+the rightmost n 			bits of an unsigned char  variable y (leaving other bits
+unchanged).
+<P>
+E.g. if <I>x</I> =  10101010 (170 decimal) and <I>y</I> = 10100111 (167 decimal)  and
+<I>n</I> = 3 and <I>p</I> = 
+			6 say then you need to strip off 3 bits of y (111) and put them in x at
+position 
+			10<I>xxx</I>010 to get answer 10111010.
+<P>
+Your answer should print out the result in binary form (see
+Exercise&nbsp;<A HREF="node13.html#ex:bin">12.1</A> although input can be in decimal form.
+<P>
+Your output should be like this:
+<PRE>
+   x = 10101010 (binary)
+   y = 10100111 (binary)
+   setbits n = 3, p = 6 gives x = 10111010 (binary)
+</PRE>
+</P>
+<P> <P>
+<B>Exercise 12515</B></P>
+<P>
+Write a function that inverts the bits of an unsigned char x and stores answer
+in y.
+<P>
+Your answer should print out the result in binary form (see
+Exercise&nbsp;<A HREF="node13.html#ex:bin">12.1</A> although input can be in decimal form.
+<P>
+Your output should be like this:
+<PRE>
+   x = 10101010 (binary)
+   x inverted = 01010101 (binary)
+</PRE>
+<P></P>
+<P> <P>
+<B>Exercise 12516</B></P>
+<P>
+Write a function that rotates (<B>NOT shifts</B>) to the right 
+by n bit positions the bits of an unsigned char x.ie no bits are lost in this
+process.
+<P>
+Your answer should print out the result in binary form (see
+Exercise&nbsp;<A HREF="node13.html#ex:bin">12.1</A> although input can be in decimal form.
+<P>
+Your output should be like this:
+<PRE>
+   x = 10100111 (binary)
+   x rotated by 3 = 11110100 (binary)
+</PRE>
+</P>
+<P>
+<P><B>Note</B>: All the functions developed
+should be as concise as 			possible
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Dave Marshall</I>
+<BR><I>1/5/1999</I>
+</ADDRESS>
+</BODY>
+
+<!-- Mirrored from users.cs.cf.ac.uk/Dave.Marshall/C/node13.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Oct 2020 09:07:13 GMT -->
+</HTML>

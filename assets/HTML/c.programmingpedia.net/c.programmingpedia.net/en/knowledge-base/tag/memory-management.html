@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en" >
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/memory-management by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:55:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- webmaster tools -->
+        <meta name="google-site-verification" content="" />
+        <!-- Open Graph Tags -->
+        <meta name="title" property="og:title" content="C Language Knowledge Base">
+        <meta name="description" property="og:description" content="C Language Knowledge Base">
+        <title>C Language Knowledge Base</title>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <style>
+            body{margin:0;}img{max-width:100%;}ul{margin-top:0;margin-bottom:1rem;}.list-inline{padding-left:0;list-style:none;}.list-inline-item{display:inline-block;}.list-inline-item:not(:last-child){margin-right:.5rem;}.site-header{display:flex;height:60px;}.site-main,.site-footer{display:flex;}.col-aside-left-and-sidebar .col-aside-left,.col-sidebar,.col-content,.col-aside-right{position:relative;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{height:60px;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner{position:fixed;z-index:1;}.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{height:calc(100vh - 60px);position:fixed;}.site-main .col-sidebar-overflow{height:calc(100vh - 60px);position:relative;overflow-x:hidden;overflow-y:auto;}.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 450px);}.col-aside-left,.col-aside-left-inner{width:calc(50% - 750px);}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content,.col-content-inner{width:1200px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 750px);}@media(max-width:1869px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 500px);}.col-aside-left,.col-aside-left-inner{display:none;}.col-sidebar,.col-sidebar-inner{width:calc(50% - 500px);}.col-content,.col-content-inner{width:1000px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 500px);}}@media(max-width:1549px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:calc(50% - 400px);}.col-sidebar,.col-sidebar-inner{width:calc(50% - 400px);}.col-content,.col-content-inner{width:800px;}.col-aside-right,.col-aside-right-inner{width:calc(50% - 400px);}}@media(max-width:1229px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:300px;}.col-sidebar,.col-sidebar-inner{width:300px;}.col-content{width:calc(100% - 300px);}.col-content-inner{width:100%;}.col-aside-right,.col-aside-right-inner{display:none;}}@media(max-width:1000px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{width:250px;}.col-sidebar,.col-sidebar-inner{width:250px;}.col-content{width:calc(100% - 250px);}}@media(max-width:767px){.col-aside-left-and-sidebar,.col-aside-left-and-sidebar-inner{display:none;}.col-sidebar,.col-sidebar-inner{display:none;}.col-content{width:100%;}.site-main{display:initial;}.site-main .col-sidebar,.site-main .col-sidebar-inner{display:initial;width:100%;position:relative;}.site-main .col-sidebar-overflow{height:calc(30vh);}}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-header .col-content-inner{box-shadow:rgba(116,129,141,.1) 0 3px 8px 0;border-bottom:1px solid #d4dadf;}.site-header .col-aside-left-and-sidebar-inner,.site-header .col-aside-right-inner,.site-main .col-aside-left-inner,.site-main .col-sidebar-inner,.site-main .col-aside-right-inner{background:#f5f7f9 none repeat scroll 0% 0%;}.site-header .col-aside-left-and-sidebar-inner,.site-main .col-sidebar-inner{border-right:1px solid #e6ecf1;}.site-header .col-aside-right,.site-main .col-aside-right{border-left:1px solid #e6ecf1;}.brand{font-size:24px;font-weight:bold;height:100%;text-align:right;margin-right:20px;margin-top:10px;}
+        </style>
+    <link rel="stylesheet" type="text/css" href="../../../styles/master.min0e4d.css?v=todo">
+    <!-- to fix/move? -->
+    
+
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55584370-32"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131737769-1');
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="site-header">
+    <div class="col-aside-left-and-sidebar">
+        <div class="col-aside-left-and-sidebar-inner">
+            <div class="brand">
+                <i class="fas fa-yin-yang" style="color: #0056b3;"></i>&nbsp;
+                C Language Pedia
+            </div>
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+<div>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="../../../index.html">Tutorial</a></li>
+            <li class="list-inline-item"><a href="../../knowledge-base.html">Knowledge-Base</a></li>
+
+            <li class="list-inline-item"><a href="../../awesome-learning/book.html">Awesome</a></li>
+    </ul>
+</div>
+
+<style>
+    .site-header .col-content .list-inline {
+        padding-left: 20px;
+        padding-top: 15px;
+
+        font-weight: bold;
+    }
+</style>
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+            
+        </div>
+    </div>
+</div>
+<div class="site-main">
+    <div class="col-aside-left">
+        <div class="col-aside-left-inner">
+            
+        </div>
+    </div>
+    <div class="col-sidebar">
+        <div class="col-sidebar-inner">
+
+            <div class="col-sidebar-overflow">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="col-content">
+        <div class="col-content-inner">
+            
+<div class="kb-search">
+    <div class="search-container d-flex justify-content-center">
+        <form action="https://c.programmingpedia.net/en/knowledge-base/" method="get" class="form-inline">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn-only my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+    </div>
+
+    <h2 id="itemcount-result-for-search-term">
+        ItemCount Result For: <span class="query-searched">Search Term</span>
+    </h2>
+
+
+    <div class="kb-search-box">
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="where-are-constant-variables-stored-in-c-"><a href="../1576489/where-are-constant-variables-stored-in-c-.html">Where are constant variables stored in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I wonder where constant variables are stored.  Is it in the same memory area as global variables? Or is it on the stack?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="constants.html">constants</a></span>
+                                <span class="tag-item"><a href="globals.html">globals</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="variables.html">variables</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/0/user188276" target="_blank">user188276</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-allocate-aligned-memory-only-using-the-standard-library-"><a href="../227897/how-to-allocate-aligned-memory-only-using-the-standard-library-.html">How to allocate aligned memory only using the standard library?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I just finished a test as part of a job interview, and one question stumped me, even using Google for reference. I&#39;d like to see what the StackOverflow crew can do with it:
+
+
+  The memset_16aligned function requires a 16-byte aligned pointer passed to it,...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/63/jimdaniel" target="_blank">JimDaniel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="alloca-implementation"><a href="../714692/alloca-implementation.html">Alloca implementation</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How does one implement alloca() using inline x86 assembler in languages like D, C, and C++?  I want to create a slightly modified version of it, but first I need to know how the standard version is implemented.  Reading the disassembly from compilers does...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="assembly.html">assembly</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="d.html">d</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/23903/dsimcha" target="_blank">dsimcha</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="alloca-implementation"><a href="../714692/alloca-implementation.html">Alloca implementation</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How does one implement alloca() using inline x86 assembler in languages like D, C, and C++?  I want to create a slightly modified version of it, but first I need to know how the standard version is implemented.  Reading the disassembly from compilers does...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="assembly.html">assembly</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="d.html">d</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/23903/dsimcha" target="_blank">dsimcha</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="alloca-implementation"><a href="../714692/alloca-implementation.html">Alloca implementation</a></h3>
+                     
+                    <div class="kb-search-body">
+                        How does one implement alloca() using inline x86 assembler in languages like D, C, and C++?  I want to create a slightly modified version of it, but first I need to know how the standard version is implemented.  Reading the disassembly from compilers does...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="assembly.html">assembly</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="d.html">d</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/23903/dsimcha" target="_blank">dsimcha</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-can-i-create-a-dynamically-sized-array-of-structs-"><a href="../260915/how-can-i-create-a-dynamically-sized-array-of-structs-.html">How can I create a dynamically sized array of structs?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I know how to create an array of structs but with a predefined size. However is there a way to create a dynamic array of structs such that the array could get bigger?
+
+For example:
+
+    typedef struct
+    {
+        char *str;
+    } words;
+
+    main()
+    ...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="dynamic.html">dynamic</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/31274/d--rattansingh" target="_blank">D. Rattansingh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-malloc-and-free-work-"><a href="../1119134/how-do-malloc---and-free---work-.html">How do malloc() and free() work?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I want to know how malloc and free work.
+
+int main() {
+    unsigned char *p = (unsigned char*)malloc(4*sizeof(unsigned char));
+    memset(p,0,4);
+    strcpy((char*)p,&quot;abcdabcd&quot;); // **deliberately storing 8bytes**
+    cout &amp;lt;&amp;lt; p;
+    free(p); // Obvi...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/38038/mahesh" target="_blank">mahesh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-malloc-and-free-work-"><a href="../1119134/how-do-malloc---and-free---work-.html">How do malloc() and free() work?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I want to know how malloc and free work.
+
+int main() {
+    unsigned char *p = (unsigned char*)malloc(4*sizeof(unsigned char));
+    memset(p,0,4);
+    strcpy((char*)p,&quot;abcdabcd&quot;); // **deliberately storing 8bytes**
+    cout &amp;lt;&amp;lt; p;
+    free(p); // Obvi...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="cplusplus.html">c++</a></span>
+                                <span class="tag-item"><a href="free.html">free</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/38038/mahesh" target="_blank">mahesh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="memory-usage-of-current-process-in-c"><a href="../1558402/memory-usage-of-current-process-in-c.html">Memory usage of current process in C</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I need to get the memory usage of the current process in C. Can someone offer a code sample of how to do this on a Linux platform?
+
+I&#39;m aware of the cat /proc/&amp;lt;your pid&amp;gt;/status method of getting memory usage, but I have no idea how to capture that i...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="memory.html">memory</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="php-extension.html">php-extension</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/69079/scotts" target="_blank">scotts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-it-ok-to-use-classic-malloc-free-in-objective-c-iphone-apps-"><a href="../1150650/is-it-ok-to-use--classic--malloc---free---in-objective-c-iphone-apps-.html">Is it ok to use &quot;classic&quot; malloc()/free() in Objective-C/iPhone apps?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;ve been playing around with iPhone development for a while, and although it feels a bit awkward when you&#39;re a &quot;hard core&quot; .NET developer, it&#39;s not all that bad once you get used to it.
+
+In every book I read about Objective-C, there&#39;s only talk about ret...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="objective-c.html">objective-c</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/113570/philippe-leybaert" target="_blank">Philippe Leybaert</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-include-a-dynamic-array-inside-a-struct-in-c-"><a href="../2060974/how-to-include-a-dynamic-array-inside-a-struct-in-c-.html">How to include a dynamic array INSIDE a struct in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have looked around but have been unable to find a solution to what must be a well asked question.
+Here is the code I have:
+
+ #include &amp;lt;stdlib.h&amp;gt;
+
+struct my_struct {
+    int n;
+    char s[]
+};
+
+int main()
+{
+    struct my_struct ms;
+    ms.s = mallo...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="arrays.html">arrays</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                                <span class="tag-item"><a href="struct.html">struct</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/163173/tom" target="_blank">Tom</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="when-should-i-use-malloc-in-c-and-when-don-t-i-"><a href="../1963780/when-should-i-use-malloc-in-c-and-when-don-t-i-.html">When should I use malloc in C and when don&#39;t I?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I understand how malloc() works. My question is, I&#39;ll see things like this:
+
+#define A_MEGABYTE (1024 * 1024)
+
+char *some_memory;
+size_t size_to_allocate = A_MEGABYTE;
+some_memory = (char *)malloc(size_to_allocate);
+sprintf(some_memory, &quot;Hello World&quot;);
+pr...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory.html">memory</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/175836/randombits" target="_blank">randombits</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="what-does-the-brk-system-call-do-"><a href="../6988487/what-does-the-brk---system-call-do-.html">What does the brk() system call do?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        According to Linux programmers manual: 
+
+
+  brk() and sbrk() change the location of the program break, which
+  defines the end of the process&#39;s data segment.
+
+
+What does the data segment mean over here? Is it just the data segment or data, BSS, and heap c...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="brk.html">brk</a></span>
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="linux.html">linux</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="unix.html">unix</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/246095/nik" target="_blank">nik</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-you-store-an-arbitrarily-large-integer-value-in-memory-"><a href="../2252896/how-do-you-store-an-arbitrarily-large-integer-value-in-memory-.html">How do you store an arbitrarily large integer value in memory?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I have to store an integer value that is larger than the maximum value for the long datatype. How would I store and manipulate this value in memory?
+
+Please illustrate it through an example, if possible.
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="integer.html">integer</a></span>
+                                <span class="tag-item"><a href="integer-arithmetic.html">integer-arithmetic</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/271938/yatin" target="_blank">yatin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="maximum-memory-which-malloc-can-allocate"><a href="../2798330/maximum-memory-which-malloc-can-allocate.html">maximum memory which malloc can allocate</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I was trying to figure out how much memory I can malloc to maximum extent on my machine
+(1 Gb RAM 160 Gb HD Windows platform).
+
+I read that the maximum memory malloc can allocate is limited to physical memory (on heap).
+
+Also when a program exceeds consum...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="computer-architecture.html">computer-architecture</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="operating-system.html">operating-system</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/332354/vikas" target="_blank">Vikas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="difference-between-static-memory-allocation-and-dynamic-memory-allocation"><a href="../8385322/difference-between-static-memory-allocation-and-dynamic-memory-allocation.html">Difference between static memory allocation and dynamic memory allocation</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I would like to know what is the difference between static memory allocation and dynamic memory allocation?
+
+Could you explain this with any example?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="dynamic-memory-allocation.html">dynamic-memory-allocation</a></span>
+                                <span class="tag-item"><a href="memory.html">memory</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="static-memory-allocation.html">static-memory-allocation</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/430803/nishant-kumar" target="_blank">Nishant Kumar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-do-i-free-memory-in-c-"><a href="../9069205/how-do-i-free-memory-in-c-.html">How do I free memory in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I&#39;m writing code which has a lot of 1 &amp;amp; 2 dimensional arrays. I got &quot;error: can&#39;t allocate region&quot; and I think its because too much memory is allocated. I use &quot;malloc&quot; and &quot;free&quot; functions, but I&#39;m not sure I&#39;m using them correclyt. Maybe you know whe...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/596881/andrey" target="_blank">andrey</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="is-it-good-practice-to-free-a-null-pointer-in-c-"><a href="../6084218/is-it-good-practice-to-free-a-null-pointer-in-c-.html">Is it good practice to free a NULL pointer in C?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        
+  Possible Duplicate:
+  Does free(ptr) where ptr is NULL corrupt memory?  
+
+
+
+
+I&#39;m writing a C function that frees a pointer if it was malloc()ed. The pointer can either be NULL (in the case that an error occured and the code didn&#39;t get the chance to all...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="pointers.html">pointers</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/732284/rid" target="_blank">rid</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-copy-one-integer-array-to-another"><a href="../8287109/how-to-copy-one-integer-array-to-another.html">How to copy one integer array to another</a></h3>
+                     
+                    <div class="kb-search-body">
+                        What is the best way to duplicate an integer array? I know memcpy() is one way to do it. Is there any function like strdup()?
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/750177/fourofakind" target="_blank">FourOfAKind</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kb-search-question">
+                <div class="container-question" style="position: relative;">
+                    <h3 id="how-to-dynamically-allocate-memory-space-for-a-string-and-get-that-string-from-user-"><a href="../8164000/how-to-dynamically-allocate-memory-space-for-a-string-and-get-that-string-from-user-.html">How to dynamically allocate memory space for a string and get that string from user?</a></h3>
+                     
+                    <div class="kb-search-body">
+                        I want to read input from user using C program. I don&#39;t want to use array like,
+
+char names[50];
+
+
+because if the user gives string of length 10, then the remaining spaces are wasted.
+
+If I use character pointer like,
+
+char *names;
+
+
+then I need to alloca...
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 tag-list">
+                                <span class="tag-item"><a href="c.html">c</a></span>
+                                <span class="tag-item"><a href="dynamic.html">dynamic</a></span>
+                                <span class="tag-item"><a href="malloc.html">malloc</a></span>
+                                <span class="tag-item"><a href="memory-management.html">memory-management</a></span>
+                                <span class="tag-item"><a href="string.html">string</a></span>
+                        </div>
+                        <div class="col-sm-3 asker-name text-right">
+                            Asked By <a href="https://stackoverflow.com/users/974155/dinesh" target="_blank">Dinesh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    Page 1 of 2
+
+    <div class="pagination-container"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="../searchfa9d.html?q=&amp;page=2">2</a></li><li class="PagedList-skipToNext"><a href="../searchfa9d.html?q=&amp;page=2" rel="next">»</a></li></ul></div>
+    </div>
+
+            
+        </div>
+    </div>
+    <div class="col-aside-right">
+        <div class="col-aside-right-inner">
+        </div>
+    </div>
+</div>
+<div class="site-footer">
+</div>
+    
+    <a href="#" id="scroll-to-top" class="back-to-top" style="display: inline;">Icon</a>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+        $('a').each(function() {
+            var a = new RegExp('/' + window.location.host + '/');
+            if (!a.test(this.href)) {
+                $(this).attr("target", "_blank");
+            }
+        });
+
+        $("table").addClass("table table-bordered table-hover table-responsive-sm table-striped");
+        $("thead").addClass("thead-dark");
+
+        $('aside a').each(function() {
+            if ($(this).attr('href') == '/{{page.permalink}}' ||
+                $(this).attr('href') == '{{ site.github.url }}/{{page.permalink}}') {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
+</script>
+
+
+</body>
+
+<!-- Mirrored from c.programmingpedia.net/en/knowledge-base/tag/memory-management by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Jan 2021 09:55:52 GMT -->
+</html>

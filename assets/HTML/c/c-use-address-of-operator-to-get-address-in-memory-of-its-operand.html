@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Use Address of Operator to get address in memory of its operand</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Use Address of Operator to get address in memory of its operand'>C Use Address of Operator to get address in memory of its operand</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-arrays-introduction.html'>C Array Introduction
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-initialization.html'>C Array Initialization
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-partially-initialized-array.html'>C Array Initialization Partially 
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-designated-initializers.html'>C Array Initialization Designate
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-compound-literals.html'>C Array Compound Literals
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Element
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-assigning-array-element-values.html'>C Array Element
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-array-element-length-bounds.html'>C Array Element Length Bounds
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-specifying-an-array-size.html'>C Array Size
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-finding-the-size-of-an-array.html'>C Array Size Get
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-variable-length-arrays.html'>C Array Variable Length 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Multi Dimensional
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-multidimensional-arrays.html'>C 2D Arrays
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-initializing-a-two-dimensional-array.html'>C 2D Array Initialize
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-multi-dimensional-array-sum.html'>C 2D Array Sum
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C 2D Array Game: tic tac toe
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Example
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-calculate-averages-with-arrays.html'>C Array Average
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-reusing-the-numbers-stored-in-array.html'>C Array Calculate
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C Array Address Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-memory-address-of-array-element.html'>C Array Element Address
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C Array Reciprocal
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-array-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Use Address of Operator to get address in memory of its operand</h1>
+<a class ='btn btn-outline-dark' href=c-reusing-the-numbers-stored-in-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-memory-address-of-array-element.html>Next</a><p>The address of operator, &amp;, produces the address in memory of its operand. 
+
+</p><p>You have been using the address of operator extensively with the <i style='color:blue'>scanf</i>() function. 
+
+</p><p>The following program outputs the addresses of some variables: 
+</p><div class='myCodeDiv'><button id='GHMYX' class='myCopyButton' data-clipboard-target='#EWZPB'>Copy</button><pre  id='EWZPB' style='font-size:18px;' class='code'>#<span class='r'>include</span>&lt;stdio.h&gt; 
+
+<span class='r'>int</span> main(<span class='r'>void</span>) 
+{ 
+  <span class='c'>// Define some integer variables </span>
+  <span class='r'>long</span> a = 1L; 
+  <span class='r'>long</span> b = 2L; 
+  <span class='r'>long</span> c = 3L; 
+
+  <span class='c'>// Define some floating-point variables </span>
+  <span class='r'>double</span> d = 4.0; 
+  <span class='r'>double</span> e = 5.0; 
+  <span class='r'>double</span> f = 6.0; 
+
+  printf(<span class='q'>"type long occupies %d bytes."</span>, <span class='r'>sizeof</span>(<span class='r'>long</span>)); 
+  printf(<span class='q'>"\nThe address of a is: %p  The address of b is: %p"</span>, &amp;a, &amp;b); 
+  printf(<span class='q'>"\nThe address of c is: %p"</span>, &amp;c); 
+  printf(<span class='q'>"\n\nA variable of type double occupies %u bytes."</span>, <span class='r'>sizeof</span>(<span class='r'>double</span>)); 
+  printf(<span class='q'>"\nThe address of d is: %p  The address of e is: %p"</span>, &amp;d, &amp;e); 
+  printf(<span class='q'>"\nThe address of f is: %p\n"</span>, &amp;f); 
+  <span class='r'>return</span> 0; 
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#GHMYX');clipboard.on('success', function(e) {$('#GHMYX').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#GHMYX').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>Next, you output the number of bytes occupied by variables of type long, followed by the addresses of  
+the three variables of that type that you created.
+</p><a class ='btn btn-outline-dark' href=c-reusing-the-numbers-stored-in-array.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-memory-address-of-array-element.html>Next</a><h2>Related</h2><UL><LI><a href='c-game-tic-tac-toe-noughts-and-crosses-via-multidimensional-array.html'>C game tic tac toe, noughts and crosses via multidimensional array</a></LI><LI><a href='c-calculate-averages-with-arrays.html'>C Calculate Averages With Arrays</a></LI><LI><a href='c-reusing-the-numbers-stored-in-array.html'>C Reusing the numbers stored in array</a></LI><LI><a href='c-memory-address-of-array-element.html'>C Memory Address of Array Element</a></LI><LI><a href='c-calculates-reciprocal-of-array-element-and-store-in-separate-array.html'>C calculates reciprocal of array element and store in separate array</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-use-address-of-operator-to-get-address-in-memory-of-its-operand.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+

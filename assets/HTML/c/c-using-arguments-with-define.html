@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang='en'>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-arguments-with-define.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<link rel='shortcut icon' href='https://www.demo2s.com/java/favicon.ico'>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<style>
+#sidebar {transition: all 0.3s;}
+#sidebar.active {margin-left: 0px;}
+#leftBarButton{display:none;}    
+@media (max-width: 768px) {#sidebar {display:none;}#sidebar.active {display:block;}#leftBarButton{display:block;}}
+.myCodeDiv {position: relative;}
+.myCopyButton{position:absolute;top:0;right:0;z-index:10;display: block;padding: 5px 8px;
+border: 1px solid #ccc;
+border-radius: 0 4px 0 4px;
+font-size: 12px;
+background-color: #fff;
+cursor: pointer;
+}
+pre.code {border: 1px solid #ccc;background-color: #F7F7F9;padding: 9px 14px;}
+a{color:#337ab7;}
+p { font-size:120%;margin: 10px 0 10px 0;}
+table { font-size:120%;}
+.r {color:#7f0055;font-weight:bold;}
+.q {color:#2a00ff;font-weight:bold;}
+.c {color:#3f7f5f;font-weight:bold;}
+
+</style>
+<title>C Using Arguments with #define</title>
+</head>
+<body>
+<div class='container-xl'>
+<nav aria-label='breadcrumb'>
+<ol class='breadcrumb'>
+<li class='breadcrumb-item'><a href='http://www.demo2s.com/'>Home</a></li>
+<li class='breadcrumb-item' aria-current='C'><a href='c.html'>C</a></li><li class='breadcrumb-item' aria-current='C Using Arguments with #define'>C Using Arguments with #define</li>
+</ol>
+</nav>
+<button id='leftBarButton' style='float:right'>Menu</button>
+<div class='row'>
+<div id='sidebar' class='col-12 col-md-3 col-lg-3'>
+<UL style='border-right:1px solid black;word-wrap:break-word;list-style-type:none;padding:0px'><LI><UL style='list-style-type:none;padding-left:0px'><LI style='font-size:20px;font-style:bold;'>Introduction
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor.html'>C Preprocessor
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#define
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-manifest-constants-define.html'>C #define
+
+</a></h6></LI><LI style='background-color:#d6d8d9' ><h6><a href='#'>C #define with arguments 
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Macro
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C # Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-glue-the-operator.html'>C ## Operator
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-variadic-macros-and-va-args.html'>C Variadic Macros
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>#include
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-file-inclusion-include.html'>C #include
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-uses-for-header-files.html'>C Header Files
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Flag
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-undef-directive.html'>C #undef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifdef-else-and-endif.html'>C #ifdef, #else, and #endif
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-conditional-compilation-ifndef.html'>C #ifndef
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-if-and-elif-directives.html'>C #if #elif
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Predefined
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-predefined-macros.html'>C Predefined Macros
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-line-error.html'>C #line #error
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-pragma.html'>C #pragma
+
+</a></h6></LI><LI style='font-size:20px;font-style:bold;'>Question
+</LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-1.html'>C Review Questions 1
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-review-questions-2.html'>C Review Questions 2
+
+</a></h6></LI><LI><h6 style='word-wrap:break-word'><a href='c-preprocessor-exercise-1.html'>C Exercise 1
+
+</a></h6></LI></UL></LI></UL>
+</div>
+<div style='min-height:700px;' class='col-12 col-md-9 col-lg-9'>
+<h1>C Using Arguments with #define</h1>
+<a class ='btn btn-outline-dark' href=c-manifest-constants-define.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-creating-strings-from-macro-arguments-the-operator.html>Next</a><p>By using arguments, you can create function-like macros that look and act much 
+like functions.
+
+</p><p>A macro with arguments looks very similar to a function because the arguments are enclosed
+within parentheses. 
+
+</p><p>Function-like macro definitions have one or more arguments in parentheses, and these 
+arguments then appear in the replacement portion.
+
+</p><center><img alt='c-macro-function.png' src='data:image/png;base64,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'/></center><br/><p>Here's a sample definition:
+</p><div class='myCodeDiv'><button id='MBHMS' class='myCopyButton' data-clipboard-target='#PKYUR'>Copy</button><pre  id='PKYUR' style='font-size:18px;' class='code'>#define SQUARE(X) X*X
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#MBHMS');clipboard.on('success', function(e) {$('#MBHMS').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#MBHMS').text('error');});</script></div><p>It can be used in program like this:
+</p><div class='myCodeDiv'><button id='TTSCK' class='myCopyButton' data-clipboard-target='#FESTA'>Copy</button><pre  id='FESTA' style='font-size:18px;' class='code'>z = SQUARE(2);
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#TTSCK');clipboard.on('success', function(e) {$('#TTSCK').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#TTSCK').text('error');});</script></div><p>This looks like a function call, but it doesn't necessarily behave identically. 
+
+</p><p>The following code illustrates using this and a second macro. 
+
+</p><div class='myCodeDiv'><button id='RQTJR' class='myCopyButton' data-clipboard-target='#NIXOO'>Copy</button><pre  id='NIXOO' style='font-size:18px;' class='code'>#<span class='r'>include</span> &lt;stdio.h&gt;
+#define SQUARE(X) X*X
+#define PR(X)   printf(<span class='q'>"The result is %d.\n"</span>, X)
+<span class='r'>int</span> main(<span class='r'>void</span>)
+{
+    <span class='r'>int</span> x = 5;
+    <span class='r'>int</span> z;
+
+    printf(<span class='q'>"x = %d\n"</span>, x);
+    z = SQUARE(x);
+    printf(<span class='q'>"Evaluating SQUARE(x): "</span>);
+    PR(z);
+    z = SQUARE(2);
+    printf(<span class='q'>"Evaluating SQUARE(2): "</span>);
+    PR(z);
+    printf(<span class='q'>"Evaluating SQUARE(x+2): "</span>);
+    PR(SQUARE(x+2));
+    printf(<span class='q'>"Evaluating 100/SQUARE(2): "</span>);
+    PR(100/SQUARE(2));
+    printf(<span class='q'>"x is %d.\n"</span>, x);
+    printf(<span class='q'>"Evaluating SQUARE(++x): "</span>);
+    PR(SQUARE(++x));
+    printf(<span class='q'>"After incrementing, x is %x.\n"</span>, x);
+
+    <span class='r'>return</span> 0;
+}
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#RQTJR');clipboard.on('success', function(e) {$('#RQTJR').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#RQTJR').text('error');});</script></div><p>Output:
+</p><img src='data:image/png;base64,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'><h3>Note
+
+</h3><p>The SQUARE macro has this definition:
+</p><div class='myCodeDiv'><button id='ZXFED' class='myCopyButton' data-clipboard-target='#JWYCT'>Copy</button><pre  id='JWYCT' style='font-size:18px;' class='code'>#define SQUARE(X) X*X
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZXFED');clipboard.on('success', function(e) {$('#ZXFED').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZXFED').text('error');});</script></div><p>Here, SQUARE is the macro identifier, the X in <b>SQUARE</b>(X) is the macro argument, 
+and X*X is the replacement list. 
+
+</p><p>Wherever <b>SQUARE</b>(x) appears, it is replaced by x*x. 
+
+</p><p>The x in the macro definition is replaced by the symbol used in the macro call in the
+program. 
+
+</p><p>Therefore, <b>SQUARE</b>(2) is replaced by 2*2, so the x really does act as an argument.
+
+</p><p>A macro argument does not work exactly like a function argument. 
+
+</p><p>The preprocessor doesn't make calculations; it just substitutes character sequences. 
+
+</p><p>Wherever the definition shows an x, the preprocessor substitutes the characters x+2. 
+
+</p><p>Therefore,
+</p><div class='myCodeDiv'><button id='HICXA' class='myCopyButton' data-clipboard-target='#ERIQB'>Copy</button><pre  id='ERIQB' style='font-size:18px;' class='code'>x*x
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#HICXA');clipboard.on('success', function(e) {$('#HICXA').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#HICXA').text('error');});</script></div><p>becomes
+</p><div class='myCodeDiv'><button id='IKWQW' class='myCopyButton' data-clipboard-target='#VSRDH'>Copy</button><pre  id='VSRDH' style='font-size:18px;' class='code'>x+2*x+2
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#IKWQW');clipboard.on('success', function(e) {$('#IKWQW').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#IKWQW').text('error');});</script></div><p>The only multiplication is 2*x. If x is 5, this is the value of this expression:
+</p><div class='myCodeDiv'><button id='VDUGC' class='myCopyButton' data-clipboard-target='#QYGKO'>Copy</button><pre  id='QYGKO' style='font-size:18px;' class='code'>5+2*5+2 = 5 + 10 + 2 = 17
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#VDUGC');clipboard.on('success', function(e) {$('#VDUGC').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#VDUGC').text('error');});</script></div><p>A function call passes the value of the argument to the function while the program 
+is running. 
+
+</p><p>A macro call passes the argument token to the program before compilation; it's a 
+different process at a different time. 
+
+</p><p>You can fix the code above using more parentheses:
+</p><div class='myCodeDiv'><button id='ZHAEL' class='myCopyButton' data-clipboard-target='#SORXQ'>Copy</button><pre  id='SORXQ' style='font-size:18px;' class='code'>#define SQUARE(x)     (x)*(x)
+</pre><script type='text/javascript'>var clipboard = new ClipboardJS('#ZHAEL');clipboard.on('success', function(e) {$('#ZHAEL').text('copied');e.clearSelection();});clipboard.on('error', function(e) {$('#ZHAEL').text('error');});</script></div><p>Now <b>SQUARE</b>(x+2) becomes (x+2)*(x+2), and you get the desired multiplication as the 
+parentheses carry over in the replacement string.
+</p><a class ='btn btn-outline-dark' href=c-manifest-constants-define.html>Previous</a><a class ='btn btn-outline-dark' style='float:right' href=c-creating-strings-from-macro-arguments-the-operator.html>Next</a><h2>Related</h2><UL><LI><a href='c-structure-exercise-2.html'>C structure exercise 2</a></LI><LI><a href='c-preprocessor.html'>C Preprocessor</a></LI><LI><a href='c-manifest-constants-define.html'>C Manifest Constants: #define</a></LI><LI><a href='c-creating-strings-from-macro-arguments-the-operator.html'>C Creating Strings from Macro Arguments: The # Operator</a></LI><LI><a href='c-preprocessor-glue-the-operator.html'>C Preprocessor Glue: The ## Operator</a></LI></UL></div>
+</div>
+<script type='text/javascript'>
+$(document).ready(function () {
+$('#leftBarButton').on('click', function () {$('#sidebar').toggleClass('active');});
+});        
+</script>
+<footer style='margin-left:40px;margin-top:40px;'>
+<p class='pull-right'><a href='http://www.demo2s.com/'>demo2s.com</a>&nbsp;|
+&nbsp;Email:<script language='JavaScript' type='text/javascript'>
+var part1 = 'yinpeng';var part6 = '263';var part2 = Math.pow(2,6);var part3 = String.fromCharCode(part2);var part4 = 'hotmail.com';var part5 = part1 + String.fromCharCode(part2) + part4;document.write(part1 + part6 + part3 + part4);
+</script>&nbsp;|&nbsp;Demo Source and Support. All rights reserved.</p>
+</footer>  
+</body>
+
+<!-- Mirrored from www.demo2s.com/c/c-using-arguments-with-define.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Dec 2020 08:56:04 GMT -->
+</html>
+
